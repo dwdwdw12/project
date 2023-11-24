@@ -65,7 +65,7 @@ max-width: 100%;
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
-						비행기 좌석선택
+						${fno} 번 비행기 좌석선택 -> 비행기 루트로 바꾸기
 					</h2>
 					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
 						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
@@ -74,34 +74,34 @@ max-width: 100%;
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 				
-				<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map" style="text-align: center;">
-						<map name="image-map" id="seats">
-							<area target="" alt="A1" href="A1" coords="292,204,374,277" shape="rect">
-							<area target="" alt="A2" href="A2" coords="292,296,374,370" shape="rect">
-							<area target="" alt="A3" href="A3" coords="292,389,374,462" shape="rect">
-							<area target="" alt="A4" href="A4" coords="292,481,374,555" shape="rect">
-							<area target="" alt="B1" href="B1" coords="465,204,546,277" shape="rect">
-							<area target="" alt="B2" href="B2" coords="465,296,374,370" shape="rect">
-							<area target="" alt="B3" href="B3" coords="465,389,374,462" shape="rect">
-							<area target="" alt="B4" href="B4" coords="465,481,374,555" shape="rect">
-							<area target="" alt="C1" href="C1" coords="564,204,644,277" shape="rect">
-							<area target="" alt="C2" href="C2" coords="564,296,644,370" shape="rect">
-							<area target="" alt="C3" href="C3" coords="564,389,644,462" shape="rect">
-							<area target="" alt="C4" href="C4" coords="564,481,644,555" shape="rect">
-							<area target="" alt="D1" href="D1" coords="750,204,833,277" shape="rect">
-							<area target="" alt="D2" href="D2" coords="750,296,833,370" shape="rect">
-							<area target="" alt="D3" href="D3" coords="750,389,833,462" shape="rect">
-							<area target="" alt="D4" href="D4" coords="750,481,833,555" shape="rect">
-							<area target="" alt="E1" href="E1" coords="850,204,931,277" shape="rect">
-							<area target="" alt="E2" href="E2" coords="850,296,931,370" shape="rect">
-							<area target="" alt="E3" href="E3" coords="850,389,931,462" shape="rect">
-							<area target="" alt="E4" href="E4" coords="850,481,931,555" shape="rect">
-							<area target="" alt="F1" href="F1" coords="946,204,1028,277" shape="rect">
-							<area target="" alt="F2" href="F2" coords="946,296,1028,370" shape="rect">
-							<area target="" alt="F3" href="F3" coords="946,389,1028,462" shape="rect">
-							<area target="" alt="F4" href="F4" coords="946,481,1028,555" shape="rect">
-						</map>
-						</div>
+					<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map" style="text-align: center;">
+							<map name="image-map" id="seats">
+								<area target="" alt="A1" href="A1" coords="292,204,374,277" shape="rect" id="seat">
+								<area target="" alt="A2" href="A2" coords="292,296,374,370" shape="rect" id="seat">
+								<area target="" alt="A3" href="A3" coords="292,389,374,462" shape="rect" id="seat">
+								<area target="" alt="A4" href="A4" coords="292,481,374,555" shape="rect" id="seat">
+								<area target="" alt="B1" href="B1" coords="465,204,546,277" shape="rect" id="seat">
+								<area target="" alt="B2" href="B2" coords="465,296,374,370" shape="rect" id="seat">
+								<area target="" alt="B3" href="B3" coords="465,389,374,462" shape="rect" id="seat">
+								<area target="" alt="B4" href="B4" coords="465,481,374,555" shape="rect" id="seat">
+								<area target="" alt="C1" href="C1" coords="564,204,644,277" shape="rect" id="seat">
+								<area target="" alt="C2" href="C2" coords="564,296,644,370" shape="rect" id="seat">
+								<area target="" alt="C3" href="C3" coords="564,389,644,462" shape="rect" id="seat">
+								<area target="" alt="C4" href="C4" coords="564,481,644,555" shape="rect" id="seat">
+								<area target="" alt="D1" href="D1" coords="750,204,833,277" shape="rect" id="seat">
+								<area target="" alt="D2" href="D2" coords="750,296,833,370" shape="rect" id="seat">
+								<area target="" alt="D3" href="D3" coords="750,389,833,462" shape="rect" id="seat">
+								<area target="" alt="D4" href="D4" coords="750,481,833,555" shape="rect" id="seat">
+								<area target="" alt="E1" href="E1" coords="850,204,931,277" shape="rect" id="seat">
+								<area target="" alt="E2" href="E2" coords="850,296,931,370" shape="rect" id="seat">
+								<area target="" alt="E3" href="E3" coords="850,389,931,462" shape="rect" id="seat">
+								<area target="" alt="E4" href="E4" coords="850,481,931,555" shape="rect" id="seat">
+								<area target="" alt="F1" href="F1" coords="946,204,1028,277" shape="rect" id="seat">
+								<area target="" alt="F2" href="F2" coords="946,296,1028,370" shape="rect" id="seat">
+								<area target="" alt="F3" href="F3" coords="946,389,1028,462" shape="rect" id="seat">
+								<area target="" alt="F4" href="F4" coords="946,481,1028,555" shape="rect" id="seat">
+							</map>
+					</div>
 			</div>		
 						
 		</div>
@@ -117,73 +117,23 @@ max-width: 100%;
 <%@ include file="../includes/footer.jsp"%>
 <script>
 $(document).ready(function(e) {
-	$('img[usemap]').rwdImageMaps();
-	
-	$("#seats").on("click","area",function(e){
-		e.preventDefault();
-		$("#actionForm").append("<input type='hidden' name='fno' value='" + ${fno}+ "'>");
-		$("#actionForm").append("<input type='hidden' name='seat' value='" + $(this).attr("href")+ "'>");
-		$("#actionForm").submit();
-		
-	})
+	$('img[usemap]').rwdImageMaps();	
 });
 </script>
+<<script type="text/javascript">
+$("#seat").on("click",function(e){
+	e.preventDefault();
+	var seat = document.getElementById("seat").getAttribute("href");
+	alert(seat);
+	$("#actionForm").append("<input type='hidden' name='fno' value='" + ${fno}+ "'>");
+	$("#actionForm").append("<input type='hidden' name='seat' value='" + $(this).attr("href")+ "'>");
+	$("#actionForm").submit();
 
-<script type="text/javascript">
-	//페이지 버튼 클릭 이동
-	var actionForm = $("#actionForm");
-	$(".page-item a").on("click", function(e) {
-		e.preventDefault();
-		console.log("test--------------------------");
-		actionForm.find("input[name='pageNum']").val($(this).attr("href")); 
-		actionForm.submit();
-	});
+	
+	
+	})
 </script>
-<!-- 충돌부분 추가 -->
-<script type="text/javascript">
-	var $jLatest = jQuery.noConflict();
-	$jLatest('input[id="dates"]').daterangepicker();
-	$jLatest('input[id="startDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-	$jLatest('input[id="endDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-</script>
+
 <script type="text/javascript">
 	$(function() {
 		$('.slideshow').each(function() {
