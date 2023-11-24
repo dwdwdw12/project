@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.airline.mapper.UserMapper">
+
+	<resultMap type="com.airline.vo.KakaoUserVO" id="userMap">
+		<id property="userId" column="userid" />
+		<result property="userId" column="userid" />
+		<result property="userNick" column="userNick" />
+		<result property="gradeCode" column="gradeCode" />
+		<result property="userNameK" column="userNameK" />
+		<result property="userNameE" column="userNameE" />
+		<result property="gender" column="gender" />
+		<result property="pwd" column="pwd" />
+		<result property="mail" column="mail" />
+		<result property="phone" column="phone" />
+		<result property="postCode" column="postCode" />
+		<result property="address" column="address" />
+		<result property="userReginumFirst" column="userReginumFirst" />
+		<result property="userReginumLast" column="userReginumLast" />
+		<result property="admin" column="admin" />
+		<result property="enabled" column="enabled" />
+		<collection property="authority" column="authMap" ofType="com.airline.vo.AuthorityVO" autoMapping="true">
+			<id property="userid" column="userid"/>
+			<id property="authority" column="authority"/>
+		</collection>
+	</resultMap>
+
+<!-- 	<resultMap type="com.airline.vo.AuthorityVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="authority" column="authority" />
+	</resultMap> -->
+
+	<select id="getUser" resultMap="userMap">
+		select user.userId, user.pwd, user.enabled, auth.authority
+		from kakaouser user left outer join authorities auth on user.userId = auth.userid where
+		user.userId=#{userId}
+	</select>
+
+	<!-- <select id="getq" resultType="int"> select count(*) from kakaouser 
+		</select> -->
+
+</mapper>

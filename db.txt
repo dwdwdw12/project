@@ -1,0 +1,161 @@
+//유저테이블
+create table kakaouser(
+userId varchar(10) primary key,
+userNick varchar(30) unique,
+gradeCode int(1) default 0,
+userNameK varchar(50) not null,
+userNameE varchar(50) not null,
+gender char(1),
+pwd varchar(10) not null,
+mail varchar(50) not null,
+phone int(15) not null,
+postCode int(5) not null,
+address varchar(50) not null,
+userReginumFirst int(6),
+userReginumLast int(7),
+admin int(1) default 0
+);
+
+select * from kakaouser;
+insert into kakaouser values('user01', '유저1', 0,'김유저','userkim','M','user01','user@naver.com',01011112222,11111,'수원시 영통구',911111,1111111,0);
+
+//시큐리티용 권한테이블
+create table authorities(
+	userid varchar(10) not null,
+    authority varchar(50) not null,
+    constraint fk_auth_user foreign key(userId) references kakaouser(userId)
+);
+
+alter table kakaouser add enabled char(1) default '1';
+alter table kakaouser modify pwd varchar(100) not null;
+alter table kakaouser modify gender char(1) default 'M';
+alter table authorities add constraint fk_auth_user foreign key(userid)
+references kakaouser(userid) ON DELETE CASCADE;
+
+//유저로그
+create table userlog(
+    logNum int(3) auto_increment primary key,
+    userid varchar(10) not null, 
+    regidate timestamp,
+    updateDate timestamp,
+    gradeUpdate timestamp,
+    totalCount int(2) default 0,
+    totalMileage int(10) default 0,
+    totalSum int(10) default 0,
+    constraint fk_log_userid foreign key (userid) references kakaouser(userid) on delete cascade
+);
+
+alter table userlog modify regidate timestamp default current_timestamp;
+alter table userlog modify updateDate timestamp default current_timestamp;
+alter table userlog modify gradeUpdate timestamp default current_timestamp;
+
+insert into userlog(userid) values('user01');
+insert into userlog(userid) values('admin');
+
+//등급
+create table grade(
+	gradecode int(1) primary key,
+    usergrade varchar(10),
+    gradestandard int(10)
+);
+
+insert into grade values(0,'제이지',0);
+insert into grade values(1,'어피치',300000);
+insert into grade values(2,'라이언',500000);
+insert into grade values(3,'춘식이',1000000);
+
+alter table kakaouser add constraint fk_gradecode foreign key(gradecode) references grade(gradecode) on delete cascade;
+
+create table flightreservation(
+	resno varchar(50) primary key,
+    userid varchar(10),
+    userName varchar(50),
+    flightName varchar(50),
+    departure varchar(50),
+    arrival varchar(50),
+    arrTime timestamp default current_timestamp,
+    depTime timestamp default current_timestamp,
+    purchaseTime timestamp default current_timestamp,
+    seatId varchar(10),
+    ispaid boolean default false
+);
+
+alter table flightreservation add constraint fk_res_userid foreign key(userid) references kakaouser(userid) on delete cascade;
+
+create table resSeats(
+	seatId varchar(10) primary key,
+    flightName varchar(50),
+    depDay timeStamp,
+    seatClass varchar(10),
+    rowId varchar(10),
+    colId varchar(10),
+    isVacancy boolean default true
+);
+
+//시큐리티 로그아웃
+create table PERSISTENT_LOGINS (
+  USERNAME varchar(64) not null,
+  SERIES varchar(64) primary key,
+  TOKEN varchar(64) not null,
+  LAST_USED timestamp not null
+);
+
+//비행기 좌석 테이블
+create table seatclass(
+	seatclass varchar(10) primary key,
+    pricePercent float(5),
+    totalCount int(3)
+);
+
+insert into seatclass values('일등석', 2, 4);
+insert into seatclass values('비지니스', 1.5, 4);
+insert into seatclass values('이코노미', 1, 12);
+
+alter table resSeats add constraint fk_seatclass foreign key(seatClass) references seatclass(seatclass) on delete cascade;
+
+create table discountpolicy(
+	ageGroup varchar(20) primary key,
+    ageDiscountRate float(5)
+);
+
+insert into discountpolicy values(1, 0.0);
+insert into discountpolicy values(12, 0.75);
+insert into discountpolicy values(64, 1);
+
+create table purchaseHistory(
+	purchaseNo int(5) primary key auto_increment,
+    resno varchar(50),
+    userid varchar(10),
+    checkOk boolean default false
+);
+
+alter table purchaseHistory add constraint pk_history_no foreign key(resno) references flightreservation(resno) on delete cascade;
+alter table purchaseHistory add constraint pk_history_userid foreign key(userid) references kakaouser(userid) on delete cascade;
+
+create table userPay(
+	pno int(3) primary key auto_increment,
+	userid varchar(10),
+    resno varchar(50),
+    price int(10),
+    getDate timestamp,
+    mileage int(10) default 0
+);
+
+alter table userPay add constraint pk_pay_userid foreign key(userid) references kakaouser(userid) on delete cascade;
+alter table userPay add constraint pk_pay_resno foreign key(resno) references flightreservation(resno) on delete cascade;
+
+create table terms(
+	termsCode int(1) auto_increment primary key,
+    termsTitle varchar(100),
+    termsContents varchar(5000)
+);
+
+create table termsManage(
+    userid varchar(10),
+    termsCode int(1),
+    agree char(1) default 'N'
+);
+
+alter table termsManage add constraint pk_temrs_id foreign key(userid) references kakaouser(userid) on delete cascade;
+alter table termsManage add constraint pk_terms_code foreign key(termsCode) references terms(termsCode) on delete cascade;
+

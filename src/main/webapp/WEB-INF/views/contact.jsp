@@ -1,0 +1,197 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="includes/header2.jsp"%>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<!-- Google web font "Open Sans" -->
+<link rel="stylesheet"
+	href="../resources/font-awesome-4.7.0/css/font-awesome.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<!-- Bootstrap style -->
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick-theme.css" />
+<link rel="stylesheet" href="../resources/css/templatemo-style.css">
+<!-- Templatemo style -->
+
+<script src="../resources/js/vendor/modernizr.custom.min.js"></script>
+<link rel="stylesheet" href="../resources/css/normalize.css">
+<style>
+.slideshow {
+	height: 465px;
+	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
+	position: relative;
+}
+
+.slideshow img {
+	position: absolute;
+	/*이미지 위치 가운데로 옮기기*/
+	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
+	margin-left: -800px;
+	display: none;
+}
+
+p{
+	text-align: center;
+}
+</style>
+
+<div class="tm-page-wrap mx-auto">
+	<section class="tm-banner">
+
+		<!-- .tm-container-outer -->
+		<div class="inner">
+			<div class="slideshow">
+				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
+					height="1000"> <img src="../resources/img/tm-img-02.jpg"
+					alt="" width="1600" height="1000"> <img
+					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
+					height="1000"> <img src="../resources/img/tm-img-04.jpg"
+					alt="" width="1600" height="1000">
+			</div>
+		</div>
+	</section>
+
+	<section class="p-5 tm-container-outer tm-bg-gray">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
+					<h2 class="text-uppercase mb-4">
+						Your <strong>Journey</strong> is our priority
+					</h2>
+					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
+						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
+						Duis nec lobortis velit. Vivamus id magna vulputate, tempor ante
+						eget, tempus augue. Maecenas ultricies neque magna.</p>
+<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
+						explore</a> -->
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="tm-container-outer" id="tm-section-2">
+
+	</div>
+	<div class="tm-container-outer" id="tm-section-3">
+		<ul class="nav nav-pills tm-tabs-links">
+			<li class="tm-tab-link-li"><a href="history" data-toggle="information"
+				class="tm-tab-link"> <img
+					src="../resources/img/north-america.png" alt="Image"
+					class="img-fluid"> 소개 
+			</a></li>
+			<li class="tm-tab-link-li"><a href="history" data-toggle="history"
+				class="tm-tab-link"> <img
+					src="../resources/img/south-america.png" alt="Image"
+					class="img-fluid"> 역사
+			</a></li>
+			<li class="tm-tab-link-li"><a href="map" data-toggle="map"
+				class="tm-tab-link"><img src="../resources/img/antartica.png"
+					alt="Image" class="img-fluid"> 찾아오는 길
+			</a></li>
+		</ul>
+
+	</div>
+	<div class="main-wrapper">
+		<div class="main-content">
+			<section id="section">
+			</section>
+	</div>
+	<!-- <div class="main-wrapper">
+
+	<!-- .tm-container-outer -->
+	<%@ include file="includes/footer.jsp"%>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3156d02ad4070a1c858f024518bda8c5"></script>
+	<script type="text/javascript">
+		var str="";
+		var section = $("#section");
+		$(".tm-tab-link-li").on("click","a",function(e){
+			e.preventDefault();
+			var operData = $(this).data("toggle");
+			if(operData ==="map"){
+				str="";
+				str+="<section id='map'>";
+				str+="<div class='tm-container-outer tm-position-relative' id='map' style='width: 400px; height: 400px;'></div>";
+				str+="<div><p>카카오 본사</p><p>제주특별자치도 제주시 첨단로 242 (우)63309. 전화:<p>카카오 판교</p><p>제주특별자치도 제주시 첨단로 242 (우)63309. 전화: 1899-1326 (유료) </p></div>";
+				str+="</section>";
+			}else if(operData ==="history"){
+				str="";
+				str+="<section id='history'>";
+				str+="<div class='tm-container-outer tm-position-relative' id='history'></div>";
+				str+="<div><p>연혁 크롤링 해오기</p></div>";
+				str+="</section>";
+			}else if(operData ==="information"){
+				str="";
+				str+="<section id='information'>";
+				str+="<div class='tm-container-outer tm-position-relative' id='information'></div>";
+				str+="<div id='img'></div>"; 
+				/* str+="<div><p><img src='../resources/img/kakao/인사말.jpg' alt="Image"></p></div>";  */
+				str+="<div><p>카카오 에어라인 ‘Fly, better fly’라는 슬로건을 바탕으로 2023년 10월 첫 창립되었습니다.</p><br></div>";
+				str+="<div><p>카카오 에어라인은 국내 항공사 중 가장 많은 국내선 노선 운영으로 편리하고 다양한 항공 서비스를 제공하고 있으며,</p></div>";
+				str+="<div><p>일본, 중국, 동남아, 대양주 등 전 세계로 뻗어가며 고객 여러분께 더 넓은 세상을 보여 드리기 위해 노력하고 있습니다.</p><br></div>";
+				str+="<div><p>또한 카카오 에어라인은 경제적, 사회적, 환경적 책임을 다하고 지속 가능한 성장을 이루고,</p></div>";
+				str+="<div><p>타협이 없는 절대 안전을 기반으로 여러분의 행복한 여행을 책임지겠습니다.</p><br></div>";
+				str+="<div><p>더 나은 항공 여행 제공을 목표로 항공사의 핵심 가치인 안전과 서비스에서 완벽을 추구하며</p></div>";
+				str+="<div><p>대한민국 대표 실용항공사로 자리매김할 수 있도록 최선을 다 하는 카카오 에어라인이 되도록 하겠습니다.</p><br></div>";
+				str+="<div><p>감사합니다.</p></div>"; 
+				str+="</section>";
+			}
+			section.html(str);
+			
+			var mapContainer = document.getElementById('map'), 
+			mapOption = { 
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			
+		});
+
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('.slideshow').each(function() {
+				// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
+				let $slides = $(this).find("img");
+				let slideCount = $slides.length;
+				let currentIndex = 0;
+				$slides.eq(currentIndex).fadeIn();
+				// 첫 이미지를 나타나게 함
+
+				// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
+				let showNextSlide = function() {
+					let nextIndex = (currentIndex + 1) % slideCount;
+					// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
+					$slides.eq(currentIndex).fadeOut();
+					// 현재 이미지를 사라지게 하고
+					$slides.eq(nextIndex).fadeIn();
+					// 위에서 구한 다음 이미지를 나타나게 함
+					currentIndex = nextIndex;
+					// 다음 이미지의 값을 현재로 
+				}
+
+				let timer = setInterval(showNextSlide, 1000);
+				$(this).on('mouseover', function() {
+					//타이머 취소
+					clearInterval(timer);
+				}).on('mouseout', function() {
+					//타이머 시작
+					timer = setInterval(showNextSlide, 1000);
+				})
+			})
+		}); 
+		
+		// Slick Carousel
+        $('.tm-slideshow').slick({
+            infinite: true,
+            arrows: true,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
+	</script>
