@@ -14,9 +14,11 @@ import com.airline.mapper.UserMapper;
 import com.airline.vo.CustomUser;
 import com.airline.vo.KakaoUserVO;
 
+import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
+@Getter
 public class CustomUserDetailService implements UserDetailsService{
 
 	@Autowired
