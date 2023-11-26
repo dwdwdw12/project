@@ -169,15 +169,14 @@ label { font-weight: 700; }
     padding: 25px 25px 15px;
     width: 100%;
     max-width: 830px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 15px auto;
 }
 
 .tm-form-group { float: left; }
 .tm-form-group-pad { padding: 0 8px; }
-.tm-form-group-1 { width: 50%; }
-.tm-form-group-2 { width: 50%; }
-.tm-form-group-3 { width: 25%; }
+.tm-form-group-1 { width: 50%; margin: auto;}
+.tm-form-group-2 { width: 50%; margin: auto;}
+.tm-form-group-3 { width: 25%; margin: auto;}
 .form-control { border-radius: 0; }
 
 .tm-btn {
