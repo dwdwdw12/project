@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.airline.mapper.FlightMapper;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightVO;
+import com.airline.vo.KakaoUserVO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -38,6 +39,41 @@ public class FlightServiceImpl implements FlightService{
 	@Override
 	public int getTotalSearch(Criteria cri, String dep, String arr, String time) {
 		return mapper.getTotalSearch(cri, dep, arr, time);
+	}
+
+	@Override
+	public FlightVO getFlightInfo(int fno) {
+		return mapper.getFlightInfo(fno);
+	}
+
+	@Override
+	public int getPrice(String depName, String arrName) {
+		return mapper.getPrice(depName,arrName);
+	}
+
+	@Override
+	public int getUserAge(String userid) {
+		return mapper.getUserAge(userid);
+	}
+
+	@Override
+	public float getAgeDiscount(int age) {
+		return mapper.getAgeDiscount(age);
+	}
+
+	@Override
+	public int getKakaoPoint(String userid) {
+		return mapper.getKakaoPoint(userid);
+	}
+
+	@Override
+	public int getPoint(String userid) {
+		return mapper.getPoint(userid);
+	}
+
+	@Override
+	public int getcount(String userid) {
+		return mapper.getCount(userid);
 	}
 
 }

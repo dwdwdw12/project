@@ -31,4 +31,6 @@ public class FlightVO {
 	private String arrName;
 	private String depRegioncode;
 	private String arrRegioncode;
+	private String ageGroup; //나이구간
+	private float ageDiscountRate; //나이구간 추가
 }

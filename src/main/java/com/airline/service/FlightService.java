@@ -17,4 +17,24 @@ public interface FlightService {
 	public List<FlightVO> getListSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 
 	public int getTotalSearch(Criteria cri, String dep, String arr, String formattedDate);
+
+	//항공정보
+	public FlightVO getFlightInfo(int fno);
+
+	//가격구간 검색
+	public int getPrice(String depName, String arrName);
+
+	//유저나이 검색
+	public int getUserAge(String userid);
+
+	//나이별 할인율 검색
+	public float getAgeDiscount(int age);
+
+	//카카오포인트 검색	
+	public int getKakaoPoint(String userid);
+
+	//마일리지 검색
+	public int getPoint(String userid);
+	//마일리지 검색을 위한 null 체크
+	public int getcount(String userid);
 }
