@@ -187,7 +187,7 @@
 					sagittis eget diam.</p>
 				<a href="#"
 					class="text-uppercase tm-btn tm-btn-white tm-btn-white-primary">Continue
-					Reading</a>
+					Readingqqqq</a>
 			</div>
 		</section>
 		<section
