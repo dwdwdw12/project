@@ -34,4 +34,5 @@ public class Criteria {
 			return pageNum<1 ? 0 : (pageNum-1) * amount;
 		}
 		
+
 }
