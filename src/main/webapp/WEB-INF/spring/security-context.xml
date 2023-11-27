@@ -15,10 +15,12 @@
 	<bean id="csrfTokenRepository" class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"></bean>
 
 	<!-- <security:http auto-config="true" use-expressions="true"> -->
-	<security:http>
+	<security:http auto-config="true">
 		<!-- <security:intercept-url pattern="/*" access="isAnonymous()" /> -->
-		<security:intercept-url pattern="/user" access="hasRole('ROLE_MEMBER')" />
-		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		
+		<security:intercept-url pattern="/user/**" access="hasRole('ROLE_MEMBER')"  />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/flight/**" access="permitAll" />
 		
 		<security:csrf token-repository-ref="csrfTokenRepository" disabled="true" />
 		<security:headers>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/header2.jsp"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -23,12 +22,15 @@
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
 
+<!-- import import -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 <!-- 이미지로더 -->
 <script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
 <style>
-/* img{
+img{
 max-width: 100%;
-} */
+}
 
 .slideshow {
 	height: 465px;
@@ -66,7 +68,7 @@ max-width: 100%;
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
-						${fno} 번 비행기 좌석선택 -> 비행기 루트로 바꾸기
+						비행기 티켓 결제페이지
 					</h2>
 					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
 						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
@@ -74,72 +76,75 @@ max-width: 100%;
 						eget, tempus augue. Maecenas ultricies neque magna.</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
-					
-					<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map" style="text-align: center;">
-							<map name="image-map" id="seats">
-								<area class="seat" target="" alt="A1" coords="292,204,374,277" shape="rect" id="A1" >
-								<area class="seat" target="" alt="A2" href="A2" coords="292,296,374,370" shape="rect" id="A2" >
-								<area class="seat" target="" alt="A3" href="A3" coords="292,389,374,462" shape="rect" id="A3">
-								<area class="seat" target="" alt="A4" href="A4" coords="292,481,374,555" shape="rect" id="A4"  >
-								<area class="seat" target="" alt="B1" href="B1" coords="465,204,546,277" shape="rect" id="B1">
-								<area class="seat" target="" alt="B2" href="B2" coords="465,296,546,370" shape="rect" id="B2">
-								<area class="seat" target="" alt="B3" href="B3" coords="465,389,546,462" shape="rect" id="B3">
-								<area class="seat" target="" alt="B4" href="B4" coords="465,481,546,555" shape="rect" id="B4">
-								<area class="seat" target="" alt="C1" href="C1" coords="564,204,644,277" shape="rect" id="C1">
-								<area class="seat" target="" alt="C2" href="C2" coords="564,296,644,370" shape="rect" id="C2">
-								<area class="seat" target="" alt="C3" href="C3" coords="564,389,644,462" shape="rect" id="C3">
-								<area class="seat" target="" alt="C4" href="C4" coords="564,481,644,555" shape="rect" id="C4">
-								<area class="seat" target="" alt="D1" href="D1" coords="750,204,833,277" shape="rect" id="D1">
-								<area class="seat" target="" alt="D2" href="D2" coords="750,296,833,370" shape="rect" id="D2">
-								<area class="seat" target="" alt="D3" href="D3" coords="750,389,833,462" shape="rect" id="D3">
-								<area class="seat" target="" alt="D4" href="D4" coords="750,481,833,555" shape="rect" id="D4">
-								<area class="seat" target="" alt="E1" href="E1" coords="850,204,931,277" shape="rect" id="E1">
-								<area class="seat" target="" alt="E2" href="E2" coords="850,296,931,370" shape="rect" id="E2">
-								<area class="seat" target="" alt="E3" href="E3" coords="850,389,931,462" shape="rect" id="E3">
-								<area class="seat" target="" alt="E4" href="E4" coords="850,481,931,555" shape="rect" id="E4">
-								<area class="seat" target="" alt="F1" href="F1" coords="946,204,1028,277" shape="rect" id="F1">
-								<area class="seat" target="" alt="F2" href="F2" coords="946,296,1028,370" shape="rect" id="F2">
-								<area class="seat" target="" alt="F3" href="F3" coords="946,389,1028,462" shape="rect" id="F3">
-								<area class="seat" target="" alt="F4" href="F4" coords="946,481,1028,555" shape="rect" id="F4">
-							</map>
-					</div>
+						<div class="card-body bg-white mt-0 shadow">
+                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="15000"><span>15,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span>20,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="25000"><span>25,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="35000"><span>35,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="40000"><span>40,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
+                <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
+                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+ </div>
+				</div>
 			</div>		
-						
+					
 		</div>
 	</section>
-	
-	<!-- 전달 폼 -->
-	<form id="resForm" action="/flight/flightRes" method="get">
-		<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>
-	</form>
-
 
 </div>
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
-<script>
-$(document).ready(function(e) {
-	$('img[usemap]').rwdImageMaps();	
-});
-</script>
 <script type="text/javascript">
-	$(".seat").click(function(e){
-		e.preventDefault();
-		/* alert($(this).attr('id')); */
-	 	$("#resForm").append("<input type='hidden' name='fno' value='" + ${fno}+ "'>");
-		$("#resForm").append("<input type='hidden' name='seat' value='" +$(this).attr('id')+ "'>");
-		$("#resForm").submit();
-		alert("ddddddd");
-		
-	})
-/* 	var seat = $("area[name='s']").href();
-	/* var seat = $(this).document.getElementByName("s").getAttribute("href"); 
-	alert(seat);
- 	$("#actionForm").append("<input type='hidden' name='fno' value='" + ${fno}+ "'>");
-	$("#actionForm").append("<input type='hidden' name='seat' value='" + $(this).attr("href")+ "'>");
-	$("#actionForm").submit(); */
+    $('#charge_kakao').click(function () {
+        // getter
+        var IMP = window.IMP;
+        IMP.init('imp80062786');
+        var money = $('input[name="cp_item"]:checked').val();
+        console.log(money);
 	
+        IMP.request_pay({
+            pg: 'kakaopay.TC0ONETIME',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            pay_method: 'card',
+            name: '카카오 포인트 충전',
+            amount: money,
+            buyer_email: 'kbr7105@naver.com',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '인천광역시 부평구',
+            buyer_postcode: '12566'
+        }, function (rsp) {
+        	console.log("dddd");
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                $.ajax({
+                    type: "GET", 
+                    url: "/user/chargePoint2", //충전 금액값을 보낼 url 설정
+                    data: {
+                        "amount" : money
+                    },
+                });
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+            document.location.href="/"; //alert창 확인 후 이동할 url 설정
+        });
+    });
 </script>
+
+
 <script type="text/javascript">
 	$(function() {
 		$('.slideshow').each(function() {
