@@ -1,13 +1,15 @@
 package com.airline.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface BoardDiaryLikeMapper {
 
-	int insertLikecount(int boardNum, String userId);
+	public int insertLike(@Param("boardNum") int boardNum, @Param("userId") String userId);
 	
-	int deleteLikecount(int boardNum, String userId);
+	public int deleteLike(@Param("boardNum") int boardNum, @Param("userId") String userId);
 	
-	int checkLike(int boardNum, String userId);
+	public int checkLike(@Param("boardNum") int boardNum, @Param("userId") String userId);
 	
-	int likecount(int boardNum);	
+	public int likeCount(int boardNum);	
 	
 }
