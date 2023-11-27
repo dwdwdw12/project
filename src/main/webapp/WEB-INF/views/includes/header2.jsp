@@ -101,7 +101,7 @@
 							<div class="book_room">
 								<div class="socail_links">
 									<ul>
-										<li><a href="#">notice <!-- <i class="fa fa-facebook-square"></i> -->
+										<li><a href="/notice/list">notice <!-- <i class="fa fa-facebook-square"></i> -->
 										</a></li>
 										<li><a href="#">event <!-- <i class="fa fa-twitter"></i> -->
 										</a></li>
