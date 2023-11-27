@@ -68,7 +68,7 @@ max-width: 100%;
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
-						비행기 티켓 결제페이지
+						비행기 티켓 결제 정보
 					</h2>
 					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
 						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
@@ -77,10 +77,10 @@ max-width: 100%;
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 						<div>
-						<p>결제자 : ${userid}</p>
+						<p>결제자 : </p>
 						<p>항공정보 : ${vo}</p>
 						<p>항공정보1=>가격구간 서치시 필요정보 : ${vo.depName} / ${vo.arrName}</p>
-						<p>:기본요금*나이별구간*좌석구간 = ${price}*${pc}</p>
+						<p>:기본요금*나이별구간*좌석구간 = ${price}*${pc}*${seat}</p>
 						<p>총 결제금액 : ${total}</p>
 						
 						
@@ -94,18 +94,41 @@ max-width: 100%;
 						
 						</div>
 						<div class="card-body bg-white mt-0 shadow">
-                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="15000"><span>15,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span>20,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="25000"><span>25,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="35000"><span>35,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="40000"><span>40,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
-                <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+                <!-- <p style="font-weight: bold">카카오페이 현재 사용가능</p> -->
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="userid">결제자</label> 
+						<input name="userid" type="text" class="form-control" id="userid" value="${userid}" readonly="readonly">
+					</div>
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="vo">항공정보</label> 
+						<input name="vo" type="text" class="form-control" id="vo" value="${vo.depName}=> ${vo.arrName} , ${vo.fullDeptime}" readonly="readonly">
+					</div>
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="seat">좌석정보</label> 
+						<input name="seat" type="text" class="form-control" id="seat" value="${seat}" readonly="readonly">
+					</div>
+					
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="total">총 결제금액</label> 
+						<input name="total" type="text" class="form-control" id="total" value="${total}" readonly="readonly">
+					</div>
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="point">마일리지 사용</label> 
+						<input name="pointUse1" type="checkbox" class="form-control" id="pointUse1">
+						<input name="pointUse2" type="text" class="form-control" id="pointUse2" value="" >
+						<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
+					</div>
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="kakaoP">카카오페이 사용</label> 
+						<input name="kakaoPUse1" type="checkbox" class="form-control" id="kakaoPUse1" >
+						<input name="kakaoPUse2" type="text" class="form-control" id="kakaoPUse2" value="" >
+						<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
+					</div>
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="totalPay">최종결제금액</label> 
+						<input name="totalPay" type="text" class="form-control" id="totalPay" value="total-마일리지-카카오페이" readonly="readonly">
+					</div>
+                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결 제</button>
  </div>
 						${fno}, ${seat}
 				</div>
@@ -118,6 +141,14 @@ max-width: 100%;
 </div>
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
+<script>
+if($("#pointUse1").prop("check",true)){
+	$("#pointUse1").val(1);
+}else{
+	$("#pointUse1").val(0);
+}
+
+</script>
 <script>
     $('#charge_kakao').click(function () {
         // getter
