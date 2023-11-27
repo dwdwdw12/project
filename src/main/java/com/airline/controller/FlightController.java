@@ -182,18 +182,13 @@ public class FlightController {
 		
 	}
 	
-//	@GetMapping("/rescomplete")
-//	@PreAuthorize("isAuthenticated()")
-//	public @ResponseBody void getRescomplete(@RequestParam("userid")String userid,@RequestParam("point") Integer point,@RequestParam("kakao") Integer kakao,@RequestParam("total") Integer total,@RequestParam("fno") Integer fno,@RequestParam("seat") String seat) {
-//		log.info("결제완료.. get");
-//		System.out.println(userid);
-//		System.out.println(point);
-//		System.out.println(kakao);
-//		System.out.println(total);
-//		System.out.println(fno);
-//		System.out.println(seat);
-//		
-//		}
+	@GetMapping("/rescomplete")
+	@PreAuthorize("isAuthenticated()")
+	public void getRescomplete(Model model) {
+		log.info("결제완료.. get");
+		//결제완료 메세지 띄우기
+		
+		}
 	
 	@PostMapping(value="/rescomplete" )
 	@PreAuthorize("isAuthenticated()")
@@ -206,6 +201,10 @@ public class FlightController {
 		System.out.println(flight.getFno());
 		log.info("결제완료.. post");
 		//db에 집어넣기
+		//1.예약 테이블
+		//2.userpay
+		//3.등급 업데이트
+		//4.마일리지 및 카카오페이 사용내역 업데이트
 		//getRescomplete으로 리다이렉트
 	
 	}
