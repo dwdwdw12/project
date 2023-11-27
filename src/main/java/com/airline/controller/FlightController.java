@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.UUID;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.airline.service.FlightService;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResDTO;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.FlightVO;
 import com.airline.vo.PageDTO;
 
@@ -201,7 +203,12 @@ public class FlightController {
 		System.out.println(flight.getFno());
 		log.info("결제완료.. post");
 		//db에 집어넣기
+		//항공정보 가져오기 + user정보 가져오기
+		FlightVO vo = flights.getFlightInfo(flight.getFno());
+		String uName = flights.getUserName(flight.getUserid());
 		//1.예약 테이블
+		String rno = UUID.randomUUID().toString();
+		//FlightResVO resvo = FlightResVO.builder().resno(rno).userid(flight.getUserid()).username(flight.)
 		//2.userpay
 		//3.등급 업데이트
 		//4.마일리지 및 카카오페이 사용내역 업데이트

@@ -42,4 +42,6 @@ public interface FlightMapper {
 	
 	public float getSeatPc(String seat);
 
+	public String getUserName(String userid);
+
 }
