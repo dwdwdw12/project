@@ -64,36 +64,56 @@
 						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
 						Duis nec lobortis velit. Vivamus id magna vulputate, tempor ante
 						eget, tempus augue. Maecenas ultricies neque magna.</p>
-					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
+<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 				</div>
 			</div>
-
-			<form action="/flight/search" method="get"
-				class="tm-search-form tm-section-pad-1">
-				<div class="form-row tm-search-form-row">
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="dep">Choose Your Destination</label> 
-						<input name="dep" type="text" class="form-control" id="departure"
-							placeholder="Type your destination..." required="required">
-					</div>
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="arr">Choose Your Arrival</label> 
-						<input name="arr" type="text" class="form-control" id="arrival" placeholder="Type your destination..." required="required">
-					</div>
-				</div>
-				<!-- form-row -->
-				<div class="form-row tm-search-form-row">
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-						<label for="inputCheckIn">Check In Date</label> 
-						<input name="time" type="text" class="form-control" id="inputCheckIn" placeholder="Check In" required="required">
-					</div>
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<label for="btnSubmit">&nbsp;</label>
-						<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="btnSubmit">Check Availability</button>
-					</div>
-				</div>
-			</form>
+			
+			
+			
+			
+			
+			
+			
+			<form action="index.html" method="get"
+						class="tm-search-form tm-section-pad-2">
+						<div class="form-row tm-search-form-row">
+							<input type="hidden" name="command" value="flightList"/>
+							<div class="form-row tm-search-form-row">
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+									<label for="inputCity"><a>&#x2714&nbsp;&nbsp;</a>Choose Your Department</label> 
+									<input name="department" type="text" class="form-control" id="inputCity" placeholder="Type your destination...">
+								</div>
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+									<label for="inputCity"><a>&#x2714&nbsp;&nbsp;</a>Choose Your Arrive</label> 
+									<input name="arrive" type="text" class="form-control" id="inputCity" placeholder="Type your destination...">
+								</div>
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+									<label for="inputCheckIn"><a>&#x2714&nbsp;&nbsp;</a>탑승객</label> 
+									<input name="" type="text" class="form-control" id="" placeholder="탑승객">
+								</div>
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+									<label for="inputCheckIn"><a>&#x2714&nbsp;&nbsp;</a>좌석등급</label> 
+									<input name="" type="text" class="form-control" id="" placeholder="좌석등급">
+								</div>
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+									<label for="inputCheckIn"><a>&#x1F551&nbsp;&nbsp;</a>Check In Date</label> 
+									<input name="check-in" type="text" class="form-control" id="inputCheckIn" placeholder="Check In">
+								</div>
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+									<label for="btnSubmit">&nbsp;</label>
+									<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="btnSubmit"  onclick="return checksubmit()">Check Availability</button>
+								</div>
+								</div>
+						</div>
+					</form>
+			
+			
+			
+			
+			
+			
+			
 		</div>
 	</section>
 
@@ -814,22 +834,22 @@
 					// 다음 이미지의 값을 현재로 
 				}
 
-				let timer = setInterval(showNextSlide, 1000);
+				let timer = setInterval(showNextSlide, 5000);
 				$(this).on('mouseover', function() {
 					//타이머 취소
 					clearInterval(timer);
 				}).on('mouseout', function() {
 					//타이머 시작
-					timer = setInterval(showNextSlide, 1000);
+					timer = setInterval(showNextSlide, 5000);
 				})
 			})
 		});
-
+		
 		// Slick Carousel
-		$('.tm-slideshow').slick({
-			infinite : true,
-			arrows : true,
-			slidesToShow : 1,
-			slidesToScroll : 1
-		});
+        $('.tm-slideshow').slick({
+            infinite: true,
+            arrows: true,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
 	</script>
