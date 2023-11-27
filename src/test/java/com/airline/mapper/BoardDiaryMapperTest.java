@@ -27,8 +27,13 @@ public class BoardDiaryMapperTest {
 	@Test
 	public void testGetListwithPaging() {
 		Criteria cri = new Criteria();
-		cri.setPageNum(2);
+		cri.setPageNum(1);
 		cri.setAmount(2);
+		
+		cri.setType("T");
+		cri.setKeyword("5");
+		
+		cri.setOrder("likecount");
 		
 		mapper.getListwithPaging(cri).forEach(board->log.info(board));
 	}
