@@ -90,7 +90,6 @@ max-width: 100%;
 						<p>카카오페이 사용여부 / 현재 페이포인트 : ${kakaoP}</p>
 						<p>결제버튼 -> 이름, 아이디, 가격 넘겨줘야함</p>
 						<input type="hidden" id="fno" value="${fno}">
-						<input type="text" id="fno" value="${fno}">${fno}
 						
 						
 						</div>
