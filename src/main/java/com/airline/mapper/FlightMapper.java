@@ -35,6 +35,11 @@ public interface FlightMapper {
 	public int getPoint(String userid);
 
 	public int getCount(String userid);
+
+	public String getEmail(String userid);
 	
+	public int getKCount(String userid);
+	
+	public float getSeatPc(String seat);
 
 }

@@ -16,13 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.airline.service.FlightService;
 import com.airline.vo.Criteria;
+import com.airline.vo.FlightResDTO;
 import com.airline.vo.FlightVO;
-import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PageDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -93,6 +94,23 @@ public class FlightController {
 		float pc = 0;
 		System.out.println("price : "+price);
 
+		//좌석별 가격구간 검색
+		float seatPc = 0;
+		String className = seat.charAt(0)+"";
+		if(className == "A") {
+			seat = "비지니스";
+			seatPc = flights.getSeatPc(seat);
+		}else if(className == "B") {
+			seat = "이코노미";
+			seatPc = flights.getSeatPc(seat);
+		}else {
+			seat = "일등석";
+			seatPc = flights.getSeatPc(seat);
+		}
+		
+		System.out.println("seat : "+seat);
+		model.addAttribute("seat",seatPc);
+				
 		//유저정보 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(authentication.getPrincipal() instanceof UserDetails) {
@@ -101,6 +119,10 @@ public class FlightController {
 			
 			System.out.println("id : "+userid);
 			model.addAttribute("userid",userid);
+			//유저이메일
+			String email = flights.getEmail(userid);
+			model.addAttribute("email",email);
+			
 			//유저나이 검색
 			String dbage = flights.getUserAge(userid)+"";
 			int age = 0;
@@ -118,9 +140,16 @@ public class FlightController {
 			  System.out.println(pc);
 			  
 			//카카오 포인트 검색
-			int kakaoP = flights.getKakaoPoint(userid);
-			System.out.println(kakaoP);
-			model.addAttribute("kakaoP", kakaoP);
+				int kpoint = flights.getKcount(userid);
+				int kakaoP = 0;
+				if(kpoint ==0) {
+					kakaoP = 0;
+				}else {
+					kakaoP = flights.getKakaoPoint(userid);
+				}
+				
+				System.out.println(kakaoP);
+				model.addAttribute("kakaoP", kakaoP);
 			//유저 마일리지 검색 
 			int count = flights.getcount(userid);
 			System.out.println(count);
@@ -143,31 +172,42 @@ public class FlightController {
 				String userid = authentication.getPrincipal().toString(); 
 				System.out.println("id : "+userid);
 			} 
-
-		
+		model.addAttribute("fno",fno);
+		model.addAttribute("seat",seat);
 		model.addAttribute("vo", vo);
 		model.addAttribute("price", price);
 		model.addAttribute("pc", pc);
-		model.addAttribute("total", price*pc);
+		model.addAttribute("total", Math.round(price*pc*seatPc));
 		
 		
 	}
 	
-	@PostMapping("/rescomplete")
+	@GetMapping("/rescomplete")
 	@PreAuthorize("isAuthenticated()")
-	public @ResponseBody void rescomplete(int amount) {
-		System.out.println("amount : "+amount);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication.getPrincipal() instanceof UserDetails) {
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
-			String userid = userDetails.getUsername(); 
-			System.out.println("id : "+userid);
-			//pay.chargePoint(userid,amount);
-			} else { 
-				String userid = authentication.getPrincipal().toString(); 
-				System.out.println("id : "+userid);
-			} 
+	public void getRescomplete(Model model) {
+		log.info("결제완료.. get");
+		//결제완료 메세지 띄우기
+		
 		}
+	
+	@PostMapping(value="/rescomplete" )
+	@PreAuthorize("isAuthenticated()")
+	public @ResponseBody void rescomplete(@RequestBody FlightResDTO flight) {
+		System.out.println(flight.getUserid());
+		System.out.println(flight.getPoint());
+		System.out.println(flight.getKakao());
+		System.out.println(flight.getSeat());
+		System.out.println(flight.getTotal());
+		System.out.println(flight.getFno());
+		log.info("결제완료.. post");
+		//db에 집어넣기
+		//1.예약 테이블
+		//2.userpay
+		//3.등급 업데이트
+		//4.마일리지 및 카카오페이 사용내역 업데이트
+		//getRescomplete으로 리다이렉트
+	
+	}
 	
 
 	
