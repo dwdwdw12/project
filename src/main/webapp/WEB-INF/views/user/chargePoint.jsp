@@ -22,6 +22,9 @@
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
 
+<!-- import import -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 <!-- 이미지로더 -->
 <script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
 <style>
@@ -73,90 +76,75 @@ max-width: 100%;
 						eget, tempus augue. Maecenas ultricies neque magna.</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
-						${fno}, ${seat}
+						<div class="card-body bg-white mt-0 shadow">
+                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="15000"><span>15,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span>20,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="25000"><span>25,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="35000"><span>35,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="40000"><span>40,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
+                <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
+                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+ </div>
 				</div>
 			</div>		
 					
 		</div>
 	</section>
-	
-	<!-- 전달 폼 -->
-	<form id="actionForm" action="/user/flightRes" method="get">
-	</form>
-
 
 </div>
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
-<script>
-$(document).ready(function(e) {
-	$('img[usemap]').rwdImageMaps();
+<script type="text/javascript">
+    $('#charge_kakao').click(function () {
+        // getter
+        var IMP = window.IMP;
+        IMP.init('imp80062786');
+        var money = $('input[name="cp_item"]:checked').val();
+        console.log(money);
 	
-	$("#seats").on("click","area",function(e){
-		e.preventDefault();
-		$("#actionForm").append("<input type='hidden' name='fno' value='" + ${fno}+ "'>");
-		$("#actionForm").append("<input type='hidden' name='seat' value='" + $(this).attr("href")+ "'>");
-		$("#actionForm").submit();
-		
-	})
-});
+        IMP.request_pay({
+            pg: 'kakaopay.TC0ONETIME',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            pay_method: 'card',
+            name: '카카오 포인트 충전',
+            amount: money,
+            buyer_email: 'kbr7105@naver.com',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '인천광역시 부평구',
+            buyer_postcode: '12566'
+        }, function (rsp) {
+        	console.log("dddd");
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                $.ajax({
+                    type: "GET", 
+                    url: "/user/chargePoint2", //충전 금액값을 보낼 url 설정
+                    data: {
+                        "amount" : money
+                    },
+                });
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+            document.location.href="/"; //alert창 확인 후 이동할 url 설정
+        });
+    });
 </script>
 
-<script type="text/javascript">
-	//페이지 버튼 클릭 이동
-	var actionForm = $("#actionForm");
-	$(".page-item a").on("click", function(e) {
-		e.preventDefault();
-		console.log("test--------------------------");
-		actionForm.find("input[name='pageNum']").val($(this).attr("href")); 
-		actionForm.submit();
-	});
-</script>
-<!-- 충돌부분 추가 -->
-<script type="text/javascript">
-	var $jLatest = jQuery.noConflict();
-	$jLatest('input[id="dates"]').daterangepicker();
-	$jLatest('input[id="startDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-	$jLatest('input[id="endDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-</script>
+
 <script type="text/javascript">
 	$(function() {
 		$('.slideshow').each(function() {

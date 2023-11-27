@@ -69,14 +69,15 @@
 											</ul>
 										</li>
 										<sec:authorize access="isAuthenticated()">
-											<li sec:authorize="hasRole(T(com.airline.vo.UserRole).ROLE_MEMBER)"><a href="/user" href="#">myPage(user)<i class="ti-angle-down"></i></a>
+											<li sec:authorize="hasRole('ROLE_MEMBER'))"><a href="/user" href="#">myPage(user)<i class="ti-angle-down"></i></a>
 												<ul class="submenu">
 													<li><a href="blog.html">회원정보 조회/수정</a></li>
+													<li><a href="/user/chargePoint">포인트 충전</a></li>
 													<li><a href="single-blog.html">체크인</a></li>
 													<li><a href="single-blog.html">구매내역 조회</a></li>
 												</ul>
 											</li>
-											<li sec:authorize="hasRole(T(com.airline.vo.UserRole).ROLE_ADMIN)"><a href="/admin" href="#">myPage(admin)<i class="ti-angle-down"></i></a>
+											<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin" href="#">myPage(admin)<i class="ti-angle-down"></i></a>
 												<ul class="submenu">
 													<li><a href="blog.html">회원조회</a></li>
 													<li><a href="single-blog.html">항공스케줄 등록/수정</a></li>
@@ -119,6 +120,8 @@
 											<p>
 												<sec:authentication property="principal.username" />
 												님 환영합니다!
+												<sec:authentication property="principal.user" />
+												<sec:authentication property="principal.user.authority" />
 											</p>
 											<form id="actionForm" action="/logout" method="post">
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
