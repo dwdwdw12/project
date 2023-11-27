@@ -23,6 +23,10 @@ public interface BoardDiaryMapper {
 	
 	public int getTotalCount(Criteria cri);
 
-	public void updateReplyCnt(@Param("boardNum") int boardNum, @Param("amount") int amount); 
+	public void updateReplyCount(@Param("boardNum") int boardNum, @Param("amount") int amount); 
+	
+	public int updateReadCount(int boardNum);
+	
+	public int updateLikeCount(int boardNum);
 	
 }
