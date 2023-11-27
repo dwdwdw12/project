@@ -75,6 +75,14 @@
 	<select id="getCount" resultType="int">
 		select count(userid) from userpay where userid=#{userid}
 	</select>
+	
+	<select id="getKCount" resultType="int">
+		select count(userid) from point where userid=#{userid}
+	</select>
+	
+	<select id="getSeatPc" resultType="float">
+		select pricePercent from seatclass where seatclass=#{seat}
+	</select>
 
 	
 </mapper>
