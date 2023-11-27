@@ -91,4 +91,9 @@ public class FlightServiceImpl implements FlightService{
 		return mapper.getSeatPc(seat);
 	}
 
+	@Override
+	public String getUserName(String userid) {
+		return mapper.getUserName(userid);
+	}
+
 }

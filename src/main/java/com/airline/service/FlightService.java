@@ -43,4 +43,6 @@ public interface FlightService {
 	public float getSeatPc(String seat);
 	//유저 이메일
 	public String getEmail(String userid);
+
+	public String getUserName(String userid);
 }

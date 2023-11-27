@@ -88,6 +88,10 @@
 	<select id="getEmail" resultType="String">
 		select mail from kakaouser where userid=#{userid}
 	</select>
+	
+	<select id="getUserName">
+		select userNameK from kakaouser where userid=#{userid}
+	</select>
 
 	
 </mapper>
