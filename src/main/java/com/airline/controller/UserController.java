@@ -1,6 +1,6 @@
 package com.airline.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.airline.service.FlightService;
-import com.airline.service.PayService;
+//import com.airline.service.PayService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -26,7 +26,7 @@ public class UserController {
 	private FlightService flights;
 	
 	@Autowired
-	private PayService pay;
+//	private PayService pay;
 	
 	//좌석 선택 후 결제창으로 넘어가기
 //	@GetMapping("/flightRes")
@@ -46,15 +46,15 @@ public class UserController {
 	public @ResponseBody void postChargePoint(int amount) {
 		System.out.println("amount : "+amount);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication.getPrincipal() instanceof UserDetails) {
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
-			String userid = userDetails.getUsername(); 
-			System.out.println("id : "+userid);
-			pay.chargePoint(userid,amount);
-			} else { 
-				String userid = authentication.getPrincipal().toString(); 
-				System.out.println("id : "+userid);
-			} 
+//		if(authentication.getPrincipal() instanceof UserDetails) {
+//			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
+//			String userid = userDetails.getUsername(); 
+//			System.out.println("id : "+userid);
+//			pay.chargePoint(userid,amount);
+//			} else { 
+//				String userid = authentication.getPrincipal().toString(); 
+//				System.out.println("id : "+userid);
+//			} 
 		}
 	
 
