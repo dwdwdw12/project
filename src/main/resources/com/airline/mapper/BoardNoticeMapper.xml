@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.airline.mapper.BoardNoticeMapper">
+
+<select id="getList" resultType="com.airline.vo.BoardNoticeVO">
+	select * from boardnotice
+</select>
+
+<select id="getOne" resultType="com.airline.vo.BoardNoticeVO">
+	select * from boardnotice where boardnum = #{boardnum}
+</select>
+
+<select id="getTotal" resultType="int">
+	select count(*) from boardnotice where boardnum >0
+</select>
+
+<select id="getPageList" resultType="com.airline.vo.BoardNoticeVO">
+	<![CDATA[
+	select c.* 
+	from(select b.* from(select row_number() over(order by boardnum desc) as num, a.* from boardnotice a)b where num<= #{pageNum}* #{amount})c 
+	where num>= (#{pageNum}-1)* #{amount}
+	]]>
+</select>
+
+<insert id="insert">
+	insert into boardnotice ( boardsubject, boardcontent, boardwriter) 
+	values(#{boardsubject},#{boardcontent},#{boardwriter});
+</insert>
+
+<update id="modify">
+	update boardnotice set boardcontent=#{boardcontent}, modifydate=now()
+	where boardnum=#{boardnum} 
+</update>
+
+<delete id="delete">
+	delete from boardnotice where boardnum=#{boardnum}
+</delete>
+
+
+
+</mapper>
