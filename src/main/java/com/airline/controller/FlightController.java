@@ -8,13 +8,21 @@ import java.util.Date;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.airline.service.FlightService;
 import com.airline.vo.Criteria;
+import com.airline.vo.FlightVO;
+import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PageDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -71,5 +79,96 @@ public class FlightController {
 		log.info("res....");
 		model.addAttribute("fno",fno);
 	}
+	
+	//좌석 선택 후 결제창으로 넘어가기
+	@GetMapping("/flightRes")
+	@PreAuthorize("isAuthenticated()")
+	public void flightRes(Model model,@Param("fno")int fno, @Param("seat")String seat) {
+		log.info("유저 결제창...");
+		//예약할 항공정보
+		FlightVO vo = flights.getFlightInfo(fno);
+		System.out.println("vo : "+vo);
+		//가격구간 검색
+		int price = flights.getPrice(vo.getDepName(),vo.getArrName());
+		float pc = 0;
+		System.out.println("price : "+price);
+
+		//유저정보 가져오기
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
+			String userid = userDetails.getUsername();
+			
+			System.out.println("id : "+userid);
+			model.addAttribute("userid",userid);
+			//유저나이 검색
+			String dbage = flights.getUserAge(userid)+"";
+			int age = 0;
+			if(Integer.parseInt(dbage.substring(0, 2))<11 || Integer.parseInt(dbage.substring(0, 2))>59) {
+				age = 12;
+				//age = 2023-Integer.parseInt(19+dbage.substring(0, 2));
+			}else {
+				//나잇값 다시 고쳐야함...;;
+				age = 2023-Integer.parseInt(20+dbage.substring(0, 2));
+			}
+			System.out.println("age : "+age);
+			
+			//나이별 할인구간 검색
+			  pc = flights.getAgeDiscount(age); 
+			  System.out.println(pc);
+			  
+			//카카오 포인트 검색
+			int kakaoP = flights.getKakaoPoint(userid);
+			System.out.println(kakaoP);
+			model.addAttribute("kakaoP", kakaoP);
+			//유저 마일리지 검색 
+			int count = flights.getcount(userid);
+			System.out.println(count);
+			int point = 0;
+			if(count == 0) {
+				point = 0;
+			}else {
+				point = flights.getPoint(userid);
+			}
+
+			System.out.println(point);
+			model.addAttribute("point",point);
+			
+			
+			//int ageP =flights.getAgePercent()
+			
+			
+			//pay.chargePoint(userid,amount);
+			} else { 
+				String userid = authentication.getPrincipal().toString(); 
+				System.out.println("id : "+userid);
+			} 
+
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("price", price);
+		model.addAttribute("pc", pc);
+		model.addAttribute("total", price*pc);
+		
+		
+	}
+	
+	@PostMapping("/rescomplete")
+	@PreAuthorize("isAuthenticated()")
+	public @ResponseBody void rescomplete(int amount) {
+		System.out.println("amount : "+amount);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
+			String userid = userDetails.getUsername(); 
+			System.out.println("id : "+userid);
+			//pay.chargePoint(userid,amount);
+			} else { 
+				String userid = authentication.getPrincipal().toString(); 
+				System.out.println("id : "+userid);
+			} 
+		}
+	
+
 	
 }

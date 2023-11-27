@@ -28,4 +28,10 @@ public class Criteria {
 			return type == null? new String[] {} : type.split("");
 		}
 		
+		public int getNewStart() {
+			System.out.println("pagenum>>"+pageNum);
+			
+			return pageNum<1 ? 0 : (pageNum-1) * amount;
+		}
+		
 }

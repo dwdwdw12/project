@@ -48,4 +48,33 @@
 			and DEPDAY like concat('%',#{time},'%')
 	</select>
 	
+	<select id="getFlightInfo" resultType="com.airline.vo.FlightVO">
+		select * from airplaneschedule where fno=#{fno}
+	</select>
+	
+	<select id="getPrice" resultType="int">
+		select price from price where depname=#{depname} and arrname=#{arrname}
+	</select>
+	
+	<select id="getUserAge" resultType="int">
+		select userReginumFirst from kakaouser where userid = #{userid}
+	</select>
+	
+	<select id="getAgeDiscount" resultType="float">
+		select ageDiscountRate from discountpolicy where ageGroup = #{age}
+	</select>
+	
+	<select id="getKakaoPoint" resultType="int">
+		select sum(amount) from point where userid=#{userid}
+	</select>
+	
+	<select id="getPoint" resultType="int">
+		select sum(mileage) from userpay where userid=#{userid}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(userid) from userpay where userid=#{userid}
+	</select>
+
+	
 </mapper>
