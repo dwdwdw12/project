@@ -53,7 +53,7 @@
 										<li><a href="index.html" href="#"><img
 												src="../resources/img/kakao/chunsik.png" alt=""
 												style="width: 60px"></a></li>
-										<li><a href="index.html" href="/">home</a></li>
+										<li><a href="/">home</a></li>
 										<li><a href="/flight/list">flight<i class="ti-angle-down"></i></a>
 											<ul class="submenu">
 												<li><a href="/flight/list">Flight Schedule</a></li>
