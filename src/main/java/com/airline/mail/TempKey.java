@@ -3,7 +3,7 @@ package com.airline.mail;
 import java.util.Random;
 
 public class TempKey {
-
+ 
 	public String getKey() {
 		return authCodeMaker();
 	}
