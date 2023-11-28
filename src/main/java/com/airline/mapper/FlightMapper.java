@@ -69,5 +69,5 @@ public interface FlightMapper {
 	public FlightResVO getResInfo(String rno);
 
 	public KakaoUserVO getUserInfo(String userid);
-
+	//
 }

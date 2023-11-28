@@ -72,4 +72,5 @@ public interface FlightService {
 	public FlightResVO getResInfo(String rno);
 	//카카오 유저테이블
 	public KakaoUserVO getUserInfo(String userid);
+	//
 }
