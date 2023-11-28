@@ -16,4 +16,9 @@ public class JoinServiceImpl implements JoinService{
 		return join.checkEmail(email);
 	}
 
+	@Override
+	public String showUserId(String email, String mail_key) {
+		return join.getUserId(email, mail_key);
+	}
+
 }

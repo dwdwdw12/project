@@ -2,6 +2,9 @@ package com.airline.mail;
 
 import java.util.Random;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 public class TempKey {
  
 	public String getKey() {
@@ -33,7 +36,7 @@ public class TempKey {
 		}
 
 		authCode = temp.toString();
-		System.out.println(authCode);
+		log.info("생성된 랜덤키 >> " + authCode);
 
 		return authCode;
 	}
