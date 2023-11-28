@@ -56,13 +56,13 @@
 						<button type="submit" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" id="login">로그인</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='../user/joinTerms'">회원가입</button>
+						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/user/joinTerms'" data-oper="join">회원가입</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='find_id'">아이디 찾기</button>
+						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='findId'" data-oper="findId">아이디 찾기</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='find_pwd'">비밀번호 찾기</button>
+						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='findPwd'" data-oper="findPwd">비밀번호 찾기</button>
 					</div>
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -85,6 +85,20 @@
 		e.preventDefault();
 		alert("login");
 		$("form").submit();
+	});
+	
+	$(document).ready(function(){
+		 var operForm = $(".frm");
+		 
+	$("button[data-oper='join']").on("click", function(e){
+		operForm.attr("action", "/user/joinTerms").submit();
+		});
+	
+	$("button[data-oper='list']").on("click", function(e){
+		operForm.find("#bno").remove(); //전체 리스트 목록 보러갈 때는 bno 필요없으니까 삭제함..(url에 노출됨)
+		operForm.attr("action", "/board/list").attr("method", "get").submit();
+		});
+	
 	});
 </script>
 </body>
