@@ -120,7 +120,7 @@
 								<td>${list.fullArrtime}</td>
 								<td>${list.depName}</td>
 								<td>${list.arrName}</td>
-								<td><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="reserve" href="${list.fno}">reservation</button></td>
+								<td><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">reservation</button></td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -153,8 +153,8 @@
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
 	</form>
 	<!-- 예약페이지 이동 -->
-	<form id="resForm" action="/flight/reservation" method="get">
-		<%-- <input type="hidden" name="fno" value="${list.fno}" /> --%>
+	<form name="resForm" action="/flight/reservation" method="get">
+		 <input type="hidden" name="fno" value="" /> 
 	</form>
 
 </div>
@@ -170,11 +170,14 @@
 		actionForm.submit();
 	});
 	
-	$("#reserve").on("click",function(e){
+	$(".reserve-button").on("click",function(e){
 		e.preventDefault();
 		alert("예약 페이지로 이동합니다.")
-		$("#resForm").append("<input type='hidden' name='fno' value='" + $(this).attr("href")+ "'>");
-		$("#resForm").submit();
+		var fno = $(this).data("fno");
+		console.log(fno);
+		//$("resForm").append("<input type='hidden' name='fno' value='" + $(this).attr("href")+ "'>");
+		$("input[name='fno']").val(fno);
+		$("form[name='resForm']").submit();
 	})
 	
 
