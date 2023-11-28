@@ -14,7 +14,6 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class FlightResVO {
 	private String resno;
 	private String userid;
@@ -22,10 +21,19 @@ public class FlightResVO {
 	private String flightname;
 	private String departure;
 	private String arrival;
-	private Date arrtime;
-	private Date deptime;
+	private String arrtime;
+	private String deptime;
 	private Date purchasetime;
 	private String seatid;
-	private int ispaid;
+	private int ispaid;  //0결제 1 미결제
+	
+	/*
+	 * @Builder public FlightResVO(String resno, String userid, String username,
+	 * String flightname,String departure, String arrival, String arrtime,String
+	 * deptime,String seatid) { this.resno = resno; this.userid = userid;
+	 * this.username = username; this.flightname = flightname; this.departure =
+	 * departure; this.arrival = arrival; this.arrtime = arrtime; this.deptime =
+	 * deptime; this.seatid = seatid; }
+	 */
 	
 }
