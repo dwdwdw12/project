@@ -53,7 +53,8 @@
  (2023년 6월 1일부 시행) <br>
 <br> </p><br>
 <!-- [CMS] 회사소개 > 회사소개 > 약관/정책 > 약관 통합관리 >  카카오클럽 일반 규정 --><!-- [CMS] 회사소개 > 회사소개 > 약관/정책 > 약관 통합관리 > 홈페이지 이용약관 -->
-<style type="text/css"> .policy_wrap p{ padding:15px 0;}
+
+<style type="/text/css"> .policy_wrap p{ padding:15px 0;}
 </style>
 <div class="policy_wrap"> 
 <p><strong>제1장 총칙</strong></p> 

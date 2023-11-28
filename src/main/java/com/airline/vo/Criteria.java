@@ -1,5 +1,7 @@
 package com.airline.vo;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -34,5 +36,13 @@ public class Criteria {
 			return pageNum<1 ? 0 : (pageNum-1) * amount;
 		}
 		
-
+		public String getListLink() {
+			UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+													.queryParam("pageNum", this.pageNum)
+													.queryParam("amount", this.getAmount())
+													.queryParam("type", this.getType())
+													.queryParam("keyword", this.getKeyword());
+			return builder.toUriString();
+		}
+		
 }
