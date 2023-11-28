@@ -51,7 +51,7 @@ public interface FlightService {
 	//예약테이블 업데이트
 	public int insertRes(Map<String, String> map);
 	//구매테이블 업데이트
-	public int insertPay(String rno, Integer total, long mileage);
+	public int insertPay(String resno, String userid, Integer total, int mileage);
 	//구매횟수 조회
 	public int getBuyCount(String userid);
 	//총 구매금액 조회
@@ -72,5 +72,6 @@ public interface FlightService {
 	public FlightResVO getResInfo(String rno);
 	//카카오 유저테이블
 	public KakaoUserVO getUserInfo(String userid);
-	//
+	//최신순 예약내역 1 가져오기
+	public FlightResVO getResFirst(String userid);
 }

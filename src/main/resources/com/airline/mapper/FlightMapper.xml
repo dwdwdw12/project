@@ -98,32 +98,33 @@
 	</insert>
 	
 	<insert id="insertPay">
-		insert into userpay(userid, resno, price, mileage) values(#{userid}, #{resno}, #{price}, #{mileage})
+		insert into userpay(userid, resno, price, mileage) values(#{userid}, #{rno}, #{total}, #{mileage})
 	</insert>
 	
 	<select id="getBuyCount" resultType="int">
-		select count(userid) from flightreservation where isCancel in not 1
+		select count(userid) from flightreservation <!-- <![CDATA[where isCancel <> 1]]> -->
 	</select>
 	
-	<select id="getTotalBuy">
+	<select id="getTotalBuy" resultType="int">
 		select sum(price) from userpay where userid=#{userid}
 	</select>
 	
-	<select id="getCurrentMileage">
+	<select id="getCurrentMileage" resultType="int">
 		select sum(mileage) from userpay where userid=#{userid}
 	</select>
 	
 	<!-- 업데이트?? 인서트?? -->
-	<update id="logUpdate">
-		update userlog set totalCount=#{flightCount}, totalSum=#{flightSum}, totalMileage=#{userPoint} where userid=#{userid}
-	</update>
+	<insert id="logUpdate">
+		insert into userlog(userid,totalcount, totalMileage,totalSum) values(#{userid},#{flightCount},#{userPoint},#{flightSum})
+		<!-- update userlog set totalCount=#{flightCount}, totalSum=#{flightSum}, totalMileage=#{userPoint} where userid=#{userid} -->
+	</insert>
 	
-	<select id="getGradeCode" resultType="int">
-		select gradeCode from grade where gradeStandard
+	<select id="getCode" resultType="int">
+		select gradeCode from grade where gradeStandard = #{flightSum}
 	</select>
 	
 	<insert id="updateGrade">
-		update kakaouser set gradeCode=#{getGrade} where userid=#{userid}
+		update kakaouser set gradeCode=#{getCode} where userid=#{userid}
 	</insert>
 	
 	<select id="getOriCode" resultType="int">
@@ -140,6 +141,10 @@
 	
 	<select id="getUserInfo"  resultType="com.airline.vo.KakaoUserVO">
 		select * from kakaouser where userid=#{userid}
+	</select>
+	
+	<select id="getResFirst" resultType="com.airline.vo.FlightResVO">
+		select * from(select row_number() over(order by purchaseTime desc) rownum, r.* from flightreservation r where userid=#{userid}) p where rownum = 1
 	</select>
 	
 	

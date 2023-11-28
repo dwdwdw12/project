@@ -13,7 +13,7 @@
 	</insert>
 
 	<insert id="updateKakao">
-		insert into point(userid, amout) values(#{userid}, #{kakao})
+		insert into point(userid, amount) values(#{userid}, #{kakao})
 	</insert>
 	
 </mapper>
