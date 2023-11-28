@@ -76,4 +76,24 @@ public class FlightServiceImpl implements FlightService{
 		return mapper.getCount(userid);
 	}
 
+	@Override
+	public String getEmail(String userid) {
+		return mapper.getEmail(userid);
+	}
+
+	@Override
+	public int getKcount(String userid) {
+		return mapper.getKCount(userid);
+	}
+
+	@Override
+	public float getSeatPc(String seat) {
+		return mapper.getSeatPc(seat);
+	}
+
+	@Override
+	public String getUserName(String userid) {
+		return mapper.getUserName(userid);
+	}
+
 }

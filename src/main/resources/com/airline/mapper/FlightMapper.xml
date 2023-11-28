@@ -83,6 +83,15 @@
 	<select id="getSeatPc" resultType="float">
 		select pricePercent from seatclass where seatclass=#{seat}
 	</select>
+	
+	
+	<select id="getEmail" resultType="String">
+		select mail from kakaouser where userid=#{userid}
+	</select>
+	
+	<select id="getUserName">
+		select userNameK from kakaouser where userid=#{userid}
+	</select>
 
 	
 </mapper>

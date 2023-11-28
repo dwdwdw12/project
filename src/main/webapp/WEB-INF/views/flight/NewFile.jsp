@@ -89,144 +89,73 @@ max-width: 100%;
 						<p>마일리지 사용여부 / 현재 유저 총 마일리지 : ${point}</p>
 						<p>카카오페이 사용여부 / 현재 페이포인트 : ${kakaoP}</p>
 						<p>결제버튼 -> 이름, 아이디, 가격 넘겨줘야함</p>
-						<input type="hidden" id="fno" value="${fno}">
+						
 						
 						
 						</div>
 						<div class="card-body bg-white mt-0 shadow">
                 <!-- <p style="font-weight: bold">카카오페이 현재 사용가능</p> -->
-                	<div class="form-row tm-search-form-row">
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="userid">결제자</label> 
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="userid" type="text" class="form-control" id="userid" value="${userid}" readonly="readonly">
-						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="userid">연락처(이메일)</label> 
-						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="email" type="text" class="form-control" id="email" value="${email}" readonly="readonly">
-						</div>
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="userid">결제자</label> 
+						<input name="userid" type="text" class="form-control" id="userid" value="${userid}" readonly="readonly">
 					</div>
-					<div class="form-row tm-search-form-row">
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="vo">항공정보</label> 
-						</div>
-							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="vo" type="text" class="form-control" id="vo" value="${vo.depName}=> ${vo.arrName} , ${vo.fullDeptime}" readonly="readonly">
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="seat">좌석정보</label> 
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="seat" type="text" class="form-control" id="seat" value="${seat}" readonly="readonly">
-						</div>
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="vo">항공정보</label> 
+						<input name="vo" type="text" class="form-control" id="vo" value="${vo.depName}=> ${vo.arrName} , ${vo.fullDeptime}" readonly="readonly">
 					</div>
-
-					<div class="form-row tm-search-form-row">
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-				            <label class="checkbox-test">
-				            <input type="checkbox" class="checkbox-test" id="pointUse1">마일리지 사용</label>
-						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="pointUse2" type="text" class="form-control" id="pointUse2" value="" readonly="readonly" >
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-				            <label class="checkbox-test">마일리지 금액</label>
-						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
-						</div>
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="seat">좌석정보</label> 
+						<input name="seat" type="text" class="form-control" id="seat" value="${seat}" readonly="readonly">
 					</div>
-					<div class="form-row tm-search-form-row">
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-	                		<label class="checkbox-test">
-				            <input type="checkbox" class="checkbox-test" id="kakaoPUse1">카카오페이 사용</label>
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="kakaoPUse2" type="text" class="form-control" id="kakaoPUse2" value="" readonly="readonly">
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-	                		<label class="checkbox-test">카카오페이 금액</label>
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
-						</div>
+					
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="total">총 결제금액</label> 
+						<input name="total" type="text" class="form-control" id="total" value="${total}" readonly="readonly">
 					</div>
-					<div class="form-row tm-search-form-row">
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="total">총 결제금액</label> 
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="total" type="text" class="form-control" id="total" value="${total}" readonly="readonly">
-						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="totalPay">최종결제금액</label> 
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="totalPay" type="text" class="form-control" id="totalPay" value="total-마일리지-카카오페이" readonly="readonly">
-						</div>
-						
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="point">마일리지 사용</label> 
+						<input name="pointUse1" type="checkbox" class="form-control" id="pointUse1">
+						<input name="pointUse2" type="text" class="form-control" id="pointUse2" value="" >
+						<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
+					</div>
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="kakaoP">카카오페이 사용</label> 
+						<input name="kakaoPUse1" type="checkbox" class="form-control" id="kakaoPUse1" >
+						<input name="kakaoPUse2" type="text" class="form-control" id="kakaoPUse2" value="" >
+						<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
+					</div>
+                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<label for="totalPay">최종결제금액</label> 
+						<input name="totalPay" type="text" class="form-control" id="totalPay" value="total-마일리지-카카오페이" readonly="readonly">
 					</div>
                 <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결 제</button>
  </div>
-					
+						${fno}, ${seat}
 				</div>
 			</div>		
 					
 		</div>
 	</section>
 	
-	
+
 </div>
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
 <script>
-
-    $("#pointUse1").click(function(){
-        var chk = $(this).is(":checked");
-        
-        if(chk == true){
-        	$("#pointUse2").removeAttr("readonly");
-        	var pointVal = $("#pointUse2").val();
-        }else{
-        	$("#pointUse2").attr("readonly","readonly");
-        }
-    });
-    
-    $("#kakaoPUse1").click(function(){
-        var chk = $(this).is(":checked");
-        
-        if(chk == true){
-        	$("#kakaoPUse2").removeAttr("readonly");
-        	var kpoint = $("#kakaoPUse2").val();
-        }else{
-        	console.log("fff");
-        	$("#kakaoPUse2").attr("readonly","readonly");
-        }
-    }); 
-
+if($("#pointUse1").prop("check",true)){
+	$("#pointUse1").val(1);
+}else{
+	$("#pointUse1").val(0);
+}
 
 </script>
 <script>
-
     $('#charge_kakao').click(function () {
         // getter
         var IMP = window.IMP;
         IMP.init('imp80062786');
-       // var money = $('input[name="cp_item"]:checked').val();
-       // console.log(money);
-        var pointVal = $("#pointUse2").val();
-        var kpoint = $("#kakaoPUse2").val();
-        var name = $("#userid").val();
-        var total = $("#total").val();
-        var seat = $("#seat").val();
-        var fno = $("#fno").val();
-        var mail = $("#email").val();
-        
-        if(pointVal.length == 0){pointVal = 0};
-        if(kpoint.length == 0){kpoint = 0};
+        var money = $('input[name="cp_item"]:checked').val();
+        console.log(money);
 
         IMP.request_pay({
             pg : 'danal_tpay',
@@ -234,10 +163,10 @@ max-width: 100%;
             merchant_uid: 'merchant_' + new Date().getTime(), //상점에서 생성한 고유 주문번호
             name : '주문명:결제테스트',
             amount : 100,
-            buyer_email : mail,
-            buyer_name : name,
+            buyer_email : 'iamport1@siot.do',
+            buyer_name : '구매자이름1',
             buyer_tel : '010-1234-5678',
-            buyer_addr : mail,
+            buyer_addr : '서울특별시 강남구 삼성동',
             buyer_postcode : '123-456',
             biz_num : '9810030929'
         }, function (rsp) {
@@ -250,18 +179,11 @@ max-width: 100%;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
                 $.ajax({
                     type: "POST", 
-                    url: "/flight/rescomplete",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                    	//imp_uid : rsp.imp_uid,
-                        //"amount" : 100,
-                        point : pointVal,
-                        kakao : kpoint,
-                        total : total,
-                        fno : fno,
-                        seat : seat,
-                        userid : name
-                    })
+                    url: "/flight/rescomplete", //충전 금액값을 보낼 url 설정
+                    data: {
+                    	imp_uid : rsp.imp_uid,
+                        "amount" : money
+                    }
                 }).done(function(data){
                 	if ( everythings_fine ) {
             			var msg = '결제가 완료되었습니다.';
@@ -281,7 +203,7 @@ max-width: 100%;
                 msg += '에러내용 : ' + rsp.error_msg;
             }
             alert(msg);
-            /* document.location.href="/flight/rescomplete"; //alert창 확인 후 이동할 url 설정 */
+            document.location.href="/flight/rescomplete"; //alert창 확인 후 이동할 url 설정
         });
     });
 </script>

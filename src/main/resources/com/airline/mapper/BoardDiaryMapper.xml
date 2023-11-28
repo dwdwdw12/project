@@ -3,13 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.airline.mapper.BoardDiaryMapper">
-
+	
 	<select id="getList" resultType="com.airline.vo.BoardDiaryVO">
 		select * from boardDiary order by boardNum
 	</select>
 	
 	<select id="getListwithPaging" resultType="com.airline.vo.BoardDiaryVO">
-		select * from boardDiary order by boardNum limit #{newStart}, #{amount}
+		select * from boardDiary where
+		<if test="type=='boardTitle'.toString()">
+			boardTitle like concat('%',#{keyword},'%')
+		</if>
+		<if test="type=='boardContent'.toString()" >
+			boardContent like concat('%', #{keyword}, '%')
+		</if>
+		<if test="type=='boardWriter'.toString()">
+			boardWriter like concat('%', #{keyword}, '%')
+		</if>
+		 order by 
+		<if test="order=='latest'.toString()">
+  			boardNum desc,
+  		</if>
+  		<if test="order=='oldest'.toString()" >
+  			boardNum asc,
+  		</if>
+  		<if test="order=='readcount'.toString()">
+  			readcount desc, boardNum desc,
+  		</if>
+  		<if test="order=='replycount'.toString()">
+  			replycount desc, boardNum desc,
+  		</if>
+  		<if test="order=='likecount'.toString()">
+  			likecount desc, boardNum desc,
+  		</if>
+		 boardNum limit #{newStart}, #{amount}
 	</select>
 
 	<select id="get" resultType="com.airline.vo.BoardDiaryVO">
@@ -32,13 +58,29 @@
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(*) from teammember <!--where 
-			 <include refid="criteria"></include> 
-				boardNum>0 -->
+		select count(*) from boardDiary where 
+		<if test="type=='boardTitle'.toString()">
+			boardTitle like concat('%',#{keyword},'%')
+		</if>
+		<if test="type=='boardContent'.toString()" >
+			boardContent like concat('%', #{keyword}, '%')
+		</if>
+		<if test="type=='boardWriter'.toString()">
+			boardWriter like concat('%', #{keyword}, '%')
+		</if> 
+			and	boardNum>0
 	</select>
 	
-	<update id="updateReplyCnt">
-		update boardDiary set replyCnt = replyCnt + #{amount} where boardNum = #{boardNum}
+	<update id="updateReplyCount">
+		update boardDiary set replycount = (select count(replyNum) from boardDiaryReply where boardNum = #{boardNum}) where boardNum = #{boardNum}
+	</update>
+	
+	<update id="updateReadCount">
+		update boardDiary set readCount = readCount + 1 where boardNum = #{boardNum}
+	</update>
+	
+	<update id="updateLikeCount">
+		update boardDiary set likecount = (select count(likeNum) from boardDiaryLike where boardNum = #{boardNum}) where boardNum = #{boardNum}
 	</update>
 	
 </mapper>

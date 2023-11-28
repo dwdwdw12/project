@@ -15,6 +15,8 @@ public class Criteria {
 		private String type; // T, C, W title content writer
 		private String keyword; //검색 내용
 		
+		private String order;
+		
 		public Criteria() {
 			this(1,10);
 		}
@@ -29,9 +31,8 @@ public class Criteria {
 		}
 		
 		public int getNewStart() {
-			System.out.println("pagenum>>"+pageNum);
-			
 			return pageNum<1 ? 0 : (pageNum-1) * amount;
 		}
 		
+
 }

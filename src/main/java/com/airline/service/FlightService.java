@@ -37,4 +37,12 @@ public interface FlightService {
 	public int getPoint(String userid);
 	//마일리지 검색을 위한 null 체크
 	public int getcount(String userid);
+	//카카오포인트 검색을 위한 null 체크
+	public int getKcount(String userid);
+	//좌석별 가격구간
+	public float getSeatPc(String seat);
+	//유저 이메일
+	public String getEmail(String userid);
+
+	public String getUserName(String userid);
 }
