@@ -11,5 +11,6 @@ public interface PayMapper {
 	public int updatePoint(@Param("point")int point,@Param("userid") String userid);
 
 	public int updateKakao(@Param("kakao")int kakao,@Param("userid") String userid);
+	//
 
 }

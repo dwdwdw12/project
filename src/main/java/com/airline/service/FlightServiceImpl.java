@@ -157,5 +157,6 @@ public class FlightServiceImpl implements FlightService{
 	public KakaoUserVO getUserInfo(String userid) {
 		return mapper.getUserInfo(userid);
 	}
+	//
 
 }

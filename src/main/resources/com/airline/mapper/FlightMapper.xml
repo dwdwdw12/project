@@ -89,9 +89,59 @@
 		select mail from kakaouser where userid=#{userid}
 	</select>
 	
-	<select id="getUserName">
+	<select id="getUserName" resultType="String">
 		select userNameK from kakaouser where userid=#{userid}
 	</select>
-
+	
+	<insert id="insertRes" parameterType="java.util.Map" >
+		insert into flightreservation(resno, userid, userName, flightName, departure, arrival, arrTime, depTime, seatId) values(#{resno},#{userid},#{username},#{flightname},#{departure},#{arrival},#{arrtime},#{deptime},#{seatid})
+	</insert>
+	
+	<insert id="insertPay">
+		insert into userpay(userid, resno, price, mileage) values(#{userid}, #{resno}, #{price}, #{mileage})
+	</insert>
+	
+	<select id="getBuyCount" resultType="int">
+		select count(userid) from flightreservation where isCancel in not 1
+	</select>
+	
+	<select id="getTotalBuy">
+		select sum(price) from userpay where userid=#{userid}
+	</select>
+	
+	<select id="getCurrentMileage">
+		select sum(mileage) from userpay where userid=#{userid}
+	</select>
+	
+	<!-- 업데이트?? 인서트?? -->
+	<update id="logUpdate">
+		update userlog set totalCount=#{flightCount}, totalSum=#{flightSum}, totalMileage=#{userPoint} where userid=#{userid}
+	</update>
+	
+	<select id="getGradeCode" resultType="int">
+		select gradeCode from grade where gradeStandard
+	</select>
+	
+	<insert id="updateGrade">
+		update kakaouser set gradeCode=#{getGrade} where userid=#{userid}
+	</insert>
+	
+	<select id="getOriCode" resultType="int">
+		select gradeCode from kakaouser where userid=#{userid}
+	</select>
+	
+	<insert id="insertGradeUpdate">
+		insert into userlog (userid, totalCount, totalMileage, totalSum) values(#{userid},#{flightCount},#{userPoint},#{flightSum})
+	</insert>
+	
+	<select id="getResInfo" resultType="com.airline.vo.FlightResVO">
+		select * from flightreservation where resno = #{rno}
+	</select>
+	
+	<select id="getUserInfo"  resultType="com.airline.vo.KakaoUserVO">
+		select * from kakaouser where userid=#{userid}
+	</select>
+	
+	
 	
 </mapper>

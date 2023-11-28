@@ -272,7 +272,7 @@ public class FlightController {
 		//getRescomplete으로 리다이렉트(예약정보 가져오기)
 		FlightResVO resVo = flights.getResInfo(rno);
 		System.out.println("resVO >>>"+resVo);
-		rttr.addFlashAttribute("resInfo",resVo);
+		rttr.addFlashAttribute("resInfo",resVo);//
 		return "redirect:/flight/rescomplete";
 	}
 	
