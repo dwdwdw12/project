@@ -1,11 +1,13 @@
 package com.airline.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import com.airline.vo.Criteria;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 
@@ -43,5 +45,29 @@ public interface FlightMapper {
 	public float getSeatPc(String seat);
 
 	public String getUserName(String userid);
+
+	public int insertRes(Map<String, String> map);
+
+	public int insertPay(@Param("rno")String rno,@Param("total") Integer total,@Param("mileage") long mileage);
+
+	public int getBuyCount(String userid);
+
+	public int getTotalBuy(String userid);
+
+	public int getCurrentMileage(String userid);
+
+	public int logUpdate(@Param("userid")String userid,@Param("flightCount") int flightCount,@Param("flightSum") int flightSum,@Param("userPoint") int userPoint);
+
+	public int getCode(int flightSum);
+
+	public int updateGrade(@Param("userid")String userid,@Param("getCode") int getCode);
+
+	public int getOriCode(String userid);
+
+	public int insertGradeUpdate(@Param("userid")String userid,@Param("flightCount") int flightCount, @Param("flightSum")int flightSum, @Param("userPoint")int userPoint);
+
+	public FlightResVO getResInfo(String rno);
+
+	public KakaoUserVO getUserInfo(String userid);
 
 }
