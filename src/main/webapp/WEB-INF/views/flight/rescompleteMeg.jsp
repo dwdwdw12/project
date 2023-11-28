@@ -97,7 +97,7 @@ max-width: 100%;
 							<label for="vo">항공정보</label> 
 						</div>
 							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="vo" type="text" class="form-control" id="vo" value="${vo.depName}=> ${vo.arrName} , ${vo.fullDeptime}" readonly="readonly">
+							<input name="vo" type="text" class="form-control" id="vo" value="${vo.departure}=> ${vo.arrival} , ${vo.deptime}" readonly="readonly">
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="seat">좌석정보</label> 
@@ -114,8 +114,6 @@ max-width: 100%;
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
 						</div>
-					</div>
-					<div class="form-row tm-search-form-row">
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 	                		<label class="checkbox-test">카카오페이 사용 금액</label>
 						</div>
@@ -135,8 +133,7 @@ max-width: 100%;
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<input name="totalPay" type="text" class="form-control" id="totalPay" value="total-마일리지-카카오페이" readonly="readonly">
-						</div>
-						
+						</div>	
 					</div>
                 <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결 제</button>
 						

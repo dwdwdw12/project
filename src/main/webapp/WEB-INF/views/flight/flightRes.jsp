@@ -98,6 +98,9 @@ max-width: 100%;
 							<input name="email" type="text" class="form-control" id="email" value="${email}" readonly="readonly">
 						</div>
 					</div>
+					
+					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
+					
 					<div class="form-row tm-search-form-row">
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="vo">항공정보</label> 
@@ -113,13 +116,15 @@ max-width: 100%;
 						</div>
 					</div>
 
+					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
+
 					<div class="form-row tm-search-form-row">
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 				            <label class="checkbox-test">
 				            <input type="checkbox" class="checkbox-test" id="pointUse1">마일리지 사용</label>
 						</div>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="pointUse2" type="text" class="form-control" id="pointUse2" value="" readonly="readonly" >
+							<input name="pointUse2" type="text" class="form-control" id="pointUse2" value="0" readonly="readonly" >
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 				            <label class="checkbox-test">마일리지 금액</label>
@@ -128,13 +133,16 @@ max-width: 100%;
 							<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
 						</div>
 					</div>
+					
+					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
+					
 					<div class="form-row tm-search-form-row">
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 	                		<label class="checkbox-test">
 				            <input type="checkbox" class="checkbox-test" id="kakaoPUse1">카카오페이 사용</label>
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="kakaoPUse2" type="text" class="form-control" id="kakaoPUse2" value="" readonly="readonly">
+							<input name="kakaoPUse2" type="text" class="form-control" id="kakaoPUse2" value="0" readonly="readonly">
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 	                		<label class="checkbox-test">카카오페이 금액</label>
@@ -143,6 +151,9 @@ max-width: 100%;
 							<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
 						</div>
 					</div>
+					
+					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
+					
 					<div class="form-row tm-search-form-row">
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="total">총 결제금액</label> 
@@ -154,11 +165,11 @@ max-width: 100%;
 							<label for="totalPay">최종결제금액</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="totalPay" type="text" class="form-control" id="totalPay" value="total-마일리지-카카오페이" readonly="readonly">
+							<input name="totalPay" type="text" class="form-control" id="totalPay" value="${total}" readonly="readonly">
 						</div>
-						
 					</div>
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결 제</button>
+					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
+                <button type="button" class="btn btn-primary btn-lg btn-block btn-custom" id="charge_kakao">결 제</button>
  </div>
 					
 				</div>
@@ -171,8 +182,8 @@ max-width: 100%;
 </div>
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
-<script>
-
+ <script>
+ window.onload = function () {
     $("#pointUse1").click(function(){
         var chk = $(this).is(":checked");
         
@@ -180,8 +191,10 @@ max-width: 100%;
         	$("#pointUse2").removeAttr("readonly");
         	var pointVal = $("#pointUse2").val();
         }else{
+        	$("#pointUse2").val("0");
         	$("#pointUse2").attr("readonly","readonly");
         }
+        updatePayment();
     });
     
     $("#kakaoPUse1").click(function(){
@@ -192,10 +205,31 @@ max-width: 100%;
         	var kpoint = $("#kakaoPUse2").val();
         }else{
         	console.log("fff");
+        	$("#kakaoPUse2").val("0");
         	$("#kakaoPUse2").attr("readonly","readonly");
+        	
         }
+        updatePayment();
     }); 
-
+    
+    function updatePayment(){
+    	var total = parseInt($("#total").val()) || 0; // 총 결제금액 가져오기
+        // 카카오페이 사용 체크 여부 확인
+        if ($("#kakaoPUse1").is(":checked")) {
+            var kakaoP = parseInt($("#kakaoPUse2").val()) || 0; // 카카오페이 금액 가져오기
+            total -= kakaoP; // 카카오페이 금액 빼기
+        }
+    	
+        // 포인트 사용 체크 여부 확인
+        if ($("#pointUse1").is(":checked")) {
+            var mileage = parseInt($("#pointUse2").val()) || 0; // 마일리지 금액 가져오기
+            total -= mileage; // 마일리지 금액 빼기
+        }
+        
+        // 최종결제금액 표시
+        $("#totalPay").val(total);
+    }
+ }
 
 </script>
 <script>
@@ -261,8 +295,7 @@ max-width: 100%;
             			
             			alert(msg);
             		} else {
-            			//[3] 아직 제대로 결제가 되지 않았습니다.
-            			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+            			document.location.href="/flight/reservation";
             		}
                 });
             } else {
