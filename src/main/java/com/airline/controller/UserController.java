@@ -57,10 +57,7 @@ public class UserController {
 //			} 
 		}
 	
-	@GetMapping("/joinTerms")
-	public void joinTerms() {
-		log.info(">>>>>>>>>>>>>>>");
-	}
+
 	
 
 		

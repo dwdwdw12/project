@@ -36,7 +36,7 @@
 			</div>
 		<!-- 	<div class="row tm-banner-row tm-banner-row-header tm-about-text-wrap mx-auto text-center">	 -->
 			<div class="row tm-banner-row mx-auto text-center">				
-				<form action="/login" role="form" method="post" class="tm-search-form tm-section-pad-4" name="frm" style="background-color:white; width: 670px; height:180px;">
+				<form action="/login" role="form" method="post" class="tm-search-form tm-section-pad-4" name="frm" id="operForm" style="background-color:white; width: 670px; height:180px;">
 					<div class="form-group tm-container">
 						<label for="userid">ID</label> 
 						<input type="text" id="userid" name="username" class="form-control" placeholder="id" required value="<%=cookie%>"/>
@@ -56,16 +56,17 @@
 						<button type="submit" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" id="login">로그인</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/user/joinTerms'" data-oper="join">회원가입</button>
+						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/joinTerms'">회원가입</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='findId'" data-oper="findId">아이디 찾기</button>
+						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findId'" >아이디 찾기</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='findPwd'" data-oper="findPwd">비밀번호 찾기</button>
+						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
 					</div>
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<input type="hidden" name="${message}" value="${message}"/>
 					</div>
 			</form>
 			
@@ -80,26 +81,24 @@
 	</div>
 	<%@ include file="includes/footer.jsp"%>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 	$("#login").on("click",function(e){
 		e.preventDefault();
 		alert("login");
 		$("form").submit();
 	});
 	
-	$(document).ready(function(){
-		 var operForm = $(".frm");
+	 $(document).ready(function(){
+		 var operForm = $("#operForm");
 		 
 	$("button[data-oper='join']").on("click", function(e){
-		operForm.attr("action", "/user/joinTerms").submit();
-		});
-	
-	$("button[data-oper='list']").on("click", function(e){
-		operForm.find("#bno").remove(); //전체 리스트 목록 보러갈 때는 bno 필요없으니까 삭제함..(url에 노출됨)
-		operForm.attr("action", "/board/list").attr("method", "get").submit();
-		});
-	
+		e.preventDefault();
+		alert("join");
+		operForm.attr("action", "/join/joinTerms").attr("method","get").submit();
+		}); 
 	});
+	 
+	
 </script>
 </body>
 

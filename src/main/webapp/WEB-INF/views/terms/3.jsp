@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<div style="height: 200px; overflow: auto; border-top: 1px solid #666;; background-color: #f7f7f7">
->
+<div style="height: 200px; overflow: auto; border-top: 1px solid #666;; background-color: #f7f7f7" >
 <div class="terms_cont" name="terms07" tabindex="0">
 							<p> 카카오항공에서는 항공여행시스템 제공 업체인 AMADEUS사에 당사의 예약 및 운송 시스템 운영을 위탁하고 있으며, 예약에 필요한 개인정보 국외 이전 사항은 다음과 같습니다. </p>
 <p>&nbsp;</p>
@@ -27,6 +26,6 @@
 <p>&nbsp;</p>
 <p>라. 이전받는 자의 개인정보 이용 목적 및 보유, 이용기간</p>
 <p>- 예약 정보 : 당사 예약시스템 운영 및 예약기록 유지, 개인정보 이전 후 5년 간</p>
-<p>- 회원 정보 : 회원 서비스 이용 및 개인 식별 등, 계약 종료 또는 회원 탈퇴 시까지</p></div>
+<p>- 회원 정보 : 회원 서비스 이용 및 개인 식별 등, 계약 종료 또는 회원 탈퇴 시까지</p></div></div>
 </body>
 </html>
