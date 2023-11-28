@@ -56,6 +56,7 @@
 						<button type="submit" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" id="login">로그인</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+
 						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/joinTerms'">회원가입</button>
 					</div>
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
@@ -88,6 +89,7 @@
 		$("form").submit();
 	});
 	
+
 	 $(document).ready(function(){
 		 var operForm = $("#operForm");
 		 
@@ -98,7 +100,7 @@
 		}); 
 	});
 	 
-	
+
 </script>
 </body>
 

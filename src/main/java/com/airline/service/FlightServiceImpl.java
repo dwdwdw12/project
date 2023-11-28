@@ -1,12 +1,14 @@
 package com.airline.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.airline.mapper.FlightMapper;
 import com.airline.vo.Criteria;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 
@@ -74,6 +76,86 @@ public class FlightServiceImpl implements FlightService{
 	@Override
 	public int getcount(String userid) {
 		return mapper.getCount(userid);
+	}
+
+	@Override
+	public String getEmail(String userid) {
+		return mapper.getEmail(userid);
+	}
+
+	@Override
+	public int getKcount(String userid) {
+		return mapper.getKCount(userid);
+	}
+
+	@Override
+	public float getSeatPc(String seat) {
+		return mapper.getSeatPc(seat);
+	}
+
+	@Override
+	public String getUserName(String userid) {
+		return mapper.getUserName(userid);
+	}
+
+	@Override
+	public int insertRes(Map<String, String> map) {
+		return mapper.insertRes(map);
+	}
+
+	@Override
+	public int insertPay(String rno, Integer total, long mileage) {
+		return mapper.insertPay(rno,total,mileage);
+	}
+
+	@Override
+	public int getBuyCount(String userid) {
+		return mapper.getBuyCount(userid);
+	}
+
+	@Override
+	public int getTotalBuy(String userid) {
+		return mapper.getTotalBuy(userid);
+	}
+
+	@Override
+	public int getCurMileage(String userid) {
+		return mapper.getCurrentMileage(userid);
+	}
+
+	@Override
+	public int logUpdate(String userid, int flightCount, int flightSum, int userPoint) {
+		return mapper.logUpdate(userid, flightCount, flightSum, userPoint);
+	}
+
+	@Override
+	public int getGradeCode(int flightSum) {
+		return mapper.getCode(flightSum);
+	}
+
+	@Override
+	public int updateGrade(String userid, int getCode) {
+		return mapper.updateGrade(userid, getCode);
+	}
+
+	@Override
+	public int getOriCode(String userid) {
+		return mapper.getOriCode(userid);
+	}
+
+	@Override
+	public int insertGradeUpdate(String userid, int flightCount, int flightSum, int userPoint) {
+		return mapper.insertGradeUpdate(userid, flightCount, flightSum, userPoint);
+	}
+
+	@Override
+	public FlightResVO getResInfo(String rno) {
+		return mapper.getResInfo(rno);
+	}
+
+	@Override
+	public KakaoUserVO getUserInfo(String userid) {
+		return mapper.getUserInfo(userid);
 	}
 
 }

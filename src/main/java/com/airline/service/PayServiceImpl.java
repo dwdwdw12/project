@@ -13,8 +13,17 @@ public class PayServiceImpl implements PayService {
 	
 	@Override
 	public int chargePoint(String userid,int amount) {
-		// TODO Auto-generated method stub
 		return mapper.chargePoint(userid, amount);
+	}
+
+	@Override
+	public int updatePoint(int point,String userid) {
+		return mapper.updatePoint(point, userid);
+	}
+
+	@Override
+	public int updateKakaoPoint(int kakao,String userid) {
+		return mapper.updateKakao(kakao, userid);
 	}
 
 }
