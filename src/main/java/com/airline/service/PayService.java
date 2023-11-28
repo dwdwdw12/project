@@ -7,5 +7,5 @@ public interface PayService {
 	public int updatePoint(int point, String userid);
 
 	public int updateKakaoPoint(int kakao, String userid);
-
+	//
 }

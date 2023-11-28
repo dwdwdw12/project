@@ -68,7 +68,7 @@ max-width: 100%;
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
-						비행기 티켓 결제 정보
+						비행기 티켓 결제페이지
 					</h2>
 					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
 						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
@@ -77,14 +77,8 @@ max-width: 100%;
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 						<div>
-
-						<input type="hidden" id="fno" value="${fno}">
-						
-						
-						</div>
-						<div class="card-body bg-white mt-0 shadow">
-                <!-- <p style="font-weight: bold">카카오페이 현재 사용가능</p> -->
-                	<div class="form-row tm-search-form-row">
+					
+<div class="form-row tm-search-form-row">
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="userid">결제자</label> 
 						</div>
@@ -95,7 +89,7 @@ max-width: 100%;
 							<label for="userid">연락처(이메일)</label> 
 						</div>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="email" type="text" class="form-control" id="email" value="${email}" readonly="readonly">
+							<input name="email" type="text" class="form-control" id="email" value="${kvo.mail}" readonly="readonly">
 						</div>
 					</div>
 					<div class="form-row tm-search-form-row">
@@ -109,35 +103,21 @@ max-width: 100%;
 							<label for="seat">좌석정보</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="seat" type="text" class="form-control" id="seat" value="${seat}" readonly="readonly">
+							<input name="seat" type="text" class="form-control" id="seat" value="${vo.seatid}" readonly="readonly">
 						</div>
 					</div>
 
 					<div class="form-row tm-search-form-row">
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-				            <label class="checkbox-test">
-				            <input type="checkbox" class="checkbox-test" id="pointUse1">마일리지 사용</label>
-						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="pointUse2" type="text" class="form-control" id="pointUse2" value="" readonly="readonly" >
-						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-				            <label class="checkbox-test">마일리지 금액</label>
+				            <label class="checkbox-test">마일리지 사용금액</label>
 						</div>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
 						</div>
 					</div>
 					<div class="form-row tm-search-form-row">
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-	                		<label class="checkbox-test">
-				            <input type="checkbox" class="checkbox-test" id="kakaoPUse1">카카오페이 사용</label>
-						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="kakaoPUse2" type="text" class="form-control" id="kakaoPUse2" value="" readonly="readonly">
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-	                		<label class="checkbox-test">카카오페이 금액</label>
+	                		<label class="checkbox-test">카카오페이 사용 금액</label>
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
@@ -159,74 +139,42 @@ max-width: 100%;
 						
 					</div>
                 <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결 제</button>
+						
+						
+						</div>
+						<div class="card-body bg-white mt-0 shadow">
+                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
+
+                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
  </div>
-					
 				</div>
 			</div>		
 					
 		</div>
 	</section>
 	
-	
+
 </div>
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
 <script>
-
-    $("#pointUse1").click(function(){
-        var chk = $(this).is(":checked");
-        
-        if(chk == true){
-        	$("#pointUse2").removeAttr("readonly");
-        	var pointVal = $("#pointUse2").val();
-        }else{
-        	$("#pointUse2").attr("readonly","readonly");
-        }
-    });
-    
-    $("#kakaoPUse1").click(function(){
-        var chk = $(this).is(":checked");
-        
-        if(chk == true){
-        	$("#kakaoPUse2").removeAttr("readonly");
-        	var kpoint = $("#kakaoPUse2").val();
-        }else{
-        	console.log("fff");
-        	$("#kakaoPUse2").attr("readonly","readonly");
-        }
-    }); 
-
-
-</script>
-<script>
-
     $('#charge_kakao').click(function () {
         // getter
         var IMP = window.IMP;
         IMP.init('imp80062786');
-       // var money = $('input[name="cp_item"]:checked').val();
-       // console.log(money);
-        var pointVal = $("#pointUse2").val();
-        var kpoint = $("#kakaoPUse2").val();
-        var name = $("#userid").val();
-        var total = $("#total").val();
-        var seat = $("#seat").val();
-        var fno = $("#fno").val();
-        var mail = $("#email").val();
-        
-        if(pointVal.length == 0){pointVal = 0};
-        if(kpoint.length == 0){kpoint = 0};
+        var money = $('input[name="cp_item"]:checked').val();
+        console.log(money);
 
         IMP.request_pay({
             pg : 'danal_tpay',
             pay_method : 'card',
             merchant_uid: 'merchant_' + new Date().getTime(), //상점에서 생성한 고유 주문번호
             name : '주문명:결제테스트',
-            amount : 100,
-            buyer_email : mail,
-            buyer_name : name,
+            amount : money,
+            buyer_email : 'iamport1@siot.do',
+            buyer_name : '구매자이름1',
             buyer_tel : '010-1234-5678',
-            buyer_addr : mail,
+            buyer_addr : '서울특별시 강남구 삼성동',
             buyer_postcode : '123-456',
             biz_num : '9810030929'
         }, function (rsp) {
@@ -239,18 +187,11 @@ max-width: 100%;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
                 $.ajax({
                     type: "POST", 
-                    url: "/flight/rescomplete",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                    	//imp_uid : rsp.imp_uid,
-                        //"amount" : 100,
-                        point : pointVal,
-                        kakao : kpoint,
-                        total : total,
-                        fno : fno,
-                        seat : seat,
-                        userid : name
-                    })
+                    url: "/flight/rescomplete", //충전 금액값을 보낼 url 설정
+                    data: {
+                    	imp_uid : rsp.imp_uid,
+                        "amount" : money
+                    }
                 }).done(function(data){
                 	if ( everythings_fine ) {
             			var msg = '결제가 완료되었습니다.';
@@ -270,7 +211,7 @@ max-width: 100%;
                 msg += '에러내용 : ' + rsp.error_msg;
             }
             alert(msg);
-            document.location.href="/flight/rescompleteMeg?userid="+name; //alert창 확인 후 이동할 url 설정 
+            document.location.href="/flight/rescomplete"; //alert창 확인 후 이동할 url 설정
         });
     });
 </script>

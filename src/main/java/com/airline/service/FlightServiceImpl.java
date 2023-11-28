@@ -104,8 +104,8 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
-	public int insertPay(String rno, Integer total, long mileage) {
-		return mapper.insertPay(rno,total,mileage);
+	public int insertPay(String resno, String userid, Integer total, int mileage) {
+		return mapper.insertPay(resno,userid, total,mileage);
 	}
 
 	@Override
@@ -157,5 +157,11 @@ public class FlightServiceImpl implements FlightService{
 	public KakaoUserVO getUserInfo(String userid) {
 		return mapper.getUserInfo(userid);
 	}
+
+	@Override
+	public FlightResVO getResFirst(String userid) {
+		return mapper.getResFirst(userid);
+	}
+	//
 
 }

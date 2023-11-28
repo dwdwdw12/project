@@ -35,5 +35,6 @@ public class FlightResVO {
 	 * departure; this.arrival = arrival; this.arrtime = arrtime; this.deptime =
 	 * deptime; this.seatid = seatid; }
 	 */
+	//
 	
 }

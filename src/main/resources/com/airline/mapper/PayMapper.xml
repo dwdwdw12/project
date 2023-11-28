@@ -8,6 +8,12 @@
 		insert into point(userid, amount) values(#{userid}, #{amount})
 	</insert>
 	
+	<insert id="updatePoint">
+		insert into userpay(userid,mileage) values(#{userid},#{point}) 
+	</insert>
 
+	<insert id="updateKakao">
+		insert into point(userid, amount) values(#{userid}, #{kakao})
+	</insert>
 	
 </mapper>

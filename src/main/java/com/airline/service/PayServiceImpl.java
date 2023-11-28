@@ -25,5 +25,6 @@ public class PayServiceImpl implements PayService {
 	public int updateKakaoPoint(int kakao,String userid) {
 		return mapper.updateKakao(kakao, userid);
 	}
+	//
 
 }

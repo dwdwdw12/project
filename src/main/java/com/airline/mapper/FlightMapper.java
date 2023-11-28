@@ -48,7 +48,7 @@ public interface FlightMapper {
 
 	public int insertRes(Map<String, String> map);
 
-	public int insertPay(@Param("rno")String rno,@Param("total") Integer total,@Param("mileage") long mileage);
+	public int insertPay(@Param("rno")String rno,@Param("userid")String userid, @Param("total") Integer total,@Param("mileage") int mileage);
 
 	public int getBuyCount(String userid);
 
@@ -69,5 +69,6 @@ public interface FlightMapper {
 	public FlightResVO getResInfo(String rno);
 
 	public KakaoUserVO getUserInfo(String userid);
-
+	
+	public FlightResVO getResFirst(String userid);
 }
