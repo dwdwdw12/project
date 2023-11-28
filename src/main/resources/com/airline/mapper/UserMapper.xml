@@ -32,8 +32,14 @@
 		<result property="authority" column="authority" />
 	</resultMap> -->
 
-	<select id="getUser" resultMap="userMap">
+<!-- 	<select id="getUser" resultMap="userMap">
 		select user.userId, user.pwd, user.enabled, auth.authority
+		from kakaouser user left outer join authorities auth on user.userId = auth.userid where
+		user.userId=#{userId}
+	</select>
+ -->
+	<select id="getUser" resultMap="userMap">
+		select user.*, auth.authority
 		from kakaouser user left outer join authorities auth on user.userId = auth.userid where
 		user.userId=#{userId}
 	</select>
