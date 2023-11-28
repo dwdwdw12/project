@@ -8,5 +8,8 @@
 	select mail from kakaouser where mail= #{email};
 </select>
 
+<select id="getUserId" resultType="com.airline.vo.KakaoUserVO">
+	select * from kakaouser where mail = #{email} and mail_key = #{mail_key}
+</select>
 
 </mapper>
