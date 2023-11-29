@@ -30,6 +30,6 @@ public class BoardNoticeVO {
 	private String modifydate;
 	private int boardnum;
 	private int readcount;
-	
+	private int emergency;
 	
 }

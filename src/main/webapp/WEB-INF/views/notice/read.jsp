@@ -126,7 +126,12 @@ a {
 					<span class="mr-2"><i class="fa fa-rupee text-success"></i>작성자
 						: &nbsp;${board.boardwriter}</span>
 						<br>
+					<c:if test="${board.emergency==0 }">
 					글번호 : <c:out value="${board.boardnum }" />
+					</c:if>
+					<c:if test="${board.emergency==1 }">
+					<p style="color:red;">긴급</p>
+					</c:if>
 				</div>
 				<hr>
 				<div class="d-flex align-items-center mt-4 offers mb-1">
@@ -141,9 +146,6 @@ a {
 
 				<div class="mt-3" style="display: inline;">
 					<form method="get" role="form" action="/notice/register">
-						<input type="hidden"  name="pageNum" value="<c:out value="${page.pageNum}" />">
-	           			<input type="hidden"  name="amount" value="<c:out value="${page.amount}" />">
-	           			<input type="hidden"  name="boardnum" value="<c:out value="${board.boardnum}" />">
 							<button data-oper="register" class="btn btn-secondary mr-2" type="submit">글쓰기</button>
 							<button data-oper="modify" class="btn btn-dark mr-2" type="submit">수정</button>
 							<button data-oper="list" class="btn btn-info mr-2" type="submit" >목록</button>
@@ -151,6 +153,9 @@ a {
 							<button data-oper="delete" type="submit" class="btn btn-danger mr-2">삭제</button>
 					</form>
 				</div>
+	           			<input type="hidden"  name="boardnum" id="boardnum" value="<c:out value="${board.boardnum}" />">
+						<input type="hidden"  name="pageNum" value="<c:out value="${page.pageNum}" />">
+	           			<input type="hidden"  name="amount" value="<c:out value="${page.amount}" />">
 			</div>
 		</div>
 	</div>
@@ -176,6 +181,14 @@ a {
 				self.location= "/notice/list?pageNum="+${cri.pageNum}+"&amount="+${cri.amount};	
 				return;
 			 }
+			if(operation==="register"){
+				formObj.submit();
+			}
+			
+			if(operation==="modify"){
+				self.location="/notice/modify?boardnum="+${board.boardnum};
+				return;
+			}
 				formObj.submit();			//클릭 한 데이터를 담아서 전송
 		});
 	});

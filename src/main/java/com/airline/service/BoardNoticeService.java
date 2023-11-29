@@ -2,8 +2,10 @@ package com.airline.service;
 
 import java.util.List;
 
+import com.airline.vo.AuthorityVO;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 
 public interface BoardNoticeService {
 
@@ -19,7 +21,13 @@ public interface BoardNoticeService {
 	
 	public void modify(BoardNoticeVO vo);
 	
+	public void updateReadCount(int boardnum);
+	
 	public void delete(int boardnum);
 
+	public List<KakaoUserVO> getUserList();
 	
+	public AuthorityVO getAuthority(String userid);
+	
+	public KakaoUserVO getUser(String userid);
 }

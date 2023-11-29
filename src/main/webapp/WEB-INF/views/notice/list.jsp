@@ -116,15 +116,45 @@ a {
 	color: black;
 	text-decoration-line: none;
 }
+
+.emergency{
+color:red;
+font: bold;
+}
 </style>
 </head>
 <body>
-	<h2>고객센터 게시판</h2>
+	<h2><a href="/notice/list">고객센터 게시판</a></h2>
 
 	<hr class="hr1" noshade>
 
 	<br>
-
+	총 ${page.total}개의 글이 있습니다.
+	<form action="/notice/list" id="searchForm" method="get">
+		<select name="type">
+			<option value="T" <c:out value="${page.cri.type eq 'T' ? 'selected' : ''}"/> >제목</option>
+			<option value="C" >내용</option>
+			<option value="W" >작성자</option>
+		</select>
+		<input type="text" name="keyword" <c:out value="${page.cri.keyword}"/>>
+		<input type="hidden" name="pageNum" value="${page.cri.pageNum}">
+		<input type="hidden" name="amount" value="${page.cri.amount}">
+		<button class="btn btn-warning btn-xs" >검색</button>
+	</form>
+	
+		<c:if test="${!empty loginUser.admin}">
+			<div style="float: right;">
+				<input type="button" class="gradient" onclick="location.href='/notice/register'" value="글쓰기">
+			</div>
+		</c:if>
+		<c:if test="${empty loginUser.admin}">
+			<p style="color: red; float:right;">*로그인 후 글 작성이 가능합니다.</p>	
+		</c:if>	 
+	
+	<c:if test="${loginUser.authority=='ROLE_ADMIN' }">
+		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
+	</c:if>
+	
 	<table id="listTable">
 		<tr>
 			<th width=10%>글번호</th>
@@ -133,75 +163,169 @@ a {
 			<th width=20%>작성자</th>
 			<th width=10%>조회수</th>
 		</tr>
-		<c:forEach var="item" items="${list}">
-			<tr>	
-				<td>${item.boardnum}</td>
-				<td><a class="move" href="<c:out value='${item.boardnum }' />">${item.boardsubject }</a></td>
-				<td>${item.regidate }</td>
-				<td>${item.boardwriter}</td>
-				<td>${item.readcount}</td>
-			</tr>
-		</c:forEach>
+			<c:forEach var="item" items="${list}">
+				<c:if test="${item.emergency==1}">
+					<tr>
+						<td><span class="emergency">긴급</span></td>
+						<td><a class="move" href="<c:out value='${item.boardnum }' />">${item.boardsubject }</a></td>
+						<td>${item.regidate }</td>
+						<td>${item.boardwriter}</td>
+						<td>${item.readcount}</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		
+			<c:forEach var="item" items="${list}">
+				<c:if test="${item.emergency==0 }">
+						<tr>	
+							<td>${item.boardnum}</td>
+							<td><a class="move" href="<c:out value='${item.boardnum }' />">${item.boardsubject }</a></td>
+							<td>${item.regidate }</td>
+							<td>${item.boardwriter}</td>
+							<td>${item.readcount}</td>
+						</tr>
+				</c:if>		
+			</c:forEach>
 	</table>
 	<br>
 
+ <div class="container">
+			<ul class="pagination pagination justify-content-center">
+				<!-- <td colspan="5"> -->
+					<c:choose>
+						<c:when test="${page.cri.pageNum<=1}"> 
+							<li class="page-item"><a class="page-link">Previous</a><li>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${!empty page.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${page.cri.pageNum-1}&keyword=${page.cri.keyword}&type=${page.cri.type}&amount=${paging.cri.amount}">Previous</a>&nbsp;<li>
+							</c:if>
+							<c:if test="${empty page.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${page.cri.pageNum-1}&amount=${page.cri.amount}">Previous</a>&nbsp;<li>
+							</c:if>
+						</c:otherwise>
+					</c:choose> 
+					<c:forEach var="a" begin="${page.startPage}" end="${page.endPage}" step="1">
+						<c:choose>
+							<c:when test="${a==page.cri.pageNum}"> 
+								<li class="page-item active"><a class="page-link" >${a}</a></li>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${!empty page.cri.keyword}">
+									<li class="page-item"><a class="page-link"  href="?pageNum=${a}&keyword=${page.cri.keyword}&type=${page.cri.type}&amount=${page.cri.amount}">${a}</a>&nbsp;<li>
+								</c:if>
+								<c:if test="${empty page.cri.keyword}">
+									<li class="page-item"><a class="page-link"  href="?pageNum=${a}&amount=${page.cri.amount}">${a}</a>&nbsp;</li>
+								</c:if>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach> 
+						
+					<c:choose>
+						<c:when test="${page.cri.pageNum>=page.realEnd}"> 
+							<li class="page-item"><a class="page-link">Next</a><li>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${!empty page.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${page.cri.pageNum+1}&keyword=${page.cri.keyword}&type=${page.cri.type}">Next</a></li>
+							</c:if>					
+							<c:if test="${empty page.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${page.cri.pageNum+1}&amount=${page.cri.amount}">Next</a></li>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
+				<!-- </td> -->
+			</ul>
+			
+		 </div>
+			
 
-	<div class="container" style="color: black;">
+
+	<%-- <div class="container" style="color: black;">
 			<ul class="pagination justify-content-center">
 			<c:if test="${page.prev}">
 				<li class="page-item"><a class="page-link"
-					href="${page.startPage-1}">Previous</a></li>
+					href="${page.startPage-10}">Previous</a></li>
 			</c:if>
+			
 			<c:forEach begin="${page.startPage}" end="${page.endPage}"
 				var="num">
-				<li
-					class="page-item  ${page.cri.pageNum == num ? 'active' : ''}">
-					<a class="page-link" href="${num}">${num}</a>
+				<li class="page-item  ${page.cri.pageNum == num ? 'active' : ''}">
+					<a class="page-link" href="${num }">${num}</a>
 				</li>
 			</c:forEach>
+			
+			
 			<c:if test="${page.next}">
 				<li class="page-item"><a class="page-link"
 					href="${page.endPage+1}">Next</a></li>
 			</c:if>
 		</ul>
-	</div>
+		
+	</div> --%>
 
 	<form action="/notice/list" method="get" id="actionForm">
 		<input type="hidden" name="pageNum" value="${page.cri.pageNum }">
 		<input type="hidden" name="amount" value="${page.cri.amount }">
+	  	<input type="hidden" name="type" value="${page.cri.type}">
+       	<input type="hidden" name="keyword" value="${page.cri.keyword}">
 	</form>
-	
-					<%-- <c:if test="${!empty user.admin}"> --%>
-						<button data-oper="register" class="btn btn-secondary mr-2" type="submit">글쓰기</button>
-					<%-- </c:if> --%>
+
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
 			var actionForm = $("#actionForm");
-			$(".pagination a").on("click", function(e){
+		 /* 	$(".pagination a").on("click", function(e){
 				e.preventDefault();
 				
 				console.log('click');
 				
 				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 				actionForm.submit();
-			});
-			
-			
-			$("#regBtn").on("click", function() {
-				self.location = "/notice/register";
-			});
-			
+			});  */
 			
 			$(".move").on("click", function(e){
 			
 				e.preventDefault();
 				actionForm.append("<input type='hidden' name='boardnum' value='"+$(this).attr("href")+"'>");
 				actionForm.attr("action", "/notice/read");
+				actionForm.attr("method", "post");
 				actionForm.submit();
 				
 			});
+			
+			$("#register").on("click", function(){
+				self.location = "/notice/register";
+			});
+			
+			
+			//검색버튼 이벤트 처리
+			var searchForm = $("#searchForm");
+			$("#searchForm button").on("click",function(e){
+				
+				if(!searchForm.find("option:selected").val()){
+					alert("검색 종류를 선택해주세요.");
+					return false;
+				}
+				
+				if(!searchForm.find("input[name='keyword']").val()){
+					alert("키워드를 입력하세요.");
+					return false;
+				}
+				
+				searchForm.find("input[name='pageNum']").val("1");
+				e.preventDefault();
+				
+				searchForm.submit();
+			});
+			
+			
+			//selected 체크
+			var select = "${page.cri.type}";
+			if(select != "") { 
+				$('#type option[value= '+ select +']').prop("selected", true);
+				}			
 			
 			
 		});
