@@ -65,6 +65,14 @@
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
 					</div>
+
+
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code
+						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
+					</div>
+
+
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<input type="hidden" name="${message}" value="${message}"/>

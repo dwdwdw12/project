@@ -1,9 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../includes/header2.jsp"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Bootstrap style -->
+<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+<link rel="stylesheet" href="css/templatemo-style.css">
+<title>Insert title here</title>
+</head>
 <body>
 	<div class="tm-page-wrap mx-auto">
-	<div class="tm-container-outer tm-banner-bg">
 		<section class="tm-banner">
 			<div class="tm-container-outer ">
 				<div class="container">
@@ -22,16 +40,15 @@
 					<br> <br>
 				</div>
 				<br>
-				<form action="UserServlet" method="post" name="frm"
+				<form action="/join/joinTerms" method="post" name="frm"
 					style="margin: 0 20px 0 20px">
 					<fieldset style="margin: 20px 20px 20px 20px">
-
-						<input type="hidden" name="command" value="join_checkUser">
 						<hr>
 						<input type="checkbox" name="selectall" id="agree_all"
 							data-type="all_ck_item" onclick="selectAll(this)"> <label
 							for="agree_all" class="fsz_23">카카오 클럽 일반규정, 약관 및 본인의 개인정보
 							수집·이용, 국외 이전, 제 3자 제공에 모두 동의합니다.</label>
+							
 						<hr>
 						<input type="checkbox" name="terms" value="selectall"
 							id="agree_hompageUse" onclick="return checkSelectAll()">
@@ -65,15 +82,15 @@
 					<div align="center">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='/'">취소</button>
-					<button type="button" class="btn btn-primary"
-						onclick="if (termsCheck() != false) { location.href='UserServlet?command=join_check'; }">동의</button>
-						<br>
+					<!-- 취소 누르는데 체크박스 리셋이 안먹힌다..... 메인으로 보냄 -->
+					<button type="submit" class="btn btn-primary"
+						onclick="return termsCheck()">동의</button>						<br>
 						<br>
 					</div>
 				</form>
 			</div>
+
 		</section>
-</div>
 		<%@ include file="../includes/footer.jsp"%>
 
 	</div>

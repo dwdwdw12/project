@@ -46,9 +46,9 @@ public class MailSendMapperTest {
 		sendMail.setSubject("카카오 항공 인증 메일입니다.");
 		sendMail.setText("<h3>카카오 항공을 찾아주셔서 감사합니다.</h3>" +
 						"<br>아래 확인 버튼을 눌러서 인증을 완료해 주시기 바랍니다." +
-						"<br><br><a href='http://localhost:8088/join/getUserId"
-						+"email="+email+
-						"&mail_key"+mail_key
+						"<br><br><a href='http://localhost:8090/join/getUserId"
+						+"?email="+email+
+						"&mail_key="+mail_key
 						+"' target='_blank'>이메일 인증 확인</a>");
 		sendMail.setFrom("systemlocal99@gmail.com", "카카오 항공");
 		sendMail.setTo(email);
