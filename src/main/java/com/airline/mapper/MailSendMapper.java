@@ -2,6 +2,8 @@ package com.airline.mapper;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.airline.vo.KakaoUserVO;
 
 public interface MailSendMapper {

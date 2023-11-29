@@ -94,6 +94,8 @@ public class FlightController {
 	@GetMapping("/flight/reservation")
 	public void getReservation(Model model,@Param("fno")int fno) {
 		log.info("res....");
+		FlightVO vo = flights.getFlightInfo(fno);
+		model.addAttribute("vo",vo);
 		model.addAttribute("fno",fno);
 	}
 	
