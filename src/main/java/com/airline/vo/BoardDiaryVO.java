@@ -28,4 +28,5 @@ public class BoardDiaryVO {
 	private int readCount;
 	private int replyCount;
 	private int likeCount;
+	private String userId;
 }
