@@ -80,4 +80,10 @@
 		select * from(select row_number() over(order by regidate desc) rownum, p.* from boarddiary p where userid=#{userid})r where rownum<=3; 
 	]]>
 	</select>
+	
+	<select id="getUserInfoAll" resultType="com.airline.vo.KakaoUserVO">
+	<![CDATA[	
+		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5; 
+	]]>
+	</select>
 </mapper>

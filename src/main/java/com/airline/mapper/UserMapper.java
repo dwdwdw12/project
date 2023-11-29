@@ -27,6 +27,8 @@ public interface UserMapper {
 	public List<PointVO> getKakao3(String userid);
 	
 	public List<BoardDiaryVO> getDiary(String userid);
+
+	public List<KakaoUserVO> getUserInfoAll();
 	
 
 }
