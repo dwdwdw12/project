@@ -12,10 +12,10 @@ import lombok.ToString;
 public class Criteria {
 
 		private int pageNum; //page num
-		private int amount; //page ´ç µ¥ÀÌÅÍ °³¼ö
+		private int amount; //page ë‹¹ ë°ì´í„° ê°œìˆ˜
 		
 		private String type; // T, C, W title content writer
-		private String keyword; //°Ë»ö ³»¿ë
+		private String keyword; //ê²€ìƒ‰ ë‚´ìš©
 		
 		private String order;
 		
