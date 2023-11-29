@@ -302,8 +302,10 @@ public class FlightController {
 		model.addAttribute("userid",userid);
 		model.addAttribute("vo",vo);
 		model.addAttribute("kvo",kvo);
+		//총 결제금액
+		int usePoint = flights.usePoint(userid);
+		model.addAttribute("point",usePoint);
 
-		
 
 		}
 	

@@ -120,8 +120,8 @@
 											<p>
 												<sec:authentication property="principal.username" />
 												님 환영합니다!
-												<sec:authentication property="principal.user" />
-												<sec:authentication property="principal.user.authority" />
+<%-- 												<sec:authentication property="principal.user" />
+												<sec:authentication property="principal.user.authority" /> --%>
 											</p>
 											<form id="actionForm" action="/logout" method="post">
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
