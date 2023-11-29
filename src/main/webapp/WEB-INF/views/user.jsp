@@ -50,18 +50,15 @@ span:before {
 	
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
-			<div class="row gx-6"><div class="col"><p><h2 style="text-align: center;">오늘의 날씨</h2></p></div></div>
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 bg-light" style="float: left; width: 33%;">
-					
 						<div class="weather">
 							<div class="currIcon"></div>
 							<div class="currTemp"></div>
 							<div class="city"></div>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>
