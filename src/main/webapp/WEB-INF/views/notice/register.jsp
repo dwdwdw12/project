@@ -137,7 +137,7 @@ a {
 						
 						<div class="mb-1">
 							<span class="text-sm">작성자</span> 
-							<input type="text" name="boardwriter"
+							<input type="text" name="boardwriter" 
 								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
 						</div>
 					

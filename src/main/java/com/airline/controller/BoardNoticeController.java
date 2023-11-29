@@ -37,7 +37,7 @@ public class BoardNoticeController {
 		model.addAttribute("page", new PageDTO(cri, service.getTotal()));
 	}
 	
-	@GetMapping("/read")
+	@PostMapping("/read")
 	public void read(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("board", service.getOne(boardnum));
 		System.out.println(service.getOne(boardnum));
@@ -46,30 +46,30 @@ public class BoardNoticeController {
 	
 	
 	@PostMapping("/delete")
-	public String delete(@Param("boardnum") int boardnum, RedirectAttributes rttr) {
+	public String delete(@Param("boardnum") int boardnum, RedirectAttributes rttr,Model model ) {
 		service.delete(boardnum);
 		return "redirect:/notice/list";
 	}
 	
 	@GetMapping("/register")
-	public void getRegister() {
+	public void getRegister(Model model ) {
 	}
 	
 	@PostMapping("/register")
-	public String register( BoardNoticeVO vo, RedirectAttributes rttr) throws Exception{
+	public String register( BoardNoticeVO vo, RedirectAttributes rttr,Model model) throws Exception{
 		System.out.println(vo);
 		service.insert(vo);
 		return "redirect:/notice/list";
 	}
 
 	@GetMapping("/modify")
-	public void getModify(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri) {
+	public void getModify(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri ) {
 		model.addAttribute("board", service.getOne(boardnum));
 		System.out.println(service.getOne(boardnum));
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardNoticeVO vo, RedirectAttributes rttr) {
+	public String modify(BoardNoticeVO vo, RedirectAttributes rttr,Model model ) {
 		service.modify(vo);
 		System.out.println(">>>>>>>>>>>>>>>>"+vo);
 		return "redirect:/notice/list";

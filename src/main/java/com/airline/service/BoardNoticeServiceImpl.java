@@ -57,9 +57,16 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	}
 
 	@Override
-	public List<KakaoUserVO> getUser() {
-		return mapper.getUser();
+	public List<KakaoUserVO> getUserList() {
+		return mapper.getUserList();
 	}
+
+	@Override
+	public KakaoUserVO getUser(String userid) {
+		return mapper.getUser(userid);
+	}
+	
+	
 
 
 	

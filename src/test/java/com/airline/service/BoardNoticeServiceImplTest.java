@@ -27,8 +27,13 @@ public class BoardNoticeServiceImplTest {
 	}
 	
 	@Test
+	public void testGetUserList() {
+		service.getUserList().forEach(user -> log.info(user));
+	}
+	
+	@Test
 	public void testGetUser() {
-		service.getUser().forEach(user -> log.info(user));
+		service.getUser("user01");
 	}
 	
 	@Test

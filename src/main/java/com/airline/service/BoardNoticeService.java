@@ -24,6 +24,8 @@ public interface BoardNoticeService {
 	
 	public void delete(int boardnum);
 
-	public List<KakaoUserVO> getUser();
+	public List<KakaoUserVO> getUserList();
+	
+	public KakaoUserVO getUser(String userid);
 	
 }

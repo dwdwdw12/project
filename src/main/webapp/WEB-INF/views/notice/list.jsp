@@ -141,7 +141,9 @@ font: bold;
 		<input type="hidden" name="amount" value="${page.cri.amount}">
 		<button class="btn btn-warning btn-xs" >검색</button>
 	</form>
-	<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
+	<c:if test="${empty user.admin}">
+		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
+	</c:if>
 	
 	
 	<table id="listTable">
@@ -219,7 +221,6 @@ font: bold;
 				console.log('click');
 				
 				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				actionForm.find("input[name='startRow']").val($(this).attr("href"));
 				actionForm.submit();
 			});
 			
@@ -228,6 +229,7 @@ font: bold;
 				e.preventDefault();
 				actionForm.append("<input type='hidden' name='boardnum' value='"+$(this).attr("href")+"'>");
 				actionForm.attr("action", "/notice/read");
+				actionForm.attr("method", "post");
 				actionForm.submit();
 				
 			});
