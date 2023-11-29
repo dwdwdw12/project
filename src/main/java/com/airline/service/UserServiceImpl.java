@@ -67,4 +67,10 @@ public class UserServiceImpl implements UserService{
 		return mapper.getDiary(userid);
 	}
 
+
+	@Override
+	public List<KakaoUserVO> getUserInfoAll() {
+		return mapper.getUserInfoAll();
+	}
+
 }

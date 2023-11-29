@@ -50,33 +50,14 @@ span:before {
 	
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
-			<div class="row gx-6"><div class="col"><p><h2 style="text-align: center;">오늘의 날씨</h2></p></div></div>
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 bg-light" style="float: left; width: 33%;">
-					
-						<dl>
-							<dt>기온</dt>
-							<dd class="temperature"><dd>
-						</dl>
-					</div>
-					<div class="p-3  bg-light" style="float: left; width: 33%;">
-						<dl>
-							<dt>위치</dt>
-							<dd class="place"><dd>
-						</dl>
-					</div>
-					<div class="p-3 bg-light" style="float: left; width: 33%;">
-						<dl>
-							<dt>설명</dt>
-							<img class="icon"/>
-							<dd class="description"><dd>
-						</dl>
-					</div>
-					<div class="p-3 border bg-light">
-						<input type="hidden" id="weather" value=""/>
-						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-weather" onclick="">상세조회 >></button>
+						<div class="weather">
+							<div class="currIcon"></div>
+							<div class="currTemp"></div>
+							<div class="city"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -278,100 +259,60 @@ span:before {
 	    	 
 
 	<!-- .tm-container-outer -->
-	<%@ include file="includes/footer.jsp"%>
-<!--  	<script type="text/javascript">
-	$(".btn-weather").on("click",function(e){
-		e.preventDefault();
-		console.log("dd");
-		
-		const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d';
-		
-		const success = (position) => {
-  			console.log(position);
-  			const latitude = position.coords.latitude;
-  		  	const longitude = position.coords.longitude;
-  		  	getWeather(latitude, longitude);
-		}
-		
-		const fail = () => {
-  			console.log("좌표정보 받기 실패");
-		}
-		
-		const getWeather = (lat, lon) => {
-			fetch(
-			    `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric&lang=kr`
-			  ).then((response) => {
-			      return response.json();
-		    }).then((json) => {
-		        console.log(json);
-		    }).catch((error) => {
-		        alert(error);
-		    }).then((json) => {
-		        const temperature = json.main.temp;
-		        const place = json.name;
-		        const description = json.weather[0].description;
-		        const icon = json.weather[0].icon;
-		        const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
-
-		        tempSection.innerText = temperature;
-		        placeSection.innerText = place;
-		        descSection.innerText = description;
-		        iconSection.setAttribute('src', iconURL);
-		      });
-		}
-		
-		
-		
-		navigator.geolocation.getCurrentPosition(success, fail);
-		//navigator.geolocation.getCurrentPosition(success, error, [options])
-		//requestCoords();
-	})
-	  
-</script>-->
+<script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function(){
-	console.log("dd");
+$(document).ready(function(){
 	const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d';
+	var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid="+API_KEY+"&units=metric";
+	let weatherIcon = {        
+			'01' : 'fas fa-sun',
+			'02' : 'fas fa-cloud-sun',
+			'03' : 'fas fa-cloud',
+			'04' : 'fas fa-cloud-meatball',
+			'09' : 'fas fa-cloud-sun-rain',
+			'10' : 'fas fa-cloud-showers-heavy',
+			'11' : 'fas fa-poo-storm',
+			'13' : 'far fa-snowflake',
+			'50' : 'fas fa-smog'      
+	};
+	  
 	
-	const success = (position) => {
-			console.log(position);
-			const latitude = position.coords.latitude;
-		  	const longitude = position.coords.longitude;
-		  	getWeather(latitude, longitude);
-	}
-	
-	const fail = () => {
-			console.log("좌표정보 받기 실패");
-	}
-	
-	const getWeather = (lat, lon) => {
-		fetch(
-		    `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric&lang=kr`
-		  ).then((response) => {
-		      return response.json();
-	    }).then((json) => {
-	        console.log(json);
-	    }).catch((error) => {
-	        alert(error);
-	    }).then((json) => {
-	        const temperature = json.main.temp;
-	        const place = json.name;
-	        const description = json.weather[0].description;
-	        const icon = json.weather[0].icon;
-	        const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+	$.ajax({
+		url : apiUrl,
+		dataType: "json",
+		type : "GET",
+		async : "false",
+		success : function(resp){
+			console.log(resp);
+			console.log("현재 온도 : "+(resp.main.temp));
+			console.log("현재 습도 : "+(resp.main.humidity));
+			console.log("날씨 : "+(resp.weather[0].main));
+			console.log("상세날씨설명 : "+(resp.weather[0].description));
+			console.log("날씨 이미지 : "+(resp.weather[0].icon));
+			console.log("바람 : "+(resp.wind.speed));
+			console.log("나라 : "+(resp.sys.country));
+			console.log("도시이름 : "+(resp.name));
+			console.log("구름 : "+(resp.clouds.all));
+/* 			$(".weather").append("<p>현재 온도: " + (resp.main.temp) + "℃</p>");
+			$(".weather").append("<p>현재 습도: " + resp.main.humidity + "%</p>");
+			$(".weather").append("<p>날씨: " + resp.weather[0].main + "</p>");
+			$(".weather").append("<p>상세날씨설명: " + resp.weather[0].description + "</p>");
+			$(".weather").append("<p>바람: " + resp.wind.speed + " m/s</p>");
+			$(".weather").append("<p>나라: " + resp.sys.country + "</p>");
+			$(".weather").append("<p>도시이름: " + resp.name + "</p>");
+			$(".weather").append("<p>구름: " + resp.clouds.all + "%</p>"); */
+			//var weatherIcon = '<img src="http://openweathermap.org/img/wn/'+resp.weather[0].icon+'png" alt="'+resp.weather[0].description+'"/>'
+			//$(".weather").html(weatherIcon);
+			var $Icon = (resp.weather[0].icon).substr(0,2);      
+			var $Temp = Math.floor(resp.main.temp) + 'º';      
+			var $city = resp.name;
+			  $('.currIcon').append('<i class="' + weatherIcon[$Icon] +'"></i>');      
+			  $('.currTemp').prepend($Temp);      
+			  $('.city').append($city);
+			 
 
-	        tempSection.innerText = temperature;
-	        placeSection.innerText = place;
-	        descSection.innerText = description;
-	        iconSection.setAttribute('src', iconURL);
-	      });
-	}
-	
-	
-	
-	navigator.geolocation.getCurrentPosition(success, fail);
-	//navigator.geolocation.getCurrentPosition(success, error, [options])
-	//requestCoords();
-	
-});
+		}
+	});
+	});
 </script>
+	<%@ include file="includes/footer.jsp"%>

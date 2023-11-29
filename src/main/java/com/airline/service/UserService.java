@@ -24,5 +24,7 @@ public interface UserService {
 	List<PointVO> getKakao3(String userid);
 	//여행일기 게시글 3개
 	List<BoardDiaryVO> getDiary(String userid);
+	//전체 유저정보 가져오기(가입순서 desc)
+	List<KakaoUserVO> getUserInfoAll();
 
 }
