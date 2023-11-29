@@ -18,3 +18,4 @@ public interface JoinService {
 	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
 }
+ 
