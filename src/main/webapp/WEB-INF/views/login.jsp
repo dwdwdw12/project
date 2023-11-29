@@ -68,7 +68,7 @@
 
 
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code
+						<a href="http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
 					</div>
 
@@ -78,6 +78,50 @@
 						<input type="hidden" name="${message}" value="${message}"/>
 					</div>
 			</form>
+			
+			<body>
+  <ul>
+      <li onclick="kakaoLogin();">
+        <a href="javascript:void(0)">
+            <span>카카오 로그인</span>
+        </a>
+      </li>
+  </ul>
+
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script>
+  //카카오로그인
+  function kakaoLogin() {
+
+    $.ajax({
+        url: '/login/getKakaoAuthUrl',
+        type: 'get',
+        async: false,
+        dataType: 'text',
+        success: function (res) {
+            location.href = res;
+        }
+    });
+
+  }
+
+  $(document).ready(function() {
+
+      var kakaoInfo = '${kakaoInfo}';
+
+      if(kakaoInfo != ""){
+          var data = JSON.parse(kakaoInfo);
+
+          alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
+          alert(
+          "user : \n" + "email : "
+          + data['email']  
+          + "\n nickname : " 
+          + data['nickname']);
+      }
+  });  
+
+  </script>
 			
 		</div>
 			

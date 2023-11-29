@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import com.airline.mapper.JoinMapper;
 import com.airline.vo.KakaoUserVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import lombok.extern.log4j.Log4j;
 
@@ -71,7 +75,7 @@ public class JoinServiceImpl implements JoinService {
 
 			// 결과 코드가 200이라면 성공
 			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
+			log.info("responseCode : " + responseCode);
 
 			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -81,7 +85,7 @@ public class JoinServiceImpl implements JoinService {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body : " + result);
+			log.info("response body : " + result);
 
 			// jackson objectmapper 객체 생성
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -92,8 +96,8 @@ public class JoinServiceImpl implements JoinService {
 			access_Token = jsonMap.get("access_token").toString();
 			refresh_Token = jsonMap.get("refresh_token").toString();
 
-			System.out.println("access_token : " + access_Token);
-			System.out.println("refresh_token : " + refresh_Token);
+			log.info("access_token : " + access_Token);
+			log.info("refresh_token : " + refresh_Token);
 
 			br.close();
 			bw.close();
@@ -102,6 +106,83 @@ public class JoinServiceImpl implements JoinService {
 		}
 		return access_Token;
 
+	}
+
+	@Override
+	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable {
+		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+				HashMap<String, Object> userInfo = new HashMap<String, Object>();
+				String reqURL = "http://kapi.kakao.com/v2/user/me";
+
+				try {
+					URL url = new URL(reqURL);
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestMethod("POST");
+
+					// 요청에 필요한 Header에 포함될 내용
+					conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+					int responseCode = conn.getResponseCode();
+					log.info("responseCode >> " + responseCode);
+
+					BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+					String line = "";
+					String result = "";
+
+					while ((line = br.readLine()) != null) {
+						result += line;
+					}
+					log.info("response body >> " + result);
+					log.info("result type >> " + result.getClass().getName()); // java.lang.String
+
+					try {
+						// jackson objectmapper 객체 생성
+						ObjectMapper objectMapper = new ObjectMapper();
+						// JSON String -> Map
+						Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
+						});
+
+						log.info("jsonMap Data >> " +jsonMap.get("properties")); //null error
+
+						Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
+						Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
+
+						// log.info(properties.get("nickname"));
+						// log.info(kakao_account.get("email"));
+
+						String nickname = properties.get("nickname").toString();
+						//String email = kakao_account.get("email").toString();
+
+						userInfo.put("nickname", nickname);
+						//userInfo.put("email", email);
+
+						log.info("nickname >> " + nickname);
+						//log.info("email >> " + email);
+
+//			            JsonParser parser = new JsonParser();
+//			            JsonElement element = parser.parse(result);
+//
+//			            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+//			            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+//
+//			            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+//			            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+//			            
+//			            userInfo.put("accessToken", access_Token);
+//			            userInfo.put("nickname", nickname);
+//			            userInfo.put("email", email);
+						
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return userInfo;
+			
 	}
 
 }
