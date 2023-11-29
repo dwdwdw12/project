@@ -1,33 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%-- <%@ include file="../includes/header2.jsp"%> --%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../includes/header2.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../resources/summernote/summernote-lite.js"></script>
-  <script src="../resources/summernote/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href="../resources/summernote/summernote-lite.css">
+<script src="../resources/summernote/summernote-ko-KR.js"></script>
+<link rel="stylesheet"
+	href="../resources/summernote/summernote-lite.css">
 <title>Insert title here</title>
 <!-- <link rel="stylesheet" type="text/css" href="../resources/css/shopping.css"> -->
 <script type="text/javascript" src="../resources/script/boardDiary.js"></script>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
-<link rel="stylesheet" type="text/css" href="../resources/slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="../resources/slick/slick-theme.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+
+
+
 <style>
-	.gradient {
+.gradient {
 	width: 80px;
 	height: 30px;
 	font-weight: 900;
@@ -36,60 +47,85 @@
 	background: #FFC107;
 	border: solid 2px white;
 	border-radius: 5px;
-	}
+}
 
+.modal-backdrop {
+	z-index: 10;
+}
+
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+}
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top: 180px;">
 
-	<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
-	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
+	<input type="hidden" id="boardNum" name="boardNum"
+		value="${board.boardNum}" readonly="readonly">
+	<input type="hidden" id="userId" name="userId"
+		value="${loginUser.userId}" readonly="readonly">
 	<div class="container">
 		<h1>게시글 상세보기</h1>
-			<form action="/boardDiary/delete" method="post" name="frm">
-			<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
-			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
+		<form action="/boardDiary/delete" method="post" name="frm">
+			<input type="hidden" id="userId" name="userId"
+				value="${loginUser.userId}" readonly="readonly"> <input
+				type="hidden" id="boardNum" name="boardNum"
+				value="${board.boardNum}" readonly="readonly">
 			<div class="form-group">
-				<label for="boardTitle">제목</label> 
-				<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}" readonly="readonly">
+				<label for="boardTitle">제목</label> <input type="text"
+					class="form-control" id="boardTitle" name="boardTitle"
+					value="${board.boardTitle}" readonly="readonly">
 			</div>
-	
+
 			<div class="form-group">
-				<label for="boardWriter">작성자</label> 
-				<input type="text" class="form-control" id="boardWriter" name="boardWriter" value="${board.boardWriter}" readonly="readonly">
+				<label for="boardWriter">작성자</label> <input type="text"
+					class="form-control" id="boardWriter" name="boardWriter"
+					value="${board.boardWriter}" readonly="readonly">
 			</div>
-	
-			<div class="form-group" style="border-top: 1px solid; border-bottom: 1px solid;">
-				<label for="boardContent"><h3>내용</h3></label><br><br>
-				<%-- <textarea id="summernote" class="summernote" name="boardContent" readonly="readonly">${board.boardContent}</textarea> --%>
-				${board.boardContent}
+
+			<label for="boardContent">내용</label>
+			<div class="form-group"
+				style="border-top: 1px solid; border-bottom: 1px solid;">
+				<br> ${board.boardContent} <br>
+				<br>
 			</div>
-			
-			<div class="mt-3 text-right">	
-			<c:choose>
-				<c:when test="${loginUser.admin==1}">
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/list'">목록</button>&nbsp;	
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}'">수정</button>&nbsp;	
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
+
+			<div class="mt-3 text-right">
+				<c:choose>
+					<c:when test="${loginUser.admin==1}">
+						<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/list'">목록</button>&nbsp;	
+					<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}'">수정</button>&nbsp;	
+					<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
 					<button type="button" class="gradient" onclick="del()">삭제</button>&nbsp;
 				</c:when>
-				<c:when test="${loginUser.userNick==board.boardWriter}">
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/list'">목록</button>&nbsp; 
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}'">수정</button>&nbsp;	
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
+					<c:when test="${loginUser.userNick==board.boardWriter}">
+						<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/list'">목록</button>&nbsp; 
+					<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}'">수정</button>&nbsp;	
+					<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
 					<button type="reset" class="gradient" onclick="del()">삭제</button>&nbsp;
 				</c:when>
-				<c:when test="${!empty loginUser.admin}">
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/list'">목록</button>&nbsp;
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
+					<c:when test="${!empty loginUser.admin}">
+						<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/list'">목록</button>&nbsp;
+					<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
 				</c:when>
-				<c:otherwise>
-					<button type="button" class="gradient" onclick="location.href='/boardDiary/list'">목록</button>&nbsp; <br> <br>
-				</c:otherwise>
-			</c:choose>
+					<c:otherwise>
+						<button type="button" class="gradient"
+							onclick="location.href='/boardDiary/list'">목록</button>&nbsp; <br>
+						<br>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<br>
-			
+
 			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
 				<img src="./img/upArrow.png" width="100px" height="100px" title="위로">
@@ -99,166 +135,419 @@
 				</a>
 			</div>
 			 -->
-			<br><br><br>
+			<br>
+			<br>
+			<br>
 		</form>
 	</div>
 
-	<script>
-	$(document).ready(
-			function() {
-				/* $('#summernote').summernote({
-					disableDragAndDrop: true,
-					height : 300,
-					width : 500,
-					lang : "ko-KR"
-				}); */
-				 /*$('#summernote').summernote('disable')/*({
-					height : 300,
-					width : 500,
-					lang : "ko-KR"
-				}); */
-			});		
-		
-	</script>
 	<div class="container">
-	<form action="boardDiaryLikeInsert.do" method="post"  style="margin: auto; width: 220px;">
-		<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}">
-		<input type="hidden" id="userId" name="userId" value="${loginUser.userId}">
-		<c:choose> 
-			<c:when test="${empty loginUser.userId}">
-				<p>추천 ${likecount}개</p>
-				<!-- <input type="image" src="../img/thumbsUp.png" style="width: 80px; height: 80px;"><br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5개 -->
-			</c:when>
-			<c:when test="${checkLike==-1}"> 
-			 	<input type="image" src="./img/thumbsUp.png" style="width: 80px; height: 80px;">
-			</c:when>  
-			<c:when test="${checkLike==0}"> 
-			 	<%-- <input type="submit" value="추천 ${likecount}개"><input> --%>
-			 	<input type="image" src="./img/thumbsUp.png" style="width: 80px; height: 80px;"><br>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${likecount}개<br>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천하기
-			</c:when>  
-			<c:when test="${checkLike==1}">
-			 	<%-- <input type="submit" value="추천취소 ${likecount}개"> --%>
-			 	<input type="image" src="./img/thumbsUp.png" style="width: 80px; height: 80px;"><br>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${likecount}개<br>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천취소
-			</c:when> 
-		 </c:choose> 
-	</form>
-	<br><br>
-	</div>
-	<div id="bottom"></div>
-	<div class="container" id="allReply">
-		 <c:if test="${replyCount>0}">
-			<ul style="list-style:none; padding-left:0px;">
-				<h2>댓글</h2>
-				<li>댓글 개수 : ${replyCount}</li>			
-			</ul>
+		<div  style="margin-right:1px;">
+		<button type="button" class="btn btn-warning " id="like_btn" onclick="updateLike(); return false;">추천</button>
+		<input type="text" id="test111" value="추천 ${likeCount}개">						
+		</div>
+		<form action="/boardDiary/like" method="post"
+			style="margin: auto; width: 220px;">
+			<input type="hidden" id="boardNum" name="boardNum"
+				value="${board.boardNum}"> <input type="hidden" id="userId"
+				name="userId" value="${loginUser.userId}">
+			<c:choose>
+				<c:when test="${empty loginUser.userId}">
+					<i id="thumbsUp" class="fa fa-heart"
+						style="color: red; font-size: 80px;"></i>
+					<p>추천 ${likeCount}개</p>
+					<!-- <i id="thumbsUp" class="fa fa-heart-o" style="color: red; font-size:80px;"></i> -->
+					<!-- <i id="thumbsUp" class="fa fa-thumbs-o-up" style="font-size:80px;"></i> -->
+				</c:when>
 
-			<c:forEach var="reply" items="${replyList}">
-					<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
-					번호 : ${reply.replyNum} &nbsp; &nbsp;
-					작성자 : ${reply.replyWriter} &nbsp; &nbsp;
-					<c:choose>
-						<c:when test="${reply.regiDate>=reply.modifyDate}">
-							날짜 : ${reply.regiDate}					
-						</c:when>
-						<c:when test="${reply.regiDate<reply.modifyDate}">
-							날짜 : ${reply.modifyDate}
-						</c:when>
-					</c:choose>
-					<form action="boardDiaryReplyUpdate.do" method="post">
-						
-						<c:choose> 
-						<c:when test="${loginUser.userId==reply.replyWriter}">	
-							<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}">	
-							<input type="hidden" id="replyNum" name="replyNum" value="${reply.replyNum}">
-  							내용 : <textarea name="replyContent" class="chat-text" cols="80" rows="1" oninput="calcTextareaHeight(this)" >${reply.replyContent}</textarea> 	
-							<button type="submit" class="gradient">수정</button>&nbsp;	
-							<button type="button" class="gradient" onclick="del(); location.href='boardDiaryReplyDelete.do?boardNum=${board.boardNum}&replyNum=${reply.replyNum}'">삭제</button>&nbsp;
-						</c:when>
-						<c:otherwise>
-							<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}">	
-							<input type="hidden" id="replyNum" name="replyNum" value="${reply.replyNum}">
-  							내용 : ${reply.replyContent}								
-						</c:otherwise>
-						</c:choose>
-					</form>
-					<hr>
-			</c:forEach>
-			
-			 <ul class="pagination pagination justify-content-center">
-				<li>
-					<c:choose>
-						<c:when test="${paging.cri.pageNum<=1}"> 
-							<li class="page-item"><a class="page-link">Previous</a><li>	
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="/boardDiary/view?boardNum=${board.boardNum}&page=${paging.cri.pageNum-1}">Previous</a></li>
-						</c:otherwise>
-					</c:choose> 
-					<c:forEach var="a" begin="${paging.startPage}" end="${paging.endPage}" step="1">
-						<c:choose>
-							<c:when test="${a==paging.cri.pageNum}"> 
-								<li class="page-item active"><a class="page-link" >${a}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="/boardDiary/view?boardNum=${board.boardNum}&page=${a}">${a}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach> 
-						
-					<c:choose>
-						<c:when test="${paging.cri.pageNum>=paging.realEnd}"> 
-							<li class="page-item"><a class="page-link">Next</a><li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="/boardDiary/view?boardNum=${board.boardNum}&page=${paging.cri.pageNum+1}">[다음]</a></li>
-						</c:otherwise>
-					</c:choose>
+				<c:when test="${checkLike==-1}">
+					<i id="thumbsUp" class="fa fa-heart-o"
+						style="color: red; font-size: 80px;"></i>
+				</c:when>
+				<c:when test="${checkLike==0}">
+					<input type="submit" value="추천 ${likeCount}개">
+					<input>
+			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${likeCount}개<br>
+					<i id="thumbsUp" class="fa fa-heart-o"
+						style="color: red; font-size: 80px;"></i>
+			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천하기
+			</c:when>
+				<c:when test="${checkLike==1}">
+					<input type="submit" value="추천취소 ${likeCount}개">
+					<i id="thumbsUp" class="fa fa-heart"
+						style="color: red; font-size: 80px;"></i>
+			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${likeCount}개<br>
+			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천취소
+			</c:when>
+			</c:choose>
+		</form>
+		<br>
+		<br>
+	</div>
+
+	<div class="container">
+		<div class="panel-heading">
+			<i class="fa fa-comments fa-fw"></i>Reply
+
+		</div>
+		<div class="panel-body">
+			<ul class="chat">
+				<li class="left clearfix" data-replyNum='12'>
+					<div>
+						<div class="header">
+							<strong class="primary-font">user00</strong> <small
+								class="pull-right text-muted">2023-11-16 11:20</small>
+						</div>
+						<p>good job</p>
+					</div>
 				</li>
 			</ul>
- 			
-		</c:if>
-		<c:if test="${empty replyList}">
-			<ul>
-				<li>등록된 댓글이 없습니다.</li>
-			</ul>
-		</c:if>
-	</div>
-
-	<br><br>
-	<div class="container">
-<!-- 	<button type="button" class="btn btn-success float-right" onclick="location.href='boardDiaryList.do'">목록</button>&nbsp; <br> <br>	 -->
-	<c:if test="${!empty loginUser}">
-		<div class="wrap">
-	  		<h2>댓글쓰기</h2>
-	  		<form action="boardDiaryReplyWriter.do" method="post">
-	  			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}">
-	  			<input type="hidden" id="boardWriter" name="boardWriter" value="${board.boardWriter}">
-	    		<div>
-	      			<div>
-	      				<%-- 작성자 : <input type="text" class="form-control" id="replyWriter" name="replyWriter" value="${loginUser.userId}" readonly="readonly"> --%>
-	      				작성자 : <input type="text" class="form-control" id="replyWriter" name="replyWriter" value="${loginUser.userId}">
-	     			</div>
-	    		</div>
-	     		<div>
-	      			<textarea rows="10" cols="155" id="replyContent" name="replyContent"></textarea>
-	     		</div>
-	     		<div class="mt-3 text-right">	
-		    		<button type="submit" class="gradient">등록</button>
-		    	</div>
-	  		</form>
 		</div>
-	</c:if>
-	<c:if test="${empty loginUser}">
-		<h2>댓글쓰기</h2>
-		<h4>로그인 후 댓글을 작성할 수 있습니다.</h4>
-	</c:if> 
+		<div class="panel-footer"></div>
 	</div>
-	<br><br>
+	<div class="container">
+		<br>
+		<br>
+
+		<!-- 	<button type="button" class="btn btn-success float-right" onclick="location.href='boardDiaryList.do'">목록</button>&nbsp; <br> <br>	 -->
+		<c:if test="${!empty loginUser}">
+			<div class="wrap">
+				<h2>댓글쓰기</h2>
+				<form action="/boardDiary/reples/new" method="post">
+					<input type="hidden" id="boardNum" name="boardNum"
+						value="${board.boardNum}"> <input type="hidden"
+						id="boardWriter" name="boardWriter" value="${board.boardWriter}">
+					<input type="hidden" id="userId" name="userId"
+						value="${loginUser.userId}">
+					<div>
+						<div>
+							작성자 : <input type="text" class="form-control" id="replyWriter"
+								name="replyWriter" value="${loginUser.userNick}"
+								readonly="readonly">
+						</div>
+					</div>
+					<div>
+						<textarea style="width: 100%;" rows="10" id="replyContent"
+							name="replyContent"></textarea>
+					</div>
+					<div class="mt-3 text-right">
+						<button type="submit" id="replybtn" class="gradient">등록</button>
+					</div>
+				</form>
+			</div>
+		</c:if>
+		<c:if test="${empty loginUser}">
+			<h2>댓글쓰기</h2>
+			<h4>로그인 후 댓글을 작성할 수 있습니다.</h4>
+		</c:if>
+	</div>
+	<br>
+	<br>
+
+	<!-- 모달창 -->
+	<div class="modal" id="myModal" style="position: fixed; z-index: 9999;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">댓글</h4>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group">
+						<label>댓글 내용</label> <input class="form-control"
+							name="replyContent" value="New Reply" />
+					</div>
+					<div class="form-group">
+						<label>작성자</label> <input class="form-control" name="replyWriter"
+							id="replyWriter" value="ReplyWriter" />
+					</div>
+					<div class="form-group">
+						<label>작성일</label> <input class="form-control" name="modifyDate"
+							value="" />
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<!-- <button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button> -->
+					<button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
+					<button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
+					<button id="modalCloseBtn" type="button" class="btn btn-info"
+						data-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- /모달창 -->
+
+	<script type="text/javascript" src="../resources/script/reply.js"></script>
+
+	<script>
+	var bnoValue = '${board.boardNum}';
+	var userId = '${loginUser.userId}';
+	var replyUL = $(".chat");
+	
+	console.log("userId : " + userId);
+	console.log('bnoValue : ' + bnoValue);
+
+	showList(1);
+
+	//reply
+	function showList(page) { //아니면 1을 대입
+		replyService
+				.getList(
+						{
+							boardNum : bnoValue,
+							page : page || 1
+						},
+						function(replyCount, list) {
+							
+							if(page==-1){					//아래의 다른 함수에서 page=-1을 호출, paging 처리가 새로 시작됨
+								pageNum = Math.ceil(replyCount/10.0);		//댓글 갯수가 10개를 넘어가면 다음 페이지로 이동함
+								showList(pageNum);
+								return;
+							}
+							
+							var str = "";
+							if (list == null || list.length == 0) {
+								replyUL.html("<br>등록된 댓글이 없습니다");
+								return;
+							}
+							for (var i = 0, len = list.length || 0; i < len; i++) {
+								str += "<li class='left clearfix' data-replyNum='" + list[i].replyNum + "'>"; //안쪽에 작은 따옴표로 바꾸기. rno값 주의.
+								str += "<div><div class='header'>";
+								str += "<strong class='primary-font'>" + list[i].replyWriter + "</strong>";
+								if(userId==list[i].userId){
+									str += "&nbsp;&nbsp;&nbsp;<i class='fa fa-gear'></i>";
+								}
+								str += "<small class='pull-right text-muted'>" + replyService.displayTime(list[i].modifyDate) + "</small>";
+								str += "</div><p>" + list[i].replyContent + "</p>";
+								 
+								str += "</div></li><br>";
+							}
+							replyUL.html("<br>"+str);
+							
+							showReplyPage(replyCount);
+						}); //end function
+
+	} //end showList
+	
+	var modal = $(".modal");
+	var modalInputReply = modal.find("input[name='replyContent']");
+	var modalInputReplyer = modal.find("input[name='replyWriter']");
+	var modalInputReplyDate = modal.find("input[name='modifyDate']");
+	
+	var modalRegisterBtn = $("#modalRegisterBtn");	
+	var modalModBtn = $("#modalModBtn");
+	var modalRemoveBtn = $("#modalRemoveBtn");
+	var modalCloseBtn = $("#modalCloseBtn");	
+	
+	var userId = null;
+	userId = '${loginUser.userId}';
+	/* <sec:authorize access = "isAuthenticated()">
+		userId = '<sec:authentication property="principal.username"/>';
+	</sec:authorize> */
+	
+	var replyWriter = '${loginUser.userNick}';
+	var replyContent = $("#replyContent");
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	
+	//Ajax spring security header
+	$(document).ajaxSend(function(e, xhr, options){
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	});
+	
+	//댓글 등록
+	$("#replybtn").on("click", function(e){
+		e.preventDefault();
+		var reply = {
+				boardNum : bnoValue,
+				replyContent : replyContent.val(),
+				replyWriter : replyWriter,
+				userId : userId
+		}
+		const textarea = document.getElementById('replyContent');
+		textarea.value = '';
+		
+		replyService.add(reply, function(result){
+			alert(result);
+			
+			showList(-1);			//댓글 내용 새로 고침(댓글 1페이지 호출) -> -1페이지 호출, getList()에서 paging을 새로 작동
+		});
+		
+	});
+	
+	//댓글 조회 클릭 이벤트 처리
+	$(".chat").on("click", "li", function(e){
+		var replyNum = $(this).data("replynum");
+		console.log("replyNum : " + replyNum);
+		
+		replyService.get(replyNum, function(reply){
+			if(userId!=reply.userId){
+				modalInputReply.val(reply.replyContent).attr("readonly", "readonly");
+				modalInputReplyer.val(reply.replyWriter).attr("readonly", "readonly") ;
+				modalInputReplyDate.val(replyService.displayTime(reply.modifyDate)).attr("readonly", "readonly"); //읽기전용 변경
+				modal.data("replyNum", reply.replyNum);	
+				
+				modal.find("button[id != 'modalCloseBtn']").hide();
+			} else {
+				modalInputReply.val(reply.replyContent);
+				modalInputReplyer.val(reply.replyWriter).attr("readonly", "readonly") ;
+				modalInputReplyDate.val(replyService.displayTime(reply.modifyDate)).attr("readonly", "readonly"); //읽기전용 변경
+				modal.data("replyNum", reply.replyNum);	
+				
+				modal.find("button[id != 'modalCloseBtn']").hide();
+				modalModBtn.show();
+				modalRemoveBtn.show();
+			}
+			
+			$(".modal").modal("show");
+		});
+	});
+	
+	//댓글 수정
+	modalModBtn.on("click", function(e){
+		
+		var originalReplyer = modalInputReplyer.val();
+		
+		var reply = {
+			replyNum : modal.data("replyNum"),
+			replyContent : modalInputReply.val(),
+			replyWriter: originalReplyer
+		};
+		
+		replyService.update(reply, function(result){
+			alert(result);
+			
+			$('#myModal').modal("hide");
+			console.log("Modify => " + pageNum)
+			showList(pageNum);
+		});
+	});
+
+	//댓글 삭제
+	modalRemoveBtn.on("click", function(e){
+		var replyNum = modal.data("replyNum");				
+		
+		var originalReplyer = modalInputReplyer.val();
+	
+		replyService.remove(replyNum, originalReplyer, function(result){
+			alert(result);
+			$('#myModal').modal("hide");
+			console.log("Delete => " + pageNum)
+			showList(pageNum);
+		});
+	});
+	
+	//페이징 처리
+	var pageNum = 1;
+	var replyPageFooter = $(".panel-footer");
+	
+	function showReplyPage(replyCount){
+		var endNum = Math.ceil(pageNum/10.0)*10;
+		var startNum = endNum - 9;
+		
+		var prev = startNum !=1;
+		var next = false;
+		
+		if(endNum*10>=replyCount){
+			endNum = Math.ceil(replyCount/10.0);
+		}
+		
+		if(endNum*10<replyCount){
+			next=true;
+		}
+		
+		var str = "<ul class='pagination pull-right'>";
+		if(prev){
+			str += "<li class = 'page-item'><a class='page-link' href='"+ (startNum-1) +"'>Previous</a></li>";
+		}
+		
+		for(var i=startNum; i<=endNum; i++){
+			var active = pageNum == i ? "active" : "";
+			
+			str += "<li class='page-item "+ active + "'> <a class='page-link' href='" + i + "'>" + i + "</a></li>";
+		}
+		
+		if(next){
+			str += "<li class = 'page-item'><a class='page-link' href='"+ (endNum+1) +"'>Next</a></li>";
+		}
+		
+		str += "</ul>";
+		console.log("str >>> " + str);
+		
+		replyPageFooter.html(str);
+	}
+	
+	//댓글 페이지 이벤트 처리
+	replyPageFooter.on("click", "li a", function(e){		// li>a 내부의 href를 꺼내기 위해서.
+		e.preventDefault();
+		
+		var targetPageNum = $(this).attr("href");
+		console.log("targetPageNum : " + targetPageNum);
+		pageNum=targetPageNum;
+		showList(pageNum);
+	});
+	
+//추천 부분
+var boardNum = ${board.boardNum};
+
+const handleRefresh = () => {
+	  setRefresh(refresh * -1);
+	}
+
+function updateLike(){ 
+	console.log(boardNum);
+	console.log(userId);
+	
+	 $.ajax({
+            type : "POST",  
+            url : "/boardDiary/like/" + boardNum + "/" + userId,       
+            dataType : "json", 
+            error : function(){
+               alert("통신 에러");
+            },
+            success : function(data) {
+                console.log(data);
+                console.log("dto>>"+data.checkLike);
+                console.log("dto>>"+data.message);
+                    if(data.checkLike == 0){
+                    	alert("추천완료.");
+                    	/* location.reload(); */
+                    	/* $("#test111").value = "추천" + data.likeCount +"개" */;
+                    	
+                    	const likecnt = document.getElementById('test111');
+                    	
+                    	var cnt = parseInt(data.likeCount) + 1;
+                    	likecnt.value = "추천 " + cnt +"개";
+                		
+                    	handleRefresh();
+                    }
+                    else if(data.checkLike == 1) {
+	                    alert("추천취소");
+	                    /* $("#test111").value = "추천" + data.likeCount +"개"; */
+	                     
+	                    const likecnt = document.getElementById('test111');
+	                   
+	                    var cnt = parseInt(data.likeCount) - 1;
+                    	likecnt.value = "추천 " + cnt +"개";
+	                    
+	                    handleRefresh();
+                }
+            }
+        });
+ }
+</script>
+
+
 	<%@ include file="../includes/footer.jsp"%>
 </body>
 </html>

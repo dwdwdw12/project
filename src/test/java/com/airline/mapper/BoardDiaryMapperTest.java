@@ -84,7 +84,7 @@ public class BoardDiaryMapperTest {
 	
 	@Test
 	public void updateReplyCountTest() {
-		int result = mapper.updateReplyCount(3,1);
+		int result = mapper.updateReplyCount(3);
 		log.info("result : " + result);
 	}
 	

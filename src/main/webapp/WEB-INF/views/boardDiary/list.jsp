@@ -56,7 +56,7 @@
 
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	<div style="max-width: 1400px; margin: 0 auto; ">
 	<h2>여행일기</h2>
 	<hr class="hr1" noshade>
