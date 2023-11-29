@@ -147,10 +147,8 @@ font: bold;
 				<input type="button" class="gradient" onclick="location.href='/notice/register'" value="글쓰기">
 			</div>
 		</c:if>
-		<c:if test="${empty loginUser.admin}">
-			<p style="color: red; float:right;">*로그인 후 글 작성이 가능합니다.</p>	
-		</c:if>	 
-	
+	${loginUser }
+	${loginUser.admin }
 	<c:if test="${loginUser.authority=='ROLE_ADMIN' }">
 		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
 	</c:if>
@@ -241,28 +239,6 @@ font: bold;
 			
 
 
-	<%-- <div class="container" style="color: black;">
-			<ul class="pagination justify-content-center">
-			<c:if test="${page.prev}">
-				<li class="page-item"><a class="page-link"
-					href="${page.startPage-10}">Previous</a></li>
-			</c:if>
-			
-			<c:forEach begin="${page.startPage}" end="${page.endPage}"
-				var="num">
-				<li class="page-item  ${page.cri.pageNum == num ? 'active' : ''}">
-					<a class="page-link" href="${num }">${num}</a>
-				</li>
-			</c:forEach>
-			
-			
-			<c:if test="${page.next}">
-				<li class="page-item"><a class="page-link"
-					href="${page.endPage+1}">Next</a></li>
-			</c:if>
-		</ul>
-		
-	</div> --%>
 
 	<form action="/notice/list" method="get" id="actionForm">
 		<input type="hidden" name="pageNum" value="${page.cri.pageNum }">
