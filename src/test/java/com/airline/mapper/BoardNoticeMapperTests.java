@@ -27,9 +27,16 @@ public class BoardNoticeMapperTests {
 	}
 	
 	@Test
+	public void testGetUser() {
+		mapper.getUser().forEach(user -> log.info(user));
+	}
+	
+	@Test
 	public void testGetPageList() {
 		Criteria cri = new Criteria();
-		cri.setPageNum(1);
+		cri.setKeyword("awd");
+		cri.setType("T");
+		cri.setPageNum(3);
 		cri.setAmount(10);
 		mapper.getPageList(cri);
 	}
@@ -67,5 +74,6 @@ public class BoardNoticeMapperTests {
 	public void delete() {
 		mapper.delete(13);
 	}
+	
 
 }

@@ -27,9 +27,14 @@ public class BoardNoticeServiceImplTest {
 	}
 	
 	@Test
+	public void testGetUser() {
+		service.getUser().forEach(user -> log.info(user));
+	}
+	
+	@Test
 	public void testGetPageList() {
 		Criteria cri = new Criteria();
-		cri.setPageNum(1);
+		cri.setPageNum(2);
 		cri.setAmount(10);
 		service.getPageList(cri);
 	}
@@ -47,7 +52,6 @@ public class BoardNoticeServiceImplTest {
 	@Test
 	public void testInsert() {
 		BoardNoticeVO vo = BoardNoticeVO.builder()
-				.boardcontent("dd")
 				.boardsubject("wwwww")
 				.boardcontent("adad")
 				.boardwriter("admin")
@@ -59,7 +63,7 @@ public class BoardNoticeServiceImplTest {
 	public void testModify() {
 		BoardNoticeVO vo = BoardNoticeVO.builder()
 				.boardcontent("appapap")
-				.boardnum(10)
+				.boardnum(116)
 				.build();
 		service.modify(vo);
 	}

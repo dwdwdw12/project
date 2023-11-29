@@ -7,12 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.BoardNoticeService;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PageDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -37,7 +40,10 @@ public class BoardNoticeController {
 	@GetMapping("/read")
 	public void read(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("board", service.getOne(boardnum));
+		System.out.println(service.getOne(boardnum));
+		service.updateReadCount(boardnum);
 	}
+	
 	
 	@PostMapping("/delete")
 	public String delete(@Param("boardnum") int boardnum, RedirectAttributes rttr) {
@@ -46,13 +52,27 @@ public class BoardNoticeController {
 	}
 	
 	@GetMapping("/register")
-	public void getRegister(@Param("boardnum") int boardnum, Model model) {
-		model.addAttribute("board", service.getOne(boardnum));
+	public void getRegister() {
 	}
 	
 	@PostMapping("/register")
-	public String register(Model model, BoardNoticeVO vo, RedirectAttributes rttr) {
+	public String register( BoardNoticeVO vo, RedirectAttributes rttr) throws Exception{
+		System.out.println(vo);
 		service.insert(vo);
 		return "redirect:/notice/list";
 	}
+
+	@GetMapping("/modify")
+	public void getModify(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri) {
+		model.addAttribute("board", service.getOne(boardnum));
+		System.out.println(service.getOne(boardnum));
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BoardNoticeVO vo, RedirectAttributes rttr) {
+		service.modify(vo);
+		System.out.println(">>>>>>>>>>>>>>>>"+vo);
+		return "redirect:/notice/list";
+	}
+	
 }

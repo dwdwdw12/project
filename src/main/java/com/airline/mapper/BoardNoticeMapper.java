@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 
 public interface BoardNoticeMapper {
 	
@@ -19,6 +20,11 @@ public interface BoardNoticeMapper {
 	
 	public void modify(BoardNoticeVO vo);
 	
+	public void updateReadCount(int boardnum);
+	
 	public void delete(int boardnum);
+
+	public List<KakaoUserVO> getUser();
+	
 
 }

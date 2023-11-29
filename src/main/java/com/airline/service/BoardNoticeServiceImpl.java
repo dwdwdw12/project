@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.airline.mapper.BoardNoticeMapper;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 
 @Service
 public class BoardNoticeServiceImpl implements BoardNoticeService{
@@ -49,6 +50,17 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	public void delete(int boardnum) {
 		mapper.delete(boardnum);
 	}
+
+	@Override
+	public void updateReadCount(int boardnum) {
+		mapper.updateReadCount(boardnum);
+	}
+
+	@Override
+	public List<KakaoUserVO> getUser() {
+		return mapper.getUser();
+	}
+
 
 	
 }
