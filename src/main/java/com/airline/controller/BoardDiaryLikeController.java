@@ -5,12 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.airline.mapper.BoardDiaryMapper;
 import com.airline.service.BoardDiaryLikeService;
 import com.airline.vo.BoardDiaryLikeDTO;
+import com.airline.vo.BoardDiaryLikeVO;
+import com.airline.vo.BoardDiaryReplyVO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -66,30 +69,17 @@ public class BoardDiaryLikeController {
 		return new ResponseEntity<BoardDiaryLikeDTO>(dto, HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
-//	@PostMapping(value = "/{boardNum}/{userId}")
-//	public ResponseEntity<String> updateLike(@PathVariable("boardNum") int boardNum, @PathVariable("userId") String userId){
-//		log.info("insert like controller ");
-//		
-//		int checkLike = service.checkLike(boardNum, userId);
-//		log.info("checklike : "+checkLike);
-//		if(checkLike==0) {
-//			boolean insertLike = service.insertLike(boardNum, userId);
-//			diaryMapper.updateLikeCount(boardNum);
-//			
-//			return insertLike ? new ResponseEntity<String>("success", HttpStatus.OK) 	
-//					: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
-//			
-//		} else if(checkLike==1) {
-//			boolean deleteLike = service.deleteLike(boardNum, userId);
-//			log.info("delete like 통과 ");
-//			diaryMapper.updateLikeCount(boardNum);
-//			log.info("update like count 통과 ");
-//			return deleteLike ? new ResponseEntity<String>("success", HttpStatus.OK) 	
-//					: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
-//		}
-//		
-//		return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
-//	}
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping(value = "/check/{boardNum}")
+	public int checkLike(@PathVariable("boardNum") int boardNum, @RequestBody BoardDiaryLikeVO vo){
+		log.info("check like controller ");
+		log.info("boardNum : " + boardNum);
+		log.info("board like vo : " + vo);
+		
+		int checkLike = service.checkLike(boardNum, vo.getUserId());
+		log.info("checklike : "+checkLike);
+
+		return checkLike; 
+	}
 	
 }
