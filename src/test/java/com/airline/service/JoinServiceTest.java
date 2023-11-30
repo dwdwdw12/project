@@ -35,10 +35,11 @@ public class JoinServiceTest {
 		join.getAccessToken("2W4AQCGwhnwzYQ8Z8ONcyJkOY0pPlZlNjmQ-u-93GZhgoQ-VcQpnIhzBLI4KPXUbAAABjBpMLq7_A_o_BVb6-Q");
 		//responseCode : 200 이면 성공
 	}
+
 	
 	@Test
 	public void getUserInfoTest() throws Throwable {
-		String access_Token = join.getAccessToken("_wDdd4UwLJxHK62OZwrduTkjdOdYx35ac52aZRaxDETUlisFcW7cM1Tj3tUKPXSYAAABjBtH9NWt1856Xp2T3g");
+		String access_Token = join.getAccessToken("fjjpENvrt2r_gGt4brr4Xv5CMnbJTb7QvrRpezt0XHzape_GBsmuXNvj47EKKw0gAAABjB9uZhvHP8VuE1ZNOQ");
 		join.getUserInfo(access_Token);
 	}
 

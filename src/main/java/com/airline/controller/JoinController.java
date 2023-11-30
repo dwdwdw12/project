@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -150,34 +151,37 @@ public class JoinController {
 		}
 
 	}
-	
+
+					
 	
 	
 	//카카오 로그인 구현
-	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
-		// 2번 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
-		// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
-		@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
-		public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
-
-			// 1번
-			log.info("code:" + code);
-			
-			// 2번
-			String access_Token = join.getAccessToken(code);
-			log.info("###access_Token#### : " + access_Token);
-			// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
-			
-			// 3번
-			HashMap<String, Object> userInfo = join.getUserInfo(access_Token);
-			log.info("###nickname#### : " + userInfo.get("nickname"));
-			log.info("###email#### : " + userInfo.get("email"));
-			
-			ModelAndView mv = new ModelAndView();
-			//mv.addObject("userInfo", join.)
-			mv.setViewName("/join/checkMember");
-			return mv;	
-			// return에 페이지를 해도 되고, 여기서는 코드가 넘어오는지만 확인할거기 때문에 따로 return 값을 두지는 않았음
-		}
-
+		// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
+			// 2번 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
+			// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
+//			@RequestMapping(value = "/kakao", method = RequestMethod.GET)
+			@GetMapping("/kakao")
+			@CrossOrigin(origins = "http://localhost:8081/join/kakao")
+			public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
+System.out.println("kakao controller타는중~~~(join에서 get)");
+				// 1번
+				log.info("code:" + code);
+				
+				// 2번
+				String access_Token = join.getAccessToken(code);
+				log.info("###access_Token#### : " + access_Token);
+				// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
+				
+				// 3번
+				HashMap<String, Object> userInfo = join.getUserInfo(access_Token);
+				log.info("###nickname#### : " + userInfo.get("nickname"));
+				//log.info("###email#### : " + userInfo.get("email"));
+				
+				ModelAndView mv = new ModelAndView();
+				//mv.addObject("userInfo", join.)
+				mv.setViewName("/join/checkMember");
+				return mv;	
+				// 닉네임밖에 못받아오기때문에... 기존회원여부 페이지로 이동시킴...ㅜㅜ
+			}
+					
 }

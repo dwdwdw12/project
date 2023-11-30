@@ -46,7 +46,7 @@ public class JoinServiceImpl implements JoinService {
 		return join.checkMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
 	}
 
-	@Override
+	@Override //토큰 받아오기
 	public String getAccessToken(String authorize_code) throws Throwable {
 		String access_Token = "";
 		String refresh_Token = "";
@@ -67,7 +67,7 @@ public class JoinServiceImpl implements JoinService {
 			sb.append("grant_type=authorization_code");
 
 			sb.append("&client_id=a490df18ce9a725d8744f401c597d9eb"); // REST_API키 본인이 발급받은 key 넣어주기
-			sb.append("&redirect_uri=https://localhost:8081"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
+			sb.append("&redirect_uri=http://localhost:8081/join/kakao"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -107,12 +107,12 @@ public class JoinServiceImpl implements JoinService {
 		return access_Token;
 
 	}
-
+	
 	@Override
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 				HashMap<String, Object> userInfo = new HashMap<String, Object>();
-				String reqURL = "http://kapi.kakao.com/v2/user/me";
+				String reqURL = "https://kapi.kakao.com/v2/user/me";
 
 				try {
 					URL url = new URL(reqURL);
@@ -143,13 +143,13 @@ public class JoinServiceImpl implements JoinService {
 						Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
 						});
 
-						log.info("jsonMap Data >> " +jsonMap.get("properties")); //null error
+						log.info("jsonMap Data >> " +jsonMap.get("properties")); //null error처리해주기
 
 						Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
 						Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
 
-						// log.info(properties.get("nickname"));
-						// log.info(kakao_account.get("email"));
+						log.info(properties.get("nickname"));
+						//log.info(kakao_account.get("email"));
 
 						String nickname = properties.get("nickname").toString();
 						//String email = kakao_account.get("email").toString();

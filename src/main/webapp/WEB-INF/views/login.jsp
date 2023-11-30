@@ -72,63 +72,58 @@
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
 					</div>
 
-
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<input type="hidden" name="${message}" value="${message}"/>
 					</div>
 			</form>
 			
-			<body>
-  <ul>
-      <li onclick="kakaoLogin();">
-        <a href="javascript:void(0)">
-            <span>카카오 로그인</span>
-        </a>
-      </li>
-  </ul>
+			<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('3156d02ad4070a1c858f024518bda8c5'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
 
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  <script>
-  //카카오로그인
-  function kakaoLogin() {
+<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+    alt="카카오 로그인 버튼" />
+</a>
+<p id="token-result"></p>
 
-    $.ajax({
-        url: '/login/getKakaoAuthUrl',
-        type: 'get',
-        async: false,
-        dataType: 'text',
-        success: function (res) {
-            location.href = res;
-        }
+<script>
+  function loginWithKakao() {
+    Kakao.Auth.authorize({
+      redirectUri: 'https://localhost:8443/kakao',
     });
-
   }
 
-  $(document).ready(function() {
+  // 아래는 데모를 위한 UI 코드입니다.
+  displayToken()
+  function displayToken() {
+    var token = getCookie('authorize-access-token');
 
-      var kakaoInfo = '${kakaoInfo}';
+    if(token) {
+      Kakao.Auth.setAccessToken(token);
+      Kakao.Auth.getStatusInfo()
+        .then(function(res) {
+          if (res.status === 'connected') {
+            document.getElementById('token-result').innerText
+              = 'login success, token: ' + Kakao.Auth.getAccessToken();
+          }
+        })
+        .catch(function(err) {
+          Kakao.Auth.setAccessToken(null);
+        });
+    }
+  }
 
-      if(kakaoInfo != ""){
-          var data = JSON.parse(kakaoInfo);
-
-          alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
-          alert(
-          "user : \n" + "email : "
-          + data['email']  
-          + "\n nickname : " 
-          + data['nickname']);
-      }
-  });  
-
-  </script>
-			
+  function getCookie(name) {
+    var parts = document.cookie.split(name + '=');
+    if (parts.length === 2) { return parts[1].split(';')[0]; }
+  }
+</script>
 		</div>
-			
-			
-					
 		</div>
-
 	</div>
 
 	</div>
