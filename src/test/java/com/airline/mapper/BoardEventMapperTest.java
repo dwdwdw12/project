@@ -1,12 +1,14 @@
 package com.airline.mapper;
 
-import org.junit.Test;  
+import static org.junit.Assert.*; 
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.airline.vo.BoardDiaryVO;
+import com.airline.vo.BoardEventVO;
 import com.airline.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
@@ -14,10 +16,10 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/security-context.xml","file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 @Log4j
-public class BoardDiaryMapperTest {
-	
+public class BoardEventMapperTest {
+
 	@Autowired
-	private BoardDiaryMapper mapper;
+	private BoardEventMapper mapper;
 	
 	@Test
 	public void getListTest() {
@@ -31,25 +33,24 @@ public class BoardDiaryMapperTest {
 		cri.setAmount(2);
 		
 		cri.setType("boardTitle");
-		cri.setKeyword("5");
-		
-		cri.setOrder("likecount");
+		cri.setKeyword("test");
 		
 		mapper.getListwithPaging(cri).forEach(board->log.info(board));
 	}
 	
 	@Test
 	public void getTest() {
-		BoardDiaryVO vo = mapper.get(3);
-		log.info("Diary VO : "+vo);
+		BoardEventVO vo = mapper.get(3);
+		log.info("Event VO : "+vo);
 	}
 	
 	@Test
 	public void insertTest() {
-		BoardDiaryVO vo = new BoardDiaryVO();
+		BoardEventVO vo = new BoardEventVO();
 		vo.setBoardTitle("test5");
 		vo.setBoardContent("test content5");
-		vo.setBoardWriter("유저01");
+		vo.setStartDate("2023-12-01 00:50:00");
+		vo.setEndDate("2023-12-10 20:00:00");
 				
 		int insert = mapper.insert(vo);
 		log.info("insert result : " + insert);
@@ -57,9 +58,11 @@ public class BoardDiaryMapperTest {
 	
 	@Test
 	public void updateTest() {
-		BoardDiaryVO vo = new BoardDiaryVO();
+		BoardEventVO vo = new BoardEventVO();
 		vo.setBoardTitle("test update1");
 		vo.setBoardContent("test content update1");
+		vo.setStartDate("2023-12-02 00:50:10");
+		vo.setEndDate("2023-12-11 20:00:10");
 		vo.setBoardNum(3);
 		
 		int result = mapper.update(vo);
@@ -68,35 +71,23 @@ public class BoardDiaryMapperTest {
 	
 	@Test
 	public void deleteTest() {
-		int delete = mapper.delete(4);
+		int delete = mapper.delete(5);
 		log.info("delete result : " + delete);
 	}
 	
 	@Test
 	public void getTotalCountTest() {
 		Criteria cri = new Criteria();
-		cri.setType("boardTitle");
-		cri.setKeyword("5");
+		cri.setType("boardContent");
+		cri.setKeyword("update");
 		int totalCount = mapper.getTotalCount(cri);
 		
 		log.info("total count : " + totalCount);
 	}
 	
 	@Test
-	public void updateReplyCountTest() {
-		int result = mapper.updateReplyCount(3);
-		log.info("result : " + result);
-	}
-	
-	@Test
 	public void updateReadCountTest() {
-		int result = mapper.updateReadCount(2);
-		log.info("result : " + result);
-	}
-	
-	@Test
-	public void updateLikeCountTest() {
-		int result = mapper.updateLikeCount(3);
+		int result = mapper.updateReadCount(3);
 		log.info("result : " + result);
 	}
 
