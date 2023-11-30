@@ -20,5 +20,22 @@ public class JoinMapperTest {
 	public void checkEmailtest() {
 		join.checkEmail("user01@naver.com");
 	}
+	
+	@Test
+	public void getUserIdTest() {
+		String email = "dbswjd4991@naver.com";
+		String mail_key = "MPjgjx9Uys";
+		join.getUserId(email, mail_key);
+	}
 
+	@Test
+	public void checkMemberTest() {
+		String userNameE = "userchoi";
+		String userNameK = "최유저";
+		String gender="M";
+		int userReginumFirst = 881231;
+		int userReginumLast = 1111111;
+		
+		join.checkMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
+	}
 }

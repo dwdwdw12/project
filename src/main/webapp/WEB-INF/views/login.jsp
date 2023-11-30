@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+<meta name="referrer" content="no-referrer-when-downgrade" />
 <!-- Templatemo style -->
 	<!-- 쿠키값으로 id정보 받아오기 -->
 	<%String cookie = "";
@@ -65,16 +66,89 @@
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
 					</div>
+
+
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code
+						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
+					</div>
+
+
+
+<div class="wrap">
+     <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
+     	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
+        
+      	<div>카카오톡으로 간편로그인 </div>
+   	</a>
+   	</div>
+
+
+
+
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<input type="hidden" name="${message}" value="${message}"/>
 					</div>
 			</form>
 			
+			
+			
+			
+			
+			
+			<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('3156d02ad4070a1c858f024518bda8c5'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+    alt="카카오 로그인 버튼" />
+</a>
+<p id="token-result"></p>
+
+<script>
+  function loginWithKakao() {
+    Kakao.Auth.authorize({
+      redirectUri: 'https://localhost:8443/kakao',
+    });
+  }
+
+  // 아래는 데모를 위한 UI 코드입니다.
+  displayToken()
+  function displayToken() {
+    var token = getCookie('authorize-access-token');
+
+    if(token) {
+      Kakao.Auth.setAccessToken(token);
+      Kakao.Auth.getStatusInfo()
+        .then(function(res) {
+          if (res.status === 'connected') {
+            document.getElementById('token-result').innerText
+              = 'login success, token: ' + Kakao.Auth.getAccessToken();
+          }
+        })
+        .catch(function(err) {
+          Kakao.Auth.setAccessToken(null);
+        });
+    }
+  }
+
+  function getCookie(name) {
+    var parts = document.cookie.split(name + '=');
+    if (parts.length === 2) { return parts[1].split(';')[0]; }
+  }
+</script>
+			
+			
+			
+			
+			
+			
+			
 		</div>
-			
-			
-					
 		</div>
 
 	</div>
