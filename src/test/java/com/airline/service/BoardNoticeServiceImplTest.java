@@ -78,4 +78,12 @@ public class BoardNoticeServiceImplTest {
 		service.delete(6);
 	}
 	
+	
+	@Test
+	public void testPopup() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(1);
+		cri.setAmount(10);
+		service.noticePopup(cri);
+	}
 }

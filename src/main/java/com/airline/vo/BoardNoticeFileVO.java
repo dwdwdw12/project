@@ -14,6 +14,6 @@ public class BoardNoticeFileVO {
 	private String uuid;
 	private String extension;
 	private String fileurl;
-	
+	 
 	
 }

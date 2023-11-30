@@ -22,7 +22,7 @@ public class BoardNoticeVO {
 //	regidate datetime default current_timestamp,
 //	modifydate datetime default current_timestamp,
 //	readcount int default 0
-	
+	 
 	private String boardsubject; 
 	private String boardcontent;
 	private String boardwriter; 

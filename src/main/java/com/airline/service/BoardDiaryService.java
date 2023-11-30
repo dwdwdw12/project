@@ -20,4 +20,6 @@ public interface BoardDiaryService {
 	
 	public int getTotalCount(Criteria cri);
 	
+	
+	
 }

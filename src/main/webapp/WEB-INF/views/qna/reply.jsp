@@ -121,8 +121,14 @@ a {
 <body>
 
 	<div class="py-4 px-2 w-3/5 m-auto">
-		<form action="/notice/register" method="post" name="frm" >
-
+		<form action="/qna/reply" method="post" name="frm">
+			<input type="hidden" name="boardnum" value="<c:out value="${board.boardnum }" />">
+			<input type="hidden" name="modifydate" value="<c:out value="${board.modifydate }" />">
+			<input type="hidden" name="regidate" value="<c:out value="${board.regidate }" />">
+			<input type="hidden" name="readcount" value="<c:out value="${board.readcount}" />">
+ 			<input type="hidden" name="boardreref" value="<c:out value="${board.boardreref}" />">
+ 			<input type="hidden" name="boardreseq" value="<c:out value="${board.boardreseq+1}" />">
+ 			<input type="hidden" name="boardrelevel" value="<c:out value="${board.boardrelevel+1}" />">
 			<div
 				class="max-w-full bg-white rounded-lg overflow-hidden md:max-w-full">
 				<div class="md:flex">
@@ -130,40 +136,31 @@ a {
 
 						<div class="mb-1">
 							<span class="text-sm">제목</span> 
-							<input type="text"	name="boardsubject"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
+							<input type="text"	name="boardsubject" value="ㄴRe : ${board.boardsubject}"
+								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600" readonly>
 						</div>
 					
 						
 						<div class="mb-1">
 							<span class="text-sm">작성자</span> 
-							<input type="text"  value="${loginUser.userNick }"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
-							<input type="hidden" name="boardwriter" value="${loginUser.userId }">
+							<input type="text" name="boardwriter" value="${loginUser.userNick}"
+								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600" readonly>
 						</div>
-						
+					
+
 						<div class="mb-1">
 							<span class="text-sm">내용</span>
-								<textarea class="summernote" name="boardcontent"></textarea>
+								<textarea class="summernote" name="boardcontent">${board.boardcontent}</textarea>
 						</div>
 
 
 
 						<div class="mt-3 text-right">
-						<select name="emergency">
-							<option value="0">일반</option>
-							<option value="1">긴급</option>
-							<option value="2">팝업공지</option>
-						</select>
-						
-							<input
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-green-700"
-								type="reset" value="다시 작성">
 							<button
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="listBtn" type="submit">목록</button>
 							<button
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit"
-								onclick= "return boardnoticeCheck()">등록</button>
+								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" type="submit"
+								onclick= "return boardqnaCheck()">답변</button>
 						</div>
 
 
@@ -208,10 +205,14 @@ a {
 		});
 	
 	
-		function boardnoticeCheck() {
+		function boardqnaCheck() {
 			if (document.frm.boardsubject.value.trim() == "") {
-				alert("제목을 입력해주세요.");
-				return false;
+				alert("로그인 후 수정해주시길 바랍니다.");
+				self.location ="/login"
+			}
+			if (document.frm.boardwriter.value.trim() == "") {
+				alert("로그인 후 수정해주시길 바랍니다.");
+				self.location ="/login"
 			}
 			return true;
 		}
@@ -222,7 +223,7 @@ a {
 		
 		listForm.click(function(e){
 			e.preventDefault();
-			 self.location = "/notice/list"; 
+			 self.location = "/qna/list"; 
 		});
 		
 		

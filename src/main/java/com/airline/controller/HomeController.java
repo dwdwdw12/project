@@ -1,11 +1,10 @@
 package com.airline.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,16 +14,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.airline.service.BoardNoticeService;
+import com.airline.vo.Criteria;
+
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
 public class HomeController {
 	
+	@Autowired
+	private BoardNoticeService service;
+	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {		
-		return "home";
+	public String home(Model model, Criteria cri) {		
+		model.addAttribute("emer", service.noticePopup(cri));
+		return "home"; 
 	}
 	
 	//로그인->spring 페이지로 뺄까..?

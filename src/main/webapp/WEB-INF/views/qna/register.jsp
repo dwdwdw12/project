@@ -121,8 +121,7 @@ a {
 <body>
 
 	<div class="py-4 px-2 w-3/5 m-auto">
-		<form action="/notice/register" method="post" name="frm" >
-
+		<form action="/qna/register" method="post" name="frm" >
 			<div
 				class="max-w-full bg-white rounded-lg overflow-hidden md:max-w-full">
 				<div class="md:flex">
@@ -137,9 +136,8 @@ a {
 						
 						<div class="mb-1">
 							<span class="text-sm">작성자</span> 
-							<input type="text"  value="${loginUser.userNick }"
+							<input type="text" name="boardwriter" value="${loginUser.userNick}"
 								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
-							<input type="hidden" name="boardwriter" value="${loginUser.userId }">
 						</div>
 						
 						<div class="mb-1">
@@ -150,12 +148,6 @@ a {
 
 
 						<div class="mt-3 text-right">
-						<select name="emergency">
-							<option value="0">일반</option>
-							<option value="1">긴급</option>
-							<option value="2">팝업공지</option>
-						</select>
-						
 							<input
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-green-700"
 								type="reset" value="다시 작성">
@@ -163,7 +155,7 @@ a {
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="listBtn" type="submit">목록</button>
 							<button
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit"
-								onclick= "return boardnoticeCheck()">등록</button>
+								onclick= "return boardqnaCheck()">등록</button>
 						</div>
 
 
@@ -208,7 +200,7 @@ a {
 		});
 	
 	
-		function boardnoticeCheck() {
+		function boardqnaCheck() {
 			if (document.frm.boardsubject.value.trim() == "") {
 				alert("제목을 입력해주세요.");
 				return false;
@@ -222,7 +214,7 @@ a {
 		
 		listForm.click(function(e){
 			e.preventDefault();
-			 self.location = "/notice/list"; 
+			 self.location = "/qna/list"; 
 		});
 		
 		

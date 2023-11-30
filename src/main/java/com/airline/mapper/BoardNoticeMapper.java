@@ -30,5 +30,9 @@ public interface BoardNoticeMapper {
 	public AuthorityVO getAuthority(String userid);
 	
 	public KakaoUserVO getUser(String userid);
+	
+	public List<BoardNoticeVO> noticePopup(Criteria cri);
+	
+	public int popupTotal();
 
 }

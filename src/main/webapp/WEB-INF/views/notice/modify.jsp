@@ -157,6 +157,7 @@ a {
 						<select name="emergency">
 							<option value="0">일반</option>
 							<option value="1">긴급</option>
+							<option value="2">팝업공지</option>
 						</select>
 							<button
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="listBtn" type="submit">목록</button>

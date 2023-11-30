@@ -75,7 +75,7 @@ tr:hover {
 body {
 	width: 65%;
 	margin: 0 auto;
-	margin-top : 180px;
+	margin-top : 270px;
 }
 
 .greylist {
@@ -124,13 +124,13 @@ font: bold;
 </style>
 </head>
 <body>
-	<h2><a href="/notice/list">공지사항 게시판</a></h2>
+	<h2><a href="/qna/list">고객센터 게시판</a></h2>
 
 	<hr class="hr1" noshade>
 
 	<br>
 	총 ${page.total}개의 글이 있습니다.
-	<form action="/notice/list" id="searchForm" method="get">
+	<form action="/qna/list" id="searchForm" method="get">
 		<select name="type">
 			<option value="T" <c:out value="${page.cri.type eq 'T' ? 'selected' : ''}"/> >제목</option>
 			<option value="C" >내용</option>
@@ -143,11 +143,12 @@ font: bold;
 	</form>
 	
 	
-	<c:if test="${loginUser.userId eq 'admin'}">
+	<c:if test="${!empty loginUser.admin}">
 		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
 	</c:if>
-	<c:if test="${loginUser.userId eq 'admin'}">
-		<button data-oper="popupList" class="btn mr-2 right" id="popupList" type="submit">팝업공지</button>
+	
+	<c:if test="${empty loginUser.admin }">
+		<span style="color:red;" class="right">로그인 후 글 작성이 가능합니다.</span>
 	</c:if>
 	
 	<table id="listTable">
@@ -158,30 +159,15 @@ font: bold;
 			<th width=20%>작성자</th>
 			<th width=10%>조회수</th>
 		</tr>
-
 		
 			<c:forEach var="item" items="${list}">
-				<c:if test="${item.emergency==1}">
-					<tr>
-						<td><span class="emergency">긴급</span></td>
-						<td><a class="move" href="/notice/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
-						<td>${item.regidate }</td>
-						<td>${item.boardwriter}</td>
-						<td>${item.readcount}</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		
-			<c:forEach var="item" items="${list}">
-				<c:if test="${item.emergency==0 }">
 						<tr>	
 							<td>${item.boardnum}</td>
-							<td><a class="move" href="/notice/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
+							<td><a class="move" href="/qna/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
 							<td>${item.regidate }</td>
 							<td>${item.boardwriter}</td>
 							<td>${item.readcount}</td>
 						</tr>
-				</c:if>		
 			</c:forEach>
 	</table>
 	<br>
@@ -251,31 +237,10 @@ font: bold;
 		$(document).ready(function() {
 			
 			var actionForm = $("#actionForm");
-		 /* 	$(".pagination a").on("click", function(e){
-				e.preventDefault();
-				
-				console.log('click');
-				
-				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				actionForm.submit();
-			});  */
 			
-		/* 	$(".move").on("click", function(e){
-			
-				e.preventDefault();
-				actionForm.append("<input type='hidden' name='boardnum' value='"+$(this).attr("href")+"'>");
-				actionForm.attr("action", "/notice/read");
-				actionForm.attr("method", "post");
-				actionForm.submit();
-				
-			}); */
 			
 			$("#register").on("click", function(){
-				self.location = "/notice/register";
-			});
-
-			$("#popupList").on("click", function(){
-				self.location = "/notice/popupList";
+				self.location = "/qna/register";
 			});
 			
 			

@@ -37,6 +37,8 @@
 }
 </style>
 
+
+
 <div class="tm-page-wrap mx-auto">
 	<section class="tm-banner">
 
@@ -71,7 +73,7 @@
 			
 			
 			
-			
+
 			
 			
 			
@@ -765,6 +767,10 @@
 				Message Now</button>
 		</form>
 	</div>
+	<!-- 모달창 -->
+	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/>
+	<!-- /모달창 -->
+
 	<!-- .tm-container-outer -->
 	<%@ include file="includes/footer.jsp"%>
 	<!-- 충돌부분 추가 -->
@@ -852,4 +858,8 @@
             slidesToShow: 1,
             slidesToScroll: 1
         });
+		
+	
+		
 	</script>
+	
