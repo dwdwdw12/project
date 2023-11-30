@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+
 <!-- Templatemo style -->
 	<!-- 쿠키값으로 id정보 받아오기 -->
 	<%String cookie = "";
@@ -68,13 +69,13 @@
 
 
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<a href="http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
 					</div>
 
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<input type="hidden" name="${message}" value="${message}"/>
+						<input type="hidden" id="joinMessage" name="${joinMessage}" value="${joinMessage}"/>
 					</div>
 			</form>
 			
@@ -90,38 +91,7 @@
 </a>
 <p id="token-result"></p>
 
-<script>
-  function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'https://localhost:8443/kakao',
-    });
-  }
 
-  // 아래는 데모를 위한 UI 코드입니다.
-  displayToken()
-  function displayToken() {
-    var token = getCookie('authorize-access-token');
-
-    if(token) {
-      Kakao.Auth.setAccessToken(token);
-      Kakao.Auth.getStatusInfo()
-        .then(function(res) {
-          if (res.status === 'connected') {
-            document.getElementById('token-result').innerText
-              = 'login success, token: ' + Kakao.Auth.getAccessToken();
-          }
-        })
-        .catch(function(err) {
-          Kakao.Auth.setAccessToken(null);
-        });
-    }
-  }
-
-  function getCookie(name) {
-    var parts = document.cookie.split(name + '=');
-    if (parts.length === 2) { return parts[1].split(';')[0]; }
-  }
-</script>
 		</div>
 		</div>
 	</div>
@@ -137,7 +107,7 @@
 	});
 	
 
-	 $(document).ready(function(){
+/* 	 $(document).ready(function(){
 		 var operForm = $("#operForm");
 		 
 	$("button[data-oper='join']").on("click", function(e){
@@ -145,9 +115,16 @@
 		alert("join");
 		operForm.attr("action", "/join/joinTerms").attr("method","get").submit();
 		}); 
-	});
+	}); */
 	 
-
+	 $(document).ready(function(){
+		<%--  var message = "<%= request.getAttribute("joinMessage") %>"; --%>
+ 		 var message == $("#joinMessage");
+			 console.log(message+"hi");
+		 if(message != null){
+			 alert(message);
+		 };
+	 });
 </script>
 </body>
 

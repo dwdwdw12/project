@@ -143,11 +143,11 @@ public class JoinController {
 		KakaoUserVO vo = join.confirmMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
 		log.info(vo);
 
-		if (vo != null) {
-			return "/join/memberInfo"; // 가질못함.... 왜못가는걸까...
+		if (vo == null) {
+			return "/join/memberInfo"; // 데이터가 없어야 신규유저
 		} else {
-			model.addAttribute("message", "이미 가입된 회원입니다.");
-			return "/login";
+			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
+			return "/login"; //uri가 http://localhost:8081/join/checkMember인채로 이동함.. attr을 하던지 해야할듯
 		}
 
 	}

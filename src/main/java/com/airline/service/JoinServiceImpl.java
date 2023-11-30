@@ -17,9 +17,6 @@ import com.airline.mapper.JoinMapper;
 import com.airline.vo.KakaoUserVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import lombok.extern.log4j.Log4j;
 
@@ -75,7 +72,7 @@ public class JoinServiceImpl implements JoinService {
 
 			// 결과 코드가 200이라면 성공
 			int responseCode = conn.getResponseCode();
-			log.info("responseCode : " + responseCode);
+			System.out.println("responseCode : " + responseCode);
 
 			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -85,7 +82,7 @@ public class JoinServiceImpl implements JoinService {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			log.info("response body : " + result);
+			System.out.println("response body : " + result);
 
 			// jackson objectmapper 객체 생성
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -96,8 +93,8 @@ public class JoinServiceImpl implements JoinService {
 			access_Token = jsonMap.get("access_token").toString();
 			refresh_Token = jsonMap.get("refresh_token").toString();
 
-			log.info("access_token : " + access_Token);
-			log.info("refresh_token : " + refresh_Token);
+			System.out.println("access_token : " + access_Token);
+			System.out.println("refresh_token : " + refresh_Token);
 
 			br.close();
 			bw.close();

@@ -13,7 +13,7 @@ public interface JoinService {
 									String gender, 
 									int userReginumFirst,
 									int userReginumLast);
-
+	
 	String getAccessToken(String authorize_code) throws Throwable;
 	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
