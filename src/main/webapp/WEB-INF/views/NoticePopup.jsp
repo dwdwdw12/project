@@ -36,10 +36,13 @@
 <style>
 font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, Helvetica Neue, Helvetica, Arial, sans-serif;
 .layerPopup img{
-margin-bottom : 20px;}
+ max-width: 100%;
+    height: auto;
+    display: block; /* 이미지 사이에 추가 공백 제거 */
+    margin: 0 auto; /* 중앙 정렬 */}
 .layerPopup:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:9000}
 .layerPopup .layerBox {    z-index:10000;   
-position:fixed; left:65%; top:48%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
+position:fixed; left:55%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
 .layerPopup .layerBox .title {margin-bottom:10px; padding-bottom:10px; font-weight:600; border-bottom:1px solid #d9d9d9;}
 .layerPopup .layerBox .btnTodayHide {
 font-size:14px; font-weight:600; color:black; 
@@ -53,6 +56,7 @@ height : 30px;line-height:30px;border:black solid 1px; text-align : center;text-
 .layerPopup form{
 	margin-top : 5px;
 	font-size:16px; font-weight:600;
+	max-width: 800px;
 	weight: 100%;
 	height : 30px;
 	line-height:30px
