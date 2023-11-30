@@ -26,6 +26,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <style>
 span:before {
 	font-family: bootstrap-icons;
@@ -183,10 +184,10 @@ span:before {
 						<%-- <c:out value="${getPvo}"><input type="hidden" class="data" value="${getPvo}"/></c:out> --%>
  						<c:forEach items="${getPvo}" var="data" varStatus="loop">
 							<input type="hidden" id="data_${loop.index}" class="data" value='<c:out value="${json}"/>'/>
-						</c:forEach> 
+						</c:forEach> </p>
 						<h2 style="text-align: center;">매출현황</h2>
-						<canvas id="result" width="800" height="400"></canvas>
-						</p>
+						<canvas id="sales_chart" width="800" height="400"></canvas>
+						
 						<p class="chart2"></p>
 						<%-- 					<table class="table table-hover">
 			      		   <thead>
@@ -319,26 +320,24 @@ span:before {
 
 	<!-- .tm-container-outer -->
 <!-- 날씨아이콘 임포트 -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1"></script>
-<canvas id="result"></canvas>	
-<script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-			 const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d'; 
-			var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid="
-					+ API_KEY + "&units=metric";
-			let weatherIcon = {
-				'01' : 'fas fa-sun',
-				'02' : 'fas fa-cloud-sun',
-				'03' : 'fas fa-cloud',
-				'04' : 'fas fa-cloud-meatball',
-				'09' : 'fas fa-cloud-sun-rain',
-				'10' : 'fas fa-cloud-showers-heavy',
-				'11' : 'fas fa-poo-storm',
-				'13' : 'far fa-snowflake',
-				'50' : 'fas fa-smog'
-			};
 
+<script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+			const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d';
+			var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid="+API_KEY+"&units=metric";
+			let weatherIcon = {        
+					'01' : 'fas fa-sun',
+					'02' : 'fas fa-cloud-sun',
+					'03' : 'fas fa-cloud',
+					'04' : 'fas fa-cloud-meatball',
+					'09' : 'fas fa-cloud-sun-rain',
+					'10' : 'fas fa-cloud-showers-heavy',
+					'11' : 'fas fa-poo-storm',
+					'13' : 'far fa-snowflake',
+					'50' : 'fas fa-smog'      
+			};
 			$.ajax({
 				url : apiUrl,
 				dataType : "json",
@@ -355,16 +354,6 @@ span:before {
 					console.log("나라 : "+ (resp.sys.country));
 					console.log("도시이름 : "+ (resp.name));
 					console.log("구름 : "+ (resp.clouds.all));
-					 			$(".weather").append("<p>현재 온도: " + (resp.main.temp) + "℃</p>");
-								$(".weather").append("<p>현재 습도: " + resp.main.humidity + "%</p>");
-								$(".weather").append("<p>날씨: " + resp.weather[0].main + "</p>");
-								$(".weather").append("<p>상세날씨설명: " + resp.weather[0].description + "</p>");
-								$(".weather").append("<p>바람: " + resp.wind.speed + " m/s</p>");
-								$(".weather").append("<p>나라: " + resp.sys.country + "</p>");
-								$(".weather").append("<p>도시이름: " + resp.name + "</p>");
-								$(".weather").append("<p>구름: " + resp.clouds.all + "%</p>"); 
-					var weatherIcon = '<img src="http://openweathermap.org/img/wn/'+resp.weather[0].icon+'png" alt="'+resp.weather[0].description+'"/>'
-					$(".weather").html(weatherIcon);
 					var $Icon = (resp.weather[0].icon).substr(0, 2);
 					var $Temp = Math.floor(resp.main.temp)+ 'º';
 					var $city = resp.name;
@@ -380,45 +369,45 @@ span:before {
 
 				}
 			});
-			
-		 	console.log("start");
-			var data = $(".data").val(); // JSTL을 사용하여 데이터를 가져옴
-			console.log(data);
-			var dataList = JSON.parse(data);
-	        //dataList.push(JSON.parse(jsonData_${loop.index}));			
 
-		    var labels = dataList.map(item => new Date(item.buyDate));
-		    var values = dataList.map(item => item.amount);
-		    
-		    var ctx = document.getElementById('result');
-		    var chart = new Chart(ctx, {
-		        type: 'line',
-		        data: {
-		            labels: labels,
-		            datasets: [{
-		                label: Amount,//'Your Data',
-		                data: values,
-		                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-		                borderColor: 'rgba(75, 192, 192, 1)',
-		                borderWidth: 1
-		            }]
-		        },
-		        options: {
-		        	scales: {
-		                x: {
-		                    type: 'time', // x축이 시간 데이터임을 명시
-		                    time: {
-		                        unit: 'day' // x축에 표시할 시간 단위
-		                    }
-		                },
-		                y: {
-		                    beginAtZero: true
-		                }
-		        }
-		    });
+	 	console.log("start");
+		var data = $(".data").val(); // JSTL을 사용하여 데이터를 가져옴
+		console.log(data);
+		var dataList = JSON.parse(data);
+        //dataList.push(JSON.parse(jsonData_${loop.index}));			
 
-			
-		});
+	    var labels = dataList.map(item => new Date(item.buyDate));
+	    var values = dataList.map(item => item.amount);
+	    console.log(values)
+	    var ctx = document.getElementById('sales_chart').getContext('2d');
+	    var chart = new Chart(ctx, {
+	        type: 'bar',
+	        data: {
+	            labels: labels,
+	            datasets: [{
+	                label: "매출",//'Your Data',
+	                data: values,
+	                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+	                borderColor: 'rgba(75, 192, 192, 1)',
+	                borderWidth: 1
+	            }]
+	        },
+	        options: {
+	        	scales: {
+	                x: {
+	                    type: 'time', // x축이 시간 데이터임을 명시
+	                    time: {
+	                        unit: 'day' // x축에 표시할 시간 단위
+	                    }
+	                },
+	                y: {
+	                    beginAtZero: true
+	                }
+	        	}
+	        }
+	    });
+
+    });	
 </script>
 
 <%@ include file="includes/footer.jsp"%>
