@@ -23,8 +23,8 @@ public class BoardQnaServiceImpl implements BoardQnaService{
 	@Override
 	public BoardQnaVO readOne(int boardnum) {
 		return mapper.readOne(boardnum);
-	}
-
+	} 
+ 
 	@Override
 	public void deleteQna(int boardnum) {
 		mapper.deleteQna(boardnum);

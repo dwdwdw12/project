@@ -18,7 +18,7 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	private BoardNoticeMapper mapper;
 	
 	@Override
-	public List<BoardNoticeVO> getList() {
+	public List<BoardNoticeVO> getList() {  
 		return mapper.getList();
 	}
 

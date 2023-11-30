@@ -25,8 +25,8 @@ public class BoardQnaVO {
 //			boardreref int,
 //			boardrelevel int,
 //			boardreseq int,
-//			readcount int default 0 
-//			);
+//			readcount int default 0  
+//			); 
 	
 	private int boardnum, boardreref, boardrelevel, boardreseq, readcount;
 	private String boardsubject, boardcontent, boardwriter, regidate, modifydate;

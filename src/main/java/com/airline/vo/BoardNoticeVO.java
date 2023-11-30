@@ -21,8 +21,8 @@ public class BoardNoticeVO {
 //	boardwriter varchar(100) not null,
 //	regidate datetime default current_timestamp,
 //	modifydate datetime default current_timestamp,
-//	readcount int default 0
-	 
+//	readcount int default 0 
+	  
 	private String boardsubject; 
 	private String boardcontent;
 	private String boardwriter; 

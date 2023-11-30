@@ -26,7 +26,7 @@ public class BoardQnaServiceImplTests {
 	
 	@Test
 	public void getPageList() { 
-		Criteria cri = new Criteria();
+		Criteria cri = new Criteria();  
 		cri.setPageNum(2);
 		cri.setAmount(2);
 		service.getPageList(cri);

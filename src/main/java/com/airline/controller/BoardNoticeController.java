@@ -78,8 +78,8 @@ public class BoardNoticeController {
 		service.modify(vo);
 		System.out.println(">>>>>>>>>>>>>>>>"+vo);
 		return "redirect:/notice/list";
-	}
-	
+	}   
+	 
 	@GetMapping("/popupList")
 	@PreAuthorize("isAuthenticated()")
 	public void getPopupList(Model model, Criteria cri) {

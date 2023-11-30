@@ -14,13 +14,13 @@
 					boardcontent like concat ('%',#{keyword},'%')
 				</if>	
 				<if test="type=='W'.toString()"> 
-					boardwriter like concat ('%',#{keyword},'%')
+					boardwriter like concat ('%',#{keyword},'%') 
 				</if>	
 			</foreach>
 		</trim>
 	</sql> 
 
-<select id="getList" resultType="com.airline.vo.BoardNoticeVO">
+<select id="getList" resultType="com.airline.vo.BoardNoticeVO"> 
 	select * from boardnotice
 </select>
 

@@ -33,7 +33,7 @@ public class BoardQnaController {
 		model.addAttribute("list", service.getPageList(cri));
 		model.addAttribute("page", new PageDTO(cri, service.getTotal()));
 	}
-	
+	  
 	
 	@GetMapping("/read")
 	public void read(Model model, @Param("boardnum")int boardnum , @ModelAttribute("cri") Criteria cri) {

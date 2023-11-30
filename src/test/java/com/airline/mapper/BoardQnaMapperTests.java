@@ -26,7 +26,7 @@ public class BoardQnaMapperTests {
 	
 	@Test
 	public void getPageList() {
-		Criteria cri = new Criteria();
+		Criteria cri = new Criteria();  
 		cri.setPageNum(1); 
 		cri.setAmount(10);
 		mapper.getPageList(cri); 

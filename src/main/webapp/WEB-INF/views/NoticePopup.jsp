@@ -18,7 +18,7 @@
             	setCookie("maindiv", "done", 24 * 60 * 60); // 24시간을 초 단위로 설정
             }
             document.getElementById('layer_popup').style.display = "none"; // 수정: visibility 대신 display 사용
-        }
+        } 
 
         // 수정: 페이지 로딩 시에 쿠키를 읽고 상태에 따라 모달을 띄울지 말지 결정
         function checkCookie() {

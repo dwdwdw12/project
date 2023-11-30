@@ -10,9 +10,9 @@
 
 <select id="getPageList" resultType="com.airline.vo.BoardQnaVO">
      	<![CDATA[
-     	select * from boardqna 
+     	select * from boardqna  
      	]]>
-     			<if test="type=='T'.toString()">
+     			<if test="type=='T'.toString()">   
 					where boardsubject like concat ('%',#{keyword},'%')
 				</if>	
 				<if test="type=='C'.toString()">
