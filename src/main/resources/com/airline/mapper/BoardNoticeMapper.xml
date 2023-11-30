@@ -5,7 +5,7 @@
 <mapper namespace="com.airline.mapper.BoardNoticeMapper">
 
 	<sql id="criteria">
-		<trim prefix="(" suffix=") ">
+		<trim prefix="( where " suffix=") ">
 			<foreach collection="typeArr" item="type" separator="or">
 				<if test="type=='T'.toString()">
 					boardsubject like concat ('%',#{keyword},'%')
@@ -30,8 +30,9 @@
 
 <select id="getTotal" resultType="int">
 	<![CDATA[
-	select count(*) from boardnotice 
+	select count(*) from boardnotice
 	]]>
+	
 			<if test="type=='T'.toString()">
 				where boardsubject like concat ('%',#{keyword},'%')
 			</if>	
@@ -50,19 +51,20 @@
 
  <select id="getPageList" resultType="com.airline.vo.BoardNoticeVO">
      	<![CDATA[
-     	select * from boardnotice 
+     	select * from boardnotice where
      	]]>
      			<if test="type=='T'.toString()">
-					where boardsubject like concat ('%',#{keyword},'%')
+					boardsubject like concat ('%',#{keyword},'%') and
 				</if>	
 				<if test="type=='C'.toString()">
-					where boardcontent like concat ('%',#{keyword},'%')
+					boardcontent like concat ('%',#{keyword},'%') and
 				</if>	
 				<if test="type=='W'.toString()">
-					where boardwriter like concat ('%',#{keyword},'%')
+					boardwriter like concat ('%',#{keyword},'%') and
 				</if>	
 		<![CDATA[
-     	order by boardnum desc
+		(emergency =1 or emergency =0)
+     	order by emergency desc,boardnum desc 
      	limit #{amount} offset #{newStart} 
      	]]>
 </select>

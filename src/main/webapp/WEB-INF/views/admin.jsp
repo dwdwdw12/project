@@ -112,7 +112,7 @@ span:before {
 							        <c:when test="${vo.gradeCode=1}">
 							        	<td>관리자</td>
 							        </c:when>
-							        <c:otherwise test="${vo.gradeCode=0}">
+							        <c:otherwise >
 							        	<td>일반회원</td>
 							        </c:otherwise>
 						        
