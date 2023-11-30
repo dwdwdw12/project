@@ -18,7 +18,7 @@ function getCookie(name) {
 		console.log(cookie_array)
 		for ( var index in cookie_array) {
 			var cookie_name = cookie_array[index].split("=");
-			if (cookie_name[0] == "mycookie") {
+			if (cookie_name[0] == "mycookie") { 
 				return cookie_name[1];
 			}
 		}

@@ -768,7 +768,7 @@
 		</form>
 	</div>
 	<!-- 모달창 -->
-	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/>
+	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/> 
 	<!-- /모달창 -->
 
 	<!-- .tm-container-outer -->

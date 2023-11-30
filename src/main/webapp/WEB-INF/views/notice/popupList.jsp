@@ -159,7 +159,7 @@ font: bold;
 			<th width=10%>조회수</th>
 		</tr>
 			<c:forEach var="item" items="${list}">
-				<c:if test="${item.emergency==2}">
+				<c:if test="${item.emergency==2}"> 
 					<tr>
 						<td><span style="color:green;">팝업</span></td>
 						<td><a class="move" href="/notice/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>

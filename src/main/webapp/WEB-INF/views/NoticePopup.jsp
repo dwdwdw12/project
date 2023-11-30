@@ -46,7 +46,7 @@ font-size:14px; font-weight:600; color:black;
 float: left;text-decoration:none;width: 150px; 
 height : 30px;line-height:30px;border:black solid 1px; text-align : center;text-decoration:none;
 }
-.layerPopup div{
+.layerPopup div{ 
 	display : inline;
 	width : 800px;
 }

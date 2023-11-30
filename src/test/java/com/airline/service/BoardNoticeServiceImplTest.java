@@ -80,7 +80,7 @@ public class BoardNoticeServiceImplTest {
 	
 	
 	@Test
-	public void testPopup() {
+	public void testPopup() { 
 		Criteria cri = new Criteria();
 		cri.setPageNum(1);
 		cri.setAmount(10);

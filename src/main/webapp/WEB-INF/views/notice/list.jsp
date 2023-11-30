@@ -180,7 +180,7 @@ font: bold;
 							<td>${item.regidate }</td>
 							<td>${item.boardwriter}</td>
 							<td>${item.readcount}</td>
-						</tr>
+						</tr> 
 				</c:if>		
 			</c:forEach>
 	</table>

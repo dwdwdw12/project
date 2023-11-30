@@ -13,7 +13,7 @@
 				<if test="type=='C'.toString()">
 					boardcontent like concat ('%',#{keyword},'%')
 				</if>	
-				<if test="type=='W'.toString()">
+				<if test="type=='W'.toString()"> 
 					boardwriter like concat ('%',#{keyword},'%')
 				</if>	
 			</foreach>

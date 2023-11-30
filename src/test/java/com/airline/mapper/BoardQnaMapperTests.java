@@ -29,7 +29,7 @@ public class BoardQnaMapperTests {
 		Criteria cri = new Criteria();
 		cri.setPageNum(1); 
 		cri.setAmount(10);
-		mapper.getPageList(cri);
+		mapper.getPageList(cri); 
 	}
 	
 	@Test

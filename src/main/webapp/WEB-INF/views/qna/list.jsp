@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css" 
 	href="/resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
 <link rel="stylesheet"

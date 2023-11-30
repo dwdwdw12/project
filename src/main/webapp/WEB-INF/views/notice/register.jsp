@@ -165,7 +165,7 @@ a {
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit"
 								onclick= "return boardnoticeCheck()">등록</button>
 						</div>
-
+ 
 
 					</div>
 				</div>
