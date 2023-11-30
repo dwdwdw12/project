@@ -34,7 +34,7 @@ public class HomeController {
 		log.info("logout>>"+logout);
 		log.info("login page");
 		model.addAttribute("REST_API_KEY","a490df18ce9a725d8744f401c597d9eb");
-		model.addAttribute("REDIRECT_URI","https://localhost:8443/kakao");
+		model.addAttribute("REDIRECT_URI","http://localhost:8081/join/kakao");
 		
 		if(error != null) {
 			model.addAttribute("error","Login Error Check your account");

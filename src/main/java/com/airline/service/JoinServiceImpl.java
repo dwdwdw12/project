@@ -64,7 +64,7 @@ public class JoinServiceImpl implements JoinService {
 			sb.append("grant_type=authorization_code");
 
 			sb.append("&client_id=a490df18ce9a725d8744f401c597d9eb"); // REST_API키 본인이 발급받은 key 넣어주기
-			sb.append("&redirect_uri=https://localhost:8443/kakao"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
+			sb.append("&redirect_uri=http://localhost:8081/join/kakao"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -114,7 +114,7 @@ public class JoinServiceImpl implements JoinService {
 				try {
 					URL url = new URL(reqURL);
 					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-					conn.setRequestMethod("GET");
+					conn.setRequestMethod("POST");
 
 					// 요청에 필요한 Header에 포함될 내용
 					conn.setRequestProperty("Authorization", "Bearer " + access_Token);
@@ -146,7 +146,7 @@ public class JoinServiceImpl implements JoinService {
 						Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
 
 						log.info(properties.get("nickname"));
-						// log.info(kakao_account.get("email"));
+						//log.info(kakao_account.get("email"));
 
 						String nickname = properties.get("nickname").toString();
 						//String email = kakao_account.get("email").toString();

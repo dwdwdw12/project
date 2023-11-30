@@ -16,6 +16,8 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
 <div class="tm-main-content" id="top">
 	<div class="tm-page-wrap mx-auto">
 		<section class="tm-banner">

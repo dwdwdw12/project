@@ -38,7 +38,7 @@ public class JoinServiceTest {
 	
 	@Test
 	public void getUserInfoTest() throws Throwable {
-		String access_Token = join.getAccessToken("AUscawGq3fxoOX0-4mMOFXyD77ee27pCAbmT28CDtewpO7DGF462t07nGtcKPXLrAAABjB4Q2qkFVMIyByjmyg");
+		String access_Token = join.getAccessToken("fjjpENvrt2r_gGt4brr4Xv5CMnbJTb7QvrRpezt0XHzape_GBsmuXNvj47EKKw0gAAABjB9uZhvHP8VuE1ZNOQ");
 		join.getUserInfo(access_Token);
 	}
 

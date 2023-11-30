@@ -159,9 +159,9 @@ public class JoinController {
 			// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
 //			@RequestMapping(value = "/kakao", method = RequestMethod.GET)
 			@GetMapping("/kakao")
-			@CrossOrigin(origins = {"http://localhost:8081", "https://localhost:8443"})
+			@CrossOrigin(origins = "http://localhost:8081/join/kakao")
 			public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
-
+System.out.println("kakao controller타는중~~~(join에서 get)");
 				// 1번
 				log.info("code:" + code);
 				
@@ -179,11 +179,20 @@ public class JoinController {
 				//mv.addObject("userInfo", join.)
 				mv.setViewName("/join/checkMember");
 				return mv;	
-				// return에 페이지를 해도 되고, 여기서는 코드가 넘어오는지만 확인할거기 때문에 따로 return 값을 두지는 않았음
+				// 닉네임밖에 못받아오기때문에... 기존회원여부 페이지로 이동시킴...ㅜㅜ
 			}
+					
 			
-			
-			
-
-
+//
+			@GetMapping("/index")
+			 public String index() {
+			        
+			        return "/join/index";
+			    }
+			    
+//		    @GetMapping(value="/kakao")
+//		    public String login() {
+//		        
+//		        return "/join/index";
+//		    }
 }
