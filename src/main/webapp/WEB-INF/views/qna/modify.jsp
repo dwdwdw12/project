@@ -16,14 +16,14 @@
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> 
 <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="/resources/css/searchbar.css">
- 
+
 <!-- Summernote 스타일 및 스크립트 -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -121,8 +121,12 @@ a {
 <body>
 
 	<div class="py-4 px-2 w-3/5 m-auto">
-		<form action="/notice/register" method="post" name="frm" >
-
+		<form action="/qna/modify" method="post" name="frm">
+			<input type="hidden" name="boardnum" value="<c:out value="${board.boardnum }" />">
+			<input type="hidden" name="modifydate" value="<c:out value="${board.modifydate }" />">
+			<input type="hidden" name="regidate" value="<c:out value="${board.regidate }" />">
+			<input type="hidden" name="readcount" value="<c:out value="${board.readcount }" />">
+ 
 			<div
 				class="max-w-full bg-white rounded-lg overflow-hidden md:max-w-full">
 				<div class="md:flex">
@@ -130,42 +134,33 @@ a {
 
 						<div class="mb-1">
 							<span class="text-sm">제목</span> 
-							<input type="text"	name="boardsubject"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
+							<input type="text"	name="boardsubject" value="${board.boardsubject}"
+								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600" readonly>
 						</div>
 					
 						
 						<div class="mb-1">
 							<span class="text-sm">작성자</span> 
-							<input type="text"  value="${loginUser.userNick }"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
-							<input type="hidden" name="boardwriter" value="${loginUser.userId }">
+							<input type="text" name="boardwriter" value="${board.boardwriter}"
+								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600" readonly>
 						</div>
-						
+					
+
 						<div class="mb-1">
 							<span class="text-sm">내용</span>
-								<textarea class="summernote" name="boardcontent"></textarea>
+								<textarea class="summernote" name="boardcontent">${board.boardcontent}</textarea>
 						</div>
 
 
 
 						<div class="mt-3 text-right">
-						<select name="emergency">
-							<option value="0">일반</option>
-							<option value="1">긴급</option>
-							<option value="2">팝업공지</option>
-						</select>
-						
-							<input
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-green-700"
-								type="reset" value="다시 작성">
 							<button
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="listBtn" type="submit">목록</button>
 							<button
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit"
-								onclick= "return boardnoticeCheck()">등록</button>
+								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" type="submit"
+								onclick= "return boardqnaCheck()">수정</button>
 						</div>
- 
+
 
 					</div>
 				</div>
@@ -208,10 +203,14 @@ a {
 		});
 	
 	
-		function boardnoticeCheck() {
+		function boardqnaCheck() {
 			if (document.frm.boardsubject.value.trim() == "") {
-				alert("제목을 입력해주세요.");
-				return false;
+				alert("로그인 후 수정해주시길 바랍니다.");
+				self.location ="/login"
+			}
+			if (document.frm.boardwriter.value.trim() == "") {
+				alert("로그인 후 수정해주시길 바랍니다.");
+				self.location ="/login"
 			}
 			return true;
 		}
@@ -222,7 +221,7 @@ a {
 		
 		listForm.click(function(e){
 			e.preventDefault();
-			 self.location = "/notice/list"; 
+			 self.location = "/qna/list"; 
 		});
 		
 		

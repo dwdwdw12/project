@@ -17,8 +17,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
-<link rel="stylesheet" type="text/css"
-	href="/resources/slick/slick-theme.css" />  
+<link rel="stylesheet" type="text/css"  
+	href="/resources/slick/slick-theme.css" /> 
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -124,13 +124,13 @@ font: bold;
 </style>
 </head>
 <body>
-	<h2><a href="/notice/list">공지사항 게시판</a></h2>
+	<h2>팝업 공지</h2>
 
 	<hr class="hr1" noshade>
 
 	<br>
 	총 ${page.total}개의 글이 있습니다.
-	<form action="/notice/list" id="searchForm" method="get">
+	<form action="/notice/popupList" id="searchForm" method="get">
 		<select name="type">
 			<option value="T" <c:out value="${page.cri.type eq 'T' ? 'selected' : ''}"/> >제목</option>
 			<option value="C" >내용</option>
@@ -147,7 +147,7 @@ font: bold;
 		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
 	</c:if>
 	<c:if test="${loginUser.userId eq 'admin'}">
-		<button data-oper="popupList" class="btn mr-2 right" id="popupList" type="submit">팝업공지</button>
+		<button data-oper="list" class="btn mr-2 right" id="list" type="submit">회원 공지사항</button>
 	</c:if>
 	
 	<table id="listTable">
@@ -158,30 +158,16 @@ font: bold;
 			<th width=20%>작성자</th>
 			<th width=10%>조회수</th>
 		</tr>
-
-		
 			<c:forEach var="item" items="${list}">
-				<c:if test="${item.emergency==1}">
+				<c:if test="${item.emergency==2}"> 
 					<tr>
-						<td><span class="emergency">긴급</span></td>
+						<td><span style="color:green;">팝업</span></td>
 						<td><a class="move" href="/notice/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
 						<td>${item.regidate }</td>
 						<td>${item.boardwriter}</td>
 						<td>${item.readcount}</td>
 					</tr>
 				</c:if>
-			</c:forEach>
-		
-			<c:forEach var="item" items="${list}">
-				<c:if test="${item.emergency==0 }">
-						<tr>	
-							<td>${item.boardnum}</td>
-							<td><a class="move" href="/notice/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
-							<td>${item.regidate }</td>
-							<td>${item.boardwriter}</td>
-							<td>${item.readcount}</td>
-						</tr> 
-				</c:if>		
 			</c:forEach>
 	</table>
 	<br>
@@ -278,6 +264,9 @@ font: bold;
 				self.location = "/notice/popupList";
 			});
 			
+			$("#list").on("click", function(){
+				self.location = "/notice/list";
+			});
 			
 			//검색버튼 이벤트 처리
 			var searchForm = $("#searchForm");

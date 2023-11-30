@@ -18,7 +18,7 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	private BoardNoticeMapper mapper;
 	
 	@Override
-	public List<BoardNoticeVO> getList() {
+	public List<BoardNoticeVO> getList() {  
 		return mapper.getList();
 	}
 
@@ -70,5 +70,15 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	@Override
 	public KakaoUserVO getUser(String userid) {
 		return mapper.getUser(userid);
+	}
+
+	@Override
+	public List<BoardNoticeVO> noticePopup(Criteria cri) {
+		return mapper.noticePopup(cri);
+	}
+
+	@Override
+	public int popupTotal() {
+		return mapper.popupTotal();
 	}
 }

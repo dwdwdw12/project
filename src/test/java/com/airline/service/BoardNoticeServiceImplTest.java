@@ -14,8 +14,8 @@ import com.airline.vo.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-@Log4j
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml") 
+@Log4j 
 public class BoardNoticeServiceImplTest {
 
 	@Autowired
@@ -78,4 +78,12 @@ public class BoardNoticeServiceImplTest {
 		service.delete(6);
 	}
 	
+	
+	@Test
+	public void testPopup() { 
+		Criteria cri = new Criteria();
+		cri.setPageNum(1);
+		cri.setAmount(10);
+		service.noticePopup(cri);
+	}
 }
