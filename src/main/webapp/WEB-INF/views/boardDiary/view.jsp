@@ -141,48 +141,11 @@
 		</form>
 	</div>
 
-	<div class="container">
-		<div  style="margin-right:1px;">
-		<button type="button" class="btn btn-warning " id="like_btn" onclick="updateLike(); return false;">추천</button>
-		<input type="text" id="test111" value="추천 ${likeCount}개">						
+	<div class="container" style="margin: auto; width: 220px;">
+		<input type="hidden" id="test111" value="추천 ${likeCount}개">						
+		
+		<div class="likeArea">
 		</div>
-		<form action="/boardDiary/like" method="post"
-			style="margin: auto; width: 220px;">
-			<input type="hidden" id="boardNum" name="boardNum"
-				value="${board.boardNum}"> <input type="hidden" id="userId"
-				name="userId" value="${loginUser.userId}">
-			<c:choose>
-				<c:when test="${empty loginUser.userId}">
-					<i id="thumbsUp" class="fa fa-heart"
-						style="color: red; font-size: 80px;"></i>
-					<p>추천 ${likeCount}개</p>
-					<!-- <i id="thumbsUp" class="fa fa-heart-o" style="color: red; font-size:80px;"></i> -->
-					<!-- <i id="thumbsUp" class="fa fa-thumbs-o-up" style="font-size:80px;"></i> -->
-				</c:when>
-
-				<c:when test="${checkLike==-1}">
-					<i id="thumbsUp" class="fa fa-heart-o"
-						style="color: red; font-size: 80px;"></i>
-				</c:when>
-				<c:when test="${checkLike==0}">
-					<input type="submit" value="추천 ${likeCount}개">
-					<input>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${likeCount}개<br>
-					<i id="thumbsUp" class="fa fa-heart-o"
-						style="color: red; font-size: 80px;"></i>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천하기
-			</c:when>
-				<c:when test="${checkLike==1}">
-					<input type="submit" value="추천취소 ${likeCount}개">
-					<i id="thumbsUp" class="fa fa-heart"
-						style="color: red; font-size: 80px;"></i>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${likeCount}개<br>
-			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천취소
-			</c:when>
-			</c:choose>
-		</form>
-		<br>
-		<br>
 	</div>
 
 	<div class="container">
@@ -231,7 +194,7 @@
 							name="replyContent"></textarea>
 					</div>
 					<div class="mt-3 text-right">
-						<button type="submit" id="replybtn" class="gradient">등록</button>
+						<button type="submit" id="replybtn" class="gradient" >등록</button>
 					</div>
 				</form>
 			</div>
@@ -365,24 +328,43 @@
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	});
 	
+	//유효성 검사
+	function replyCheck(){
+		console.log("유효성 검사중");
+		console.log(replyContent.val());
+	    if(replyContent.val()==""||replyContent.val().trim()==""){
+	        alert("내용을 입력해주세요.");
+	        return false;
+	    }
+	    
+	    return true;
+	}
+	
 	//댓글 등록
 	$("#replybtn").on("click", function(e){
-		e.preventDefault();
-		var reply = {
-				boardNum : bnoValue,
-				replyContent : replyContent.val(),
-				replyWriter : replyWriter,
-				userId : userId
-		}
-		const textarea = document.getElementById('replyContent');
-		textarea.value = '';
-		
-		replyService.add(reply, function(result){
-			alert(result);
+
+		if(replyCheck()==true){
+	
+			e.preventDefault();
 			
-			showList(-1);			//댓글 내용 새로 고침(댓글 1페이지 호출) -> -1페이지 호출, getList()에서 paging을 새로 작동
-		});
-		
+			
+			var reply = {
+					boardNum : bnoValue,
+					replyContent : replyContent.val(),
+					replyWriter : replyWriter,
+					userId : userId
+			}
+			const textarea = document.getElementById('replyContent');
+			textarea.value = '';
+			
+			replyService.add(reply, function(result){
+				alert(result);
+				
+				showList(-1);			//댓글 내용 새로 고침(댓글 1페이지 호출) -> -1페이지 호출, getList()에서 paging을 새로 작동
+			});
+		} else{
+			e.preventDefault();
+		}
 	});
 	
 	//댓글 조회 클릭 이벤트 처리
@@ -529,22 +511,93 @@ function updateLike(){
                     	var cnt = parseInt(data.likeCount) + 1;
                     	likecnt.value = "추천 " + cnt +"개";
                 		
+                    	var str="";
+						str += "<i id='heart' class='fa fa-heart' style='color: red; font-size: 80px;' onclick='updateLike(); return false;'></i><br>"
+						str += "&nbsp;&nbsp;&nbsp;&nbsp;<b>추천 "+ cnt + "개</b>";
+						$(".likeArea").html(str);
+                    	
                     	handleRefresh();
                     }
                     else if(data.checkLike == 1) {
 	                    alert("추천취소");
-	                    /* $("#test111").value = "추천" + data.likeCount +"개"; */
 	                     
 	                    const likecnt = document.getElementById('test111');
 	                   
 	                    var cnt = parseInt(data.likeCount) - 1;
                     	likecnt.value = "추천 " + cnt +"개";
 	                    
+                    	var str="";
+						str += "<i id='heart' class='fa fa-heart-o' style='color: red; font-size: 80px;' onclick='updateLike(); return false;'></i><br>"
+						str += "&nbsp;&nbsp;&nbsp;&nbsp;<b>추천 "+ cnt + "개</b>";
+						$(".likeArea").html(str);
+                    	
 	                    handleRefresh();
                 }
             }
         });
- }
+ 	}
+	
+	
+
+	$(document).ready(function(){
+			
+		console.log("check 시작");
+		console.log(boardNum);
+		console.log("userId>>"+userId);
+		console.log("/boardDiary/like/check/" + boardNum + "/" + userId);
+		
+		var userId = '${loginUser.userId}'
+		
+		if(userId!=''){
+			$.ajax({
+		        type : "POST",  
+		        url : "/boardDiary/like/check/" + boardNum,       
+		        dataType : "json", 
+				data : JSON.stringify({boardNum:boardNum, userId:userId}),
+		        contentType : "application/json; charset=utf-8",
+		
+		        error : function(error){
+		            alert("통신 에러222");
+		            console.log(error);
+		        },
+		        success : function(data) {
+		        	console.log("check 통과");
+		        	console.log(data);
+		        	
+		        	if(data== 1){
+		            console.log("이미 추천한 상태");
+			            var str="";
+						str += "<i id='heart' class='fa fa-heart' style='color: red; font-size: 80px;' onclick='updateLike(); return false;'></i><br>"
+						str += "&nbsp;&nbsp;&nbsp;&nbsp;<b>추천 "+ ${likeCount} + "개</b>";
+						$(".likeArea").html(str);
+		           	}
+		        	
+		            else if(data== 0) {
+		            console.log("아직 추천하지 않음");
+			            var str="";
+						str += "<i id='heart' class='fa fa-heart-o' style='color: red; font-size: 80px;' onclick='updateLike(); return false;'></i><br>"
+						str += "&nbsp;&nbsp;&nbsp;&nbsp;<b>추천 "+ ${likeCount} + "개</b>";
+						$(".likeArea").html(str);
+		            
+		           }
+		        }
+		    });
+		} else if(userId==''){
+			console.log("비로그인 유저");
+			
+			var str="";
+			str += "<i id='heart' class='fa fa-heart' style='color: red; font-size: 80px;' onclick='message();'></i><br>"
+			str += "&nbsp;&nbsp;&nbsp;&nbsp;<b>추천 "+ ${likeCount} + "개</b>";
+			$(".likeArea").html(str);
+		}
+	});
+	
+	function message(){
+		alert("로그인 후 추천이 가능합니다");
+	}
+	
+	
+	
 </script>
 
 
