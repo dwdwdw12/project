@@ -27,10 +27,10 @@ public class BoardNoticeMapperTests {
 	}
 	
 	@Test
-	public void testGetUserList() {
+	public void testGetUserList() { 
 		mapper.getUserList().forEach(user -> log.info(user));
-	}
-	
+	} 
+	  
 	@Test
 	public void testGetUser() {
 		log.info(mapper.getUser("admin"));

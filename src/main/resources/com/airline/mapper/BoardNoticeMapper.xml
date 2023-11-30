@@ -13,14 +13,14 @@
 				<if test="type=='C'.toString()">
 					boardcontent like concat ('%',#{keyword},'%')
 				</if>	
-				<if test="type=='W'.toString()">
-					boardwriter like concat ('%',#{keyword},'%')
+				<if test="type=='W'.toString()"> 
+					boardwriter like concat ('%',#{keyword},'%') 
 				</if>	
 			</foreach>
 		</trim>
-	</sql>
+	</sql> 
 
-<select id="getList" resultType="com.airline.vo.BoardNoticeVO">
+<select id="getList" resultType="com.airline.vo.BoardNoticeVO"> 
 	select * from boardnotice
 </select>
 
@@ -93,5 +93,27 @@
 	select * from kakaouser where userid=#{userid}
 </select>
 
+<select id="noticePopup" resultType="com.airline.vo.BoardNoticeVO">
+	     	<![CDATA[
+     	select * from boardnotice 
+     	]]>
+     			<if test="type=='T'.toString()">
+					where boardsubject like concat ('%',#{keyword},'%')
+				</if>	
+				<if test="type=='C'.toString()">
+					where boardcontent like concat ('%',#{keyword},'%')
+				</if>	
+				<if test="type=='W'.toString()">
+					where boardwriter like concat ('%',#{keyword},'%')
+				</if>	
+		<![CDATA[
+		where emergency=2
+     	order by boardnum desc
+     	limit #{amount} offset #{newStart} 
+     	]]>
+</select>
 
+<select id="popupTotal" resultType="int"> 
+	select count(*) from boardnotice where emergency =2
+</select>
 </mapper>

@@ -22,13 +22,17 @@ public interface BoardNoticeMapper {
 	public void modify(BoardNoticeVO vo);
 	
 	public void updateReadCount(int boardnum);
-	
+	  
 	public void delete(int boardnum);
-
+  
 	public List<KakaoUserVO> getUserList();
 	
 	public AuthorityVO getAuthority(String userid);
 	
-	public KakaoUserVO getUser(String userid);
+	public KakaoUserVO getUser(String userid); 
+	
+	public List<BoardNoticeVO> noticePopup(Criteria cri);
+	
+	public int popupTotal();
 
 }

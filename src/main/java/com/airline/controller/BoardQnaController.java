@@ -11,81 +11,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.airline.service.BoardNoticeService;
-import com.airline.vo.AuthorityVO;
-import com.airline.vo.BoardNoticeVO;
+import com.airline.service.BoardQnaService;
+import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
-import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PageDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/notice/*")
+@RequestMapping("/qna/*")
 @Log4j
 @RequiredArgsConstructor
-public class BoardNoticeController {
+public class BoardQnaController {
 
 	@Autowired
-	private BoardNoticeService service;
+	private BoardQnaService service;
 	
 	@GetMapping("/list")
 	public void getList(Model model, Criteria cri) {
 		model.addAttribute("list", service.getPageList(cri));
 		model.addAttribute("page", new PageDTO(cri, service.getTotal()));
 	}
+	  
 	
 	@GetMapping("/read")
-	public void read(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri) {
-		model.addAttribute("board", service.getOne(boardnum));
-		System.out.println(service.getOne(boardnum));
+	public void read(Model model, @Param("boardnum")int boardnum , @ModelAttribute("cri") Criteria cri) {
+		model.addAttribute("board", service.readOne(boardnum));
+		model.addAttribute("auth", service.selectBoardreref(boardnum));
+		System.out.println(service.readOne(boardnum));
 		service.updateReadCount(boardnum);
 	}
-	
 	
 	@PostMapping("/delete")
 	@PreAuthorize("isAuthenticated()")
 	public String delete(@Param("boardnum") int boardnum, RedirectAttributes rttr,Model model ) {
-		service.delete(boardnum);
-		return "redirect:/notice/list";
+		service.deleteQna(boardnum);
+		return "redirect:/qna/list";
 	}
+	
 	
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
 	public void getRegister(Model model ,String userid) {
-		model.addAttribute("user", service.getUser(userid));
 	}
+	
 	
 	@PostMapping("/register")
 	@PreAuthorize("isAuthenticated()")
-	public String register( BoardNoticeVO vo, RedirectAttributes rttr,Model model) throws Exception{
+	public String register( BoardQnaVO vo, RedirectAttributes rttr,Model model) throws Exception{
 		System.out.println(vo);
-		service.insert(vo);
-		return "redirect:/notice/list";
+		service.registerQna(vo);
+		return "redirect:/qna/list";
 	}
-
-	@GetMapping("/modify")
+	
+	
+	@GetMapping({"/modify", "/reply"})
 	@PreAuthorize("isAuthenticated()")
 	public void getModify(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri ) {
-		model.addAttribute("board", service.getOne(boardnum));
-		System.out.println(service.getOne(boardnum));
+		model.addAttribute("board", service.readOne(boardnum));
+		System.out.println(service.readOne(boardnum));
 	}
 	
 	@PostMapping("/modify")
 	@PreAuthorize("isAuthenticated()")
-	public String modify(BoardNoticeVO vo, RedirectAttributes rttr,Model model ) {
-		service.modify(vo);
+	public String modify(BoardQnaVO vo, RedirectAttributes rttr,Model model ) {
+		service.updateQna(vo);
 		System.out.println(">>>>>>>>>>>>>>>>"+vo);
-		return "redirect:/notice/list";
-	}   
-	 
-	@GetMapping("/popupList")
-	@PreAuthorize("isAuthenticated()")
-	public void getPopupList(Model model, Criteria cri) {
-		model.addAttribute("list", service.noticePopup(cri));
-		model.addAttribute("page", new PageDTO(cri, service.popupTotal()));
+		return "redirect:/qna/list";
 	}
 	
-
+	@PostMapping("/reply")
+	@PreAuthorize("isAuthenticated()")
+	public String reply(Model model,BoardQnaVO vo, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri ) {
+		service.replyQna(vo);
+		return "redirect:/qna/list";
+	}
+	
 }

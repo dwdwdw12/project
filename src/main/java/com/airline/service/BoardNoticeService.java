@@ -14,7 +14,7 @@ public interface BoardNoticeService {
 	public List<BoardNoticeVO> getPageList(Criteria cri);
 	
 	public int getTotal();
-	
+	 
 	public BoardNoticeVO getOne(int boardnum);
 	
 	public void insert(BoardNoticeVO vo);
@@ -29,5 +29,9 @@ public interface BoardNoticeService {
 	
 	public AuthorityVO getAuthority(String userid);
 	
-	public KakaoUserVO getUser(String userid);
+	public KakaoUserVO getUser(String userid); 
+	 
+	public List<BoardNoticeVO> noticePopup(Criteria cri);
+	
+	public int popupTotal();
 }
