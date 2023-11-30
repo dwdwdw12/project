@@ -26,5 +26,7 @@ public interface UserService {
 	List<BoardDiaryVO> getDiary(String userid);
 	//전체 유저정보 가져오기(가입순서 desc)
 	List<KakaoUserVO> getUserInfoAll();
+	//한달동안 카카오페이 결제내역
+	List<PointVO> getPointList();
 
 }

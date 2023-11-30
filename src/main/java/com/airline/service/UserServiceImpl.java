@@ -73,4 +73,10 @@ public class UserServiceImpl implements UserService{
 		return mapper.getUserInfoAll();
 	}
 
+
+	@Override
+	public List<PointVO> getPointList() {
+		return mapper.getPointList();
+	}
+
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,8 @@ import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -121,8 +124,22 @@ public class HomeController {
 	
 	
 	//마이페이지(관리자)
-	@GetMapping("/admin")
-	public void adminPage(Model model) {
+	/*
+	 * @GetMapping("/admin") public void adminPage(Model model) {
+	 * log.info("admin page"); //유저정보 가져오기 Authentication authentication =
+	 * SecurityContextHolder.getContext().getAuthentication();
+	 * if(authentication.getPrincipal() instanceof UserDetails) { UserDetails
+	 * userDetails = (UserDetails) authentication.getPrincipal(); String userid =
+	 * userDetails.getUsername(); //회원정보 조회 } //회원정보 가져오기 List<KakaoUserVO> vo =
+	 * user.getUserInfoAll(); model.addAttribute("vo",vo); //매출현황(카카오페이+항공결제내역
+	 * 월별/년도별) //한달동안 포인트 구입매출관련 내역 List<PointVO> pvo = user.getPointList();
+	 * 
+	 * }
+	 */
+	
+	//마이페이지(관리자)
+	@GetMapping(value="/admin", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void adminPage(Model model)throws Exception {
 		log.info("admin page");
 		//유저정보 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -134,7 +151,25 @@ public class HomeController {
 		//회원정보 가져오기
 		List<KakaoUserVO> vo = user.getUserInfoAll();
 		model.addAttribute("vo",vo);
+		//매출현황(카카오페이+항공결제내역 월별/년도별)
+		//한달동안 포인트 구입매출관련 내역
+		List<PointVO> getPvo = user.getPointList();
+	    // 데이터를 JSON 문자열로 변환하여 모델에 추가
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    try {
+	        String json = objectMapper.writeValueAsString(getPvo);
+	        model.addAttribute("json", json);
+	    } catch (JsonProcessingException e) {
+	        e.printStackTrace(); // 또는 예외 처리 로직 추가
+	    }
+		
+	    System.out.println(getPvo);
+        model.addAttribute("getPvo", getPvo);
+
+		
 	}
+	
+
 	
 	@GetMapping("/contact")
 	public void contact() {

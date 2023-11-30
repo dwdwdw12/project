@@ -30,60 +30,55 @@
 span:before {
 	font-family: bootstrap-icons;
 }
+
+.currIcon {
+	font-size: 22ex;
+	text-align: center;
+	color: #ffc107;
+}
+
+.currTemp {
+	text-align: center;
+}
+
+.city {
+	text-align: center;
+}
 </style>
 
 <div class="tm-page-wrap mx-auto">
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
-				<div class="col">
-					<div class="p-3 border bg-light">
-						<input type="hidden" id="weather" value=""/>
-						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-weath" onclick="">상세조회 >></button>
+				<div class="col" style="width: 33%;">
+					<div class="p-3 bg-light">
+						<div class="weather">
+							<div class="currIcon"></div>
+							<div class="currTemp"></div>
+							<div class="city"></div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</section>
-	
-	
-	<section class="p-5 tm-container-outer tm-bg-gray">
-		<div class="container">
-			<div class="row gx-6"><div class="col"><p><h2 style="text-align: center;">오늘의 날씨</h2></p></div></div>
-			<div class="row gx-6">
 				<div class="col">
-					<div class="p-3 bg-light" style="float: left; width: 33%;">
-					
-						<dl>
-							<dt>기온</dt>
-							<dd class="temperature"><dd>
-						</dl>
-					</div>
-					<div class="p-3  bg-light" style="float: left; width: 33%;">
-						<dl>
-							<dt>위치</dt>
-							<dd class="place"><dd>
-						</dl>
-					</div>
-					<div class="p-3 bg-light" style="float: left; width: 33%;">
-						<dl>
-							<dt>설명</dt>
-							<img class="icon"/>
-							<dd class="description"><dd>
-						</dl>
-					</div>
-					<div class="p-3 border bg-light">
-						<input type="hidden" id="weather" value=""/>
-						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-weather" onclick="">상세조회 >></button>
+					<div class="p-3 bg-light">
+						<p>
+						<h3 style="text-align: center;">
+							<i class="bi bi-check-lg"></i><strong>오늘의 날씨</strong>
+						</h3>
+						</p>
+						<div class="detail">
+							<div class=""></div>
+							<div class=""></div>
+							<div class=""></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-<!-- 회원정보 조회 -->
+
+	<!-- 회원정보 조회 -->
 	<section class="p-5 tm-container-outer tm-bg-gray">
 
 		<!-- .tm-container-outer -->
@@ -91,47 +86,63 @@ span:before {
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 border bg-light">
-						<p><h2>전체 회원정보 조회</h2></p>
+						<p>
+						<h2 style="text-align: center;">전체 회원정보 조회</h2>
+						</p>
 						<table class="table table-hover">
-			      		   <thead>
-						      <tr>
-						        <th>아이디</th>
-						        <th>닉네임</th>
-						        <th>등급</th>
-						        <th>메일</th>
-						        <th>핸드폰</th>
-						        <th>관리자여부</th>
-						      </tr>
-						    </thead>
-						    <c:forEach items="${vo}" var="vo">
-						    <tbody>
-						      <tr>
-						        <td>${vo.userId}</td>
-						        <td>${vo.userNick}</td>
-						        <c:choose>
-							        <c:when test="${vo.gradeCode=1}">
-							        	<td>관리자</td>
-							        </c:when>
-							        <c:otherwise test="${vo.gradeCode=0}">
-							        	<td>일반회원</td>
-							        </c:otherwise>
-						        
-						        </c:choose>
-						        <td>${vo.mail}</td>
-						        <td>${vo.phone}</td>
-						        <td>${vo.admin}</td>
-						      </tr>
-						     </tbody>
-						      </c:forEach>	      		
-			      		</table>
- 					<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회 >></button>	
-		    	 </div>
-		    </div>
- 		 </div>
-		
+							<thead>
+								<tr>
+									<th>아이디</th>
+									<th>닉네임</th>
+									<th>등급</th>
+									<th>메일</th>
+									<th>핸드폰</th>
+									<th>관리자여부</th>
+								</tr>
+							</thead>
+							<c:forEach items="${vo}" var="vo">
+								<tbody>
+									<tr>
+										<td>${vo.userId}</td>
+										<td>${vo.userNick}</td>
+										<c:choose>
+											<c:when test="${vo.gradeCode==0}">
+												<td>제이지</td>
+											</c:when>
+											<c:when test="${vo.gradeCode==1}">
+												<td>어피치</td>
+											</c:when>
+											<c:when test="${vo.gradeCode==2}">
+												<td>라이언</td>
+											</c:when>
+											<c:otherwise>
+												<td>춘식이</td>
+											</c:otherwise>
+										</c:choose>
+										<td>${vo.mail}</td>
+										<td>${vo.phone}</td>
+										<c:choose>
+											<c:when test="${vo.admin==1}">
+												<td>관리자</td>
+											</c:when>
+											<c:otherwise>
+												<td>일반회원</td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+								</tbody>
+							</c:forEach>
+						</table>
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick=""> 회원정보 관리
+							>></button>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</section>
-	
+
 	<!-- 매출현황 조회 -->
 	<section class="p-5 tm-container-outer tm-bg-gray">
 
@@ -140,8 +151,11 @@ span:before {
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 border bg-light">
-						<p><h2>매출현황</h2></p>
-				<%-- 		<table class="table table-hover">
+						<p id="result">
+						<h2 style="text-align: center;">매출현황</h2>
+						</p>
+						<p class="line-chart"></p>
+						<%-- 		<table class="table table-hover">
 			      		   <thead>
 						      <tr>
 						        <th>일시</th>
@@ -158,13 +172,23 @@ span:before {
 						     </tbody>
 						      </c:forEach>	      		
 			      		</table> --%>
- 					<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회 >></button>	
-		    	 </div>
-		    </div>
-			<div class="col">
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회
+							>></button>
+					</div>
+				</div>
+				<div class="col">
 					<div class="p-3 border bg-light">
-						<p><h2>매출현황</h2></p>
-	<%-- 					<table class="table table-hover">
+						<p id="chart" value="${getPvo}">
+						<%-- <c:out value="${getPvo}"><input type="hidden" class="data" value="${getPvo}"/></c:out> --%>
+ 						<c:forEach items="${getPvo}" var="data" varStatus="loop">
+							<input type="hidden" id="data_${loop.index}" class="data" value='<c:out value="${json}"/>'/>
+						</c:forEach> 
+						<h2 style="text-align: center;">매출현황</h2>
+						<canvas id="result" width="800" height="400"></canvas>
+						</p>
+						<p class="chart2"></p>
+						<%-- 					<table class="table table-hover">
 			      		   <thead>
 						      <tr>
 						        <th>일시</th>
@@ -179,27 +203,28 @@ span:before {
 						        <td>${kvo.amount}</td>
 						      </tr>
 						     </tbody>
-						      </c:forEach>	 --%>      		
-			      		</table>
- 					<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회 >></button>	
-		    	 </div>
-		    </div>
- 		 </div>
-		
+						      </c:forEach>	 --%>
+						</table>
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회
+							>></button>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</section>
-	
+
 	<!-- 항공권 예약/조회내역 -->
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
-			    <div class="col">
-			    	 <div class="p-3 border bg-light">
-			    	 <p>
-						<h3 style="text-align: center;">
-							 항공권 예약/구매 현황 </h3>
+				<div class="col">
+					<div class="p-3 border bg-light">
+						<p>
+						<h3 style="text-align: center;">항공권 예약/구매 현황</h3>
 						</p>
-<%-- 			    	 	<table class="table table-hover">
+						<%-- 			    	 	<table class="table table-hover">
 					    <thead>
 					    	<th>시간</th>
 					    	<th>내용</th>
@@ -218,25 +243,25 @@ span:before {
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table> --%>
-	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
-			    	 </div>
-			   	 </div>
-	    	 </div>
-    	 </div>
-   	 </section>
-   	 
-   	 	<!-- 게시글 작성내역 -->
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
+							>></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 게시글 작성내역 -->
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
-			    <div class="col">
-			    	 <div class="p-3 border bg-light">
-			    	 <p>
-						<h3 style="text-align: center;">
-							공지사항 작성 현황 </h3>
+				<div class="col">
+					<div class="p-3 border bg-light">
+						<p>
+						<h3 style="text-align: center;">공지사항 작성 현황</h3>
 						</p>
-<%-- 			    	 	<table class="table table-hover">
+						<%-- 			    	 	<table class="table table-hover">
 					    <thead>
 					    	<th>시간</th>
 					    	<th>내용</th>
@@ -255,18 +280,18 @@ span:before {
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table> --%>
-	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
-			    	 </div>
-			   	 </div>
-			   	 
-   	 		    <div class="col">
-			    	 <div class="p-3 border bg-light">
-			    	 <p>
-						<h3 style="text-align: center;">
-							이벤트 게시판 작성 현황 </h3>
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
+							>></button>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="p-3 border bg-light">
+						<p>
+						<h3 style="text-align: center;">이벤트 게시판 작성 현황</h3>
 						</p>
-<%-- 			    	 	<table class="table table-hover">
+						<%-- 			    	 	<table class="table table-hover">
 					    <thead>
 					    	<th>제목</th>
 					    	<th>내용</th>
@@ -282,110 +307,118 @@ span:before {
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table> --%>
-	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
-			    	 </div>
-			   	 </div>
-	    	 </div>
-    	 </div>
-   	 </section>
-	    	 
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
+							>></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!-- .tm-container-outer -->
-	<%@ include file="includes/footer.jsp"%>
-<!--  	<script type="text/javascript">
-	$(".btn-weather").on("click",function(e){
-		e.preventDefault();
-		console.log("dd");
-		
-		const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d';
-		
-		const success = (position) => {
-  			console.log(position);
-  			const latitude = position.coords.latitude;
-  		  	const longitude = position.coords.longitude;
-  		  	getWeather(latitude, longitude);
-		}
-		
-		const fail = () => {
-  			console.log("좌표정보 받기 실패");
-		}
-		
-		const getWeather = (lat, lon) => {
-			fetch(
-			    `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric&lang=kr`
-			  ).then((response) => {
-			      return response.json();
-		    }).then((json) => {
-		        console.log(json);
-		    }).catch((error) => {
-		        alert(error);
-		    }).then((json) => {
-		        const temperature = json.main.temp;
-		        const place = json.name;
-		        const description = json.weather[0].description;
-		        const icon = json.weather[0].icon;
-		        const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
-
-		        tempSection.innerText = temperature;
-		        placeSection.innerText = place;
-		        descSection.innerText = description;
-		        iconSection.setAttribute('src', iconURL);
-		      });
-		}
-		
-		
-		
-		navigator.geolocation.getCurrentPosition(success, fail);
-		//navigator.geolocation.getCurrentPosition(success, error, [options])
-		//requestCoords();
-	})
-	  
-</script>-->
+<!-- 날씨아이콘 임포트 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1"></script>
+<canvas id="result"></canvas>	
+<script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function(){
-	console.log("dd");
-	const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d';
-	
-	const success = (position) => {
-			console.log(position);
-			const latitude = position.coords.latitude;
-		  	const longitude = position.coords.longitude;
-		  	getWeather(latitude, longitude);
-	}
-	
-	const fail = () => {
-			console.log("좌표정보 받기 실패");
-	}
-	
-	const getWeather = (lat, lon) => {
-		fetch(
-		    `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric&lang=kr`
-		  ).then((response) => {
-		      return response.json();
-	    }).then((json) => {
-	        console.log(json);
-	    }).catch((error) => {
-	        alert(error);
-	    }).then((json) => {
-	        const temperature = json.main.temp;
-	        const place = json.name;
-	        const description = json.weather[0].description;
-	        const icon = json.weather[0].icon;
-	        const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+	$(document).ready(function() {
+			 const API_KEY = '7b8ae9e52a7e1bb3db6bfbe353ec511d'; 
+			var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid="
+					+ API_KEY + "&units=metric";
+			let weatherIcon = {
+				'01' : 'fas fa-sun',
+				'02' : 'fas fa-cloud-sun',
+				'03' : 'fas fa-cloud',
+				'04' : 'fas fa-cloud-meatball',
+				'09' : 'fas fa-cloud-sun-rain',
+				'10' : 'fas fa-cloud-showers-heavy',
+				'11' : 'fas fa-poo-storm',
+				'13' : 'far fa-snowflake',
+				'50' : 'fas fa-smog'
+			};
 
-	        tempSection.innerText = temperature;
-	        placeSection.innerText = place;
-	        descSection.innerText = description;
-	        iconSection.setAttribute('src', iconURL);
-	      });
-	}
-	
-	
-	
-	navigator.geolocation.getCurrentPosition(success, fail);
-	//navigator.geolocation.getCurrentPosition(success, error, [options])
-	//requestCoords();
-	
-});
+			$.ajax({
+				url : apiUrl,
+				dataType : "json",
+				type : "GET",
+				async : "false",
+				success : function(resp) {
+					console.log(resp);
+					console.log("현재 온도 : "+ (resp.main.temp));
+					console.log("현재 습도 : "+ (resp.main.humidity));
+					console.log("날씨 : "+ (resp.weather[0].main));
+					console.log("상세날씨설명 : "+ (resp.weather[0].description));
+					console.log("날씨 이미지 : "+ (resp.weather[0].icon));
+					console.log("바람 : "+ (resp.wind.speed));
+					console.log("나라 : "+ (resp.sys.country));
+					console.log("도시이름 : "+ (resp.name));
+					console.log("구름 : "+ (resp.clouds.all));
+					 			$(".weather").append("<p>현재 온도: " + (resp.main.temp) + "℃</p>");
+								$(".weather").append("<p>현재 습도: " + resp.main.humidity + "%</p>");
+								$(".weather").append("<p>날씨: " + resp.weather[0].main + "</p>");
+								$(".weather").append("<p>상세날씨설명: " + resp.weather[0].description + "</p>");
+								$(".weather").append("<p>바람: " + resp.wind.speed + " m/s</p>");
+								$(".weather").append("<p>나라: " + resp.sys.country + "</p>");
+								$(".weather").append("<p>도시이름: " + resp.name + "</p>");
+								$(".weather").append("<p>구름: " + resp.clouds.all + "%</p>"); 
+					var weatherIcon = '<img src="http://openweathermap.org/img/wn/'+resp.weather[0].icon+'png" alt="'+resp.weather[0].description+'"/>'
+					$(".weather").html(weatherIcon);
+					var $Icon = (resp.weather[0].icon).substr(0, 2);
+					var $Temp = Math.floor(resp.main.temp)+ 'º';
+					var $city = resp.name;
+					$('.currIcon').append('<i class="' + weatherIcon[$Icon] +'"></i>');
+					$('.currTemp').prepend($Temp);
+					$('.city').append($city);
+
+					$(".detail").append("<p>나라/도시: "+ resp.sys.country+ "/" + resp.name+ "</p>");
+					$(".detail").append("<p>상세날씨설명: "+ resp.weather[0].description+ "</p>");
+					$(".detail").append("<p>구름: " + resp.clouds.all+ "%</p>");
+					$(".detail").append("<p>바람: " + resp.wind.speed+ " m/s</p>");
+					$(".detail").append("<p>현재 온도: "+ (resp.main.temp)+ "℃</p>");
+
+				}
+			});
+			
+		 	console.log("start");
+			var data = $(".data").val(); // JSTL을 사용하여 데이터를 가져옴
+			console.log(data);
+			var dataList = JSON.parse(data);
+	        //dataList.push(JSON.parse(jsonData_${loop.index}));			
+
+		    var labels = dataList.map(item => new Date(item.buyDate));
+		    var values = dataList.map(item => item.amount);
+		    
+		    var ctx = document.getElementById('result');
+		    var chart = new Chart(ctx, {
+		        type: 'line',
+		        data: {
+		            labels: labels,
+		            datasets: [{
+		                label: Amount,//'Your Data',
+		                data: values,
+		                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+		                borderColor: 'rgba(75, 192, 192, 1)',
+		                borderWidth: 1
+		            }]
+		        },
+		        options: {
+		        	scales: {
+		                x: {
+		                    type: 'time', // x축이 시간 데이터임을 명시
+		                    time: {
+		                        unit: 'day' // x축에 표시할 시간 단위
+		                    }
+		                },
+		                y: {
+		                    beginAtZero: true
+		                }
+		        }
+		    });
+
+			
+		});
 </script>
+
+<%@ include file="includes/footer.jsp"%>

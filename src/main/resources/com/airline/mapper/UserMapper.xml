@@ -86,4 +86,8 @@
 		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5; 
 	]]>
 	</select>
+	
+	<select id="getPointList" resultType="com.airline.vo.PointVO">
+		select * from point where amount>0 and buyDate between date_sub(now(), interval 7 day) and now()
+	</select>
 </mapper>
