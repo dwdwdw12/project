@@ -93,7 +93,10 @@
 		</select>
           <input class="inputId" type="text" id="keyword" name="keyword" placeholder="검색어 입력" value="${paging.cri.keyword}">
           <input class="gradient" type="submit" value="검색하기" onclick="return search()">
-         <input type="button" class="gradient" value="내글보기" onclick="location.href='/boardDiary/list?type=boardWriter&keyword=${loginUser.userNick}'">
+          <c:if test="${!empty loginUser.userId}">
+          	<input type="button" class="gradient" value="내글보기" onclick="location.href='/boardDiary/list?type=boardWriter&keyword=${loginUser.userNick}'">
+          </c:if>
+          
           <input type="button" class="gradient" onclick="location.href='/boardDiary/list'" value="전체">&nbsp; <br> <br>
         </span>
 		</form>
@@ -141,9 +144,6 @@
 	
 		 </table> 
 				
-				<input type="button" class="gradient" onclick="location.href='/boardDiary/write'" value="테스트글쓰기">
-			
-			
 		<c:if test="${!empty loginUser.admin}">
 			<div style="float: right;">
 				<input type="button" class="gradient" onclick="location.href='/boardDiary/write'" value="글쓰기">

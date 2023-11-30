@@ -38,13 +38,18 @@
 	border: solid 2px white;
 	border-radius: 5px;
 	}
+	
+	.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	}
 
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top: 180px;">
 	
 	<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
-	<input type="hidden" id="userId" name="userId" value="${loginUser.userid}" readonly="readonly">
+	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
 	<div class="container">
 		<h1>이벤트 상세보기</h1>
 			<form action="boardEventDelete.do" method="get" name="frm">
@@ -104,55 +109,39 @@
 			
 			<div class="form-group">
 				<label for="boardContent"><!-- 내용 --></label><br>
-				<textarea id="summernote" class="summernote" name="boardContent" readonly="readonly">${board.boardContent}</textarea>
+				${board.boardContent}
 			</div>
 			
 			<div id="bottom"></div>
 			<div class="mt-3 text-right">
 			<c:choose>
 				<c:when test="${loginUser.admin==1}">
-					<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-					<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
 					<button type="button" class="gradient" onclick="del()">삭제</button>&nbsp;
-					<button type="button" class="gradient" onclick="location.href='boardEventUpdate.do?boardNum=${board.boardNum}'">수정</button>	
-					<button type="button" class="gradient" onclick="location.href='boardEventWrite.do'" id="write">글쓰기</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/update?boardNum=${board.boardNum}'">수정</button>	
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/write'" id="write">글쓰기</button>
 				</c:when>
 				<c:otherwise>
-					<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-					<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
 				</c:otherwise>
 			</c:choose>
 			</div>
 			<br><br>
-			<div style="position: fixed; bottom: 5px; right: 5px;">
+			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
 				<img src="./img/upArrow.png" width="100px" height="100px" title="위로">
 				</a><br>
 				<a href="#bottom">
 				<img src="./img/downArrow.png" width="100px" height="100px" title="아래로">
 				</a>
-			</div>
+			</div> -->
 			
 		</form>
 	</div>
 
-	<script>
-		$(document).ready(
-				function() {
-					$('#summernote').summernote({
-						disableDragAndDrop: true,
-						/* height: 800, */
-						lang : "ko-KR"
-					});
-					$('#summernote').summernote('disable')({
-						/* height : 300,
-						width : 500, */
-						
-						
-					});
-					
-				});
-	</script>
+
 	<%@ include file="../includes/footer.jsp"%>
 </body>
 </html>

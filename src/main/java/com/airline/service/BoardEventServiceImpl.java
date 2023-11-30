@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.airline.mapper.BoardDiaryMapper;
-import com.airline.vo.BoardDiaryVO;
+import com.airline.mapper.BoardEventMapper;
+import com.airline.vo.BoardEventVO;
 import com.airline.vo.Criteria;
 
 import lombok.AllArgsConstructor;
@@ -15,26 +15,26 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 @AllArgsConstructor
-public class BoardDiaryServiceImpl implements BoardDiaryService{
+public class BoardEventServiceImpl implements BoardEventService{
 
-	private final BoardDiaryMapper mapper;
+	private final BoardEventMapper mapper;
 	
 	@Override
-	public List<BoardDiaryVO> getListwithPaging(Criteria criteria) {
+	public List<BoardEventVO> getListwithPaging(Criteria criteria) {
 		log.info("get list with paging service");
 		return mapper.getListwithPaging(criteria);
 	}
 
 	@Transactional
 	@Override
-	public BoardDiaryVO get(int boardNum) {
+	public BoardEventVO get(int boardNum) {
 		log.info("get service");
 		mapper.updateReadCount(boardNum);
 		return mapper.get(boardNum);
 	}
 
 	@Override
-	public boolean insert(BoardDiaryVO board) {
+	public boolean insert(BoardEventVO board) {
 		log.info("insert service");
 		return mapper.insert(board)==1;
 	}
@@ -46,7 +46,7 @@ public class BoardDiaryServiceImpl implements BoardDiaryService{
 	}
 
 	@Override
-	public boolean update(BoardDiaryVO board) {
+	public boolean update(BoardEventVO board) {
 		log.info("update service");
 		return mapper.update(board)==1;
 	}
@@ -56,5 +56,5 @@ public class BoardDiaryServiceImpl implements BoardDiaryService{
 		log.info("getTotalCount");
 		return mapper.getTotalCount(cri);
 	}
-
+	
 }

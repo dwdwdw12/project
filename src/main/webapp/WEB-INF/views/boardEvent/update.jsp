@@ -62,15 +62,20 @@
 	border: solid 2px white;
 	border-radius: 5px;
 	}
+	
+	.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    }
 
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	
 	 <div class="container">
 		<h2>이벤트 수정</h2>
 		<form action="boardEventUpdate.do" method="post" name="frm" enctype="multipart/form-data">
-			<input type="hidden" id="boardNum" name="boardNum" value="${boardNum}"> 
+			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}">
@@ -143,20 +148,20 @@
 			
 			<div id="bottom"></div>
 			<div class="mt-3 text-right">
-			<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-			<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+			<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
+			<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
 			<button type="reset" class="gradient">다시작성</button> &nbsp;
 			<button type="submit" class="gradient" onclick="return boardCheck()">수정</button> &nbsp;
 			</div>
 			<br><br>
-			<div style="position: fixed; bottom: 5px; right: 5px;">
+			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
 				<img src="./img/upArrow.png" width="100px" height="100px" title="위로">
 				</a><br>
 				<a href="#bottom">
 				<img src="./img/downArrow.png" width="100px" height="100px" title="아래로">
 				</a>
-			</div>
+			</div> -->
 			
 		</form>
 	</div> 

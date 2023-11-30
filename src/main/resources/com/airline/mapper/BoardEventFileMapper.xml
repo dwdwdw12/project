@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.airline.mapper.BoardEventFileMapper">
+	
+	<select id="searchFileByBoardNum" resultType="com.airline.vo.BoardEventFileVO">
+		select * from boardEventFile where boardNum=#{boardNum} order by repImgYn desc, fileOrder asc
+	</select>
+	
+	<select id="fileCount" resultType="int">
+		select count(*) from boardEventFile where boardNum=#{boardNum}
+	</select>
+
+	<insert id="insertFile">
+		insert into boardEventFile(boardNum, oriFileName, savedFileName, extension, repImgYn, fileSize, fileOrder) 
+		values(#{boardNum}, #{oriFileName}, #{savedFileName}, #{extension}, #{repImgYn}, #{fileSize}, #{fileOrder})
+	</insert>
+	
+	<delete id="deleteFiles">
+		delete from boardEventFile where boardNum=#{boardNum}
+	</delete>
+	
+	<select id="findRepImg" resultType="com.airline.vo.BoardEventFileVO">
+		select * from boardEventFile where repImgYn='Y'
+	</select>
+	
+	<update id="updateRepImg">
+		update boardEvent set repImg = #{repImg} where boardNum = #{boardNum}
+	</update>
+	
+	
+</mapper>

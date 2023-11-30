@@ -1,5 +1,7 @@
 package com.airline.vo;
 
+import java.util.List; 
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,4 +29,6 @@ public class BoardEventVO {
 	private String modifyDate;
 	private int readCount;
 	private String repImg;
+	
+	private List<BoardEventFileVO> attachList;
 }
