@@ -8,12 +8,15 @@ import org.springframework.context.annotation.Description;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.mail.MailHandler;
@@ -148,6 +151,39 @@ public class JoinController {
 		}
 
 	}
+	
+	
+	//카카오 로그인 구현
+		// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
+			// 2번 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
+			// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
+//			@RequestMapping(value = "/kakao", method = RequestMethod.GET)
+			@GetMapping("/kakao")
+			@CrossOrigin(origins = {"http://localhost:8081", "https://localhost:8443"})
+			public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
+
+				// 1번
+				log.info("code:" + code);
+				
+				// 2번
+				String access_Token = join.getAccessToken(code);
+				log.info("###access_Token#### : " + access_Token);
+				// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
+				
+				// 3번
+				HashMap<String, Object> userInfo = join.getUserInfo(access_Token);
+				log.info("###nickname#### : " + userInfo.get("nickname"));
+				//log.info("###email#### : " + userInfo.get("email"));
+				
+				ModelAndView mv = new ModelAndView();
+				//mv.addObject("userInfo", join.)
+				mv.setViewName("/join/checkMember");
+				return mv;	
+				// return에 페이지를 해도 되고, 여기서는 코드가 넘어오는지만 확인할거기 때문에 따로 return 값을 두지는 않았음
+			}
+			
+			
+			
 
 
 }

@@ -73,6 +73,18 @@
 					</div>
 
 
+
+<div class="wrap">
+     <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
+     	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
+        
+      	<div>카카오톡으로 간편로그인 </div>
+   	</a>
+   	</div>
+
+
+
+
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<input type="hidden" name="${message}" value="${message}"/>
@@ -80,9 +92,6 @@
 			</form>
 			
 		</div>
-			
-			
-					
 		</div>
 
 	</div>

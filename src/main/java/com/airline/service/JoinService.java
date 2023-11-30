@@ -1,5 +1,7 @@
 package com.airline.service;
 
+import java.util.HashMap;
+
 import com.airline.vo.KakaoUserVO;
 
 public interface JoinService {
@@ -13,4 +15,7 @@ public interface JoinService {
 									int userReginumLast);
 	
 	String getAccessToken(String authorize_code) throws Throwable;
+	
+	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
+
 }
