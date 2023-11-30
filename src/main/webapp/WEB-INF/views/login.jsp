@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
-<meta name="referrer" content="no-referrer-when-downgrade" />
+
 <!-- Templatemo style -->
 	<!-- 쿠키값으로 id정보 받아오기 -->
 	<%String cookie = "";
@@ -73,29 +73,11 @@
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
 					</div>
 
-
-
-<div class="wrap">
-     <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
-     	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
-        
-      	<div>카카오톡으로 간편로그인 </div>
-   	</a>
-   	</div>
-
-
-
-
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<input type="hidden" name="${message}" value="${message}"/>
 					</div>
 			</form>
-			
-			
-			
-			
-			
 			
 			<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
   integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
@@ -141,16 +123,8 @@
     if (parts.length === 2) { return parts[1].split(';')[0]; }
   }
 </script>
-			
-			
-			
-			
-			
-			
-			
 		</div>
 		</div>
-
 	</div>
 
 	</div>
