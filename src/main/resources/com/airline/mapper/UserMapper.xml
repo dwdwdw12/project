@@ -88,6 +88,6 @@
 	</select>
 	
 	<select id="getPointList" resultType="com.airline.vo.PointVO">
-		select * from point where amount>0 and buyDate between date_sub(now(), interval 7 day) and now()
+		select *, sum(amount) as sum from point where amount>0 group by substr(buyDate,1,10);
 	</select>
 </mapper>

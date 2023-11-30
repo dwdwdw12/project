@@ -377,7 +377,7 @@ $(document).ready(function() {
         //dataList.push(JSON.parse(jsonData_${loop.index}));			
 
 	    var labels = dataList.map(item => new Date(item.buyDate));
-	    var values = dataList.map(item => item.amount);
+	    var values = dataList.map(item => item.sum);
 	    console.log(values)
 	    var ctx = document.getElementById('sales_chart').getContext('2d');
 	    var chart = new Chart(ctx, {
