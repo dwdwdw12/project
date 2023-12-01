@@ -61,7 +61,7 @@ height : 30px;line-height:30px;border:black solid 1px; text-align : center;text-
 	height : 30px;
 	line-height:30px
 }
-.layerPopup #close {
+.layerPopup #close { 
 font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: right; line-height:30px; text-align : center;text-decoration:underline;
 }
 .layerPopup a{
@@ -72,8 +72,8 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 </head>
 <body>
 <div class="layerPopup" id="layer_popup" style="visibility: visible;">
-    <div class="layerBox">
-        <h4 class="title">Kakao Airline 긴급 공지사항</h4>
+    <div class="layerBox"> 
+		<h4 class="title"> <a  href="/notice/list"> Kakao Airline 긴급 공지사항</a></h4>
         <div class="cont">
             <p style="color:red">
 <img src="/img/alert.png" onerror="this.style.display='none'" width=100% height=auto usemap="#popup" alt="event page">

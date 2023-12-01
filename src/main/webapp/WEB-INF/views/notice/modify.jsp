@@ -135,7 +135,7 @@ a {
 						<div class="mb-1">
 							<span class="text-sm">제목</span> 
 							<input type="text"	name="boardsubject" value="${board.boardsubject}"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600" readonly>
+								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
 						</div>
 					
 						
@@ -154,7 +154,8 @@ a {
 
 
 						<div class="mt-3 text-right">
-						<select name="emergency">
+						<select id="select" name="emergency">
+							<option value="3">----</option>
 							<option value="0">일반</option>
 							<option value="1">긴급</option>
 							<option value="2">팝업공지</option>
@@ -213,8 +214,13 @@ a {
 				alert("제목을 입력해주세요.");
 				return false;
 			}
+			
+			if(document.frm.emergency.value.trim() == 3){
+				alert("일반, 긴급, 팝업공지를 선택해주세요.")
+				return false;
+			}
 			return true;
-		}
+		} 
 		
 		
 		

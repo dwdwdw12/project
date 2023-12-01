@@ -243,7 +243,7 @@ font: bold;
 				self.location = "/qna/register";
 			});
 			
-			
+			 
 			//검색버튼 이벤트 처리
 			var searchForm = $("#searchForm");
 			$("#searchForm button").on("click",function(e){

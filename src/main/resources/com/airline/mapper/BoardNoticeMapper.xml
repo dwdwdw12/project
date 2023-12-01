@@ -18,7 +18,7 @@
 				</if>	
 			</foreach>
 		</trim>
-	</sql> 
+	</sql>  
 
 <select id="getList" resultType="com.airline.vo.BoardNoticeVO"> 
 	select * from boardnotice
@@ -32,7 +32,6 @@
 	<![CDATA[
 	select count(*) from boardnotice
 	]]>
-	
 			<if test="type=='T'.toString()">
 				where boardsubject like concat ('%',#{keyword},'%')
 			</if>	
@@ -63,9 +62,9 @@
 					boardwriter like concat ('%',#{keyword},'%') and
 				</if>	
 		<![CDATA[
-		(emergency =1 or emergency =0)
+		(emergency =1 or emergency =0 or emergency=2)
      	order by emergency desc,boardnum desc 
-     	limit #{amount} offset #{newStart} 
+     	limit #{amount} offset #{newStart}  
      	]]>
 </select>
 
@@ -97,19 +96,19 @@
 
 <select id="noticePopup" resultType="com.airline.vo.BoardNoticeVO">
 	     	<![CDATA[
-     	select * from boardnotice 
+     	select * from boardnotice where
      	]]>
      			<if test="type=='T'.toString()">
-					where boardsubject like concat ('%',#{keyword},'%')
+					 boardsubject like concat ('%',#{keyword},'%') and
 				</if>	
 				<if test="type=='C'.toString()">
-					where boardcontent like concat ('%',#{keyword},'%')
+					 boardcontent like concat ('%',#{keyword},'%') and
 				</if>	
 				<if test="type=='W'.toString()">
-					where boardwriter like concat ('%',#{keyword},'%')
+					 boardwriter like concat ('%',#{keyword},'%') and
 				</if>	
 		<![CDATA[
-		where emergency=2
+		 emergency=2
      	order by boardnum desc
      	limit #{amount} offset #{newStart} 
      	]]>

@@ -32,6 +32,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/searchbar.css">
+	
+
 <title>게시판</title>
 <style>
 h2 {
@@ -143,15 +145,15 @@ font: bold;
 	</form>
 	
 	
-	<c:if test="${loginUser.userId eq 'admin'}">
+	<c:if test="${loginUser.admin ==1}">
 		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
 	</c:if>
-	<c:if test="${loginUser.userId eq 'admin'}">
+	<c:if test="${loginUser.admin ==1}">
 		<button data-oper="popupList" class="btn mr-2 right" id="popupList" type="submit">팝업공지</button>
 	</c:if>
-	
+	  
 	<table id="listTable">
-		<tr>
+		<tr> 
 			<th width=10%>글번호</th>
 			<th width=40%>제목</th>
 			<th width=20%>작성일자</th>
@@ -161,7 +163,7 @@ font: bold;
 
 		
 			<c:forEach var="item" items="${list}">
-				<c:if test="${item.emergency==1}">
+				<c:if test="${item.emergency==1 || item.emergency==2}">
 					<tr>
 						<td><span class="emergency">긴급</span></td>
 						<td><a class="move" href="/notice/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
@@ -306,7 +308,7 @@ font: bold;
 				$('#type option[value= '+ select +']').prop("selected", true);
 				}			
 			
-			
+
 		});
 	</script>
 	<%@ include file="../includes/footer.jsp"%>

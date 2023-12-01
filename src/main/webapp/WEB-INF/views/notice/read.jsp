@@ -153,7 +153,7 @@ a {
 							<button data-oper="list" class="btn btn-info mr-2" type="submit" >목록</button>
 							<br> <br>
 						<c:if test="${loginUser.userId eq 'admin'}">
-							<button data-oper="delete" type="submit" class="btn btn-danger mr-2">삭제</button>
+							<button data-oper="delete" type="submit" class="btn btn-danger mr-2" >삭제</button>
 						</c:if>
 					</form>
 				</div>
@@ -174,11 +174,11 @@ a {
 		$("button").on("click", function(e){	//클릭하면
 			e.preventDefault();	//이동을 중지 시킴
 			
-			var operation = $(this).data("oper");	//클릭 한 데이터를 탐색(등록,삭제,목록)
+			var operation = $(this).data("oper");	//클릭 한 데이터를 탐색(등록,삭제,목록) 
 			//console.log(operation);			//콘솔창에 클릭한 데이터 중 하나가 출력(안써도 됨)
 			
-			if(operation==="delete"){
-				formObj.attr("method", "post");
+		 if(operation==="delete"){
+	    		formObj.attr("method", "post");
 				formObj.attr("action", "/notice/delete?boardnum= + ${board.boardnum}");	//post방식
 			}
 			if(operation==="list"){
@@ -195,6 +195,7 @@ a {
 			}
 				formObj.submit();			//클릭 한 데이터를 담아서 전송
 		});
+		
 	});
 	 
 </script> 
