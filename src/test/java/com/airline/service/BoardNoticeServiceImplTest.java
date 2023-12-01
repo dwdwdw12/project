@@ -23,7 +23,7 @@ public class BoardNoticeServiceImplTest {
 	
 	@Test
 	public void testGetList() {
-		service.getList().forEach(list -> log.info(list));
+		service.getList().forEach(list -> log.info(list)); 
 	}
 	
 	@Test
@@ -51,7 +51,9 @@ public class BoardNoticeServiceImplTest {
 	
 	@Test
 	public void getTotalTest() {
-		service.getTotal();
+		Criteria cri = new Criteria();
+		cri.setPageNum(1);
+		service.getTotal(cri);
 	}
 	
 	@Test

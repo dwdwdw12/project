@@ -28,14 +28,14 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	}
 	
 	@Override
-	public int getTotal() {
-		return mapper.getTotal();
+	public int getTotal(Criteria cri) {
+		return mapper.getTotal(cri);
 	}  
  
 	@Override
 	public BoardNoticeVO getOne(int boardnum) {
 		return mapper.getOne(boardnum);
-	}
+	} 
 
 	@Override
 	public void insert(BoardNoticeVO vo) {

@@ -6,16 +6,20 @@ import com.airline.vo.BoardEventFileVO;
 
 public interface BoardEventFileMapper {
 	
-	List<BoardEventFileVO> searchFileByBoardNum(int boardNum);
+	public List<BoardEventFileVO> searchFileByBoardNum(int boardNum);
 	
-	int fileCount(int boardNum);
+	public int fileCount(int boardNum);
 	
-	int insertFile(BoardEventFileVO vo); 
+	public int insert(BoardEventFileVO vo); 
 	
-	int deleteFiles(int boardNum);
+	public void delete(String uuid);
 	
-	List<BoardEventFileVO> findRepImg();
-
-	int updateRepImg(String ori_file_name, int boardNum);
+	public int deleteAll(int boardNum);
+	
+	public BoardEventFileVO findRepImg(int boardNum);
+	
+	public List<BoardEventFileVO> findRepImgFiles();
+	
+	public List<BoardEventFileVO> getOldFiles();
 	
 }

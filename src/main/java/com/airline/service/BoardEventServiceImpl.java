@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.airline.mapper.BoardEventFileMapper;
 import com.airline.mapper.BoardEventMapper;
+import com.airline.vo.BoardEventFileVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.Criteria;
 
@@ -18,6 +20,8 @@ import lombok.extern.log4j.Log4j;
 public class BoardEventServiceImpl implements BoardEventService{
 
 	private final BoardEventMapper mapper;
+	
+	private final BoardEventFileMapper fileMapper;
 	
 	@Override
 	public List<BoardEventVO> getListwithPaging(Criteria criteria) {
@@ -33,28 +37,72 @@ public class BoardEventServiceImpl implements BoardEventService{
 		return mapper.get(boardNum);
 	}
 
+	@Transactional
 	@Override
-	public boolean insert(BoardEventVO board) {
+	public void insert(BoardEventVO board) {
 		log.info("insert service");
-		return mapper.insert(board)==1;
+		
+		mapper.insert(board);
+		
+		if(board.getAttachList()==null||board.getAttachList().size()<=0) {
+			return;
+		}
+		
+		board.getAttachList().forEach(attach->{
+			attach.setBoardNum(board.getBoardNum());
+			fileMapper.insert(attach);
+		});
+		
+		BoardEventFileVO vo = fileMapper.findRepImg(board.getBoardNum());
+		String repImg = vo.getFileName();
+		String filePath = "C:\\upload\\" + vo.getUploadPath() + "/" + vo.getUuid() + "_"+ vo.getFileName();
+		mapper.updateRepImg(repImg, filePath, board.getBoardNum());
 	}
 
+	@Transactional
 	@Override
 	public boolean delete(int boardNum) {
 		log.info("delete service");
+		
+		fileMapper.deleteAll(boardNum);
+		
 		return mapper.delete(boardNum)==1;
 	}
 
+	@Transactional
 	@Override
 	public boolean update(BoardEventVO board) {
 		log.info("update service");
-		return mapper.update(board)==1;
+		
+		fileMapper.deleteAll(board.getBoardNum());
+		
+		boolean result = mapper.update(board)==1;
+		
+		if(result&&board.getAttachList()!=null&&board.getAttachList().size()>0) {
+			board.getAttachList().forEach(attach->{
+				attach.setBoardNum(board.getBoardNum());
+				fileMapper.insert(attach);
+			});
+		}
+		
+		BoardEventFileVO vo = fileMapper.findRepImg(board.getBoardNum());
+		String repImg = vo.getFileName();
+		String filePath = "C:\\upload\\" + vo.getUploadPath() + "/" + vo.getUuid() + "_"+ vo.getFileName();
+		mapper.updateRepImg(repImg, filePath, board.getBoardNum());
+		
+		return result;
 	}
 
 	@Override
 	public int getTotalCount(Criteria cri) {
 		log.info("getTotalCount");
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<BoardEventFileVO> getFileList(int boardNum) {
+		log.info("get file list by boardNum" + boardNum);
+		return fileMapper.searchFileByBoardNum(boardNum);
 	}
 	
 }

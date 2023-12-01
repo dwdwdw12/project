@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
@@ -144,10 +144,10 @@ font: bold;
 	
 	
 	<c:if test="${loginUser.userId eq 'admin'}">
-		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
+		<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
 	</c:if>
 	<c:if test="${loginUser.userId eq 'admin'}">
-		<button data-oper="list" class="btn mr-2 right" id="list" type="submit">회원 공지사항</button>
+		<button data-oper="list" class="gradient right" id="list" type="submit">공지사항</button>
 	</c:if>
 	
 	<table id="listTable">
