@@ -21,4 +21,20 @@
 	and userReginumLast = #{userReginumLast}
 </select>
 
+<select id="getTerms" resultType="String">
+	select termsContents from terms where termsCode = #{termscode}
+</select>
+
+<insert id="insertMember">
+	insert into kakaouser(
+		userId, userNick, userNameK, userNameE, gender, 
+		pwd, mail, phone, postCode, address, userReginumFirst, userReginumLast)
+		
+		values(
+			#{userId}, #{userNick}, #{userNameK}, #{userNameE}, #{gender},
+			#{pwd}, #{mail}, #{phone}, #{postCode}, #{address}, 
+			#{userReginumFirst}, #{userReginumLast}
+	)
+</insert>
+
 </mapper>

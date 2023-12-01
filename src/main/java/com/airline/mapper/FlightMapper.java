@@ -71,4 +71,6 @@ public interface FlightMapper {
 	public KakaoUserVO getUserInfo(String userid);
 	
 	public FlightResVO getResFirst(String userid);
+
+	public int usePoint(String userid);
 }

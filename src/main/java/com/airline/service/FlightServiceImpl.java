@@ -162,6 +162,11 @@ public class FlightServiceImpl implements FlightService{
 	public FlightResVO getResFirst(String userid) {
 		return mapper.getResFirst(userid);
 	}
+
+	@Override
+	public int usePoint(String userid) {
+		return mapper.usePoint(userid);
+	}
 	//
 
 }

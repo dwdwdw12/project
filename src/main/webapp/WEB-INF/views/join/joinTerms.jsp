@@ -2,24 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../includes/header2.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-<!-- Google web font "Open Sans" -->
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<!-- Bootstrap style -->
-<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
-<link rel="stylesheet" href="css/templatemo-style.css">
-<title>Insert title here</title>
-</head>
+
 <body>
 	<div class="tm-page-wrap mx-auto">
 		<section class="tm-banner">
@@ -55,14 +38,14 @@
 						<label for="agree_hompageUse" class="fsz_23"> <span
 							class="col_brown2">[필수]</span> 카카오 클럽 일반 규정 및 홈페이지 이용 약관
 						</label> <br>
-						<%@ include file="../terms/1.jsp"%>
+						${terms1}
 
 						<br> <input type="checkbox" name="terms" value="selectall"
 							id="agree_personalCollection" onclick="return checkSelectAll()">
 						<label for="agree_personalCollection" class="fsz_23"> <span
 							class="col_brown2">[필수]</span> 개인정보 수집 및 이용안내
 						</label> <br>
-						<%@ include file="../terms/2.jsp"%>
+						${terms2}
 
 						<br> <br> <input type="checkbox" name="terms"
 							value="selectall" id="agree_personalTransferToAbroad"
@@ -70,7 +53,7 @@
 							for="agree_personalTransferToAbroad" class="fsz_23"> <span
 							class="col_brown2">[필수]</span> 개인정보 국외 이전 동의
 						</label> <br>
-						<%@ include file="../terms/3.jsp"%>
+						${terms3}
 						<br>
 
 

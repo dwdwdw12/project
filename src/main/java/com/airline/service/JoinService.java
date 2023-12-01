@@ -14,9 +14,11 @@ public interface JoinService {
 									int userReginumFirst,
 									int userReginumLast);
 	
-	String getAccessToken(String authorize_code) throws Throwable;
-	
+	public String getAccessToken(String authorize_code) throws Throwable;
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
+	public String getTerms(int termsCode);
+	public void registerMember(KakaoUserVO vo);
+	
 
 }
  

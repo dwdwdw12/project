@@ -13,14 +13,14 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<!-- Bootstrap style -->
+<!-- Bootstrap style --> 
 <link rel="stylesheet" type="text/css" href="/resources/css/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />  
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="/resources/css/templatemo-style.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script
+<link rel="stylesheet" href="/resources/css/templatemo-style.css"> 
+<link rel="stylesheet"  
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">    
+<script 
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 	
 <script
@@ -126,7 +126,12 @@ a {
 					<span class="mr-2"><i class="fa fa-rupee text-success"></i>작성자
 						: &nbsp;${board.boardwriter}</span>
 						<br>
+					<c:if test="${board.emergency==0 }">
 					글번호 : <c:out value="${board.boardnum }" />
+					</c:if>
+					<c:if test="${board.emergency==1 }">
+					<p style="color:red;">긴급</p>
+					</c:if>
 				</div>
 				<hr>
 				<div class="d-flex align-items-center mt-4 offers mb-1">
@@ -141,16 +146,20 @@ a {
 
 				<div class="mt-3" style="display: inline;">
 					<form method="get" role="form" action="/notice/register">
-						<input type="hidden"  name="pageNum" value="<c:out value="${page.pageNum}" />">
-	           			<input type="hidden"  name="amount" value="<c:out value="${page.amount}" />">
-	           			<input type="hidden"  name="boardnum" value="<c:out value="${board.boardnum}" />">
-							<button data-oper="register" class="btn btn-secondary mr-2" type="submit">글쓰기</button>
-							<button data-oper="modify" class="btn btn-dark mr-2" type="submit">수정</button>
-							<button data-oper="list" class="btn btn-info mr-2" type="submit" >목록</button>
+						<c:if test="${loginUser.admin == 1}">
+							<button data-oper="register" class="gradient" type="submit">글쓰기</button>
+							<button data-oper="modify" class="gradient" type="submit">수정</button>
+						</c:if>
+							<button data-oper="list" class="gradient" type="submit" >목록</button>
 							<br> <br>
-							<button data-oper="delete" type="submit" class="btn btn-danger mr-2">삭제</button>
+						<c:if test="${loginUser.admin ==1}">
+							<button data-oper="delete" type="submit" class="gradient" >삭제</button>
+						</c:if>
 					</form>
 				</div>
+	           			<input type="hidden"  name="boardnum" id="boardnum" value="<c:out value="${board.boardnum}" />">
+						<input type="hidden"  name="pageNum" value="<c:out value="${page.pageNum}" />">
+	           			<input type="hidden"  name="amount" value="<c:out value="${page.amount}" />">
 			</div>
 		</div>
 	</div>
@@ -165,19 +174,28 @@ a {
 		$("button").on("click", function(e){	//클릭하면
 			e.preventDefault();	//이동을 중지 시킴
 			
-			var operation = $(this).data("oper");	//클릭 한 데이터를 탐색(등록,삭제,목록)
+			var operation = $(this).data("oper");	//클릭 한 데이터를 탐색(등록,삭제,목록) 
 			//console.log(operation);			//콘솔창에 클릭한 데이터 중 하나가 출력(안써도 됨)
 			
-			if(operation==="delete"){
-				formObj.attr("method", "post");
+		 if(operation==="delete"){
+	    		formObj.attr("method", "post");
 				formObj.attr("action", "/notice/delete?boardnum= + ${board.boardnum}");	//post방식
 			}
 			if(operation==="list"){
 				self.location= "/notice/list?pageNum="+${cri.pageNum}+"&amount="+${cri.amount};	
 				return;
 			 }
+			if(operation==="register"){
+				formObj.submit();
+			}
+			
+			if(operation==="modify"){
+				self.location="/notice/modify?boardnum="+${board.boardnum};
+				return;
+			}
 				formObj.submit();			//클릭 한 데이터를 담아서 전송
 		});
+		
 	});
 	 
 </script> 

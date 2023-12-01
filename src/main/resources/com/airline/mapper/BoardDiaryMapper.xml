@@ -65,8 +65,8 @@
 	</select>
 
 	<insert id="insert">
-		insert into boardDiary(boardTitle, boardContent, boardWriter)
-		values(#{boardTitle}, #{boardContent}, #{boardWriter})
+		insert into boardDiary(boardTitle, boardContent, boardWriter, userId)
+		values(#{boardTitle}, #{boardContent}, #{boardWriter}, #{userId})
 	</insert>
 
 	<delete id="delete">

@@ -49,6 +49,14 @@
 									<tr>
 										<hr>
 										<br>
+										<th scope="row" style="text-align: left;"><label
+											for="userNameK">한글명</label></th>
+										<td colspan="3"><input type="text" id="userNameK"
+											placeholder="한글 명 입력 (예 : 홍길동)" maxlength="5"
+											oninput="handleOnInputKor(this)" name="userNameK"
+											class="form-control"></td>
+									</tr>
+									<tr>
 										<th scope="row" width="120px" style="text-align: left;"><label
 											for="userNameE">영문명</label></th>
 										<td colspan="3"><input type="text" id="userNameE"
@@ -56,15 +64,6 @@
 											style="text-transform: uppercase;"
 											oninput="handleOnInputEng(this)" class="form-control"
 											name="userNameE"></td>
-									</tr>
-									<tr>
-										<th scope="row" style="text-align: left;"><label
-											for="userNameK">한글명</label></th>
-										<td colspan="3"><input type="text" id="userNameK"
-											placeholder="한글 명 입력 (예 : 홍길동)" maxlength="5"
-											oninput="handleOnInputKor(this)" name="userNameK"
-											class="form-control"></td>
-
 									</tr>
 									<tr>
 										<th scope="row" style="text-align: left;">성별</th>
@@ -108,8 +107,8 @@
 							===========${agree} : model에 넣어준 값 넘어오는지 확인용================== <input
 								type="hidden" name="agree" value="${agree}"> <br>
 								
-							<button type="submit" class="btn btn-primary"
-								onclick="return joinInformCheck();">확인</button>
+							<button type="submit" id="checkMemberBtn" class="btn btn-primary"
+								>확인</button>
 						</form>
 
 
@@ -131,36 +130,32 @@
 	</div>
 </div>
 <script type="text/javascript">
-	function joinInformCheck() { //값이 비었는지 확인
+	$("#checkMemberBtn").on("click", function(e){ //값이 비었는지 확인
+		e.preventDefault();
+		
 		var regfirst = /^(?=.*[0-9]).{6,7}$/;
 		var reglast = /^(?=.*[0-9]).{7,8}$/;
 
-		if (document.frm.engName.value.length == 0) {
+		if (document.frm.userNameE.value.length == 0) {
 			alert("영문 명을 입력해주세요.");
 			return false;
 		}
-		if (document.frm.korName.value.length == 0) {
+		if (document.frm.userNameK.value.length == 0) {
 			alert("한글 명을 입력해주세요.");
 			return false;
 		}
-		if (document.frm.usernum_first.value.length == 0) {
+		if (document.frm.userReginumFirst.value.length == 0) {
 			alert("주민등록번호를 입력해주세요.");
 			return false;
 		}
-		if (document.frm.usernum_last.value.length == 0) {
+		if (document.frm.userReginumLast.value.length == 0) {
 			alert("주민등록번호를 입력해주세요.");
 			return false;
 		}
-
-		if (!regfirst.test(document.frm.usernum_first.value)) {
-			alert("주민등록번호를 다시 확인해주시기 바랍니다.")
-			return false;
-		}
-		if (!reglast.test(document.frm.usernum_last.value)) {
-			alert("주민등록번호를 다시 확인해주시기 바랍니다.")
-			return false;
-		}
-	}
+		
+		frm.submit();
+	
+	});
 
 	function handleOnInput(el, maxlength) {
 		if (el.value.length > maxlength) {
@@ -174,19 +169,7 @@
 		e.value = e.value.replace(/[^ㄱ-힣]/ig, '')
 	}
 
-	/* function pwdLengthCheck(){
-		var regfirst = /^(?=.*[0-9]).{6,7}$/;
-		var reglast = /^(?=.*[0-9]).{7,8}$/;
-			        if(!regfirst.test(document.frm.usernum_first.value)){
-			            alert("주민등록번호를 다시 확인해주시기 바랍니다.")
-			            usernum_first.focus();
-			            return false;
-			        } else if(!reglast.test(document.frm.usernum_last.value)){
-			            alert("주민등록번호를 다시 확인해주시기 바랍니다.")
-			            usernum_last.focus();
-			            return false;
-			        }
-		} */
+
 </script>
 </body>
 </html>

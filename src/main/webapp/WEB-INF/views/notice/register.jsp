@@ -8,9 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- 첫 번째 스타일 및 스크립트 섹션 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
@@ -19,33 +17,20 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- 여기에 필요한 다른 스크립트가 있다면 추가 -->
-
-<!-- 두 번째 스타일 및 스크립트 섹션 -->
 <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="/resources/css/templatemo-style.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/searchbar.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/resources/css/searchbar.css">
+ 
+<!-- Summernote 스타일 및 스크립트 --> 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-  <script type="text/javascript" src="/resources/js/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href="/resources/css/summernote-lite.css">
-  <script type="text/javascript" src="/resources/js/summernote-lite.js"></script>
-<title>Insert title here</title>
-<style type="text/css">
-  /* 여기에 필요한 스타일이 있다면 추가 */
-</style>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+<script type="text/javascript" src="/resources/js/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/css/summernote-lite.css">
+<script type="text/javascript" src="/resources/js/summernote-lite.js"></script>
 
 <title>게시판</title>
 <style>
@@ -136,8 +121,7 @@ a {
 <body>
 
 	<div class="py-4 px-2 w-3/5 m-auto">
-		<form action="/notice/register" method="post" name="frm" enctype="multipart/form-data">
-
+		<form action="/notice/register" method="post" name="frm" >
 
 			<div
 				class="max-w-full bg-white rounded-lg overflow-hidden md:max-w-full">
@@ -145,49 +129,44 @@ a {
 					<div class="w-full px-1 py-1">
 
 						<div class="mb-1">
-							<span class="text-sm">제목</span> <input type="text"
-								name="boardsubject"
+							<span class="text-sm">제목</span> 
+							<input type="text"	name="boardsubject"
 								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
 						</div>
+					
+						
 						<div class="mb-1">
-
-							<span>파일 업로드</span>
-
-				<!-- 			<div
-								class="relative border-dotted h-12 rounded-lg border-dashed border-2 border-yellow-400 bg-gray-100 flex justify-center items-center">
-								<div class="absolute">
-									<div class="flex flex-col items-center">
-										<i class="fa fa-folder-open fa-1x text-blue-600">파일을
-											드래그하시거나, 눌러서 파일 첨부를 해주세요.</i> <span
-											class="block text-gray-400 font-normal"> </span>
-									</div>
-								</div>
-								<input type="file" class="h-full w-full opacity-0"
-									name="fileurl">
-							</div> -->
-
-							<div class="mb-1">
-								<span class="text-sm">내용</span>
-							<!-- 	<textarea name="boardcontent"
-									class="h-56 py-1 px-6 w-full border-2 border-yellow-400 rounded focus:outline-none focus:border-blue-600 resize-none"></textarea> -->
-									<textarea class="summernote" name="editordata"></textarea>
-							</div>
-
-
+							<span class="text-sm">작성자</span> 
+							<input type="text"  value="${loginUser.userNick }"
+								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
+							<input type="hidden" name="boardwriter" value="${loginUser.userId }">
+						</div>
+						
+						<div class="mb-1">
+							<span class="text-sm">내용</span>
+								<textarea class="summernote" name="boardcontent"></textarea>
 						</div>
 
-						<div class="mt-3 text-right">
 
+
+						<div class="mt-3 text-right">
+						<select name="emergency">
+							<option value="3">----</option>
+							<option value="0">일반</option>
+							<option value="1">긴급</option>
+							<option value="2">팝업공지</option>
+						</select> 
+						
 							<input
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-green-700"
 								type="reset" value="다시 작성">
 							<button
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="listBtn" type="submit">목록</button>
 							<button
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit">등록</button>
-
+								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit"
+								onclick= "return boardnoticeCheck()">등록</button>
 						</div>
-
+ 
 
 					</div>
 				</div>
@@ -235,6 +214,11 @@ a {
 				alert("제목을 입력해주세요.");
 				return false;
 			}
+			
+			if(document.frm.emergency.value.trim() == 3){
+				alert("일반, 긴급, 팝업공지를 선택해주세요.")
+				return false;
+			}
 			return true;
 		}
 		
@@ -244,8 +228,6 @@ a {
 		
 		listForm.click(function(e){
 			e.preventDefault();
-			/* listForm.attr("method","get");
-			listForm.attr("action","/notice/list"); */
 			 self.location = "/notice/list"; 
 		});
 		
