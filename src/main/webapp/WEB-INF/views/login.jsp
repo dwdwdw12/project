@@ -33,6 +33,7 @@
 				<div class="tm-banner-header">
 					<h1 class="text-uppercase tm-banner-title">Login</h1>
 					<p class="mb-4">아이디 및 패스워드를 입력 해 주세요.</p>
+					${message }
 				</div>
 			</div>
 		<!-- 	<div class="row tm-banner-row tm-banner-row-header tm-about-text-wrap mx-auto text-center">	 -->

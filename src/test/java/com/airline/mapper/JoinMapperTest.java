@@ -32,13 +32,16 @@ public class JoinMapperTest {
 
 	@Test
 	public void checkMemberTest() {
-		String userNameE = "userchoi";
-		String userNameK = "최유저";
-		String gender="M";
-		int userReginumFirst = 881231;
-		int userReginumLast = 1111111;
+
+		KakaoUserVO vo = KakaoUserVO.builder()
+				.userNameE("userchoi")
+				.userNameK("최유저")
+				.gender("M")
+				.userReginumFirst(881231)
+				.userReginumLast(1111111)
+				.build();
 		
-		join.checkMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
+		join.checkMember(vo);
 	}
 	
 	@Test

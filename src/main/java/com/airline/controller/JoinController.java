@@ -134,35 +134,33 @@ public class JoinController {
 	public void checkMember(Model model) {
 		log.info("JoinController >> checkMember [get]");
 	}
+	
 
 	@PostMapping("/checkMember") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
-	public String checkMember(Model model, String userNameE, String userNameK, String gender, int userReginumFirst,
-			int userReginumLast) {
+	public String checkMember(Model model, KakaoUserVO vo) {
 		log.info("JoinController >> checkMember [post]");
-		log.info(userNameE+ userNameK+ gender+ userReginumFirst+ userReginumLast);
+		log.info(vo);
 		
-		String userYear = Integer.toString(userReginumFirst).substring(0, 2);
-		String userMonth = Integer.toString(userReginumFirst).substring(2, 4);
-		String userDate = Integer.toString(userReginumFirst).substring(4, 6);
+//		String userYear = Integer.toString(userReginumFirst).substring(0, 2);
+//		String userMonth = Integer.toString(userReginumFirst).substring(2, 4);
+//		String userDate = Integer.toString(userReginumFirst).substring(4, 6);
 		
-		model.addAttribute("userNameK",userNameK);
-		model.addAttribute("userNameE",userNameE);
-		model.addAttribute("gender",gender);
-		model.addAttribute("userReginumFirst", userReginumFirst);
-		model.addAttribute("userReginumLast", userReginumLast);
-		model.addAttribute("userYear",userYear);
-		model.addAttribute("userMonth",userMonth);
-		model.addAttribute("userDate",userDate);
-
-		KakaoUserVO vo = join.confirmMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
+		model.addAttribute("userInfo", vo);
+		join.confirmMember(vo);
 		log.info(vo);
 		if (vo == null) {
 			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!
 		} else {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
-			return "/login"; //uri가 http://localhost:8081/join/checkMember인채로 이동함.. attr을 하던지 해야할듯
+			return "/join/joinTerms"; //uri가 http://localhost:8081/join/checkMember인채로 이동함.. attr을 하던지 해야할듯
 		}
 
+	}
+	
+	@GetMapping("/memberInfo") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
+	public void memberInfoGet(Model model, KakaoUserVO vo) {
+		model.addAttribute("userInfo", vo);
+		log.info("JoinController >> ㅛ [get]");
 	}
 	
 	@PostMapping("/memberInfo")

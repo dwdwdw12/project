@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
 
 <div class="tm-page-wrap mx-auto">
@@ -37,7 +38,7 @@
 							<th scope="row" style="padding: 16px 8px 8px 8px; width: 150px"><label for="userNameK">한글명<span
 									class="icon_require" style="color: red; font-size: x-small;">
 										*</span></label></th>
-							<td style="padding: 8px">${userNameK}
+							<td style="padding: 8px">${userInfo.userNameK}
 								<p class="txt_error_Msg" id="error_koreanName"
 									style="display: none;"></p>
 							</td>
@@ -45,19 +46,29 @@
 						<tr>
 							<th scope="row" style="padding: 8px;">영문명<span class="icon_require"
 								style="color: red; font-size: x-small;"> *</span></th>
-							<td style="padding: 8px">${userNameE}</td>
+							<td style="padding: 8px">${userInfo.userNameE}</td>
 						</tr>
 
 						<tr>
 							<th scope="row" style="padding: 8px;">성별<span class="icon_require"
 								style="color: red; font-size: x-small;"> *</span></th>
-							<td style="padding: 8px">${gender}</td>
+							<td style="padding: 8px">${userInfo.gender}</td>
 						</tr>
 
 						<tr>
 							<th scope="row" style="padding: 8px;">생년월일<span class="icon_require"
 								style="color: red; font-size: x-small;"> *</span></th>
-							<td style="padding: 8px">19${userYear}년&nbsp;&nbsp;${userMonth}월&nbsp;&nbsp;${userDate}일</td>
+							<td style="padding: 8px">
+					<%-- 		<% 
+								int userReginumFirst = model.getAttribute("userInfo");
+								String userYear = Integer.toString(userReginumFirst).substring(0, 2);
+								String userMonth = Integer.toString(userReginumFirst).substring(2, 4);
+								String userDate = Integer.toString(userReginumFirst).substring(4, 6);
+								%>
+							19<%= userYear %>년&nbsp;&nbsp<%= userMonth %>월&nbsp;&nbsp;<%= userDate %>일
+ --%>
+ 								${userInfo.userreginumfirst}							
+							</td>
 						</tr>
 
 
@@ -240,11 +251,7 @@
 					<button type="submit" class="btn btn-primary"
 						onclick="return formCheck(); location.href='UserServlet?command=join_info'">확인</button>
 				</div>
-				<input type="hidden" name="${userNameK}" value="${userNameK}">
-				<input type="hidden" name="${userNameE}" value="${userNameE}">
-				<input type="hidden" name="${gender}" value="${gender}">
-				<input type="hidden" name="${userReginumFirst}" value="${userReginumFirst}">
-				<input type="hidden" name="${userReginumLast}" value="${userReginumLast}">
+				<input type="hidden" name="${userInfo}">
 				
 			</form>
 

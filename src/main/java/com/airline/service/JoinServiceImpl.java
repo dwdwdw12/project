@@ -38,9 +38,8 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public KakaoUserVO confirmMember(String userNameE, String userNameK, String gender, int userReginumFirst,
-			int userReginumLast) {
-		return join.checkMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
+	public KakaoUserVO confirmMember(KakaoUserVO vo) {
+		return join.checkMember(vo);
 	}
 
 	@Override //토큰 받아오기

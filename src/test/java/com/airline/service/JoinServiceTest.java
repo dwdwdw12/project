@@ -21,14 +21,16 @@ public class JoinServiceTest {
 
 	@Test
 	public void confirmMemberTest() {
-		String userNameE = "userchoi";
-		String userNameK = "최유저";
-		String gender="M";
-		int userReginumFirst = 881231;
-		int userReginumLast = 1111111;
+		KakaoUserVO vo = KakaoUserVO.builder()
+				.userNameE("userchoi")
+				.userNameK("최유저")
+				.gender("M")
+				.userReginumFirst(881231)
+				.userReginumLast(1111111)
+				.build();
 		
-		join.confirmMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
-	}
+		join.confirmMember(vo);
+		}
 	
 	@Test
 	public void kakaoLoginTest() throws Throwable {
