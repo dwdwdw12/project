@@ -13,14 +13,14 @@ public interface BoardNoticeService {
 
 	public List<BoardNoticeVO> getPageList(Criteria cri);
 	
-	public int getTotal();
+	public int getTotal(Criteria cri);
 	 
 	public BoardNoticeVO getOne(int boardnum);
 	
 	public void insert(BoardNoticeVO vo);
 	
 	public void modify(BoardNoticeVO vo);
-	
+	 
 	public void updateReadCount(int boardnum);
 	
 	public void delete(int boardnum);  

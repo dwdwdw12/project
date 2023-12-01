@@ -33,8 +33,8 @@ public class BoardQnaServiceImplTests {
 	}
 	
 	@Test
-	public void getTotal() {
-		service.getTotal();
+	public void getTotal(Criteria cri) {
+		service.getTotal(cri);
 	}
 
 	@Test

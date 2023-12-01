@@ -14,7 +14,7 @@
 <!-- Google web font "Open Sans" -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css" 
 	href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css"
@@ -146,10 +146,10 @@ font: bold;
 	
 	
 	<c:if test="${loginUser.admin ==1}">
-		<button data-oper="register" class="btn mr-2 right" id="register" type="submit">글쓰기</button>
+		<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
 	</c:if>
 	<c:if test="${loginUser.admin ==1}">
-		<button data-oper="popupList" class="btn mr-2 right" id="popupList" type="submit">팝업공지</button>
+		<button data-oper="popupList" class="gradient right" id="popupList" type="submit">팝업공지</button>
 	</c:if>
 	  
 	<table id="listTable">

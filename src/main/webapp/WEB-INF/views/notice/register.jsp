@@ -211,7 +211,7 @@ a {
 	
 		function boardnoticeCheck() {
 			if (document.frm.boardsubject.value.trim() == "") {
-				alert("제목을 입력해주세요.");
+				alert("제목을 입력해주세요."); 
 				return false;
 			}
 			
@@ -220,7 +220,7 @@ a {
 				return false;
 			}
 			return true;
-		}
+		} 
 		
 		
 		

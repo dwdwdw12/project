@@ -24,7 +24,7 @@ public class BoardQnaVO {
 //			modifydate datetime default current_timestamp,
 //			boardreref int,
 //			boardrelevel int,
-//			boardreseq int, 
+//			boardreseq int,  
 //			readcount int default 0  
 //			); 
 	

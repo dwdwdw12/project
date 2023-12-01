@@ -33,9 +33,7 @@
 </select>
 
 <select id="getTotal" resultType="int">
-	<![CDATA[
 	select count(*) from boardqna 
-	]]>
 			<if test="type=='T'.toString()">
 				where boardsubject like concat ('%',#{keyword},'%')
 			</if>	 
