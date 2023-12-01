@@ -30,8 +30,8 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 	@Override
 	public int getTotal() {
 		return mapper.getTotal();
-	}
-
+	}  
+ 
 	@Override
 	public BoardNoticeVO getOne(int boardnum) {
 		return mapper.getOne(boardnum);

@@ -80,11 +80,12 @@ public class BoardQnaController {
 		System.out.println(">>>>>>>>>>>>>>>>"+vo);
 		return "redirect:/qna/list";
 	}
-	
+	 
 	@PostMapping("/reply")
 	@PreAuthorize("isAuthenticated()")
 	public String reply(Model model,BoardQnaVO vo, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri ) {
 		service.replyQna(vo);
+		service.updateRepAdmin(boardnum);
 		return "redirect:/qna/list";
 	}
 	

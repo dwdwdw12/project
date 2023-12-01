@@ -21,9 +21,9 @@ public interface BoardNoticeMapper {
 	
 	public void modify(BoardNoticeVO vo);
 	
-	public void updateReadCount(int boardnum);
+	public void updateReadCount(int boardnum); 
 	  
-	public void delete(int boardnum);
+	public void delete(int boardnum); 
   
 	public List<KakaoUserVO> getUserList();
 	

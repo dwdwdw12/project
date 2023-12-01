@@ -18,7 +18,7 @@
 				</if>	
 			</foreach>
 		</trim>
-	</sql>  
+	</sql>   
 
 <select id="getList" resultType="com.airline.vo.BoardNoticeVO"> 
 	select * from boardnotice
@@ -74,7 +74,7 @@
 </insert>
 
 <update id="modify">
-	update boardnotice set boardcontent=#{boardcontent}, modifydate=now(), emergency=#{emergency}
+	update boardnotice set boardsubject=#{boardsubject} ,boardcontent=#{boardcontent}, modifydate=now(), emergency=#{emergency}
 	where boardnum=#{boardnum} 
 </update>
 

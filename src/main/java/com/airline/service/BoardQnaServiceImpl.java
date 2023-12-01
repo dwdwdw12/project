@@ -65,4 +65,9 @@ public class BoardQnaServiceImpl implements BoardQnaService{
 		return mapper.selectBoardreref(boardnum);
 	}
 
+	@Override
+	public void updateRepAdmin(int boardreref) {
+		mapper.updateRepAdmin(boardreref);
+	} 
+
 }

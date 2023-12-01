@@ -24,11 +24,11 @@ public class BoardQnaVO {
 //			modifydate datetime default current_timestamp,
 //			boardreref int,
 //			boardrelevel int,
-//			boardreseq int,
+//			boardreseq int, 
 //			readcount int default 0  
 //			); 
 	
-	private int boardnum, boardreref, boardrelevel, boardreseq, readcount;
+	private int boardnum, boardreref, boardrelevel, boardreseq, readcount, repadmin;
 	private String boardsubject, boardcontent, boardwriter, regidate, modifydate;
 	
 }

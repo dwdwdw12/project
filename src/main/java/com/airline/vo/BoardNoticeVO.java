@@ -24,7 +24,7 @@ public class BoardNoticeVO {
 //	readcount int default 0 
 	  
 	private String boardsubject; 
-	private String boardcontent;
+	private String boardcontent;  
 	private String boardwriter; 
 	private String regidate;
 	private String modifydate;
