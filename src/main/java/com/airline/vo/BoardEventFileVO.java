@@ -7,12 +7,13 @@ import lombok.ToString;
 /*create table boardEventFile(
     fileNum int auto_increment primary key,
     boardNum int,
-    oriFileName varchar(2000), 
-    savedFileName varchar(2000),
-    extension varchar(10),
-    repImgYn varchar(1),
-    fileSize int,
+    uuid varchar(2000),
+    uploadPath varchar(2000),
+    fileName varchar(2000),
+    fileType varchar(1) DEFAULT 'I',
     fileOrder varchar(50) DEFAULT 'uploadFile01',
+	repImgYn varchar(1) default 'N',
+    fileSize int,
     constraint fk_Evnet_file_boardNum foreign key(boardNum) references boardEvent(boardNum) on delete cascade
 );*/
 
@@ -20,10 +21,11 @@ import lombok.ToString;
 public class BoardEventFileVO {
 	private int fileNum;
 	private int boardNum;
-	private String oriFileName;
-	private String savedFileName;
-	private String extension;
+	private String uuid;
+	private String uploadPath;
+	private String fileName;
+	private String fileType;
+	private String fileOrder;
 	private String repImgYn;
 	private int fileSize;
-	private String fileOrder;
 }

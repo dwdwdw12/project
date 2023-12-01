@@ -12,22 +12,30 @@
 		select count(*) from boardEventFile where boardNum=#{boardNum}
 	</select>
 
-	<insert id="insertFile">
-		insert into boardEventFile(boardNum, oriFileName, savedFileName, extension, repImgYn, fileSize, fileOrder) 
-		values(#{boardNum}, #{oriFileName}, #{savedFileName}, #{extension}, #{repImgYn}, #{fileSize}, #{fileOrder})
+	<insert id="insert">
+		insert into boardEventFile(boardNum, uuid, uploadpath, filename, filetype, fileOrder, repImgYn, fileSize) 
+		values(#{boardNum}, #{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{fileOrder}, #{repImgYn}, #{fileSize})
 	</insert>
 	
-	<delete id="deleteFiles">
+	<delete id="delete">
+		delete from boardEventFile where uuid=#{uuid}
+	</delete>
+	
+	<delete id="deleteAll">
 		delete from boardEventFile where boardNum=#{boardNum}
 	</delete>
 	
 	<select id="findRepImg" resultType="com.airline.vo.BoardEventFileVO">
+		select * from boardEventFile where repImgYn='Y' and boardNum = #{boardNum}
+	</select>
+	
+	<select id="findRepImgFiles" resultType="com.airline.vo.BoardEventFileVO">
 		select * from boardEventFile where repImgYn='Y'
 	</select>
 	
-	<update id="updateRepImg">
-		update boardEvent set repImg = #{repImg} where boardNum = #{boardNum}
-	</update>
+	<select id="getOldFiles" resultType="com.airline.vo.BoardEventFileVO">
+		select * from boardEventFile where uploadpath = to_char(sysdate -1, 'yyyy\mm\dd')
+	</select>
 	
 	
 </mapper>

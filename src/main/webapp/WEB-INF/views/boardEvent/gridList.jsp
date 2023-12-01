@@ -80,7 +80,7 @@
 	<br>
 		<ul class="thumbTypeGrid">
 			<c:forEach var="board" items="${EventList}">			
-				<div class="img">
+				<%-- <div class="img">
 					<a href="/boardEvent/view?boardNum=${board.boardNum}">
 						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
 						<img src="../resources/upload/${board.repImg}" width="200" height="300">	<br>
@@ -88,7 +88,20 @@
 					<p style="width: 200px"><a href="/boardEvent/view?boardNum=${board.boardNum}">
 					${board.boardTitle}</a><br>
 					${board.startDate} ~ <br>&nbsp;&nbsp;&nbsp;${board.endDate}</p>
+				</div> --%>
+				<c:if test="${!empty board.filePath}">
+					<div class="img">
+					<a href="/boardEvent/view?boardNum=${board.boardNum}">
+						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
+							
+						<img src=${board.filePath} width="200" height="300">	<br>
+						<img src="C:/upload/2023/12/01/42e07b8e-9066-4939-8814-2c380fafc523_event07.jpeg" width="200" height="300">	<br>
+					</a>
+					<p style="width: 200px"><a href="/boardEvent/view?boardNum=${board.boardNum}">
+					${board.boardTitle}</a><br>
+					${board.startDate} ~ <br>&nbsp;&nbsp;&nbsp;${board.endDate}</p>
 				</div>
+				</c:if>
 			</c:forEach>
 		</ul>
 	</div>
@@ -172,6 +185,47 @@
 	</div>
 	<br><br>
 	</div>
+	
+<script>
+$(document).ready(function(){
+	(function(){
+		var boardNum = '<c:out value="${board.boardNum}"/>';
+		$.getJSON("/boardEvent/getAttachList", {boardNum : boardNum}, function(arr) {
+			console.log(arr);
+			
+			var str = "";
+			
+			$(arr).each(function(i, attach) {
+				// image type
+				if (attach.fileType) {
+					//var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+					var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+					
+					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+					str += "<div>";
+					str += "	<img src='/display?fileName=" + fileCallPath + "' style='max-width: 100%; height: auto;'>";
+					str += "</div>";
+					str += "</li>";
+					
+				} else {
+					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+					str += "	<div>";
+					str += "		<span> " + attach.fileName + "</span><br/>";
+					str += "		<img src='..resources/upload/noimage.png'></a>";
+					str += "	</div>";
+					str += "</li>";
+				}
+				
+			});
+			
+			$(".uploadResult ul").html(str);
+			
+		});
+		
+	})();//end function
+	
+});
+</script>	
 	
 	<%@ include file="../includes/footer.jsp"%>
 </body>

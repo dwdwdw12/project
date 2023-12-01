@@ -29,6 +29,7 @@ public class BoardEventVO {
 	private String modifyDate;
 	private int readCount;
 	private String repImg;
+	private String filePath;
 	
 	private List<BoardEventFileVO> attachList;
 }

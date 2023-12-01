@@ -2,6 +2,8 @@ package com.airline.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.Criteria;
 
@@ -22,5 +24,7 @@ public interface BoardEventMapper {
 	public int getTotalCount(Criteria cri);
 
 	public int updateReadCount(int boardNum);
+	
+	int updateRepImg(@Param("repImg") String repImg, @Param("filePath") String filePath, @Param("boardNum") int boardNum);
 	
 }
