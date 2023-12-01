@@ -28,6 +28,12 @@ public class MailSendServiceImpl implements MailSendService{
 		mailSendMapper.updateMailKey(params);
 	}
 
+	@Override
+	public void resetMailKey(String email) throws Exception {
+		mailSendMapper.resetMailkey(email);
+	}
+
+
 	
 
 
