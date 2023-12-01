@@ -5,7 +5,7 @@
 <%@ include file="../includes/header2.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>   
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -131,6 +131,9 @@ a {
 					</c:if>
 					<c:if test="${board.emergency==1 }">
 					<p style="color:red;">긴급</p>
+					</c:if>
+					<c:if test="${board.emergency==2 }">
+					<p style="color:green;">팝업</p>
 					</c:if>
 				</div>
 				<hr>

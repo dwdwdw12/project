@@ -31,8 +31,8 @@ public class BoardQnaController {
 	@GetMapping("/list")
 	public void getList(Model model, Criteria cri) {
 		model.addAttribute("list", service.getPageList(cri));
-		model.addAttribute("page", new PageDTO(cri, service.getTotal()));
-	}
+		model.addAttribute("page", new PageDTO(cri, service.getTotal(cri)));
+	} 
 	  
 	
 	@GetMapping("/read")

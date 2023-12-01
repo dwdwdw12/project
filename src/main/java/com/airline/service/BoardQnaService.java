@@ -11,7 +11,7 @@ public interface BoardQnaService {
 	
 	public List<BoardQnaVO> getPageList(Criteria cri);
 	
-	public int getTotal();
+	public int getTotal(Criteria cri);
 	
 	public BoardQnaVO readOne(int boardnum); 
 	
@@ -21,7 +21,7 @@ public interface BoardQnaService {
 	
 	public void updateReadCount(int boardnum);
   
-	public void registerQna(BoardQnaVO vo);
+	public void registerQna(BoardQnaVO vo); 
 	
 	public void replyQna(BoardQnaVO vo);
 	 

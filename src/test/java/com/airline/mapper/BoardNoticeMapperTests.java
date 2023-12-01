@@ -48,11 +48,15 @@ public class BoardNoticeMapperTests {
 	
 	@Test
 	public void testgetTotal() {
-		mapper.getTotal();
+		Criteria cri = new Criteria();
+		cri.setType("T");
+		cri.setKeyword("우아아");
+		mapper.getTotal(cri);
+		
 	}
 	
 	@Test 
-	public void getOne() {
+	public void getOne() { 
 		mapper.getOne(5);
 	}
 	

@@ -46,8 +46,8 @@ public class BoardQnaServiceImpl implements BoardQnaService{
 	}
 
 	@Override
-	public int getTotal() {
-		return mapper.getTotal();
+	public int getTotal(Criteria cri) {
+		return mapper.getTotal(cri);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BoardQnaServiceImpl implements BoardQnaService{
 	}
 
 	@Override
-	public void replyQna(BoardQnaVO vo) {
+	public void replyQna(BoardQnaVO vo) { 
 		mapper.replyQna(vo);
 	}
 

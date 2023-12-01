@@ -11,13 +11,13 @@ public interface BoardQnaMapper {
 	
 	public List<BoardQnaVO> getPageList(Criteria cri);
 	
-	public int getTotal();
+	public int getTotal(Criteria cri);
 	
 	public BoardQnaVO readOne(int boardnum);
 	
 	public void deleteQna(int boardnum);
 	
-	public void updateQna(BoardQnaVO vo);
+	public void updateQna(BoardQnaVO vo); 
 	
 	public void updateReadCount(int boardnum);
 

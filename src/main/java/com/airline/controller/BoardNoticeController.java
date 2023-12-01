@@ -33,7 +33,7 @@ public class BoardNoticeController {
 	@GetMapping("/list")
 	public void getList(Model model, Criteria cri) {
 		model.addAttribute("list", service.getPageList(cri));
-		model.addAttribute("page", new PageDTO(cri, service.getTotal()));
+		model.addAttribute("page", new PageDTO(cri, service.getTotal(cri)));
 	}
 	 
 	@GetMapping("/read")
@@ -43,7 +43,7 @@ public class BoardNoticeController {
 		service.updateReadCount(boardnum);
 	}
 	
-	
+	 
 	@PostMapping("/delete")
 	@PreAuthorize("isAuthenticated()")
 	public String delete(@Param("boardnum") int boardnum, RedirectAttributes rttr,Model model ) {
