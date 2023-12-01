@@ -61,7 +61,7 @@
 
 	<select id="getPoint3" resultType="com.airline.vo.UserPayVO">
 	<![CDATA[
-		select r.mileage,r.getDate from(select row_number() over(order by pno desc) rownum, p.* from userpay p where userid=#{userid})r where rownum<=3; 
+		select r.mileage,r.getDate from(select row_number() over(order by pno desc) rownum, p.* from userpay p where userid=#{userid})r where rownum<=3 
 	]]>  
 	</select>
 	
@@ -71,19 +71,19 @@
 	
 	<select id="getKakao3" resultType="com.airline.vo.PointVO">
 	<![CDATA[
-		select * from(select row_number() over(order by buyDate desc) rownum, p.* from point p where userid=#{userid})r where rownum<=3; 
+		select * from(select row_number() over(order by buyDate desc) rownum, p.* from point p where userid=#{userid})r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getDiary" resultType="com.airline.vo.BoardDiaryVO">
 	<![CDATA[
-		select * from(select row_number() over(order by regidate desc) rownum, p.* from boarddiary p where userid=#{userid})r where rownum<=3; 
+		select * from(select row_number() over(order by regidate desc) rownum, p.* from boarddiary p where userid=#{userid})r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getUserInfoAll" resultType="com.airline.vo.KakaoUserVO">
 	<![CDATA[	
-		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5; 
+		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5 
 	]]>
 	</select>
 	
@@ -92,30 +92,30 @@
 	</select> -->
 	
 	<select id="getSale" resultType="com.airline.vo.UserPayVO">
-		select *, sum(price)as sum from userpay group by substr(getDate,1,10);
+		select *, sum(price)as sum from userpay group by substr(getDate,1,10)
 	</select>
 	
 	<select id="reqCancel" resultType="com.airline.vo.CancelVO">
 	<![CDATA[
-		select * from(select row_number() over() rownum, p.* from cancel p )r where rownum<=3; 
+		select * from(select row_number() over() rownum, p.* from cancel p )r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getFlightres" resultType="com.airline.vo.FlightResVO">
 	<![CDATA[
-	select * from(select row_number() over(order by purchaseTime desc) rownum, p.* from flightreservation p )r where rownum<=3; 
+	select * from(select row_number() over(order by purchaseTime desc) rownum, p.* from flightreservation p )r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getNotice" resultType="com.airline.vo.BoardNoticeVO">
 	<![CDATA[
-	select * from(select row_number() over(order by regidate desc) rownum, p.* from boardnotice p )r where rownum<=3; 
+	select * from(select row_number() over(order by regidate desc) rownum, p.* from boardnotice p )r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getEvent" resultType="com.airline.vo.BoardEventVO">
 	<![CDATA[
-	    select * from(select row_number() over(order by startDate desc, endDate desc) rownum, p.* from boardevent p )r where rownum<=3; 
+	    select * from(select row_number() over(order by startDate desc, endDate desc) rownum, p.* from boardevent p )r where rownum<=3 
 	]]>
 	</select>
 	
@@ -145,7 +145,7 @@
 	
 	<select id="getUserRes" resultType="com.airline.vo.FlightResVO">
 	<![CDATA[
-		select * from flightreservation where userid=#{userid} order by purchaseTime desc limit #{cri.pageNum},#{cri.amount};
+		select * from flightreservation where userid=#{userid} order by purchaseTime desc limit #{cri.pageNum},#{cri.amount}
 	 ]]> 
 	</select>
 	
