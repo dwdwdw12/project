@@ -136,10 +136,9 @@ a {
 
 						<div class="mb-1">
 							<span class="text-sm">제목</span> 
-							<input type="text"	name="boardsubject" value="ㄴRe : ${board.boardsubject}"
+							<input type="text"	name="boardsubject" value="&nbsp;&nbsp;&nbsp; Re : ${board.boardsubject}"
 								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600" readonly>
 						</div>
-					
 						
 						<div class="mb-1">
 							<span class="text-sm">작성자</span> 
@@ -165,7 +164,7 @@ a {
 
 
 					</div>
-				</div>
+				</div> 
 			</div>
 		</form>
 	</div>

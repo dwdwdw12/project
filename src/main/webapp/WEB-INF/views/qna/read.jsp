@@ -16,7 +16,7 @@
 <!-- Bootstrap style -->
 <link rel="stylesheet" type="text/css" href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" /> 
+<link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" />  
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -145,10 +145,10 @@ a {
 							<button data-oper="modify" class="gradient" type="submit">수정</button>
 						</c:if>
 							<button data-oper="list" class="gradient" type="submit" >목록</button>
-						<c:if test="${loginUser.userNick eq '관리자' || loginUser.userNick eq board.boardwriter || auth.boardwriter eq loginUser.userNick}">
+						<c:if test="${loginUser.admin==1 || loginUser.userNick eq board.boardwriter || auth.boardwriter eq loginUser.userNick}">
 							<button data-oper="reply" type="submit" class="gradient">답변</button>
 						</c:if>
-						<c:if test="${loginUser.userNick eq '관리자' || loginUser.userNick eq board.boardwriter || auth.boardwriter eq loginUser.userNick}">
+						<c:if test="${loginUser.admin==1 || loginUser.userNick eq board.boardwriter}">
 							<button data-oper="delete" type="submit" class="gradient">삭제</button>
 						</c:if>
 					</form>

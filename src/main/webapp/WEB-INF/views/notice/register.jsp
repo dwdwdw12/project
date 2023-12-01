@@ -151,10 +151,11 @@ a {
 
 						<div class="mt-3 text-right">
 						<select name="emergency">
+							<option value="3">----</option>
 							<option value="0">일반</option>
 							<option value="1">긴급</option>
 							<option value="2">팝업공지</option>
-						</select>
+						</select> 
 						
 							<input
 								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-green-700"
@@ -211,6 +212,11 @@ a {
 		function boardnoticeCheck() {
 			if (document.frm.boardsubject.value.trim() == "") {
 				alert("제목을 입력해주세요.");
+				return false;
+			}
+			
+			if(document.frm.emergency.value.trim() == 3){
+				alert("일반, 긴급, 팝업공지를 선택해주세요.")
 				return false;
 			}
 			return true;
