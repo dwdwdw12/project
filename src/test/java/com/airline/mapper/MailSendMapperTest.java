@@ -56,5 +56,11 @@ public class MailSendMapperTest {
 		
 		log.info("updateMailKeytest end");
 	}
+	
+	@Test
+	public void resetMailKeyTest() throws Exception{
+		String email = "user01@naver.com";
+		mailMapper.resetMailkey(email);
+	}
 
 }

@@ -3,12 +3,14 @@ package com.airline.vo;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class KakaoUserVO {
 	private String userId;
 	private String userNick;
@@ -18,7 +20,7 @@ public class KakaoUserVO {
 	private String gender;
 	private String pwd;
 	private String mail ;
-	private int phone;
+	private String phone; //int에서 -> char(13)으로 변경함
 	private int postCode;
 	private String address;
 	private int userReginumFirst;
