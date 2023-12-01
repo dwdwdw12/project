@@ -139,8 +139,7 @@ span:before {
 							>></button>
 					</div>
 				</div>
-			</div>
-
+    </div>
 		</div>
 	</section>
 
@@ -153,62 +152,38 @@ span:before {
 				<div class="col">
 					<div class="p-3 border bg-light">
 						<p id="result">
-						<h2 style="text-align: center;">매출현황</h2>
+						<h2 style="text-align: center;">항공권 취소요청</h2>
 						</p>
 						<p class="line-chart"></p>
-						<%-- 		<table class="table table-hover">
+						<table class="table table-hover">
 			      		   <thead>
 						      <tr>
-						        <th>일시</th>
-						        <th>적립/사용 카카오페이</th>
+						        <th>예약번호</th>
+						        <th>요청일자</th>
 						      </tr>
 						    </thead>
-						    <c:forEach items="${kvo3}" var="kvo">
+						    <c:forEach items="${cvo}" var="cvo">
 						    <tbody>
 						      <tr>
-						        <td><fmt:formatDate value="${kvo.buyDate}"
+						      	<td>${cvo.resno}</td>
+						        <td><fmt:formatDate value="${cvo.requestTime}"
 														pattern="yyyy-MM-dd HH:mm" /></td>
-						        <td>${kvo.amount}</td>
 						      </tr>
 						     </tbody>
 						      </c:forEach>	      		
-			      		</table> --%>
+			      		</table> 
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">항공권 취소 처리
 							>></button>
 					</div>
 				</div>
 				<div class="col">
 					<div class="p-3 border bg-light">
-						<p id="chart" value="${getPvo}">
-						<%-- <c:out value="${getPvo}"><input type="hidden" class="data" value="${getPvo}"/></c:out> --%>
- 						<c:forEach items="${getPvo}" var="data" varStatus="loop">
+ 						<c:forEach items="${pvo}" var="data" varStatus="loop">
 							<input type="hidden" id="data_${loop.index}" class="data" value='<c:out value="${json}"/>'/>
 						</c:forEach> </p>
 						<h2 style="text-align: center;">매출현황</h2>
-						<canvas id="sales_chart" width="800" height="400"></canvas>
-						
-						<p class="chart2"></p>
-						<%-- 					<table class="table table-hover">
-			      		   <thead>
-						      <tr>
-						        <th>일시</th>
-						        <th>적립/사용 카카오페이</th>
-						      </tr>
-						    </thead>
-						    <c:forEach items="${kvo3}" var="kvo">
-						    <tbody>
-						      <tr>
-						        <td><fmt:formatDate value="${kvo.buyDate}"
-														pattern="yyyy-MM-dd HH:mm" /></td>
-						        <td>${kvo.amount}</td>
-						      </tr>
-						     </tbody>
-						      </c:forEach>	 --%>
-						</table>
-						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회
-							>></button>
+						<canvas id="sales_chart" width="400" height="180"></canvas>
 					</div>
 				</div>
 			</div>
@@ -223,27 +198,47 @@ span:before {
 				<div class="col">
 					<div class="p-3 border bg-light">
 						<p>
-						<h3 style="text-align: center;">항공권 예약/구매 현황</h3>
+						<h3 style="text-align: center;">전체 항공권 예약/구매 현황</h3>
 						</p>
-						<%-- 			    	 	<table class="table table-hover">
+						<table class="table table-hover">
 					    <thead>
-					    	<th>시간</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
+					    	<th>아이디</th>
+					    	<th>출발지</th>
+					    	<th>도착지</th>
+					    	<th>좌석등급</th>
+					    	<th>구매일</th>
+					    	<th>구매확정여부</th>
+					    	<th>취소여부</th>
 					    </thead>
-					    <c:forEach items="${pvo3}" var="list">
+					    <c:forEach items="${fvo}" var="fvo">
 					    <tbody>
 					      <tr>
-					        <td><fmt:formatDate value="${list.getDate}"
+					      	<td>${fvo.userid}</td>
+					      	<td>${fvo.departure}</td>
+					      	<td>${fvo.arrival}</td>
+					        <td>${fvo.seatid}</td>
+					        <td><fmt:formatDate value="${fvo.purchasetime}"
 												pattern="yyyy-MM-dd HH:mm" /></td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
+					        <c:choose>
+					        	<c:when test="${fvo.ispaid}==0">
+					        		<td>true</td>
+					        	</c:when>
+					        	<c:otherwise>
+					        		<td>false</td>
+					        	</c:otherwise>
+					        </c:choose>
+					        <c:choose>
+					        	<c:when test="${fvo.isCancel}==0">
+					        		<td>false</td>
+					        	</c:when>
+					        	<c:otherwise>
+					        		<td>true</td>
+					        	</c:otherwise>
+					        </c:choose>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		
-	      			</table> --%>
+	      			</table>
 						<button type="button"
 							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
 							>></button>
@@ -260,27 +255,26 @@ span:before {
 				<div class="col">
 					<div class="p-3 border bg-light">
 						<p>
-						<h3 style="text-align: center;">공지사항 작성 현황</h3>
+						<h3 style="text-align: center;">공지사항 작성 조회</h3>
 						</p>
-						<%-- 			    	 	<table class="table table-hover">
-					    <thead>
-					    	<th>시간</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    </thead>
-					    <c:forEach items="${pvo3}" var="list">
-					    <tbody>
-					      <tr>
-					        <td><fmt:formatDate value="${list.getDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					      </tr>
-					     </tbody>
-					      </c:forEach>	      		
-	      			</table> --%>
+						<table class="table table-hover">
+						    <thead>
+						    	<th>번호</th>
+						    	<th>제목</th>
+						    	<th>작성일</th>
+						    </thead>
+						    <c:forEach items="${nvo}" var="nvo">
+						    <tbody>
+						      <tr>
+						        <td>${nvo.boardnum}</td>
+						        <td>${nvo.boardsubject}</td>
+						        <td>${nvo.regidate}</td>
+						         <%-- <td><fmt:formatDate value="${nvo.regidate}"
+													pattern="yyyy-MM-dd HH:mm" /></td> --%>
+						      </tr>
+						     </tbody>
+						      </c:forEach>	      		
+		      			</table>
 						<button type="button"
 							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
 							>></button>
@@ -290,24 +284,27 @@ span:before {
 				<div class="col">
 					<div class="p-3 border bg-light">
 						<p>
-						<h3 style="text-align: center;">이벤트 게시판 작성 현황</h3>
+						<h3 style="text-align: center;">이벤트 게시판 작성 조회</h3>
 						</p>
-						<%-- 			    	 	<table class="table table-hover">
+						<table class="table table-hover">
 					    <thead>
+					    	<th>번호</th>
 					    	<th>제목</th>
-					    	<th>내용</th>
-					    	<th>작성일자</th>
+					    	<th>시작일</th>
+					    	<th>종료일</th>
 					    </thead>
-					    <c:forEach items="${dvo}" var="dvo">
+					    <c:forEach items="${evo}" var="evo">
 					    <tbody>
 					      <tr>
-					        <td>${dvo.boardTitle}</td>
-					        <td>${dvo.boardContent}</td>
-  					        <td><fmt:parseDate var = "datePase" value="${dvo.regiDate}" pattern="yyyy-MM-dd HH:mm"/><fmt:formatDate value="${datePase}" pattern="yyyy-MM-dd HH:mm" /></td>
+					        <td>${evo.boardNum}</td>
+					        <td>${evo.boardTitle}</td>
+					        <td>${evo.startDate}</td>
+					        <td>${evo.endDate}</td>
+  					       <%--  <td><fmt:parseDate var = "datePase" value="${evo.regiDate}" pattern="yyyy-MM-dd HH:mm"/><fmt:formatDate value="${datePase}" pattern="yyyy-MM-dd HH:mm" /></td> --%>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		
-	      			</table> --%>
+	      				</table> 
 						<button type="button"
 							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
 							>></button>
@@ -372,11 +369,13 @@ $(document).ready(function() {
 
 	 	console.log("start");
 		var data = $(".data").val(); // JSTL을 사용하여 데이터를 가져옴
-		console.log(data);
+		//var data1 = $("#data_${loop.index}").val();
+		console.log("data : "+data);
+		//console.log("data1 : "+data1);
 		var dataList = JSON.parse(data);
         //dataList.push(JSON.parse(jsonData_${loop.index}));			
 
-	    var labels = dataList.map(item => new Date(item.buyDate));
+	    var labels = dataList.map(item => new Date(item.getDate).toDateString());
 	    var values = dataList.map(item => item.sum);
 	    console.log(values)
 	    var ctx = document.getElementById('sales_chart').getContext('2d');
@@ -385,10 +384,10 @@ $(document).ready(function() {
 	        data: {
 	            labels: labels,
 	            datasets: [{
-	                label: "매출",//'Your Data',
+	                label: "매출(원)",//'Your Data',
 	                data: values,
-	                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-	                borderColor: 'rgba(75, 192, 192, 1)',
+	                backgroundColor: 'rgba(255, 193, 7, 0.2)',
+	                borderColor: 'rgba(255, 193, 7, 1)',
 	                borderWidth: 1
 	            }]
 	        },
