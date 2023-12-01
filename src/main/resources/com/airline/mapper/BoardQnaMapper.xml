@@ -71,6 +71,10 @@
 
 
 <insert id="replyQna" parameterType="com.airline.vo.BoardQnaVO">
+     <selectKey keyProperty="repadmin" order="BEFORE" resultType="int">
+       <![CDATA[ select repadmin+1 from boardqna where boardreref = #{boardreref} and boardrelevel=0]]>
+    </selectKey>
+   
     <![CDATA[
     INSERT INTO boardqna (
         boardsubject, boardcontent, boardwriter,
@@ -84,6 +88,15 @@
     )
     ]]>
 </insert>
+
+<update id="updateRepAdmin">
+  <![CDATA[
+    UPDATE boardqna AS b1
+    JOIN (SELECT boardreref FROM boardqna WHERE boardnum = #{boardnum}) AS b2
+    SET b1.repadmin = b1.repadmin + 1
+    WHERE b1.boardreref = b2.boardreref AND b1.boardrelevel = 0 
+  ]]> 
+</update>
 
 
 <select id="selectBoardreref" resultType="com.airline.vo.BoardQnaVO">

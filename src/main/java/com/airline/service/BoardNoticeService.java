@@ -23,8 +23,8 @@ public interface BoardNoticeService {
 	
 	public void updateReadCount(int boardnum);
 	
-	public void delete(int boardnum);
-
+	public void delete(int boardnum);  
+ 
 	public List<KakaoUserVO> getUserList();
 	
 	public AuthorityVO getAuthority(String userid);

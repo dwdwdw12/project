@@ -18,9 +18,9 @@
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />  
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="/resources/css/templatemo-style.css"> 
-<link rel="stylesheet" 
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script
+<link rel="stylesheet"  
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">    
+<script 
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 	
 <script
@@ -146,14 +146,14 @@ a {
 
 				<div class="mt-3" style="display: inline;">
 					<form method="get" role="form" action="/notice/register">
-						<c:if test="${loginUser.userId eq 'admin'}">
-							<button data-oper="register" class="btn btn-secondary mr-2" type="submit">글쓰기</button>
-							<button data-oper="modify" class="btn btn-dark mr-2" type="submit">수정</button>
+						<c:if test="${loginUser.admin == 1}">
+							<button data-oper="register" class="gradient" type="submit">글쓰기</button>
+							<button data-oper="modify" class="gradient" type="submit">수정</button>
 						</c:if>
-							<button data-oper="list" class="btn btn-info mr-2" type="submit" >목록</button>
+							<button data-oper="list" class="gradient" type="submit" >목록</button>
 							<br> <br>
-						<c:if test="${loginUser.userId eq 'admin'}">
-							<button data-oper="delete" type="submit" class="btn btn-danger mr-2" >삭제</button>
+						<c:if test="${loginUser.admin ==1}">
+							<button data-oper="delete" type="submit" class="gradient" >삭제</button>
 						</c:if>
 					</form>
 				</div>

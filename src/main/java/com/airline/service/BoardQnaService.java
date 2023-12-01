@@ -24,6 +24,8 @@ public interface BoardQnaService {
 	public void registerQna(BoardQnaVO vo);
 	
 	public void replyQna(BoardQnaVO vo);
-	
+	 
 	public BoardQnaVO selectBoardreref(int boardnum);
+	
+	public void updateRepAdmin(int boardreref);
 }

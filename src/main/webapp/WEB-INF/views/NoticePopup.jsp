@@ -77,7 +77,7 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
         <div class="cont">
             <p style="color:red">
 <img src="/img/alert.png" onerror="this.style.display='none'" width=100% height=auto usemap="#popup" alt="event page">
-<c:forEach items="${emer}" var="emer">
+<c:forEach items="${emer}" var="emer"> 
 ${emer.boardcontent}
 <hr>
 </c:forEach>

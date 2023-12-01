@@ -18,9 +18,9 @@
 	href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css" 
-	href="/resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="/resources/css/templatemo-style.css"> 
-<link rel="stylesheet"
+	href="/resources/slick/slick-theme.css" /> 
+<link rel="stylesheet" href="/resources/css/templatemo-style.css">    
+<link rel="stylesheet"   
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script 
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
@@ -245,7 +245,7 @@ font: bold;
 			
 			 
 			//검색버튼 이벤트 처리
-			var searchForm = $("#searchForm");
+			var searchForm = $("#searchForm"); 
 			$("#searchForm button").on("click",function(e){
 				
 				if(!searchForm.find("option:selected").val()){

@@ -27,4 +27,6 @@ public interface BoardQnaMapper {
 	
 	public BoardQnaVO selectBoardreref(int boardnum); 
 	
+	public void updateRepAdmin(int boardreref); 
+	
 }

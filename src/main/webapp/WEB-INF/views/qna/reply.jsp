@@ -129,6 +129,8 @@ a {
  			<input type="hidden" name="boardreref" value="<c:out value="${board.boardreref}" />">
  			<input type="hidden" name="boardreseq" value="<c:out value="${board.boardreseq+1}" />">
  			<input type="hidden" name="boardrelevel" value="<c:out value="${board.boardrelevel+1}" />">
+ 			<input type="hidden" name="repadmin" value="<c:out value="${board.repadmin}" />">
+			 			
 			<div
 				class="max-w-full bg-white rounded-lg overflow-hidden md:max-w-full">
 				<div class="md:flex">
