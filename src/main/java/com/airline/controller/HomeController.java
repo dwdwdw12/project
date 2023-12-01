@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.airline.service.BoardNoticeService;
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
-
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.FlightResVO;
-import com.airline.vo.Criteria;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -46,13 +43,9 @@ public class HomeController {
 	@Autowired
 	private UserService user;
 	
-	@Autowired
-	private BoardNoticeService service;
-	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, Criteria cri) {		
-		model.addAttribute("emer", service.noticePopup(cri));	
+	public String home(Model model) {		
 		return "home";
 	}
 	
@@ -62,8 +55,6 @@ public class HomeController {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
-		model.addAttribute("REST_API_KEY","607caeca9f2a0089b46f99c667e0dee3");
-		model.addAttribute("REDIRECT_URI","http://localhost:8081/join/kakao");
 		
 		if(error != null) {
 			model.addAttribute("error","Login Error Check your account");
