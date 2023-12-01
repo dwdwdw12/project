@@ -53,11 +53,14 @@ public class BoardEventFileController {
 		return false;
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+//	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile, String fileOrder) {
 		log.info("update ajax post...");
+		
+		System.out.println("order : " + fileOrder);
+		
 		
 		List<AttachFileDTO> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload";
@@ -77,6 +80,11 @@ public class BoardEventFileController {
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
+			System.out.println("getName>>>>>>" + multipartFile.getName());
+			System.out.println("getResource>>>>>>" + multipartFile.getResource());
+			System.out.println("getContentType>>>>>>" + multipartFile.getContentType());
+			System.out.println("getSize>>>>>>" + multipartFile.getSize());
+			
 			//IE has file path
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
 			log.info("only file name: " + uploadFileName);
@@ -92,13 +100,20 @@ public class BoardEventFileController {
 				
 				attachDTO.setUuid(uuid.toString());
 				attachDTO.setUploadPath(uploadFolderPath);
+				attachDTO.setFileOrder(fileOrder);
+				attachDTO.setFileSize((int) multipartFile.getSize());
+				if(fileOrder.equals("uploadFile01")) {
+					attachDTO.setRepImgYn("Y");
+				} else {
+					attachDTO.setRepImgYn("N");
+				}
 				
 				//check image type file
 				if(checkImageType(saveFile)) {
 					attachDTO.setImage(true);
 					
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 400, 500);
 					thumbnail.close();
 				}
 				list.add(attachDTO);
@@ -178,7 +193,7 @@ public class BoardEventFileController {
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type){

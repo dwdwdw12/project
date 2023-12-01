@@ -24,7 +24,7 @@
 	var $jLatest = jQuery.noConflict();
 
 	function setDetailImage(event){
-		for(var image of event.target.files){
+		/* for(var image of event.target.files){
 			var reader = new FileReader();
 			
 			reader.onload = function(event){
@@ -36,7 +36,7 @@
 			
 			console.log(image);
 			reader.readAsDataURL(image);
-		}
+		} */
 	}
 </script>
 
@@ -83,7 +83,7 @@
 	
 	 <div class="container">
 		<h2>이벤트 등록</h2>
-		<form action="/boardEvent/write" method="post" name="frm" enctype="multipart/form-data">
+		<form action="/boardEvent/write" role="form" method="post" name="frm" >
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle">
@@ -104,18 +104,25 @@
 				첫번째 파일은 썸네일에 표시됩니다.
 			<div class="form-group">
 				1. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile01" id="uploadFile01" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile01" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				2. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile02" id="uploadFile02" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile02" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				3. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile03" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile03" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				4. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile04" id="uploadFile05" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile04" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				5. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile04" id="uploadFile05" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile05" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
 			</div>
-			이미지 미리보기
+		<!-- 	이미지 미리보기
 			<div id="images_container" style="heigt:200px;"></div>
+			 -->
+			<div class="uploadResult">
+			이미지 미리보기2
+				<ul>
+				
+				</ul>
+			</div>
 			
 			<div class="form-group">
 				<label for="boardContent">내용</label><br> 
@@ -143,31 +150,7 @@
 		</form>
 	
 	</div>
-	<div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-
-				<div class="panel-heading">File Attach</div>
-
-				<div class="panel-body">
-					<div class="form-group uploadDiv">
-						<input type="file" name="uploadFile" id="uploadFile01"> 
-						<input type="file" name="uploadFile" id="uploadFile02">
-						<input type="file" name="uploadFile" id="uploadFile03">
-						<input type="file" name="uploadFile" id="uploadFile04">
-						<input type="file" name="uploadFile" id="uploadFile05">
-					</div>
-					<div class="uploadResult">
-						<ul>
-
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+	
 
 
 
@@ -290,6 +273,9 @@ $(document).ready(function(e){
 			str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
 			str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
 			str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].fileOrder' value='" + jobj.data("fileorder") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].fileSize' value='" + jobj.data("filesize") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].repImgYn' value='" + jobj.data("repimgyn") + "'>";
 			
 		});
 		
@@ -313,40 +299,45 @@ $(document).ready(function(e){
 		return true;
 	}
 	
-	var csrfHeaderName = "${_csrf.headerName}";
-	var csrfTokenValue = "${_csrf.token}";
-	
-	$("input[type='file']").change(function(e){
-		var formData = new FormData();
-		var inputFile = $("input[name='uploadFile']");
-		
-		console.log(">>>" + $(this).prop("id"));
-		var targetId = $(this).prop("id");
-		
-		var files = inputFile[0].files;
-		for(var i=0; i<files.length;i++){
-			if(!checkExtension(files[i].name, files[i].size)){
-				return false;
+	$("input[type='file']").focus( function(){
+		  before = $(this).val();	  
+	 	}).change(function(e){
+	 	
+	 		var targetId = $(this).prop("id");
+	 	
+	 	if(before!=''){
+	 		alert("아래에서 파일 삭제 후 다시 첨부해주세요");
+	 		$("#"+targetId).val("");
+	 	}
+	 	else{
+			var formData = new FormData();
+			
+			console.log(">>>" + $(this).prop("id"));
+			
+			var inputFile = $("#"+targetId);
+			
+			var files = inputFile[0].files;
+			for(var i=0; i<files.length;i++){
+				if(!checkExtension(files[i].name, files[i].size)){
+					return false;
+				}
+				formData.append("uploadFile", files[i]);
+				formData.append("fileOrder", targetId);
 			}
-			formData.append("uploadFile", files[i]);
-			formData.append("fileOrder", targetId);
-		}
-		
-		$.ajax({
-			url: '/uploadAjaxAction',
-			processData: false,
-			contentType: false,
-			beforeSend: function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
-			data: formData,
-			type: 'POST',
-			dataType: 'json',
-			success: function(result){
-				console.log(result);
-				showUploadResult(result);
-			}
-		});
+			
+			$.ajax({
+				url: '/uploadAjaxAction',
+				processData: false,
+				contentType: false,
+				data: formData,
+				type: 'POST',
+				dataType: 'json',
+				success: function(result){
+					console.log(result);
+					showUploadResult(result);
+				}
+			});
+	 	}
 	});
 	
 	$(".uploadResult").on("click", "button", function(e){
@@ -354,6 +345,8 @@ $(document).ready(function(e){
 		
 		var targetFile = $(this).data("file");
 		var type = $(this).data("type");
+		var targetId = $(this).data("fileorder");
+		console.log("fileOrder>>"+targetId);
 		
 		var targetLi = $(this).closest("li");
 		
@@ -364,19 +357,19 @@ $(document).ready(function(e){
 		({
 			url: '/deleteFile',
 			data: {fileName: targetFile, type: type},
-			beforeSend: function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
 			dataType: 'text',
 			type: 'POST',
 			success: function(result)
 			{
 				alert(result);
 				targetLi.remove();
+				$("#"+targetId).val("");
+//				$("#"+targetId).replaceWith($("#"+targetId).clone(true)); //IE에서 동작하지 않으면 사용하기
 			}
 		});
 		
 	});
+
 	
 });
 function showUploadResult(uploadResultArr){
@@ -391,30 +384,33 @@ function showUploadResult(uploadResultArr){
 		//image type
 		if(obj.image){
 			var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+			var order = obj.fileOrder.slice(-1);
 			
 			str+= "<li data-path ='"+ obj.uploadPath + "'";
-			str+=" data-uuid='"+ obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'";
+			str+=" data-uuid='"+ obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "' data-fileOrder='" + obj.fileOrder + "' data-fileSize='" + obj.fileSize + "' data-repImgYn='" + obj.repImgYn + "'";
 			str+= " ><div>";
-			str+="<span>" + obj.fileName + "</span>";
-			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+			str+="<span>" + order +"번 파일 : " + obj.fileName + "</span>";
+			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='image' data-fileOrder=" + obj.fileOrder + " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 			str+="<img src='/display?fileName=" + fileCallPath + "'>";
 			str+= "</div>";
 			str+= "</li>";
 		} else{
 			var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
 			var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+			var order = obj.fileOrder.slice(-1);
 			
 			str+="<li ";
-			str+= "data-path='" + obj.uploadPath +"' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'><div>";
-			str+="<span>" + obj.fileName + "</span>";
+			str+= "data-path='" + obj.uploadPath +"' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "' data-fileOrder='" + obj.fileOrder + "' data-fileSize='" + obj.fileSize + "' data-repImgYn='" + obj.repImgYn + "'"; 
+			str+= "><div>";
+			str+="<span>" + order +"번 파일 : " + obj.fileName + "</span>";
 			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-			str+="<img src='resources/img/noimage.gif'></a>";
+			str+="<img src='..resources/upload/noimage.png'></a>";
 			str+= "</div>";
 			str+= "</li>";
 		}
 	});
 	uploadUL.append(str);
-}	
+}
 </script>
 	<%@ include file="../includes/footer.jsp"%>
 </body>
