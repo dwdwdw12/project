@@ -3,6 +3,10 @@ package com.airline.service;
 import java.util.List;
 
 import com.airline.vo.BoardDiaryVO;
+import com.airline.vo.BoardEventVO;
+import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.CancelVO;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -26,7 +30,15 @@ public interface UserService {
 	List<BoardDiaryVO> getDiary(String userid);
 	//전체 유저정보 가져오기(가입순서 desc)
 	List<KakaoUserVO> getUserInfoAll();
-	//한달동안 카카오페이 결제내역
-	List<PointVO> getPointList();
+	//한달동안 항공 결제내역
+	List<UserPayVO> getSale();
+	//티켓취소요청
+	List<CancelVO> reqCancel();
+	//항공권 구매/예약현황
+	List<FlightResVO> getFlightres();
+	//공지사항 
+	List<BoardNoticeVO> getNotice();
+	//이벤트
+	List<BoardEventVO> getEvent();
 
 }

@@ -26,6 +26,7 @@ public class FlightResVO {
 	private Date purchasetime;
 	private String seatid;
 	private int ispaid;  //0결제 1 미결제
+	private int isCancel; //0취소안함 1취소
 	
 	/*
 	 * @Builder public FlightResVO(String resno, String userid, String username,

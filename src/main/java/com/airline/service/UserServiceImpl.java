@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.airline.mapper.UserMapper;
 import com.airline.vo.BoardDiaryVO;
+import com.airline.vo.BoardEventVO;
+import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.CancelVO;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -75,8 +79,32 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public List<PointVO> getPointList() {
-		return mapper.getPointList();
+	public List<UserPayVO> getSale() {
+		return mapper.getSale();
+	}
+
+
+	@Override
+	public List<CancelVO> reqCancel() {
+		return mapper.reqCancel();
+	}
+
+
+	@Override
+	public List<FlightResVO> getFlightres() {
+		return mapper.getFlightres();
+	}
+
+
+	@Override
+	public List<BoardNoticeVO> getNotice() {
+		return mapper.getNotice();
+	}
+
+
+	@Override
+	public List<BoardEventVO> getEvent() {
+		return mapper.getEvent();
 	}
 
 }

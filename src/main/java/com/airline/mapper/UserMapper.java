@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.airline.vo.BoardDiaryVO;
+import com.airline.vo.BoardEventVO;
+import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.CancelVO;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -30,7 +34,15 @@ public interface UserMapper {
 
 	public List<KakaoUserVO> getUserInfoAll();
 
-	public List<PointVO> getPointList();
+	public List<UserPayVO> getSale();
+
+	public List<CancelVO> reqCancel();
+
+	public List<FlightResVO> getFlightres();
+
+	public List<BoardNoticeVO> getNotice();
+
+	public List<BoardEventVO> getEvent();
 	
 
 }

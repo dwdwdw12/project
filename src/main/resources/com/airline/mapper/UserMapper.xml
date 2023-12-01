@@ -87,7 +87,35 @@
 	]]>
 	</select>
 	
-	<select id="getPointList" resultType="com.airline.vo.PointVO">
+<!-- 	<select id="getPointList" resultType="com.airline.vo.PointVO">
 		select *, sum(amount) as sum from point where amount>0 group by substr(buyDate,1,10);
+	</select> -->
+	
+	<select id="getSale" resultType="com.airline.vo.UserPayVO">
+		select *, sum(price)as sum from userpay group by substr(getDate,1,10);
+	</select>
+	
+	<select id="reqCancel" resultType="com.airline.vo.CancelVO">
+	<![CDATA[
+		select * from(select row_number() over() rownum, p.* from cancel p )r where rownum<=3; 
+	]]>
+	</select>
+	
+	<select id="getFlightres" resultType="com.airline.vo.FlightResVO">
+	<![CDATA[
+	select * from(select row_number() over(order by purchaseTime desc) rownum, p.* from flightreservation p )r where rownum<=3; 
+	]]>
+	</select>
+	
+	<select id="getNotice" resultType="com.airline.vo.BoardNoticeVO">
+	<![CDATA[
+	select * from(select row_number() over(order by regidate desc) rownum, p.* from boardnotice p )r where rownum<=3; 
+	]]>
+	</select>
+	
+	<select id="getEvent" resultType="com.airline.vo.BoardEventVO">
+	<![CDATA[
+	    select * from(select row_number() over(order by startDate desc, endDate desc) rownum, p.* from boardevent p )r where rownum<=3; 
+	]]>
 	</select>
 </mapper>
