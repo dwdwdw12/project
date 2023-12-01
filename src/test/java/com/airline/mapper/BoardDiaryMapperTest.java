@@ -41,7 +41,7 @@ public class BoardDiaryMapperTest {
 	@Test
 	public void getTest() {
 		BoardDiaryVO vo = mapper.get(3);
-		log.info("MemberVO : "+vo);
+		log.info("Diary VO : "+vo);
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class BoardDiaryMapperTest {
 	
 	@Test
 	public void updateReplyCountTest() {
-		int result = mapper.updateReplyCount(3,1);
+		int result = mapper.updateReplyCount(3);
 		log.info("result : " + result);
 	}
 	

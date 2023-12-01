@@ -28,7 +28,7 @@ public class BoardDiaryServiceImpl implements BoardDiaryService{
 	@Transactional
 	@Override
 	public BoardDiaryVO get(int boardNum) {
-		log.info("get list with paging service");
+		log.info("get service");
 		mapper.updateReadCount(boardNum);
 		return mapper.get(boardNum);
 	}

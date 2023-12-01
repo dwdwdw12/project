@@ -5,8 +5,8 @@
 <mapper namespace="com.airline.mapper.BoardDiaryReplyMapper">
 		
 	<insert id="insertReply">
-		insert into boardDiaryReply(boardNum, replyWriter, replyContent)
-		values(#{boardNum}, #{replyWriter}, #{replyContent})
+		insert into boardDiaryReply(boardNum, replyWriter, replyContent, userId)
+		values(#{boardNum}, #{replyWriter}, #{replyContent}, #{userId})
 	</insert>
 	
 	<select id="replyCount" resultType="int">

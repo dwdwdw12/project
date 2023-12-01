@@ -11,4 +11,9 @@
 		select * from kakaouser where mail_key = {mail_key}
 	</select>
 	
+	<update id="resetMailkey" >
+		update kakaouser set mail_key = 0 where mail = #{email}
+	</update>
+	
+	
 </mapper>
