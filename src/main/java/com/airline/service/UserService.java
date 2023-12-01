@@ -6,6 +6,7 @@ import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
+import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
@@ -40,5 +41,23 @@ public interface UserService {
 	List<BoardNoticeVO> getNotice();
 	//이벤트
 	List<BoardEventVO> getEvent();
+	//카카오 포인트 충전
+	int chargePoint(String userid, int amount);
+	//유저별 카카오포인트 내역 가져오기
+	List<PointVO> getKPoint(String userid, Criteria cri);
+	//유저별 마일리지 적립내역 가져오기
+	List<UserPayVO> getMPoint(String userid, Criteria cri);
+	//카카오페이 게시글 수
+	int getKTotal(String userid, Criteria cri);
+	//마일리지 게시글 수
+	int getMTotal(String userid, Criteria cri);
+	//유저별 항공예약 상세
+	List<FlightResVO> getUserRes(String userid, Criteria cri);
+	//총 구매횟수
+	int getCountBuy(String userid);
+	//총 구매금액
+	int getTotal(String userid);
+	//항공예약 총 게시글수
+	int getFlightTotal(String userid, Criteria cri);
 
 }

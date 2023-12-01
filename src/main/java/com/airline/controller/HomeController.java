@@ -32,9 +32,11 @@ import com.airline.vo.UserPayVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@RequiredArgsConstructor
 @Log4j
 public class HomeController {
 	

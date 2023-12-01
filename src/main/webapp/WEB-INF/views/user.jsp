@@ -127,7 +127,7 @@ span:before {
 	        <div class="col">
 	      		<div class="p-3 border bg-light">
 	      		<p>
-						<h3>현재 마일리지 >><strong><fmt:formatNumber
+						<h3>마일리지 >><strong><fmt:formatNumber
 									value="${sumP}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -149,13 +149,14 @@ span:before {
 				      </c:forEach>	      		
 	      		</table>
 	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/mileage'">상세조회 >></button>
 	      		</div>
 	   		 </div>
+	   		 
 	   		  <div class="col">
 				<div class="p-3 border bg-light">
 	      		<p>
-						<h3>현재 카카오페이 잔액 >><strong><fmt:formatNumber
+						<h3>카카오페이 잔액 >><strong><fmt:formatNumber
 									value="${sumK}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -175,8 +176,10 @@ span:before {
 				     </tbody>
 				      </c:forEach>	      		
 	      		</table>
-	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+	      		
+		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/chargePoint'" >충전 >></button>
+		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/kakaoDetail'" >상세조회 >></button>
+	      		
 	      		</div>
 		    </div>
  		 </div>
@@ -213,8 +216,7 @@ span:before {
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table>
-	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+	      			<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'">상세조회 >></button>
 			    	 </div>
 			   	 </div>
 	    	 </div>
