@@ -30,33 +30,63 @@
 span:before {
 	font-family: bootstrap-icons;
 }
+
+.currIcon{
+   font-size: 22ex;
+   text-align: center; 
+   color: #ffc107;
+}
+
+.currTemp{
+	text-align: center; 
+}
+.city{
+ 	text-align: center; 
+}
 </style>
 
 <div class="tm-page-wrap mx-auto">
-	<section class="p-5 tm-container-outer tm-bg-gray">
+	<%-- <section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 border bg-light">
-						<input type="hidden" id="weather" value=""/>
-						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-weath" onclick="">상세조회 >></button>
+						<img src="../resources/img/kakao/flyinglion.png" alt="background img for userPage" width="1000" height="335"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+	 --%>
 	
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
-				<div class="col">
+<!-- 				<div class="col">
 					<div class="p-3 bg-light" style="float: left; width: 33%;">
 						<div class="weather">
 							<div class="currIcon"></div>
 							<div class="currTemp"></div>
 							<div class="city"></div>
+						</div>
+					</div>
+				</div> -->
+				<div class="col" style="width: 33%;">
+					<div class="p-3 bg-light">
+						<div class="weather">
+							<div class="currIcon"></div>
+							<div class="currTemp"></div>
+							<div class="city"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="p-3 bg-light">
+					<p ><h3 style="text-align: center;"><i class="bi bi-check-lg"></i><strong>오늘의 날씨</strong></h3></p>
+						<div class="detail">
+							<div class=""></div>
+							<div class=""></div>
+							<div class=""></div>
 						</div>
 					</div>
 				</div>
@@ -97,7 +127,7 @@ span:before {
 	        <div class="col">
 	      		<div class="p-3 border bg-light">
 	      		<p>
-						<h3>현재 마일리지 >><strong><fmt:formatNumber
+						<h3>마일리지 >><strong><fmt:formatNumber
 									value="${sumP}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -119,13 +149,14 @@ span:before {
 				      </c:forEach>	      		
 	      		</table>
 	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/mileage'">상세조회 >></button>
 	      		</div>
 	   		 </div>
+	   		 
 	   		  <div class="col">
 				<div class="p-3 border bg-light">
 	      		<p>
-						<h3>현재 카카오페이 잔액 >><strong><fmt:formatNumber
+						<h3>카카오페이 잔액 >><strong><fmt:formatNumber
 									value="${sumK}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -139,15 +170,16 @@ span:before {
 				    <c:forEach items="${kvo3}" var="kvo">
 				    <tbody>
 				      <tr>
-				        <td><fmt:formatDate value="${kvo.buyDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
+				        <td><fmt:formatDate value="${kvo.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 				        <td>${kvo.amount}</td>
 				      </tr>
 				     </tbody>
 				      </c:forEach>	      		
 	      		</table>
-	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+	      		
+		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/chargePoint'" >충전 >></button>
+		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/kakaoDetail'" >상세조회 >></button>
+	      		
 	      		</div>
 		    </div>
  		 </div>
@@ -184,8 +216,7 @@ span:before {
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table>
-	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+	      			<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'">상세조회 >></button>
 			    	 </div>
 			   	 </div>
 	    	 </div>
@@ -309,6 +340,12 @@ $(document).ready(function(){
 			  $('.currIcon').append('<i class="' + weatherIcon[$Icon] +'"></i>');      
 			  $('.currTemp').prepend($Temp);      
 			  $('.city').append($city);
+			  
+			  $(".detail").append("<p>나라/도시: " + resp.sys.country+"/" +resp.name +"</p>");
+			  $(".detail").append("<p>상세날씨설명: " + resp.weather[0].description + "</p>");
+			  $(".detail").append("<p>구름: " + resp.clouds.all + "%</p>"); 
+			  $(".detail").append("<p>바람: " + resp.wind.speed + " m/s</p>");
+			  $(".detail").append("<p>현재 온도: " + (resp.main.temp) + "℃</p>");
 			 
 
 		}

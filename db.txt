@@ -159,3 +159,11 @@ create table termsManage(
 alter table termsManage add constraint pk_temrs_id foreign key(userid) references kakaouser(userid) on delete cascade;
 alter table termsManage add constraint pk_terms_code foreign key(termsCode) references terms(termsCode) on delete cascade;
 
+create table cancel(
+	cno int(5) auto_increment primary key,
+    userid varchar(10),
+    resno varchar(50),
+    isCancel int default 1,
+    RequestTime Timestamp default current_timestamp,
+    CancelTime Timestamp default current_timestamp
+);
