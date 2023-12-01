@@ -67,7 +67,7 @@
 								%>
 							19<%= userYear %>년&nbsp;&nbsp<%= userMonth %>월&nbsp;&nbsp;<%= userDate %>일
  --%>
- 								${userInfo.userreginumfirst}							
+ 								${userInfo.userReginumFirst}							
 							</td>
 						</tr>
 

@@ -146,13 +146,13 @@ public class JoinController {
 //		String userDate = Integer.toString(userReginumFirst).substring(4, 6);
 		
 		model.addAttribute("userInfo", vo);
-		join.confirmMember(vo);
+		KakaoUserVO result = join.confirmMember(vo);
 		log.info(vo);
-		if (vo == null) {
-			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!
+		if (result == null) {
+			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!... 근데 왜 !=null로 되는걸까 신규회원들이...?
 		} else {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
-			return "/join/joinTerms"; //uri가 http://localhost:8081/join/checkMember인채로 이동함.. attr을 하던지 해야할듯
+			return "/join/joinTerms"; //uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
 		}
 
 	}

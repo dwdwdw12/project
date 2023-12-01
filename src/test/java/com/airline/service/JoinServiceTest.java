@@ -23,7 +23,7 @@ public class JoinServiceTest {
 	public void confirmMemberTest() {
 		KakaoUserVO vo = KakaoUserVO.builder()
 				.userNameE("userchoi")
-				.userNameK("최유저")
+				.userNameK("최유ㅇ저")
 				.gender("M")
 				.userReginumFirst(881231)
 				.userReginumLast(1111111)
