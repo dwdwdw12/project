@@ -5,7 +5,7 @@ var replyService =  (function(){
         console.log("reply...");
         $.ajax({
             type : 'post',                                          //전송타입 주의
-            url : '/replies/new',
+            url : '/boardDiary/replies/new',
             data : JSON.stringify(reply),
             contentType : "application/json; charset=utf-8",        //전송
 
@@ -24,16 +24,18 @@ var replyService =  (function(){
     }                                                      //end add
 
     function getList(param, callback, error){
-        var bno = param.bno;
+        var boardNum = param.boardNum;
         var page = param.page || 1;
-
+		console.log("getList ajax start");
+		console.log(boardNum);
+		console.log(page);
         $.ajax({
             type : "get",
-            url : "/replies/pages/" + bno + "/" + page + ".json",           //data와 contentType이 없으면 생략
+            url : "/boardDiary/replies/pages/" + boardNum + "/" + page,           //data와 contentType이 없으면 생략
             
             success : function(data, status, xhr){                
                 if(callback){                   
-                    callback(data.replyCnt, data.list);                     
+                    callback(data.replyCount, data.list);                     
                 }
             },
             
@@ -45,11 +47,11 @@ var replyService =  (function(){
         });                                             
     }                                                       //end get List 
 
-    function remove(rno, replyer, callback, error){
+    function remove(replyNum, replyWriter, callback, error){
         $.ajax({
             type : "delete",
-            url : "/replies/" + rno,
-			data : JSON.stringify({rno:rno, replyer:replyer}),
+            url : "/boardDiary/replies/" + replyNum,
+			data : JSON.stringify({replyNum:replyNum, replyWriter:replyWriter}),
             contentType : "application/json; charset=utf-8", 
             success : function(result, status, xhr){
                 if(callback){
@@ -66,11 +68,11 @@ var replyService =  (function(){
     }                                                       //end remove
 
     function update(reply, callback, error){
-        console.log("RNO : " + reply.rno);
+        console.log("ReplyNum : " + reply.replyNum);
 
         $.ajax({
             type : "put",
-            url : "/replies/" + reply.rno,
+            url : "/boardDiary/replies/" + reply.replyNum,
             data : JSON.stringify(reply),
             contentType : "application/json; charset=utf-8",
 
@@ -89,12 +91,12 @@ var replyService =  (function(){
         });
     }                                                       //end update
 
-    function get(rno, callback, error){
-        console.log("get : " + rno);
+    function get(replyNum, callback, error){
+        console.log("get : " + replyNum);
 
         $.ajax({
             type: "get",
-            url: "/replies/"+rno,
+            url: "/boardDiary/replies/"+replyNum,
 
             success : function(result, status, xhr){
                 if(callback){

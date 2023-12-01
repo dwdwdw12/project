@@ -20,6 +20,7 @@ public class UserPayVO {
 	private int price;
 	private Date getDate;
 	private int mileage;
+	private int sum;
 	
 
 }

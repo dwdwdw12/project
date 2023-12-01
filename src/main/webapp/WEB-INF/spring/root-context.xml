@@ -47,7 +47,7 @@
 	<bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" /> <!-- 메일서버 호스트 -->
-		<property name="port" value="587" /> <!-- 메일서버 포트번호 -->
+		<property name="port" value="587" /> <!-- 메일서버 포트번호 (465 사용 시 오류남)-->
 		<property name="username" value="systemlocal99@gmail.com" /> <!-- 자신의 이메일 아이디 -->
 		<property name="password" value="jilpqhutftrqvbsf" /> <!-- 자신의 비밀번호 -->
 		<!-- 보안연결 TLS과 관련된 설정 -->
@@ -57,7 +57,7 @@
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
-				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop><!-- 강제로 프로토콜 설정함 -->
 			</props>
 		</property>
 	</bean>

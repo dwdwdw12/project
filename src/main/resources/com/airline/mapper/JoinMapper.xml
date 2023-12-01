@@ -8,8 +8,33 @@
 	select mail from kakaouser where mail= #{email};
 </select>
 
-<select id="getUserId" resultType="com.airline.vo.KakaoUserVO">
+<select id="getUserId" resultType="com.airline.vo.KakaoUserVO" parameterType="map">
 	select * from kakaouser where mail = #{email} and mail_key = #{mail_key}
 </select>
+
+<select id="checkMember" resultType="com.airline.vo.KakaoUserVO" parameterType="map">
+	select * from kakaouser where 
+	userNameE = #{userNameE}
+	and userNameK = #{userNameK}
+	and gender = #{gender}
+	and userReginumFirst = #{userReginumFirst}
+	and userReginumLast = #{userReginumLast}
+</select>
+
+<select id="getTerms" resultType="String">
+	select termsContents from terms where termsCode = #{termscode}
+</select>
+
+<insert id="insertMember">
+	insert into kakaouser(
+		userId, userNick, userNameK, userNameE, gender, 
+		pwd, mail, phone, postCode, address, userReginumFirst, userReginumLast)
+		
+		values(
+			#{userId}, #{userNick}, #{userNameK}, #{userNameE}, #{gender},
+			#{pwd}, #{mail}, #{phone}, #{postCode}, #{address}, 
+			#{userReginumFirst}, #{userReginumLast}
+	)
+</insert>
 
 </mapper>

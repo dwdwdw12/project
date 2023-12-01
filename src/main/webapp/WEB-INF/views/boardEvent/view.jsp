@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../resources/summernote/summernote-lite.js"></script>
@@ -38,16 +38,21 @@
 	border: solid 2px white;
 	border-radius: 5px;
 	}
+	
+	.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	}
 
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top: 180px;">
 	
 	<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
-	<input type="hidden" id="userId" name="userId" value="${loginUser.userid}" readonly="readonly">
+	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
 	<div class="container">
 		<h1>이벤트 상세보기</h1>
-			<form action="boardEventDelete.do" method="get" name="frm">
+			<form action="/boardEvent/delete" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
@@ -81,11 +86,7 @@
 				</c:choose>
 			</div>
 	
-			<c:if test="${imgCount>0}">
-			<%-- 	<ul>
-					<li>이미지</li><br>
-					<li>이미지 개수 : ${imgCount}</li>	<br>	
-				</ul> --%>
+			<%-- <c:if test="${imgCount>0}">
 	
 				<c:forEach var="file" items="${fileList}">
 					<c:if test="${file.repImgYn=='Y'}">
@@ -100,59 +101,103 @@
 						<img src="./upload/${file.oriFileName}" style="max-width: 100%; height: auto;">	<br>
 					</c:if>
 				</c:forEach>
-			</c:if>
+			</c:if> --%>
+			
+			<!-- 이미지 출력 -->
+			<div class="row">
+			    <div class="col-lg-12">
+			        <div class="panel panel-default">
+			        
+				        <div class="panel-heading"></div>
+				        <div class="panel-body">
+					        <div class="uploadResult">
+					        	<ul>
+					        	</ul>
+					        </div>
+				        </div>
+					</div>
+			    </div>
+			</div>
 			
 			<div class="form-group">
 				<label for="boardContent"><!-- 내용 --></label><br>
-				<textarea id="summernote" class="summernote" name="boardContent" readonly="readonly">${board.boardContent}</textarea>
+				${board.boardContent}
 			</div>
 			
 			<div id="bottom"></div>
 			<div class="mt-3 text-right">
 			<c:choose>
 				<c:when test="${loginUser.admin==1}">
-					<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-					<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
 					<button type="button" class="gradient" onclick="del()">삭제</button>&nbsp;
-					<button type="button" class="gradient" onclick="location.href='boardEventUpdate.do?boardNum=${board.boardNum}'">수정</button>	
-					<button type="button" class="gradient" onclick="location.href='boardEventWrite.do'" id="write">글쓰기</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/update?boardNum=${board.boardNum}'">수정</button>	
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/write'" id="write">글쓰기</button>
 				</c:when>
 				<c:otherwise>
-					<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-					<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/update?boardNum=${board.boardNum}'">테스트수정</button>	
+					<button type="button" class="gradient" onclick="del()">테스트삭제</button>&nbsp;
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
 				</c:otherwise>
 			</c:choose>
 			</div>
 			<br><br>
-			<div style="position: fixed; bottom: 5px; right: 5px;">
+			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
 				<img src="./img/upArrow.png" width="100px" height="100px" title="위로">
 				</a><br>
 				<a href="#bottom">
 				<img src="./img/downArrow.png" width="100px" height="100px" title="아래로">
 				</a>
-			</div>
+			</div> -->
 			
 		</form>
 	</div>
 
-	<script>
-		$(document).ready(
-				function() {
-					$('#summernote').summernote({
-						disableDragAndDrop: true,
-						/* height: 800, */
-						lang : "ko-KR"
-					});
-					$('#summernote').summernote('disable')({
-						/* height : 300,
-						width : 500, */
-						
-						
-					});
+
+
+<script>
+$(document).ready(function(){
+	(function(){
+		var boardNum = '<c:out value="${board.boardNum}"/>';
+		$.getJSON("/boardEvent/getAttachList", {boardNum : boardNum}, function(arr) {
+			console.log(arr);
+			
+			var str = "";
+			
+			$(arr).each(function(i, attach) {
+				// image type
+				if (attach.fileType) {
+					//var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+					var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
 					
-				});
-	</script>
+					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+					str += "<div>";
+					str += "	<img src='/display?fileName=" + fileCallPath + "' style='max-width: 100%; height: auto;'>";
+					str += "</div>";
+					str += "</li>";
+					
+				} else {
+					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+					str += "	<div>";
+					str += "		<span> " + attach.fileName + "</span><br/>";
+					str += "		<img src='..resources/upload/noimage.png'></a>";
+					str += "	</div>";
+					str += "</li>";
+				}
+				
+			});
+			
+			$(".uploadResult ul").html(str);
+			
+		});
+		
+	})();//end function
+	
+});
+</script>
+
 	<%@ include file="../includes/footer.jsp"%>
 </body>
 </html>

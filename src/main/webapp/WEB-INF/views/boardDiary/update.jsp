@@ -37,11 +37,15 @@
 	border: solid 2px white;
 	border-radius: 5px;
 	}
+	
+	.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    }
 
 </style>
 </head>
-<body style="background-color: white;">
-	${loginUser}
+<body style="background-color: white; margin-top : 180px;">
 	
 	<div class="container">
 		<h2>여행일기 수정</h2>

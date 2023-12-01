@@ -20,26 +20,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.airline.service.BoardNoticeService;
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
+
+import com.airline.vo.BoardEventVO;
+import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.CancelVO;
+import com.airline.vo.FlightResVO;
+import com.airline.vo.Criteria;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@RequiredArgsConstructor
 @Log4j
 public class HomeController {
 	
 	@Autowired
 	private UserService user;
 	
+	@Autowired
+	private BoardNoticeService service;
+	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {		
+	public String home(Model model, Criteria cri) {		
+		model.addAttribute("emer", service.noticePopup(cri));	
 		return "home";
 	}
 	
@@ -49,6 +62,8 @@ public class HomeController {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
+		model.addAttribute("REST_API_KEY","607caeca9f2a0089b46f99c667e0dee3");
+		model.addAttribute("REDIRECT_URI","http://localhost:8081/join/kakao");
 		
 		if(error != null) {
 			model.addAttribute("error","Login Error Check your account");
@@ -152,19 +167,36 @@ public class HomeController {
 		List<KakaoUserVO> vo = user.getUserInfoAll();
 		model.addAttribute("vo",vo);
 		//매출현황(카카오페이+항공결제내역 월별/년도별)
-		//한달동안 포인트 구입매출관련 내역
-		List<PointVO> getPvo = user.getPointList();
+		//일별 항공매출현황
+        List<UserPayVO> pvo = user.getSale();
+       // System.out.println("pvo>> "+pvo);
 	    // 데이터를 JSON 문자열로 변환하여 모델에 추가
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    try {
-	        String json = objectMapper.writeValueAsString(getPvo);
+	        String json = objectMapper.writeValueAsString(pvo);
 	        model.addAttribute("json", json);
+	        //System.out.println("json>> "+json);
 	    } catch (JsonProcessingException e) {
 	        e.printStackTrace(); // 또는 예외 처리 로직 추가
 	    }
 		
-	    System.out.println(getPvo);
-        model.addAttribute("getPvo", getPvo);
+	    System.out.println(pvo);
+        model.addAttribute("pvo", pvo);
+        //취소요청
+        List<CancelVO> cvo = user.reqCancel();
+        model.addAttribute("cvo",cvo);
+        //항공권 구매/예약 현황
+        List<FlightResVO> fvo = user.getFlightres();
+        System.out.println(fvo);
+        model.addAttribute("fvo",fvo);
+        //공지사항
+        List<BoardNoticeVO> nvo = user.getNotice();
+        model.addAttribute("nvo",nvo);
+        //이벤트 게시판
+        List<BoardEventVO> evo = user.getEvent();
+        model.addAttribute("evo",evo);
+        
+        
 
 		
 	}

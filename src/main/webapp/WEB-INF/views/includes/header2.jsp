@@ -34,7 +34,7 @@
 <script src="../resources/js/jquery-1.11.3.min.js"></script>
 
 </head>
-0
+
 <body>
 	<!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
@@ -102,6 +102,8 @@
 							<div class="book_room">
 								<div class="socail_links">
 									<ul>
+										<li><a href="/qna/list">qna <!-- <i class="fa fa-facebook-square"></i> -->
+										</a></li>
 										<li><a href="/notice/list">notice <!-- <i class="fa fa-facebook-square"></i> -->
 										</a></li>
 										<li><a href="#">event <!-- <i class="fa fa-twitter"></i> -->

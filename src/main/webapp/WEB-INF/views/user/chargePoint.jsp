@@ -68,27 +68,24 @@ max-width: 100%;
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
-						비행기 티켓 결제페이지
+						<strong>kakao point 충전</strong>
 					</h2>
-					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
-						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
-						Duis nec lobortis velit. Vivamus id magna vulputate, tempor ante
-						eget, tempus augue. Maecenas ultricies neque magna.</p>
+					<p class="mb-4">카카오페이 포인트를 충전하고, 항공권 결제 시 사용할 수 있습니다.</p>
+					<p class="mb-4">원하는 충전금액을 선택한 후 결제버튼을 클릭 해 주세요.</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 						<div class="card-body bg-white mt-0 shadow">
                 <p style="font-weight: bold">카카오페이 현재 사용가능</p>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="15000"><span>15,000원</span></label>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="20000"><span>20,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="25000"><span>25,000원</span></label>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label>
-                <label class="box-radio-input"><input type="radio" name="cp_item" value="35000"><span>35,000원</span></label>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="40000"><span>40,000원</span></label>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
-                <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="100000"><span>100,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="200000"><span>200,000원</span></label>
+                <label class="box-radio-input"><input type="radio" name="cp_item" value="500000"><span>500,000원</span></label>
+                <p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 10,000원이며 <br/>최대 충전금액은 500,000원 입니다.</p>
+                <button type="button" class="btn btn-lg btn-primary btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
  </div>
 				</div>
 			</div>		
