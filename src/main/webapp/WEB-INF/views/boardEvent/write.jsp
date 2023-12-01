@@ -71,16 +71,19 @@
 	border: solid 2px white;
 	border-radius: 5px;
 	}
-
+	
+	.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    }
 </style>
 
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	
 	 <div class="container">
 		<h2>이벤트 등록</h2>
-		<form action="boardEventWrite.do" method="post" name="frm" enctype="multipart/form-data">
-			<input type="hidden" id="boardNum" name="boardNum" value="${boardNum}"> 
+		<form action="/boardEvent/write" method="post" name="frm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle">
@@ -121,127 +124,298 @@
 			
 			<br>
 			<div class="mt-3 text-right">
-				<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-				<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+				<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
+				<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
 				<button type="reset" class="gradient">다시작성</button> &nbsp;
 				<button type="submit" class="gradient" onclick="return boardCheck()" id="write">등록</button> &nbsp;
 			</div>
 			<br>
 			
-			<div style="position: fixed; bottom: 5px; right: 5px;">
+			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
 				<img src="img/upArrow.png" width="100px" height="100px" title="위로">
 				</a><br>
 				<a href="#write">
 				<img src="img/downArrow.png" width="100px" height="100px" title="아래로">
 				</a>
-			</div>
+			</div> -->
 			
 		</form>
 	
-	</div> 
+	</div>
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
 
- 	<script>
- 		$('#summernote').summernote({
- 			disableDragAndDrop: true,
- 			height : 500,
-			/* width : 1200, */
-			lang : "ko-KR",
- 			toolbar: [
- 			    // [groupName, [list of button]]
- 			    ['style', ['bold', 'italic', 'underline', 'clear']],
- 			    ['fontname', ['fontname']],
- 			    ['fontsize', ['fontsize']],
- 			    ['color', ['color']],
- 			    ['para', ['ul', 'ol', 'paragraph']],
- 			    ['height', ['height']],
- 			    ['table', ['table']],
- 	       		['view', ['fullscreen', 'codeview', 'help']]
- 			  ]
- 			});
-	</script> 
+				<div class="panel-heading">File Attach</div>
+
+				<div class="panel-body">
+					<div class="form-group uploadDiv">
+						<input type="file" name="uploadFile" id="uploadFile01"> 
+						<input type="file" name="uploadFile" id="uploadFile02">
+						<input type="file" name="uploadFile" id="uploadFile03">
+						<input type="file" name="uploadFile" id="uploadFile04">
+						<input type="file" name="uploadFile" id="uploadFile05">
+					</div>
+					<div class="uploadResult">
+						<ul>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+
+
+<script>
+	$('#summernote').summernote({
+		disableDragAndDrop: true,
+		height : 500,
+	/* width : 1200, */
+	lang : "ko-KR",
+		toolbar: [
+		    // [groupName, [list of button]]
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['fontname', ['fontname']],
+		    ['fontsize', ['fontsize']],
+		    ['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']],
+		    ['table', ['table']],
+       		['view', ['fullscreen', 'codeview', 'help']]
+		  ]
+		});
+</script> 
 	
-	<script>
-		$jLatest('input[id="dates"]').daterangepicker();
-		$jLatest('input[id="startDate"]').daterangepicker({
-			singleDatePicker: true,
-		    timePicker: true,
-		    timePicker24Hour: true,
-			 "locale": {
-			       "format": 'YYYY-MM-DD HH:mm:SS',
-			       "separator": " ~ ",
-			       "applyLabel": "확인",
-			        "cancelLabel": "취소",
-			        "fromLabel": "From",
-			        "toLabel": "To",
-			        "customRangeLabel": "Custom",
-			        "weekLabel": "주",
-			        "daysOfWeek": [
-			             "일",
-			             "월",
-			             "화",
-			             "수",
-			             "목",
-			             "금",
-			             "토"
-			       ],
-			      "monthNames": [
-			             "1월",
-			             "2월",
-			             "3월",
-			             "4월",
-			             "5월",
-			             "6월",
-			             "7월",
-			             "8월",
-			             "9월",
-			             "10월",
-			             "11월",
-			             "12월"
-			        ],
-			        "firstDay": 1
-			    },
+<script>
+	$jLatest('input[id="dates"]').daterangepicker();
+	$jLatest('input[id="startDate"]').daterangepicker({
+		singleDatePicker: true,
+	    timePicker: true,
+	    timePicker24Hour: true,
+		 "locale": {
+		       "format": 'YYYY-MM-DD HH:mm:SS',
+		       "separator": " ~ ",
+		       "applyLabel": "확인",
+		        "cancelLabel": "취소",
+		        "fromLabel": "From",
+		        "toLabel": "To",
+		        "customRangeLabel": "Custom",
+		        "weekLabel": "주",
+		        "daysOfWeek": [
+		             "일",
+		             "월",
+		             "화",
+		             "수",
+		             "목",
+		             "금",
+		             "토"
+		       ],
+		      "monthNames": [
+		             "1월",
+		             "2월",
+		             "3월",
+		             "4월",
+		             "5월",
+		             "6월",
+		             "7월",
+		             "8월",
+		             "9월",
+		             "10월",
+		             "11월",
+		             "12월"
+		        ],
+		        "firstDay": 1
+		    },
+	});
+	$jLatest('input[id="endDate"]').daterangepicker({
+		singleDatePicker: true,
+	    timePicker: true,
+	    timePicker24Hour: true,
+		 "locale": {
+		       "format": 'YYYY-MM-DD HH:mm:SS',
+		       "separator": " ~ ",
+		       "applyLabel": "확인",
+		        "cancelLabel": "취소",
+		        "fromLabel": "From",
+		        "toLabel": "To",
+		        "customRangeLabel": "Custom",
+		        "weekLabel": "주",
+		        "daysOfWeek": [
+		             "일",
+		             "월",
+		             "화",
+		             "수",
+		             "목",
+		             "금",
+		             "토"
+		       ],
+		      "monthNames": [
+		             "1월",
+		             "2월",
+		             "3월",
+		             "4월",
+		             "5월",
+		             "6월",
+		             "7월",
+		             "8월",
+		             "9월",
+		             "10월",
+		             "11월",
+		             "12월"
+		        ],
+		        "firstDay": 1
+		    },
+	});
+</script>
+	
+<script>
+$(document).ready(function(e){
+	var formObj = $("form[role='form']");
+	$("button[type='submit']").on("click", function(e){
+		e.preventDefault();
+		console.log("submit clicked");
+		
+		var str="";
+		$(".uploadResult ul li").each(function(i, obj){
+			var jobj = $(obj);
+			console.dir(jobj);
+			
+			str+="<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+			
 		});
-		$jLatest('input[id="endDate"]').daterangepicker({
-			singleDatePicker: true,
-		    timePicker: true,
-		    timePicker24Hour: true,
-			 "locale": {
-			       "format": 'YYYY-MM-DD HH:mm:SS',
-			       "separator": " ~ ",
-			       "applyLabel": "확인",
-			        "cancelLabel": "취소",
-			        "fromLabel": "From",
-			        "toLabel": "To",
-			        "customRangeLabel": "Custom",
-			        "weekLabel": "주",
-			        "daysOfWeek": [
-			             "일",
-			             "월",
-			             "화",
-			             "수",
-			             "목",
-			             "금",
-			             "토"
-			       ],
-			      "monthNames": [
-			             "1월",
-			             "2월",
-			             "3월",
-			             "4월",
-			             "5월",
-			             "6월",
-			             "7월",
-			             "8월",
-			             "9월",
-			             "10월",
-			             "11월",
-			             "12월"
-			        ],
-			        "firstDay": 1
-			    },
+		
+		formObj.append(str).submit();
+		formObj.unbind('click').click();
+	});
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880; //5MB
+	
+	function checkExtension(filename, fileSize){
+		
+		if(fileSize>=maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		if(regex.test(filename)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	$("input[type='file']").change(function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		
+		console.log(">>>" + $(this).prop("id"));
+		var targetId = $(this).prop("id");
+		
+		var files = inputFile[0].files;
+		for(var i=0; i<files.length;i++){
+			if(!checkExtension(files[i].name, files[i].size)){
+				return false;
+			}
+			formData.append("uploadFile", files[i]);
+			formData.append("fileOrder", targetId);
+		}
+		
+		$.ajax({
+			url: '/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			data: formData,
+			type: 'POST',
+			dataType: 'json',
+			success: function(result){
+				console.log(result);
+				showUploadResult(result);
+			}
 		});
-	</script>
+	});
+	
+	$(".uploadResult").on("click", "button", function(e){
+		console.log("delete file");
+		
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		
+		var targetLi = $(this).closest("li");
+		
+		console.log("target>>"+targetFile);
+		console.log("type>>>"+type);
+		
+		$.ajax
+		({
+			url: '/deleteFile',
+			data: {fileName: targetFile, type: type},
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			dataType: 'text',
+			type: 'POST',
+			success: function(result)
+			{
+				alert(result);
+				targetLi.remove();
+			}
+		});
+		
+	});
+	
+});
+function showUploadResult(uploadResultArr){
+	if(!uploadResultArr||uploadResultArr.length==0){
+		return ;
+	}
+	var uploadUL = $(".uploadResult ul");
+	
+	var str="";
+	
+	$(uploadResultArr).each(function(i, obj){
+		//image type
+		if(obj.image){
+			var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+			
+			str+= "<li data-path ='"+ obj.uploadPath + "'";
+			str+=" data-uuid='"+ obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'";
+			str+= " ><div>";
+			str+="<span>" + obj.fileName + "</span>";
+			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+			str+="<img src='/display?fileName=" + fileCallPath + "'>";
+			str+= "</div>";
+			str+= "</li>";
+		} else{
+			var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+			var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+			
+			str+="<li ";
+			str+= "data-path='" + obj.uploadPath +"' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'><div>";
+			str+="<span>" + obj.fileName + "</span>";
+			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+			str+="<img src='resources/img/noimage.gif'></a>";
+			str+= "</div>";
+			str+= "</li>";
+		}
+	});
+	uploadUL.append(str);
+}	
+</script>
 	<%@ include file="../includes/footer.jsp"%>
 </body>
 </html>

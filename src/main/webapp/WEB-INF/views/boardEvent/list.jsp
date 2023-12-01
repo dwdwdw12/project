@@ -51,35 +51,30 @@
 	}
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	<div style="max-width: 1400px; margin: 0 auto; ">
 	<h2>이벤트 게시판</h2>
 	<hr class="hr1" noshade>
 	<div class="mt-3 text-right">
-		<input type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 120px" value="그리드형으로 보기">
+		<input type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 120px" value="그리드형으로 보기">
 	</div>
 	<div>   
-		<form action="boardEventList.do" method="get" id="searchForm" name="searchForm">
-		<span style="text-align: left;">▷ 총 ${boardCount}개의 게시물이 있습니다. </span>
+		<form action="/boardEvent/list" method="get" id="searchForm" name="searchForm">
+		<span style="text-align: left;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
 		<span style="float: right;">
-        <select name="searchType" class="type-box">
-			<option value="boardTitle" <c:if test="${searchType =='boardTitle'}">selected="selected"</c:if> >제목</option>
-			<option value="boardContent" <c:if test="${searchType =='boardContent'}">selected="selected"</c:if> >내용</option>
+        <select name="type" class="type-box">
+			<option value="boardTitle" <c:if test="${paging.cri.type =='boardTitle'}">selected="selected"</c:if> >제목</option>
+			<option value="boardContent" <c:if test="${paging.cri.type =='boardContent'}">selected="selected"</c:if> >내용</option>
 		</select>
-          <input class="inputId" type="text" id="keyword" name="keyword" placeholder="검색어 입력" value="${keyword}">
+          <input class="inputId" type="text" id="keyword" name="keyword" placeholder="검색어 입력" value="${paging.cri.keyword}">
           <input class="gradient" type="submit" value="검색" onclick="return search()">
-          <input type="button" class="gradient" onclick="location.href='boardEventList.do'" value="전체">&nbsp; <br> <br>
+          <input type="button" class="gradient" onclick="location.href='/boardEvent/list'" value="전체">&nbsp; <br> <br>
 		</span>
 		</form>
 	</div>
-	
+	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
 		<table class="table table-hover">
-		 <c:if test="${boardCount>0}">
-			<%-- <tr>
-				<td colspan="4">게시글</td>
-				
-				<td>글 개수 : ${boardCount}</td>
-			</tr> --%>
+		 <c:if test="${paging.total>0}">
 			<tr>
 				<th id="th1">번호</th>
 				<th id="th1">제목</th>
@@ -93,7 +88,7 @@
 
 				<tr>
 					<td>${board.boardNum}</td>
-					<td><a href="boardEventView.do?boardNum=${board.boardNum}">${board.boardTitle} </a></td>
+					<td><a href="/boardEvent/view?boardNum=${board.boardNum}">${board.boardTitle} </a></td>
 					<td>${board.startDate}</td>
 					<td>${board.endDate}</td>					
 					<td>${board.readCount}</td>
@@ -106,64 +101,57 @@
 				</tr>
 			</c:if>
 	
-			<%-- <tr>
-				<td colspan="3"></td>
-				<td colspan="2" align="right">
-					현재 페이지: ${paging.page}
-					게시글의 개수: ${EventList.size()}/${boardCount}</td>
-			</tr> --%>
-		
 		</table>
 			
 			<ul class="pagination pagination justify-content-center">
 					<!--nowpage->page  --> 
 					<c:choose>
-						<c:when test="${paging.page<=1}"> 
+						<c:when test="${paging.cri.pageNum<=1}"> 
 							<li class="page-item"><a class="page-link">Previous</a><li>
 						</c:when>
 						<c:otherwise>
-							<c:if test="${!empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventList.do?page=${paging.page-1}&keyword=${keyword}&searchType=${searchType}">Previous</a></li>
+							<c:if test="${!empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">Previous</a></li>
 							</c:if>
-							<c:if test="${empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventList.do?page=${paging.page-1}">Previous</a></li>
+							<c:if test="${empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum-1}">Previous</a></li>
 							</c:if>
 						</c:otherwise>
 					</c:choose> 
 					<c:forEach var="a" begin="${paging.startPage}" end="${paging.endPage}" step="1">
 						<c:choose>
-							<c:when test="${a==paging.page}"> 
+							<c:when test="${a==paging.cri.pageNum}"> 
 								<li class="page-item active"><a class="page-link" >${a}</a></li>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${!empty keyword}">
-									<li class="page-item"><a class="page-link" href="boardEventList.do?page=${a}&keyword=${keyword}&searchType=${searchType}">${a}</a></li>
+								<c:if test="${!empty paging.cri.keyword}">
+									<li class="page-item"><a class="page-link" href="?pageNum=${a}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">${a}</a></li>
 								</c:if>
-								<c:if test="${empty keyword}">
-									<li class="page-item"><a class="page-link" href="boardEventList.do?page=${a}">${a}</a></li>
+								<c:if test="${empty paging.cri.keyword}">
+									<li class="page-item"><a class="page-link" href="?pageNum=${a}">${a}</a></li>
 								</c:if>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach> 
 						
 					<c:choose>
-						<c:when test="${paging.page>=paging.maxPage}"> 
+						<c:when test="${paging.cri.pageNum>=paging.realEnd}"> 
 							<li class="page-item"><a class="page-link">Next</a><li>
 						</c:when>
 						<c:otherwise>
-							<c:if test="${!empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventList.do?page=${paging.page+1}&keyword=${keyword}&searchType=${searchType}">Next</a></li>
+							<c:if test="${!empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum+1}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">Next</a></li>
 							</c:if>					
-							<c:if test="${empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventList.do?page=${paging.page+1}">Next</a></li>
+							<c:if test="${empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum+1}">Next</a></li>
 							</c:if>
 						</c:otherwise>
 					</c:choose>
 			</ul>
-		
+		<input type="button" class="gradient" onclick="location.href='/boardEvent/write'" value="테스트글쓰기">
 		<div class="mt-3 text-right">
 		<c:if test="${loginUser.admin==1}">
-			<input type="button" class="gradient" onclick="location.href='boardEventWrite.do'" value="글쓰기">
+			<input type="button" class="gradient" onclick="location.href='/boardEvent/write'" value="글쓰기">
 		</c:if>
 		<br><br>
 	</div>

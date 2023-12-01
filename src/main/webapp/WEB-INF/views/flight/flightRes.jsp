@@ -184,12 +184,15 @@ max-width: 100%;
 <%@ include file="../includes/footer.jsp"%>
  <script>
  window.onload = function () {
-    $("#pointUse1").click(function(){
+   // $("#pointUse1").click(function(){
+    $("#pointUse1").change(function(){
         var chk = $(this).is(":checked");
-        
+
         if(chk == true){
         	$("#pointUse2").removeAttr("readonly");
-        	var pointVal = $("#pointUse2").val();
+ /*        	var pointVal = $("#pointUse2").val();
+        	 updatePayment(); */
+        	
         }else{
         	$("#pointUse2").val("0");
         	$("#pointUse2").attr("readonly","readonly");
@@ -204,7 +207,7 @@ max-width: 100%;
         	$("#kakaoPUse2").removeAttr("readonly");
         	var kpoint = $("#kakaoPUse2").val();
         }else{
-        	console.log("fff");
+        	console.log("체크박스 해제");
         	$("#kakaoPUse2").val("0");
         	$("#kakaoPUse2").attr("readonly","readonly");
         	

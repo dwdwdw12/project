@@ -28,25 +28,30 @@
 <link rel="stylesheet" type="text/css" href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 <style>
-.gradient {
-	width: 80px;
-	height: 30px;
-	font-weight: 900;
-	color: white;
-	text-align: center;
-	background: #FFC107;
-	border: solid 2px white;
-	border-radius: 5px;
-}
+	.gradient {
+		width: 80px;
+		height: 30px;
+		font-weight: 900;
+		color: white;
+		text-align: center;
+		background: #FFC107;
+		border: solid 2px white;
+		border-radius: 5px;
+	}
+	.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    }
 </style>
 
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	
 	 <div class="container">
 		<h2>여행일기 등록</h2>
 		<form action="/boardDiary/write" method="post" name="frm">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" id="userId" name="userId" value="${loginUser.userId}">
 		
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 

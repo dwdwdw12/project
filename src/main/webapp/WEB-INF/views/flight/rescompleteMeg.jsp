@@ -78,7 +78,7 @@ max-width: 100%;
 						explore</a> -->
 						<div>
 					
-<div class="form-row tm-search-form-row">
+					<div class="form-row tm-search-form-row">
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="userid">결제자</label> 
 						</div>
@@ -92,6 +92,7 @@ max-width: 100%;
 							<input name="email" type="text" class="form-control" id="email" value="${kvo.mail}" readonly="readonly">
 						</div>
 					</div>
+					<div class="form-row tm-search-form-row"><label for="vo"></label> </div>
 					<div class="form-row tm-search-form-row">
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="vo">항공정보</label> 
@@ -106,7 +107,7 @@ max-width: 100%;
 							<input name="seat" type="text" class="form-control" id="seat" value="${vo.seatid}" readonly="readonly">
 						</div>
 					</div>
-
+<%-- 					<div class="form-row tm-search-form-row"><label for="vo"></label> </div>
 					<div class="form-row tm-search-form-row">
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 				            <label class="checkbox-test">마일리지 사용금액</label>
@@ -120,30 +121,22 @@ max-width: 100%;
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
 						</div>
-					</div>
+					</div> --%>
+					<div class="form-row tm-search-form-row"><label for="vo"></label> </div>
 					<div class="form-row tm-search-form-row">
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="total">총 결제금액</label> 
+							<label for="total">총 금액</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="total" type="text" class="form-control" id="total" value="${total}" readonly="readonly">
+							<input name="total" type="text" class="form-control" id="total" value="${point}" readonly="readonly">
 						</div>
-	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<label for="totalPay">최종결제금액</label> 
-						</div>
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="totalPay" type="text" class="form-control" id="totalPay" value="total-마일리지-카카오페이" readonly="readonly">
-						</div>	
 					</div>
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">결 제</button>
-						
-						
+					<div class="form-row tm-search-form-row">
+                		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao">알림 메세지 보내기->카카오로그인시 사용가능</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" href="/">메인페이지</button>	
+					</div>		
 						</div>
-						<div class="card-body bg-white mt-0 shadow">
-                <p style="font-weight: bold">카카오페이 현재 사용가능</p>
 
-                <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
- </div>
 				</div>
 			</div>		
 					
@@ -155,61 +148,163 @@ max-width: 100%;
 <!-- .tm-container-outer -->
 <%@ include file="../includes/footer.jsp"%>
 <script>
-    $('#charge_kakao').click(function () {
-        // getter
-        var IMP = window.IMP;
-        IMP.init('imp80062786');
-        var money = $('input[name="cp_item"]:checked').val();
-        console.log(money);
-
-        IMP.request_pay({
-            pg : 'danal_tpay',
-            pay_method : 'card',
-            merchant_uid: 'merchant_' + new Date().getTime(), //상점에서 생성한 고유 주문번호
-            name : '주문명:결제테스트',
-            amount : money,
-            buyer_email : 'iamport1@siot.do',
-            buyer_name : '구매자이름1',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456',
-            biz_num : '9810030929'
-        }, function (rsp) {
-            console.log(rsp);
-            if (rsp.success) {
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-                $.ajax({
-                    type: "POST", 
-                    url: "/flight/rescomplete", //충전 금액값을 보낼 url 설정
-                    data: {
-                    	imp_uid : rsp.imp_uid,
-                        "amount" : money
-                    }
-                }).done(function(data){
-                	if ( everythings_fine ) {
-            			var msg = '결제가 완료되었습니다.';
-            			msg += '\n고유ID : ' + rsp.imp_uid;
-            			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-            			msg += '\결제 금액 : ' + rsp.paid_amount;
-            			msg += '카드 승인번호 : ' + rsp.apply_num;
-            			
-            			alert(msg);
-            		} else {
-            			//[3] 아직 제대로 결제가 되지 않았습니다.
-            			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-            		}
-                });
-            } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
+$(document).ready(function(){
+	alter("ddd");
+})
+    $('#send_kakao').click(function () {
+    	alert("dd");
+    	var url = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
+    	
+    	$.ajax({
+    		type:"POST",
+    		url : url,
+    		contentType : application/x-www-form-urlencoded,
+    		Authorization :  Bearer ${a490df18ce9a725d8744f401c597d9eb},
+    		data-urlencode 'template_object={
+            "object_type": "feed",
+            "content": {
+                "title": "오늘의 디저트",
+                "description": "아메리카노, 빵, 케익",
+                "image_url": "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                "image_width": 640,
+                "image_height": 640,
+                "link": {
+                    "web_url": "http://www.daum.net",
+                    "mobile_web_url": "http://m.daum.net",
+                    "android_execution_params": "contentId=100",
+                    "ios_execution_params": "contentId=100"
+                }
+            },
+    	}),
+    	"item_content" : {
+            "profile_text" :"Kakao",
+            "profile_image_url" :"https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+            "title_image_url" : "https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+            "title_image_text" :"Cheese cake",
+            "title_image_category" : "Cake",
+            "items" : [
+                {
+                    "item" :"Cake1",
+                    "item_op" : "1000원"
+                },
+                {
+                    "item" :"Cake2",
+                    "item_op" : "2000원"
+                },
+                {
+                    "item" :"Cake3",
+                    "item_op" : "3000원"
+                },
+                {
+                    "item" :"Cake4",
+                    "item_op" : "4000원"
+                },
+                {
+                    "item" :"Cake5",
+                    "item_op" : "5000원"
+                }
+            ],
+            "sum" :"Total",
+            "sum_op" : "15000원"
+        },
+        "social": {
+            "like_count": 100,
+            "comment_count": 200,
+            "shared_count": 300,
+            "view_count": 400,
+            "subscriber_count": 500
+        },
+        "buttons": [
+            {
+                "title": "웹으로 이동",
+                "link": {
+                    "web_url": "http://www.daum.net",
+                    "mobile_web_url": "http://m.daum.net"
+                }
+            },
+            {
+                "title": "앱으로 이동",
+                "link": {
+                    "android_execution_params": "contentId=100",
+                    "ios_execution_params": "contentId=100"
+                }
             }
-            alert(msg);
-            document.location.href="/flight/rescomplete"; //alert창 확인 후 이동할 url 설정
-        });
+        ]
+     })
+    	
+/*     	curl -v -X POST "https://kapi.kakao.com/v2/api/talk/memo/default/send" \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -H "Authorization: Bearer ${a490df18ce9a725d8744f401c597d9eb}" \
+        --data-urlencode 'template_object={
+            "object_type": "feed",
+            "content": {
+                "title": "오늘의 디저트",
+                "description": "아메리카노, 빵, 케익",
+                "image_url": "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                "image_width": 640,
+                "image_height": 640,
+                "link": {
+                    "web_url": "http://www.daum.net",
+                    "mobile_web_url": "http://m.daum.net",
+                    "android_execution_params": "contentId=100",
+                    "ios_execution_params": "contentId=100"
+                }
+            },
+            "item_content" : {
+                "profile_text" :"Kakao",
+                "profile_image_url" :"https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+                "title_image_url" : "https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+                "title_image_text" :"Cheese cake",
+                "title_image_category" : "Cake",
+                "items" : [
+                    {
+                        "item" :"Cake1",
+                        "item_op" : "1000원"
+                    },
+                    {
+                        "item" :"Cake2",
+                        "item_op" : "2000원"
+                    },
+                    {
+                        "item" :"Cake3",
+                        "item_op" : "3000원"
+                    },
+                    {
+                        "item" :"Cake4",
+                        "item_op" : "4000원"
+                    },
+                    {
+                        "item" :"Cake5",
+                        "item_op" : "5000원"
+                    }
+                ],
+                "sum" :"Total",
+                "sum_op" : "15000원"
+            },
+            "social": {
+                "like_count": 100,
+                "comment_count": 200,
+                "shared_count": 300,
+                "view_count": 400,
+                "subscriber_count": 500
+            },
+            "buttons": [
+                {
+                    "title": "웹으로 이동",
+                    "link": {
+                        "web_url": "http://www.daum.net",
+                        "mobile_web_url": "http://m.daum.net"
+                    }
+                },
+                {
+                    "title": "앱으로 이동",
+                    "link": {
+                        "android_execution_params": "contentId=100",
+                        "ios_execution_params": "contentId=100"
+                    }
+                }
+            ]
+        }' */
     });
 </script>
 
