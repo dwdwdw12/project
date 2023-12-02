@@ -149,10 +149,10 @@ public class JoinController {
 		KakaoUserVO result = join.confirmMember(vo);
 		log.info(vo);
 		if (result == null) {
-			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!... 근데 왜 !=null로 되는걸까 신규회원들이...?
+			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!
 		} else {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
-			return "/join/joinTerms"; //uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
+			return "/login"; //uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
 		}
 
 	}
@@ -160,11 +160,13 @@ public class JoinController {
 	@GetMapping("/memberInfo") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
 	public void memberInfoGet(Model model, KakaoUserVO vo) {
 		model.addAttribute("userInfo", vo);
-		log.info("JoinController >> ㅛ [get]");
+		log.info("JoinController >>  [get]");
 	}
 	
 	@PostMapping("/memberInfo")
-	public String memberInfo(RedirectAttributes attr, KakaoUserVO vo,
+	public String memberInfo(RedirectAttributes attr, 
+			String userId, String userNick,String userNameK, String userNameE, String gender,
+			String pwd, int userReginumFirst, int userReginumLast,
 			String phone_first, String phone_middle, String phone_last,
 			String email, String mail_Domain,
 			int postCode, String addressDefault, String addressDetail) {
@@ -173,9 +175,15 @@ public class JoinController {
 		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
 		
-		join.registerMember(vo); //phone랑 mail이랑 address는 안들어가는거 아닌가?
+		join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, address);
+		//에러발생.. 이전페이지에서 vo로 받아진 값이라 
 		
 		return "redirect:/join/joinSuccess";
+	}
+	
+	@GetMapping("/joinSuccess")
+	public void joinSuccess() {
+		
 	}
 	
 	

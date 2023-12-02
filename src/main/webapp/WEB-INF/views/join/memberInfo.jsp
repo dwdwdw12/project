@@ -251,7 +251,11 @@
 					<button type="submit" class="btn btn-primary"
 						onclick="return formCheck(); location.href='UserServlet?command=join_info'">확인</button>
 				</div>
-				<input type="hidden" name="${userInfo}">
+				<input type="hidden" name="userNameK" value="${userInfo.userNameK}">
+				<input type="hidden" name="userNameE" value="${userInfo.userNameE}">
+				<input type="hidden" name="gender" value="${userInfo.gender}">
+				<input type="hidden" name="userReginumFirst" value="${userInfo.userReginumFirst}">
+				<input type="hidden" name="userReginumLast" value="${userInfo.userReginumLast}">
 				
 			</form>
 

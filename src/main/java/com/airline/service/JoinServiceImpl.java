@@ -215,8 +215,13 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public void registerMember(KakaoUserVO vo) {
-		join.insertMember(vo);
+	public void registerMember(String userId, String userNick, String userNameK, String userNameE, String gender, String pwd,
+			int userReginumFirst, int userReginumLast, int postCode, String phone, String mail, String address) {
+		join.insertMember(userNameE, userNameK, gender, userReginumFirst, 
+				userReginumLast, userId, userNick, pwd, 
+				mail, phone, postCode, address);
 	}
 
+
+	
 }

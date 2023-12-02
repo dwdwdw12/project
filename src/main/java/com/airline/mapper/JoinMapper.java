@@ -18,10 +18,10 @@ public interface JoinMapper {
 							@Param("userReginumFirst") int userReginumFirst, 
 							@Param("userReginumLast") int userReginumLast
  * */
-	//parameter가 여러개면 명시해줘야함
 	public String getTerms(int termscode);
-	public void insertMember(KakaoUserVO vo);
-	/*(@Param("userNameE") String userNameE, 
+	
+	//parameter가 여러개면 명시해줘야함	
+	public void insertMember(@Param("userNameE") String userNameE, 
 			@Param("userNameK") String userNameK, 
 			@Param("gender") String gender, 
 			@Param("userReginumFirst") int userReginumFirst, 
@@ -32,7 +32,6 @@ public interface JoinMapper {
 			@Param("mail") String mail,
 			@Param("phone") String phone,
 			@Param("postCode" ) int postCode, 
-			@Param("address") String address)
-	 * */
+			@Param("address") String address);
 
 }

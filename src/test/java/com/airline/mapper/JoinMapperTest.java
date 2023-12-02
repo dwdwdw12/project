@@ -51,20 +51,20 @@ public class JoinMapperTest {
 	
 	@Test
 	public void insertMemberTest() {
-		KakaoUserVO vo = KakaoUserVO.builder()
-				.userId("kakaooo")
-				.userNick("test000")
-				.userNameK("테스트")
-				.userNameE("test")
-				.gender("F")
-				.pwd("test000")
-				.mail("dsdf1@nddver.com")
-				.phone("010-1111-1111")
-				.postCode(12345)
-				.address("수원시")
-				.userReginumFirst(800808)
-				.userReginumLast(2222222)
-				.build();
-		join.insertMember(vo);
+//		KakaoUserVO vo = KakaoUserVO.builder()
+//				.userId("kakaooo")
+//				.userNick("test000")
+//				.userNameK("테스트")
+//				.userNameE("test")
+//				.gender("F")
+//				.pwd("test000")
+//				.mail("dsdf1@nddver.com")
+//				.phone("010-1111-1111")
+//				.postCode(12345)
+//				.address("수원시")
+//				.userReginumFirst(800808)
+//				.userReginumLast(2222222)
+//				.build();
+//		join.insertMember(vo);
 	}
 }

@@ -27,14 +27,18 @@
 
 <insert id="insertMember">
 	insert into kakaouser(
-		userId, userNick, userNameK, userNameE, gender, 
-		pwd, mail, phone, postCode, address, userReginumFirst, userReginumLast)
+		userId, userNick, userNameK, userNameE, gender, pwd, 
+		mail, 
+		phone,
+		postCode, 
+		address, userReginumFirst, userReginumLast)
 		
 		values(
-			#{userId}, #{userNick}, #{userNameK}, #{userNameE}, #{gender},
-			#{pwd}, #{mail}, #{phone}, #{postCode}, #{address}, 
+			#{userId}, #{userNick}, #{userNameK}, #{userNameE}, #{gender}, #{pwd},
+			 #{mail}, #{phone}, #{postCode}, #{address}, 
 			#{userReginumFirst}, #{userReginumLast}
 	)
+	
 </insert>
 
 </mapper>
