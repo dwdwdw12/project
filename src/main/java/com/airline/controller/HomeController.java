@@ -61,10 +61,11 @@ public class HomeController {
 	public String home(Model model, Criteria cri) {		
 		model.addAttribute("emer", service.noticePopup(cri));
     
-    //이벤트 슬라이더용 8개만 출력.
-    cri.setAmount(8);
-		List<BoardEventVO> list = eventService.getListwithPaging(cri);
-		model.addAttribute("EventList", list);
+		//이벤트 슬라이더용 8개만 출력.
+		Criteria criEvent = new Criteria();
+		criEvent.setAmount(8);
+		List<BoardEventVO> EventImglist = eventService.getListwithPaging(criEvent);
+		model.addAttribute("EventList", EventImglist);
     
 		return "home";
 	}
