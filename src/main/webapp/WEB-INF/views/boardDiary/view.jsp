@@ -68,10 +68,13 @@
 	<div class="container">
 		<h1>게시글 상세보기</h1>
 		<form action="/boardDiary/delete" method="post" name="frm">
-			<input type="hidden" id="userId" name="userId"
-				value="${loginUser.userId}" readonly="readonly"> <input
-				type="hidden" id="boardNum" name="boardNum"
-				value="${board.boardNum}" readonly="readonly">
+			<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly"> 
+			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
+			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
+			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
+			<input type="hidden" id="type" name="type" value="${cri.type}">
+			<input type="hidden" id="order" name="order" value="${cri.order}">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="form-group">
 				<label for="boardTitle">제목</label> <input type="text"
 					class="form-control" id="boardTitle" name="boardTitle"
@@ -95,31 +98,31 @@
 				<c:choose>
 					<c:when test="${loginUser.admin==1}">
 						<button type="button" class="gradient"
-							onclick="location.href='/boardDiary/list'">목록</button>&nbsp;	
+							onclick="location.href='/boardDiary/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">목록</button>&nbsp;	
 					<button type="button" class="gradient"
-							onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}'">수정</button>&nbsp;	
+							onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}&pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">수정</button>&nbsp;	
 					<button type="button" class="gradient"
 							onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
 					<button type="button" class="gradient" onclick="del()">삭제</button>&nbsp;
 				</c:when>
 					<c:when test="${loginUser.userNick==board.boardWriter}">
 						<button type="button" class="gradient"
-							onclick="location.href='/boardDiary/list'">목록</button>&nbsp; 
+							onclick="location.href='/boardDiary/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">목록</button>&nbsp; 
 					<button type="button" class="gradient"
-							onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}'">수정</button>&nbsp;	
+							onclick="location.href='/boardDiary/update?boardNum=${board.boardNum}&pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">수정</button>&nbsp;	
 					<button type="button" class="gradient"
 							onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
 					<button type="reset" class="gradient" onclick="del()">삭제</button>&nbsp;
 				</c:when>
 					<c:when test="${!empty loginUser.admin}">
 						<button type="button" class="gradient"
-							onclick="location.href='/boardDiary/list'">목록</button>&nbsp;
+							onclick="location.href='/boardDiary/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">목록</button>&nbsp;
 					<button type="button" class="gradient"
 							onclick="location.href='/boardDiary/write'">글쓰기</button>&nbsp;
 				</c:when>
 					<c:otherwise>
 						<button type="button" class="gradient"
-							onclick="location.href='/boardDiary/list'">목록</button>&nbsp; <br>
+							onclick="location.href='/boardDiary/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">목록</button>&nbsp; <br>
 						<br>
 					</c:otherwise>
 				</c:choose>

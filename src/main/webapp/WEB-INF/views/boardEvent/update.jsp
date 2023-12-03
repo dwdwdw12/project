@@ -61,6 +61,12 @@
 		<h2>이벤트 수정</h2>
 		<form action="/boardEvent/update" role="form" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 
+			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
+			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
+			<input type="hidden" id="type" name="type" value="${cri.type}">
+			<input type="hidden" id="order" name="order" value="${cri.order}">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}">
@@ -95,7 +101,7 @@
 			*새로운 파일<br>
 			주의)파일은 5개까지 업로드 가능하며, 이미지 파일 형식만 사용할 수 있습니다(jpg, jpeg, png, bmp).<br>
 				5MB 이하의 파일만 업로드 하실 수 있습니다.<br>
-				첫번째 파일은 썸네일에 표시됩니다.
+				1번 파일이 썸네일에 표시됩니다.
 			
 			<div class="form-group">
 				1. 파일 지정하기 : <input type="file" multiple="multiple"
@@ -112,7 +118,7 @@
 			
 			<div class="uploadResult">
 			이미지 미리보기
-				<ul>
+				<ul id="uploadList">
 				
 				</ul>
 			</div>
@@ -124,8 +130,7 @@
 			
 			<div id="bottom"></div>
 			<div class="mt-3 text-right">
-			<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
-			<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
+			<button type="button" class="gradient" onclick="location.href='/boardEvent/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
 			<button type="reset" class="gradient">다시작성</button> &nbsp;
 			<button type="submit" class="gradient" onclick="return boardCheck()">수정</button> &nbsp;
 			</div>
@@ -278,6 +283,12 @@ $(document).ready(function(){
 			});
 			
 			$(".uploadResult_pre ul").html(str);
+			
+			$("#uploadList").each(function(){
+			    $(this).html($(this).children('li').sort(function(a, b){
+			        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
+			    }));
+			});
 			
 		});
 		
@@ -440,6 +451,12 @@ function showUploadResult(uploadResultArr){
 		}
 	});
 	uploadUL.append(str);
+	
+	$("#testList").each(function(){
+	    $(this).html($(this).children('li').sort(function(a, b){
+	        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
+	    }));
+	});
 }
 </script>
 	

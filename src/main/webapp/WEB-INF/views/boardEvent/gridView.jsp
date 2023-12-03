@@ -52,14 +52,14 @@
 	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
 	<div class="container">
 		<h1>이벤트 상세보기</h1>
-			<form action="/boardEvent/delete" method="post" name="frm">
+			<form action="/boardEvent/gridDelete" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
 			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
 			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
 			<input type="hidden" id="type" name="type" value="${cri.type}">
 			<input type="hidden" id="order" name="order" value="${cri.order}">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-
+			
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}" readonly="readonly">
@@ -92,22 +92,6 @@
 				</c:choose>
 			</div>
 	
-			<%-- <c:if test="${imgCount>0}">
-	
-				<c:forEach var="file" items="${fileList}">
-					<c:if test="${file.repImgYn=='Y'}">
-						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
-						<!-- 파일이름 : ${file.oriFileName} &nbsp; &nbsp;	<br> -->
-						<!-- 대표이미지입니다.<br> -->
-						<img src="./upload/${file.oriFileName}" style="max-width: 100%; height: auto;">	<br>
-					</c:if>
-					<c:if test="${file.repImgYn=='N'}">
-						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
-						<!-- 파일이름 : ${file.oriFileName} &nbsp; &nbsp;	<br> -->
-						<img src="./upload/${file.oriFileName}" style="max-width: 100%; height: auto;">	<br>
-					</c:if>
-				</c:forEach>
-			</c:if> --%>
 			
 			<!-- 이미지 출력 -->
 			<div class="row">
@@ -134,13 +118,13 @@
 			<div class="mt-3 text-right">
 			<c:choose>
 				<c:when test="${loginUser.admin==1}">
-					<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
 					<button type="button" class="gradient" onclick="del()">삭제</button>&nbsp;
-					<button type="button" class="gradient" onclick="location.href='/boardEvent/update?boardNum=${board.boardNum}&pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'">수정</button>	
-					<button type="button" class="gradient" onclick="location.href='/boardEvent/write'" id="write">글쓰기</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridUpdate?boardNum=${board.boardNum}&pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'">수정</button>	
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridWrite'" id="write">글쓰기</button>
 				</c:when>
 				<c:otherwise>
-					<button type="button" class="gradient" onclick="location.href='/boardEvent/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
+					<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
 				</c:otherwise>
 			</c:choose>
 			</div>
