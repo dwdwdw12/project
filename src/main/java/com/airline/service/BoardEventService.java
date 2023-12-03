@@ -22,4 +22,6 @@ public interface BoardEventService {
 	
 	public List<BoardEventFileVO> getFileList(int boardNum);
 	
+	public List<BoardEventFileVO> getRepImgList();
+	
 }

@@ -67,7 +67,7 @@
 	
 	 <div class="container">
 		<h2>이벤트 등록</h2>
-		<form action="/boardEvent/write" role="form" method="post" name="frm" >
+		<form action="/boardEvent/gridWrite" role="form" method="post" name="frm" >
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle">
@@ -113,7 +113,7 @@
 			
 			<br>
 			<div class="mt-3 text-right">
-				<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">목록</button>
+				<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">목록</button>
 				<button type="reset" class="gradient">다시작성</button> &nbsp;
 				<button type="submit" class="gradient" id="write">등록</button> &nbsp;
 			</div>

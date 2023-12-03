@@ -51,6 +51,10 @@
 		<h2>여행일기 수정</h2>
 		<form action="/boardDiary/update" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}">
+			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
+			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
+			<input type="hidden" id="type" name="type" value="${cri.type}">
+			<input type="hidden" id="order" name="order" value="${cri.order}">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			 
 			<div class="form-group">
@@ -69,7 +73,7 @@
 			</div>
 		
 			<div class="mt-3 text-right">	
-			<button type="button" class="gradient" onclick="location.href='boardDiaryList.do'">목록</button> &nbsp;
+			<button type="button" class="gradient" onclick="location.href='/boardDiary/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}&order=${cri.order}'">목록</button> &nbsp;
 			<button type="reset" class="gradient">다시작성</button> &nbsp;
 			<button type="submit" class="gradient" onclick="return boardCheck()">수정</button> &nbsp;
 			</div>

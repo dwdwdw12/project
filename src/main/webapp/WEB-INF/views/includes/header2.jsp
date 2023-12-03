@@ -106,7 +106,9 @@
 										</a></li>
 										<li><a href="/notice/list">notice <!-- <i class="fa fa-facebook-square"></i> -->
 										</a></li>
-										<li><a href="#">event <!-- <i class="fa fa-twitter"></i> -->
+										<li><a href="/boardDiary/list">Board Diary <!-- <i class="fa fa-twitter"></i> -->
+										</a></li>
+										<li><a href="/boardEvent/list">Event 
 										</a></li>
 										<sec:authorize access="isAnonymous">
 											<li><a href="/login"> login<!--  <i class="fa fa-instagram"></i>-->

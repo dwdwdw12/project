@@ -55,7 +55,8 @@ public class BoardEventServiceImpl implements BoardEventService{
 		
 		BoardEventFileVO vo = fileMapper.findRepImg(board.getBoardNum());
 		String repImg = vo.getFileName();
-		String filePath = "C:\\upload\\" + vo.getUploadPath() + "/" + vo.getUuid() + "_"+ vo.getFileName();
+		String newPath = vo.getUploadPath().substring(0,4) + "/"+ vo.getUploadPath().substring(5,7) + "/" + vo.getUploadPath().substring(8,10);
+		String filePath = newPath + "/" + vo.getUuid() + "_"+ vo.getFileName();
 		mapper.updateRepImg(repImg, filePath, board.getBoardNum());
 	}
 
@@ -87,7 +88,8 @@ public class BoardEventServiceImpl implements BoardEventService{
 		
 		BoardEventFileVO vo = fileMapper.findRepImg(board.getBoardNum());
 		String repImg = vo.getFileName();
-		String filePath = "C:\\upload\\" + vo.getUploadPath() + "/" + vo.getUuid() + "_"+ vo.getFileName();
+		String newPath = vo.getUploadPath().substring(0,4) + "/"+ vo.getUploadPath().substring(5,7) + "/" + vo.getUploadPath().substring(8,10);
+		String filePath = newPath + "/" + vo.getUuid() + "_"+ vo.getFileName();
 		mapper.updateRepImg(repImg, filePath, board.getBoardNum());
 		
 		return result;
@@ -104,5 +106,13 @@ public class BoardEventServiceImpl implements BoardEventService{
 		log.info("get file list by boardNum" + boardNum);
 		return fileMapper.searchFileByBoardNum(boardNum);
 	}
+
+	@Override
+	public List<BoardEventFileVO> getRepImgList() {
+		log.info("getRepImg service impl");
+		return fileMapper.findRepImgFiles();
+	}
+	
+	
 	
 }
