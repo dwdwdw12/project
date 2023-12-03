@@ -21,7 +21,7 @@ public interface BoardNoticeService {
 	
 	public void modify(BoardNoticeVO vo);
 	 
-	public void updateReadCount(int boardnum);
+	public void updateReadCount(int boardnum); 
 	
 	public void delete(int boardnum);  
  

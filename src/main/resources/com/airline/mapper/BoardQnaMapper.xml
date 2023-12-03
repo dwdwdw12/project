@@ -15,7 +15,7 @@
      			<if test="type=='T'.toString()">   
 					where boardsubject like concat ('%',#{keyword},'%')
 				</if>	
-				<if test="type=='C'.toString()">
+				<if test="type=='C'.toString()"> 
 					where boardcontent like concat ('%',#{keyword},'%')
 				</if>	
 				<if test="type=='W'.toString()">

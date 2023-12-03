@@ -13,7 +13,7 @@
             document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
         }
  
-        function closePop() {
+        function closePop() {  
             if (document.pop_form.chkbox.checked) {
             	setCookie("maindiv", "done", 24 * 60 * 60); // 24시간을 초 단위로 설정
             }

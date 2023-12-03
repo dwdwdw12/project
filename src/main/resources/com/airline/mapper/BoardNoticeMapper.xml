@@ -48,7 +48,7 @@
 
  <select id="getPageList" resultType="com.airline.vo.BoardNoticeVO">
      	<![CDATA[
-     	select * from boardnotice where
+     	select * from boardnotice where 
      	]]>
      			<if test="type=='T'.toString()">
 					boardsubject like concat ('%',#{keyword},'%') and
