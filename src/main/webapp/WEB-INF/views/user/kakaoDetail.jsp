@@ -92,29 +92,38 @@
 						<tbody>
 							<tr>
 								<td>${list.pno}</td>
-								<td>${list.amount}</td>
-								<td>${list.buyDate}</td>
+								<td><fmt:formatNumber value="${list.amount}" pattern="#,###" /></td>
+								<td><fmt:formatDate value="${list.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 							</tr>
 						</tbody>
 					</c:forEach>
 				</table>
 				<!-- 페이징 -->
 		<ul class="pagination justify-content-center">
-				<c:if test="${paging.prev}">
+ 				<c:if test="${paging.prev}">
 					<li class="page-item">
-						<a class="page-link" href="${paging.startPage-1}">Previous</a>
+						<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
 					</li>
-				</c:if>
-				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" items="${paging}" var="num">
-					<li class="page-item active">
-						<a class="page-link" href="${num}">${num}</a>
-					</li>
+				</c:if> 
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+					<c:choose>
+				        <c:when test="${num eq paging.cri.pageNum}">
+				            <li class="page-item active">
+				                <span class="page-link">${num}</span>
+				            </li>
+				        </c:when>
+				        <c:otherwise>
+				            <li class="page-item">
+				                <a class="page-link" href="?pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
+				            </li>
+				        </c:otherwise>
+					 </c:choose>       
 				</c:forEach>
-				<c:if test="${paging.next}">
-					<li class="page-item"><a class="page-link"
-						href="${paging.endPage+1}">Next</a></li>
-				</c:if>
-				</ul>
+				 <c:if test="${paging.next}">
+					<li class="page-item">
+					<a class="page-link" href="?pageNum=${paging.cri.pageNum+1}&amount=${paging.cri.amount}">Next</a></li>
+				</c:if> 
+				</ul> 
 			</div>
 		</div>
 	</section>
@@ -131,13 +140,13 @@
 <%@ include file="../includes/footer.jsp"%>
 <script type="text/javascript">
 	//페이지 버튼 클릭 이동
-	var actionForm = $("#pageForm");
+/* 	var actionForm = $("#pageForm");
 	$(".page-item a").on("click", function(e) {
 		e.preventDefault();
 		console.log("test--------------------------");
 		actionForm.find("input[name='pageNum']").val($(this).attr("href")); 
 		actionForm.submit();
-	});
+	}); */
 	
 
 </script>

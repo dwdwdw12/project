@@ -5,6 +5,7 @@ import java.util.List;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
@@ -59,5 +60,15 @@ public interface UserService {
 	int getTotal(String userid);
 	//항공예약 총 게시글수
 	int getFlightTotal(String userid, Criteria cri);
+	//항공취소
+	int cancelTicket(String data);
+	//체크인
+	int checkin(String data);
+	//유저페이지 항공내역3개
+	List<FlightResVO> getFlight3(String userid);
+	//유저이름 검색(닉네임)
+	String getName(String userid);
+	//qna 게시판3개 
+	List<BoardQnaVO> getQna(String username);
 
 }

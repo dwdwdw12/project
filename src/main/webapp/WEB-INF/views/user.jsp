@@ -199,19 +199,20 @@ span:before {
 						</p>
 			    	 	<table class="table table-hover">
 					    <thead>
-					    	<th>시간</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
+					    	<th>예약번호</th>
+					    	<th>출발지</th>
+					    	<th>출발일자</th>
+					    	<th>도착지</th>
+					    	<th>도착일자</th>
 					    </thead>
-					    <c:forEach items="${pvo3}" var="list">
+					    <c:forEach items="${rvo3}" var="list">
 					    <tbody>
 					      <tr>
-					        <td><fmt:formatDate value="${list.getDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
+					      	<td>${list.resno}</td>
+					      	<td>${list.departure}</td>
+					        <td>${list.deptime}</td>
+					        <td>${list.arrival}</td>
+					        <td>${list.arrtime}</td>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		
@@ -232,29 +233,33 @@ span:before {
 			    	 <p>
 						<h3 style="text-align: center;">
 							<strong>${vo.userNameK} 님</strong> 문의게시글 작성 현황 </h3>
-							<p>아직 없음</p>
 						</p>
 			    	 	<table class="table table-hover">
 					    <thead>
-					    	<th>시간</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
+					    	<th>제목</th>
+					    	<th>작성일</th>
+					    	<th>답변여부</th>
 					    </thead>
-					    <c:forEach items="${pvo3}" var="list">
+					    <c:forEach items="${qvo}" var="qvo">
 					    <tbody>
 					      <tr>
-					        <td><fmt:formatDate value="${list.getDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
+
+					        <td>${qvo.boardsubject}</td>
+					        <td>${qvo.regidate}</td>
+					        <c:choose>
+					        	<c:when test="${qvo.repadmin >0}">
+					        		<td>완료</td>
+					      		</c:when>
+					      		<c:otherwise>
+					      			<td>대기중</td>
+					      		</c:otherwise>
+					      	</c:choose>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table>
 	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/qna'">상세조회 >></button>
 			    	 </div>
 			   	 </div>
 			   	 

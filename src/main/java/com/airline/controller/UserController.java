@@ -3,6 +3,7 @@ package com.airline.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airline.service.UserService;
 import com.airline.vo.Criteria;
@@ -75,7 +78,8 @@ public class UserController {
 			int sumK = service.getSumK(userid);
 			model.addAttribute("vo",vo);
 			model.addAttribute("sumK",sumK);
-			model.addAttribute("pageMaker", new PageDTO(cri, service.getKTotal(userid, cri)));
+			System.out.println( new PageDTO(cri, service.getKTotal(userid, cri)));
+			model.addAttribute("paging", new PageDTO(cri, service.getKTotal(userid, cri)));
 		}
 	}
 	
@@ -117,6 +121,23 @@ public class UserController {
 			System.out.println("test>>>>>"+new PageDTO(cri, service.getFlightTotal(userid, cri)));
 		}
 	}
+	
+	//항공취소, 체크인 처리
+	@PostMapping(value="/userResDetail", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void userResDetailPost(@RequestParam("resno")String data) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			String userid = userDetails.getUsername();
+			System.out.println("id : " + userid);
+			System.out.println("data : "+data);
+			//항공취소 처리
+			int result = service.cancelTicket(data);
+			//체크인 처리
+			int resultCheckin = service.checkin(data);
+		}
+	}
+	
 	
 
 	@GetMapping("/joinTerms")
