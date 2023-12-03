@@ -8,6 +8,14 @@
 	select mail from kakaouser where mail= #{email};
 </select>
 
+<select id="checkUserIdAndEmail" resultType="String">
+	select mail from kakaouser where mail= #{email} and userId = #{userId}
+</select>
+
+<update id="updatePwdByMailKey" parameterType="map">
+	update kakaouser set pwd = #{mail_key} where userId = #{userId}
+</update>
+
 <select id="getUserId" resultType="com.airline.vo.KakaoUserVO" parameterType="map">
 	select * from kakaouser where mail = #{email} and mail_key = #{mail_key}
 </select>
@@ -21,8 +29,8 @@
 	and userReginumLast = #{userReginumLast}
 </select>
 
-<select id="getTerms" resultType="String">
-	select termsContents from terms where termsCode = #{termscode}
+<select id="getTerms" resultType="com.airline.vo.TermsVO">
+	select * from terms where termsCode = #{termscode}
 </select>
 
 <insert id="insertMember">

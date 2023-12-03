@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.airline.mail.TempKey;
 import com.airline.vo.KakaoUserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -66,5 +67,22 @@ public class JoinMapperTest {
 //				.userReginumLast(2222222)
 //				.build();
 //		join.insertMember(vo);
+	}
+	
+	@Test
+	public void checkUserIdAndEmailTest() {
+		
+		String email = "1111111@naver.com";
+		String userId = "hana111";
+		
+		join.checkUserIdAndEmail(userId, email);
+	}
+	
+	@Test
+	public void updatePwdByMailKeyTest() {
+		String mail_key = new TempKey().getKey();
+		String userId = "hana111";
+		
+		join.updatePwdByMailKey(userId, mail_key);
 	}
 }

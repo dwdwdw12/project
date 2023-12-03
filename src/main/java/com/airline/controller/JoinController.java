@@ -24,6 +24,7 @@ import com.airline.mail.TempKey;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
 import com.airline.vo.KakaoUserVO;
+import com.airline.vo.TermsVO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -44,9 +45,9 @@ public class JoinController {
 
 	@GetMapping("/joinTerms")
 	public void joinTermsGet(Model model) {
-		String terms1 = join.getTerms(1);
-		String terms2 = join.getTerms(2);
-		String terms3 = join.getTerms(3);
+		TermsVO terms1 = join.getTerms(1);
+		TermsVO terms2 = join.getTerms(2);
+		TermsVO terms3 = join.getTerms(3);
 		
 		model.addAttribute("terms1", terms1);
 		model.addAttribute("terms2", terms2);
@@ -77,7 +78,7 @@ public class JoinController {
 		
 		if(result == null) {
 			model.addAttribute("message", "입력하신 정보를 다시 확인해주시기 바랍니다.");
-			return "/join/findId";
+			return "redirect:/join/findId";
 		} else {
 			try {
 				String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -98,7 +99,7 @@ public class JoinController {
 				sendMail.setTo(email);
 				sendMail.send();
 	
-				log.info("controller에서 메일 보냄 완료");
+				log.info("controller에서 아아디 찾기 메일 보냄 완료");
 	
 				return "redirect:/join/mailSended";	
 				
@@ -130,6 +131,55 @@ public class JoinController {
 		log.info("JoinController >> findPwd");
 	}
 
+	@PostMapping("/findPwd") // 여유가 있다면.. 랜덤키생성/메일보내는 메서드를 따로 뺄까 생각중...
+	public String findPwd(String userId, String email, Model model, RedirectAttributes attr) {
+		
+		String result = join.confirmUserIdAndEmail(userId, email);
+
+		log.info("userId >> " + userId);
+		log.info("email >> " + email);
+		log.info("result >> " + result);
+		
+		if(result == null) {
+			model.addAttribute("message", "입력하신 정보를 다시 확인해주시기 바랍니다.");
+			return "redirect:/join/findPwd";
+		} else {
+			try {
+				String mail_key = new TempKey().getKey(); // 랜덤키 생성
+	
+				Map<String, String> params = new HashMap<String, String>();
+				//params.put("userId", userId);
+				params.put("email", email);
+				params.put("mail_key", mail_key);
+				
+				mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+				log.info("입력받은 아이디 >> " +userId + " 입력받은 이메일 >> " + email + " 생성된 key >> " + mail_key);
+	
+				MailHandler sendMail = new MailHandler(mailSender);
+				sendMail.setSubject("카카오 항공 인증 메일입니다.");
+				sendMail.setText("<h3>카카오 항공을 찾아주셔서 감사합니다.</h3>" + "<br>아래의 임시 비밀번호로 로그인 후 비밀번호 변경 부탁드립니다."
+						+ "<h3>" + mail_key + "</h3>"
+						+ "<br><br><a href='http://localhost:8081/login"
+						+ "' target='_blank'>로그인</a>");
+				sendMail.setFrom("systemlocal99@gmail.com", "카카오 항공");
+				sendMail.setTo(email);
+				sendMail.send();
+	
+				log.info("controller에서 아아디 찾기 메일 보냄 완료");
+				
+				join.modifyPwdByMailKey(userId, mail_key);
+	
+				return "redirect:/join/mailSended";	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "redirect:/error/accessError";
+			}
+		}
+
+	}
+	
+	
 	@GetMapping("/checkMember") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
 	public void checkMember(Model model) {
 		log.info("JoinController >> checkMember [get]");
@@ -178,7 +228,33 @@ public class JoinController {
 		join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, address);
 		//에러발생.. 이전페이지에서 vo로 받아진 값이라 
 		
-		return "redirect:/join/joinSuccess";
+		try {
+			String mail_key = new TempKey().getKey(); // 랜덤키 생성
+
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("email", email);
+			params.put("mail_key", mail_key);
+			
+			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+			log.info("입력받은 이메일 >> " + email + "생성된 key >> " + mail_key);
+
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
+			sendMail.setText("<h3>카카오 항공을 찾아주셔서 감사합니다.</h3>" + "<br>언제나 회원님을 생각하는 카카오 항공이 되겠습니다."
+					+ "<br><br>");
+			sendMail.setFrom("systemlocal99@gmail.com", "카카오 항공");
+			sendMail.setTo(email);
+			sendMail.send();
+
+			log.info("controller에서 가입완료 메일 보냄 완료");
+
+			return "redirect:/join/joinSuccess";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/error/accessError";
+		}
+		
 	}
 	
 	@GetMapping("/joinSuccess")

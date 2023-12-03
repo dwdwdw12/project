@@ -4,11 +4,14 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import com.airline.vo.KakaoUserVO;
+import com.airline.vo.TermsVO;
 
 @Component
 public interface JoinMapper {
 
 	public String checkEmail(String email);
+	public String checkUserIdAndEmail(@Param("userId") String userId, @Param("email") String email);
+	public void updatePwdByMailKey(@Param("userId") String userId, @Param("mail_key") String mail_key);
 	public KakaoUserVO getUserId(@Param("email") String email, @Param("mail_key") String mail_key);
 	public KakaoUserVO checkMember(KakaoUserVO vo);
 /*
@@ -18,7 +21,7 @@ public interface JoinMapper {
 							@Param("userReginumFirst") int userReginumFirst, 
 							@Param("userReginumLast") int userReginumLast
  * */
-	public String getTerms(int termscode);
+	public TermsVO getTerms(int termscode);
 	
 	//parameter가 여러개면 명시해줘야함	
 	public void insertMember(@Param("userNameE") String userNameE, 

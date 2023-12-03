@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.airline.mapper.JoinMapper;
 import com.airline.vo.KakaoUserVO;
+import com.airline.vo.TermsVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,6 +42,18 @@ public class JoinServiceImpl implements JoinService {
 	public KakaoUserVO confirmMember(KakaoUserVO vo) {
 		return join.checkMember(vo);
 	}
+	
+
+	@Override
+	public String confirmUserIdAndEmail(String userId, String email) {
+		return join.checkUserIdAndEmail(userId, email);
+	}
+
+	@Override
+	public void modifyPwdByMailKey(String userId, String mail_key) {
+		join.updatePwdByMailKey(userId, mail_key);
+	}
+	
 
 	@Override //토큰 받아오기
 	public String getAccessToken(String authorize_code) throws Throwable {
@@ -210,7 +223,7 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public String getTerms(int termsCode) {
+	public TermsVO getTerms(int termsCode) {
 		return join.getTerms(termsCode);
 	}
 
@@ -221,6 +234,8 @@ public class JoinServiceImpl implements JoinService {
 				userReginumLast, userId, userNick, pwd, 
 				mail, phone, postCode, address);
 	}
+
+
 
 
 	
