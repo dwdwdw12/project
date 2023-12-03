@@ -15,7 +15,7 @@
  
         function closePop() {  
             if (document.pop_form.chkbox.checked) {
-            	setCookie("maindiv", "done", 24 * 60 * 60); // 24시간을 초 단위로 설정
+            	setCookie("maindiv", "done", 1); // GMT시간으로 24시간 (1일)로 수정
             }
             document.getElementById('layer_popup').style.display = "none"; // 수정: visibility 대신 display 사용
         }  
