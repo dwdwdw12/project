@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.airline.mapper.BoardEventMapper;
+import com.airline.service.BoardEventService;
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
+import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
@@ -43,9 +46,16 @@ public class HomeController {
 	@Autowired
 	private UserService user;
 	
+	@Autowired
+	private BoardEventService eventService;
+	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {		
+	public String home(Model model) {	
+		Criteria cri = new Criteria();
+		cri.setAmount(8);
+		List<BoardEventVO> list = eventService.getListwithPaging(cri);
+		model.addAttribute("EventList", list);
 		return "home";
 	}
 	
