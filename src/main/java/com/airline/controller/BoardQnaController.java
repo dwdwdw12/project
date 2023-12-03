@@ -27,7 +27,7 @@ public class BoardQnaController {
 
 	@Autowired
 	private BoardQnaService service;
-	
+	 
 	@GetMapping("/list")
 	public void getList(Model model, Criteria cri) {
 		model.addAttribute("list", service.getPageList(cri));
