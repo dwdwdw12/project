@@ -9,6 +9,7 @@ import com.airline.mapper.UserMapper;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
@@ -160,6 +161,36 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int getFlightTotal(String userid, Criteria cri) {
 		return mapper.getFlightTotal(userid,cri);
+	}
+
+
+	@Override
+	public int cancelTicket(String data) {
+		return mapper.cancelTicket(data);
+	}
+
+
+	@Override
+	public int checkin(String data) {
+		return mapper.checkin(data);
+	}
+
+
+	@Override
+	public List<FlightResVO> getFlight3(String userid) {
+		return mapper.getFlight3(userid);
+	}
+
+
+	@Override
+	public String getName(String userid) {
+		return mapper.getUserName(userid);
+	}
+
+
+	@Override
+	public List<BoardQnaVO> getQna(String username) {
+		return mapper.getQna(username);
 	}
 
 }

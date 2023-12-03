@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
@@ -48,7 +49,7 @@ public interface UserMapper {
 
 	public int chargePoint(@Param("userid")String userid,@Param("amount") int amount);
 
-	public List<PointVO> getKPoint(String userid, Criteria cri);
+	public List<PointVO> getKPoint(@Param("userid")String userid,@Param("cri") Criteria cri);
 
 	public List<UserPayVO> getMPoint(@Param("userid")String userid,@Param("cri")Criteria cri);
 
@@ -63,6 +64,16 @@ public interface UserMapper {
 	public int getTotal(String userid);
 
 	public int getFlightTotal(@Param("userid")String userid,@Param("cri")Criteria cri);
+
+	public int cancelTicket(String data);
+
+	public int checkin(String data);
+
+	public List<FlightResVO> getFlight3(String userid);
+
+	public String getUserName(String userid);
+
+	public List<BoardQnaVO> getQna(String username);
 	
 
 }
