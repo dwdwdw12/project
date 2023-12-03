@@ -104,26 +104,36 @@
 								</c:choose>
 								<td><fmt:formatNumber
 									value="${list.mileage}" pattern="#,###" /></td>
-								<td>${list.getDate}</td>
+								<td><fmt:formatDate value="${list.getDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 							</tr>
 						</tbody>
 					</c:forEach>
 				</table>
 				<!-- 페이징 -->
 		<ul class="pagination justify-content-center">
-			<c:if test="${pageMaker.prev}">
-				<li class="page-item">
-					<a class="page-link" href="${pageMaker.startPage-1}">Previous</a>
-				</li>
-			</c:if>
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-					<li class="page-item active">
-						<a class="page-link" href="${num}">${num}</a>
+ 				<c:if test="${paging.prev}">
+					<li class="page-item">
+						<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
 					</li>
-			</c:forEach>
-			<c:if test="${pageMaker.next}">
-				<li class="page-item"><a class="page-link" href="${pageMaker.endPage+1}">Next</a></li>
-			</c:if>
+				</c:if> 
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+					<c:choose>
+				        <c:when test="${num eq paging.cri.pageNum}">
+				            <li class="page-item active">
+				                <span class="page-link">${num}</span>
+				            </li>
+				        </c:when>
+				        <c:otherwise>
+				            <li class="page-item">
+				                <a class="page-link" href="?pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
+				            </li>
+				        </c:otherwise>
+					 </c:choose>       
+				</c:forEach>
+				 <c:if test="${paging.next}">
+					<li class="page-item">
+					<a class="page-link" href="?pageNum=${paging.cri.pageNum+1}&amount=${paging.cri.amount}">Next</a></li>
+				</c:if>
 		</ul>
 			</div>
 		</div>
@@ -131,8 +141,8 @@
 	
 	<!-- 전달 폼 -->
 	<form id="actionForm" action="/user/kakaoDetail" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}" />
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
+		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}" />
+		<input type="hidden" name="amount" value="${paging.cri.amount}" />
 		<input type="hidden" value='sec:authentication property="principal.username"'/>
 	</form>
 
@@ -141,13 +151,13 @@
 <%@ include file="../includes/footer.jsp"%>
 <script type="text/javascript">
 	//페이지 버튼 클릭 이동
-	var actionForm = $("#actionForm");
+/* 	var actionForm = $("#actionForm");
 	$(".page-item a").on("click", function(e) {
 		e.preventDefault();
 		console.log("test--------------------------");
 		actionForm.find("input[name='pageNum']").val($(this).attr("href")); 
 		actionForm.submit();
-	});
+	}); */
 	
 
 </script>

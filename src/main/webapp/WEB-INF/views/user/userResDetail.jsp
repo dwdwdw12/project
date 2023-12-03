@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <%@ include file="../includes/header2.jsp"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -20,9 +21,9 @@
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 <!-- Templatemo style -->
-
+<!-- 
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
-<link rel="stylesheet" href="../resources/css/normalize.css">
+<link rel="stylesheet" href="../resources/css/normalize.css"> -->
 <style>
 .slideshow {
 	height: 465px;
@@ -54,30 +55,34 @@
 			</div>
 		</div>
 	</section>
-   
+
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
-					<h2 class="text-uppercase mb-4">
-						항공권 예약 확인 및 취소
-					</h2>
+					<h2 class="text-uppercase mb-4">항공권 예약 확인 및 취소</h2>
 					<p class="mb-4">구매하신 항공권 내역 확인 및 취소가 가능합니다.</p>
+					<p class="mb-4">*취소한 항공권은 영업일 기준 3일 이내 취소처리됩니다.</p>
+					<p class="mb-4">*체크인 항공권은 취소처리가 불가합니다.</p>
 				</div>
 			</div>
 
-			<form action="/flight/search" method="get" class="tm-search-form tm-section-pad-1">
+			<form action="/flight/search" method="get"
+				class="tm-search-form tm-section-pad-1">
 				<div class="form-row tm-search-form-row">
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-					<label for="dep">총 구매횟수>> &nbsp;:&nbsp; ${count}번</label> 
+					<div
+						class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+<%-- 						<label for="dep">총 구매횟수 &nbsp;:&nbsp; ${count}번</label> 
 						<label for="dep">/ 총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
-									value="${totalPrice}" pattern="#,###" />원</label> 
+								value="${totalPrice}" pattern="#,###" />원</label> --%>
+						<p>총 구매횟수 &nbsp;:&nbsp; ${count}번</p>
+						<p>총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
+								value="${totalPrice}" pattern="#,###" />원</p>
 					</div>
 
 				</div>
 				<!-- form-row -->
-				<div class="form-row tm-search-form-row">
-				</div>
+				<div class="form-row tm-search-form-row"></div>
 			</form>
 
 			<div class="container">
@@ -89,7 +94,7 @@
 							<th>출발지</th>
 							<th>출발시간</th>
 							<th>도착지</th>
-							<th>도착시간</th>							
+							<th>도착시간</th>
 							<th>취소여부</th>
 							<th>체크인여부</th>
 							<th>취소</th>
@@ -98,82 +103,151 @@
 					</thead>
 					<c:forEach items="${vo}" var="list">
 						<tbody>
-							<tr>
+							<tr class="flight">
 								<td>${list.resno}</td>
-								<td><fmt:formatDate value="${list.purchasetime}" pattern="yyyy-MM-dd HH:mm" /></td>
+								<td><fmt:formatDate value="${list.purchasetime}"
+										pattern="yyyy-MM-dd HH:mm" /></td>
 								<td>${list.departure}</td>
 								<td>${list.deptime}</td>
 								<td>${list.arrival}</td>
 								<td>${list.arrtime}</td>
-								<td>${list.isCancel}</td>
-								<td>${list.isCheckin}</td>
-								
-<%-- 								<c:choose>
+								<%-- <td>${list.isCancel}</td>
+								<td>${list.isCheckin}</td> --%>
+
+								 <c:choose>
 									<c:when test="${list.isCancel==0}">
 										<td>false</td>
 									</c:when>
 									<c:otherwise>
 										<td>true</td>
 									</c:otherwise>
-								</c:choose> --%>
-<%-- 								<c:choose>
+								</c:choose> 
+								<c:choose>
 									<c:when test="${list.isCheckin==0}">
 										<td>false</td>
 									</c:when>
 									<c:otherwise>
 										<td>true</td>
 									</c:otherwise>
-								</c:choose> --%>
-								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'">취소</button></td>
-								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'">체크인</button></td>
+								</c:choose> 
+								<td>
+								<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="cancelTicket('${list.resno}',${list.isCheckin},'${list.isCancel}')">취소</button></td>
+								<td><button type="button"
+										class="btn btn-primary btn-sm btn-block btn-custom"
+										onclick="checkin('${list.resno}','${list.isCheckin}','${list.isCancel}')">체크인</button></td>
 							</tr>
 						</tbody>
 					</c:forEach>
 				</table>
-				<!-- 페이징 
+				<!-- 페이징  -->
 				<ul class="pagination justify-content-center">
-						<c:if test="${paging.prev}">
-							<li class="page-item">
-								<a class="page-link" href="${paging.startPage-1}">Previous</a>
-							</li>
-						</c:if>
-						<c:forEach begin="${paging.startPage}" end="${paging.endPage}" items="${paging}" var="num">
-							<li class="page-item active">
-								<a class="page-link" href="${num}">${num}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${paging.next}">
-							<li class="page-item"><a class="page-link"
-								href="${paging.endPage+1}">Next</a></li>
-						</c:if>
-				</ul>-->
+							<c:if test="${paging.prev}">
+					<li class="page-item">
+						<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
+					</li>
+				</c:if> 
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+					<c:choose>
+				        <c:when test="${num eq paging.cri.pageNum}">
+				            <li class="page-item active">
+				                <span class="page-link">${num}</span>
+				            </li>
+				        </c:when>
+				        <c:otherwise>
+				            <li class="page-item">
+				                <a class="page-link" href="?pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
+				            </li>
+				        </c:otherwise>
+					 </c:choose>       
+				</c:forEach>
+				 <c:if test="${paging.next}">
+					<li class="page-item">
+					<a class="page-link" href="?pageNum=${paging.cri.pageNum+1}&amount=${paging.cri.amount}">Next</a></li>
+				</c:if> 
+				</ul>
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- 전달 폼 -->
-	<form id="pageForm" action="/user/kakaoDetail" method="get">
+	<form id="ticketForm" action="/user/kakaoDetail" method="get">
 		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}" />
-		<input type="hidden" name="amount" value="${paging.cri.amount}" />
-		<input type="hidden" value='sec:authentication property="principal.username"'/>
-	</form> 
+		<input type="hidden" name="amount" value="${paging.cri.amount}" /> <input
+			type="hidden"
+			value='sec:authentication property="principal.username"' />
+	</form>
 
 </div>
 <!-- .tm-container-outer -->
-<%@ include file="../includes/footer.jsp"%>
-<script type="text/javascript">
-	//페이지 버튼 클릭 이동
-	var actionForm = $("#pageForm");
-	$(".page-item a").on("click", function(e) {
-		e.preventDefault();
-		console.log("test--------------------------");
-		actionForm.find("input[name='pageNum']").val($(this).attr("href")); 
-		actionForm.submit();
-	});
-	
 
+<script type="text/javascript">
+	function cancelTicket(resno,isCheckin,isCancel){
+		console.log(resno, isCheckin, isCancel);
+		 if(isCancel == 1){
+			alert("이미 취소완료된 항공권입니다.");
+			return false;
+		}else if(isCheckin ==1){
+			alert("체크인 된 항공권은 취소가 불가합니다.");
+			return false;
+		}else{
+			console.log("취소중...");
+			$.ajax({
+				url : "/user/userResDetail",
+				async : false,
+				dataType : "text",
+				data : {
+					resno : resno	
+				},
+				type : "POST",
+				success : function(data){
+					console.log(data);
+				},error : function(err){
+					console.log(err);
+				}
+				
+			});
+			
+			location.reload(); 
+		}
+	}	
+
+function checkin(resno,isCheckin,isCancel){
+	console.log(resno, isCheckin, isCancel);
+	 if(isCancel == 1){
+		alert("취소된 항공권은 체크인이 불가합니다.");
+		return false;
+	}else if(isCheckin ==1){
+		alert("이미 체크인이 완료 된 항공권입니다.");
+		return false;
+	}else{
+		console.log("체크인중...");
+		if(!confirm("체크인 후에는 티켓 취소가 불가합니다.")){
+			return false;
+		}else{
+			$.ajax({
+				url : "/user/userResDetail",
+				async : false,
+				dataType : "text",
+				data : {
+					resno : resno	
+				},
+				type : "POST",
+				success : function(data){
+					console.log(data);
+				},error : function(err){
+					console.log(err);
+				}
+				
+			});
+			
+			location.reload(); 
+		}
+	
+	}
+	
+}
 </script>
-<!-- 충돌부분 추가 -->
+<!--  충돌부분 추가 
 <script type="text/javascript">
 	var $jLatest = jQuery.noConflict();
 	$jLatest('input[id="dates"]').daterangepicker();
@@ -217,8 +291,8 @@
 					"firstDay" : 1
 				},
 			});
-</script>
-<script type="text/javascript">
+</script> -->
+<!-- <script type="text/javascript">
 	$(function() {
 		$('.slideshow').each(function() {
 			// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
@@ -258,4 +332,5 @@
 		slidesToShow : 1,
 		slidesToScroll : 1
 	});
-</script>
+</script> -->
+<%@ include file="../includes/footer.jsp"%>

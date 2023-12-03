@@ -24,6 +24,7 @@ import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
@@ -116,13 +117,17 @@ public class HomeController {
 			//카카오페이 최근내역 3개
 			List<PointVO> kvo3 = user.getKakao3(userid);
 			model.addAttribute("kvo3",kvo3);
+			//예약내역 3개
+			List<FlightResVO> rvo3 = user.getFlight3(userid);
+			model.addAttribute("rvo3",rvo3);
 			//여행일기 게시글 최근3개
 			List<BoardDiaryVO> dvo = user.getDiary(userid);
 			model.addAttribute("dvo",dvo);
 			//문의게시글 최근3개
-			/*
-			 * List<BoardQnaVO> dvo = user.getDiary(userid); model.addAttribute("dvo",dvo);
-			 */
+			String username = user.getName(userid);
+			List<BoardQnaVO> qvo = user.getQna(username);
+			model.addAttribute("qvo",qvo);
+			 
 			
 		}
 		
