@@ -279,7 +279,7 @@ System.out.println("kakao controller타는중~~~(join에서 get)");
 				log.info("###access_Token#### : " + access_Token);
 				// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
 				
-				// 3번
+				// 3번 
 				HashMap<String, Object> userInfo = join.getUserInfo(access_Token);
 				log.info("###nickname#### : " + userInfo.get("nickname"));
 				log.info("###email#### : " + userInfo.get("email"));
