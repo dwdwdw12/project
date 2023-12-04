@@ -89,6 +89,7 @@ public class AdminController {
 			admin.insertlog(userid, sumMile, sumPrice);
 			//cancel 테이블 취소여부 update
 			admin.updateCancel(resno);
+			//등급계산 다시해야함
 		}
 		
 	}

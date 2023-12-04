@@ -167,6 +167,16 @@ public class FlightServiceImpl implements FlightService{
 	public int usePoint(String userid) {
 		return mapper.usePoint(userid);
 	}
+
+	@Override
+	public String getResAll(String flightName) {
+		return mapper.getResAll(flightName);
+	}
+
+	@Override
+	public int ResCnt(String flightName) {
+		return mapper.ResCnt(flightName);
+	}
 	//
 
 }
