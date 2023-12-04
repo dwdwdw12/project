@@ -10,9 +10,13 @@ import com.airline.vo.TermsVO;
 public interface JoinMapper {
 
 	public String checkEmail(String email);
+	
 	public String checkUserIdAndEmail(@Param("userId") String userId, @Param("email") String email);
+	
 	public void updatePwdByMailKey(@Param("userId") String userId, @Param("mail_key") String mail_key);
+	
 	public KakaoUserVO getUserId(@Param("email") String email, @Param("mail_key") String mail_key);
+	
 	public KakaoUserVO checkMember(KakaoUserVO vo);
 /*
  * @Param("userNameE") String userNameE, 
@@ -37,4 +41,4 @@ public interface JoinMapper {
 			@Param("postCode" ) int postCode, 
 			@Param("address") String address);
 
-}
+} 

@@ -68,7 +68,8 @@ public class JoinMapperTest {
 //				.build();
 //		join.insertMember(vo);
 	}
-	
+
+
 	@Test
 	public void checkUserIdAndEmailTest() {
 		

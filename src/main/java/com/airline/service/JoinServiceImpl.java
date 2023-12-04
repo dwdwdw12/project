@@ -221,7 +221,7 @@ public class JoinServiceImpl implements JoinService {
 				return userInfo;
 			
 	}
-
+ 
 	@Override
 	public TermsVO getTerms(int termsCode) {
 		return join.getTerms(termsCode);

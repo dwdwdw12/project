@@ -68,7 +68,7 @@
 						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
 					</div>
 
-
+ 
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
