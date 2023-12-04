@@ -32,4 +32,6 @@ public interface JoinMapper {
 			@Param("address") String address)
 	 * */
 
+	public int userIdDuplicateCheck(String userId);
+	public int userNickDuplicateCheck(String userNick);
 }

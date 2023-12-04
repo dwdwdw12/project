@@ -18,6 +18,8 @@ public interface JoinService {
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
 	public String getTerms(int termsCode);
 	public void registerMember(KakaoUserVO vo);
+	public int userIdDuplicateCheck(String userId);
+	public int userNickDuplicateCheck(String userNick);
 	
 
 }

@@ -37,4 +37,12 @@
 	)
 </insert>
 
+<select id="userIdDuplicateCheck" resultType="Integer">
+	select count(userId) from kakaouser where userId = #{userId}
+</select>
+<select id="userNickDuplicateCheck" resultType="Integer">
+	select count(userNick) from kakaouser where userNick = #{userNick}
+</select>
+
+
 </mapper>

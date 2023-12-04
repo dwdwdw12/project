@@ -220,4 +220,15 @@ public class JoinServiceImpl implements JoinService {
 		join.insertMember(vo);
 	}
 
+	@Override
+	public int userIdDuplicateCheck(String userId) {
+		return join.userIdDuplicateCheck(userId);
+	}
+
+	@Override
+	public int userNickDuplicateCheck(String userNick) {
+		return join.userNickDuplicateCheck(userNick);
+	}
+
+
 }
