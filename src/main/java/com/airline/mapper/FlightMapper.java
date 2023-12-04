@@ -28,6 +28,8 @@ public interface FlightMapper {
 
 	public int getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 
+	public int getRoundTripPrice(@Param("depname")String depName,@Param("arrname") String arrName);
+
 	public int getUserAge(String userid);
 
 	public float getAgeDiscount(@Param("age")int age);

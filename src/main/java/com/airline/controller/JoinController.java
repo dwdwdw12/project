@@ -1,4 +1,4 @@
-package com.airline.controller;
+ package com.airline.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,9 +25,12 @@ import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.Post;
+
 
 @Controller
 @Log4j
@@ -207,6 +210,42 @@ public class JoinController {
 
 	}
 	
+	@PostMapping("/userIdDuplicateCheck")
+	@ResponseBody
+	public int memberInfo(@RequestParam("userId") String userId) {
+		// ajax 아이디 체크
+		int userIdCnt = join.userIdDuplicateCheck(userId);
+		return userIdCnt;
+	}
+
+	@PostMapping("/userNickDuplicateCheck")
+	@ResponseBody
+	public int userNickDuplicateCheck(@RequestParam("userNick") String userNick) {
+		// ajax 아이디 체크
+		int userNickCnt = join.userNickDuplicateCheck(userNick);
+		return userNickCnt;
+	}
+
+	@PostMapping("/userPwdCheck")
+	@ResponseBody
+	public int userPwdDuplicateCheck(@RequestParam("pwd") String pwd, @RequestParam("pwd_check") String pwd_check) {
+		// ajax 비밀번호 일치 체크
+		int userPwdCnt = -1;
+		log.info("pwd >> " + pwd);
+		log.info("pwd_check >> " + pwd_check);
+		// select count(pwd) from kakaouser where pwd = #{pwd_check} => DB에 입력받는 pwd가
+		// 없으니 당연함..
+		// 1이 안나옴..
+		if (pwd.equals(pwd_check)) { 
+			userPwdCnt = 1;
+			log.info("result userPwdCnt >> " + userPwdCnt);
+		} else {
+			userPwdCnt = 0;
+			log.info("result userPwdCnt >> " + userPwdCnt);
+		}
+		return userPwdCnt;
+	}
+	
 	@GetMapping("/memberInfo") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
 	public void memberInfoGet(Model model, KakaoUserVO vo) {
 		model.addAttribute("userInfo", vo);
@@ -269,7 +308,7 @@ public class JoinController {
 			// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
 			@GetMapping("/kakao")
 			@CrossOrigin(origins = "http://localhost:8081/join/kakao")
-			public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
+			public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model) throws Throwable {
 System.out.println("kakao controller타는중~~~(join에서 get)");
 				// 1번
 				log.info("code:" + code);
@@ -292,7 +331,7 @@ System.out.println("kakao controller타는중~~~(join에서 get)");
 				
 				ModelAndView mv = new ModelAndView();
 				//mv.addObject("userInfo", join.)
-				mv.setViewName("/join/checkMember");
+				mv.setViewName("/join/memberInfo");
 				return mv;	
 				// 닉네임밖에 못받아오기때문에... 기존회원여부 페이지로 이동시킴...ㅜㅜ
 			}

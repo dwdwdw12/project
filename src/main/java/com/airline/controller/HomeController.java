@@ -1,5 +1,10 @@
 package com.airline.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -24,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.airline.mapper.BoardEventMapper;
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
-
+import com.airline.service.FlightService;
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
@@ -52,9 +57,12 @@ public class HomeController {
 	
 	@Autowired
 	private BoardEventService eventService;	
+	
+	@Autowired
+	private FlightService flightService;
 		
-  @Autowired
-	private BoardNoticeService service;
+    @Autowired
+ 	private BoardNoticeService service;
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -66,7 +74,56 @@ public class HomeController {
 		criEvent.setAmount(8);
 		List<BoardEventVO> EventImglist = eventService.getListwithPaging(criEvent);
 		model.addAttribute("EventList", EventImglist);
-    
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");         
+		Date now = new Date();         
+		String today = sdf.format(now);
+		model.addAttribute("today", today);
+
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String fdate = date.format(fm);
+		
+		model.addAttribute("nextWeek", date.plusWeeks(1));
+		
+		//국내선
+		model.addAttribute("GMPtoCJU", flightService.getRoundTripPrice("김포", "제주"));
+		model.addAttribute("KWJtoCJU", flightService.getRoundTripPrice("광주", "제주"));
+		model.addAttribute("GMPtoRSU", flightService.getRoundTripPrice("김포", "여수"));
+		
+		//동북아
+		model.addAttribute("ICNtoKIX", flightService.getRoundTripPrice("인천", "오사카"));
+		model.addAttribute("ICNtoFUK", flightService.getRoundTripPrice("인천", "후쿠오카"));
+		model.addAttribute("ICNtoTPE", flightService.getRoundTripPrice("인천", "타이베이"));
+		model.addAttribute("ICNtoHKG", flightService.getRoundTripPrice("인천", "홍콩"));
+
+		//동남아/서남아
+		model.addAttribute("ICNtoSGN", flightService.getRoundTripPrice("인천", "호찌민"));
+		model.addAttribute("ICNtoMNL", flightService.getRoundTripPrice("인천", "마닐라"));
+		model.addAttribute("ICNtoSIN", flightService.getRoundTripPrice("인천", "싱가포르"));
+		model.addAttribute("ICNtoBKK", flightService.getRoundTripPrice("인천", "방콕"));
+		
+		//중앙아시아
+		model.addAttribute("ICNtoUBN", flightService.getRoundTripPrice("인천", "울란바타르"));
+		model.addAttribute("ICNtoALA", flightService.getRoundTripPrice("인천", "알마티"));
+		model.addAttribute("ICNtoTAS", flightService.getRoundTripPrice("인천", "타슈켄트"));
+
+		//유럽
+		model.addAttribute("ICNtoFRA", flightService.getRoundTripPrice("인천", "프랑크푸르트"));
+		model.addAttribute("ICNtoLHR", flightService.getRoundTripPrice("인천", "런던히드로"));
+		model.addAttribute("ICNtoCDG", flightService.getRoundTripPrice("인천", "파리"));
+		model.addAttribute("ICNtoFCO", flightService.getRoundTripPrice("인천", "로마"));
+		
+		//미주
+		model.addAttribute("ICNtoLAX", flightService.getRoundTripPrice("인천", "로스앤젤레스"));
+		model.addAttribute("ICNtoJFK", flightService.getRoundTripPrice("인천", "뉴욕"));
+		model.addAttribute("ICNtoSFO", flightService.getRoundTripPrice("인천", "샌프란시스코"));
+		model.addAttribute("ICNtoHNL", flightService.getRoundTripPrice("인천", "호놀룰루"));
+
+		//대양주
+		model.addAttribute("ICNtoSYD", flightService.getRoundTripPrice("인천", "시드니"));
+		model.addAttribute("ICNtoSPN", flightService.getRoundTripPrice("인천", "사이판"));
+
 		return "home";
 	}
 	

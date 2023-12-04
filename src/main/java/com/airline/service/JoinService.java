@@ -22,6 +22,8 @@ public interface JoinService {
 	public String getAccessToken(String authorize_code) throws Throwable;
 	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
+	public int userIdDuplicateCheck(String userId);
+	public int userNickDuplicateCheck(String userNick);
 	
 	public TermsVO getTerms(int termsCode);
 	
@@ -30,8 +32,7 @@ public interface JoinService {
 			String phone,
 			String mail,
 			String address);
-	//vo로 받고싶은데 phone, email, address를 못합침..->일단 파라미터로 받음..
-	
+	//vo로 받고싶은데 phone, email, address를 못합침..->일단 파라미터로 받음..	
 
 }
  
