@@ -331,7 +331,7 @@ System.out.println("kakao controller타는중~~~(join에서 get)");
 				
 				ModelAndView mv = new ModelAndView();
 				//mv.addObject("userInfo", join.)
-				mv.setViewName("/join/checkMember");
+				mv.setViewName("/join/memberInfo");
 				return mv;	
 				// 닉네임밖에 못받아오기때문에... 기존회원여부 페이지로 이동시킴...ㅜㅜ
 			}
