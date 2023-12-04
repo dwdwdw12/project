@@ -163,7 +163,7 @@ public class JoinServiceImpl implements JoinService {
 						log.info(kakao_account.get("name"));
 						log.info(kakao_account.get("gender"));
 						log.info(kakao_account.get("age_range_needs_agreement"));
-						//log.info(kakao_account.get("age_range")); => error
+						//log.info(kakao_account.get("age_range")); //=> error
 						log.info(kakao_account.get("birthday")); //탄생연도는 따로 권한이 필요해서 불가능-> age_rage로 대체하여 성인인지만 판단할예정... 그러나 age_range에서 에러발생
 						log.info(kakao_account.get("phone_number"));
 //						log.info(kakao_account.get("shipping_address")); =>error
@@ -236,6 +236,15 @@ public class JoinServiceImpl implements JoinService {
 				mail, phone, postCode, address);
 	}
 
+	@Override
+	public int userIdDuplicateCheck(String userId) {
+		return join.userIdDuplicateCheck(userId);
+	}
+
+	@Override
+	public int userNickDuplicateCheck(String userNick) {
+		return join.userNickDuplicateCheck(userNick);
+	}
 
 
 

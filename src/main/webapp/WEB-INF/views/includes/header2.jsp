@@ -50,7 +50,7 @@
 							<div class="main-menu  d-none d-lg-block">
 								<nav>
 									<ul id="navigation">
-										<li><a href="index.html" href="#"><img
+										<li><a href="/"><img
 												src="../resources/img/kakao/chunsik.png" alt=""
 												style="width: 60px"></a></li>
 										<li><a href="/">home</a></li>

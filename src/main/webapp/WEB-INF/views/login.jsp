@@ -69,11 +69,15 @@
 					</div>
 
  
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+<%-- 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
-					</div>
+					</div> --%>
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address">
+					<img alt="kakao_login" src="../resources/img/kakao/kakao_login_small.png">
+					</a>
 					<br>
+					
 					<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
 					  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
 					<script>
@@ -127,6 +131,12 @@
 			 alert(message);
 		 };
 	 });
+	 
+	 	 
+	var message = ${message};
+	if(message != null){
+		alert(message);
+	};
 </script>
 </body>
 

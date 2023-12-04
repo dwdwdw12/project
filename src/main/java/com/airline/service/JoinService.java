@@ -22,6 +22,8 @@ public interface JoinService {
 	public String getAccessToken(String authorize_code) throws Throwable;
 	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
+	public int userIdDuplicateCheck(String userId);
+	public int userNickDuplicateCheck(String userNick);
 	
 	public TermsVO getTerms(int termsCode);
 	

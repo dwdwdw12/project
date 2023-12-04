@@ -2,6 +2,41 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
+<style>
+.id_ok{
+font-size: small;
+color:#008000;
+display: none;
+}
+
+.id_already{
+font-size: small;
+color:rgb(201, 0, 0); 
+display: none;
+}
+.userNick_ok{
+font-size: small;
+color:#008000;
+display: none;
+}
+
+.userNick_already{
+font-size: small;
+color:rgb(201, 0, 0); 
+display: none;
+}
+.userPwd_ok{
+font-size: small;
+color:#008000;
+display: none;
+}
+
+.userPwd_already{
+font-size: small;
+color:rgb(201, 0, 0); 
+display: none;
+}
+</style>
 
 <div class="tm-page-wrap mx-auto">
 		<section class="tm-banner">
@@ -77,19 +112,29 @@
 									class="icon_require" style="color: red; font-size: x-small;">
 										*</span>
 							</label></th>
-							<td style="padding: 8px"><input type="text" id="userId" name="userId"
+							<td style="padding: 8px">
+							<input type="text" id="userId" name="userId"
 								placeholder="영문+숫자 6~10자" title="영문+숫자 6~10자"
 								style="width: 200px; display: inline;" maxlength="10"
-								class="input_id; form-control" onkeydown="inputIdChk()">
+								class="input_id; form-control" oninput="checkId()" required="required">
+							<!-- oninput="checkId()"으로 값을 입력할 때마다 바로바로 데이터 확인시킴, style로 색을 지정하고 none;으로 숨겨둔 상태 -->
+							<!-- id ajax 중복체크 -->
+								<span class="id_ok">&nbsp;&nbsp;사용 가능한 아이디입니다.</span>
+								<span class="id_already">&nbsp;&nbsp;사용 불가능한 아이디입니다.</span>
 
-								<button type="button" class="btn btn-primary" id="btn_idCheck"
-									onclick="joinInformUseridCheck();" style="display: inline;">중복확인</button> <!-- 아이디 중복 체크 여부 -->
-								<input type="hidden" name="idDuplication" value="idUncheck" />
 								<p style="color: gray; margin-top: 10px; font-size: 0.8em;">
 									6 ~ 10자리 영문(대소문자 구별), 숫자 조합 입력 가능 <br>(단 한글, 공백,
 									특수문자 입력 불가)
 									>
 								</p>
+<!-- 								<button type="button" class="btn btn-primary" id="btn_idCheck"
+									onclick="joinInformUseridCheck();" style="display: inline;">중복확인</button> 아이디 중복 체크 여부
+								<input type="hidden" name="idDuplication" value="idUncheck" />
+								<p style="color: gray; margin-top: 10px; font-size: 0.8em;">
+									6 ~ 10자리 영문(대소문자 구별), 숫자 조합 입력 가능 <br>(단 한글, 공백,
+									특수문자 입력 불가)
+									>
+								</p> -->
 							</td>
 						</tr>
 
@@ -98,14 +143,20 @@
 									class="icon_require" style="color: red; font-size: x-small;">
 										*</span>
 							</label></th>
-							<td style="padding: 8px"><input type="text" id="userNick" name=userNick
-								placeholder="한글/영문/숫자 6~10자" title="한글 or 영문 or 숫자 6~10자 "
+							<td style="padding: 8px"><input type="text" id="userNick" name="userNick"
+								placeholder="한글/영문 2~10자" title="한글/영문 2~10자"
 								style="width: 200px; display: inline;" maxlength="10"
-								class="input_id; form-control" onkeydown="inputIdChk()">
+								class="input_Nick; form-control" oninput="checkNick()" required="required">
+							<!-- oninput="checkId()"으로 값을 입력할 때마다 바로바로 데이터 확인시킴, style로 색을 지정하고 none;으로 숨겨둔 상태 -->
+							<!-- id ajax 중복체크 -->
+								<span class="userNick_ok">&nbsp;&nbsp;사용 가능한 닉네임입니다.</span>
+								<span class="userNick_already">&nbsp;&nbsp;사용 불가능한 닉네임입니다.</span>
 
-								<button type="button" class="btn btn-primary" id="btn_idCheck"
-									onclick="joinInformUseridCheck();" style="display: inline;">중복확인</button> <!-- 아이디 중복 체크 여부 -->
-								<input type="hidden" name="idDuplication" value="idUncheck" />
+								<p style="color: gray; margin-top: 10px; font-size: 0.8em;">
+									6 ~ 10자리 영문(대소문자 구별), 숫자 조합 입력 가능 <br>(단 한글, 공백,
+									특수문자 입력 불가)
+									>
+								</p>
 							</td>
 						</tr>
 
@@ -114,19 +165,25 @@
 							<th scope="row" style="padding: 8px;"><label for="pwd">비밀번호<span
 									class="icon_require" style="color: red; font-size: x-small;">
 										*</span></label></th>
-							<td style="padding: 8px"><input type="password" id="pwd" autocomplete="off"
+							<td style="padding: 8px">
+							<input type="password" id="pwd" autocomplete="off"
 								name="pwd" placeholder="영문+숫자+특수문자 6~10자리" maxlength="10"
 								title="영문+숫자+특수문자 6~10자리" style="width: 200px;"
-								onkeydown="inputPwdChk()" class="form-control"></td>
+								class="form-control" required="required"></td>
 						</tr>
 						<tr>
 							<th scope="row" style="padding: 8px;"><label for="pwd_check">비밀번호 확인<span
 									class="icon_require" style="color: red; font-size: x-small;">
 										*</span></label></th>
-							<td style="padding: 8px"><input type="password" id="pwd_check" autocomplete="off"
+							<td style="padding: 8px">
+							<input type="password" id="pwd_check" autocomplete="off"
 								placeholder="영문+숫자+특수문자 6~10자리" title="영문+숫자+특수문자 6~10자리"
-								maxlength="10" style="width: 200px; display: inline" onkeydown="inputPwdChk()"
-								class="form-control">
+								maxlength="10" style="width: 200px; display: inline" oninput="pwdCheck()" 
+								class="form-control" required="required">
+							<!-- id ajax 중복체크 -->
+								<span class="userPwd_ok">&nbsp;&nbsp;비밀번호 확인이 완료되었습니다.</span>
+								<span class="userPwd_already">&nbsp;&nbsp;비밀번호를 다시 확인해주시기 바랍니다.</span>
+								
 
 								<!-- <button onclick="joinInformPwdCheck()" id="btn_pwdCheck"
 									type="button" class="btn btn-primary" style="display: inline;">확인</button> <input
@@ -138,7 +195,7 @@
 										*</span></label></th>
 							<td style="padding: 8px" id="korea_phone"><select id="phone_first"
 								name="phone_first" style="width: 150px; display: inline;" title="휴대전화 번호 앞자리"
-								class="form-control">
+								class="form-control" required="required">
 									<option value="">선택</option>
 									<option value="010">010</option>
 									<option value="011">011</option>
@@ -149,11 +206,11 @@
 							</select> <input type="text" id="phone_middle" name="phone_middle"
 								placeholder="중간번호" title="휴대전화 번호 가운데 자리" maxlength="4"
 								style="width: 150px; display: inline;" class="form-control"
-								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" required="required">
 								<input type="text" id="phone_last" name="phone_last"
 								placeholder="끝 번호" title="휴대전화번호 끝자리" maxlength="4"
 								style="width: 150px; display: inline;" class="form-control"
-								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" required="required">
 								<p class="txt_error_Msg" id="error_koreaPhone"
 									style="display: none;"></p></td>
 						</tr>
@@ -165,9 +222,9 @@
 										*</span></label></th>
 							<td style="padding: 8px"><input type="text" id="input_emailID" name="email"
 								placeholder="이메일 입력" title="이메일 아이디 입력" style="width: 130px; display: inline;"
-								class="form-control"> @ &nbsp; <select
+								class="form-control" required="required"> @ &nbsp; <select
 								id="select_emailDomain" title="이메일 도메인 선택" name="mail_Domain"
-								style="width: 148px; display: inline;" onchange="display()" class="form-control">
+								style="width: 148px; display: inline;" onchange="display()" class="form-control" required="required">
 
 	                           <option value="naver.com" onclick="return display()">naver.com</option>
 	
@@ -249,7 +306,7 @@
 				<br>
 				<div align="center">
 					<button type="submit" class="btn btn-primary"
-						onclick="return formCheck(); location.href='UserServlet?command=join_info'">확인</button>
+						onclick="return formCheck()">확인</button>
 				</div>
 				<input type="hidden" name="userNameK" value="${userInfo.userNameK}">
 				<input type="hidden" name="userNameE" value="${userInfo.userNameE}">
@@ -264,40 +321,105 @@
 <br>
 
 <script type="text/javascript">		
-		function joinInformUseridCheck(){ //값이 비었는지 확인 ->필수입력항목 비엇는지 확인으로 설정해야함
+	
+		function checkId(){
+			var userId = $('#userId').val(); 
+			$.ajax({
+				url : '/join/userIdDuplicateCheck', //controller에서 요청받을 주소
+				type : 'post', //post방식으로 전달
+				data : {userId:userId}, //데이터
+				dataType : 'json',
+				success : function(userIdCnt){ //controller에서 넘어온 cnt값을 받음
+					if(userIdCnt == 0){ //0이면 사용가능 1이면 중복
+						$('.id_ok').css("display", "inline-block");
+						$('.id_already').css("display", "none");
+					} else { //!=0일때 (중복일때)
+						$('.id_ok').css("display", "none");
+						$('.id_already').css("display", "inline-block");
+						//$('#userId').val(''); 값을 지우는데 지우면 확인못할것같아서 주석처리함
+					}
+				},
+				error:function(){
+					alert("오류가 발생하였습니다.");
+				}
+			});
+		};
+
+		function checkNick(){
+			var userNick = $('#userNick').val(); 
+			$.ajax({
+				url : '/join/userNickDuplicateCheck', //controller에서 요청받을 주소
+				type : 'post', //post방식으로 전달
+				data : {userNick:userNick}, //데이터
+				dataType : 'json',
+				success : function(userNickCnt){ //controller에서 넘어온 cnt값을 받음
+					if(userNickCnt == 0){ //0이면 사용가능 1이면 중복
+						$('.userNick_ok').css("display", "inline-block");
+						$('.userNick_already').css("display", "none");
+					} else { //!=0일때 (중복일때)
+						$('.userNick_ok').css("display", "none");
+						$('.userNick_already').css("display", "inline-block");
+						//$('#userNick').val(''); 값을 지우는데 지우면 확인못할것같아서 주석처리함
+					}
+				},
+				error:function(){
+					alert("오류가 발생하였습니다.");
+				}
+			});
+		};
+
+		function pwdCheck(){
+			var pwd = $('#pwd').val(); 
+			var pwd_check = $('#pwd_check').val(); 
+			$.ajax({
+				url : '/join/userPwdCheck', //controller에서 요청받을 주소
+				type : 'post', //post방식으로 전달
+				data : {pwd:pwd, pwd_check:pwd_check}, //데이터
+				dataType : 'json',
+				success : function(userPwdCnt){ //controller에서 넘어온 cnt값을 받음
+					if(userPwdCnt == 1){ //1이면 일치
+						$('.userPwd_ok').css("display", "inline-block");
+						$('.userPwd_already').css("display", "none");
+					} else if(userPwdCnt == 0) { // 0 불일치
+						$('.userPwd_ok').css("display", "none");
+						$('.userPwd_already').css("display", "inline-block");
+						//값을 지우면 확인못할것같아서 주석처리함
+					} else{ //-1 : controller에서 문제가 발생
+						alert("오류가 발생하였습니다.");
+					}
+				},
+				error:function(){
+					alert("오류가 발생하였습니다.");
+				}
+			});
+		};
+		
+		function formCheck() {
+	        /*  if (document.frm.idDuplication.value == "idUncheck" ) {
+	            alert("아이디 중복확인을 해주세요.");
+	            document.frm.userid.focus;
+	            return false;
+	         }
+	         else if (document.frm.pwdDuplication.value == "pwdUncheck" ) {
+	            alert("비밀번호를 다시 확인해주세요.");
+	            document.frm.pwd.focus;
+	            return false;
+	         }  */
 			var regId = /^[a-zA-Z0-9]{6,10}$/;
+			var regIdPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,10}$/;
 
 			if(document.frm.userId.value.length == 0){
 		        alert("아이디를 입력해주세요.");
 		        return false;
-		    }
-			
-	        //아이디 영어 대소문자 확인
-	        else if(!regId.test(document.frm.userId.value)){
+		    } 
+			else if(!regId.test(document.frm.userId.value)){ //아이디 영어 대소문자 확인
 	            alert("6~10자 영문 대소문자, 숫자만 입력하세요.")
 	            userid.focus();
 	            return false;
 	        }
-			
-			var url = "UserServlet?command=user_register_idCheck&userid=" + document.frm.userid.value
-			open(url, "confirm",
-			"toolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=600,height=200") ;	
-		}
-		function inputIdChk(){//텍스트가 입력된다면 중복체크 다시 하는 함수
-			var dbCheckId = document.frm.btn_idCheck;
-			document.frm.idDuplication.value="idUncheck";
-			dbCheckId.disabled=false;
-			dbCheckId.style.opacity=1;
-			dbCheckId.style.cursor="pointer";
-			
-		}
-		
-		
-		function joinInformPwdCheck(){
-			var regIdPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,10}$/;
 
 	        //비밀번호 확인
-	        if(document.frm.pwd.value.length == 0){
+	        else if(document.frm.pwd.value.length == 0){
 	            alert("비밀번호를 입력하세요.")
 	            pwd.focus();
 	            return false;
@@ -319,32 +441,7 @@
 	            pwd_check.focus();
 	            return false;
 	        }
-	            //document.frm.pwdCheckBtn.disabled = true;
-	        document.frm.pwdDuplication.value="pwdCheck";
-	        document.frm.btn_pwdCheck.disabled=true;
-	        document.frm.btn_pwdCheck.style.cursor="default";
-		}
-		function inputPwdChk(){//텍스트가 입력된다면 중복체크 다시 하는 함수
-			var dbCheckPwd = document.frm.btn_pwdCheck;
-			document.frm.pwdDuplication.value="pwdUncheck";
-			dbCheckPwd.disabled=false;
-			dbCheckPwd.style.opacity=1;
-			dbCheckPwd.style.cursor="pointer";
-			
-		}
-		
-		function formCheck() {
-	         if (document.frm.idDuplication.value == "idUncheck" ) {
-	            alert("아이디 중복확인을 해주세요.");
-	            document.frm.userid.focus;
-	            return false;
-	         }
-	         else if (document.frm.pwdDuplication.value == "pwdUncheck" ) {
-	            alert("비밀번호를 다시 확인해주세요.");
-	            document.frm.pwd.focus;
-	            return false;
-	         } 
-	         else if(document.frm.phone_first.value.length == 0){
+		    else if(document.frm.phone_first.value.length == 0){
 	            alert("휴대전화번호를 다시 확인해주세요.")
 	            document.frm.phone_first.focus;
 	            return false;
