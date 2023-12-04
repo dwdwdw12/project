@@ -34,7 +34,8 @@
 	</select>
 	
 	<select id="getOldFiles" resultType="com.airline.vo.BoardEventFileVO">
-		select * from boardEventFile where uploadpath = to_char(sysdate -1, 'yyyy\mm\dd')
+		select * from boardEventFile where uploadpath = DATE_FORMAT(date_add(now(), interval -1 day), '%Y\%m\%d')
+		
 	</select>
 	
 	

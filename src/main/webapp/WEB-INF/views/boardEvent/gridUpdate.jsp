@@ -132,7 +132,7 @@
 			<div class="mt-3 text-right">
 			<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
 			<button type="reset" class="gradient">다시작성</button> &nbsp;
-			<button type="submit" class="gradient" onclick="return boardCheck()">수정</button> &nbsp;
+			<button type="submit" class="gradient">수정</button> &nbsp;
 			</div>
 			<br><br>
 			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
@@ -302,9 +302,14 @@ $(document).ready(function(){
 $(document).ready(function(e){
 	var formObj = $("form[role='form']");
 	$("button[type='submit']").on("click", function(e){
-		e.preventDefault();
-		console.log("submit clicked");
-		
+		//e.preventDefault();
+		//console.log("submit clicked");
+		var check = boardCheck();
+		if(check==false){
+			e.preventDefault();
+			console.log(check);
+		} else{
+			
 		var str="";
 		$(".uploadResult ul li").each(function(i, obj){
 			var jobj = $(obj);
@@ -322,6 +327,8 @@ $(document).ready(function(e){
 		
 		formObj.append(str).submit();
 		formObj.unbind('click').click();
+		
+		}
 	});
 	
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -452,7 +459,7 @@ function showUploadResult(uploadResultArr){
 	});
 	uploadUL.append(str);
 	
-	$("#testList").each(function(){
+	$("#uploadList").each(function(){
 	    $(this).html($(this).children('li').sort(function(a, b){
 	        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
 	    }));

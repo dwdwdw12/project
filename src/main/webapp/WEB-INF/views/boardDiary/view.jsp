@@ -289,7 +289,7 @@
 								str += "<div><div class='header'>";
 								str += "<strong class='primary-font'>" + list[i].replyWriter + "</strong>";
 								if(userId==list[i].userId){
-									str += "&nbsp;&nbsp;&nbsp;<i class='fa fa-gear'></i>";
+									str += "&nbsp;&nbsp;&nbsp;<i class='fa fa-gear' style='color: gray; font-size: 17px;'></i>";
 								}
 								str += "<small class='pull-right text-muted'>" + replyService.displayTime(list[i].modifyDate) + "</small>";
 								str += "</div><p>" + list[i].replyContent + "</p>";
@@ -505,7 +505,7 @@ function updateLike(){
                 console.log("dto>>"+data.checkLike);
                 console.log("dto>>"+data.message);
                     if(data.checkLike == 0){
-                    	alert("추천완료.");
+                    	alert("추천이 완료되었습니다");
                     	/* location.reload(); */
                     	/* $("#test111").value = "추천" + data.likeCount +"개" */;
                     	
@@ -522,7 +522,7 @@ function updateLike(){
                     	handleRefresh();
                     }
                     else if(data.checkLike == 1) {
-	                    alert("추천취소");
+	                    alert("추천이 취소되었습니다");
 	                     
 	                    const likecnt = document.getElementById('test111');
 	                   
