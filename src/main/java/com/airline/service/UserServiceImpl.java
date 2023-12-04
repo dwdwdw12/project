@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.airline.mapper.UserMapper;
 import com.airline.vo.BoardDiaryVO;
+import com.airline.vo.BoardEventVO;
+import com.airline.vo.BoardNoticeVO;
+import com.airline.vo.BoardQnaVO;
+import com.airline.vo.CancelVO;
+import com.airline.vo.Criteria;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -71,6 +77,120 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<KakaoUserVO> getUserInfoAll() {
 		return mapper.getUserInfoAll();
+	}
+
+
+	@Override
+	public List<UserPayVO> getSale() {
+		return mapper.getSale();
+	}
+
+
+	@Override
+	public List<CancelVO> reqCancel() {
+		return mapper.reqCancel();
+	}
+
+
+	@Override
+	public List<FlightResVO> getFlightres() {
+		return mapper.getFlightres();
+	}
+
+
+	@Override
+	public List<BoardNoticeVO> getNotice() {
+		return mapper.getNotice();
+	}
+
+
+	@Override
+	public List<BoardEventVO> getEvent() {
+		return mapper.getEvent();
+	}
+
+
+	@Override
+	public int chargePoint(String userid, int amount) {
+		return mapper.chargePoint(userid,amount);
+	}
+
+
+	@Override
+	public List<PointVO> getKPoint(String userid, Criteria cri) {
+		return mapper.getKPoint(userid,cri);
+	}
+
+
+	@Override
+	public List<UserPayVO> getMPoint(String userid, Criteria cri) {
+		return mapper.getMPoint(userid,cri);
+	}
+
+
+	@Override
+	public int getKTotal(String userid, Criteria cri) {
+		return mapper.getKTotal(userid, cri);
+	}
+
+
+	@Override
+	public int getMTotal(String userid, Criteria cri) {
+		return mapper.getMTotal(userid, cri);
+	}
+
+
+	@Override
+	public List<FlightResVO> getUserRes(String userid, Criteria cri) {
+		return mapper.getUserRes(userid,cri);
+	}
+
+
+	@Override
+	public int getCountBuy(String userid) {
+		return mapper.getCountBuy(userid);
+	}
+
+
+	@Override
+	public int getTotal(String userid) {
+		return mapper.getTotal(userid);
+	}
+
+
+	@Override
+	public int getFlightTotal(String userid, Criteria cri) {
+		return mapper.getFlightTotal(userid,cri);
+	}
+
+
+	@Override
+	public int cancelTicket(String data) {
+		return mapper.cancelTicket(data);
+	}
+
+
+	@Override
+	public int checkin(String data) {
+		return mapper.checkin(data);
+	}
+
+
+	@Override
+	public List<FlightResVO> getFlight3(String userid) {
+		return mapper.getFlight3(userid);
+	}
+
+
+	@Override
+	public String getName(String userid) {
+		return mapper.getUserName(userid);
+	}
+
+
+	@Override
+	public List<BoardQnaVO> getQna(String username) {
+		return mapper.getQna(username);
 	}
 
 }

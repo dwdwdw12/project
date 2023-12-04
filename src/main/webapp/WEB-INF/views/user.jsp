@@ -30,33 +30,63 @@
 span:before {
 	font-family: bootstrap-icons;
 }
+
+.currIcon{
+   font-size: 22ex;
+   text-align: center; 
+   color: #ffc107;
+}
+
+.currTemp{
+	text-align: center; 
+}
+.city{
+ 	text-align: center; 
+}
 </style>
 
 <div class="tm-page-wrap mx-auto">
-	<section class="p-5 tm-container-outer tm-bg-gray">
+	<%-- <section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 border bg-light">
-						<input type="hidden" id="weather" value=""/>
-						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-weath" onclick="">상세조회 >></button>
+						<img src="../resources/img/kakao/flyinglion.png" alt="background img for userPage" width="1000" height="335"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+	 --%>
 	
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
-				<div class="col">
+<!-- 				<div class="col">
 					<div class="p-3 bg-light" style="float: left; width: 33%;">
 						<div class="weather">
 							<div class="currIcon"></div>
 							<div class="currTemp"></div>
 							<div class="city"></div>
+						</div>
+					</div>
+				</div> -->
+				<div class="col" style="width: 33%;">
+					<div class="p-3 bg-light">
+						<div class="weather">
+							<div class="currIcon"></div>
+							<div class="currTemp"></div>
+							<div class="city"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="p-3 bg-light">
+					<p ><h3 style="text-align: center;"><i class="bi bi-check-lg"></i><strong>오늘의 날씨</strong></h3></p>
+						<div class="detail">
+							<div class=""></div>
+							<div class=""></div>
+							<div class=""></div>
 						</div>
 					</div>
 				</div>
@@ -97,7 +127,7 @@ span:before {
 	        <div class="col">
 	      		<div class="p-3 border bg-light">
 	      		<p>
-						<h3>현재 마일리지 >><strong><fmt:formatNumber
+						<h3>마일리지 >><strong><fmt:formatNumber
 									value="${sumP}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -119,13 +149,14 @@ span:before {
 				      </c:forEach>	      		
 	      		</table>
 	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/mileage'">상세조회 >></button>
 	      		</div>
 	   		 </div>
+	   		 
 	   		  <div class="col">
 				<div class="p-3 border bg-light">
 	      		<p>
-						<h3>현재 카카오페이 잔액 >><strong><fmt:formatNumber
+						<h3>카카오페이 잔액 >><strong><fmt:formatNumber
 									value="${sumK}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -139,15 +170,16 @@ span:before {
 				    <c:forEach items="${kvo3}" var="kvo">
 				    <tbody>
 				      <tr>
-				        <td><fmt:formatDate value="${kvo.buyDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
+				        <td><fmt:formatDate value="${kvo.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 				        <td>${kvo.amount}</td>
 				      </tr>
 				     </tbody>
 				      </c:forEach>	      		
 	      		</table>
-	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+	      		
+		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/chargePoint'" >충전 >></button>
+		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/kakaoDetail'" >상세조회 >></button>
+	      		
 	      		</div>
 		    </div>
  		 </div>
@@ -167,25 +199,25 @@ span:before {
 						</p>
 			    	 	<table class="table table-hover">
 					    <thead>
-					    	<th>시간</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
+					    	<th>예약번호</th>
+					    	<th>출발지</th>
+					    	<th>출발일자</th>
+					    	<th>도착지</th>
+					    	<th>도착일자</th>
 					    </thead>
-					    <c:forEach items="${pvo3}" var="list">
+					    <c:forEach items="${rvo3}" var="list">
 					    <tbody>
 					      <tr>
-					        <td><fmt:formatDate value="${list.getDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
+					      	<td>${list.resno}</td>
+					      	<td>${list.departure}</td>
+					        <td>${list.deptime}</td>
+					        <td>${list.arrival}</td>
+					        <td>${list.arrtime}</td>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table>
-	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+	      			<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'">상세조회 >></button>
 			    	 </div>
 			   	 </div>
 	    	 </div>
@@ -201,29 +233,33 @@ span:before {
 			    	 <p>
 						<h3 style="text-align: center;">
 							<strong>${vo.userNameK} 님</strong> 문의게시글 작성 현황 </h3>
-							<p>아직 없음</p>
 						</p>
 			    	 	<table class="table table-hover">
 					    <thead>
-					    	<th>시간</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
-					    	<th>내용</th>
+					    	<th>제목</th>
+					    	<th>작성일</th>
+					    	<th>답변여부</th>
 					    </thead>
-					    <c:forEach items="${pvo3}" var="list">
+					    <c:forEach items="${qvo}" var="qvo">
 					    <tbody>
 					      <tr>
-					        <td><fmt:formatDate value="${list.getDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
-					        <td>${list.mileage}</td>
+
+					        <td>${qvo.boardsubject}</td>
+					        <td>${qvo.regidate}</td>
+					        <c:choose>
+					        	<c:when test="${qvo.repadmin >0}">
+					        		<td>완료</td>
+					      		</c:when>
+					      		<c:otherwise>
+					      			<td>대기중</td>
+					      		</c:otherwise>
+					      	</c:choose>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table>
 	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/qna'">상세조회 >></button>
 			    	 </div>
 			   	 </div>
 			   	 
@@ -309,6 +345,12 @@ $(document).ready(function(){
 			  $('.currIcon').append('<i class="' + weatherIcon[$Icon] +'"></i>');      
 			  $('.currTemp').prepend($Temp);      
 			  $('.city').append($city);
+			  
+			  $(".detail").append("<p>나라/도시: " + resp.sys.country+"/" +resp.name +"</p>");
+			  $(".detail").append("<p>상세날씨설명: " + resp.weather[0].description + "</p>");
+			  $(".detail").append("<p>구름: " + resp.clouds.all + "%</p>"); 
+			  $(".detail").append("<p>바람: " + resp.wind.speed + " m/s</p>");
+			  $(".detail").append("<p>현재 온도: " + (resp.main.temp) + "℃</p>");
 			 
 
 		}

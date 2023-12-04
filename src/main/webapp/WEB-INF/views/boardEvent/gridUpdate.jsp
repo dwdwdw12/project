@@ -59,7 +59,7 @@
 	
 	 <div class="container">
 		<h2>이벤트 수정</h2>
-		<form action="/boardEvent/update" role="form" method="post" name="frm">
+		<form action="/boardEvent/gridUpdate" role="form" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 
 			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
 			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
@@ -130,9 +130,9 @@
 			
 			<div id="bottom"></div>
 			<div class="mt-3 text-right">
-			<button type="button" class="gradient" onclick="location.href='/boardEvent/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
+			<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
 			<button type="reset" class="gradient">다시작성</button> &nbsp;
-			<button type="submit" class="gradient" >수정</button> &nbsp;
+			<button type="submit" class="gradient">수정</button> &nbsp;
 			</div>
 			<br><br>
 			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
@@ -309,7 +309,7 @@ $(document).ready(function(e){
 			e.preventDefault();
 			console.log(check);
 		} else{
-		
+			
 		var str="";
 		$(".uploadResult ul li").each(function(i, obj){
 			var jobj = $(obj);
@@ -327,6 +327,7 @@ $(document).ready(function(e){
 		
 		formObj.append(str).submit();
 		formObj.unbind('click').click();
+		
 		}
 	});
 	

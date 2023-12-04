@@ -9,6 +9,8 @@ function boardCheck(){
         return false;
     }
     
+   
+    
     return true;
 }
 

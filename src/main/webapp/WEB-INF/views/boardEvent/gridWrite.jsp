@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ include file="../includes/header2.jsp"%>	
+<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>-->
+<%@ include file="../includes/header2.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../resources/summernote/summernote-lite.js"></script>
@@ -23,7 +22,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
 	var $jLatest = jQuery.noConflict();
-	
 </script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -36,7 +34,17 @@
 <link rel="stylesheet" type="text/css" href="../resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+
 <style>
+	.images_container{
+		width: 300px;
+		height: 200px;
+	}
+	.img{
+		width: 300px;
+		height: 200px;
+	}
+	
 	.gradient {
 	width: 80px;
 	height: 30px;
@@ -52,57 +60,32 @@
     max-width: 1400px; 
     margin: 0 auto;
     }
-
 </style>
+
 </head>
 <body style="background-color: white; margin-top : 180px;">
 	
 	 <div class="container">
-		<h2>이벤트 수정</h2>
-		<form action="/boardEvent/update" role="form" method="post" name="frm">
-			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 
-			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
-			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
-			<input type="hidden" id="type" name="type" value="${cri.type}">
-			<input type="hidden" id="order" name="order" value="${cri.order}">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			
+		<h2>이벤트 등록</h2>
+		<form action="/boardEvent/gridWrite" role="form" method="post" name="frm" >
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
-				<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}">
+				<input type="text" class="form-control" id="boardTitle" name="boardTitle">
 			</div>
 
 			<!-- <input type="text" id=dates name="dates" value="" /> -->
 			<div class="form-group">
 				<label for="boardTitle">시작일</label> 
-				<input type="text" class="form-control" id="startDate" name="startDate" value="${board.startDate}">
+				<input type="text" class="form-control" id="startDate" name="startDate">
 			</div>
 			<div class="form-group">
 				<label for="boardTitle">종료일</label> 
-				<input type="text" class="form-control" id="endDate" name="endDate" value="${board.endDate}">
+				<input type="text" class="form-control" id="endDate" name="endDate">
 			</div>
 			
-			현재 이미지
-			<div class="row">
-			    <div class="col-lg-12">
-			        <div class="panel panel-default">
-			        
-				        <div class="panel-heading"></div>
-				        <div class="panel-body">
-					        <div class="uploadResult_pre">
-					        	<ul>
-					        	</ul>
-					        </div>
-				        </div>
-					</div>
-			    </div>
-			</div>
-			
-			*새로운 파일<br>
 			주의)파일은 5개까지 업로드 가능하며, 이미지 파일 형식만 사용할 수 있습니다(jpg, jpeg, png, bmp).<br>
 				5MB 이하의 파일만 업로드 하실 수 있습니다.<br>
 				1번 파일이 썸네일에 표시됩니다.
-			
 			<div class="form-group">
 				1. 파일 지정하기 : <input type="file" multiple="multiple"
 					name="uploadFile" id="uploadFile01" accept=".png, .jpeg, .jpg, .bmp"> <br>
@@ -115,7 +98,7 @@
 				5. 파일 지정하기 : <input type="file" multiple="multiple"
 					name="uploadFile" id="uploadFile05" accept=".png, .jpeg, .jpg, .bmp"> <br>
 			</div>
-			
+		
 			<div class="uploadResult">
 			이미지 미리보기
 				<ul id="uploadList">
@@ -125,208 +108,167 @@
 			
 			<div class="form-group">
 				<label for="boardContent">내용</label><br> 
-				<textarea id="summernote" class="summernote" name="boardContent">${board.boardContent}</textarea>
+				<textarea id="summernote" class="summernote" name="boardContent"></textarea>
 			</div>
 			
-			<div id="bottom"></div>
+			<br>
 			<div class="mt-3 text-right">
-			<button type="button" class="gradient" onclick="location.href='/boardEvent/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
-			<button type="reset" class="gradient">다시작성</button> &nbsp;
-			<button type="submit" class="gradient" >수정</button> &nbsp;
+				<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">목록</button>
+				<button type="reset" class="gradient">다시작성</button> &nbsp;
+				<button type="submit" class="gradient" id="write">등록</button> &nbsp;
 			</div>
-			<br><br>
+			<br>
+			
 			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
-				<img src="./img/upArrow.png" width="100px" height="100px" title="위로">
+				<img src="img/upArrow.png" width="100px" height="100px" title="위로">
 				</a><br>
-				<a href="#bottom">
-				<img src="./img/downArrow.png" width="100px" height="100px" title="아래로">
+				<a href="#write">
+				<img src="img/downArrow.png" width="100px" height="100px" title="아래로">
 				</a>
 			</div> -->
 			
 		</form>
-	</div> 
-
- 	<script>
- 		$('#summernote').summernote({
- 			disableDragAndDrop: true,
- 			height : 300,
-			/* width : 1200, */
-			lang : "ko-KR",
- 			toolbar: [
- 			    // [groupName, [list of button]]
- 			    ['style', ['bold', 'italic', 'underline', 'clear']],
- 			    ['fontname', ['fontname']],
- 			    ['fontsize', ['fontsize']],
- 			    ['color', ['color']],
- 			    ['para', ['ul', 'ol', 'paragraph']],
- 			    ['height', ['height']],
- 			    ['table', ['table']],
- 	       		['view', ['fullscreen', 'codeview', 'help']]
- 			  ]
- 			});
-	</script> 
 	
-	<script>
-		$jLatest('input[id="dates"]').daterangepicker();
-		$jLatest('input[id="startDate"]').daterangepicker({
-			singleDatePicker: true,
-		    timePicker: true,
-		    timePicker24Hour: true,
-			 "locale": {
-			       "format": 'YYYY-MM-DD HH:mm:SS',
-			       "separator": " ~ ",
-			       "applyLabel": "확인",
-			        "cancelLabel": "취소",
-			        "fromLabel": "From",
-			        "toLabel": "To",
-			        "customRangeLabel": "Custom",
-			        "weekLabel": "주",
-			        "daysOfWeek": [
-			             "일",
-			             "월",
-			             "화",
-			             "수",
-			             "목",
-			             "금",
-			             "토"
-			       ],
-			      "monthNames": [
-			             "1월",
-			             "2월",
-			             "3월",
-			             "4월",
-			             "5월",
-			             "6월",
-			             "7월",
-			             "8월",
-			             "9월",
-			             "10월",
-			             "11월",
-			             "12월"
-			        ],
-			        "firstDay": 1
-			    },
+	</div>
+	
+
+
+
+
+<script>
+	$('#summernote').summernote({
+		disableDragAndDrop: true,
+		height : 500,
+	/* width : 1200, */
+	lang : "ko-KR",
+		toolbar: [
+		    // [groupName, [list of button]]
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['fontname', ['fontname']],
+		    ['fontsize', ['fontsize']],
+		    ['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']],
+		    ['table', ['table']],
+       		['view', ['fullscreen', 'codeview', 'help']]
+		  ]
 		});
-		$jLatest('input[id="endDate"]').daterangepicker({
-			singleDatePicker: true,
-		    timePicker: true,
-		    timePicker24Hour: true,
-			 "locale": {
-			       "format": 'YYYY-MM-DD HH:mm:SS',
-			       "separator": " ~ ",
-			       "applyLabel": "확인",
-			        "cancelLabel": "취소",
-			        "fromLabel": "From",
-			        "toLabel": "To",
-			        "customRangeLabel": "Custom",
-			        "weekLabel": "주",
-			        "daysOfWeek": [
-			             "일",
-			             "월",
-			             "화",
-			             "수",
-			             "목",
-			             "금",
-			             "토"
-			       ],
-			      "monthNames": [
-			             "1월",
-			             "2월",
-			             "3월",
-			             "4월",
-			             "5월",
-			             "6월",
-			             "7월",
-			             "8월",
-			             "9월",
-			             "10월",
-			             "11월",
-			             "12월"
-			        ],
-			        "firstDay": 1
-			    },
-		});
-	</script>
+</script> 
 	
 <script>
-//이미지 표시
-$(document).ready(function(){
-	(function(){
-		var boardNum = '<c:out value="${board.boardNum}"/>';
-		$.getJSON("/boardEvent/getAttachList", {boardNum : boardNum}, function(arr) {
-			console.log(arr);
-			
-			var str = "";
-			
-			$(arr).each(function(i, attach) {
-				// image type
-				if (attach.fileType) {
-					//var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-					var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-					
-					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
-					str += "<div>";
-					str += "	<img src='/display?fileName=" + fileCallPath + "' style='max-width: 100%; height: auto;'>";
-					str += "</div>";
-					str += "</li>";
-					
-				} else {
-					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
-					str += "	<div>";
-					str += "		<span> " + attach.fileName + "</span><br/>";
-					str += "		<img src='..resources/upload/noimage.png'></a>";
-					str += "	</div>";
-					str += "</li>";
-				}
-				
-			});
-			
-			$(".uploadResult_pre ul").html(str);
-			
-			$("#uploadList").each(function(){
-			    $(this).html($(this).children('li').sort(function(a, b){
-			        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
-			    }));
-			});
-			
-		});
-		
-	})();//end function
-	
-});
+	$jLatest('input[id="dates"]').daterangepicker();
+	$jLatest('input[id="startDate"]').daterangepicker({
+		singleDatePicker: true,
+	    timePicker: true,
+	    timePicker24Hour: true,
+		 "locale": {
+		       "format": 'YYYY-MM-DD HH:mm:SS',
+		       "separator": " ~ ",
+		       "applyLabel": "확인",
+		        "cancelLabel": "취소",
+		        "fromLabel": "From",
+		        "toLabel": "To",
+		        "customRangeLabel": "Custom",
+		        "weekLabel": "주",
+		        "daysOfWeek": [
+		             "일",
+		             "월",
+		             "화",
+		             "수",
+		             "목",
+		             "금",
+		             "토"
+		       ],
+		      "monthNames": [
+		             "1월",
+		             "2월",
+		             "3월",
+		             "4월",
+		             "5월",
+		             "6월",
+		             "7월",
+		             "8월",
+		             "9월",
+		             "10월",
+		             "11월",
+		             "12월"
+		        ],
+		        "firstDay": 1
+		    },
+	});
+	$jLatest('input[id="endDate"]').daterangepicker({
+		singleDatePicker: true,
+	    timePicker: true,
+	    timePicker24Hour: true,
+		 "locale": {
+		       "format": 'YYYY-MM-DD HH:mm:SS',
+		       "separator": " ~ ",
+		       "applyLabel": "확인",
+		        "cancelLabel": "취소",
+		        "fromLabel": "From",
+		        "toLabel": "To",
+		        "customRangeLabel": "Custom",
+		        "weekLabel": "주",
+		        "daysOfWeek": [
+		             "일",
+		             "월",
+		             "화",
+		             "수",
+		             "목",
+		             "금",
+		             "토"
+		       ],
+		      "monthNames": [
+		             "1월",
+		             "2월",
+		             "3월",
+		             "4월",
+		             "5월",
+		             "6월",
+		             "7월",
+		             "8월",
+		             "9월",
+		             "10월",
+		             "11월",
+		             "12월"
+		        ],
+		        "firstDay": 1
+		    },
+	});
 </script>
-
+	
 <script>
-//전송 및 업로드
 $(document).ready(function(e){
 	var formObj = $("form[role='form']");
 	$("button[type='submit']").on("click", function(e){
-		//e.preventDefault();
-		//console.log("submit clicked");
+//		e.preventDefault();
 		var check = boardCheck();
 		if(check==false){
 			e.preventDefault();
 			console.log(check);
-		} else{
-		
-		var str="";
-		$(".uploadResult ul li").each(function(i, obj){
-			var jobj = $(obj);
-			console.dir(jobj);
+		} else{	
+			console.log(check);
+			e.preventDefault();
+			console.log("submit clicked");
 			
-			str+="<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].fileOrder' value='" + jobj.data("fileorder") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].fileSize' value='" + jobj.data("filesize") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].repImgYn' value='" + jobj.data("repimgyn") + "'>";
+			var str="";
+			$(".uploadResult ul li").each(function(i, obj){
+				var jobj = $(obj);
+				console.dir(jobj);
+				
+				str+="<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].fileOrder' value='" + jobj.data("fileorder") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].fileSize' value='" + jobj.data("filesize") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].repImgYn' value='" + jobj.data("repimgyn") + "'>";
+				
+			});
 			
-		});
-		
-		formObj.append(str).submit();
-		formObj.unbind('click').click();
+			formObj.append(str).submit();
+			formObj.unbind('click').click();
 		}
 	});
 	
@@ -464,8 +406,8 @@ function showUploadResult(uploadResultArr){
 	    }));
 	});
 }
+
 </script>
-	
 	<%@ include file="../includes/footer.jsp"%>
 </body>
 </html>

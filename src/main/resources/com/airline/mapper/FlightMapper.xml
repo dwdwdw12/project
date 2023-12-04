@@ -148,7 +148,7 @@
 	</select>
 	
 	<select id="usePoint" resultType="int">
-	select price from(select row_number() over(order by getDate desc) rownum, p.* from userpay p where userid=#{userid}and price is not null) s where rownum = 1;
+		select price from(select row_number() over(order by getDate desc) rownum, p.* from userpay p where userid=#{userid}and price is not null) s where rownum = 1;
 	</select>
 	
 	

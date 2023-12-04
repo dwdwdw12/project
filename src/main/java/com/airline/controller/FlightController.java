@@ -225,7 +225,7 @@ public class FlightController {
 		map.put("flightname", vo.getFlightName());
 		map.put("departure", vo.getDepName());
 		map.put("arrival", vo.getArrName());
-		map.put("arrtime", vo.getFullArrival());
+		map.put("arrtime", vo.getFullArrtime());
 		map.put("deptime", vo.getFullDeptime());
 		map.put("seatid", flight.getSeat());
 		System.out.println(map);

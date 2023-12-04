@@ -34,7 +34,7 @@ public class BoardNoticeController {
 	public void getList(Model model, Criteria cri) {
 		model.addAttribute("list", service.getPageList(cri));
 		model.addAttribute("page", new PageDTO(cri, service.getTotal(cri)));
-	}
+	} 
 	 
 	@GetMapping("/read")
 	public void read(Model model, @Param("boardnum")int boardnum, @ModelAttribute("cri") Criteria cri) {

@@ -20,7 +20,7 @@ public interface BoardQnaService {
 	public void updateQna(BoardQnaVO vo);
 	
 	public void updateReadCount(int boardnum);
-  
+   
 	public void registerQna(BoardQnaVO vo); 
 	
 	public void replyQna(BoardQnaVO vo);

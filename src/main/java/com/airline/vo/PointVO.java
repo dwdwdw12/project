@@ -18,5 +18,6 @@ public class PointVO {
 	private String userid;
 	private int amount;
 	private Date buyDate;
+	private int sum;
 
 }

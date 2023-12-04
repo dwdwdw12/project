@@ -61,7 +61,7 @@
 
 	<select id="getPoint3" resultType="com.airline.vo.UserPayVO">
 	<![CDATA[
-		select r.mileage,r.getDate from(select row_number() over(order by pno desc) rownum, p.* from userpay p where userid=#{userid})r where rownum<=3; 
+		select r.mileage,r.getDate from(select row_number() over(order by pno desc) rownum, p.* from userpay p where userid=#{userid})r where rownum<=3 
 	]]>  
 	</select>
 	
@@ -71,19 +71,115 @@
 	
 	<select id="getKakao3" resultType="com.airline.vo.PointVO">
 	<![CDATA[
-		select * from(select row_number() over(order by buyDate desc) rownum, p.* from point p where userid=#{userid})r where rownum<=3; 
+		select * from(select row_number() over(order by buyDate desc) rownum, p.* from point p where userid=#{userid})r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getDiary" resultType="com.airline.vo.BoardDiaryVO">
 	<![CDATA[
-		select * from(select row_number() over(order by regidate desc) rownum, p.* from boarddiary p where userid=#{userid})r where rownum<=3; 
+		select * from(select row_number() over(order by regidate desc) rownum, p.* from boarddiary p where userid=#{userid})r where rownum<=3 
 	]]>
 	</select>
 	
 	<select id="getUserInfoAll" resultType="com.airline.vo.KakaoUserVO">
 	<![CDATA[	
-		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5; 
+		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5 
 	]]>
 	</select>
+	
+<!-- 	<select id="getPointList" resultType="com.airline.vo.PointVO">
+		select *, sum(amount) as sum from point where amount>0 group by substr(buyDate,1,10);
+	</select> -->
+	
+	<select id="getSale" resultType="com.airline.vo.UserPayVO">
+		select *, sum(price)as sum from userpay group by substr(getDate,1,10)
+	</select>
+	
+	<select id="reqCancel" resultType="com.airline.vo.CancelVO">
+	<![CDATA[
+		select * from(select row_number() over() rownum, p.* from cancel p )r where rownum<=3 
+	]]>
+	</select>
+	
+	<select id="getFlightres" resultType="com.airline.vo.FlightResVO">
+	<![CDATA[
+	select * from(select row_number() over(order by purchaseTime desc) rownum, p.* from flightreservation p )r where rownum<=3 
+	]]>
+	</select>
+	
+	<select id="getNotice" resultType="com.airline.vo.BoardNoticeVO">
+	<![CDATA[
+	select * from(select row_number() over(order by regidate desc) rownum, p.* from boardnotice p )r where rownum<=3 
+	]]>
+	</select>
+	
+	<select id="getEvent" resultType="com.airline.vo.BoardEventVO">
+	<![CDATA[
+	    select * from(select row_number() over(order by startDate desc, endDate desc) rownum, p.* from boardevent p )r where rownum<=3 
+	]]>
+	</select>
+	
+	<insert id="chargePoint">
+		insert into point(userid,amount) values(#{userid},#{amount})
+	</insert>
+	
+	<select id="getKPoint" resultType="com.airline.vo.PointVO">
+		select * from point where userid = #{userid} limit #{cri.pageNum},#{cri.amount}
+<!-- 	<![CDATA[
+		select c.* from(select b.* from(select row_number() over(order by buyDate asc) as num, a.* from point a where userid=#{userid})b where num<= #{cri.pageNum}* #{cri.amount})c where num>= (#{cri.pageNum}-1)* #{cri.amount}
+	 ]]>  -->
+	</select>
+	
+	<select id="getMPoint" resultType="com.airline.vo.UserPayVO">
+	<![CDATA[
+		select c.* from(select b.* from(select row_number() over(order by getDate asc) as num, a.* from userpay a where userid=#{userid})b where num<= #{cri.pageNum}* #{cri.amount})c where num>= (#{cri.pageNum}-1)* #{cri.amount}
+	 ]]> 
+	</select>
+	
+	<select id="getKTotal" resultType="int">
+		select count(*) from point where userid=#{userid}
+	</select>
+	
+	<select id="getMTotal" resultType="int">
+		select count(*) from userpay where userid=#{userid}
+	</select>
+	
+	<select id="getUserRes" resultType="com.airline.vo.FlightResVO">
+	<![CDATA[
+		select * from flightreservation where userid=#{userid} order by purchaseTime desc limit #{cri.pageNum},#{cri.amount}
+	 ]]> 
+	</select>
+	
+	<select id="getCountBuy" resultType="int">
+		select count(price) from userpay
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select sum(price) from userpay
+	</select>
+	
+	<select id="getFlightTotal" resultType="int">
+		select count(*) from flightreservation where userid=#{userid}	 
+	</select>
+	
+	<update id="cancelTicket">
+		update flightreservation set isCancel = 1 where resno=#{data}
+	</update>
+	
+	<update id="checkin">
+		update flightreservation set isCheckin = 1 where resno=#{data}
+	</update>
+	
+	<select id="getFlight3" resultType="com.airline.vo.FlightResVO">
+		select * from flightreservation where userid=#{userid} limit 1, 3
+	</select>
+	
+	<select id="getQna" resultType="com.airline.vo.BoardQnaVO">
+		select b.* from(select a.* from boardqna a where a.boardWriter = #{username})b where b.boardrelevel = 0 limit 1,3
+	</select>
+	
+	<select id="getUserName" resultType="String">
+		select userNick from kakaouser where userid=#{userid}
+	</select>
+	
 </mapper>
