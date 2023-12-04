@@ -44,6 +44,22 @@
 	margin-left: -800px;
 	display: none;
 }
+#depTable th {
+    position: sticky;
+    text-align: center;
+    top: 0px;
+    background-color: gray !important;
+}
+#arrTable th {
+    position: sticky;
+    text-align: center;
+    top: 0px;
+    background-color: gray !important;
+}
+td {
+	text-align: center;
+}
+
 </style>
 
 <div class="tm-page-wrap mx-auto">
@@ -115,12 +131,12 @@
 					</div>
 				</div>
 			</form>
+			<br><br>
 
 			<input type="hidden" class="form-control" id="sampleArr" name="sampleArr" value = "${arrDate}" >
-			<div class="container">
-			<br> 
-				<h2>${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
-				<table class="table table-hover">
+			<h2 style="text-align: center">${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
+			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 750px;">
+				<table class="table table-hover" id="depTable">
 					<thead>
 						<tr>
 							<th>항공편명</th>
@@ -131,6 +147,10 @@
 							<th>예약하기</th>
 						</tr>
 					</thead>
+					<c:if test="${empty list}">
+						예약가능한 항공편이 없습니다. <br>
+						다시 여정을 선택해주세요.
+					</c:if>
 					<c:forEach items="${list}" var="list">
 						<tbody>
 							<tr>
@@ -146,7 +166,7 @@
 					</c:forEach>
 				</table>
 				<!-- 페이징 -->
-		<ul class="pagination justify-content-center">
+		<%-- <ul class="pagination justify-content-center">
 			<c:if test="${pageMaker.prev}">
 				<li class="page-item"><a class="page-link"
 					href="${pageMaker.startPage-1}">Previous</a></li>
@@ -162,17 +182,17 @@
 				<li class="page-item"><a class="page-link"
 					href="${pageMaker.endPage+1}">Next</a></li>
 			</c:if>
-		</ul>
+		</ul> --%>
 			</div>
 		</div>
 	</section>
 	
 	<c:if test="${!empty arrlist}">
 	<section class="p-5 tm-container-outer tm-bg-gray">
-		<div class="container">
-			<div class="container">
-				<h2>${arr} <i class='fa fa-arrow-right'></i> ${dep}</h2>
-				<table class="table table-hover">
+		<div class="container" >
+		<h2 style="text-align: center">${arr} <i class='fa fa-arrow-right'></i> ${dep}</h2>
+			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 750px;">
+				<table class="table table-hover" id="arrTable">
 					<thead>
 						<tr>
 							<th>항공편명</th>
@@ -198,7 +218,7 @@
 					</c:forEach>
 				</table>
 				<!-- 페이징 -->
-		<ul class="pagination justify-content-center">
+		<%-- <ul class="pagination justify-content-center">
 			<c:if test="${pageMaker.prev}">
 				<li class="page-item"><a class="page-link"
 					href="${pageMaker.startPage-1}">Previous</a></li>
@@ -214,7 +234,7 @@
 				<li class="page-item"><a class="page-link"
 					href="${pageMaker.endPage+1}">Next</a></li>
 			</c:if>
-		</ul>
+		</ul> --%>
 			</div>
 		</div>
 	</section>
