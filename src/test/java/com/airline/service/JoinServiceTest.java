@@ -21,20 +21,23 @@ public class JoinServiceTest {
 
 	@Test
 	public void confirmMemberTest() {
-		String userNameE = "userchoi";
-		String userNameK = "최유저";
-		String gender="M";
-		int userReginumFirst = 881231;
-		int userReginumLast = 1111111;
+		KakaoUserVO vo = KakaoUserVO.builder()
+				.userNameE("userchoi")
+				.userNameK("최유ㅇ저")
+				.gender("M")
+				.userReginumFirst(881231)
+				.userReginumLast(1111111)
+				.build();
 		
-		join.confirmMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
-	}
+		join.confirmMember(vo);
+		}
 	
 	@Test
 	public void kakaoLoginTest() throws Throwable {
 		join.getAccessToken("2W4AQCGwhnwzYQ8Z8ONcyJkOY0pPlZlNjmQ-u-93GZhgoQ-VcQpnIhzBLI4KPXUbAAABjBpMLq7_A_o_BVb6-Q");
 		//responseCode : 200 이면 성공
 	}
+
 	
 	@Test
 	public void getUserInfoTest() throws Throwable {

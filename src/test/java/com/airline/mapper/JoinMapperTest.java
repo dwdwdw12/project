@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.airline.mail.TempKey;
 import com.airline.vo.KakaoUserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -14,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class JoinMapperTest {
-
+ 
 	@Autowired
 	private JoinMapper join;
 	
@@ -32,13 +33,16 @@ public class JoinMapperTest {
 
 	@Test
 	public void checkMemberTest() {
-		String userNameE = "userchoi";
-		String userNameK = "최유저";
-		String gender="M";
-		int userReginumFirst = 881231;
-		int userReginumLast = 1111111;
+
+		KakaoUserVO vo = KakaoUserVO.builder()
+				.userNameE("userchoi")
+				.userNameK("최유저")
+				.gender("M")
+				.userReginumFirst(881231)
+				.userReginumLast(1111111)
+				.build();
 		
-		join.checkMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
+		join.checkMember(vo);
 	}
 	
 	@Test
@@ -48,20 +52,38 @@ public class JoinMapperTest {
 	
 	@Test
 	public void insertMemberTest() {
-		KakaoUserVO vo = KakaoUserVO.builder()
-				.userId("kakaooo")
-				.userNick("test000")
-				.userNameK("테스트")
-				.userNameE("test")
-				.gender("F")
-				.pwd("test000")
-				.mail("dsdf1@nddver.com")
-				.phone("010-1111-1111")
-				.postCode(12345)
-				.address("수원시")
-				.userReginumFirst(800808)
-				.userReginumLast(2222222)
-				.build();
-		join.insertMember(vo);
+//		KakaoUserVO vo = KakaoUserVO.builder()
+//				.userId("kakaooo")
+//				.userNick("test000")
+//				.userNameK("테스트")
+//				.userNameE("test")
+//				.gender("F")
+//				.pwd("test000")
+//				.mail("dsdf1@nddver.com")
+//				.phone("010-1111-1111")
+//				.postCode(12345)
+//				.address("수원시")
+//				.userReginumFirst(800808)
+//				.userReginumLast(2222222)
+//				.build();
+//		join.insertMember(vo);
+	}
+
+
+	@Test
+	public void checkUserIdAndEmailTest() {
+		
+		String email = "1111111@naver.com";
+		String userId = "hana111";
+		
+		join.checkUserIdAndEmail(userId, email);
+	}
+	
+	@Test
+	public void updatePwdByMailKeyTest() {
+		String mail_key = new TempKey().getKey();
+		String userId = "hana111";
+		
+		join.updatePwdByMailKey(userId, mail_key);
 	}
 }

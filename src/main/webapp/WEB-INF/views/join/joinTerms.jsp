@@ -36,24 +36,24 @@
 						<input type="checkbox" name="terms" value="selectall"
 							id="agree_hompageUse" onclick="return checkSelectAll()">
 						<label for="agree_hompageUse" class="fsz_23"> <span
-							class="col_brown2">[필수]</span> 카카오 클럽 일반 규정 및 홈페이지 이용 약관
+							class="col_brown2">[필수]</span> ${terms1.termsTitle}
 						</label> <br>
-						${terms1}
+						${terms1.termsContents}
 
 						<br> <input type="checkbox" name="terms" value="selectall"
 							id="agree_personalCollection" onclick="return checkSelectAll()">
 						<label for="agree_personalCollection" class="fsz_23"> <span
-							class="col_brown2">[필수]</span> 개인정보 수집 및 이용안내
+							class="col_brown2">[필수]</span> ${terms2.termsTitle}
 						</label> <br>
-						${terms2}
+						${terms2.termsContents}
 
 						<br> <br> <input type="checkbox" name="terms"
 							value="selectall" id="agree_personalTransferToAbroad"
 							onclick="return checkSelectAll()"> <label
 							for="agree_personalTransferToAbroad" class="fsz_23"> <span
-							class="col_brown2">[필수]</span> 개인정보 국외 이전 동의
+							class="col_brown2">[필수]</span> ${terms3.termsTitle}
 						</label> <br>
-						${terms3}
+						${terms2.termsContents}
 						<br>
 
 

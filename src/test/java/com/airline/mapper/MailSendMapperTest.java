@@ -54,7 +54,7 @@ public class MailSendMapperTest {
 		sendMail.setTo(email);
 		sendMail.send();
 		
-		log.info("updateMailKeytest end");
+		log.info("MailSendMapperTest >> updateMailKeytest end");
 	}
 	
 	@Test

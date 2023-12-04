@@ -1,3 +1,4 @@
+ 
 package com.airline.service;
 
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.airline.mapper.JoinMapper;
 import com.airline.vo.KakaoUserVO;
+import com.airline.vo.TermsVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -38,10 +40,21 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public KakaoUserVO confirmMember(String userNameE, String userNameK, String gender, int userReginumFirst,
-			int userReginumLast) {
-		return join.checkMember(userNameE, userNameK, gender, userReginumFirst, userReginumLast);
+	public KakaoUserVO confirmMember(KakaoUserVO vo) {
+		return join.checkMember(vo);
 	}
+	
+
+	@Override
+	public String confirmUserIdAndEmail(String userId, String email) {
+		return join.checkUserIdAndEmail(userId, email);
+	}
+
+	@Override
+	public void modifyPwdByMailKey(String userId, String mail_key) {
+		join.updatePwdByMailKey(userId, mail_key);
+	}
+	
 
 	@Override //토큰 받아오기
 	public String getAccessToken(String authorize_code) throws Throwable {
@@ -150,7 +163,7 @@ public class JoinServiceImpl implements JoinService {
 						log.info(kakao_account.get("name"));
 						log.info(kakao_account.get("gender"));
 						log.info(kakao_account.get("age_range_needs_agreement"));
-						//log.info(kakao_account.get("age_range")); => error
+						//log.info(kakao_account.get("age_range")); //=> error
 						log.info(kakao_account.get("birthday")); //탄생연도는 따로 권한이 필요해서 불가능-> age_rage로 대체하여 성인인지만 판단할예정... 그러나 age_range에서 에러발생
 						log.info(kakao_account.get("phone_number"));
 //						log.info(kakao_account.get("shipping_address")); =>error
@@ -209,15 +222,18 @@ public class JoinServiceImpl implements JoinService {
 				return userInfo;
 			
 	}
-
+ 
 	@Override
-	public String getTerms(int termsCode) {
+	public TermsVO getTerms(int termsCode) {
 		return join.getTerms(termsCode);
 	}
 
 	@Override
-	public void registerMember(KakaoUserVO vo) {
-		join.insertMember(vo);
+	public void registerMember(String userId, String userNick, String userNameK, String userNameE, String gender, String pwd,
+			int userReginumFirst, int userReginumLast, int postCode, String phone, String mail, String address) {
+		join.insertMember(userNameE, userNameK, gender, userReginumFirst, 
+				userReginumLast, userId, userNick, pwd, 
+				mail, phone, postCode, address);
 	}
 
 	@Override
@@ -231,4 +247,6 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 
+
+	
 }
