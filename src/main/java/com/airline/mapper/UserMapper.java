@@ -74,6 +74,10 @@ public interface UserMapper {
 	public String getUserName(String userid);
 
 	public List<BoardQnaVO> getQna(String username);
+
+	public List<BoardDiaryVO> getUserDiary(@Param("username")String username,@Param("cri") Criteria cri);
+
+	public int getUserDiaryCnt(@Param("username")String username,@Param("cri") Criteria cri);
 	
 
 }

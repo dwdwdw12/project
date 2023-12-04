@@ -155,5 +155,13 @@
 		select price from(select row_number() over(order by getDate desc) rownum, p.* from userpay p where userid=#{userid}and price is not null) s where rownum = 1;
 	</select>
 	
+	<select id="getResAll" resultType="java.util.List">
+		select seatId from flightreservation where flightName=#{flightName}
+	</select>
+	
+	<select id="ResCnt" resultType="int">
+		select count(seatId) from flightreservation where flightName=#{flightName}
+	</select>
+	
 	
 </mapper>

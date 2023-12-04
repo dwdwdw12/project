@@ -210,20 +210,7 @@ public class HomeController {
 		
 	}
 	
-	
-	//마이페이지(관리자)
-	/*
-	 * @GetMapping("/admin") public void adminPage(Model model) {
-	 * log.info("admin page"); //유저정보 가져오기 Authentication authentication =
-	 * SecurityContextHolder.getContext().getAuthentication();
-	 * if(authentication.getPrincipal() instanceof UserDetails) { UserDetails
-	 * userDetails = (UserDetails) authentication.getPrincipal(); String userid =
-	 * userDetails.getUsername(); //회원정보 조회 } //회원정보 가져오기 List<KakaoUserVO> vo =
-	 * user.getUserInfoAll(); model.addAttribute("vo",vo); //매출현황(카카오페이+항공결제내역
-	 * 월별/년도별) //한달동안 포인트 구입매출관련 내역 List<PointVO> pvo = user.getPointList();
-	 * 
-	 * }
-	 */
+
 	
 	//마이페이지(관리자)
 	@GetMapping(value="/admin", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -135,7 +135,7 @@ span:before {
 							</c:forEach>
 						</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick=""> 회원정보 관리
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/userInfo'"> 회원정보 관리
 							>></button>
 					</div>
 				</div>
@@ -161,6 +161,7 @@ span:before {
 						      <tr>
 						        <th>예약번호</th>
 						        <th>요청일자</th>
+						        <th>취소완료</th>
 						      </tr>
 						    </thead>
 						    <c:forEach items="${cvo}" var="cvo">
@@ -169,12 +170,21 @@ span:before {
 						      	<td>${cvo.resno}</td>
 						        <td><fmt:formatDate value="${cvo.requestTime}"
 														pattern="yyyy-MM-dd HH:mm" /></td>
+								<c:choose>
+									<c:when test="${cvo.cancelOk == 0}">
+										<td>미처리</td>
+									</c:when>	
+									<c:otherwise>
+										<td>완료</td>
+									</c:otherwise>	
+								</c:choose>
+														
 						      </tr>
 						     </tbody>
 						      </c:forEach>	      		
 			      		</table> 
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">항공권 취소 처리
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/cancelTicket'">항공권 취소 처리
 							>></button>
 					</div>
 				</div>
@@ -221,7 +231,7 @@ span:before {
 					        <td><fmt:formatDate value="${fvo.purchasetime}"
 												pattern="yyyy-MM-dd HH:mm" /></td>
 					        <c:choose>
-					        	<c:when test="${fvo.ispaid}==0">
+					        	<c:when test="${fvo.ispaid==0}">
 					        		<td>true</td>
 					        	</c:when>
 					        	<c:otherwise>
@@ -229,7 +239,7 @@ span:before {
 					        	</c:otherwise>
 					        </c:choose>
 					        <c:choose>
-					        	<c:when test="${fvo.isCancel}==0">
+					        	<c:when test="${fvo.isCancel==0}">
 					        		<td>false</td>
 					        	</c:when>
 					        	<c:otherwise>
@@ -241,7 +251,7 @@ span:before {
 					      </c:forEach>	      		
 	      			</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/buyTicket'">상세조회
 							>></button>
 					</div>
 				</div>
@@ -277,7 +287,7 @@ span:before {
 						      </c:forEach>	      		
 		      			</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/notice'">상세조회
 							>></button>
 					</div>
 				</div>
@@ -307,7 +317,7 @@ span:before {
 					      </c:forEach>	      		
 	      				</table> 
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">상세조회
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/event'">상세조회
 							>></button>
 					</div>
 				</div>

@@ -112,7 +112,7 @@ max-width: 100%;
 							<label for="seat">좌석정보</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="seat" type="text" class="form-control" id="seat" value="${seat}" readonly="readonly">
+							<input name="seat" type="text" class="form-control" id="seat" value="${className}" readonly="readonly">
 						</div>
 					</div>
 

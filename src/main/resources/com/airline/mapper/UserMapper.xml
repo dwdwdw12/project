@@ -83,7 +83,7 @@
 	
 	<select id="getUserInfoAll" resultType="com.airline.vo.KakaoUserVO">
 	<![CDATA[	
-		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=5 
+		select * from(select row_number() over() rownum, p.* from kakaouser p )r where rownum<=3 
 	]]>
 	</select>
 	
@@ -180,6 +180,14 @@
 	
 	<select id="getUserName" resultType="String">
 		select userNick from kakaouser where userid=#{userid}
+	</select>
+	
+	<select id="getUserDiary" resultType="com.airline.vo.BoardDiaryVO">
+		select * from boarddiary where boardwriter = #{username} limit #{cri.pageNum},#{cri.amount}
+	</select>
+	
+	<select id="getUserDiaryCnt" resultType="int">
+		select count(*) from boarddiary where boardwriter = #{username}
 	</select>
 	
 </mapper>
