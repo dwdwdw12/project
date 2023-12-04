@@ -30,8 +30,7 @@ public interface JoinService {
 			String phone,
 			String mail,
 			String address);
-	//vo로 받고싶은데 phone, email, address를 못합침..->일단 파라미터로 받음..
-	
+	//vo로 받고싶은데 phone, email, address를 못합침..->일단 파라미터로 받음..	
 
 }
  

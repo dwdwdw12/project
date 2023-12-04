@@ -18,7 +18,7 @@ public class JoinMapperTest {
  
 	@Autowired
 	private JoinMapper join;
-	
+	 
 	@Test
 	public void checkEmailtest() {
 		join.checkEmail("user01@naver.com");

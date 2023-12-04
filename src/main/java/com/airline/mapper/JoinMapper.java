@@ -24,7 +24,7 @@ public interface JoinMapper {
 							@Param("gender") String gender, 
 							@Param("userReginumFirst") int userReginumFirst, 
 							@Param("userReginumLast") int userReginumLast
- * */
+ */
 	public TermsVO getTerms(int termscode);
 	
 	//parameter가 여러개면 명시해줘야함	

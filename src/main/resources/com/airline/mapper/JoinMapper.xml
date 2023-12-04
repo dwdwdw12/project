@@ -16,7 +16,6 @@
 	update kakaouser set pwd = #{mail_key} where userId = #{userId}
 </update>
 
-
 <select id="getUserId" resultType="com.airline.vo.KakaoUserVO" parameterType="map">
 	select * from kakaouser where mail = #{email} and mail_key = #{mail_key}
 </select>
