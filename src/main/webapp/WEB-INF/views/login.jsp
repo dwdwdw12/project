@@ -148,6 +148,10 @@
 		}); 
 	});
 	 
+	var message = ${message};
+	if(message != null){
+		alert(message);
+	};
 
 </script>
 </body>
