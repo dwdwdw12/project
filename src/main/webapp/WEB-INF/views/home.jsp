@@ -180,34 +180,33 @@
 		<ul class="nav nav-pills tm-tabs-links">
 			<li class="tm-tab-link-li"><a href="#1a" data-toggle="tab"
 				class="tm-tab-link"> <img
-					src="../resources/img/north-america.png" alt="Image"
+					src="../resources/mainImg/korea.png" width="100px" height="100px" alt="Image"
 					class="img-fluid"> 국내선
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#2a" data-toggle="tab"
-				class="tm-tab-link"> <img
-					src="../resources/img/south-america.png" alt="Image"
-					class="img-fluid"> 동북아시아
+				class="tm-tab-link"> 
+				<img src="../resources/mainImg/north-east-asia.png" alt="Image" width="100px" height="100px" class="img-fluid"> 
+				<br>동북아시아
 			</a></li>
-			<li class="tm-tab-link-li"><a href="#3a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/europe.png"
-					alt="Image" class="img-fluid"> 동남아/서남아시아
+			<li class="tm-tab-link-li"><a href="#3a" data-toggle="tab" class="tm-tab-link"> 
+			<img src="../resources/mainImg/south-east-asia.png" alt="Image" width="100px" height="100px" class="img-fluid"> 
+					동남아/서남아시아
 			</a></li>
-			<li class="tm-tab-link-li"><a href="#4a" data-toggle="tab"
-				class="tm-tab-link active"> <!-- Current Active Tab --> <img
-					src="../resources/img/north-america.png" alt="Image" class="img-fluid">
+			<li class="tm-tab-link-li"><a href="#4a" data-toggle="tab" class="tm-tab-link active"> <!-- Current Active Tab --> 
+			<img src="../resources/mainImg/centraal-asia.png" alt="Image" width="100px" height="100px" class="img-fluid">
 					중앙아시아
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#5a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/europe.png"
+				class="tm-tab-link"> <img src="../resources/mainImg/europe.png"
 					alt="Image" class="img-fluid"> 유럽
 			</a></li>
-			<li class="tm-tab-link-li"><a href="#6a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/north-america.png"
-					alt="Image" class="img-fluid"> 미주(미국/캐나다)
+			<li class="tm-tab-link-li"><a href="#6a" data-toggle="tab" class="tm-tab-link"> 
+			<img src="../resources/mainImg/north_america.png" alt="Image" width="100px" height="100px" class="img-fluid"> 
+			미주(미국/캐나다)
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#7a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/australia.png"
-					alt="Image" class="img-fluid"> 대양주
+				class="tm-tab-link"> <img src="../resources/mainImg/oceania.png"
+					alt="Image" width="100px" height="100px" class="img-fluid"> 대양주
 			</a></li>
 		</ul>
 		<div class="tab-content clearfix">
