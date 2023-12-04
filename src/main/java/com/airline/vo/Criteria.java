@@ -24,6 +24,7 @@ public class Criteria {
 		}
 		
 		public Criteria(int pageNum, int amount) {
+			if(pageNum<=1) {this.pageNum = 0;}
 			this.pageNum = pageNum;
 			this.amount = amount;
 		}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.airline.mapper.AdminMapper">
+
+	<select id="getCancelList" resultType="com.airline.vo.CancelVO">
+		select * from cancel limit #{cri.pageNum},#{cri.amount}
+	</select>
+	
+	<select id="getCancelCnt" resultType="int">
+		select count(*) from cancel
+	</select>
+	
+	<select id="getResInfo" resultType="com.airline.vo.FlightResVO">
+		select * from flightreservation limit #{cri.newStart},#{cri.amount}
+	</select>
+	
+	<select id="getPayInfo" resultType="com.airline.vo.UserPayVO">
+		select * from userpay where resno=#{resno}
+	</select>
+	
+	<update id="updatePrice">
+		update userpay set price=#{price}, mileage=#{mileage} where resno=#{resno} 
+	</update>
+	
+	<select id="sumMile" resultType="int">
+		select sum(mileage) from userpay where userid=#{userid}
+	</select>
+	
+	<select id="sumPrice" resultType="int">
+		select sum(price) from userpay where userid=#{userid}
+	</select>
+	
+	<insert id="insertlog">
+		insert userlog(userid, totalMileage, totalSum) values(#{userid},#{sumMile},#{sumPrice})
+	</insert>
+	
+	<update id="updateCancel">
+		update cancel set cancelOk=1 where resno=#{resno}
+	</update>
+	
+	<select id="getTicketCnt" resultType="int">
+		select count(*) from flightreservation
+	</select>
+	
+	<select id="getUserInfo" resultType="com.airline.vo.KakaoUserVO">
+		select * from kakaouser limit #{cri.pageNum},#{cri.amount}
+	</select>
+	
+	<select id="getUserCnt" resultType="int">
+		select count(*) from kakaouser
+	</select>
+	
+	<update id="updateUserInfo1">
+		update kakaouser set enabled=1 where userid=#{userid}
+	</update>
+	
+	<update id="updateUserInfo0">
+		update kakaouser set enabled=0 where userid=#{userid}
+	</update>
+	
+	<select id="getNotice" resultType="com.airline.vo.BoardNoticeVO">
+		select * from boardnotice limit #{cri.pageNum},#{cri.amount}
+	</select>
+	
+	<select id="noticeCnt" resultType="int">
+		select count(*) from boardnotice
+	</select>
+	
+	<delete id="deleteNotice">
+		delete from boardnotice where boardnum=#{boardnum}
+	</delete>
+	
+	<select id="getEvent" resultType="com.airline.vo.BoardEventVO">
+		select * from boardevent limit #{cri.pageNum}, #{cri.amount}
+	</select>
+	
+	<select id="eventCtn" resultType="int">
+		select count(*) from boardevent 
+	</select>
+</mapper>
