@@ -29,6 +29,11 @@ public class FlightMapperTest {
 		.forEach(vo->log.info(vo));
 	}
 	
+	@Test
+	public void getRoundTripPriceTest() {
+		log.info(mapper.getRoundTripPrice("홍콩", "인천"));
+	}
+	
 	//검색어만 하는건 성공
 	/*
 	 * @Test public void getSearchTest2() { mapper.getListSearch2("인천","오사카",
