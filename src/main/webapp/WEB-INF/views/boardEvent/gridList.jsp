@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../resources/script/boardDiary.js"></script>
@@ -55,43 +55,54 @@
 
 <title>Insert title here</title>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	<div style="max-width: 1300px; margin: 0 auto; ">	
 	<h2>이벤트 게시판</h2>
 	<hr class="hr1" noshade>
 	<div class="mt-3 text-right">
-		<input type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 120px" value="리스트형으로 보기">
+		<input type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 120px" value="리스트형으로 보기">
 	</div>
 	<div>
-	<form action="boardEventList.do" method="get" id="searchForm" name="searchForm">
+	<form action="/boardEvent/gridList" method="get" id="searchForm" name="searchForm">
 		<input type="hidden" name="Grid" value="Grid">
-		<span style="text-align: left;">▷ 총 ${boardCount}개의 게시물이 있습니다. </span>
+		<span style="text-align: left;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
 		<span style="float: right;">
-        <select name="searchType" class="type-box">
-			<option value="boardTitle" <c:if test="${searchType =='boardTitle'}">selected="selected"</c:if> >제목</option>
-			<option value="boardContent" <c:if test="${searchType =='boardContent'}">selected="selected"</c:if> >내용</option>
+        <select name="type" class="type-box">
+			<option value="boardTitle" <c:if test="${paging.cri.type =='boardTitle'}">selected="selected"</c:if> >제목</option>
+			<option value="boardContent" <c:if test="${paging.cri.type =='boardContent'}">selected="selected"</c:if> >내용</option>
 		</select>
-          <input class="inputId" type="text" id="keyword" name="keyword" placeholder="검색어 입력" value="${keyword}">
+          <input class="inputId" type="text" id="keyword" name="keyword" placeholder="검색어 입력" value="${paging.cri.keyword}">
           <input class="gradient" type="submit" value="검색" onclick="return search()">
-          <input type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" value="전체">&nbsp; 
+          <input type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" value="전체">&nbsp; 
          </span>
 		</form>
 	</div>
 	<br>
+		
 		<ul class="thumbTypeGrid">
 			<c:forEach var="board" items="${EventList}">			
 				<div class="img">
-					<a href="boardEventView.do?boardNum=${board.boardNum}">
+					<a href="/boardEvent/gridView?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">
 						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
-						<img src="upload/${board.repImg}" width="200" height="300">	<br>
+						<img src="/display?fileName=${board.filePath}" width="200" height="300">	<br>
+						
 					</a>
-					<p style="width: 200px"><a href="boardEventView.do?boardNum=${board.boardNum}">
+					<p style="width: 200px"><a href="/boardEvent/gridView?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">
 					${board.boardTitle}</a><br>
 					${board.startDate} ~ <br>&nbsp;&nbsp;&nbsp;${board.endDate}</p>
 				</div>
 			</c:forEach>
 		</ul>
-	</div>
+		
+	<!-- 이미지 출력 다른 방법-->
+			        
+         <!-- <div class="panel-body">
+	        <div class="uploadResult">
+	        	<ul id="uploadList" class="thumbTypeGrid">
+	        	</ul>
+	        </div>
+        </div> --> 
+		
 	<div class="container">		
 		<table class="table table-hover">
 			<c:if test="${empty EventList}">
@@ -100,60 +111,51 @@
 			</tr>
 			</c:if>
 	
-			<tr>
-				<!-- <td colspan="2"><a href="./boardDiaryWrite.do">[글쓰기]</a></td> -->
-				<%-- <td colspan="5" align="right">
-					현재 페이지: ${paging.page}
-					게시글의 개수: ${EventList.size()}/${boardCount}</td> --%>
-				<c:if test="${empty EventList}">
-				<tr>
-					<td colspan="5">등록된 글이 없습니다.</td>
-				</tr>
-		</c:if>
-			</tr>
+			
 		</table>
-		 <c:if test="${boardCount>0}">
+		
+		<c:if test="${paging.total>0}">
 		
 			<ul class="pagination pagination justify-content-center">
 					<c:choose>
-						<c:when test="${paging.page<=1}"> 
-							<li class="page-item"><a class="page-link">Previous</a><li>
+						<c:when test="${paging.cri.pageNum<=1}">
+							<li class="page-item"><a class="page-link">Previous</a></li>
 						</c:when>
 						<c:otherwise>
-							<c:if test="${!empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventListGrid.do?page=${paging.page-1}&keyword=${keyword}&searchType=${searchType}">Previous</a></li>
+							<c:if test="${!empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">Previous</a></li>
 							</c:if>
-							<c:if test="${empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventListGrid.do?page=${paging.page-1}">Previous</a></li>
+							<c:if test="${empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum-1}">Previous</a></li>
 							</c:if>
 						</c:otherwise>
 					</c:choose> 
 					<c:forEach var="a" begin="${paging.startPage}" end="${paging.endPage}" step="1">
 						<c:choose>
-							<c:when test="${a==paging.page}"> 
+							<c:when test="${a==paging.cri.pageNum}"> 
 								<li class="page-item active"><a class="page-link" >${a}</a></li>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${!empty keyword}">
-									<li class="page-item active"><a class="page-link"  href="boardEventListGrid.do?page=${a}&keyword=${keyword}&searchType=${searchType}">${a}</a></li>
+								<c:if test="${!empty paging.cri.keyword}">
+									<li class="page-item"><a class="page-link" href="?pageNum=${a}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">${a}</a></li>
 								</c:if>
-								<c:if test="${empty keyword}">
-									<li class="page-item active"><a class="page-link"  href="boardEventListGrid.do?page=${a}">${a}</a></li>
+								<c:if test="${empty paging.cri.keyword}">
+									<li class="page-item"><a class="page-link" href="?pageNum=${a}">${a}</a></li>
 								</c:if>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach> 
 						
 					<c:choose>
-						<c:when test="${paging.page>=paging.maxPage}"> 
-							<li class="page-item"><a class="page-link">Next</a><li>
+						<c:when test="${paging.cri.pageNum>=paging.realEnd}"> 
+							<li class="page-item"><a class="page-link">Next</a></li>
 						</c:when>
 						<c:otherwise>
-							<c:if test="${!empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventListGrid.do?page=${paging.page+1}&keyword=${keyword}&searchType=${searchType}">Next</a></li>
+							<c:if test="${!empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum+1}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">Next</a></li>
 							</c:if>					
-							<c:if test="${empty keyword}">
-								<li class="page-item"><a class="page-link" href="boardEventListGrid.do?page=${paging.page+1}">Next</a></li>
+							<c:if test="${empty paging.cri.keyword}">
+								<li class="page-item"><a class="page-link" href="?pageNum=${paging.cri.pageNum+1}">Next</a></li>
 							</c:if>
 						</c:otherwise>
 					</c:choose>
@@ -161,18 +163,60 @@
 			
 		</c:if>
 		
-
+	
 	
 	</div>
 	<div class="container">		   
-		
 	<div class="mt-3 text-right">
 		<c:if test="${loginUser.admin==1}">
-			<input type="button" class="gradient" onclick="location.href='boardEventWrite.do'" value="글쓰기">
+			<input type="button" class="gradient" onclick="location.href='/boardEvent/gridWrite'" value="글쓰기">
 		</c:if> 
 	</div>
 	<br><br>
 	</div>
+
+</div>
+	
+<script>
+
+/* $(document).ready(function(){
+	
+	(function(){
+		let EventList = [];
+		<c:forEach var="board" items="${EventList}" varStatus="status">
+			EventList.push({
+				boardNum : "${board.boardNum}",
+				boardTitle : "${board.boardTitle}",
+				startDate : "${board.startDate}",
+				endDate : "${board.endDate}",
+				filePath : "${board.filePath}"				
+				});
+		</c:forEach>
+		console.log(EventList);
+		var str = "";
+		$.each(EventList, function(i, board) {
+//		EventList.forEach(function(board, i) {
+			var fileCallPath = encodeURIComponent(board.filePath);
+			//console.log(board.filePath);
+			//console.log(fileCallPath);
+			str += "<div class='img'>";
+//			str += "<a href='/boardEvent/gridView?boardNum=" + board.boardNum +" &pageNum=" + ${paging.cri.pageNum} + "&keyword=" + ${paging.cri.keyword} + "&type=" + ${paging.cri.type} +"'>";
+			str += "<a href='/boardEvent/gridView?boardNum=" + board.boardNum +" &pageNum=" + ${paging.cri.pageNum} +"'>";
+			str += "<input type='hidden' id='boardNum' name='boardNum' value='" + board.boardNum +"' readonly='readonly'>";
+			str += "<img src='/display?fileName=" + fileCallPath + "' width='200' height='300'></a><br>";
+			str += "<p style='width: 200px'><a href='/boardEvent/gridView?boardNum=" + board.boardNum + "'>";
+			str += board.boardTitle + "</a><br>";
+			str += board.startDate + "~" + "<br>&nbsp;&nbsp;&nbsp;" + board.endDate + "</p>";
+			str += "</div>"; 
+		});
+			$(".uploadResult ul").html(str);
+		
+	})();//end function
+	
+}); */
+
+
+</script>	
 	
 	<%@ include file="../includes/footer.jsp"%>
 </body>

@@ -174,7 +174,7 @@
 		<input type='hidden' name='${_csrf.parameterName}'
 			value='${_csrf.token}' />
 	</form>
-	111
+	
 
 </div>
 <!-- .tm-container-outer -->
@@ -182,6 +182,25 @@
 <script>
 	$(document).ready(function(e) {
 		$('img[usemap]').rwdImageMaps();
+/* 		var href = $(".seat").prop('href');
+		if(href = ) */
+/* 		$.ajax({
+			console.log("start");
+			url : "/flight/reservation",
+			type : "GET",
+			data : {
+				
+			},
+			success : function(data){
+				console.log(data);
+			},
+			error : function(err){
+				console.log(err)
+			}
+			
+			
+		}); */
+		location.reload();
 	});
 </script>
 <script type="text/javascript">

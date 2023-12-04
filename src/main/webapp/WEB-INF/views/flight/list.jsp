@@ -128,19 +128,17 @@
 				<!-- 페이징 -->
 		<ul class="pagination justify-content-center">
 			<c:if test="${pageMaker.prev}">
-				<li class="page-item"><a class="page-link"
-					href="${pageMaker.startPage-1}">Previous</a></li>
-			</c:if>
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
-				var="num">
-				<li
-					class="page-item  ${pageMaker.cri.pageNum == num ? 'active' : ''}">
-					<a class="page-link" href="${num}">${num}</a>
+				<li class="page-item">
+					<a class="page-link" href="${pageMaker.startPage-1}">Previous</a>
 				</li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+					<li class="page-item active">
+						<a class="page-link" href="${num}">${num}</a>
+					</li>
 			</c:forEach>
 			<c:if test="${pageMaker.next}">
-				<li class="page-item"><a class="page-link"
-					href="${pageMaker.endPage+1}">Next</a></li>
+				<li class="page-item"><a class="page-link" href="${pageMaker.endPage+1}">Next</a></li>
 			</c:if>
 		</ul>
 			</div>
@@ -151,6 +149,7 @@
 	<form id="actionForm" action="/flight/list" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}" />
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
+		<input type="hidden" value='sec:authentication property="principal.username"'/>
 	</form>
 	<!-- 예약페이지 이동 -->
 	<form name="resForm" action="/flight/reservation" method="get">

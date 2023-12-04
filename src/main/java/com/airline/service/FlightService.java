@@ -74,4 +74,6 @@ public interface FlightService {
 	public KakaoUserVO getUserInfo(String userid);
 	//최신순 예약내역 1 가져오기
 	public FlightResVO getResFirst(String userid);
+	//사용포인트 조회
+	public int usePoint(String userid);
 }

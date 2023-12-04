@@ -147,6 +147,9 @@
 		select * from(select row_number() over(order by purchaseTime desc) rownum, r.* from flightreservation r where userid=#{userid}) p where rownum = 1
 	</select>
 	
+	<select id="usePoint" resultType="int">
+		select price from(select row_number() over(order by getDate desc) rownum, p.* from userpay p where userid=#{userid}and price is not null) s where rownum = 1;
+	</select>
 	
 	
 </mapper>

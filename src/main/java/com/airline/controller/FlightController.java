@@ -225,7 +225,7 @@ public class FlightController {
 		map.put("flightname", vo.getFlightName());
 		map.put("departure", vo.getDepName());
 		map.put("arrival", vo.getArrName());
-		map.put("arrtime", vo.getFullArrival());
+		map.put("arrtime", vo.getFullArrtime());
 		map.put("deptime", vo.getFullDeptime());
 		map.put("seatid", flight.getSeat());
 		System.out.println(map);
@@ -302,8 +302,10 @@ public class FlightController {
 		model.addAttribute("userid",userid);
 		model.addAttribute("vo",vo);
 		model.addAttribute("kvo",kvo);
+		//총 결제금액
+		int usePoint = flights.usePoint(userid);
+		model.addAttribute("point",usePoint);
 
-		
 
 		}
 	

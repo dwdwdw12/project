@@ -23,4 +23,5 @@ public class BoardDiaryReplyVO {
 	private String replyContent;
 	private String regiDate;
 	private String modifyDate;
+	private String userId;
 }

@@ -43,10 +43,11 @@ public class BoardDiaryReplyController {
 													@PathVariable("page") int page){
 		log.info("get List...boardNum : " + boardNum + " page : " +page);							
 		
-		Criteria cri = new Criteria(page, 5);
+		Criteria cri = new Criteria(page, 10);
 		
 		return new ResponseEntity<ReplyPageDTO>(service.selectAllReply(cri, boardNum), HttpStatus.OK);	
 	}
+	
 	
 	@GetMapping(value = "/{replyNum}", produces = {MediaType.APPLICATION_JSON_VALUE})	
 	public ResponseEntity<BoardDiaryReplyVO> get(@PathVariable("replyNum") int replyNum){
@@ -54,7 +55,7 @@ public class BoardDiaryReplyController {
 		return new ResponseEntity<BoardDiaryReplyVO>(service.selectOneReply(replyNum), HttpStatus.OK);
 	}
 	
-	@PreAuthorize("principal.userNick==#vo.replyWriter")
+//	@PreAuthorize("principal.userName==#vo.userId")
 	@DeleteMapping(value = "/{replyNum}")
 	public ResponseEntity<String> remove(@RequestBody BoardDiaryReplyVO vo, @PathVariable("replyNum") int replyNum){		
 		log.info("delete : " + replyNum);
@@ -63,7 +64,7 @@ public class BoardDiaryReplyController {
 										: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@PreAuthorize("principal.userNick==#vo.replyWriter")				
+//	@PreAuthorize("principal.userName==#vo.userId")				
 	@RequestMapping(method = {RequestMethod.PATCH, RequestMethod.PUT}, value = "/{replyNum}", consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody BoardDiaryReplyVO vo, @PathVariable("replyNum") int replyNum){
 		log.info("modify >> " + replyNum);

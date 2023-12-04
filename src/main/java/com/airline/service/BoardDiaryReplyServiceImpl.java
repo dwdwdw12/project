@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.airline.mapper.BoardDiaryMapper;
 import com.airline.mapper.BoardDiaryReplyMapper;
 import com.airline.vo.BoardDiaryReplyVO;
 import com.airline.vo.Criteria;
@@ -18,6 +19,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardDiaryReplyServiceImpl implements BoardDiaryReplyService{
 
 	private final BoardDiaryReplyMapper mapper;
+	private final BoardDiaryMapper diaryMapper;
 	
 	@Override
 	public BoardDiaryReplyVO selectOneReply(int replyNum) {
@@ -35,7 +37,9 @@ public class BoardDiaryReplyServiceImpl implements BoardDiaryReplyService{
 	@Override
 	public boolean insertReply(BoardDiaryReplyVO vo) {
 		log.info("insert reply service");
-		return mapper.insertReply(vo)==1;
+		int result = mapper.insertReply(vo);
+		diaryMapper.updateReplyCount(vo.getBoardNum());
+		return result==1;
 	}
 
 	@Override
@@ -47,7 +51,11 @@ public class BoardDiaryReplyServiceImpl implements BoardDiaryReplyService{
 	@Override
 	public boolean deleteReply(int replyNum) {
 		log.info("delete reply service");
-		return mapper.deleteReply(replyNum)==1;
+		BoardDiaryReplyVO vo = mapper.selectOneReply(replyNum);
+		int boardNum = vo.getBoardNum();
+		int result = mapper.deleteReply(replyNum);
+		diaryMapper.updateReplyCount(boardNum);
+		return result==1;
 	}
 
 	

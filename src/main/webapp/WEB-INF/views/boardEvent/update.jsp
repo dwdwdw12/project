@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../resources/summernote/summernote-lite.js"></script>
@@ -24,21 +24,6 @@
 <script>
 	var $jLatest = jQuery.noConflict();
 	
-	function setDetailImage(event){
-		for(var image of event.target.files){
-			var reader = new FileReader();
-			
-			reader.onload = function(event){
-				var img = document.createElement("img");
-				img.setAttribute("src", event.target.result);
-				img.setAttribute("class", "col-lg-6");
-				document.querySelector("div#images_container").appendChild(img);
-			};
-			
-			console.log(image);
-			reader.readAsDataURL(image);
-		}
-	}
 </script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -62,15 +47,26 @@
 	border: solid 2px white;
 	border-radius: 5px;
 	}
+	
+	.container {
+    max-width: 1400px; 
+    margin: 0 auto;
+    }
 
 </style>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top : 180px;">
 	
 	 <div class="container">
 		<h2>이벤트 수정</h2>
-		<form action="boardEventUpdate.do" method="post" name="frm" enctype="multipart/form-data">
-			<input type="hidden" id="boardNum" name="boardNum" value="${boardNum}"> 
+		<form action="/boardEvent/update" role="form" method="post" name="frm">
+			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 
+			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
+			<input type="hidden" id="keyword" name="keyword" value="${cri.keyword}">
+			<input type="hidden" id="type" name="type" value="${cri.type}">
+			<input type="hidden" id="order" name="order" value="${cri.order}">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
 				<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}">
@@ -86,77 +82,67 @@
 				<input type="text" class="form-control" id="endDate" name="endDate" value="${board.endDate}">
 			</div>
 			
-			<c:if test="${imgCount>0}">
-				<ul>
-					<li>이미지</li><br>
-					<li>이미지 개수 : ${imgCount}</li>	<br>	
+			현재 이미지
+			<div class="row">
+			    <div class="col-lg-12">
+			        <div class="panel panel-default">
+			        
+				        <div class="panel-heading"></div>
+				        <div class="panel-body">
+					        <div class="uploadResult_pre">
+					        	<ul>
+					        	</ul>
+					        </div>
+				        </div>
+					</div>
+			    </div>
+			</div>
+			
+			*새로운 파일<br>
+			주의)파일은 5개까지 업로드 가능하며, 이미지 파일 형식만 사용할 수 있습니다(jpg, jpeg, png, bmp).<br>
+				5MB 이하의 파일만 업로드 하실 수 있습니다.<br>
+				1번 파일이 썸네일에 표시됩니다.
+			
+			<div class="form-group">
+				1. 파일 지정하기 : <input type="file" multiple="multiple"
+					name="uploadFile" id="uploadFile01" accept=".png, .jpeg, .jpg, .bmp"> <br>
+				2. 파일 지정하기 : <input type="file" multiple="multiple"
+					name="uploadFile" id="uploadFile02" accept=".png, .jpeg, .jpg, .bmp"> <br>
+				3. 파일 지정하기 : <input type="file" multiple="multiple"
+					name="uploadFile" id="uploadFile03" accept=".png, .jpeg, .jpg, .bmp"> <br>
+				4. 파일 지정하기 : <input type="file" multiple="multiple"
+					name="uploadFile" id="uploadFile04" accept=".png, .jpeg, .jpg, .bmp"> <br>
+				5. 파일 지정하기 : <input type="file" multiple="multiple"
+					name="uploadFile" id="uploadFile05" accept=".png, .jpeg, .jpg, .bmp"> <br>
+			</div>
+			
+			<div class="uploadResult">
+			이미지 미리보기
+				<ul id="uploadList">
+				
 				</ul>
-	
-				<c:forEach var="file" items="${fileList}">
-					<c:if test="${file.repImgYn=='Y'}">
-						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
-						파일이름 : ${file.oriFileName} &nbsp; &nbsp;	<br>
-						대표이미지입니다.<br>
-						<img src="./upload/${file.oriFileName}" style="max-width: 100%; height: auto;">	<br>
-					</c:if>
-					<c:if test="${file.repImgYn=='N'}">
-						<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">	
-						파일이름 : ${file.oriFileName} &nbsp; &nbsp;	<br>
-						<img src="./upload/${file.oriFileName}" style="max-width: 100%; height: auto;">	<br>
-					</c:if>
-				</c:forEach>
-			</c:if>
+			</div>
 			
 			<div class="form-group">
 				<label for="boardContent">내용</label><br> 
-				<textarea id="summernote" class="summernote" name="boardContent" >${board.boardContent}</textarea>
+				<textarea id="summernote" class="summernote" name="boardContent">${board.boardContent}</textarea>
 			</div>
-						
-			<div>	
-			<c:choose>
-				<c:when test="${imgCount==5}">
-					주의)파일은 5개까지 업로드 가능하며, 이미지 파일 형식만 사용할 수 있습니다(jpg, jpeg, png, bmp).<br>
-				    5MB 이하의 파일만 업로드 하실 수 있습니다.<br>
-				    첫번째 파일은 썸네일에 표시됩니다<br>
-					<c:forEach var="file" items="${fileList}" varStatus="status">
-						${status.count}. 파일 지정하기 : 
-						${file.oriFileName} => <input type="file" name="uploadFile01" accept=".png, .jpeg, .jpg, .bmp" 
-								value="${file.oriFileName}" onchange="setDetailImage(event);" multiple="multiple"> <br>
-					</c:forEach>
-				</c:when>
-				<c:when test="${imgCount<5}">
-					주의)파일은 5개까지 업로드 가능하며, 이미지 파일 형식만 사용할 수 있습니다(jpg, jpeg, png, bmp).<br>
-				    5MB 이하의 파일만 업로드 하실 수 있습니다.<br>
-				    첫번째 파일은 썸네일에 표시됩니다<br>
-				    <c:forEach var="file" items="${fileList}" varStatus="status">
-						${status.count}. 파일 지정하기 : ${file.oriFileName}=><input type="file" name="uploadFile0${status.count}" accept=".png, .jpeg, .jpg, .bmp" onchange="setDetailImage(event);" multiple="multiple"><br>
-					</c:forEach>
-					<c:forEach var="num" begin="${imgCount+1}" end="5" step="1" varStatus="numStatus">
-						${imgCount+numStatus.count}. 파일 지정하기 : <input type="file" name="uploadFile0${imgCount+numStatus.count}" accept=".png, .jpeg, .jpg, .bmp" onchange="setDetailImage(event);" multiple="multiple"><br>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-			</div>
-			
-			이미지 미리보기
-			<div id="images_container" style="heigt:200px;"></div>
 			
 			<div id="bottom"></div>
 			<div class="mt-3 text-right">
-			<button type="button" class="gradient" onclick="location.href='boardEventList.do'" style="width: 100px">리스트목록</button>
-			<button type="button" class="gradient" onclick="location.href='boardEventListGrid.do'" style="width: 100px">그리드목록</button>
+			<button type="button" class="gradient" onclick="location.href='/boardEvent/list?pageNum=${cri.pageNum}&keyword=${cri.keyword}&type=${cri.type}'" style="width: 100px">목록</button>
 			<button type="reset" class="gradient">다시작성</button> &nbsp;
 			<button type="submit" class="gradient" onclick="return boardCheck()">수정</button> &nbsp;
 			</div>
 			<br><br>
-			<div style="position: fixed; bottom: 5px; right: 5px;">
+			<!-- <div style="position: fixed; bottom: 5px; right: 5px;">
 				<a href="#">
 				<img src="./img/upArrow.png" width="100px" height="100px" title="위로">
 				</a><br>
 				<a href="#bottom">
 				<img src="./img/downArrow.png" width="100px" height="100px" title="아래로">
 				</a>
-			</div>
+			</div> -->
 			
 		</form>
 	</div> 
@@ -263,25 +249,217 @@
 		});
 	</script>
 	
-	<script>
-		$(document).ready(function() {
-	        $("a[name='file-delete']").on("click", function(e) {
-	            e.preventDefault();
-	            deleteFile($(this));
-	        });
-	    })
-		function addFile() {
-	        var str = "<div class='file-input'><input type='file' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
-	        $("#file-list").append(str);
-	        $("a[name='file-delete']").on("click", function(e) {
-	            e.preventDefault();
-	            deleteFile($(this));
-	        });
-	    }
-		function deleteFile(obj) {
-		        obj.parent().remove();
-		    }
-	</script>
+<script>
+//이미지 표시
+$(document).ready(function(){
+	(function(){
+		var boardNum = '<c:out value="${board.boardNum}"/>';
+		$.getJSON("/boardEvent/getAttachList", {boardNum : boardNum}, function(arr) {
+			console.log(arr);
+			
+			var str = "";
+			
+			$(arr).each(function(i, attach) {
+				// image type
+				if (attach.fileType) {
+					//var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+					var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+					
+					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+					str += "<div>";
+					str += "	<img src='/display?fileName=" + fileCallPath + "' style='max-width: 100%; height: auto;'>";
+					str += "</div>";
+					str += "</li>";
+					
+				} else {
+					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+					str += "	<div>";
+					str += "		<span> " + attach.fileName + "</span><br/>";
+					str += "		<img src='..resources/upload/noimage.png'></a>";
+					str += "	</div>";
+					str += "</li>";
+				}
+				
+			});
+			
+			$(".uploadResult_pre ul").html(str);
+			
+			$("#uploadList").each(function(){
+			    $(this).html($(this).children('li').sort(function(a, b){
+			        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
+			    }));
+			});
+			
+		});
+		
+	})();//end function
+	
+});
+</script>
+
+<script>
+//전송 및 업로드
+$(document).ready(function(e){
+	var formObj = $("form[role='form']");
+	$("button[type='submit']").on("click", function(e){
+		e.preventDefault();
+		console.log("submit clicked");
+		
+		var str="";
+		$(".uploadResult ul li").each(function(i, obj){
+			var jobj = $(obj);
+			console.dir(jobj);
+			
+			str+="<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].fileOrder' value='" + jobj.data("fileorder") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].fileSize' value='" + jobj.data("filesize") + "'>";
+			str+="<input type='hidden' name='attachList[" + i + "].repImgYn' value='" + jobj.data("repimgyn") + "'>";
+			
+		});
+		
+		formObj.append(str).submit();
+		formObj.unbind('click').click();
+	});
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880; //5MB
+	
+	function checkExtension(filename, fileSize){
+		
+		if(fileSize>=maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		if(regex.test(filename)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	$("input[type='file']").focus( function(){
+		  before = $(this).val();	  
+	 	}).change(function(e){
+	 	
+	 		var targetId = $(this).prop("id");
+	 	
+	 	if(before!=''){
+	 		alert("아래에서 파일 삭제 후 다시 첨부해주세요");
+	 		$("#"+targetId).val("");
+	 	}
+	 	else{
+			var formData = new FormData();
+			
+			console.log(">>>" + $(this).prop("id"));
+			
+			var inputFile = $("#"+targetId);
+			
+			var files = inputFile[0].files;
+			for(var i=0; i<files.length;i++){
+				if(!checkExtension(files[i].name, files[i].size)){
+					return false;
+				}
+				formData.append("uploadFile", files[i]);
+				formData.append("fileOrder", targetId);
+			}
+			
+			$.ajax({
+				url: '/uploadAjaxAction',
+				processData: false,
+				contentType: false,
+				data: formData,
+				type: 'POST',
+				dataType: 'json',
+				success: function(result){
+					console.log(result);
+					showUploadResult(result);
+				}
+			});
+	 	}
+	});
+	
+	$(".uploadResult").on("click", "button", function(e){
+		console.log("delete file");
+		
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		var targetId = $(this).data("fileorder");
+		console.log("fileOrder>>"+targetId);
+		
+		var targetLi = $(this).closest("li");
+		
+		console.log("target>>"+targetFile);
+		console.log("type>>>"+type);
+		
+		$.ajax
+		({
+			url: '/deleteFile',
+			data: {fileName: targetFile, type: type},
+			dataType: 'text',
+			type: 'POST',
+			success: function(result)
+			{
+				alert(result);
+				targetLi.remove();
+				$("#"+targetId).val("");
+//				$("#"+targetId).replaceWith($("#"+targetId).clone(true)); //IE에서 동작하지 않으면 사용하기
+			}
+		});
+		
+	});
+
+	
+});
+function showUploadResult(uploadResultArr){
+	if(!uploadResultArr||uploadResultArr.length==0){
+		return ;
+	}
+	var uploadUL = $(".uploadResult ul");
+	
+	var str="";
+	
+	$(uploadResultArr).each(function(i, obj){
+		//image type
+		if(obj.image){
+			var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+			var order = obj.fileOrder.slice(-1);
+			
+			str+= "<li data-path ='"+ obj.uploadPath + "'";
+			str+=" data-uuid='"+ obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "' data-fileOrder='" + obj.fileOrder + "' data-fileSize='" + obj.fileSize + "' data-repImgYn='" + obj.repImgYn + "'";
+			str+= " ><div>";
+			str+="<span>" + order +"번 파일 : " + obj.fileName + "</span>";
+			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='image' data-fileOrder=" + obj.fileOrder + " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+			str+="<img src='/display?fileName=" + fileCallPath + "'>";
+			str+= "</div>";
+			str+= "</li>";
+		} else{
+			var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+			var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+			var order = obj.fileOrder.slice(-1);
+			
+			str+="<li ";
+			str+= "data-path='" + obj.uploadPath +"' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "' data-fileOrder='" + obj.fileOrder + "' data-fileSize='" + obj.fileSize + "' data-repImgYn='" + obj.repImgYn + "'"; 
+			str+= "><div>";
+			str+="<span>" + order +"번 파일 : " + obj.fileName + "</span>";
+			str+= "<button type='button' data-file=\'" + fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+			str+="<img src='..resources/upload/noimage.png'></a>";
+			str+= "</div>";
+			str+= "</li>";
+		}
+	});
+	uploadUL.append(str);
+	
+	$("#testList").each(function(){
+	    $(this).html($(this).children('li').sort(function(a, b){
+	        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
+	    }));
+	});
+}
+</script>
+	
 	<%@ include file="../includes/footer.jsp"%>
 </body>
 </html>

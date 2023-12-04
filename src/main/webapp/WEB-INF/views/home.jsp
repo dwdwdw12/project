@@ -37,6 +37,8 @@
 }
 </style>
 
+
+
 <div class="tm-page-wrap mx-auto">
 	<section class="tm-banner">
 
@@ -71,7 +73,7 @@
 			
 			
 			
-			
+
 			
 			
 			
@@ -120,20 +122,16 @@
 	<div class="tm-container-outer" id="tm-section-2">
 		<section class="tm-slideshow-section">
 			<div class="tm-slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="Image"> <img
-					src="../resources/img/tm-img-02.jpg" alt="Image"> <img
-					src="../resources/img/tm-img-03.jpg" alt="Image">
+				
+				<c:forEach var="board" items="${EventList}">
+					<img src="/display?fileName=${board.filePath}" alt="" width="690px" height="400px" onclick="location.href='/boardEvent/view?boardNum=${board.boardNum}'">					
+				</c:forEach>
 			</div>
 			<div class="tm-slideshow-description tm-bg-primary">
-				<h2 class="">Europe's most visited places</h2>
-				<p>Aenean in lacus nec dolor fermentum congue. Maecenas ut velit
-					pharetra, pharetra tortor sit amet, vulputate sem. Vestibulum mi
-					nibh, faucibus ac eros id, sagittis tincidunt velit. Proin interdum
-					ullamcorper faucibus. Ut mi nunc, sollicitudin non pulvinar id,
-					sagittis eget diam.</p>
-				<a href="#"
-					class="text-uppercase tm-btn tm-btn-white tm-btn-white-primary">Continue
-					Reading</a>
+				<h2 class="">이벤트</h2>
+				<p> 현재 진행중인 이벤트</p>
+				<a href="/boardEvent/list"
+					class="text-uppercase tm-btn tm-btn-white tm-btn-white-primary">게시판으로 이동</a>
 			</div>
 		</section>
 		<section
@@ -765,6 +763,10 @@
 				Message Now</button>
 		</form>
 	</div>
+	<!-- 모달창 -->
+	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/>   
+	<!-- /모달창 -->
+
 	<!-- .tm-container-outer -->
 	<%@ include file="includes/footer.jsp"%>
 	<!-- 충돌부분 추가 -->
@@ -852,4 +854,8 @@
             slidesToShow: 1,
             slidesToScroll: 1
         });
+		
+	
+		
 	</script>
+	

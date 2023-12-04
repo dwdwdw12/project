@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.airline.service.BoardDiaryLikeService;
 import com.airline.service.BoardDiaryService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.Criteria;
@@ -27,6 +28,8 @@ import lombok.extern.log4j.Log4j;
 public class BoardDiaryController {
 
 	private final BoardDiaryService service;
+	
+	private final BoardDiaryLikeService likeService;
 	
 	@GetMapping("/list")
 	public void list(Model model, Criteria cri) {
@@ -61,6 +64,10 @@ public class BoardDiaryController {
 		log.info(boardNum);
 		BoardDiaryVO boardVO = service.get(boardNum);
 		model.addAttribute("board", boardVO);
+		
+		int likeCount = likeService.likeCount(boardNum);
+		model.addAttribute("likeCount", likeCount);
+		
 	}
 	
 //	@PreAuthorize("principal.username==#writer")
@@ -74,7 +81,7 @@ public class BoardDiaryController {
 		}
 		
 		
-		return "redirect:/boardDiary/list" + cri.getListLink();
+		return "redirect:/boardDiary/list" + cri.getListLink2();
 	}
 	
 //	@PreAuthorize("principal.username==#writer")
@@ -87,7 +94,7 @@ public class BoardDiaryController {
 		}
 		
 		
-		return "redirect:/boardDiary/list" + cri.getListLink();
+		return "redirect:/boardDiary/list" + cri.getListLink2();
 	}
 	
 }
