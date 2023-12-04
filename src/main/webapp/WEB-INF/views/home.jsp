@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="includes/header2.jsp"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -180,37 +181,39 @@
 			<li class="tm-tab-link-li"><a href="#1a" data-toggle="tab"
 				class="tm-tab-link"> <img
 					src="../resources/img/north-america.png" alt="Image"
-					class="img-fluid"> North America
+					class="img-fluid"> 국내선
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#2a" data-toggle="tab"
 				class="tm-tab-link"> <img
 					src="../resources/img/south-america.png" alt="Image"
-					class="img-fluid"> South America
+					class="img-fluid"> 동북아시아
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#3a" data-toggle="tab"
 				class="tm-tab-link"> <img src="../resources/img/europe.png"
-					alt="Image" class="img-fluid"> Europe
+					alt="Image" class="img-fluid"> 동남아/서남아시아
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#4a" data-toggle="tab"
 				class="tm-tab-link active"> <!-- Current Active Tab --> <img
-					src="../resources/img/asia.png" alt="Image" class="img-fluid">
-					Asia
+					src="../resources/img/north-america.png" alt="Image" class="img-fluid">
+					중앙아시아
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#5a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/africa.png"
-					alt="Image" class="img-fluid"> Africa
+				class="tm-tab-link"> <img src="../resources/img/europe.png"
+					alt="Image" class="img-fluid"> 유럽
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#6a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/australia.png"
-					alt="Image" class="img-fluid"> Australia
+				class="tm-tab-link"> <img src="../resources/img/north-america.png"
+					alt="Image" class="img-fluid"> 미주(미국/캐나다)
 			</a></li>
 			<li class="tm-tab-link-li"><a href="#7a" data-toggle="tab"
-				class="tm-tab-link"> <img src="../resources/img/antartica.png"
-					alt="Image" class="img-fluid"> Antartica
+				class="tm-tab-link"> <img src="../resources/img/australia.png"
+					alt="Image" class="img-fluid"> 대양주
 			</a></li>
 		</ul>
 		<div class="tab-content clearfix">
-
+		<input type="hidden" value="${today}">
+		<input type="hidden" value="${nextWeek}">
+		
 			<!-- Tab 1 -->
 			<div class="tab-pane fade" id="1a">
 				<div class="tm-recommended-place-wrap">
@@ -218,15 +221,15 @@
 						<img src="img/tm-img-06.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">North Garden Resort</h3>
-							<p class="tm-text-highlight">One North</p>
+							<h3 class="tm-recommended-title">김포 ↔ 제주</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
-						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$110</p>
-							<p class="tm-recommended-price-link">Continue Reading</p>
+						<a href="/flight/search?dep=김포&arr=제주&depDate=${today}&arrDate=${nextWeek}" class="tm-recommended-price-box">
+							<p class="tm-recommended-price"><fmt:formatNumber value="${GMPtoCJU}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
+							<p class="tm-recommended-price-link">예약하기</p>
 						</a>
 					</div>
 
@@ -234,15 +237,15 @@
 						<img src="../resources/img/tm-img-07.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Felis nec dignissim</h3>
-							<p class="tm-text-highlight">Two North</p>
+							<h3 class="tm-recommended-title">광주 ↔ 제주</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<div id="preload-hover-img"></div>
-						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$120</p>
+						<a href="/flight/search?dep=광주&arr=제주&depDate=${today}&arrDate=${nextWeek}" class="tm-recommended-price-box">
+							<p class="tm-recommended-price"><fmt:formatNumber value="${KWJtoCJU}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -251,33 +254,18 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Sed fermentum justo</h3>
-							<p class="tm-text-highlight">Three North</p>
+							<h3 class="tm-recommended-title">김포 ↔ 여수</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$130</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${GMPtoRSU}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
 
-					<div class="tm-recommended-place">
-						<img src="../resources/img/tm-img-04.jpg" alt="Image"
-							class="img-fluid tm-recommended-img">
-						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Maecenas ultricies neque</h3>
-							<p class="tm-text-highlight">Four North</p>
-							<p class="tm-text-gray">Sed egestas, odio nec bibendum
-								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
-								lectus. Donec blandit luctus dictum...</p>
-						</div>
-						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$140</p>
-							<p class="tm-recommended-price-link">Continue Reading</p>
-						</a>
-					</div>
 				</div>
 
 				<a href="#"
@@ -294,14 +282,14 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">South Resort Hotel</h3>
-							<p class="tm-text-highlight">South One</p>
+							<h3 class="tm-recommended-title">인천 ↔ 오사카</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$220</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoKIX}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -310,14 +298,14 @@
 						<img src="../resources/img/tm-img-04.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Aenean ac ante nec diam</h3>
-							<p class="tm-text-highlight">South Second</p>
+							<h3 class="tm-recommended-title">인천 ↔ 후쿠오카</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$230</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoFUK}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -326,14 +314,14 @@
 						<img src="../resources/img/tm-img-07.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Suspendisse nec dapibus</h3>
-							<p class="tm-text-highlight">South Third</p>
+							<h3 class="tm-recommended-title">인천 ↔ 타이베이</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$240</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoTPE}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -342,14 +330,14 @@
 						<img src="../resources/img/tm-img-06.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Aliquam viverra mi at nisl</h3>
-							<p class="tm-text-highlight">South Fourth</p>
+							<h3 class="tm-recommended-title">홍콩 ↔ 인천</h3>
+							<p class="tm-text-highlight">편도</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$250</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoHKG}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -369,14 +357,14 @@
 						<img src="../resources/img/tm-img-04.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Europe Hotel</h3>
-							<p class="tm-text-highlight">Venecia, Italy</p>
+							<h3 class="tm-recommended-title">인천 ↔ 호찌민</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$330</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoSGN}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -385,14 +373,14 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">In viverra enim turpis</h3>
-							<p class="tm-text-highlight">Paris, France</p>
+							<h3 class="tm-recommended-title">인천 ↔ 마닐라</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$340</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoMNL}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -401,14 +389,14 @@
 						<img src="../resources/img/tm-img-06.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Volutpat pellentesque</h3>
-							<p class="tm-text-highlight">Barcelona, Spain</p>
+							<h3 class="tm-recommended-title">인천 ↔ 싱가포르</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$350</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoSIN}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -417,14 +405,14 @@
 						<img src="../resources/img/tm-img-07.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Grand Resort Pasha</h3>
-							<p class="tm-text-highlight">Istanbul, Turkey</p>
+							<h3 class="tm-recommended-title">인천 ↔ 방콕</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$360</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoBKK}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -444,14 +432,14 @@
 						<img src="../resources/img/tm-img-06.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Asia Resort Hotel</h3>
-							<p class="tm-text-highlight">Singapore</p>
+							<h3 class="tm-recommended-title">인천 ↔ 울란바타르</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$440</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoUBN}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -460,15 +448,15 @@
 						<img src="../resources/img/tm-img-07.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Nullam eget est a nisl</h3>
-							<p class="tm-text-highlight">Yangon, Myanmar</p>
+							<h3 class="tm-recommended-title">인천 ↔ 알마티</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<div id="preload-hover-img"></div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$450</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoALA}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -477,30 +465,14 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Proin interdum ullamcorper</h3>
-							<p class="tm-text-highlight">Bangkok, Thailand</p>
+							<h3 class="tm-recommended-title">인천 ↔ 타슈켄트</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$460</p>
-							<p class="tm-recommended-price-link">Continue Reading</p>
-						</a>
-					</div>
-
-					<div class="tm-recommended-place">
-						<img src="../resources/img/tm-img-04.jpg" alt="Image"
-							class="img-fluid tm-recommended-img">
-						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Lorem ipsum dolor sit</h3>
-							<p class="tm-text-highlight">Vientiane, Laos</p>
-							<p class="tm-text-gray">Sed egestas, odio nec bibendum
-								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
-								lectus. Donec blandit luctus dictum...</p>
-						</div>
-						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$470</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoTAS}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -520,14 +492,14 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Africa Resort Hotel</h3>
-							<p class="tm-text-highlight">First City</p>
+							<h3 class="tm-recommended-title">인천 ↔ 프랑크푸르트</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$550</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoFRA}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -536,14 +508,14 @@
 						<img src="../resources/img/tm-img-04.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Aenean ac magna diam</h3>
-							<p class="tm-text-highlight">Second City</p>
+							<h3 class="tm-recommended-title">인천 ↔ 런던히드로</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$560</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoLHR}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -552,14 +524,14 @@
 						<img src="../resources/img/tm-img-07.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Beach Barbecue Sunset</h3>
-							<p class="tm-text-highlight">Third City</p>
+							<h3 class="tm-recommended-title">인천 ↔ 파리</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$570</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoCDG}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -568,14 +540,14 @@
 						<img src="../resources/img/tm-img-06.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Grand Resort Pasha</h3>
-							<p class="tm-text-highlight">Fourth City</p>
+							<h3 class="tm-recommended-title">인천 ↔ 로마</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$580</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoFCO}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -595,14 +567,14 @@
 						<img src="../resources/img/tm-img-04.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Hotel Australia</h3>
-							<p class="tm-text-highlight">City One</p>
+							<h3 class="tm-recommended-title">인천 ↔ 로스앤젤레스</h3>
+							<p class="tm-text-highlight">편도</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$660</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoLAX}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -611,14 +583,14 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Proin interdum ullamcorper</h3>
-							<p class="tm-text-highlight">City Two</p>
+							<h3 class="tm-recommended-title">인천 ↔ 뉴욕</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$650</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoJFK}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -627,14 +599,14 @@
 						<img src="../resources/img/tm-img-06.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Beach Barbecue Sunset</h3>
-							<p class="tm-text-highlight">City Three</p>
+							<h3 class="tm-recommended-title">인천 ↔ 샌프란시스코</h3>
+							<p class="tm-text-highlight">편도</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$640</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoSFO}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -643,14 +615,14 @@
 						<img src="../resources/img/tm-img-07.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Grand Resort Pasha</h3>
-							<p class="tm-text-highlight">City Four</p>
+							<h3 class="tm-recommended-title">인천 ↔ 호놀룰루</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$630</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoHNL}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -670,14 +642,14 @@
 						<img src="../resources/img/tm-img-04.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Antartica Resort</h3>
-							<p class="tm-text-highlight">Ant City One</p>
+							<h3 class="tm-recommended-title">인천 ↔ 시드니</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$770</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoSYD}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
@@ -686,49 +658,18 @@
 						<img src="../resources/img/tm-img-05.jpg" alt="Image"
 							class="img-fluid tm-recommended-img">
 						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Pulvinar Semper</h3>
-							<p class="tm-text-highlight">Ant City Two</p>
+							<h3 class="tm-recommended-title">인천 ↔ 사이판</h3>
+							<p class="tm-text-highlight">왕복</p>
 							<p class="tm-text-gray">Sed egestas, odio nec bibendum
 								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
 								lectus. Donec blandit luctus dictum...</p>
 						</div>
 						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$230</p>
+							<p class="tm-recommended-price"><fmt:formatNumber value="${ICNtoSPN}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">Continue Reading</p>
 						</a>
 					</div>
-
-					<div class="tm-recommended-place">
-						<img src="../resources/img/tm-img-06.jpg" alt="Image"
-							class="img-fluid tm-recommended-img">
-						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Cras vel sapien</h3>
-							<p class="tm-text-highlight">Ant City Three</p>
-							<p class="tm-text-gray">Sed egestas, odio nec bibendum
-								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
-								lectus. Donec blandit luctus dictum...</p>
-						</div>
-						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$140</p>
-							<p class="tm-recommended-price-link">Continue Reading</p>
-						</a>
-					</div>
-
-					<div class="tm-recommended-place">
-						<img src="../resources/img/tm-img-07.jpg" alt="Image"
-							class="img-fluid tm-recommended-img">
-						<div class="tm-recommended-description-box">
-							<h3 class="tm-recommended-title">Nullam eget est</h3>
-							<p class="tm-text-highlight">Ant City Four</p>
-							<p class="tm-text-gray">Sed egestas, odio nec bibendum
-								mattis, quam odio hendrerit risus, eu varius eros lacus sit amet
-								lectus. Donec blandit luctus dictum...</p>
-						</div>
-						<a href="#" class="tm-recommended-price-box">
-							<p class="tm-recommended-price">$190</p>
-							<p class="tm-recommended-price-link">Continue Reading</p>
-						</a>
-					</div>
+					
 				</div>
 
 				<a href="#"
@@ -739,30 +680,7 @@
 		</div>
 	</div>
 
-	<div class="tm-container-outer tm-position-relative" id="tm-section-4">
-		<div id="google-map"></div>
-		<form action="index.html" method="post" class="tm-contact-form">
-			<div class="form-group tm-name-container">
-				<input type="text" id="contact_name" name="contact_name"
-					class="form-control" placeholder="Name" required />
-			</div>
-			<div class="form-group tm-email-container">
-				<input type="email" id="contact_email" name="contact_email"
-					class="form-control" placeholder="Email" required />
-			</div>
-			<div class="form-group">
-				<input type="text" id="contact_subject" name="contact_subject"
-					class="form-control" placeholder="Subject" required />
-			</div>
-			<div class="form-group">
-				<textarea id="contact_message" name="contact_message"
-					class="form-control" rows="9" placeholder="Message" required></textarea>
-			</div>
-			<button type="submit"
-				class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">Send
-				Message Now</button>
-		</form>
-	</div>
+
 	<!-- 모달창 -->
 	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/>   
 	<!-- /모달창 -->

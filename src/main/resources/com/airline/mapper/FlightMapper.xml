@@ -56,6 +56,10 @@
 		select price from price where depname=#{depname} and arrname=#{arrname}
 	</select>
 	
+	<select id="getRoundTripPrice" resultType="int">
+		select sum(price) from price where depname=#{depname} and arrname = #{arrname} or depname=#{arrname} and arrname = #{depname};
+	</select>
+	
 	<select id="getUserAge" resultType="int">
 		select userReginumFirst from kakaouser where userid = #{userid}
 	</select>

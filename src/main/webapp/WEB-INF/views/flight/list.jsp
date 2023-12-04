@@ -22,6 +22,15 @@
 
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+	var $jLatest = jQuery.noConflict();
+</script>
+
 <style>
 .slideshow {
 	height: 465px;
@@ -69,47 +78,51 @@
 						explore</a> -->
 				</div>
 			</div>
-
+			
 			<form action="/flight/search" method="get" class="tm-search-form tm-section-pad-1">
+				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
+				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
+				<br><br>
 				<div class="form-row tm-search-form-row">
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="dep">Choose Your Destination</label> 
+						<label for="dep">출발지</label> 
 						<input name="dep" type="text" class="form-control" id="departure" placeholder="Type your destination..." required="required">
 					</div>
 					
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="arr">Choose Your Arrival</label> 
+						<label for="arr">도착지</label> 
 						<input name="arr" type="text" class="form-control" id="arrival" placeholder="Type your destination..." required="required">
 					</div>
 				</div>
+				<br>
 				<!-- form-row -->
 				<div class="form-row tm-search-form-row">
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-						<label for="inputCheckIn">Check In Date</label> <input
-							name="time" type="text" class="form-control"
-							id="inputCheckIn" placeholder="Check In" required="required">
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+						<label>가는 날</label> 
+						<input type="text" class="form-control" id="depDate" name="depDate" value = "${depDate}">
 					</div>
-					<div
-						class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1" id="depDiv">
+						<%-- <label for="boardTitle" id="depLabel" hidden="">오는 날</label> 
+						<input type="hidden" class="form-control" id="arrDate" name="arrDate" value = "${arrDate}"> --%>
+					</div>
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<label for="btnSubmit">&nbsp;</label>
-						<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase"
-							id="btnSubmit">Check Availability</button>
+						<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="btnSubmit">검색</button>
 					</div>
 				</div>
 			</form>
 
 			<div class="container">
-				<h2>Flight Schedule</h2>
-				<p>this is flight schedule u can reservate at kakao airline site</p>
+				<h2>운항 일정</h2>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Flight Name</th>
-							<th>Departure Time</th>
-							<th>Arrival Time</th>
-							<th>Departure</th>
-							<th>Arrival</th>
-							<th>예약</th>
+							<th>항공편명</th>
+							<th>출발시간</th>
+							<th>도착시간</th>
+							<th>출발지</th>
+							<th>도착지</th>
+							<th>예약하기</th>
 						</tr>
 					</thead>
 					<c:forEach items="${list}" var="list">
@@ -179,53 +192,8 @@
 		$("form[name='resForm']").submit();
 	})
 	
+</script>
 
-</script>
-<!-- 충돌부분 추가 -->
-<script type="text/javascript">
-	var $jLatest = jQuery.noConflict();
-	$jLatest('input[id="dates"]').daterangepicker();
-	$jLatest('input[id="startDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-	$jLatest('input[id="endDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-</script>
 <script type="text/javascript">
 	$(function() {
 		$('.slideshow').each(function() {
@@ -266,4 +234,112 @@
 		slidesToShow : 1,
 		slidesToScroll : 1
 	});
+	
+	
+	
+</script>
+
+<script>
+	$("#oneWay").on("click", function(){
+		console.log("편도");
+		str = "";
+		$("#depDiv").html(str);
+		
+	});
+	
+	$("#roundTrip").on("click", function(){
+		console.log("왕복");
+		str = "";
+		str += "<label>오는 날</label>"; 
+		str += "<input type='text' class='form-control' id='arrDate' name='arrDate'>";
+		$("#depDiv").html(str);
+		
+		$jLatest('input[id="arrDate"]').daterangepicker({
+			singleDatePicker: true,
+		    //timePicker: true,
+		    timePicker24Hour: true,
+			 "locale": {
+			       "format": 'YYYY-MM-DD',
+			       "separator": " ~ ",
+			       "applyLabel": "확인",
+			        "cancelLabel": "취소",
+			        "fromLabel": "From",
+			        "toLabel": "To",
+			        "customRangeLabel": "Custom",
+			        "weekLabel": "주",
+			        "daysOfWeek": [
+			             "일",
+			             "월",
+			             "화",
+			             "수",
+			             "목",
+			             "금",
+			             "토"
+			       ],
+			      "monthNames": [
+			             "1월",
+			             "2월",
+			             "3월",
+			             "4월",
+			             "5월",
+			             "6월",
+			             "7월",
+			             "8월",
+			             "9월",
+			             "10월",
+			             "11월",
+			             "12월"
+			        ],
+			        "firstDay": 1
+			    },
+			    
+			    
+			    "minDate": "2023-12-01",
+			    "maxDate": "2024-02-28"
+		});
+	});
+
+	$jLatest('input[id="dates"]').daterangepicker();
+	$jLatest('input[id="depDate"]').daterangepicker({
+		singleDatePicker: true,
+	    //timePicker: true,
+	    timePicker24Hour: true,
+		 "locale": {
+		       "format": 'YYYY-MM-DD',
+		       "separator": " ~ ",
+		       "applyLabel": "확인",
+		        "cancelLabel": "취소",
+		        "fromLabel": "From",
+		        "toLabel": "To",
+		        "customRangeLabel": "Custom",
+		        "weekLabel": "주",
+		        "daysOfWeek": [
+		             "일",
+		             "월",
+		             "화",
+		             "수",
+		             "목",
+		             "금",
+		             "토"
+		       ],
+		      "monthNames": [
+		             "1월",
+		             "2월",
+		             "3월",
+		             "4월",
+		             "5월",
+		             "6월",
+		             "7월",
+		             "8월",
+		             "9월",
+		             "10월",
+		             "11월",
+		             "12월"
+		        ],
+		        "firstDay": 1
+		    },
+		    "minDate": "2023-12-01",
+		    "maxDate": "2024-02-28"
+	});
+	
 </script>

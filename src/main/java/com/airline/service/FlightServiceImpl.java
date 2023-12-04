@@ -52,6 +52,12 @@ public class FlightServiceImpl implements FlightService{
 	public int getPrice(String depName, String arrName) {
 		return mapper.getPrice(depName,arrName);
 	}
+	
+	@Override
+	public int getRoundTripPrice(String depName, String arrName) {
+
+		return mapper.getRoundTripPrice(depName, arrName);
+	}
 
 	@Override
 	public int getUserAge(String userid) {
