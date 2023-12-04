@@ -26,7 +26,7 @@ public class KakaoUserVO {
 	private int userReginumFirst;
 	private int userReginumLast;
 	private int admin;
-	private String enabled;
+	private int enabled;
 
 	private String mail_key; //이메일 인증을 위함
 	

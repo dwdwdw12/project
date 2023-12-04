@@ -193,4 +193,16 @@ public class UserServiceImpl implements UserService{
 		return mapper.getQna(username);
 	}
 
+
+	@Override
+	public List<BoardDiaryVO> getUserDiary(String username, Criteria cri) {
+		return mapper.getUserDiary(username, cri);
+	}
+
+
+	@Override
+	public int getUserDiaryCnt(String username, Criteria cri) {
+		return mapper.getUserDiaryCnt(username, cri);
+	}
+
 }

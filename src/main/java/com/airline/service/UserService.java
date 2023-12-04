@@ -70,5 +70,9 @@ public interface UserService {
 	String getName(String userid);
 	//qna 게시판3개 
 	List<BoardQnaVO> getQna(String username);
+	//여행일기 게시판
+	List<BoardDiaryVO> getUserDiary(String username, Criteria cri);
+	//여행일기 페이징 카운트
+	int getUserDiaryCnt(String username, Criteria cri);
 
 }
