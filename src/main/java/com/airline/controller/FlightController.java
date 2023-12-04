@@ -1,11 +1,14 @@
 package com.airline.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -61,33 +64,26 @@ public class FlightController {
 	}
 	
 	@GetMapping(value="/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public void getSearch(Model model, Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time) {
-		System.out.println("dep : "+dep+" arr : "+arr+" time : "+ time);
-		Date date = new Date(time);
-		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd");
-		int year = date.getYear()+1900;
-		int month = date.getMonth()+1;
-		int day = date.getDate();
+	public void getSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr,@Param("arrDate") String arrDate, @Param("depDate") String depDate) throws ParseException {
+		System.out.println("dep : "+dep+" arr : "+arr+" time : "+ arrDate);
 		
-		System.out.println("year : "+year);
-		System.out.println("month : "+date.getMonth());
-		System.out.println("date : "+date.getDate());
-
-		LocalDate localdate = LocalDate.of(year,month,day);
-		System.out.println("localdate : "+localdate);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
-
-		String formattedDate = formatter.format(localdate);
-		//System.out.println("날짜출력1>>>>"+formatter);
-		System.out.println("날짜출력2>>>>"+formattedDate);
+		List<FlightVO> listSearch = flights.getListSearch(cri,dep,arr,depDate);
+		System.out.println(listSearch.size());
+		for(FlightVO vo : listSearch) {
+			System.out.println("vo : "+vo);
+		}
 		
-		model.addAttribute("list",flights.getListSearch(cri,dep,arr,formattedDate));
-		model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,formattedDate)));
+		model.addAttribute("list", flights.getListSearch(cri,dep,arr,depDate));
+		model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
+		
+		model.addAttribute("arrlist", flights.getListSearch(cri,arr,dep,arrDate));
+		model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
 		
 		//검색창 반환값
 		model.addAttribute("dep", dep);
 		model.addAttribute("arr", arr);
-		model.addAttribute("time", formattedDate);
+		model.addAttribute("arrDate", arrDate);
+		model.addAttribute("depDate", depDate);
 		
 	}
 	

@@ -26,6 +26,9 @@ public interface FlightService {
 
 	//가격구간 검색
 	public int getPrice(String depName, String arrName);
+	
+	//왕복 항공편 가격 합산. 편도일 경우, 하나만 합산
+	public int getRoundTripPrice(String depName, String arrName);
 
 	//유저나이 검색
 	public int getUserAge(String userid);
