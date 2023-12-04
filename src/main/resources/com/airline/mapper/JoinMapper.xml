@@ -49,6 +49,22 @@
 	
 </insert>
 
+<insert id="insertkakaoMember" parameterType="com.airline.vo.KakaoUserVO">
+	insert into kakaouser(
+		userId, userNick, userNameK, userNameE, gender, pwd, 
+		mail, 
+		phone,
+		postCode, 
+		address, userReginumFirst, userReginumLast)
+		
+		values(
+			#{userId}, #{userNick}, #{userNameK}, #{userNameE}, #{gender}, #{pwd},
+			 #{mail}, #{phone}, #{postCode}, #{address}, 
+			#{userReginumFirst}, #{userReginumLast}
+	)
+	
+</insert>
+
 <select id="userIdDuplicateCheck" resultType="Integer">
 	select count(userId) from kakaouser where userId = #{userId}
 </select>
@@ -56,5 +72,8 @@
 	select count(userNick) from kakaouser where userNick = #{userNick}
 </select>
 
+<select id="kakaoLoginCheck" resultType="com.airline.vo.KakaoUserVO">
+	select * from kakaouser where mail = #{email} and userNameK = #{userNameK}
+</select>
 
 </mapper>

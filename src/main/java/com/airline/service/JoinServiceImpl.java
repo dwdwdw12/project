@@ -234,6 +234,11 @@ public class JoinServiceImpl implements JoinService {
 				userReginumLast, userId, userNick, pwd, 
 				mail, phone, postCode, address);
 	}
+	
+	@Override
+	public void registerKakaoMember(KakaoUserVO vo) {
+		join.insertkakaoMember(vo);
+	}
 
 	@Override
 	public int userIdDuplicateCheck(String userId) {
@@ -244,6 +249,14 @@ public class JoinServiceImpl implements JoinService {
 	public int userNickDuplicateCheck(String userNick) {
 		return join.userNickDuplicateCheck(userNick);
 	}
+
+	@Override
+	public KakaoUserVO kakaoLoginCheck(String email, String userNameK) {
+		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
+		return vo;
+	}
+
+
 
 
 
