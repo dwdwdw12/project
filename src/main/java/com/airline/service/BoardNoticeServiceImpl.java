@@ -22,7 +22,7 @@ public class BoardNoticeServiceImpl implements BoardNoticeService{
 		return mapper.getList();
 	}
 
-	@Override
+	@Override 
 	public List<BoardNoticeVO> getPageList(Criteria cri) {
 		return mapper.getPageList(cri);
 	}

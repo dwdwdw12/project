@@ -20,12 +20,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
+import com.airline.mapper.BoardEventMapper;
+import com.airline.service.BoardEventService;
+import com.airline.service.BoardNoticeService;
+
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
+import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
@@ -44,9 +50,23 @@ public class HomeController {
 	@Autowired
 	private UserService user;
 	
+	@Autowired
+	private BoardEventService eventService;	
+		
+  @Autowired
+	private BoardNoticeService service;
+	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {		
+	public String home(Model model, Criteria cri) {		
+		model.addAttribute("emer", service.noticePopup(cri));
+    
+		//이벤트 슬라이더용 8개만 출력.
+		Criteria criEvent = new Criteria();
+		criEvent.setAmount(8);
+		List<BoardEventVO> EventImglist = eventService.getListwithPaging(criEvent);
+		model.addAttribute("EventList", EventImglist);
+    
 		return "home";
 	}
 	

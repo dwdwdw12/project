@@ -88,7 +88,7 @@
 
 				<tr>
 					<td>${board.boardNum}</td>
-					<td><a href="/boardEvent/view?boardNum=${board.boardNum}">${board.boardTitle} </a></td>
+					<td><a href="/boardEvent/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">${board.boardTitle} </a></td>
 					<td>${board.startDate}</td>
 					<td>${board.endDate}</td>					
 					<td>${board.readCount}</td>
@@ -148,7 +148,8 @@
 						</c:otherwise>
 					</c:choose>
 			</ul>
-		<input type="button" class="gradient" onclick="location.href='/boardEvent/write'" value="테스트글쓰기">
+			
+			
 		<div class="mt-3 text-right">
 		<c:if test="${loginUser.admin==1}">
 			<input type="button" class="gradient" onclick="location.href='/boardEvent/write'" value="글쓰기">

@@ -13,11 +13,11 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- <link rel="manifest" href="site.webmanifest"> -->
+<!-- <link rel="manifest" href="site.webmanifest"> --> 
 <link rel="shortcut icon" type="image/x-icon"
 	href="../resources/img/favicon.png">
 <!-- Place favicon.ico in the root directory -->
-
+ 
 <!-- CSS here -->
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
@@ -106,7 +106,9 @@
 										</a></li>
 										<li><a href="/notice/list">notice <!-- <i class="fa fa-facebook-square"></i> -->
 										</a></li>
-										<li><a href="#">event <!-- <i class="fa fa-twitter"></i> -->
+										<li><a href="/boardDiary/list">Board Diary <!-- <i class="fa fa-twitter"></i> -->
+										</a></li>
+										<li><a href="/boardEvent/list">Event 
 										</a></li>
 										<sec:authorize access="isAnonymous">
 											<li><a href="/login"> login<!--  <i class="fa fa-instagram"></i>-->

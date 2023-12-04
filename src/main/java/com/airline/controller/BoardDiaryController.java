@@ -81,7 +81,7 @@ public class BoardDiaryController {
 		}
 		
 		
-		return "redirect:/boardDiary/list" + cri.getListLink();
+		return "redirect:/boardDiary/list" + cri.getListLink2();
 	}
 	
 //	@PreAuthorize("principal.username==#writer")
@@ -94,7 +94,7 @@ public class BoardDiaryController {
 		}
 		
 		
-		return "redirect:/boardDiary/list" + cri.getListLink();
+		return "redirect:/boardDiary/list" + cri.getListLink2();
 	}
 	
 }

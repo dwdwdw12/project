@@ -22,22 +22,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
 	var $jLatest = jQuery.noConflict();
-
-	function setDetailImage(event){
-		/* for(var image of event.target.files){
-			var reader = new FileReader();
-			
-			reader.onload = function(event){
-				var img = document.createElement("img");
-				img.setAttribute("src", event.target.result);
-				img.setAttribute("class", "col-lg-6");
-				document.querySelector("div#images_container").appendChild(img);
-			};
-			
-			console.log(image);
-			reader.readAsDataURL(image);
-		} */
-	}
 </script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -101,25 +85,23 @@
 			
 			주의)파일은 5개까지 업로드 가능하며, 이미지 파일 형식만 사용할 수 있습니다(jpg, jpeg, png, bmp).<br>
 				5MB 이하의 파일만 업로드 하실 수 있습니다.<br>
-				첫번째 파일은 썸네일에 표시됩니다.
+				1번 파일이 썸네일에 표시됩니다.
 			<div class="form-group">
 				1. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile" id="uploadFile01" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile01" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				2. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile" id="uploadFile02" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile02" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				3. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile" id="uploadFile03" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile03" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				4. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile" id="uploadFile04" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile04" accept=".png, .jpeg, .jpg, .bmp"> <br>
 				5. 파일 지정하기 : <input type="file" multiple="multiple"
-					name="uploadFile" id="uploadFile05" onchange="setDetailImage(event);" accept=".png, .jpeg, .jpg, .bmp"> <br>
+					name="uploadFile" id="uploadFile05" accept=".png, .jpeg, .jpg, .bmp"> <br>
 			</div>
-		<!-- 	이미지 미리보기
-			<div id="images_container" style="heigt:200px;"></div>
-			 -->
+		
 			<div class="uploadResult">
-			이미지 미리보기2
-				<ul>
+			이미지 미리보기
+				<ul id="uploadList">
 				
 				</ul>
 			</div>
@@ -131,10 +113,9 @@
 			
 			<br>
 			<div class="mt-3 text-right">
-				<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">리스트목록</button>
-				<button type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 100px">그리드목록</button>
+				<button type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 100px">목록</button>
 				<button type="reset" class="gradient">다시작성</button> &nbsp;
-				<button type="submit" class="gradient" onclick="return boardCheck()" id="write">등록</button> &nbsp;
+				<button type="submit" class="gradient" id="write">등록</button> &nbsp;
 			</div>
 			<br>
 			
@@ -261,26 +242,34 @@
 $(document).ready(function(e){
 	var formObj = $("form[role='form']");
 	$("button[type='submit']").on("click", function(e){
-		e.preventDefault();
-		console.log("submit clicked");
-		
-		var str="";
-		$(".uploadResult ul li").each(function(i, obj){
-			var jobj = $(obj);
-			console.dir(jobj);
+//		e.preventDefault();
+		var check = boardCheck();
+		if(check==false){
+			e.preventDefault();
+			console.log(check);
+		} else{	
+			console.log(check);
+			e.preventDefault();
+			console.log("submit clicked");
 			
-			str+="<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].fileOrder' value='" + jobj.data("fileorder") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].fileSize' value='" + jobj.data("filesize") + "'>";
-			str+="<input type='hidden' name='attachList[" + i + "].repImgYn' value='" + jobj.data("repimgyn") + "'>";
+			var str="";
+			$(".uploadResult ul li").each(function(i, obj){
+				var jobj = $(obj);
+				console.dir(jobj);
+				
+				str+="<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].fileOrder' value='" + jobj.data("fileorder") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].fileSize' value='" + jobj.data("filesize") + "'>";
+				str+="<input type='hidden' name='attachList[" + i + "].repImgYn' value='" + jobj.data("repimgyn") + "'>";
+				
+			});
 			
-		});
-		
-		formObj.append(str).submit();
-		formObj.unbind('click').click();
+			formObj.append(str).submit();
+			formObj.unbind('click').click();
+		}
 	});
 	
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -410,7 +399,14 @@ function showUploadResult(uploadResultArr){
 		}
 	});
 	uploadUL.append(str);
+	
+	$("#uploadList").each(function(){
+	    $(this).html($(this).children('li').sort(function(a, b){
+	        return ($(b).data('fileorder')) < ($(a).data('fileorder')) ? 1 : -1;
+	    }));
+	});
 }
+
 </script>
 	<%@ include file="../includes/footer.jsp"%>
 </body>

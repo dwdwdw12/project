@@ -53,14 +53,13 @@ public class BoardEventFileController {
 		return false;
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile, String fileOrder) {
 		log.info("update ajax post...");
 		
 		System.out.println("order : " + fileOrder);
-		
 		
 		List<AttachFileDTO> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload";
@@ -193,7 +192,7 @@ public class BoardEventFileController {
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
-	//@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type){

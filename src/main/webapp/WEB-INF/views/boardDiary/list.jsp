@@ -121,7 +121,7 @@
 
 				<tr>
 					<td>${board.boardNum}</td>
-					<td><a href="/boardDiary/view?boardNum=${board.boardNum}">${board.boardTitle} [${board.replyCount}]</a></td>
+					<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}">${board.boardTitle} [${board.replyCount}]</a></td>
 					<td>${board.boardWriter}</td>
 					<c:choose>
 						<c:when test="${board.regiDate>=board.modifyDate}">
