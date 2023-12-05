@@ -12,10 +12,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CancelVO {
-		private int cno;
-		private String userid;
-		private String resno;
-		private int isCancel;
-		private Date RequestTime;
-		private Date CancelTime;
+	private int cno;
+	private String resno;
+	private String userid ;
+	private int isCancel;
+	private int cancelOk;
+	private Date cancelTime;
+	private Date requestTime;
 }

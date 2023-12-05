@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airline.service.UserService;
+import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.PageDTO;
@@ -135,6 +136,22 @@ public class UserController {
 			int result = service.cancelTicket(data);
 			//체크인 처리
 			int resultCheckin = service.checkin(data);
+		}
+	}
+	
+	//여행일기 상세조회
+	@GetMapping("/diary")
+	public void userDiary(Model model,Criteria cri) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			String userid = userDetails.getUsername();
+			System.out.println("id : " + userid);
+			String username = service.getName(userid);
+			List<BoardDiaryVO> vo = service.getUserDiary(username, cri);
+			model.addAttribute("vo",vo);
+			model.addAttribute("paging", new PageDTO(cri, service.getUserDiaryCnt(username, cri)));
+
 		}
 	}
 	

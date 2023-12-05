@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -73,11 +74,12 @@ public class FlightController {
 			System.out.println("vo : "+vo);
 		}
 		
+		cri.setAmount(50);
 		model.addAttribute("list", flights.getListSearch(cri,dep,arr,depDate));
-		model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
+		//model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
 		
 		model.addAttribute("arrlist", flights.getListSearch(cri,arr,dep,arrDate));
-		model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
+		//model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
 		
 		//검색창 반환값
 		model.addAttribute("dep", dep);
@@ -93,6 +95,21 @@ public class FlightController {
 		FlightVO vo = flights.getFlightInfo(fno);
 		model.addAttribute("vo",vo);
 		model.addAttribute("fno",fno);
+		String flightName = vo.getFlightName();
+		System.out.println("flightName>>"+flightName);
+		//예약된 좌석 명단
+		List<String> list = new ArrayList<String>();
+		//개수
+		int cnt = flights.ResCnt(flightName);
+		for(int i = 0; i<cnt; i++) {
+			list.add(i, flights.getResAll(flightName));
+		}
+		
+		//list.add(flights.getResAll(flightName));
+
+		System.out.println("list>>"+flights.getResAll(flightName));
+		System.out.println("list>>"+list);
+		
 	}
 	
 	//좌석 선택 후 결제창으로 넘어가기
@@ -124,6 +141,7 @@ public class FlightController {
 		
 		System.out.println("seat : "+seat);
 		model.addAttribute("seat",seatPc);
+		model.addAttribute("className",className);
 				
 		//유저정보 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
