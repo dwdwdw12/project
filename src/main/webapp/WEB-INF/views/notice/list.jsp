@@ -78,6 +78,7 @@ body {
 	width: 65%;
 	margin: 0 auto;
 	margin-top : 180px;
+
 }
 
 .greylist {
@@ -124,16 +125,17 @@ color:red;
 font: bold;
 }
 
-
 </style>
 </head>
 <body>
+<div class="nightcolor">
 	<h2><a href="/notice/list">공지사항 게시판</a></h2>
 
 	<hr class="hr1" noshade>
 
 	<br>
 	총 ${page.total}개의 글이 있습니다.
+</div>
 	<form action="/notice/list" id="searchForm" method="get">
 		<select name="type">
 			<option value="T" <c:out value="${page.cri.type eq 'T' ? 'selected' : ''}"/> >제목</option>
@@ -309,8 +311,6 @@ font: bold;
 			if(select != "") { 
 				$('#type option[value= '+ select +']').prop("selected", true);
 				}			
-			
-
 		});
 	</script>
 
