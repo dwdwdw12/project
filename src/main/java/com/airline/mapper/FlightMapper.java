@@ -76,7 +76,7 @@ public interface FlightMapper {
 
 	public int usePoint(String userid);
 
-	public String getResAll(String flightName);
+	public List<FlightResVO> getResAll(String flightName);
 
 	public int ResCnt(String flightName);
 }

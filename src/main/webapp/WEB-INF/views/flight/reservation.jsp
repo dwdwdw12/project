@@ -46,16 +46,54 @@
 	margin-left: -800px;
 	display: none;
 }
+.map-container{
+	position: relative;
+    display: inline-block;
+}
 
+.map-container img {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
 #seats {
 	text-align: center; /* 이미지 맵을 가운데 정렬합니다. */
 	position: relative; /* 좌석들의 위치를 상대적으로 설정하기 위해 필요합니다. */
 }
 
 .seat {
+	opacity: 0; 
+	z-index : 1;
 	position: absolute; /* 좌석을 상대적으로 위치시킵니다. */
 	transform: translate(-50%, -50%);
 	/* 좌석의 중심을 좌석의 좌상단이 아니라 중앙으로 이동시킵니다. */
+}
+
+.seat1 {
+	/*background-color : #000000 !important;*/
+    left: 190px;
+    top: 135px;
+    /*right :242px;
+    bottom: 180px*/
+}
+
+.seat1#A1 {
+	/*background-color : #000000 !important;*/
+    left: 190px;
+    top: 135px;
+    /*right :242px;
+    bottom: 180px*/
+}
+.seat#A2 {
+	z-index : 2;
+    left: 190px;
+    top: 190px;
+}
+
+.seat#A2 {
+	z-index : 2;
+    left: 190px;
+    top: 250px;
 }
 </style>
 
@@ -85,34 +123,62 @@
 					<p class="mb-4">원하는 좌석을 골라 선택하여 주십시오</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
-
-					<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map"
-						style="text-align: center;">
+					<c:forEach items="${rvo}" var="data" varStatus="loop">	
+						<input type="hidden" id="data_${loop.index}" class="data" value='<c:out value="${json}"/>'>
+					</c:forEach>
+					<div class="map-container">
+						<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map"
+							style="text-align: center;opacity: 0.5;">
+						<div class="seat1" id="A1"></div>
+						<div class="seat1" id="A2"></div>
+						<div class="seat" id="A3"></div>
+						<div class="seat" id="A4"></div>
+						<div class="seat" id="B1"></div>
+						<div class="seat" id="B2"></div>
+						<div class="seat" id="B3"></div>
+						<div class="seat" id="B4"></div>
+						<div class="seat" id="C1"></div>
+						<div class="seat" id="C2"></div>
+						<div class="seat" id="C3"></div>
+						<div class="seat" id="C4"></div>
+						<div class="seat" id="D1"></div>
+						<div class="seat" id="D2"></div>
+						<div class="seat" id="D3"></div>
+						<div class="seat" id="D4"></div>
+						<div class="seat" id="E1"></div>
+						<div class="seat" id="E2"></div>
+						<div class="seat" id="E3"></div>
+						<div class="seat" id="E4"></div>
+						<div class="seat" id="F1"></div>
+						<div class="seat" id="F2"></div>
+						<div class="seat" id="F3"></div>
+						<div class="seat" id="F4"></div>
+					</div>
 					<map name="image-map" id="seats">
 					<area class="seat" target="" alt="A1" href="A1" coords="190,135,242,180" shape="rect" id="A1">
-<area class="seat" target="" alt="A2" href="A2" coords="190,190,242,235" shape="rect" id="A2">
-<area class="seat" target="" alt="A3" href="A3" coords="190,250,242,300" shape="rect" id="A3">
-<area class="seat" target="" alt="A4" href="A4" coords="190,310,242,360" shape="rect" id="A4">
-<area class="seat" target="" alt="B1" href="B1" coords="296,135,348,180" shape="rect" id="B1">
-<area class="seat" target="" alt="B2" href="B2" coords="296,190,348,235" shape="rect" id="B2">
-<area class="seat" target="" alt="B3" href="B3" coords="296,250,348,300" shape="rect" id="B3">
-<area class="seat" target="" alt="B4" href="B4" coords="296,310,348,360" shape="rect" id="B4">
-<area class="seat" target="" alt="C1" href="C1" coords="356,135,408,180" shape="rect" id="C1">
-<area class="seat" target="" alt="C2" href="C2" coords="356,190,408,235" shape="rect" id="C2">
-<area class="seat" target="" alt="C3" href="C3" coords="356,250,408,300" shape="rect" id="C3">
-<area class="seat" target="" alt="C4" href="C4" coords="356,310,408,360" shape="rect" id="C4">
-<area class="seat" target="" alt="D1" href="D1" coords="484,135,540,180" shape="rect" id="D1">
-<area class="seat" target="" alt="D2" href="D2" coords="484,190,540,235" shape="rect" id="D2">
-<area class="seat" target="" alt="D3" href="D3" coords="484,250,540,300" shape="rect" id="D3">
-<area class="seat" target="" alt="D4" href="D4" coords="484,310,540,360" shape="rect" id="D4">
-<area class="seat" target="" alt="E1" href="E1" coords="550,135,600,180" shape="rect" id="E1">
-<area class="seat" target="" alt="E2" href="E2" coords="550,190,600,235" shape="rect" id="E2">
-<area class="seat" target="" alt="E3" href="E3" coords="550,250,600,300" shape="rect" id="E3">
-<area class="seat" target="" alt="E4" href="E4" coords="550,310,600,360" shape="rect" id="E4">
-<area class="seat" target="" alt="F1" href="F1" coords="612,135,662,180" shape="rect" id="F1">
-<area class="seat" target="" alt="F2" href="F2" coords="612,190,662,235" shape="rect" id="F2">
-<area class="seat" target="" alt="F3" href="F3" coords="612,250,662,300" shape="rect" id="F3">
-<area class="seat" target="" alt="F4" href="F4" coords="612,310,662,360" shape="rect" id="F4">
+					<area class="seat" target="" alt="A2" href="A2" coords="190,190,242,235" shape="rect" id="A2">
+					<area class="seat" target="" alt="A3" href="A3" coords="190,250,242,300" shape="rect" id="A3">
+					<area class="seat" target="" alt="A4" href="A4" coords="190,310,242,360" shape="rect" id="A4">
+					<area class="seat" target="" alt="B1" href="B1" coords="296,135,348,180" shape="rect" id="B1">
+					<area class="seat" target="" alt="B2" href="B2" coords="296,190,348,235" shape="rect" id="B2">
+					<area class="seat" target="" alt="B3" href="B3" coords="296,250,348,300" shape="rect" id="B3">
+					<area class="seat" target="" alt="B4" href="B4" coords="296,310,348,360" shape="rect" id="B4">
+					<area class="seat" target="" alt="C1" href="C1" coords="356,135,408,180" shape="rect" id="C1">
+					<area class="seat" target="" alt="C2" href="C2" coords="356,190,408,235" shape="rect" id="C2">
+					<area class="seat" target="" alt="C3" href="C3" coords="356,250,408,300" shape="rect" id="C3">
+					<area class="seat" target="" alt="C4" href="C4" coords="356,310,408,360" shape="rect" id="C4">
+					<area class="seat" target="" alt="D1" href="D1" coords="484,135,540,180" shape="rect" id="D1">
+					<area class="seat" target="" alt="D2" href="D2" coords="484,190,540,235" shape="rect" id="D2">
+					<area class="seat" target="" alt="D3" href="D3" coords="484,250,540,300" shape="rect" id="D3">
+					<area class="seat" target="" alt="D4" href="D4" coords="484,310,540,360" shape="rect" id="D4">
+					<area class="seat" target="" alt="E1" href="E1" coords="550,135,600,180" shape="rect" id="E1">
+					<area class="seat" target="" alt="E2" href="E2" coords="550,190,600,235" shape="rect" id="E2">
+					<area class="seat" target="" alt="E3" href="E3" coords="550,250,600,300" shape="rect" id="E3">
+					<area class="seat" target="" alt="E4" href="E4" coords="550,310,600,360" shape="rect" id="E4">
+					<area class="seat" target="" alt="F1" href="F1" coords="612,135,662,180" shape="rect" id="F1">
+					<area class="seat" target="" alt="F2" href="F2" coords="612,190,662,235" shape="rect" id="F2">
+					<area class="seat" target="" alt="F3" href="F3" coords="612,250,662,300" shape="rect" id="F3">
+					<area class="seat" target="" alt="F4" href="F4" coords="612,310,662,360" shape="rect" id="F4">
 				<!-- 		<area class="seat" target="" alt="A1" coords="292,204,374,277"
 							shape="rect" id="A1">
 						<area class="seat" target="" alt="A2" coords="292,296,374,370"
@@ -178,29 +244,32 @@
 
 </div>
 <!-- .tm-container-outer -->
-<%@ include file="../includes/footer.jsp"%>
+
 <script>
-	$(document).ready(function(e) {
-		$('img[usemap]').rwdImageMaps();
-/* 		var href = $(".seat").prop('href');
-		if(href = ) */
-/* 		$.ajax({
-			console.log("start");
-			url : "/flight/reservation",
-			type : "GET",
-			data : {
-				
-			},
-			success : function(data){
-				console.log(data);
-			},
-			error : function(err){
-				console.log(err)
-			}
-			
-			
-		}); */
-		location.reload();
+$(document).ready(function(e) {
+
+var data = $(".data").val();
+//console.log("data>>"+data);
+var dataList = JSON.parse(data);
+var seatid = dataList.map(item=>item.seatid);
+var uniqSeatid = Array.from(new Set(seatid));
+console.log(seatid);
+console.log(uniqSeatid);
+
+uniqSeatid.forEach(function(seatId){
+	var seatArea = $(".seat[id='"+seatId+"']");
+	seatArea.css('background-color','#000000');
+	//seatArea.css('opacity','1');
+	//seatArea.css('z-index','2');
+	//$(".seat1[id='"+seatId+"']").css('background-color','gray');
+	seatArea.attr('id','selled');
+	$(".seat1").css('background','#000000');
+	$(".seat1").css('opacity','1');
+	$(".seat1").css('z-index','2');
+});
+
+$('img[usemap]').rwdImageMaps();
+		//location.reload();
 	});
 </script>
 <script type="text/javascript">
@@ -209,6 +278,10 @@
 					function(e) {
 						e.preventDefault();
 						alert($(this).attr('id'));
+						if($(this).attr('id') == 'selled'){
+							alert("예약된 좌석은 예매가 불가합니다.");
+							return false;
+						}
 						$("#resForm")
 								.append(
 										"<input type='hidden' name='fno' value='" + ${fno}+ "'>");
@@ -266,3 +339,4 @@
 		slidesToScroll : 1
 	});
 </script>
+<%@ include file="../includes/footer.jsp"%>
