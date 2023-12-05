@@ -123,6 +123,8 @@ a {
 color:red;
 font: bold;
 }
+
+
 </style>
 </head>
 <body>
@@ -311,6 +313,8 @@ font: bold;
 
 		});
 	</script>
+
 	<%@ include file="../includes/footer.jsp"%>
 </body>
+
 </html>

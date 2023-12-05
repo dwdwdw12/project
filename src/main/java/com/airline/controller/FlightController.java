@@ -68,11 +68,12 @@ public class FlightController {
 			System.out.println("vo : "+vo);
 		}
 		
+		cri.setAmount(50);
 		model.addAttribute("list", flights.getListSearch(cri,dep,arr,depDate));
-		model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
+		//model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
 		
 		model.addAttribute("arrlist", flights.getListSearch(cri,arr,dep,arrDate));
-		model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
+		//model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
 		
 		//검색창 반환값
 		model.addAttribute("dep", dep);
