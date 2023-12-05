@@ -34,9 +34,10 @@
 						<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 							<br> 
 							<h2 class="text-uppercase mb-4">메일이 발송되었습니다.</h2>
+							<br>  
 					<h6>이메일을 확인해주시기 바랍니다.</h6>
 
-
+<br><br> 
 							<button type="button" class="btn btn-primary"
 								onclick="location.href='/login'">로그인</button>
 							<br>

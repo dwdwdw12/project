@@ -42,7 +42,7 @@
 						<td style="padding: 8px"><input type="text" id="userNameE"
 							name="userNameE" placeholder="영문 명 입력 (예 : HONGGILDONG)"
 							title="영문 명 입력 (예 : HONGGILDONG)"
-							style="width: 200px; display: inline; text-transform: uppercase;"
+							style="width: 250px; display: inline; text-transform: uppercase;"
 							maxlength="16" class="input_userNameE; form-control"
 							oninput="handleOnInputEng(this)" required="required"></td>
 					</tr>
@@ -63,19 +63,13 @@
 						  </select>
 						</div> -->
 
-							<div>
 								<input class="form-control" type="text" name="userReginumFirst"
-									oninput="handleOnInput(this, 6); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-							</div>
-
-
-						</td>
-						<td>
-							<div>
+									oninput="handleOnInput(this, 6); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									style="width: 200px; display: inline;">
 								<input class="form-control" type="password"
 									name="userReginumLast"
-									oninput="handleOnInput(this, 7); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-							</div>
+									oninput="handleOnInput(this, 7); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									style="width: 200px; display: inline;">
 						</td>
 					</tr>
 					<tr>
@@ -132,7 +126,7 @@
 				</tbody>
 			</table>
 
-			${gender} <br> <br>
+			<br> <br>
 			<div align="center">
 				<button type="submit" class="btn btn-primary"
 					onclick="return formCheck()">확인</button>
