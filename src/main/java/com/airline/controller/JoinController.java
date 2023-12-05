@@ -57,10 +57,12 @@ public class JoinController {
 		TermsVO terms3 = join.getTerms(3);
 		TermsVO terms4 = join.getTerms(4);
 
+
 		model.addAttribute("terms1", terms1);
 		model.addAttribute("terms2", terms2);
 		model.addAttribute("terms3", terms3);
 		model.addAttribute("terms4", terms4);
+
 
 		log.info("JoinController >> joinTerms [get]");
 	}
@@ -224,6 +226,7 @@ public class JoinController {
 			return "/login"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
 		} 
 
+
 	}
 
 	@PostMapping("/userIdDuplicateCheck")
@@ -296,7 +299,7 @@ public class JoinController {
 //			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
 //			INFO : com.airline.controller.JoinController - terms 입력받은거 >> terms4
 //		}		
-		
+
 		try {
 			
 			//String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -308,6 +311,7 @@ public class JoinController {
 //			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 			log.info("입력받은 이메일 >> " + mail);
 
+
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
 			sendMail.setText("<h3>카카오 항공을 찾아주셔서 감사합니다.</h3>" + "<br>언제나 회원님을 생각하는 카카오 항공이 되겠습니다." + "<br><br>");
@@ -316,7 +320,7 @@ public class JoinController {
 			sendMail.send();
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
-
+      
 			join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, address);
 
@@ -328,7 +332,6 @@ public class JoinController {
 				join.registerBasicTerms(userId);
 			}
 
-			
 			return "redirect:/join/joinSuccess";
 
 		} catch (Exception e) {
@@ -429,9 +432,6 @@ public class JoinController {
 		log.info("가공된 phone >> " + phone);
 		log.info("가공된 gender >> " + gender);
 		
-		
-		
-
 		try {
 
 			String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -463,6 +463,5 @@ public class JoinController {
 		}
 
 	}
-	
 
 }

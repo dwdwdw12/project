@@ -85,4 +85,5 @@
 	insert into termsmanage(userid, termsCode, agree)
 	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'Y')  
 </insert>
+
 </mapper>

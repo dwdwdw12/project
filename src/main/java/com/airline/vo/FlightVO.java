@@ -22,8 +22,8 @@ public class FlightVO {
 	private String depTime;
 	private String fullArrtime;
 	private String arrTime;
-	private String flihgtTime;
-	private String fullDepartue;
+	private String flightTime;
+	private String fullDeparture;
 	private String depCode;
 	private String depName;
 	private String fullArrival;

@@ -21,12 +21,12 @@ public class JoinMapperTest {
  
 	@Autowired
 	private JoinMapper join;
+
 	
 	@Autowired
 	private PasswordEncoder pwencoder;
 	
-	
-	
+
 	 
 	@Test
 	public void checkEmailtest() {

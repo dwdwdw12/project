@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -78,9 +79,15 @@ public class BoardQnaMapperTests {
 				.boardreseq(1)
 				.build();
 		mapper.replyQna(vo);
-				
 	}
+
 	
+	@Test
+	public void answer() {
+		KakaoUserVO vo = new KakaoUserVO();
+		vo.setUserId("user01");
+		mapper.myAnsweredList(vo);
+	}
 	
 	
 }

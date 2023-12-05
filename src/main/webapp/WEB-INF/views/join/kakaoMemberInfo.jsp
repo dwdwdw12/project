@@ -3,7 +3,46 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
 
+<style>
+.id_ok {
+	font-size: small;
+	color: #008000;
+	display: none;
+}
+
+.id_already {
+	font-size: small;
+	color: rgb(201, 0, 0);
+	display: none;
+}
+
+.userNick_ok {
+	font-size: small;
+	color: #008000;
+	display: none;
+}
+
+.userNick_already {
+	font-size: small;
+	color: rgb(201, 0, 0);
+	display: none;
+}
+
+.userPwd_ok {
+	font-size: small;
+	color: #008000;
+	display: none;
+}
+
+.userPwd_already {
+	font-size: small;
+	color: rgb(201, 0, 0);
+	display: none;
+}
+</style>
+
 <div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
+
 	<section class="tm-banner">
 		<div class="tm-container-outer ">
 			<div class="container">
@@ -44,6 +83,7 @@
 							title="영문 명 입력 (예 : HONGGILDONG)"
 							style="width: 250px; display: inline; text-transform: uppercase;"
 							maxlength="16" class="input_userNameE; form-control"
+
 							oninput="handleOnInputEng(this)" required="required"></td>
 					</tr>
 					<tr>
@@ -70,6 +110,7 @@
 									name="userReginumLast"
 									oninput="handleOnInput(this, 7); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 									style="width: 200px; display: inline;">
+
 						</td>
 					</tr>
 					<tr>
@@ -125,8 +166,8 @@
 
 				</tbody>
 			</table>
-
 			<br> <br>
+
 			<div align="center">
 				<button type="submit" class="btn btn-primary"
 					onclick="return formCheck()">확인</button>
@@ -135,6 +176,7 @@
 				type="hidden" name="userNick" value="${userNick}"> <input
 				type="hidden" name="userNameK" value="${userNameK}">
 
+
 			<input type="hidden" name="gender_kakao" value="${gender}"> 
 			<input type="hidden" name="pwd" value="${pwd}"> <input
 				type="hidden" name="mail" value="${mail}"> <input
@@ -142,12 +184,11 @@
 				type="hidden" name="birthday" value="${birthday}">
 			
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			
 		</form>
-
-
 	</section>
+
 	</div>
+
 	<br>
 
 	<script type="text/javascript">

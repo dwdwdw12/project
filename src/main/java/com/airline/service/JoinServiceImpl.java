@@ -266,9 +266,5 @@ public class JoinServiceImpl implements JoinService {
 		join.registerAllTerms(userId);
 	}
 
-
-
-
-
 	
 }
