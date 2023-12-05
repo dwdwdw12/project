@@ -271,7 +271,6 @@ font: bold;
 				$('#type option[value= '+ select +']').prop("selected", true);
 				}			
 			
-			
 		});
 	</script>
 	<%@ include file="../includes/footer.jsp"%>

@@ -155,12 +155,13 @@ bottom:30px;
 									</ul>
 
 								</div>
-									<div
+
+<div
   id="kakao-talk-channel-add-button"
   data-channel-public-id="_frpnG"
   data-size="large"
-  data-support-multiple-densities="true"
-></div>
+  data-support-multiple-densities="true">
+</div>
 
 <div
   id="kakao-talk-channel-chat-button"
@@ -169,8 +170,9 @@ bottom:30px;
   data-size="small"
   data-color="yellow"
   data-shape="pc"
-  data-support-multiple-densities="true"
-></div>
+  data-support-multiple-densities="true">
+</div>
+
 <%-- 								<div>
 									<form role="form" action="/logout" method="post">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
