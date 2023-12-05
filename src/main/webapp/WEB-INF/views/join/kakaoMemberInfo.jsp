@@ -140,6 +140,9 @@
 				type="hidden" name="mail" value="${mail}"> <input
 				type="hidden" name="phone_kakao" value="${phone}"> <input
 				type="hidden" name="birthday" value="${birthday}">
+			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			
 		</form>
 
 

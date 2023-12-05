@@ -92,7 +92,9 @@
 
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<input type="hidden" id="joinMessage" name="${joinMessage}" value="${joinMessage}"/>
+						<input type="hidden" id="joinMessage" name="joinMessage" value="${joinMessage}"/>
+						<input type="hidden" id="logout" name="logout" value="${logout}"/>
+						<input type="hidden" id="error" name="error" value="${error}"/>
 					</div>
 			</form>
 			
@@ -133,10 +135,12 @@
 	 });
 	 
 	 	 
-	var message = ${message};
+	var message = ${joinMessage};
 	if(message != null){
 		alert(message);
 	};
+	
+	//error랑 logout 처리...
 </script>
 </body>
 

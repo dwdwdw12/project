@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,6 +46,9 @@ public class JoinController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/joinTerms")
 	public void joinTermsGet(Model model) {
@@ -207,10 +211,13 @@ public class JoinController {
 		log.info(vo);
 		if (result == null) {
 			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!
+		} else if(termsAgree == null) {
+			model.addAttribute("joinMessage", "약관에 동의해주시기 바랍니다.");
+			return "/join/joinTerms"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
 		} else {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
 			return "/login"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
-		}
+		} 
 
 	}
 
@@ -268,6 +275,12 @@ public class JoinController {
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
+		
+		log.info("raw password >> " + pwd);
+		//password 암호화...;
+		pwd = passwordEncoder.encode("pwd");
+		log.info("encoded password >> " + pwd);
+		
 
 		String[] userTermsAgree =  termsAgree.split(","); //selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
 		

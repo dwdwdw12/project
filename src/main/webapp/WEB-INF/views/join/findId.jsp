@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
 
 
 <body>
 	<div class="tm-main-content" id="top">
-		<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
+		<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
 			<section class="tm-page-wrap-allwhite">
 				<div class="container">
 					<div class="row">
@@ -15,7 +15,8 @@
 							<br>
 							<h6>
 								회원가입 시 등록한 이메일 주소를 입력해주시기 바랍니다.<br> 등록된 회원정보와 입력된 내용이 일치할
-								경우, 등록된 이메일 주소로 안내 메일을 발송해 드립니다.<br> 이메일 발송에는 1~2분의 시간이 소요될 수 있습니다.
+								경우, 등록된 이메일 주소로 안내 메일을 발송해 드립니다.<br> 이메일 발송에는 1~2분의 시간이 소요될
+								수 있습니다.
 							</h6>
 							<br> <br>
 							<hr>
@@ -35,15 +36,16 @@
 
 
 								</table>
-								<br> <br>
+								<br> <br> <input type="hidden"
+									name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 
-								<button id="eamilAuthBtn"
-									type="submit" class="btn btn-primary" style="display: inline;">인증
-									메일 보내기</button>
+								<button id="eamilAuthBtn" type="submit" class="btn btn-primary"
+									style="display: inline;">인증 메일 보내기</button>
 								<div>
 									<input type="hidden" id="message" name="${message}"
-										value="${message}" /><!-- 이메일 정보가 없는 경우 controller의 model에서 message 받아옴 -->
+										value="${message}" />
+									<!-- 이메일 정보가 없는 경우 controller의 model에서 message 받아옴 -->
 								</div>
 								<br> <br>
 							</form>
@@ -64,17 +66,17 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-		
-	var message = document.getElementById('message').value; //${message}를 하는 경우 var message = ; 이렇게 표시됨 -> id주어서 수정함
-	console.log(message);
-	
-	$(document).ready(function(){
-			if(message !== null){
+	<script type="text/javascript">
+		var message = document.getElementById('message').value; //${message}를 하는 경우 var message = ; 이렇게 표시됨 -> id주어서 수정함
+		console.log(message);
+
+		$(document).ready(function() {
+			if (message !== null) {
 				alert(message);
-			};
-	});
-	
+			}
+			;
+		});
+
 		function check(pattern, taget, message) {
 			if (pattern.test(taget)) {
 				return true;
@@ -90,19 +92,21 @@
 			//false 반환
 		};
 
-		$("#eamilAuthBtn").on("click", function(e){
-			e.preventDefault();
-			var form = document.signUpForm;
-			
-			var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			var email = form.email.value; 
-			if (!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
-			}
-			form.submit();
-		});
-		
-		
-</script>
+		$("#eamilAuthBtn")
+				.on(
+						"click",
+						function(e) {
+							e.preventDefault();
+							var form = document.signUpForm;
+
+							var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+							var email = form.email.value;
+							if (!check(emailPattern, email,
+									"유효하지 않은 이메일 주소입니다.")) {
+							}
+							form.submit();
+						});
+	</script>
 
 </body>
 </html>

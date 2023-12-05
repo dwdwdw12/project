@@ -315,6 +315,8 @@ display: none;
 				<input type="hidden" name="userReginumLast" value="${userInfo.userReginumLast}">
 				<input type="hidden" name="termsAgree" value="${termsAgree}">
 				
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				
 			</form>
 
 
