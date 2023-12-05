@@ -4,12 +4,15 @@ import java.util.List;
 
 import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 
 public interface BoardQnaService {
 
 	public List<BoardQnaVO> getList();
 	
 	public List<BoardQnaVO> getPageList(Criteria cri);
+	
+	public List<BoardQnaVO> questionList(int boardnum);	
 	
 	public int getTotal(Criteria cri);
 	
@@ -28,4 +31,11 @@ public interface BoardQnaService {
 	public BoardQnaVO selectBoardreref(int boardnum);
 	
 	public void updateRepAdmin(int boardreref);
+	
+	public List<BoardQnaVO> mynotAnwList(KakaoUserVO vo);
+	
+	public List<BoardQnaVO> myAnsweredList(KakaoUserVO vo);
+	
+	public List<BoardQnaVO> myAllList(KakaoUserVO vo);
+
 }

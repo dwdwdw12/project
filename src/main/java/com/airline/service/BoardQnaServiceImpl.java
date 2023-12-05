@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.airline.mapper.BoardQnaMapper;
 import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
+import com.airline.vo.KakaoUserVO;
 
 @Service
 public class BoardQnaServiceImpl implements BoardQnaService{
@@ -68,6 +69,26 @@ public class BoardQnaServiceImpl implements BoardQnaService{
 	@Override
 	public void updateRepAdmin(int boardreref) {
 		mapper.updateRepAdmin(boardreref);
+	}
+
+	@Override
+	public List<BoardQnaVO> mynotAnwList(KakaoUserVO vo) {
+		return mapper.mynotAnwList(vo);
+	}
+
+	@Override
+	public List<BoardQnaVO> myAnsweredList(KakaoUserVO vo) {
+		return mapper.myAnsweredList(vo);
+	}
+
+	@Override
+	public List<BoardQnaVO> myAllList(KakaoUserVO vo) {
+		return mapper.myAllList(vo);
+	}
+
+	@Override
+	public List<BoardQnaVO> questionList(int boardnum) {
+		return mapper.questionList(boardnum);
 	} 
 
 }
