@@ -75,7 +75,7 @@ tr:hover {
 body {
 	width: 65%;
 	margin: 0 auto;
-	margin-top : 270px;
+	margin-top : 180px;
 }
 
 .greylist {
