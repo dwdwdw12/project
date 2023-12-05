@@ -129,7 +129,7 @@
 					<div class="map-container">
 						<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map"
 							style="text-align: center;opacity: 0.5;">
-						<div class="seat1" id="A1"></div>
+						<div class="seat1" id="A1" style="width: 30px; height: 30px; border: 5px solid black; position: absolute;"></div>
 						<div class="seat1" id="A2"></div>
 						<div class="seat" id="A3"></div>
 						<div class="seat" id="A4"></div>

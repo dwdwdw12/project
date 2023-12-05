@@ -38,7 +38,7 @@
 
 
 							<button type="button" class="btn btn-primary"
-								onclick="location.href='UserServlet?command=login'">로그인</button>
+								onclick="location.href='/login'">로그인</button>
 							<br>
 							<br>
 

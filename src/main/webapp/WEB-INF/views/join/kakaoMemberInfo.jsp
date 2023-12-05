@@ -2,43 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
-<style>
-.id_ok {
-	font-size: small;
-	color: #008000;
-	display: none;
-}
-
-.id_already {
-	font-size: small;
-	color: rgb(201, 0, 0);
-	display: none;
-}
-
-.userNick_ok {
-	font-size: small;
-	color: #008000;
-	display: none;
-}
-
-.userNick_already {
-	font-size: small;
-	color: rgb(201, 0, 0);
-	display: none;
-}
-
-.userPwd_ok {
-	font-size: small;
-	color: #008000;
-	display: none;
-}
-
-.userPwd_already {
-	font-size: small;
-	color: rgb(201, 0, 0);
-	display: none;
-}
-</style>
 
 <div class="tm-page-wrap mx-auto">
 	<section class="tm-banner">
@@ -80,7 +43,7 @@
 							name="userNameE" placeholder="영문 명 입력 (예 : HONGGILDONG)"
 							title="영문 명 입력 (예 : HONGGILDONG)"
 							style="width: 200px; display: inline; text-transform: uppercase;"
-							maxlength="10" class="input_userNameE; form-control"
+							maxlength="16" class="input_userNameE; form-control"
 							oninput="handleOnInputEng(this)" required="required"></td>
 					</tr>
 					<tr>
@@ -178,18 +141,10 @@
 				type="hidden" name="userNick" value="${userNick}"> <input
 				type="hidden" name="userNameK" value="${userNameK}">
 
-			<c:set var="gender" value="${gender}" />
-			<c:choose>
-				<c:when test="${gender == 'female'}">
-					<c:set var="gender" value="F" />
-				</c:when>
-				<c:otherwise>
-					<c:set var="gender" value="M" />
-				</c:otherwise>
-			</c:choose>
+			<input type="hidden" name="gender_kakao" value="${gender}"> 
 			<input type="hidden" name="pwd" value="${pwd}"> <input
 				type="hidden" name="mail" value="${mail}"> <input
-				type="hidden" name="phone" value="${phone}"> <input
+				type="hidden" name="phone_kakao" value="${phone}"> <input
 				type="hidden" name="birthday" value="${birthday}">
 		</form>
 

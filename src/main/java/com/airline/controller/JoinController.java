@@ -59,7 +59,8 @@ public class JoinController {
 	}
 
 	@PostMapping("/joinTerms")
-	public String joinTerms(Model model) {
+	public String joinTerms(Model model, String terms) {
+		log.info("terms 이름에 담아온 값 >> " + terms);
 		model.addAttribute("agree", "동의여부 담는중~~~(jointerms_post에서)");
 		log.info("JoinController >> joinTerms [post]");
 		return "/join/checkMember";
@@ -349,18 +350,36 @@ public class JoinController {
 			model.addAttribute("pwd", mail_key);
 			return "/join/kakaoMemberInfo";
 		} else {
-			return "/";
+			return "/home"; //일단 홈으로 보냄
 		}
 	}
 	
 	@PostMapping("/kakaoMemberInfo")
-	public String kakaoMemberInfo(RedirectAttributes attr, KakaoUserVO vo, String mail) {
-		// userReginum First/ Last 값 처리해야함.....
-		
-		join.registerKakaoMember(vo);
-		// 에러발생.. 이전페이지에서 vo로 받아진 값이라
+	public String kakaoMemberInfo(RedirectAttributes attr, 
+			String userId, String userNick, String userNameK,
+			String userNameE, String gender_kakao, String pwd, int userReginumFirst, int userReginumLast, 
+			String phone_kakao, 
+			String mail, int postCode, String addressDefault, String addressDetail) {
 		//###gender### : female
-		//###phone_number### : +82 10-4784-4991
+		//###phone_number### : +82 10-4784-4991 값 처리해야함....... vo말고 파라미터로 받아야함...
+		log.info("기존의 phone >> " + phone_kakao);
+		log.info("가공된 gender_kakao >> " + gender_kakao);
+
+		String gender = gender_kakao;
+		String phone = "0"+ phone_kakao.substring(4);
+		
+		if(gender_kakao.equals("female")) {
+			gender = "F";
+		} else {
+			gender = "M";
+		}
+		
+		log.info("가공된 phone >> " + phone);
+		log.info("가공된 gender >> " + gender);
+		
+		
+		join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, addressDetail);
+		
 
 		try {
 			String mail_key = new TempKey().getKey(); // 랜덤키 생성

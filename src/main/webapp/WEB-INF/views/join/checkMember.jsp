@@ -52,7 +52,7 @@
 										<th scope="row" style="text-align: left;"><label
 											for="userNameK">한글명</label></th>
 										<td colspan="3"><input type="text" id="userNameK"
-											placeholder="한글 명 입력 (예 : 홍길동)" maxlength="5"
+											placeholder="한글 명 입력 (예 : 홍길동)" maxlength="10"
 											oninput="handleOnInputKor(this)" name="userNameK"
 											class="form-control"></td>
 									</tr>
@@ -60,7 +60,7 @@
 										<th scope="row" width="120px" style="text-align: left;"><label
 											for="userNameE">영문명</label></th>
 										<td colspan="3"><input type="text" id="userNameE"
-											placeholder="영문 명 입력 (예 : HONGGILDONG)" maxlength="10"
+											placeholder="영문 명 입력 (예 : HONGGILDONG)" maxlength="16"
 											style="text-transform: uppercase;"
 											oninput="handleOnInputEng(this)" class="form-control"
 											name="userNameE"></td>
