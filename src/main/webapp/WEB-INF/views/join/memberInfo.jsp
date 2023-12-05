@@ -38,7 +38,7 @@ display: none;
 }
 </style>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<section class="tm-banner">
 			<div class="tm-container-outer ">
 				<div class="container">
@@ -305,7 +305,7 @@ display: none;
 				<br>
 				<br>
 				<div align="center">
-					<button type="submit" class="btn btn-primary"
+					<button type="button" class="btn btn-primary"
 						onclick="return formCheck()">확인</button>
 				</div>
 				<input type="hidden" name="userNameK" value="${userInfo.userNameK}">
@@ -313,11 +313,13 @@ display: none;
 				<input type="hidden" name="gender" value="${userInfo.gender}">
 				<input type="hidden" name="userReginumFirst" value="${userInfo.userReginumFirst}">
 				<input type="hidden" name="userReginumLast" value="${userInfo.userReginumLast}">
+				<input type="hidden" name="termsAgree" value="${termsAgree}">
 				
 			</form>
 
 
 		</section>
+		</div>
 <br>
 
 <script type="text/javascript">		
@@ -407,14 +409,16 @@ display: none;
 	         }  */
 			var regId = /^[a-zA-Z0-9]{6,10}$/;
 			var regIdPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,10}$/;
+			var form = document.frm;
 
 			if(document.frm.userId.value.length == 0){
 		        alert("아이디를 입력해주세요.");
+		        document.frm.userId.focus;
 		        return false;
 		    } 
 			else if(!regId.test(document.frm.userId.value)){ //아이디 영어 대소문자 확인
 	            alert("6~10자 영문 대소문자, 숫자만 입력하세요.")
-	            userid.focus();
+	            userId.focus();
 	            return false;
 	        }
 
@@ -431,7 +435,7 @@ display: none;
 	            return false;
 	        }
 	        //비밀번호와 아이디 비교
-	        else if(document.frm.pwd.value == document.frm.userid.value){
+	        else if(document.frm.pwd.value == document.frm.userId.value){
 	            alert("아이디와 동일한 비밀번호를 사용할 수 없습니다.")
 	            pwd.focus();
 	            return false;
@@ -466,7 +470,7 @@ display: none;
 	            document.frm.email.focus;
 	            return false;
 	         } 
-	         else if(document.frm.postcode.value.length == 0){
+	         else if(document.frm.postCode.value.length == 0){
 	            alert("우편번호를 다시 확인해주세요.")
 	            document.frm.postcode.focus;
 	            return false;
@@ -476,6 +480,8 @@ display: none;
 	            document.frm.addressDefault.focus;
 	            return false;
 	         }
+			
+			form.submit();
 	      }
 		
 //직접입력란.. 직접입력 선택해야만 직접입력input보이게....

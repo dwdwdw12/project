@@ -44,6 +44,9 @@ public interface JoinMapper {
 	
 	public int userIdDuplicateCheck(String userId);
 	public int userNickDuplicateCheck(String userNick);
+	
 	public KakaoUserVO kakaoLoginCheck(@Param("email") String email, @Param("userNameK") String userNameK);
 
+	public void registerBasicTerms(String userId);
+	public void registerAllTerms(String userId);
 } 

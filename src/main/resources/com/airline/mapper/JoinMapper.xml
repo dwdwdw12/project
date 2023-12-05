@@ -76,4 +76,13 @@
 	select * from kakaouser where mail = #{email} and userNameK = #{userNameK}
 </select>
 
+<insert id="registerBasicTerms">
+	insert into termsmanage(userid, termsCode, agree)
+	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'N')  
+</insert>
+
+<insert id="registerAllTerms">
+	insert into termsmanage(userid, termsCode, agree)
+	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'Y')  
+</insert>
 </mapper>

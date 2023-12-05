@@ -19,7 +19,7 @@
 <meta name="referrer" content="no-referrer-when-downgrade" />
 
 <div class="tm-main-content" id="top">
-	<div class="tm-page-wrap mx-auto">
+	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<section class="tm-banner">
 			<div class="tm-container-outer ">
 				<div class="container">
@@ -36,6 +36,7 @@
 				<div class="row">
 					<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 						<div align="center">
+							<br> <br>
 							<h2 class="text-uppercase mb-4">기존 회원 여부 확인</h2>
 							<h6>기존 회원 여부를 확인해주시기 바랍니다.</h6>
 							<br> <br>
@@ -104,8 +105,7 @@
 
 							<br>
 							<hr>
-							===========${agree} : model에 넣어준 값 넘어오는지 확인용================== <input
-								type="hidden" name="agree" value="${agree}"> <br>
+							<input type="hidden" name="termsAgree" value="${termsAgree}"> <br>
 								
 							<button type="submit" id="checkMemberBtn" class="btn btn-primary"
 								>확인</button>

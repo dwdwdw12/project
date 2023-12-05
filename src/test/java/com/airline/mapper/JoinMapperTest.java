@@ -86,4 +86,9 @@ public class JoinMapperTest {
 		
 		join.updatePwdByMailKey(userId, mail_key);
 	}
+	@Test
+	public void registerAllTermsTest() {
+		String userId = "test11";
+		join.registerAllTerms(userId);
+	}
 }

@@ -1,6 +1,7 @@
 package com.airline.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,12 @@ public class JoinController {
 		TermsVO terms1 = join.getTerms(1);
 		TermsVO terms2 = join.getTerms(2);
 		TermsVO terms3 = join.getTerms(3);
+		TermsVO terms4 = join.getTerms(4);
 
 		model.addAttribute("terms1", terms1);
 		model.addAttribute("terms2", terms2);
 		model.addAttribute("terms3", terms3);
+		model.addAttribute("terms4", terms4);
 
 		log.info("JoinController >> joinTerms [get]");
 	}
@@ -61,8 +64,10 @@ public class JoinController {
 	@PostMapping("/joinTerms")
 	public String joinTerms(Model model, String terms) {
 		log.info("terms 이름에 담아온 값 >> " + terms);
-		model.addAttribute("agree", "동의여부 담는중~~~(jointerms_post에서)");
 		log.info("JoinController >> joinTerms [post]");
+
+		model.addAttribute("termsAgree", terms);
+		
 		return "/join/checkMember";
 	}
 
@@ -187,7 +192,7 @@ public class JoinController {
 	}
 
 	@PostMapping("/checkMember") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
-	public String checkMember(Model model, KakaoUserVO vo) {
+	public String checkMember(Model model, KakaoUserVO vo, String termsAgree) {
 		log.info("JoinController >> checkMember [post]");
 		log.info(vo);
 
@@ -196,6 +201,8 @@ public class JoinController {
 //		String userDate = Integer.toString(userReginumFirst).substring(4, 6);
 
 		model.addAttribute("userInfo", vo);
+		model.addAttribute("termsAgree", termsAgree);
+		
 		KakaoUserVO result = join.confirmMember(vo);
 		log.info(vo);
 		if (result == null) {
@@ -250,38 +257,60 @@ public class JoinController {
 	}
 
 	@PostMapping("/memberInfo")
-	public String memberInfo(RedirectAttributes attr, String userId, String userNick, String userNameK,
+	public String memberInfo(RedirectAttributes attr, String termsAgree, 
+			String userId, String userNick, String userNameK,
 			String userNameE, String gender, String pwd, int userReginumFirst, int userReginumLast, String phone_first,
 			String phone_middle, String phone_last, String email, String mail_Domain, int postCode,
 			String addressDefault, String addressDetail) {
+		
 		// email phone address 합쳐줘야해서.. parameter로 받음....
+		
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
 
-		join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast,
-				postCode, phone, mail, address);
-		// 에러발생.. 이전페이지에서 vo로 받아진 값이라
-
+		String[] userTermsAgree =  termsAgree.split(","); //selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
+		
+//		for (String string : userTermsAgree) {
+//			log.info("terms 입력받은거 >> " + string);
+//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
+//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
+//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
+//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> terms4
+//		}		
+		
 		try {
-			String mail_key = new TempKey().getKey(); // 랜덤키 생성
+			
+			//String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("email", email);
-			params.put("mail_key", mail_key);
+			//params.put("mail_key", mail_key);
 
 			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
-			log.info("입력받은 이메일 >> " + email + "생성된 key >> " + mail_key);
+			log.info("입력받은 이메일 >> " + mail);
 
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
 			sendMail.setText("<h3>카카오 항공을 찾아주셔서 감사합니다.</h3>" + "<br>언제나 회원님을 생각하는 카카오 항공이 되겠습니다." + "<br><br>");
 			sendMail.setFrom("systemlocal99@gmail.com", "카카오 항공");
-			sendMail.setTo(email);
+			sendMail.setTo(mail);
 			sendMail.send();
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
 
+			join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast,
+					postCode, phone, mail, address);
+
+			//userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
+			//-> length로 바꿈
+			if(userTermsAgree.length == 4) {
+				join.registerAllTerms(userId);
+			} else {
+				join.registerBasicTerms(userId);
+			}
+
+			
 			return "redirect:/join/joinSuccess";
 
 		} catch (Exception e) {
@@ -369,7 +398,7 @@ public class JoinController {
 		String phone = "0"+ phone_kakao.substring(4);
 		
 		if(gender_kakao.equals("female")) {
-			gender = "F";
+			gender = "W";
 		} else {
 			gender = "M";
 		}
@@ -378,10 +407,10 @@ public class JoinController {
 		log.info("가공된 gender >> " + gender);
 		
 		
-		join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, addressDetail);
 		
 
 		try {
+
 			String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
 			Map<String, String> params = new HashMap<String, String>();
@@ -400,6 +429,9 @@ public class JoinController {
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
 
+			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, addressDetail);
+			join.registerAllTerms(userId);
+			
 			return "redirect:/join/joinSuccess";
 
 		} catch (Exception e) {

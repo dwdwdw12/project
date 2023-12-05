@@ -256,6 +256,16 @@ public class JoinServiceImpl implements JoinService {
 		return vo;
 	}
 
+	@Override
+	public void registerBasicTerms(String userId) {
+		join.registerBasicTerms(userId);
+	}
+
+	@Override
+	public void registerAllTerms(String userId) {
+		join.registerAllTerms(userId);
+	}
+
 
 
 

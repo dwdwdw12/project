@@ -26,14 +26,14 @@
 			if (cookies[i].getName().equals("userid")) { // 내가 원하는 쿠키명 찾아서 값 저장
 				cookie = cookies[i].getValue();}}%>
 				
-	<div class="tm-page-wrap mx-auto">
+	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<div class="tm-container-outer tm-banner-bg">
 		<div class="container"><!-- 원복=> 컨테이너 제거 -->
 			<div class="row tm-banner-row tm-banner-row-header">
 				<div class="tm-banner-header">
 					<h1 class="text-uppercase tm-banner-title">Login</h1>
 					<p class="mb-4">아이디 및 패스워드를 입력 해 주세요.</p>
-					${message }
+					
 				</div>
 			</div>
 		<!-- 	<div class="row tm-banner-row tm-banner-row-header tm-about-text-wrap mx-auto text-center">	 -->

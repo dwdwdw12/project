@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<section class="tm-banner">
 		<div class="tm-container-outer ">
 			<div class="container">
@@ -150,6 +150,7 @@
 
 
 	</section>
+	</div>
 	<br>
 
 	<script type="text/javascript">
