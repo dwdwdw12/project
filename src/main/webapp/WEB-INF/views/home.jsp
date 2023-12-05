@@ -36,6 +36,25 @@
 	margin-left: -800px;
 	display: none;
 }
+
+@media(min-width:768px){
+#kako-talk-channel-chat-button{
+position:fixed;
+z-index:999;
+right:30px;
+bottom:30px;
+}
+}
+
+@media(max-width:767px){
+#kako-talk-channel-chat-button{
+position:fixed;
+z-index:999;
+right:15px;
+bottom:30px;
+}
+}
+
 </style>
 
 
@@ -55,6 +74,23 @@
 			</div>
 		</div>
 	</section>
+	
+	<div
+  id="kakao-talk-channel-add-button"
+  data-channel-public-id="_frpnG"
+  data-size="large"
+  data-support-multiple-densities="true"
+></div>
+
+<div
+  id="kakao-talk-channel-chat-button"
+  data-channel-public-id="_frpnG"
+  data-title="consult"
+  data-size="small"
+  data-color="yellow"
+  data-shape="pc"
+  data-support-multiple-densities="true"
+></div>
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
@@ -776,3 +812,50 @@
 		
 	</script>
 	
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+kakao.init('3156d02ad4070a1c858f024518bda8c5');
+Kakao.Channel.createAddChannelButton({
+	  container: '#kakao-talk-channel-chat-button',
+	  channelPublicId: '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.
+	});
+
+</script>
+
+<!-- 카카오 채널 추가 -->
+<script>
+  window.kakaoAsyncInit = function() {
+    Kakao.Channel.createAddChannelButton({
+      container: '#kakao-talk-channel-add-button',
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.channel.min.js';
+    js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
+    js.crossOrigin = 'anonymous';
+    fjs.parentNode.insertBefore(js, fjs);
+  })(document, 'script', 'kakao-js-sdk');
+</script>
+
+<!-- 카카오 채팅 -->
+<script>
+  window.kakaoAsyncInit = function() {
+    Kakao.Channel.createChatButton({
+      container: '#kakao-talk-channel-chat-button',
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.channel.min.js';
+    js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
+    js.crossOrigin = 'anonymous';
+    fjs.parentNode.insertBefore(js, fjs);
+  })(document, 'script', 'kakao-js-sdk');
+</script>
