@@ -68,6 +68,15 @@
 	transform: translate(-50%, -50%);
 	/* 좌석의 중심을 좌석의 좌상단이 아니라 중앙으로 이동시킵니다. */
 }
+
+.seat1 {
+	/*background-color : #000000 !important;*/
+    left: 190px;
+    top: 135px;
+    /*right :242px;
+    bottom: 180px*/
+}
+
 .seat1#A1 {
 	/*background-color : #000000 !important;*/
     left: 190px;
@@ -238,7 +247,7 @@
 
 <script>
 $(document).ready(function(e) {
-$('img[usemap]').rwdImageMaps();
+
 var data = $(".data").val();
 //console.log("data>>"+data);
 var dataList = JSON.parse(data);
@@ -254,11 +263,12 @@ uniqSeatid.forEach(function(seatId){
 	//seatArea.css('z-index','2');
 	//$(".seat1[id='"+seatId+"']").css('background-color','gray');
 	seatArea.attr('id','selled');
-	$(".seat1").css('background-color','#000000');
+	$(".seat1").css('background','#000000');
 	$(".seat1").css('opacity','1');
 	$(".seat1").css('z-index','2');
 });
 
+$('img[usemap]').rwdImageMaps();
 		//location.reload();
 	});
 </script>
