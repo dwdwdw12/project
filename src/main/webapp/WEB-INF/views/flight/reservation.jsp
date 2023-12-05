@@ -69,32 +69,176 @@
 	/* 좌석의 중심을 좌석의 좌상단이 아니라 중앙으로 이동시킵니다. */
 }
 
-.seat1 {
-	/*background-color : #000000 !important;*/
-    left: 190px;
-    top: 135px;
-    /*right :242px;
-    bottom: 180px*/
-}
 
 .seat1#A1 {
-	/*background-color : #000000 !important;*/
-    left: 190px;
-    top: 135px;
-    /*right :242px;
-    bottom: 180px*/
+    left: 189px;
+    top: 131px;
+    width:54px;
+    height : 50px;
 }
-.seat#A2 {
+.seat1#A2 {
 	z-index : 2;
-    left: 190px;
-    top: 190px;
+    left: 189px;
+    top: 191px;
+    width:54px;
+    height : 50px;
 }
 
-.seat#A2 {
+.seat1#A3 {
 	z-index : 2;
-    left: 190px;
-    top: 250px;
+    left: 189px;
+    top: 251px;
+    width:54px;
+    height : 50px;
 }
+.seat1#A4 {
+	z-index : 2;
+    left: 189px;
+    top: 312px;
+    width:54px;
+    height : 50px;
+}
+.seat1#B1 {
+    left: 300px;
+    top: 131px;
+    width:54px;
+    height : 50px;
+}
+.seat1#B2 {
+	z-index : 2;
+    left: 300px;
+    top: 192px;
+    width:54px;
+    height : 50px;
+}
+
+.seat1#B3 {
+	z-index : 2;
+    left: 300px;
+    top: 252px;
+    width:54px;
+    height : 50px;
+}
+.seat1#B4 {
+	z-index : 2;
+    left: 300px;
+    top: 312px;
+    width:54px;
+    height : 50px;
+}
+.seat1#C1 {
+    left: 364px;
+    top: 131px;
+    width:54px;
+    height : 50px;
+}
+.seat1#C2 {
+	z-index : 2;
+    left: 364px;
+    top: 191px;
+    width:54px;
+    height : 50px;
+}
+
+.seat1#C3 {
+	z-index : 2;
+    left: 365px;
+    top: 252px;
+    width:54px;
+    height : 50px;
+}
+.seat1#C4 {
+	z-index : 2;
+    left: 366px;
+    top: 312px;
+    width:54px;
+    height : 50px;
+}
+.seat1#D1 {
+    left: 486px;
+    top: 131px;
+    width:54px;
+    height : 50px;
+}
+.seat1#D2 {
+	z-index : 2;
+    left: 488px;
+    top: 191px;
+    width:54px;
+    height : 50px;
+}
+
+.seat1#D3 {
+	z-index : 2;
+    left: 484px;
+    top: 250px;
+    width:54px;
+    height : 50px;
+}
+.seat1#D4 {
+	z-index : 2;
+    left: 486px;
+    top: 310px;
+    width:54px;
+    height : 50px;
+}
+.seat1#E1 {
+    left: 550px;
+    top: 131px;
+    width:54px;
+    height : 50px;
+}
+.seat1#E2 {
+	z-index : 2;
+    left: 551px;
+    top: 190px;
+    width:54px;
+    height : 50px;
+}
+
+.seat1#E3 {
+	z-index : 2;
+    left: 551px;
+    top: 252px;
+    width:54px;
+    height : 50px;
+}
+.seat1#E4 {
+	z-index : 2;
+    left: 550px;
+    top: 311px;
+    width:54px;
+    height : 51px;
+}
+.seat1#F1 {
+    left: 612px;
+    top: 131px;
+    width:54px;
+    height : 50px;
+}
+.seat1#F2 {
+	z-index : 2;
+    left: 612px;
+    top: 190px;
+    width:54px;
+    height : 50px;
+}
+
+.seat1#F3 {
+	z-index : 2;
+    left: 613px;
+    top: 252px;
+    width:56px;
+    height : 50px;
+}
+ .seat1#F4 {
+	z-index : 2;
+    left: 612px;
+    top: 312px;
+    width:54px;
+    height : 50px;
+} 
+
 </style>
 
 <div class="tm-page-wrap mx-auto">
@@ -128,31 +272,31 @@
 					</c:forEach>
 					<div class="map-container">
 						<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map"
-							style="text-align: center;opacity: 0.5;">
+							style="text-align: center;opacity: 0.8;"">
 						<div class="seat1" id="A1"></div>
 						<div class="seat1" id="A2"></div>
-						<div class="seat" id="A3"></div>
-						<div class="seat" id="A4"></div>
-						<div class="seat" id="B1"></div>
-						<div class="seat" id="B2"></div>
-						<div class="seat" id="B3"></div>
-						<div class="seat" id="B4"></div>
-						<div class="seat" id="C1"></div>
-						<div class="seat" id="C2"></div>
-						<div class="seat" id="C3"></div>
-						<div class="seat" id="C4"></div>
-						<div class="seat" id="D1"></div>
-						<div class="seat" id="D2"></div>
-						<div class="seat" id="D3"></div>
-						<div class="seat" id="D4"></div>
-						<div class="seat" id="E1"></div>
-						<div class="seat" id="E2"></div>
-						<div class="seat" id="E3"></div>
-						<div class="seat" id="E4"></div>
-						<div class="seat" id="F1"></div>
-						<div class="seat" id="F2"></div>
-						<div class="seat" id="F3"></div>
-						<div class="seat" id="F4"></div>
+						<div class="seat1" id="A3"></div>
+						<div class="seat1" id="A4"></div>
+						<div class="seat1" id="B1"></div>
+						<div class="seat1" id="B2"></div>
+						<div class="seat1" id="B3"></div>
+						<div class="seat1" id="B4"></div>
+						<div class="seat1" id="C1"></div>
+						<div class="seat1" id="C2"></div>
+						<div class="seat1" id="C3"></div>
+						<div class="seat1" id="C4"></div>
+						<div class="seat1" id="D1"></div>
+						<div class="seat1" id="D2"></div>
+						<div class="seat1" id="D3"></div>
+						<div class="seat1" id="D4"></div>
+						<div class="seat1" id="E1"></div>
+						<div class="seat1" id="E2"></div>
+						<div class="seat1" id="E3"></div>
+						<div class="seat1" id="E4"></div>
+						<div class="seat1" id="F1"></div>
+						<div class="seat1" id="F2"></div>
+						<div class="seat1" id="F3"></div>
+						<div class="seat1" id="F4"></div>
 					</div>
 					<map name="image-map" id="seats">
 					<area class="seat" target="" alt="A1" href="A1" coords="190,135,242,180" shape="rect" id="A1">
@@ -244,7 +388,7 @@
 
 </div>
 <!-- .tm-container-outer -->
-
+<!-- <script type="text/javascript" src="http://davidlynch.org/projects/maphilight/jquery.maphilight.min.js"></script> -->
 <script>
 $(document).ready(function(e) {
 
@@ -258,14 +402,16 @@ console.log(uniqSeatid);
 
 uniqSeatid.forEach(function(seatId){
 	var seatArea = $(".seat[id='"+seatId+"']");
-	seatArea.css('background-color','#000000');
+	//seatArea.css('background-color','#CCCCCC');
 	//seatArea.css('opacity','1');
 	//seatArea.css('z-index','2');
-	//$(".seat1[id='"+seatId+"']").css('background-color','gray');
+	$(".seat1[id='"+seatId+"']").css('background-color','gray');
 	seatArea.attr('id','selled');
-	$(".seat1").css('background','#000000');
-	$(".seat1").css('opacity','1');
-	$(".seat1").css('z-index','2');
+	$(".seat1[id='"+seatId+"']").css('background','#CCCCCC');
+	$(".seat1[id='"+seatId+"']").css('opacity','0.8');
+	$(".seat1[id='"+seatId+"']").css('z-index','2');
+	$(".seat1[id='"+seatId+"']").css('position','absolute');
+	seatArea.css('z-index','3');
 });
 
 $('img[usemap]').rwdImageMaps();
@@ -273,8 +419,7 @@ $('img[usemap]').rwdImageMaps();
 	});
 </script>
 <script type="text/javascript">
-	$(".seat")
-			.click(
+	$(".seat").click(
 					function(e) {
 						e.preventDefault();
 						alert($(this).attr('id'));
