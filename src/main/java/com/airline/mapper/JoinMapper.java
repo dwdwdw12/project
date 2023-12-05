@@ -40,8 +40,10 @@ public interface JoinMapper {
 			@Param("phone") String phone,
 			@Param("postCode" ) int postCode, 
 			@Param("address") String address);
-
+	public KakaoUserVO insertkakaoMember(KakaoUserVO vo);
+	
 	public int userIdDuplicateCheck(String userId);
 	public int userNickDuplicateCheck(String userNick);
+	public KakaoUserVO kakaoLoginCheck(@Param("email") String email, @Param("userNameK") String userNameK);
 
 } 
