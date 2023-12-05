@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,9 @@ public class HomeController {
 		
     @Autowired
  	private BoardNoticeService service;
+    
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -133,6 +137,7 @@ public class HomeController {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
+		
 		
 		if(error != null) {
 			model.addAttribute("error","Login Error Check your account");

@@ -178,6 +178,11 @@ public class JoinController {
 
 				log.info("controller에서 아아디 찾기 메일 보냄 완료");
 
+				log.info("raw mail_key >> " + mail_key);
+				//password 암호화...;
+				mail_key = passwordEncoder.encode("mail_key");
+				log.info("encoded password >> " + mail_key);
+				
 				join.modifyPwdByMailKey(userId, mail_key);
 
 				return "redirect:/join/mailSended";
@@ -278,7 +283,7 @@ public class JoinController {
 		
 		log.info("raw password >> " + pwd);
 		//password 암호화...;
-		pwd = passwordEncoder.encode("pwd");
+		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
 		
 
@@ -410,6 +415,11 @@ public class JoinController {
 		String gender = gender_kakao;
 		String phone = "0"+ phone_kakao.substring(4);
 		
+		log.info("raw password >> " + pwd);
+		//password 암호화...;
+		pwd = passwordEncoder.encode(pwd);
+		log.info("encoded password >> " + pwd);
+		
 		if(gender_kakao.equals("female")) {
 			gender = "W";
 		} else {
@@ -453,5 +463,6 @@ public class JoinController {
 		}
 
 	}
+	
 
 }
