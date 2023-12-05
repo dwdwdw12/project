@@ -273,14 +273,16 @@ span:before {
 					    <thead>
 					    	<th>제목</th>
 					    	<th>내용</th>
-					    	<th>작성일자</th>
+					    	<th>댓글</th>
+					    	<th>좋아요</th>
 					    </thead>
 					    <c:forEach items="${dvo}" var="dvo">
 					    <tbody>
 					      <tr>
 					        <td>${dvo.boardTitle}</td>
-					        <td>${dvo.boardContent}</td>
   					        <td><fmt:parseDate var = "datePase" value="${dvo.regiDate}" pattern="yyyy-MM-dd HH:mm"/><fmt:formatDate value="${datePase}" pattern="yyyy-MM-dd HH:mm" /></td>
+					      	<td>${dvo.replyCount}</td>
+					      	<td>${dvo.likeCount}</td>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		

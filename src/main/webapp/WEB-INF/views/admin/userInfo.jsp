@@ -144,7 +144,9 @@
 				<ul class="pagination justify-content-center">
 							<c:if test="${paging.prev}">
 					<li class="page-item">
-						<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
+							<c:if test="${paging.cri.pageNum>=1}">
+								<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
+							</c:if>
 					</li>
 				</c:if> 
 				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">

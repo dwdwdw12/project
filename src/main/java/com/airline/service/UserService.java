@@ -74,5 +74,9 @@ public interface UserService {
 	List<BoardDiaryVO> getUserDiary(String username, Criteria cri);
 	//여행일기 페이징 카운트
 	int getUserDiaryCnt(String username, Criteria cri);
+	//qna 게시판
+	List<BoardQnaVO> getUserQna(String username, Criteria cri);
+	//qna 페이징 카운트
+	int getUserQnaCnt(String username, Criteria cri);
 
 }

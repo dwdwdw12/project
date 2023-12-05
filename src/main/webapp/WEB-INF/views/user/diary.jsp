@@ -71,7 +71,6 @@
 					<thead>
 						<tr>
 							<th>제목</th>
-							<th>내용</th>
 							<th>작성일</th>
 							<th>조회수</th>
 							<th>좋아요</th>
@@ -81,8 +80,7 @@
 					<c:forEach items="${vo}" var="list">
 						<tbody>
 							<tr>
-								<td>${list.boardTitle}<strong>[${list.replyCount}]</strong></td>
-								<td>${list.boardContent}</td>
+								<td><a href="/boardDiary/view?boardNum=${list.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}">${list.boardTitle}<strong>[${list.replyCount}]</strong></a></td>
 								<td>${list.regiDate}</td>
 								<td>${list.readCount}</td>
 								<td>${list.likeCount}</td>
@@ -94,7 +92,9 @@
 		<ul class="pagination justify-content-center">
  				<c:if test="${paging.prev}">
 					<li class="page-item">
-						<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
+							<c:if test="${paging.cri.pageNum>=1}">
+								<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
+							</c:if>
 					</li>
 				</c:if> 
 				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
