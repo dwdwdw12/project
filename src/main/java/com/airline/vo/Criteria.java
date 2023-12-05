@@ -12,7 +12,6 @@ import lombok.ToString;
 public class Criteria {
 
 		private int pageNum; //page num
-		private int pageNum2; //더블페이징에 사용할 pageNum
 		private int amount; //page 당 데이터 개수
 		
 		private String type; // T, C, W title content writer

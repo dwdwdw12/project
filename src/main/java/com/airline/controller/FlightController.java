@@ -81,7 +81,27 @@ public class FlightController {
 		model.addAttribute("arrDate", arrDate);
 		model.addAttribute("depDate", depDate);
 		
+		//가격정보 설정
+		model.addAttribute("depPrice", flights.getPrice(dep, arr));
+		model.addAttribute("arrPrice", flights.getPrice(arr, dep));
+		
+		//날짜계산
+		LocalDate depDateCal = LocalDate.parse(depDate);
+		model.addAttribute("nextDepDay", depDateCal.plusDays(1));
+		model.addAttribute("prevDepDay", depDateCal.plusDays(-1));
+		if(arrDate!=null) {
+			LocalDate arrDateCal = LocalDate.parse(arrDate);
+			model.addAttribute("nextArrDay", arrDateCal.plusDays(1));
+			model.addAttribute("prevArrDay", arrDateCal.plusDays(-1));			
+		}
+		
 	}
+	
+	@GetMapping("/flightDepArrSearch")
+	public void getflightDepArrSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr, @Param("depDate") String depDate) {
+		
+	}
+	
 	
 	@GetMapping("/flight/reservation")
 	public void getReservation(Model model,@Param("fno")int fno) {
