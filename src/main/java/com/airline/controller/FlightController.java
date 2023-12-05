@@ -1,19 +1,12 @@
 package com.airline.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.annotations.Param;
@@ -32,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.airline.service.FlightService;
 import com.airline.service.PayService;
@@ -42,6 +34,8 @@ import com.airline.vo.FlightResVO;
 import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PageDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -97,17 +91,19 @@ public class FlightController {
 		String flightName = vo.getFlightName();
 		System.out.println("flightName>>"+flightName);
 		//예약된 좌석 명단
-		List<String> list = new ArrayList<String>();
-		//개수
-		int cnt = flights.ResCnt(flightName);
-		for(int i = 0; i<cnt; i++) {
-			list.add(i, flights.getResAll(flightName));
-		}
-		
+		List<FlightResVO> rvo = flights.getResAll(flightName);
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    try {
+	        String json = objectMapper.writeValueAsString(rvo);
+	        model.addAttribute("json", json);
+	        //System.out.println("json>> "+json);
+	    } catch (JsonProcessingException e) {
+	        e.printStackTrace(); // 또는 예외 처리 로직 추가
+	    }
+	    model.addAttribute("rvo",rvo);
 		//list.add(flights.getResAll(flightName));
 
 		System.out.println("list>>"+flights.getResAll(flightName));
-		System.out.println("list>>"+list);
 		
 	}
 	
