@@ -305,7 +305,7 @@ public class JoinController {
 			params.put("email", email);
 			//params.put("mail_key", mail_key);
 
-			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+//			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 			log.info("입력받은 이메일 >> " + mail);
 
 			MailHandler sendMail = new MailHandler(mailSender);
