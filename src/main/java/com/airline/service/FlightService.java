@@ -80,7 +80,7 @@ public interface FlightService {
 	//사용포인트 조회
 	public int usePoint(String userid);
 	//예약정보 전체
-	public String getResAll(String flightName);
+	public List<FlightResVO> getResAll(String flightName);
 	//예약정보 개수
 	public int ResCnt(String flightName);
 }
