@@ -38,6 +38,25 @@
 	margin-left: -800px;
 	display: none;
 }
+
+@media(min-width:768px){
+#kako-talk-channel-chat-button{
+position:fixed;
+z-index:999;
+right:30px;
+bottom:30px;
+}
+}
+
+@media(max-width:767px){
+#kako-talk-channel-chat-button{
+position:fixed;
+z-index:999;
+right:15px;
+bottom:30px;
+}
+}
+
 </style>
 
 <div class="tm-page-wrap mx-auto">
@@ -129,6 +148,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<div id="kakao-talk-channel-chat-button">ddd</div>
 
 <%-- 	<!-- 전달 폼 -->
 	<form id="ticketForm" action="/user/kakaoDetail" method="get">
@@ -171,90 +192,14 @@
 
 
 </script>
-<!--  충돌부분 추가 
-<script type="text/javascript">
-	var $jLatest = jQuery.noConflict();
-	$jLatest('input[id="dates"]').daterangepicker();
-	$jLatest('input[id="startDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-	$jLatest('input[id="endDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-</script> -->
-<!-- <script type="text/javascript">
-	$(function() {
-		$('.slideshow').each(function() {
-			// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
-			let $slides = $(this).find("img");
-			let slideCount = $slides.length;
-			let currentIndex = 0;
-			$slides.eq(currentIndex).fadeIn();
-			// 첫 이미지를 나타나게 함
 
-			// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
-			let showNextSlide = function() {
-				let nextIndex = (currentIndex + 1) % slideCount;
-				// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
-				$slides.eq(currentIndex).fadeOut();
-				// 현재 이미지를 사라지게 하고
-				$slides.eq(nextIndex).fadeIn();
-				// 위에서 구한 다음 이미지를 나타나게 함
-				currentIndex = nextIndex;
-				// 다음 이미지의 값을 현재로 
-			}
-
-			let timer = setInterval(showNextSlide, 1000);
-			$(this).on('mouseover', function() {
-				//타이머 취소
-				clearInterval(timer);
-			}).on('mouseout', function() {
-				//타이머 시작
-				timer = setInterval(showNextSlide, 1000);
-			})
-		})
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+kakao.init('3156d02ad4070a1c858f024518bda8c5');
+Kakao.Channel.createAddChannelButton({
+	  container: '#kakao-talk-channel-chat-button',
+	  channelPublicId: '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.
 	});
 
-	// Slick Carousel
-	$('.tm-slideshow').slick({
-		infinite : true,
-		arrows : true,
-		slidesToShow : 1,
-		slidesToScroll : 1
-	});
-</script> -->
+</script>
 <%@ include file="../includes/footer.jsp"%>
