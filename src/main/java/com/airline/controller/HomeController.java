@@ -1,11 +1,20 @@
 package com.airline.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +33,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-
-import com.airline.mapper.BoardEventMapper;
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
 import com.airline.service.FlightService;
@@ -43,6 +51,9 @@ import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -265,6 +276,105 @@ public class HomeController {
 	
 	@GetMapping("/contact")
 	public void contact() {
+		
+	}
+	
+	//카카오메세지 토큰값 가져오기
+	@GetMapping(value="/oath")
+	public void oath(@RequestParam("code")String code, Model model) {
+		System.out.println(code);
+		String getCode = code;
+		String grant_type = code;
+		String url = "https://kauth.kakao.com/oauth/token";
+		String redirect_url = "http://localhost:8081/oath";
+		String rest_api_key="607caeca9f2a0089b46f99c667e0dee3";
+		Map<String, String> jsonData = new HashMap<String, String>();
+		jsonData.put("grant_type", grant_type);
+		jsonData.put("client_id", rest_api_key);
+		jsonData.put("redirect_url", redirect_url);
+		jsonData.put("code", code);
+		
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // 예쁜 형식으로 출력
+        String access_Token = "";
+        try {
+            // JSON 파일 생성
+            objectMapper.writeValue(new File("output.json"), jsonData);
+            System.out.println("JSON 파일이 생성되었습니다.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+        try {
+            URL reqUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) reqUrl.openConnection();
+            
+          //필수 헤더 세팅
+            conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+            conn.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
+            conn.setRequestMethod("POST");
+            
+            //	POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            StringBuilder sb = new StringBuilder();
+            //필수 쿼리 파라미터 세팅
+            sb.append("grant_type=authorization_code");
+            sb.append("&client_id=").append(rest_api_key);
+            sb.append("&redirect_uri=").append(redirect_url);
+            sb.append("&code=").append(code);
+            
+            bw.write(sb.toString());
+            bw.flush();
+            
+            //    결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+            
+           
+			/*
+			 * BufferedReader br = new BufferedReader(new
+			 * InputStreamReader(conn.getInputStream())); String line = ""; String result =
+			 * "";
+			 */
+            
+            //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br;
+            if (responseCode >= 200 && responseCode <= 300) {
+                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+
+            String line = "";
+            StringBuilder responseSb = new StringBuilder();
+            while((line = br.readLine()) != null){
+                responseSb.append(line);
+            }
+            
+            String result = responseSb.toString();
+            System.out.println("result : " + result);
+            
+//          Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+            access_Token = element.getAsJsonObject().get("access_token").getAsString();
+            String refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+
+            System.out.println("access_token : " + access_Token);
+            System.out.println("refresh_token : " + refresh_Token);
+            model.addAttribute("access_Token",access_Token);
+            model.addAttribute("refresh_token",refresh_Token);
+            br.close();
+            bw.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //return access_Token;
+	}
+	
+	@PostMapping(value="/oath")
+	public void sendMeg(@RequestParam("code")String code, HttpServletRequest req) {
 		
 	}
 	

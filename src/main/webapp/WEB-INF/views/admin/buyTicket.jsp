@@ -25,35 +25,13 @@
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css"> -->
 <style>
-.slideshow {
-	height: 465px;
-	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
-	position: relative;
-}
 
-.slideshow img {
-	position: absolute;
-	/*이미지 위치 가운데로 옮기기*/
-	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
-	margin-left: -800px;
-	display: none;
-}
 </style>
 
 <div class="tm-page-wrap mx-auto">
 	<section class="tm-banner">
 
-		<!-- .tm-container-outer -->
-		<div class="inner">
-			<div class="slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-02.jpg"
-					alt="" width="1600" height="1000"> <img
-					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-04.jpg"
-					alt="" width="1600" height="1000">
-			</div>
-		</div>
+
 	</section>
 
 	<section class="p-5 tm-container-outer tm-bg-gray">

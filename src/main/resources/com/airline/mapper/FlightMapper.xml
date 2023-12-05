@@ -5,10 +5,11 @@
 <mapper namespace="com.airline.mapper.FlightMapper">
 
 	<select id="getList" resultType="com.airline.vo.FlightVO">
-	<![CDATA[
-		select c.* from(select b.* from(select row_number() over(order by DEPDAY asc) as num, a.* from airplaneschedule a)b where num<= #{pageNum}* #{amount})c where num>= (#{pageNum}-1)* #{amount}
-	 ]]>  
-	</select>
+<!-- 	<![CDATA[
+		select c.* from(select b.* from(select row_number() over(order by DEPDAY asc) as num, a.* from airplaneschedule a)b where num<= #{cri.pageNum}* #{cri.amount})c where num>= (#{cri.pageNum}-1)* #{cri.amount}
+	 ]]>  -->
+	 	select * from airplaneschedule limit #{cri.pageNum},#{cri.amount}
+	 </select>
 	
 	<select id="getListSearch" resultType="com.airline.vo.FlightVO">
 	<![CDATA[

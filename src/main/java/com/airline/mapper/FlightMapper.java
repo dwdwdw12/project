@@ -14,7 +14,7 @@ import com.airline.vo.KakaoUserVO;
 @Component
 public interface FlightMapper {
 
-	public List<FlightVO> getList(Criteria cri);
+	public List<FlightVO> getList(@Param("cri")Criteria cri);
 	
 	public List<FlightVO> getListSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 
