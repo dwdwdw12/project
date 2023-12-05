@@ -4,7 +4,7 @@
     
 
 <div class="tm-main-content" id="top">
-		<div class="tm-page-wrap mx-auto">
+		<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 			<section class="tm-banner">
 				<div class="tm-container-outer ">
 					<div class="container">
@@ -38,7 +38,7 @@
 
 
 							<button type="button" class="btn btn-primary"
-								onclick="location.href='UserServlet?command=login'">로그인</button>
+								onclick="location.href='/login'">로그인</button>
 							<br>
 							<br>
 

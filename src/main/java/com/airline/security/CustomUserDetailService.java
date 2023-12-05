@@ -35,13 +35,20 @@ public class CustomUserDetailService implements UserDetailsService{
 		log.warn("queried by member mapper : "+ vo);
 		
 		if(vo != null) {
-			grantedAuthorities.add(new SimpleGrantedAuthority(vo.getAuthority().get(0).getAuthority()));
+//			grantedAuthorities.add(new SimpleGrantedAuthority(vo.getAuthority().get(0).getAuthority()));
 			return new CustomUser(vo);
 		}else {
 			return null;
 		}
-		
+		 
 		//return vo == null? null : new CustomUser(vo);
+		
+		
 	}
 
 }
+
+
+
+
+

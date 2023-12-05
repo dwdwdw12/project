@@ -26,14 +26,14 @@
 			if (cookies[i].getName().equals("userid")) { // 내가 원하는 쿠키명 찾아서 값 저장
 				cookie = cookies[i].getValue();}}%>
 				
-	<div class="tm-page-wrap mx-auto">
+	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<div class="tm-container-outer tm-banner-bg">
 		<div class="container"><!-- 원복=> 컨테이너 제거 -->
 			<div class="row tm-banner-row tm-banner-row-header">
 				<div class="tm-banner-header">
 					<h1 class="text-uppercase tm-banner-title">Login</h1>
 					<p class="mb-4">아이디 및 패스워드를 입력 해 주세요.</p>
-					${message }
+					
 				</div>
 			</div>
 		<!-- 	<div class="row tm-banner-row tm-banner-row-header tm-about-text-wrap mx-auto text-center">	 -->
@@ -73,12 +73,16 @@
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
 					</div> --%>
+
+<br><br>
+					<div style="margin-top: 50px;">
 					<a href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address">
 					<img alt="kakao_login" src="../resources/img/kakao/kakao_login_small.png">
 					</a>
+					</div>
 					<br>
 					
-					<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+					<!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
 					  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
 					<script>
 					  Kakao.init('3156d02ad4070a1c858f024518bda8c5'); // 사용하려는 앱의 JavaScript 키 입력
@@ -87,12 +91,14 @@
 					<a id="kakao-login-btn" href="javascript:loginWithKakao()">
 					  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
 					    alt="카카오 로그인 버튼" />
-					</a>
+					</a> -->
 					<p id="token-result"></p>
 
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<input type="hidden" id="joinMessage" name="${joinMessage}" value="${joinMessage}"/>
+						<input type="hidden" id="joinMessage" name="joinMessage" value="${joinMessage}"/>
+						<input type="hidden" id="logout" name="logout" value="${logout}"/>
+						<input type="hidden" id="error" name="error" value="${error}"/>
 					</div>
 			</form>
 			
@@ -125,7 +131,7 @@
 	 
 	 $(document).ready(function(){
 		<%--  var message = "<%= request.getAttribute("joinMessage") %>"; --%>
- 		 var message == $("#joinMessage");
+ 		 var message = document.getElementById("joinMessage");
 			 console.log(message+"hi");
 		 if(message != null){
 			 alert(message);
@@ -133,10 +139,12 @@
 	 });
 	 
 	 	 
-	var message = ${message};
+	var message = ${joinMessage};
 	if(message != null){
 		alert(message);
 	};
+	
+	//error랑 logout 처리...
 </script>
 </body>
 
