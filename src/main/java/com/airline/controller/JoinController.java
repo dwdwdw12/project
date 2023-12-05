@@ -286,7 +286,7 @@ public class JoinController {
 		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
 		
-
+ 
 		String[] userTermsAgree =  termsAgree.split(","); //selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
 		
 //		for (String string : userTermsAgree) {
