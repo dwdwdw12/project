@@ -1,8 +1,11 @@
 package com.airline.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
@@ -42,5 +45,6 @@ public interface JoinService {
 	public void registerAllTerms(String userId);
 
 	public void registerAuthorityMEMBER(String userId);
+	public List<SimpleGrantedAuthority> getAuthorities(String email);
 }
  

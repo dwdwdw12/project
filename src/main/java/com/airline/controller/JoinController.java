@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.mail.MailHandler;
 import com.airline.mail.TempKey;
+import com.airline.security.CustomLoginSuccessHandler;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
 import com.airline.vo.AuthorityVO;
@@ -358,7 +361,7 @@ public class JoinController {
 	// email정보가 담겨있음
 	@GetMapping("/kakao")
 	@CrossOrigin(origins = "http://localhost:8081/join/kakao")
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model, HttpSession session)
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model, HttpServletRequest request)
 			throws Throwable {
 		System.out.println("kakao controller타는중~~~(join에서 get)");
 		// 1번
@@ -407,28 +410,22 @@ public class JoinController {
 			model.addAttribute("pwd", mail_key);
 			return "/join/kakaoMemberInfo";
 		} else {
-//			session.setAttribute("userId", userInfo.get("email"));
-//			session.setAttribute("access_Token", access_Token);
-			
-			// 가입된 사용자인 경우 아이디를 사용하여 인증 및 권한 부여
-			List<AuthorityVO> userAuthority = vo.getAuthority();
-			List<GrantedAuthority> authorities = new ArrayList<>();
+			// 사용자 정보로 Authentication 객체 생성
+			 List<SimpleGrantedAuthority> userAuthorities = join.getAuthorities(email);
+		        List<GrantedAuthority> authorities = new ArrayList<>(userAuthorities);
 
-			for (AuthorityVO authorityVO : userAuthority) {
-			    // Assuming AuthorityVO has a method to get authority string, adjust accordingly
-			    String authorityString = authorityVO.getAuthority();
-			    // Creating SimpleGrantedAuthority and adding to the list
-			    authorities.add(new SimpleGrantedAuthority(authorityString));
-			}
+		        Authentication authentication = new UsernamePasswordAuthenticationToken(vo.getMail(), null, authorities);
 
-			Authentication authentication = new UsernamePasswordAuthenticationToken(vo.getMail(), null, authorities);
+			// SecurityContext에 설정
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-	            return authentication.toString(); 
-//	            [Principal=dbswjd4991@naver.com, 
-//	            Credentials=[PROTECTED], 
-//	            Authenticated=true, Details=null, Granted Authorities=[]]
-		}
+			// 세션에 사용자 정보 저장
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", vo);
+
+			// 로그인 후의 페이지로 리다이렉트
+			return "redirect:/user"; // 사용자에 따라 조절할 수 있음
+			}
 	}
 	
 	@PostMapping("/kakaoMemberInfo")
