@@ -192,6 +192,7 @@ public class FlightController {
 
 		//좌석별 가격구간 검색
 		float seatPc = 0;
+		String originSeat = seat;
 		String className = seat.charAt(0)+"";
 		if(className == "A") {
 			seat = "비지니스";
@@ -206,7 +207,7 @@ public class FlightController {
 		
 		System.out.println("seat : "+seat);
 		model.addAttribute("seat",seatPc);
-		model.addAttribute("className",className);
+		model.addAttribute("className",originSeat);
 				
 		//유저정보 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
