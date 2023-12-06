@@ -142,7 +142,7 @@ font: bold;
 			<option value="C" >내용</option>
 			<option value="W" >작성자</option>
 		</select>
-		<input type="text" name="keyword" <c:out value="${page.cri.keyword}"/>>
+		<input type="text" name="keyword" />
 		<input type="hidden" name="pageNum" value="${page.cri.pageNum}">
 		<input type="hidden" name="amount" value="${page.cri.amount}">
 		<button class="btn btn-warning btn-xs" >검색</button>
