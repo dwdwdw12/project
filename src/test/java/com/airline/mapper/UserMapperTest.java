@@ -20,7 +20,7 @@ public class UserMapperTest {
 	
 	@Test
 	public void getUserTest() {
-		KakaoUserVO vo = mapper.getUser("admin");
+		KakaoUserVO vo = mapper.getUser("dbswjd4991@naver.com");
 		log.info(vo);
 		vo.getAuthority().forEach(auth->log.info(auth));
 	}

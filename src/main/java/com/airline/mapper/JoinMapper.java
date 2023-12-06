@@ -1,8 +1,11 @@
 package com.airline.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import com.airline.vo.AuthorityVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
 
@@ -49,6 +52,7 @@ public interface JoinMapper {
 
 	public void registerBasicTerms(String userId);
 	public void registerAllTerms(String userId);
-	public String getPwd(String userId);
 
-} 
+	public void insertAuthorityMEMBER(String userId); // Authorities 테이블에 insert 
+
+}

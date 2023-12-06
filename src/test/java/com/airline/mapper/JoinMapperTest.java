@@ -43,15 +43,13 @@ public class JoinMapperTest {
 	@Test
 	public void checkMemberTest() {
 
-		KakaoUserVO vo = KakaoUserVO.builder()
-				.userNameE("userchoi")
-				.userNameK("최유저")
-				.gender("M")
-				.userReginumFirst(881231)
-				.userReginumLast(1111111)
-				.build();
-		
-		join.checkMember(vo);
+		/*
+		 * KakaoUserVO vo = KakaoUserVO.builder() .userNameE("jjj") .userNameK("정윤정")
+		 * .gender("W") .userReginumFirst(999999) .userReginumLast(1111111) .build();
+		 */
+		KakaoUserVO vo = new KakaoUserVO();
+		;
+		log.info(join.checkMember(vo));
 	}
 	
 	@Test
@@ -59,8 +57,8 @@ public class JoinMapperTest {
 		join.getTerms(1);
 	}
 	
-	@Test
-	public void insertMemberTest() {
+//	@Test
+//	public void insertMemberTest() {
 //		KakaoUserVO vo = KakaoUserVO.builder()
 //				.userId("kakaooo")
 //				.userNick("test000")
@@ -76,7 +74,7 @@ public class JoinMapperTest {
 //				.userReginumLast(2222222)
 //				.build();
 //		join.insertMember(vo);
-	}
+//	}
 
 
 	@Test
