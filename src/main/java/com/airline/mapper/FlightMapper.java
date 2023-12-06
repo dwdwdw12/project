@@ -29,8 +29,12 @@ public interface FlightMapper {
 	public int getTotalSearchByFlightName(@Param("cri")Criteria cri, @Param("flightName") String flightName, @Param("time") String time);	
 
 	public FlightVO getFlightInfo(int fno);
+	
+	public List<String> getDistinctDep(String searchValue);
 
-	public int getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
+	public List<String> getDistinctArrByDep(@Param("depName")String depName, @Param("arrName")String arrName);
+
+	public Integer getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 
 	public int getRoundTripPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 

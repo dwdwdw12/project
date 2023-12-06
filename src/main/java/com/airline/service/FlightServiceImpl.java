@@ -3,6 +3,7 @@ package com.airline.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,16 @@ public class FlightServiceImpl implements FlightService{
 	public int getTotalSearchByFlightName(Criteria cri, String flightName, String time) {
 		return mapper.getTotalSearchByFlightName(cri, flightName, time);
 	}
+	
+	@Override
+	public List<String> getDistinctDep(String searchValue) {
+		return mapper.getDistinctDep(searchValue);
+	}
+	
+	@Override
+	public List<String> getDistinctArrByDep(String depName, String arrName) {
+		return mapper.getDistinctArrByDep(depName, arrName);
+	}
 
 	@Override
 	public FlightVO getFlightInfo(int fno) {
@@ -66,7 +77,7 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
-	public int getPrice(String depName, String arrName) {
+	public Integer getPrice(String depName, String arrName) {
 		return mapper.getPrice(depName,arrName);
 	}
 	
