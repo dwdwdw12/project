@@ -16,7 +16,6 @@
 	update kakaouser set pwd = #{mail_key} where userId = #{userId}
 </update>
 
-
 <select id="getUserId" resultType="com.airline.vo.KakaoUserVO" parameterType="map">
 	select * from kakaouser where mail = #{email} and mail_key = #{mail_key}
 </select>
@@ -50,6 +49,22 @@
 	
 </insert>
 
+<insert id="insertkakaoMember" parameterType="com.airline.vo.KakaoUserVO">
+	insert into kakaouser(
+		userId, userNick, userNameK, userNameE, gender, pwd, 
+		mail, 
+		phone,
+		postCode, 
+		address, userReginumFirst, userReginumLast)
+		
+		values(
+			#{userId}, #{userNick}, #{userNameK}, #{userNameE}, #{gender}, #{pwd},
+			 #{mail}, #{phone}, #{postCode}, #{address}, 
+			#{userReginumFirst}, #{userReginumLast}
+	)
+	
+</insert>
+
 <select id="userIdDuplicateCheck" resultType="Integer">
 	select count(userId) from kakaouser where userId = #{userId}
 </select>
@@ -57,5 +72,18 @@
 	select count(userNick) from kakaouser where userNick = #{userNick}
 </select>
 
+<select id="kakaoLoginCheck" resultType="com.airline.vo.KakaoUserVO">
+	select * from kakaouser where mail = #{email} and userNameK = #{userNameK}
+</select>
+
+<insert id="registerBasicTerms">
+	insert into termsmanage(userid, termsCode, agree)
+	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'N')  
+</insert>
+
+<insert id="registerAllTerms">
+	insert into termsmanage(userid, termsCode, agree)
+	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'Y')  
+</insert>
 
 </mapper>

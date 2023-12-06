@@ -4,7 +4,7 @@
 
 
 <body>
-	<div class="tm-page-wrap mx-auto">
+	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<section class="tm-banner">
 			<div class="tm-container-outer ">
 				<div class="container">
@@ -53,7 +53,16 @@
 							for="agree_personalTransferToAbroad" class="fsz_23"> <span
 							class="col_brown2">[필수]</span> ${terms3.termsTitle}
 						</label> <br>
-						${terms2.termsContents}
+						${terms3.termsContents}
+						<br>
+
+						<br> <br> <input type="checkbox" name="terms"
+							value="terms4" id="agree_personalProvide"
+							onclick="return checkSelectAll()"> <label
+							for="agree_personalProvide" class="fsz_23"> <span
+							class="col_brown2">[선택]</span> ${terms4.termsTitle}
+						</label> <br>
+						${terms4.termsContents}
 						<br>
 
 
@@ -109,15 +118,15 @@ function checkSelectAll()  { /* 하나라도 체크되지 않으면 전체선택
 
  function termsCheck(){
 	if($('input:checkbox[id="agree_hompageUse"]').is(":checked") != true){
-		alert("약관에 동의해주시기 바랍니다.");
+		alert("필수약관에 동의해주시기 바랍니다.");
 		return false;
 	}
 	if($('input:checkbox[id="agree_personalCollection"]').is(":checked") != true){
-		alert("약관에 동의해주시기 바랍니다.");
+		alert("필수약관에 동의해주시기 바랍니다.");
 		return false;
 	}
 	if($('input:checkbox[id="agree_personalTransferToAbroad"]').is(":checked") != true){
-		alert("약관에 동의해주시기 바랍니다.");
+		alert("필수약관에 동의해주시기 바랍니다.");
 		return false;
 	}
  }

@@ -75,7 +75,7 @@ tr:hover {
 body {
 	width: 65%;
 	margin: 0 auto;
-	margin-top : 270px;
+	margin-top : 180px;
 }
 
 .greylist {
@@ -141,9 +141,10 @@ font: bold;
 		<input type="hidden" name="amount" value="${page.cri.amount}">
 		<button class="btn btn-warning btn-xs" >검색</button>
 	</form>
-	
-	
 	<c:if test="${!empty loginUser.admin}">
+		<button data-oper="myAns" class="gradient right" id="myAns" type="submit">내글보기</button>
+		<input type="hidden" name="boardwriter" value="${loginUser.userNick}">
+		
 		<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
 	</c:if>
 	
@@ -243,6 +244,10 @@ font: bold;
 				self.location = "/qna/register";
 			});
 			
+			$("#myAns").on("click", function(){
+				self.location = "/qna/myAns";
+			});
+			
 			 
 			//검색버튼 이벤트 처리
 			var searchForm = $("#searchForm"); 
@@ -270,7 +275,6 @@ font: bold;
 			if(select != "") { 
 				$('#type option[value= '+ select +']').prop("selected", true);
 				}			
-			
 			
 		});
 	</script>

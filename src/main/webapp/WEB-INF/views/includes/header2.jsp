@@ -32,7 +32,28 @@
 <link rel="stylesheet" href="../resources/css/style.css">
 <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 <script src="../resources/js/jquery-1.11.3.min.js"></script>
+<style>
+@media(min-width:768px){
+#kako-talk-channel-chat-button{
+position:fixed;
+z-index:999;
+margin: 0 0 0 20px;
+right:30px;
+bottom:30px;
+}
+}
 
+@media(max-width:767px){
+#kako-talk-channel-chat-button{
+position:fixed;
+z-index:999;
+margin: 0 0 0 20px;
+right:15px;
+bottom:30px;
+}
+}
+
+</style>
 </head>
 
 <body>
@@ -50,7 +71,7 @@
 							<div class="main-menu  d-none d-lg-block">
 								<nav>
 									<ul id="navigation">
-										<li><a href="index.html" href="#"><img
+										<li><a href="/"><img
 												src="../resources/img/kakao/chunsik.png" alt=""
 												style="width: 60px"></a></li>
 										<li><a href="/">home</a></li>
@@ -134,6 +155,24 @@
 									</ul>
 
 								</div>
+
+<div
+  id="kakao-talk-channel-add-button"
+  data-channel-public-id="_frpnG"
+  data-size="large"
+  data-support-multiple-densities="true">
+</div>
+
+<div
+  id="kakao-talk-channel-chat-button"
+  data-channel-public-id="_frpnG"
+  data-title="consult"
+  data-size="small"
+  data-color="yellow"
+  data-shape="pc"
+  data-support-multiple-densities="true">
+</div>
+
 <%-- 								<div>
 									<form role="form" action="/logout" method="post">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -157,4 +196,52 @@
 		});
 
 	</script>
+		
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+kakao.init('3156d02ad4070a1c858f024518bda8c5');
+Kakao.Channel.createAddChannelButton({
+	  container: '#kakao-talk-channel-chat-button',
+	  channelPublicId: '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.
+	});
+
+</script>
+
+<!-- 카카오 채널 추가 -->
+<script>
+  window.kakaoAsyncInit = function() {
+    Kakao.Channel.createAddChannelButton({
+      container: '#kakao-talk-channel-add-button',
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.channel.min.js';
+    js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
+    js.crossOrigin = 'anonymous';
+    fjs.parentNode.insertBefore(js, fjs);
+  })(document, 'script', 'kakao-js-sdk');
+</script>
+
+<!-- 카카오 채팅 -->
+<script>
+  window.kakaoAsyncInit = function() {
+    Kakao.Channel.createChatButton({
+      container: '#kakao-talk-channel-chat-button',
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.channel.min.js';
+    js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
+    js.crossOrigin = 'anonymous';
+    fjs.parentNode.insertBefore(js, fjs);
+  })(document, 'script', 'kakao-js-sdk');
+</script>
 	<!-- header-end -->
