@@ -81,6 +81,7 @@ bottom:30px;
 												<li><a href="single-blog.html">Flight Reservation</a></li>
 												<li><a href="single-blog.html">AirPort</a></li>
 												<li><a href="single-blog.html">Price Information</a></li>
+												<li><a href="/flight/flightDepArrSearch">Flight Status</a></li>
 											</ul></li>
 										<li><a href="about.html" href="#">board<i
 												class="ti-angle-down"></i></a>

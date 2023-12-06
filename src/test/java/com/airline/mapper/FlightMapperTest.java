@@ -25,8 +25,19 @@ public class FlightMapperTest {
 	
 	@Test
 	public void getSearchTest() {
-		mapper.getListSearch(new Criteria(),"인천","오사카", "2022-12-01")
+		mapper.getListSearch(new Criteria(),"김포","제주", "2024-02-28")
 		.forEach(vo->log.info(vo));
+	}
+	
+	@Test
+	public void getSearchByFlightNameTest() {
+		mapper.getListSearchByFlightName(new Criteria(),"OZ8234", "2023-12-01")
+		.forEach(vo->log.info(vo));
+	}
+	
+	@Test
+	public void getTotalSearchByFlightNameTest() {
+		log.info(mapper.getTotalSearchByFlightName(new Criteria(),"OZ8234", "2023-12-01"));
 	}
 	
 	@Test

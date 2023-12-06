@@ -35,12 +35,29 @@ public class FlightServiceImpl implements FlightService{
 
 	@Override
 	public List<FlightVO> getListSearch(Criteria cri, String dep, String arr, String time) {
+		log.info("dep serviceImpl"+dep);
+		log.info("arr serviceImpl"+arr);
+		log.info("time serviceImpl"+time);
+		System.out.println("dep serviceImpl"+dep);
+		System.out.println("arr serviceImpl"+arr);
+		System.out.println("time serviceImpl"+time);
 		return mapper.getListSearch(cri, dep, arr, time);
+	}
+	
+	@Override
+	public List<FlightVO> getListSearchByFlightName(Criteria cri, String flightName, String time) {
+		
+		return mapper.getListSearchByFlightName(cri, flightName, time);
 	}
 
 	@Override
 	public int getTotalSearch(Criteria cri, String dep, String arr, String time) {
 		return mapper.getTotalSearch(cri, dep, arr, time);
+	}
+
+	@Override
+	public int getTotalSearchByFlightName(Criteria cri, String flightName, String time) {
+		return mapper.getTotalSearchByFlightName(cri, flightName, time);
 	}
 
 	@Override

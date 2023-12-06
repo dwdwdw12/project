@@ -2,7 +2,10 @@ package com.airline.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +103,38 @@ public class FlightController {
 	}
 	
 	@GetMapping("/flightDepArrSearch")
-	public void getflightDepArrSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr, @Param("depDate") String depDate) {
+	public void getflightDepArrSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr, @Param("targetDate") String targetDate, @Param("flightName") String flightName) {
+		System.out.println("dep : " + dep + " arr : " + arr + " target : " + targetDate + " flightName : " + flightName);
+		if(dep!=null||arr!=null) {			
+			List<FlightVO> listSearch = flights.getListSearch(cri,dep,arr,targetDate);
+			System.out.println("노선 검색>>"+listSearch.size());
+			model.addAttribute("list", listSearch);
+			model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri, dep, arr, targetDate)));
+		}
+		
+		if(flightName!=null) {
+			List<FlightVO> listByFlightName = flights.getListSearchByFlightName(cri, flightName, targetDate);
+			System.out.println("편명 검색"+listByFlightName.size());
+			model.addAttribute("list", listByFlightName);
+			model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearchByFlightName(cri, flightName, targetDate)));
+		}
+		
+		//검색창 반환값
+		model.addAttribute("dep", dep);
+		model.addAttribute("arr", arr);
+		model.addAttribute("targetDate", targetDate);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");         
+		Date now = new Date();         
+		String today = sdf.format(now);
+		System.out.println("현재 시간>>>" + today);
+		model.addAttribute("now", today);
+		
+		if(targetDate!=null) {
+			LocalDate dateCal = LocalDate.parse(targetDate);
+			model.addAttribute("nextDay", dateCal.plusDays(1));
+			model.addAttribute("prevDay", dateCal.plusDays(-1));
+		}
 		
 	}
 	

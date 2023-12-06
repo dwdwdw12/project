@@ -33,19 +33,14 @@
 
 
 <style>
-/* .slideshow {
-	height: 465px;
-	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
-	position: relative;
+#searchTable th {
+    text-align: center;
+    top: 0px;
+    background-color: gray !important;
 }
-
-.slideshow img {
-	position: absolute;
-	/*이미지 위치 가운데로 옮기기*/
-	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
-	margin-left: -800px;
-	display: none;
-} */
+td {
+	text-align: center;
+}
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
@@ -106,7 +101,7 @@
 			<br>
 			<div class="container">
 				
-				<table class="table table-hover">
+				<table class="table table-hover" id="searchTable">
 					<thead>
 						<tr>
 							<th>항공편명</th>
