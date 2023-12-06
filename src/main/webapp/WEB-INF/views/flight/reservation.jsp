@@ -272,8 +272,10 @@
 					</c:forEach>
 					<div class="map-container">
 						<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map"
+
 							style="text-align: center;opacity: 0.8;"">
 						<div class="seat1" id="A1"></div>
+
 						<div class="seat1" id="A2"></div>
 						<div class="seat1" id="A3"></div>
 						<div class="seat1" id="A4"></div>

@@ -33,6 +33,13 @@ public interface JoinService {
 			String mail,
 			String address);
 	//vo로 받고싶은데 phone, email, address를 못합침..->일단 파라미터로 받음..	
+	
+	public void registerKakaoMember(KakaoUserVO vo);
+
+	public KakaoUserVO kakaoLoginCheck(String email, String userNameK);
+
+	public void registerBasicTerms(String userId);
+	public void registerAllTerms(String userId);
 
 }
  

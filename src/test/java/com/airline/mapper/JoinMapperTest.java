@@ -1,8 +1,11 @@
 package com.airline.mapper;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -12,13 +15,19 @@ import com.airline.vo.KakaoUserVO;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class) 
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 @Log4j
 public class JoinMapperTest {
  
 	@Autowired
 	private JoinMapper join;
+
 	
+	@Autowired
+	private PasswordEncoder pwencoder;
+	
+
+	 
 	@Test
 	public void checkEmailtest() {
 		join.checkEmail("user01@naver.com");
@@ -85,5 +94,15 @@ public class JoinMapperTest {
 		String userId = "hana111";
 		
 		join.updatePwdByMailKey(userId, mail_key);
+	}
+	@Test
+	public void registerAllTermsTest() {
+		String userId = "test11";
+		join.registerAllTerms(userId);
+	}
+	
+	@Test
+	public void bcryptTest() {//@ContextConfiguration에다가 security 추가 + @Autowired(PasswordEncoder) 추가함
+		log.info(pwencoder.encode("test11!"));
 	}
 }

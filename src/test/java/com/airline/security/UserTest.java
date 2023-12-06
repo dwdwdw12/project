@@ -134,10 +134,14 @@ public class UserTest {
 		try {
 			con = datasource.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, "user01");
+			ps.setString(1, "kakao111");
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
+			
+				String rawPassword = "kakao111!";
+				String encodedPassword = passwordEncoder.encode("kakao111!");
+			log.info("passwordEncoder한 값과 raw값 매치되는지 확인 >> " + passwordEncoder.matches(rawPassword, encodedPassword));
 				if(passwordEncoder.encode("user01").equals(rs))log.info("로그인 성공");
 				else {log.info("로그인 실패");}
 			}

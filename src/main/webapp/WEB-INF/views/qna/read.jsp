@@ -162,6 +162,26 @@ a {
 	<br>
 	<br>
 
+	<table id="listTable">
+		<tr>
+			<th width=10%>글번호</th>
+			<th width=40%>제목</th>
+			<th width=20%>작성일자</th>
+			<th width=20%>작성자</th>
+			<th width=10%>조회수</th>
+		</tr>
+		
+			<c:forEach var="item" items="${list}">
+						<tr>	
+							<td>${item.boardnum}</td>
+							<td><a class="move" href="/qna/read?boardnum=${item.boardnum}">${item.boardsubject }</a></td>
+							<td>${item.regidate }</td>
+							<td>${item.boardwriter}</td>
+							<td>${item.readcount}</td>
+						</tr>
+			</c:forEach>
+	</table>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
