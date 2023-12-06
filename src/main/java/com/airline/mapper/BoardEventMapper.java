@@ -3,10 +3,11 @@ package com.airline.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import com.airline.vo.BoardEventVO;
 import com.airline.vo.Criteria;
-
+@Component
 public interface BoardEventMapper {
 
 	public List<BoardEventVO> getList();

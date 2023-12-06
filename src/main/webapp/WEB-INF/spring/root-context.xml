@@ -67,10 +67,10 @@
 	<tx:annotation-driven />
 
 	<mybatis-spring:scan
-		base-package="com.airline.mapper" />
+		base-package="com.airline.mapper.**" />
 
 	<context:component-scan
-		base-package="com.airline.service" />
+		base-package="com.airline.service.**" />
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
