@@ -266,5 +266,10 @@ public class JoinServiceImpl implements JoinService {
 		join.registerAllTerms(userId);
 	}
 
+//	@Override
+//	public String getPwd(String userId) {
+//		return join.getPwd(userId);
+//	}
+
 	
 }

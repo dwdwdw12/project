@@ -32,6 +32,7 @@
 		
 		<security:access-denied-handler ref="customaccessDenied"/>
 		<security:form-login login-page="/login" authentication-success-handler-ref="cusotmLoginSuccess"/>
+		<security:form-login login-page="/join/kakao" authentication-success-handler-ref="cusotmLoginSuccess"/>
 		<security:logout logout-url="/logout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" logout-success-url="/"/>
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 		

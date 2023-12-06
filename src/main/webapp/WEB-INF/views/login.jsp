@@ -42,10 +42,13 @@
 					<div class="form-group tm-container">
 						<label for="userid">ID</label> 
 						<input type="text" id="userid" name="username" class="form-control" placeholder="id" required value="<%=cookie%>"/>
+						<input type="hidden" id="kakaoUserId" name="kakaoUserId" value="${kakaoUserId}"/>
+						
 					</div>
 					<div class="form-group tm-container">
 						<label for="pwd">PASSWORD</label> 
 						<input type="password" id="pwd" name="password" class="form-control" placeholder="pwd" required />
+						<input type="hidden" id="kakaoPwd" name="kakaoPwd" value="${kakaoPwd}"/>
 					</div>
 					<div class="form-group tm-container">
 						<label for="remember">아이디 저장</label> 
@@ -99,6 +102,7 @@
 						<input type="hidden" id="joinMessage" name="joinMessage" value="${joinMessage}"/>
 						<input type="hidden" id="logout" name="logout" value="${logout}"/>
 						<input type="hidden" id="error" name="error" value="${error}"/>
+						
 					</div>
 			</form>
 			
@@ -116,6 +120,18 @@
 		e.preventDefault();
 		alert("login");
 		$("form").submit();
+		
+/*		암호화된 pwd를 입력하는건 로그인이 안됨..
+		var kakaoUserId = document.getElementById("kakaoUserId");
+		var kakaoPwd = document.getElementById("kakaoPwd");
+		
+		if(kakaoUserId != null){
+			attr.username(kakaoUserId);
+		}
+		if(kakaoPwd != null){
+			attr.password(kakaoPwd);
+		}
+ */		
 	});
 	
 
