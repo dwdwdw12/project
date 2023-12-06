@@ -477,8 +477,6 @@ public class FlightController {
             int responseCode = conn.getResponseCode();
             System.out.println("Response Code: " + responseCode);
 
-            // 응답 데이터 확인 (생략 가능)
-            // ...
 
             // 연결 종료
             conn.disconnect();

@@ -78,7 +78,6 @@ max-width: 100%;
 						<div>
 					
 					<div class="form-row tm-search-form-row">
-						<input type="hidden" value=${vo.resno}/>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="userid">결제자</label> 
 						</div>
