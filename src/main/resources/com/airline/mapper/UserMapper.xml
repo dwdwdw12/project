@@ -190,4 +190,12 @@
 		select count(*) from boarddiary where boardwriter = #{username}
 	</select>
 	
+	<select id="getUserQna" resultType="com.airline.vo.BoardQnaVO">
+		 select * from boardqna where boardreref in(select boardNum from boardqna where boardWriter=#{username}and boardreseq=0)limit #{cri.pageNum},#{cri.amount};
+	</select>
+	
+	<select id="getUserQnaCnt" resultType="int">
+		select count(*) from boardqna where boardreref in(select boardNum from boardqna where boardWriter='유저01'and boardreseq=0);
+	</select>
+	
 </mapper>

@@ -43,6 +43,7 @@ span:before {
 .city{
  	text-align: center; 
 }
+
 </style>
 
 <div class="tm-page-wrap mx-auto">
@@ -127,7 +128,7 @@ span:before {
 	        <div class="col">
 	      		<div class="p-3 border bg-light">
 	      		<p>
-						<h3>마일리지 >><strong><fmt:formatNumber
+						<h3>마일리지 <i class="bi bi-caret-right-fill"></i><strong><fmt:formatNumber
 									value="${sumP}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -156,7 +157,7 @@ span:before {
 	   		  <div class="col">
 				<div class="p-3 border bg-light">
 	      		<p>
-						<h3>카카오페이 잔액 >><strong><fmt:formatNumber
+						<h3>카카오페이 <i class="bi bi-caret-right-fill"></i><strong><fmt:formatNumber
 									value="${sumK}" pattern="#,###" /></strong>
 						</h3>
 						</p>
@@ -273,14 +274,16 @@ span:before {
 					    <thead>
 					    	<th>제목</th>
 					    	<th>내용</th>
-					    	<th>작성일자</th>
+					    	<th>댓글</th>
+					    	<th>좋아요</th>
 					    </thead>
 					    <c:forEach items="${dvo}" var="dvo">
 					    <tbody>
 					      <tr>
 					        <td>${dvo.boardTitle}</td>
-					        <td>${dvo.boardContent}</td>
   					        <td><fmt:parseDate var = "datePase" value="${dvo.regiDate}" pattern="yyyy-MM-dd HH:mm"/><fmt:formatDate value="${datePase}" pattern="yyyy-MM-dd HH:mm" /></td>
+					      	<td>${dvo.replyCount}</td>
+					      	<td>${dvo.likeCount}</td>
 					      </tr>
 					     </tbody>
 					      </c:forEach>	      		

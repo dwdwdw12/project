@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
+import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.PageDTO;
@@ -151,6 +152,22 @@ public class UserController {
 			List<BoardDiaryVO> vo = service.getUserDiary(username, cri);
 			model.addAttribute("vo",vo);
 			model.addAttribute("paging", new PageDTO(cri, service.getUserDiaryCnt(username, cri)));
+
+		}
+	}
+	
+	//문의게시판
+	@GetMapping("/qna")
+	public void useqna(Model model, Criteria cri) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			String userid = userDetails.getUsername();
+			System.out.println("id : " + userid);
+			String username = service.getName(userid);
+			List<BoardQnaVO> vo = service.getUserQna(username, cri);
+			model.addAttribute("vo",vo);
+			model.addAttribute("paging", new PageDTO(cri, service.getUserQnaCnt(username, cri)));
 
 		}
 	}
