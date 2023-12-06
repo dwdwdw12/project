@@ -5,9 +5,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -286,6 +289,7 @@ public class HomeController {
 		String getCode = code;
 		String grant_type = code;
 		String url = "https://kauth.kakao.com/oauth/token";
+		//String url = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
 		String redirect_url = "http://localhost:8081/oath";
 		String rest_api_key="607caeca9f2a0089b46f99c667e0dee3";
 		Map<String, String> jsonData = new HashMap<String, String>();
@@ -370,12 +374,38 @@ public class HomeController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        //return access_Token;
+        
+        //메세지 보내기
+        try {
+            URL reqUrl = new URL("https://kapi.kakao.com/v2/api/talk/memo/default/send");
+            HttpURLConnection conn = (HttpURLConnection) reqUrl.openConnection();
+            String templateObject = "{ \"object_type\": \"feed\", \"content\": { \"title\": \"오늘의 디저트\", \"description\": \"아메리카노, 빵, 케익\", \"image_url\": \"https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg\", \"image_width\": 640, \"image_height\": 640, \"link\": { \"web_url\": \"http://www.daum.net\", \"mobile_web_url\": \"http://m.daum.net\", \"android_execution_params\": \"contentId=100\", \"ios_execution_params\": \"contentId=100\" } }, \"item_content\" : { \"profile_text\" :\"Kakao\", \"profile_image_url\" :\"https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png\", \"title_image_url\" : \"https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png\", \"title_image_text\" :\"Cheese cake\", \"title_image_category\" : \"Cake\", \"items\" : [ { \"item\" :\"Cake1\", \"item_op\" : \"1000원\" }, { \"item\" :\"Cake2\", \"item_op\" : \"2000원\" }, { \"item\" :\"Cake3\", \"item_op\" : \"3000원\" }, { \"item\" :\"Cake4\", \"item_op\" : \"4000원\" }, { \"item\" :\"Cake5\", \"item_op\" : \"5000원\" } ], \"sum\" :\"Total\", \"sum_op\" : \"15000원\" }, \"social\": { \"like_count\": 100, \"comment_count\": 200, \"shared_count\": 300, \"view_count\": 400, \"subscriber_count\": 500 }, \"buttons\": [ { \"title\": \"웹으로 이동\", \"link\": { \"web_url\": \"http://www.daum.net\", \"mobile_web_url\": \"http://m.daum.net\" } }, { \"title\": \"앱으로 이동\", \"link\": { \"android_execution_params\": \"contentId=100\", \"ios_execution_params\": \"contentId=100\" } } ] }";
+            String encodedTemplateObject = URLEncoder.encode(templateObject, StandardCharsets.UTF_8.toString());
+            
+            //필수 헤더 세팅
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+            conn.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = ("template_object=" + encodedTemplateObject).getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            // 응답 코드 확인
+            int responseCode = conn.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            // 응답 데이터 확인 (생략 가능)
+            // ...
+
+            // 연결 종료
+            conn.disconnect();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 	}
-	
-	@PostMapping(value="/oath")
-	public void sendMeg(@RequestParam("code")String code, HttpServletRequest req) {
-		
-	}
-	
+
 }
