@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +35,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +45,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.FlightService;
 import com.airline.service.PayService;
+import com.airline.vo.BoardEventFileVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResDTO;
 import com.airline.vo.FlightResVO;
@@ -52,6 +56,7 @@ import com.airline.vo.PointVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -100,8 +105,12 @@ public class FlightController {
 		model.addAttribute("depDate", depDate);
 		
 		//가격정보 설정
-		model.addAttribute("depPrice", flights.getPrice(dep, arr));
-		model.addAttribute("arrPrice", flights.getPrice(arr, dep));
+		if(flights.getPrice(dep, arr)!=null) {
+			model.addAttribute("depPrice", flights.getPrice(dep, arr));
+		}
+		if(flights.getPrice(arr, dep)!=null) {
+			model.addAttribute("arrPrice", flights.getPrice(arr, dep));
+		}
 		
 		//날짜계산
 		LocalDate depDateCal = LocalDate.parse(depDate);
@@ -521,7 +530,34 @@ public class FlightController {
         return "redirect:/user";
 	}
 	
-
+	//검색어 자동완성 - 출발지
+	@GetMapping(value = "/getDistinctDep", produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String getDistinctDep(String searchValue){
+		log.info("getDistinctDep... ");
+		List<String> list = flights.getDistinctDep(searchValue);
+//		for(String str : list) {
+//			log.info(str);
+//		}
+		
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
+	
+	//검색어 자동완성 - 도착지
+	@PostMapping(value = "/getDistinctArrByDep")
+	@ResponseBody
+	public List<String> getDistinctArrByDep( String depName, String searchValue){
+		log.info("getDistinctArrByDep... ");
+		List<String> list = flights.getDistinctArrByDep(depName, searchValue);
+		for(String str : list) {
+			log.info(str);
+		}
+		
+		//Gson gson = new Gson();
+		//return gson.toJson(list);
+		return list;
+	}
 	
 
 	

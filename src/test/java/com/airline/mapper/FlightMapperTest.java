@@ -1,5 +1,7 @@
 package com.airline.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,22 @@ public class FlightMapperTest {
 	public void getRoundTripPriceTest() {
 		log.info(mapper.getRoundTripPrice("홍콩", "인천"));
 	}
+	
+	@Test
+	public void getDistinctDepTest() {
+//		List<String> list = mapper.getDistinctDep();
+//		for(String str : list) {			
+//			log.info(str);
+//		}
+	}
+	
+//	@Test
+//	public void getDistinctArrByDepTest() {
+//		List<String> list = mapper.getDistinctArrByDep("제주");
+//		for(String str : list) {			
+//			log.info(str);
+//		}
+//	}
 	
 	//검색어만 하는건 성공
 	/*

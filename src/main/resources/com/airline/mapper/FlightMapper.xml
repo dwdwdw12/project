@@ -73,6 +73,14 @@
 			and flightName like concat('%',#{flightName},'%')
 			and DEPDAY like concat('%',#{time},'%')
 	</select>
+		
+	<select id="getDistinctDep" resultType="String">
+		select distinct(depName) from airplaneschedule where depName like concat('%',#{depName},'%')
+	</select>
+
+	<select id="getDistinctArrByDep" resultType="String">
+		select distinct(arrName) from airplaneschedule where depName = #{depName} and arrName like concat('%',#{arrName},'%')
+	</select>
 	
 	<select id="getFlightInfo" resultType="com.airline.vo.FlightVO">
 		select * from airplaneschedule where fno=#{fno}
