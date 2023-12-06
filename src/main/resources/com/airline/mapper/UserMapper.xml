@@ -55,7 +55,7 @@
 		select * from userpay where userid=#{userid}
 	</select>	
 	
-	<select id="getSumP" resultType="int">
+	<select id="getSumP" resultType="Integer">
 		select sum(mileage) from userpay where userid=#{userid}
 	</select>
 

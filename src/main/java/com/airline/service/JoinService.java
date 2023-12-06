@@ -41,5 +41,6 @@ public interface JoinService {
 	public void registerBasicTerms(String userId);
 	public void registerAllTerms(String userId);
 
+	//public String getPwd(String userId);
 }
  

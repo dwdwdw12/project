@@ -86,4 +86,8 @@
 	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'Y')  
 </insert>
 
+<select id="getPwd" resultType="String">
+	select pwd from kakaouser where userId = #{userId}
+</select>
+
 </mapper>

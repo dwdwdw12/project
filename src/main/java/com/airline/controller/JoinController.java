@@ -1,12 +1,19 @@
 package com.airline.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.mail.MailHandler;
 import com.airline.mail.TempKey;
+import com.airline.security.CustomLoginSuccessHandler;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
 import com.airline.vo.KakaoUserVO;
@@ -385,7 +393,9 @@ public class JoinController {
 		String email = (String) userInfo.get("email");
 		String userNameK = (String) userInfo.get("name");
 		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
-
+		
+		log.info("vo 결과 >>> " + vo); //authority=null 92INPhy432
+		
 		if (vo == null) {
 
 			String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -400,7 +410,15 @@ public class JoinController {
 			model.addAttribute("pwd", mail_key);
 			return "/join/kakaoMemberInfo";
 		} else {
-			return "/home"; //일단 홈으로 보냄
+//			log.info(vo.getAuthority().toString());
+//			String userAuthority = vo.getAuthority().toString();
+//			
+//			
+//			List<GrantedAuthority> authority = AuthorityUtils.createAuthorityList(userAuthority);
+//			Authentication authentication = new UsernamePasswordAuthenticationToken(vo.getUserId(), null, authority);
+//	        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+	            return "redirect:/home"; //일단 홈으로 보냄
 		}
 	}
 	
@@ -434,14 +452,14 @@ public class JoinController {
 		
 		try {
 
-			String mail_key = new TempKey().getKey(); // 랜덤키 생성
+			//String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("email", mail);
-			params.put("mail_key", mail_key);
+			//params.put("mail_key", mail_key);
 
-			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
-			log.info("입력받은 이메일 >> " + mail + "생성된 key >> " + mail_key);
+			//mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+			//log.info("입력받은 이메일 >> " + mail + "생성된 key >> " + mail_key);
 
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
