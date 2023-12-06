@@ -18,6 +18,8 @@ import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import lombok.extern.log4j.Log4j;
 
@@ -67,6 +69,7 @@ public class JoinServiceImpl implements JoinService {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
 
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
 			// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
