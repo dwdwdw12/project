@@ -67,16 +67,29 @@ td {
 			<form action="/flight/flightDepArrSearch" method="get" class="tm-search-form tm-section-pad-1">
 				<br><br>
 				<div class="form-row tm-search-form-row" id="searchText">
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="dep">출발지</label> 
-						<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요" value = "${dep}" required="required">
-					</div>
+					<c:if test="${empty flightName}">
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<label for="dep">출발지</label> 
+							<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요" value = "${dep}" required="required">
+						</div>
+						
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<label for="arr">도착지</label> 
+							<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요" value = "${arr}" required="required">
+						</div>
+					</c:if>
 					
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="arr">도착지</label> 
-						<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요" value = "${arr}" required="required">
-					</div>
+					<c:if test="${!empty flightName}">
+					
+						<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2' style='float:right;'>
+							<label for='flightName'>항공편명</label>
+							<input name='flightName' type='text' class='form-control' id='flightName' placeholder='항공편명을 입력해주세요' value='${flightName}' required='required'>
+						</div>
+						<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2' style='float:right;'>
+						</div>
+					</c:if>
 				</div>
+				
 				<br>
 				<!-- form-row -->
 				<div class="form-row tm-search-form-row">

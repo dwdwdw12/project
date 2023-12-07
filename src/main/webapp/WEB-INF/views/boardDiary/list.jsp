@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../includes/header2.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -117,6 +118,9 @@
 			</tr>
 
 		
+			<jsp:useBean id="now" class="java.util.Date" />
+			<fmt:parseNumber value="${now.time}" integerOnly="true" var="nowfmtTime" scope="request"/>
+			
 			<c:forEach var="board" items="${diaryList}">
 
 				<tr>
@@ -124,11 +128,43 @@
 					<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}">${board.boardTitle} [${board.replyCount}]</a></td>
 					<td>${board.boardWriter}</td>
 					<c:choose>
+
 						<c:when test="${board.regiDate>=board.modifyDate}">
-							<td>${board.regiDate}</td>						
+		
+							<fmt:parseDate value = "${board.regiDate}" var = "parsedMyDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+							<c:if test="${nowfmtTime-parsedMyDate.time<(1000*60*60*24)}">
+								<c:set var="hh" value="${fn:substring(board.regiDate, 11,13)}"/>
+								<c:set var="mi" value="${fn:substring(board.regiDate, 14,16)}"/>
+								<c:set var="ss" value="${fn:substring(board.regiDate, 17,19)}"/>
+
+								<td>${hh}:${mi}:${ss}</td>
+							</c:if>
+							<c:if test="${nowfmtTime-parsedMyDate.time>=(1000*60*60*24)}">
+								<c:set var="yy" value="${fn:substring(board.regiDate, 0,4)}"/>
+								<c:set var="mm" value="${fn:substring(board.regiDate, 5,7)}"/>
+								<c:set var="dd" value="${fn:substring(board.regiDate, 8,10)}"/>
+								
+								<td>${yy}/${mm}/${dd}</td>
+							</c:if>
 						</c:when>
 						<c:when test="${board.regiDate<board.modifyDate}">
-							<td>${board.modifyDate}</td>
+		
+							<fmt:parseDate value = "${board.modifyDate}" var = "parsedMyDate2" pattern = "yyyy-MM-dd HH:mm:ss" />
+							<c:if test="${nowfmtTime-parsedMyDate2.time<(1000*60*60*24)}">
+								<c:set var="hh" value="${fn:substring(board.modifyDate, 11,13)}"/>
+								<c:set var="mi" value="${fn:substring(board.modifyDate, 14,16)}"/>
+								<c:set var="ss" value="${fn:substring(board.modifyDate, 17,19)}"/>
+
+								<td>${hh}:${mi}:${ss}</td>
+							</c:if>
+							<c:if test="${nowfmtTime-parsedMyDate2.time>=(1000*60*60*24)}">
+								<c:set var="yy" value="${fn:substring(board.modifyDate, 0,4)}"/>
+								<c:set var="mm" value="${fn:substring(board.modifyDate, 5,7)}"/>
+								<c:set var="dd" value="${fn:substring(board.modifyDate, 8,10)}"/>
+								
+								<td>${yy}/${mm}/${dd}</td>
+							</c:if>
+						
 						</c:when>
 					</c:choose>
 					<td>${board.readCount}</td>
@@ -207,6 +243,41 @@
 			
 	</div>
 		<br>
+	
+<script>
+function displayTime(timeValue){
+    var today = new Date();
+    
+	var time = new Date(timeValue);
+	console.log("time>>"+time);
+		
+    var gap = today.getTime() - time;
+ 	console.log("today>>"+today.getTime());
+ 	console.log("timeV>>"+timeValue);
+ 	console.log("gap">>>+gap)
+ 	
+    var dateObj = new Date(timeValue);
+
+    console.log("dateObj : " + dateObj);
+ 
+    var str = "";
+
+    if(gap<(1000*60*60*24)){                    //24시간(밀리초*초*분*시)
+        var hh = dateObj.getHours();
+        var mi = dateObj.getMinutes();
+        var ss = dateObj.getSeconds();
+
+        return [(hh>9? '' : '0') + hh, ":", (mi>9? '' : '0') + mi, ":", (ss>9? '' : '0') + ss].join("");
+    } else {
+        var yy = dateObj.getFullYear();
+        var mm = dateObj.getMonth() + 1;        //getMonth : zero-based
+        var dd = dateObj.getDate();
+
+        return [yy, "/", (mm>9? '' : '0') + mm, "/", (dd>9? '' : '0') + dd].join("");
+    }
+}  
+
+</script>
 	
 	<%@ include file="../includes/footer.jsp"%>
 </body>
