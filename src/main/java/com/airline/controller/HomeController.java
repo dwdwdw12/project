@@ -74,7 +74,7 @@ public class HomeController {
 	private FlightService flightService;
 		
     @Autowired
- 	private BoardNoticeService service;
+ 	private BoardNoticeService noticeService;
     
     @Autowired
 	private PasswordEncoder passwordEncoder;
@@ -82,7 +82,7 @@ public class HomeController {
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
-		model.addAttribute("emer", service.noticePopup(cri));
+		model.addAttribute("emer", noticeService.noticePopup(cri));
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();
@@ -281,6 +281,26 @@ public class HomeController {
 	@GetMapping("/contact")
 	public void contact() {
 		
+	}
+	
+	@GetMapping("/memberGrade")
+	public void grade(Model model) {
+		//유저정보 가져오기
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
+			String userid = userDetails.getUsername();
+
+			KakaoUserVO vo = user.getUserInfo(userid);
+			//등급조회
+			String getGrade = user.getGrade(vo.getGradeCode());
+			model.addAttribute("vo",vo);
+			model.addAttribute("grade",getGrade);
+			//마일리지 가져오기
+			//UserPayVO pvo = user.getPoint(userid); //마일리지 내역
+			int mile = user.getMileage(userid);
+			model.addAttribute("mile", mile);
+		}
 	}
 
 }

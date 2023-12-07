@@ -198,4 +198,8 @@
 		select count(*) from boardqna where boardreref in(select boardNum from boardqna where boardWriter='유저01'and boardreseq=0);
 	</select>
 	
+	<select id="getMileage" resultType="int">
+		select totalMileage from userlog where userid = #{userid} order by lognum desc limit 1
+	</select>
+	
 </mapper>

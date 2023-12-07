@@ -78,5 +78,7 @@ public interface UserService {
 	List<BoardQnaVO> getUserQna(String username, Criteria cri);
 	//qna 페이징 카운트
 	int getUserQnaCnt(String username, Criteria cri);
+	//mileage 가져오기
+	public int getMileage(String userid);
 
 }
