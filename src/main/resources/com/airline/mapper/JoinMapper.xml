@@ -5,7 +5,7 @@
 <mapper namespace="com.airline.mapper.JoinMapper">
 
 <resultMap type="com.airline.vo.KakaoUserVO" id="joinMap">
-	<id property="userId" column="userId"/>
+	<id property="userId" column="userid"/>
 	<result property="userNick" column="userNick"/>
 	<result property="gradeCode" column="gradeCode"/>
 	<result property="userNameK" column="userNameK"/>
@@ -21,7 +21,7 @@
 	<result property="admin" column="admin"/>
 	<result property="enabled" column="enabled"/>
 	<collection property="authority" column="authMap" ofType="com.airline.vo.AuthorityVO" autoMapping="true">
-		<id property="userId" column="userId"/>
+		<id property="userid" column="userid"/>
 		<id property="authority" column="authority"/>
 	</collection>
 </resultMap>
@@ -43,7 +43,7 @@
 </select>
 
 <select id="checkMember" resultMap="joinMap">
-	select * from kakaouser a left join authorities b on a.userid=b.userid where 
+	select * from kakaouser a left join authorities b on a.userId=b.userid where 
 	a.userNameE = #{userNameE}
 	and a.userNameK = #{userNameK}
 	and a.gender = #{gender}
@@ -121,5 +121,10 @@
 <select id="getAuthorities" resultType="org.springframework.security.core.authority.SimpleGrantedAuthority">
     SELECT authority FROM authorities WHERE userid = #{email}
 </select>
+
+<insert id="insertUserlog">
+	insert into userlog(userid) values(#{userId})
+</insert>
+
 
 </mapper>

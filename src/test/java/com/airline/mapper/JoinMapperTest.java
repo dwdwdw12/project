@@ -109,4 +109,10 @@ public class JoinMapperTest {
 	public void getAuthoritiesTest() {
 		log.info(join.getAuthorities("dbswjd4991@naver.com") );
 	}
+	
+	@Test
+	public void insertUserlogTest() {
+		String userId = "dbswjd4991@naver.com";
+		join.insertUserlog(userId);
+	}
 }

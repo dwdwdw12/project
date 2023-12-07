@@ -57,4 +57,8 @@ public interface JoinMapper {
 
 	public void insertAuthorityMEMBER(String userId); // Authorities 테이블에 insert 
 	public List<SimpleGrantedAuthority> getAuthorities(String email);
+	
+	public void insertUserlog(String userId);
+	public void insertGradelog(String userId);
+	
 }

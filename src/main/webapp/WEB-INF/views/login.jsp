@@ -42,13 +42,11 @@
 					<div class="form-group tm-container">
 						<label for="userid">ID</label> 
 						<input type="text" id="userid" name="username" class="form-control" placeholder="id" required value="<%=cookie%>"/>
-						<input type="hidden" id="kakaoUserId" name="kakaoUserId" value="${kakaoUserId}"/>
 						
 					</div>
 					<div class="form-group tm-container">
 						<label for="pwd">PASSWORD</label> 
 						<input type="password" id="pwd" name="password" class="form-control" placeholder="pwd" required />
-						<input type="hidden" id="kakaoPwd" name="kakaoPwd" value="${kakaoPwd}"/>
 					</div>
 					<div class="form-group tm-container">
 						<label for="remember">아이디 저장</label> 
