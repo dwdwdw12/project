@@ -142,7 +142,7 @@ public class HomeController {
 		//공지사항 3개 출력
 		Criteria nCri = new Criteria();
 		nCri.setAmount(3);
-		model.addAttribute("noticeBoard", service.getPageList(nCri));
+		model.addAttribute("noticeBoard", noticeService.getPageList(nCri));
 		
 		
 		return "home";
