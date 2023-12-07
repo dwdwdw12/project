@@ -53,6 +53,13 @@ bottom:30px;
 }
 }
 
+#adminTalk{
+	border-radius : 15px;
+	background-color:#FFC107;
+	border : none;
+	font-size : 12px;
+}
+
 </style>
 </head>
 
@@ -81,6 +88,7 @@ bottom:30px;
 												<li><a href="single-blog.html">Flight Reservation</a></li>
 												<li><a href="single-blog.html">AirPort</a></li>
 												<li><a href="single-blog.html">Price Information</a></li>
+												<li><a href="/flight/flightDepArrSearch">Flight Status</a></li>
 											</ul></li>
 										<li><a href="about.html" href="#">board<i
 												class="ti-angle-down"></i></a>
@@ -173,6 +181,10 @@ bottom:30px;
   data-support-multiple-densities="true">
 </div>
 
+<c:if test="${loginUser.admin==1 }">
+	<button id="adminTalk">관리자톡 채널</button>
+</c:if>
+
 <%-- 								<div>
 									<form role="form" action="/logout" method="post">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -193,6 +205,11 @@ bottom:30px;
 			e.preventDefault();
 			alert("로그아웃을 진행합니다!");
 			$("#actionForm").submit();
+		});
+		
+		var link = "https://center-pf.kakao.com/_frpnG/chats";
+		$("#adminTalk").on("click", function(){
+			window.open(link);
 		});
 
 	</script>

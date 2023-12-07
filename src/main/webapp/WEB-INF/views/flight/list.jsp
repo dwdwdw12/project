@@ -2,7 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ include file="../includes/header2.jsp"%>
+<%-- <%@ include file="../includes/header2.jsp"%>
+ --%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
@@ -31,46 +36,42 @@
 	var $jLatest = jQuery.noConflict();
 </script>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  var $jb = jQuery.noConflict();
+</script>
 
 <style>
-/* .slideshow {
-	height: 465px;
-	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
-	position: relative;
+#searchTable th {
+    text-align: center;
+    top: 0px;
+    background-color: gray !important;
 }
-
-.slideshow img {
-	position: absolute;
-	/*이미지 위치 가운데로 옮기기*/
-	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
-	margin-left: -800px;
-	display: none;
+td {
+	text-align: center;
+}
+/* .autocomplete > div.active {
+  background: #333;
+  color: #eee;
+}
+.autocomplete > div {
+  background: #f1f3f499;
+  padding: .2rem .6rem;
 } */
+
+
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
-<%-- 	<section class="tm-banner">
+	
 
-		<!-- .tm-container-outer -->
-		<div class="inner">
-			<div class="slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-02.jpg"
-					alt="" width="1600" height="1000"> <img
-					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-04.jpg"
-					alt="" width="1600" height="1000">
-			</div>
-		</div>
-	</section> --%>
-   
-
-<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	
 	<section class="p-5 tm-container-outer tm-bg-gray">
-	<h2>운항 일정</h2>
-		<div class="container">
-			
+		<h2>운항 일정</h2>
+			<div class="container">
+		
 			<form action="/flight/search" method="get" class="tm-search-form tm-section-pad-1">
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
@@ -106,7 +107,7 @@
 			<br>
 			<div class="container">
 				
-				<table class="table table-hover">
+				<table class="table table-hover" id="searchTable">
 					<thead>
 						<tr>
 							<th>항공편명</th>
@@ -289,4 +290,116 @@
 		    "maxDate": "2024-02-28"
 	});
 	
+</script>
+
+<script>
+
+//출발지 자동완성
+$jb(function() {    //화면 다 뜨면 시작
+   $jb("#departure").autocomplete({
+        source : function( request, response ) {
+             $jb.ajax({
+                    type: 'get',
+                    url: "/flight/getDistinctDep",
+                    dataType: "json",
+                    data: {searchValue: $("#departure").val()},
+                    success: function(data) {
+                    	console.log(data);
+                        //서버에서 json 데이터 response 후 목록에 추가
+                        response(
+                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+                                return {
+                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+                                    value: item,    //그냥 사용자 설정값
+                                }
+                            })
+                        );
+                    }
+               });
+            },    // source 는 자동 완성 대상
+         select : function(event, ui) {    //아이템 선택시
+            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+            console.log(ui.item.label);    //김치 볶음밥label
+            console.log(ui.item.value);    //김치 볶음밥
+            
+        },
+        focus : function(event, ui) {    //포커스 가면
+            return false;//한글 에러 잡기용도로 사용됨
+        },
+        minLength: 1,// 최소 글자수
+        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+//        classes: {    //잘 모르겠음
+//            "ui-autocomplete": "highlight"
+//        },
+        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+//        disabled: true, //자동완성 기능 끄기
+//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+        close : function(event){    //자동완성창 닫아질때 호출
+            console.log(event);
+        }  
+      	    
+    });
+   
+});  
+
+//도착지 자동완성 
+ $jb(function() {    //화면 다 뜨면 시작
+    $jb("#arrival").autocomplete({
+        source : function( request, response ) {
+             $jb.ajax({
+                    type: 'POST',
+                    url: "/flight/getDistinctArrByDep",
+                    //dataType: "json",
+                    dataType: "json",
+                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
+                    data: {depName : $("#departure").val(),searchValue: $("#arrival").val()},
+                    //contentType : "application/json; charset=utf-8", 
+                    success: function(data) {
+                    	console.log(data);
+                    	var json = JSON.stringify(data);
+                    	console.log(json);
+                        //서버에서 json 데이터 response 후 목록에 추가
+                        response(
+                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+                                return {
+                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+                                    value: item,    //그냥 사용자 설정값
+                                }
+                            })
+                        );
+                    }
+               });
+            },    // source 는 자동 완성 대상
+         select : function(event, ui) {    //아이템 선택시
+            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+            console.log(ui.item.label);    //김치 볶음밥label
+            console.log(ui.item.value);    //김치 볶음밥
+            
+        },
+        focus : function(event, ui) {    //포커스 가면
+            return false;//한글 에러 잡기용도로 사용됨
+        },
+        minLength: 1,// 최소 글자수
+        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+//        classes: {    //잘 모르겠음
+//            "ui-autocomplete": "highlight"
+//        },
+        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+//        disabled: true, //자동완성 기능 끄기
+//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+        close : function(event){    //자동완성창 닫아질때 호출
+            console.log(event);
+        }  
+      	    
+    });
+   
+}); 
+
+//출발지부터 입력하도록.
+$("#arrival").on("click",function(e){
+	 if($("#departure").val()==""){
+		 alert("출발지를 입력해주세요");
+	 }
+})
+
 </script>

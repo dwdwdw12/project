@@ -8,9 +8,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import com.airline.mapper.JoinMapper;
@@ -294,6 +297,11 @@ public class JoinServiceImpl implements JoinService {
 	@Override
 	public void registerAuthorityMEMBER(String userId) {
 		join.insertAuthorityMEMBER(userId);
+	}
+
+	@Override
+	public List<SimpleGrantedAuthority> getAuthorities(String email) {
+		return join.getAuthorities(email);
 	}
 
 	

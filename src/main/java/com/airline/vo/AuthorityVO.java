@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorityVO {
-	private String userid;
+	private String userId;
 	private String authority; 
 
 }

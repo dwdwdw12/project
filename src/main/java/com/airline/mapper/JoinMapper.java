@@ -3,6 +3,8 @@ package com.airline.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.airline.vo.AuthorityVO;
@@ -54,5 +56,5 @@ public interface JoinMapper {
 	public void registerAllTerms(String userId);
 
 	public void insertAuthorityMEMBER(String userId); // Authorities 테이블에 insert 
-
+	public List<SimpleGrantedAuthority> getAuthorities(String email);
 }

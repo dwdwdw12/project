@@ -18,15 +18,23 @@ public interface FlightMapper {
 	
 	public List<FlightVO> getListSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 
+	public List<FlightVO> getListSearchByFlightName(@Param("cri")Criteria cri, @Param("flightName") String flightName, @Param("time") String time);
+
 	//public List<FlightVO> getListSearch2(@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 	
 	public int getTotal(Criteria cri);
 
 	public int getTotalSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
+	
+	public int getTotalSearchByFlightName(@Param("cri")Criteria cri, @Param("flightName") String flightName, @Param("time") String time);	
 
 	public FlightVO getFlightInfo(int fno);
+	
+	public List<String> getDistinctDep(String searchValue);
 
-	public int getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
+	public List<String> getDistinctArrByDep(@Param("depName")String depName, @Param("arrName")String arrName);
+
+	public Integer getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 
 	public int getRoundTripPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 

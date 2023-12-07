@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ include file="../includes/header2.jsp"%>
@@ -21,6 +22,10 @@
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 <!-- Templatemo style -->
 
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
 
@@ -33,7 +38,7 @@
 	display: block; /* 이미지를 블록 요소로 설정 */
  	margin: 0 auto; /* 가운데 정렬 */
 } 
-.slideshow {
+/* .slideshow {
 	height: 465px;
 	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
 	position: relative;
@@ -45,7 +50,7 @@
 	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
 	margin-left: -800px;
 	display: none;
-}
+} */
 .map-container{
 	position: relative;
     display: inline-block;
@@ -143,7 +148,7 @@
 .seat1#C3 {
 	z-index : 2;
     left: 365px;
-    top: 252px;
+    top: 253px;
     width:54px;
     height : 50px;
 }
@@ -184,7 +189,7 @@
 }
 .seat1#E1 {
     left: 550px;
-    top: 131px;
+    top: 130px;
     width:54px;
     height : 50px;
 }
@@ -212,7 +217,7 @@
 }
 .seat1#F1 {
     left: 612px;
-    top: 131px;
+    top: 130px;
     width:54px;
     height : 50px;
 }
@@ -227,7 +232,7 @@
 .seat1#F3 {
 	z-index : 2;
     left: 613px;
-    top: 252px;
+    top: 253px;
     width:56px;
     height : 50px;
 }
@@ -241,11 +246,11 @@
 
 </style>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<section class="tm-banner">
 
 		<!-- .tm-container-outer -->
-		<div class="inner">
+<!-- 		<div class="inner">
 			<div class="slideshow">
 				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
 					height="1000"> <img src="../resources/img/tm-img-02.jpg"
@@ -254,28 +259,30 @@
 					height="1000"> <img src="../resources/img/tm-img-04.jpg"
 					alt="" width="1600" height="1000">
 			</div>
-		</div>
+		</div> -->
 	</section>
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
-					<h2 class="text-uppercase mb-4">${vo.fullDeptime}&nbsp;
-						출발&nbsp;/&nbsp; ${vo.depName} &nbsp;&nbsp; >> &nbsp;&nbsp;
-						${vo.arrName}&nbsp; /&nbsp; ${vo.flightName}</h2>
-					<p class="mb-4">원하는 좌석을 골라 선택하여 주십시오</p>
+					<h2 class="text-uppercase mb-4">출발<i class="bi bi-caret-right-fill"></i>${vo.fullDeptime}</h2>
+					<h2 class="text-uppercase mb-4">${vo.depName}<i class="bi bi-caret-right-fill"></i>${vo.arrName}
+					&nbsp; /&nbsp; ${vo.flightName}</h2>
+					<p class="mb-4">원하는 좌석을 골라 선택하여 주세요.</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 					<c:forEach items="${rvo}" var="data" varStatus="loop">	
 						<input type="hidden" id="data_${loop.index}" class="data" value='<c:out value="${json}"/>'>
 					</c:forEach>
 					<div class="map-container">
-						<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map"
-
-							style="text-align: center;opacity: 0.8;"">
-						<div class="seat1" id="A1"></div>
-
+						<img src="../resources/img/비행기 좌석도.jpg" usemap="#image-map" style="text-align: center;opacity: 0.8;"">
+						<c:forEach items="${rvo}" var="seat">
+							<c:if test="${not empty seat.seatid}">
+								<div class="seat1" id="${seat.seatid}"></div>
+							</c:if>
+						</c:forEach>
+						<!-- <div class="seat1" id="A1"></div>
 						<div class="seat1" id="A2"></div>
 						<div class="seat1" id="A3"></div>
 						<div class="seat1" id="A4"></div>
@@ -298,7 +305,7 @@
 						<div class="seat1" id="F1"></div>
 						<div class="seat1" id="F2"></div>
 						<div class="seat1" id="F3"></div>
-						<div class="seat1" id="F4"></div>
+						<div class="seat1" id="F4"></div> -->
 					</div>
 					<map name="image-map" id="seats">
 					<area class="seat" target="" alt="A1" href="A1" coords="190,135,242,180" shape="rect" id="A1">
@@ -404,16 +411,18 @@ console.log(uniqSeatid);
 
 uniqSeatid.forEach(function(seatId){
 	var seatArea = $(".seat[id='"+seatId+"']");
+	var seat1 = $(".seat1");
 	//seatArea.css('background-color','#CCCCCC');
 	//seatArea.css('opacity','1');
 	//seatArea.css('z-index','2');
 	$(".seat1[id='"+seatId+"']").css('background-color','gray');
 	seatArea.attr('id','selled');
-	$(".seat1[id='"+seatId+"']").css('background','#CCCCCC');
+ 	$(".seat1[id='"+seatId+"']").css('background','#CCCCCC');
 	$(".seat1[id='"+seatId+"']").css('opacity','0.8');
 	$(".seat1[id='"+seatId+"']").css('z-index','2');
-	$(".seat1[id='"+seatId+"']").css('position','absolute');
-	seatArea.css('z-index','3');
+	$(".map-container").css('position','relative');
+	$(".seat1[id='"+seatId+"']").css('position','absolute'); 
+	seatArea.css('z-index','3');	
 });
 
 $('img[usemap]').rwdImageMaps();
@@ -444,46 +453,5 @@ $('img[usemap]').rwdImageMaps();
 	 $("#actionForm").append("<input type='hidden' name='fno' value='" + ${fno}+ "'>");
 	 $("#actionForm").append("<input type='hidden' name='seat' value='" + $(this).attr("href")+ "'>");
 	 $("#actionForm").submit(); */
-</script>
-<script type="text/javascript">
-	$(function() {
-		$('.slideshow').each(function() {
-			// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
-			let $slides = $(this).find("img");
-			let slideCount = $slides.length;
-			let currentIndex = 0;
-			$slides.eq(currentIndex).fadeIn();
-			// 첫 이미지를 나타나게 함
-
-			// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
-			let showNextSlide = function() {
-				let nextIndex = (currentIndex + 1) % slideCount;
-				// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
-				$slides.eq(currentIndex).fadeOut();
-				// 현재 이미지를 사라지게 하고
-				$slides.eq(nextIndex).fadeIn();
-				// 위에서 구한 다음 이미지를 나타나게 함
-				currentIndex = nextIndex;
-				// 다음 이미지의 값을 현재로 
-			}
-
-			let timer = setInterval(showNextSlide, 1000);
-			$(this).on('mouseover', function() {
-				//타이머 취소
-				clearInterval(timer);
-			}).on('mouseout', function() {
-				//타이머 시작
-				timer = setInterval(showNextSlide, 1000);
-			})
-		})
-	});
-
-	// Slick Carousel
-	$('.tm-slideshow').slick({
-		infinite : true,
-		arrows : true,
-		slidesToShow : 1,
-		slidesToScroll : 1
-	});
 </script>
 <%@ include file="../includes/footer.jsp"%>

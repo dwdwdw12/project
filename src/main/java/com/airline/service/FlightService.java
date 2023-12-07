@@ -19,13 +19,22 @@ public interface FlightService {
 	//리스트 전체 페이지로 바꿔치기
 	public List<FlightVO> getListSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 
+	public List<FlightVO> getListSearchByFlightName(@Param("cri")Criteria cri, @Param("flightName") String flightName, @Param("targetDate") String targetDate);
+
 	public int getTotalSearch(Criteria cri, String dep, String arr, String formattedDate);
 
+	public int getTotalSearchByFlightName(Criteria cri, String flightName, String time);
+	
+	//검색어 조회
+	public List<String> getDistinctDep(String searchValue);
+
+	public List<String> getDistinctArrByDep(@Param("depName")String depName, @Param("arrName")String arrName);
+	
 	//항공정보
 	public FlightVO getFlightInfo(int fno);
 
 	//가격구간 검색
-	public int getPrice(String depName, String arrName);
+	public Integer getPrice(String depName, String arrName);
 	
 	//왕복 항공편 가격 합산. 편도일 경우, 하나만 합산
 	public int getRoundTripPrice(String depName, String arrName);
