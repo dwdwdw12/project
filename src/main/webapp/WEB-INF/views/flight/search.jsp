@@ -40,29 +40,80 @@
   var $jb = jQuery.noConflict();
 </script>
 
+<!-- Font Awesome 5 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
 <style>
 #depTable th {
     position: sticky;
     text-align: center;
     top: 0px;
     background-color: gray !important;
+    z-index: 1;
 }
 #arrTable th {
     position: sticky;
     text-align: center;
+    vertical-align: middle;
     top: 0px;
     background-color: gray !important;
 }
 td {
+	font-size: 15px;
 	text-align: center;
+	vertical-align: middle;
 }
 
+.btn-root {text-align:center;}
+p.btn.btn-default {
+    font-size: 10px;
+    padding: 12px;
+    width: 80px;
+    border-radius: 5px;
+    margin: 15px -2px 15px -2px;
+    display: inline-block;
+    background: #efefef;
+    border: 1px solid black;
+    color:#333;
+}
+
+
+.seprator {
+    width: 80px;
+    height: 1px;
+    background-color: black;
+    margin: 0px auto;
+    display: inline-block;
+    vertical-align: middle;
+    position:relative;
+
+}
+.seprator:first-child:before {			/* 타원 */
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: black;
+    left: 0;
+    border-radius: 50%;
+    top: -5px;
+}
+.seprator:last-child:before {		/* 화살표 */
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 0;
+    border-bottom: 10px solid black;
+}
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<section class="p-5 tm-container-outer tm-bg-gray">
 	<h2>항공편 검색</h2>
-
+		
 		<div class="container">
 
 			<form action="/flight/search" method="get" class="tm-search-form tm-section-pad-1">
@@ -105,7 +156,9 @@ td {
 			<br><br>
 			</div>
 	</section>
-
+			
+			<jsp:useBean id="now" class="java.util.Date" />
+			<fmt:parseNumber value="${now.time}" integerOnly="true" var="nowfmtTime" scope="request"/>
 			<input type="hidden" class="form-control" id="sampleArr" name="sampleArr" value = "${arrDate}" >
 			
 			<c:if test="${empty list}">
@@ -127,6 +180,7 @@ td {
 			<c:if test="${!empty list}">
 			<section class="p-5 tm-container-outer tm-bg-gray">
 			<div class="container"  >
+			
 			<c:if test="${empty arrDate}">
 				<div class="text-right">
 					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
@@ -141,7 +195,7 @@ td {
 			</c:if>
 			
 			<h2 style="text-align: center">${depDate} : ${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
-			<br>
+			<p style="text-align: right;"> 예약 마감 시간은 출발 30분 전까지 입니다</p>
 			<c:choose>
 				<c:when test="${fn:length(list)<5}">
 				<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 400px;">
@@ -153,33 +207,48 @@ td {
 			<!-- <div class="container" style="overflow: auto; top: 50px; width: 100%; height: 750px;"> -->
 				<table class="table table-hover" id="depTable">
 					<thead>
-						<tr>
+						<tr>	
 							<th>항공편명</th>
-							<th>출발시간</th>
-							<th>도착시간</th>
-							<th>비행시간</th>
-							<th>출발지</th>
-							<th>도착지</th>
-							<th>가격</th>							
+							<th>출도착시간(비행시간)</th>
+							<th>이코노미석 운임</th>							
+							<th>비즈니스석 운임</th>							
+							<th>일등석 운임</th>							
 							<th>예약하기</th>
 						</tr>
 					</thead>
 					<c:if test="${empty list}">
-						예약가능한 항공편이 없습니다. <br>
-						다시 여정을 선택해주세요.
+						<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
+					다시 여정을 선택해주세요.</h3>	
 					</c:if>
 					<c:forEach items="${list}" var="list">
 						<tbody>
 							<tr>
-								<td>${list.flightName}</td>
-								<td>${list.depTime}</td>
-								<td>${list.arrTime}</td>
-								<td>${list.flightTime}</td>
-								<td>${list.depName}</td>
-								<td>${list.arrName}</td>
-								<td><fmt:formatNumber value="${depPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>								
-								<td><button type="submit"
-										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">reservation</button></td>
+								<td style="vertical-align: middle;">${list.flightName}</td>
+								<td style="vertical-align: middle;">
+									<strong>${fn:substring(list.fullDeptime, 11,16)}</strong>
+									<div class="seprator"></div>  
+									  <p class="btn btn-default">
+									  		<i class='far fa-clock'></i>&nbsp;${list.flightTime}
+									  </p>
+									   <div class="seprator"></div>
+									<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+								</td>
+								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
+								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice*1.5}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
+								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice*2}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
+								
+								<fmt:parseDate value = "${list.fullDeptime}" var = "parsedMyDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+								
+								<c:if test="${parsedMyDate.time-nowfmtTime<0}">
+									<td style="vertical-align: middle;">예약 불가</td>
+								</c:if>
+								<c:if test="${parsedMyDate.time-nowfmtTime<(1000*60*30)&&0<=parsedMyDate.time-nowfmtTime}">
+									<td style="vertical-align: middle;">예약 마감</td>
+								</c:if>
+								<c:if test="${parsedMyDate.time-nowfmtTime>=(1000*60*30)}">
+								<td style="vertical-align: middle;"><button type="submit"
+										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기</button></td>
+								</c:if>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -233,7 +302,7 @@ td {
 			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${nextArrDay}#2'">다음날</button>
 		</div>
 		<h2 style="text-align: center">${arrDate} : ${arr} <i class='fa fa-arrow-right'></i> ${dep}</h2>
-			<br>
+		<p style="text-align: right;"> 예약 마감 시간은 출발 30분 전까지 입니다</p>
 			<c:choose>
 				<c:when test="${fn:length(arrlist)<5}">
 				<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 400px;">
@@ -248,27 +317,43 @@ td {
 					<thead>
 						<tr>
 							<th>항공편명</th>
-							<th>출발시간</th>
-							<th>도착시간</th>
-							<th>비행시간</th>
-							<th>출발지</th>
-							<th>도착지</th>
-							<th>가격</th>							
+							<th>출도착시간(비행시간)</th>
+							<th>이코노미석 운임</th>							
+							<th>비즈니스석 운임</th>							
+							<th>일등석 운임</th>							
 							<th>예약하기</th>
 						</tr>
 					</thead>
 					<c:forEach items="${arrlist}" var="list">
 						<tbody>
 							<tr>
-								<td>${list.flightName}</td>
-								<td>${list.depTime}</td>
-								<td>${list.arrTime}</td>
-								<td>${list.flightTime}</td>
-								<td>${list.depName}</td>
-								<td>${list.arrName}</td>
-								<td><fmt:formatNumber value="${arrPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
-								<td><button type="submit"
-										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button"  id="reserve" data-fno="${list.fno}">reservation</button></td>
+								<td style="vertical-align: middle;">${list.flightName}</td>
+								<td style="vertical-align: middle;">
+									<strong>${fn:substring(list.fullDeptime, 11,16)}</strong>
+									<div class="seprator"></div>  
+									  <p class="btn btn-default">
+									  		<i class='far fa-clock'></i>&nbsp;${list.flightTime}
+									  </p>
+									   <div class="seprator"></div>
+									<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+								</td>
+								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
+								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice*1.5}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
+								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice*2}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
+								
+								<fmt:parseDate value = "${list.fullDeptime}" var = "parsedMyDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+								
+								<c:if test="${parsedMyDate.time-nowfmtTime<0}">
+									<td style="vertical-align: middle;">예약 불가</td>
+								</c:if>
+								<c:if test="${parsedMyDate.time-nowfmtTime<(1000*60*30)&&0<=parsedMyDate.time-nowfmtTime}">
+									<td style="vertical-align: middle;">예약 마감</td>
+								</c:if>
+								<c:if test="${parsedMyDate.time-nowfmtTime>=(1000*60*30)}">
+								<td style="vertical-align: middle;"><button type="submit"
+										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기</button></td>
+								</c:if>								
+								
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -446,7 +531,50 @@ td {
 		    "minDate": "2023-12-01",
 		    "maxDate": "2024-02-28"
 	});
-
+	
+	$jLatest('input[id="arrDate"]').daterangepicker({
+		singleDatePicker: true,
+	    //timePicker: true,
+	    timePicker24Hour: true,
+		 "locale": {
+		       "format": 'YYYY-MM-DD',
+		       "separator": " ~ ",
+		       "applyLabel": "확인",
+		        "cancelLabel": "취소",
+		        "fromLabel": "From",
+		        "toLabel": "To",
+		        "customRangeLabel": "Custom",
+		        "weekLabel": "주",
+		        "daysOfWeek": [
+		             "일",
+		             "월",
+		             "화",
+		             "수",
+		             "목",
+		             "금",
+		             "토"
+		       ],
+		      "monthNames": [
+		             "1월",
+		             "2월",
+		             "3월",
+		             "4월",
+		             "5월",
+		             "6월",
+		             "7월",
+		             "8월",
+		             "9월",
+		             "10월",
+		             "11월",
+		             "12월"
+		        ],
+		        "firstDay": 1
+		    },
+		    
+		    
+		    "minDate": "2023-12-01",
+		    "maxDate": "2024-02-28"
+	});
 </script>
 
 <script>
@@ -482,7 +610,7 @@ $jb(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
@@ -535,7 +663,7 @@ $jb(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
