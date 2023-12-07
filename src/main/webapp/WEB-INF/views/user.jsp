@@ -103,19 +103,30 @@ span:before {
 			<div class="row gx-6">
 				<div class="col">
 					<div class="p-3 border bg-light">
-						<p><h2>
+						<p><h3>
 							<strong>${vo.userNameK}(${vo.userNameE})</strong>님
-						</h2>
+							<c:if test="${grade == '춘식이'}">
+								<img src="../resources/img/kakao/등급_춘식이.png" alt="춘식이" style="width: 35px; height: 35px;"/></p>
+							</c:if>
+							<c:if test="${grade == '제이지'}">
+								<img src="../resources/img/kakao/등급_제이지.png" alt="제이지" style="width: 35px; height: 35px;"/></p>
+							</c:if>
+							<c:if test="${grade == '라이언'}">
+								<img src="../resources/img/kakao/등급_라이언.png" alt="라이언" style="width: 35px; height: 35px;"/></p>
+							</c:if>
+							<c:if test="${grade == '어피치'}">
+								<img src="../resources/img/kakao/등급_어피치.png" alt="어피치" style="width: 35px; height: 35px;"/></p>
+							</c:if>
+							<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/searchGrade'"><i class="bi bi-chevron-double-right"></i>&nbsp;등&nbsp;급&nbsp;조 회</button>
+						</h3>
 						</p>
  					<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회 >></button>
-					<p>현재 등급 >> ${grade}</p>
-					<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">등급조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick=""><i class="bi bi-chevron-double-right"></i>&nbsp;내 정 보 조 회</button>
 					<p>
-						<h2 style="text-align: center;">
-							<strong>알림</strong>
-						</h2>
+						<h3 style="text-align: center;">
+							<strong>알림</strong>&nbsp;&nbsp;<i class="bi bi-bell"></i>
+							
+						</h3>
 						</p>
 					<hr>
 					<p>
@@ -144,13 +155,14 @@ span:before {
 				      <tr>
 				        <td><fmt:formatDate value="${list.getDate}"
 												pattern="yyyy-MM-dd HH:mm" /></td>
-				        <td>${list.mileage}</td>
+				        <td><fmt:formatNumber
+									value="${list.mileage}" pattern="#,###" /></td>
 				      </tr>
 				     </tbody>
 				      </c:forEach>	      		
 	      		</table>
 	      		<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/mileage'">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/mileage'"><i class="bi bi-chevron-double-right"></i>&nbsp;상 세 조 회</button>
 	      		</div>
 	   		 </div>
 	   		 
@@ -158,7 +170,7 @@ span:before {
 				<div class="p-3 border bg-light">
 	      		<p>
 						<h3>카카오페이 <i class="bi bi-caret-right-fill"></i><strong><fmt:formatNumber
-									value="${sumK}" pattern="#,###" /></strong>
+									value="${sumK}" pattern="###,###,###,###" /></strong>
 						</h3>
 						</p>
 	      		<table class="table table-hover">
@@ -172,14 +184,15 @@ span:before {
 				    <tbody>
 				      <tr>
 				        <td><fmt:formatDate value="${kvo.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
-				        <td>${kvo.amount}</td>
+				        <td><fmt:formatNumber
+									value="${kvo.amount}" pattern="###,###,###" /></td>
 				      </tr>
 				     </tbody>
 				      </c:forEach>	      		
 	      		</table>
 	      		
-		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/chargePoint'" >충전 >></button>
-		      		<button type="button" class="btn btn-primary btn-sm btn-block" onclick="location.href='/user/kakaoDetail'" >상세조회 >></button>
+		      		<button type="button" class="btn btn-primary btn-sm " onclick="location.href='/user/chargePoint'" style="width: 49%"><i class="bi bi-chevron-double-right"></i>&nbsp;충&nbsp;전</button>
+		      		<button type="button" class="btn btn-primary btn-sm " onclick="location.href='/user/kakaoDetail'" style="width: 49%"><i class="bi bi-chevron-double-right"></i>&nbsp;상 세 조 회</button>
 	      		
 	      		</div>
 		    </div>
@@ -218,7 +231,7 @@ span:before {
 					     </tbody>
 					      </c:forEach>	      		
 	      			</table>
-	      			<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'">상세조회 >></button>
+	      			<button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/userResDetail'"><i class="bi bi-chevron-double-right"></i>&nbsp;상 세 조 회</button>
 			    	 </div>
 			   	 </div>
 	    	 </div>
@@ -260,7 +273,7 @@ span:before {
 					      </c:forEach>	      		
 	      			</table>
 	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/qna'">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/qna'"><i class="bi bi-chevron-double-right"></i>&nbsp;상 세 조 회</button>
 			    	 </div>
 			   	 </div>
 			   	 
@@ -289,7 +302,7 @@ span:before {
 					      </c:forEach>	      		
 	      			</table>
 	      			<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/diary'">상세조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/diary'"><i class="bi bi-chevron-double-right"></i>&nbsp;상 세 조 회</button>
 			    	 </div>
 			   	 </div>
 	    	 </div>

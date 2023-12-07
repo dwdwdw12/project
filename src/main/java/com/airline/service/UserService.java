@@ -9,6 +9,8 @@ import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
+import com.airline.vo.GradeLogVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -78,6 +80,11 @@ public interface UserService {
 	List<BoardQnaVO> getUserQna(String username, Criteria cri);
 	//qna 페이징 카운트
 	int getUserQnaCnt(String username, Criteria cri);
+	//등급 페이징
+	List<GradeLogVO> getGradeLog(String userid, Criteria cri);
+	int getGradeLogCnt(String userid, Criteria cri);
+	//항공운항내역
+	List<FlightVO> getFlightList3();
 	//mileage 가져오기
 	public int getMileage(String userid);
 

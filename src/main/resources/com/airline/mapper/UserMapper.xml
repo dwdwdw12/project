@@ -198,6 +198,18 @@
 		select count(*) from boardqna where boardreref in(select boardNum from boardqna where boardWriter='유저01'and boardreseq=0);
 	</select>
 	
+	<select id="getGradeLog" resultType="com.airline.vo.GradeLogVO">
+		select * from gradelog where userid=#{userid} order by updateDate desc limit #{cri.pageNum},#{cri.amount}
+	</select>
+	
+	<select id="getGradeLogCnt" resultType="int">
+		select count(*) from gradelog where userid=#{userid} 
+	</select>
+	
+	<select id="getFlightList3" resultType="com.airline.vo.FlightVO">
+		select * from airplaneschedule order by fulldeptime desc limit 0,3
+  </select>
+  
 	<select id="getMileage" resultType="int">
 		select totalMileage from userlog where userid = #{userid} order by lognum desc limit 1
 	</select>

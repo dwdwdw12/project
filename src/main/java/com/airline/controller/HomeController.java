@@ -2,6 +2,8 @@ package com.airline.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -13,7 +15,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +30,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +37,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
@@ -47,6 +49,7 @@ import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -154,7 +157,6 @@ public class HomeController {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
-		
 		
 		if(error != null) {
 			model.addAttribute("error","Login Error Check your account");
@@ -277,18 +279,22 @@ public class HomeController {
         //이벤트 게시판
         List<BoardEventVO> evo = user.getEvent();
         model.addAttribute("evo",evo);
-        
+        //항공운항내역3
+        List<FlightVO> avo = user.getFlightList3();
+        model.addAttribute("avo",avo);
         
 
 		
 	}
 	
+
 	
 	@GetMapping("/contact")
 	public void contact() {
 		
 	}
 	
+
 	@GetMapping("/memberGrade")
 	public void grade(Model model) {
 		//유저정보 가져오기
