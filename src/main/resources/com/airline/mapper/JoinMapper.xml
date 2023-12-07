@@ -44,7 +44,7 @@
 </select>
 
 <select id="checkMember" resultType="joinMap">
-	select * from kakaouser a left join authorities b on a.userid=b.userid where 
+	select * from kakaouser a left join authorities b on a.userId=b.userId where 
 	a.userNameE = #{userNameE}
 	and a.userNameK = #{userNameK}
 	and a.gender = #{gender}
