@@ -108,7 +108,7 @@ span:before {
 						</h2>
 						</p>
  					<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">내정보조회 >></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/myPage'">내정보조회 >></button>
 					<p>현재 등급 >> ${grade}</p>
 					<button type="button"
 							class="btn btn-primary btn-sm btn-block btn-custom" onclick="">등급조회 >></button>

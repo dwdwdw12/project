@@ -126,5 +126,18 @@
 	insert into userlog(userid) values(#{userId})
 </insert>
 
+<insert id="insertGradelog">
+	insert into gradelog(userid) values(#{userId})
+</insert>
+
+<insert id="insertUserPay">
+	insert into userpay(userid) values(#{userId})
+</insert>
+
+<insert id="insertPoint">
+	insert into point(userid) values(#{userId})
+</insert>
+
+
 
 </mapper>

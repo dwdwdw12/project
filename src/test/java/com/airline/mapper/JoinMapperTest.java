@@ -115,4 +115,22 @@ public class JoinMapperTest {
 		String userId = "dbswjd4991@naver.com";
 		join.insertUserlog(userId);
 	}
+
+	@Test
+	public void insertGradelogTest() {
+		String userId = "dbswjd4991@naver.com";
+		join.insertGradelog(userId);
+	}
+
+	@Test
+	public void insertUserPayTest() {
+		String userId = "dbswjd4991@naver.com";
+		join.insertUserPay(userId);
+	}
+	
+	@Test
+	public void insertPointTest() {
+		String userId = "dbswjd4991@naver.com";
+		join.insertPoint(userId);
+	}
 }

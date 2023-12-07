@@ -288,20 +288,12 @@ public class JoinController {
 		String address = addressDefault + addressDetail;
 
 		log.info("raw password >> " + pwd);
-		// password 암호화...;
+		// password 암호화...
 		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
 
 		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
-
-//		for (String string : userTermsAgree) {
-//			log.info("terms 입력받은거 >> " + string);
-//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
-//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
-//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
-//			INFO : com.airline.controller.JoinController - terms 입력받은거 >> terms4
-//		}		
-
+		
 		try {
 
 			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -324,16 +316,20 @@ public class JoinController {
 
 			join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, address);
-
-			
 			
 			// userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
-			// -> length로 바꿈
+			// -> length로 바꿈(선택약관 늘어나면 다시 고려해봐야함..)
 			if (userTermsAgree.length == 4) {
 				join.registerAllTerms(userId);
 			} else {
 				join.registerBasicTerms(userId);
 			}
+
+			join.registerAuthorityMEMBER(userId);
+			join.registerUserlog(userId);
+			join.registerGradelog(userId);
+			join.registerUserPay(userId);
+			join.registerPoint(userId);			
 
 			return "redirect:/join/joinSuccess";
 
@@ -350,24 +346,20 @@ public class JoinController {
 	}
 
 	// 카카오 로그인 구현
-	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
-	// 2번 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
-	// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname,
-	// email정보가 담겨있음
 	@GetMapping("/kakao")
 	@CrossOrigin(origins = "http://localhost:8081/join/kakao")
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model,
-			HttpServletRequest request) throws Throwable {
+			HttpServletRequest request, RedirectAttributes attr) throws Throwable {
 		System.out.println("kakao controller타는중~~~(join에서 get)");
-		// 1번
+		// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 		log.info("code:" + code);
 
-		// 2번
+		// 2번 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
 		String access_Token = join.getAccessToken(code); // url에 있는 code를 넣어서 access_Token을 가져옴
 		log.info("###access_Token#### : " + access_Token);
 		// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
 
-		// 3번
+		// 3번 받은 access_Token를 iKakaoS.getUserInfo로 보냄 userInfo받아옴
 		HashMap<String, Object> userInfo = join.getUserInfo(access_Token);
 		log.info("###nickname#### : " + userInfo.get("nickname"));
 		log.info("###email#### : " + userInfo.get("email"));
@@ -378,18 +370,13 @@ public class JoinController {
 		log.info("###birthday### : " + userInfo.get("birthday"));
 		log.info("###phone_number### : " + userInfo.get("phone_number"));
 
-		// ModelAndView mv = new ModelAndView();
-		// mv.addObject("userInfo", join.)
-		// mv.setViewName("/join/memberInfo");
-		// return mv;
-
 		// userNameK와 mail로 DB를 조회하여 결과가 있으면 마이페이지(혹은 로그인 선택 전의 페이지)
 		// 결과가 없으면 model에 정보를 담아서 추가입력정보 페이지 (kakaoMemberInfo)로 이동
 		String email = (String) userInfo.get("email");
 		String userNameK = (String) userInfo.get("name");
 		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
 
-		log.info("vo 결과 >>> " + vo); // authority=null 이 나와서 아래에서 getAuthority가 진행되지 않음..
+		log.info("vo 결과 >>> " + vo); 
 
 		if (vo == null) {
 
@@ -419,11 +406,9 @@ public class JoinController {
 			// SecurityContext에 설정
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-
 			// 세션에 사용자 정보 저장
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", vo);
-			
 			
 			// 로그인 후의 페이지로 리다이렉트
 			log.warn("login success");
@@ -435,17 +420,16 @@ public class JoinController {
 		
 			log.warn("role names : " + roleNames);
 			if(roleNames.contains("ROLE_ADMIN")) {
-				return "/admin";
+				model.addAttribute("vo", vo);
+				return "redirect:/user";
 			}
 			
 			if(roleNames.contains("ROLE_MEMBER")) {
-				return "/user";
+				model.addAttribute("vo", vo);
+				return "redirect:/user";
 			}
 			
-			
 			return "/";
-			
-			
 			
 		}
 	}
@@ -498,10 +482,14 @@ public class JoinController {
 
 			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, addressDetail);
+			
 			join.registerAllTerms(userId);
-
 			join.registerAuthorityMEMBER(userId);
-
+			join.registerUserlog(userId);
+			join.registerGradelog(userId);
+			join.registerUserPay(userId);
+			join.registerPoint(userId);
+			
 			return "redirect:/join/joinSuccess";
 
 		} catch (Exception e) {

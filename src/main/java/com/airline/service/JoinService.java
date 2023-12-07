@@ -22,9 +22,11 @@ public interface JoinService {
 
 	public KakaoUserVO confirmMember(KakaoUserVO vo);
 	
+	//카카오 로그인 관련
 	public String getAccessToken(String authorize_code) throws Throwable;
-	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
+	//public HashMap<String, Object> getKakaoLogout(String access_Token) throws Throwable;
+	
 	public int userIdDuplicateCheck(String userId);
 	public int userNickDuplicateCheck(String userNick);
 	
@@ -46,5 +48,10 @@ public interface JoinService {
 
 	public void registerAuthorityMEMBER(String userId);
 	public List<SimpleGrantedAuthority> getAuthorities(String email);
+	
+	public void registerUserlog(String userId);
+	public void registerGradelog(String userId);
+	public void registerUserPay(String userId);
+	public void registerPoint(String userId);
 }
  
