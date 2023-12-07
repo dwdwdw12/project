@@ -74,7 +74,7 @@ public class HomeController {
 	private FlightService flightService;
 		
     @Autowired
- 	private BoardNoticeService service;
+ 	private BoardNoticeService noticeService;
     
     @Autowired
 	private PasswordEncoder passwordEncoder;
@@ -82,7 +82,7 @@ public class HomeController {
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
-		model.addAttribute("emer", service.noticePopup(cri));
+		model.addAttribute("emer", noticeService.noticePopup(cri));
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();
@@ -282,5 +282,11 @@ public class HomeController {
 	public void contact() {
 		
 	}
+	
+	@GetMapping("/memberGrade")
+	public void grade() {
+		
+	}
+
 
 }
