@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -42,13 +43,13 @@ public class JoinMapperTest {
 
 	@Test
 	public void checkMemberTest() {
-
-		/*
-		 * KakaoUserVO vo = KakaoUserVO.builder() .userNameE("jjj") .userNameK("정윤정")
-		 * .gender("W") .userReginumFirst(999999) .userReginumLast(1111111) .build();
-		 */
-		KakaoUserVO vo = new KakaoUserVO();
-		;
+		KakaoUserVO vo = KakaoUserVO.builder() 
+				.userNameE("jjj") 
+				.userNameK("정윤정")
+				.gender("W") 
+				.userReginumFirst(999999) 
+				.userReginumLast(1111111) 
+				.build();
 		log.info(join.checkMember(vo));
 	}
 	
@@ -102,5 +103,16 @@ public class JoinMapperTest {
 	@Test
 	public void bcryptTest() {//@ContextConfiguration에다가 security 추가 + @Autowired(PasswordEncoder) 추가함
 		log.info(pwencoder.encode("test11!"));
+	}
+	
+	@Test
+	public void getAuthoritiesTest() {
+		log.info(join.getAuthorities("dbswjd4991@naver.com") );
+	}
+	
+	@Test
+	public void insertUserlogTest() {
+		String userId = "dbswjd4991@naver.com";
+		join.insertUserlog(userId);
 	}
 }

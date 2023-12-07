@@ -3,6 +3,7 @@ package com.airline.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,19 @@ public class FlightServiceImpl implements FlightService{
 
 	@Override
 	public List<FlightVO> getListSearch(Criteria cri, String dep, String arr, String time) {
+		log.info("dep serviceImpl"+dep);
+		log.info("arr serviceImpl"+arr);
+		log.info("time serviceImpl"+time);
+		System.out.println("dep serviceImpl"+dep);
+		System.out.println("arr serviceImpl"+arr);
+		System.out.println("time serviceImpl"+time);
 		return mapper.getListSearch(cri, dep, arr, time);
+	}
+	
+	@Override
+	public List<FlightVO> getListSearchByFlightName(Criteria cri, String flightName, String time) {
+		
+		return mapper.getListSearchByFlightName(cri, flightName, time);
 	}
 
 	@Override
@@ -44,12 +57,27 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
+	public int getTotalSearchByFlightName(Criteria cri, String flightName, String time) {
+		return mapper.getTotalSearchByFlightName(cri, flightName, time);
+	}
+	
+	@Override
+	public List<String> getDistinctDep(String searchValue) {
+		return mapper.getDistinctDep(searchValue);
+	}
+	
+	@Override
+	public List<String> getDistinctArrByDep(String depName, String arrName) {
+		return mapper.getDistinctArrByDep(depName, arrName);
+	}
+
+	@Override
 	public FlightVO getFlightInfo(int fno) {
 		return mapper.getFlightInfo(fno);
 	}
 
 	@Override
-	public int getPrice(String depName, String arrName) {
+	public Integer getPrice(String depName, String arrName) {
 		return mapper.getPrice(depName,arrName);
 	}
 	

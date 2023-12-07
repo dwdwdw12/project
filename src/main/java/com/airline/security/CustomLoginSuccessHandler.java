@@ -43,7 +43,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		HttpSession session = request.getSession();	
 		session.setAttribute("loginUser", vo); //일반로그인이랑 카카오랑 구별해서 따로 선언해서 가져오기...
 		//카카오로하면 세션값 못얻어와서 연결안되는중..
-		
+		log.info("CUSTOM LOGIN SUCCESS ===============================");
 		log.warn("login success");
 		List<String> roleNames = new ArrayList<>();
 		auth.getAuthorities().forEach(authority -> {

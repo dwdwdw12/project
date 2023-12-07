@@ -72,6 +72,7 @@ body {
 	width: 65%;
 	margin: 0 auto;
 	margin-top : 180px;
+	background-color:#EFEFEF;
 }
 
 .greylist {

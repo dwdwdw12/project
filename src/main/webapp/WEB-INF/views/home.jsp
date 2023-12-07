@@ -128,7 +128,7 @@
 			<div class="tm-slideshow">
 				
 				<c:forEach var="board" items="${EventList}">
-					<img src="/display?fileName=${board.filePath}" alt="" width="690px" height="400px" onclick="location.href='/boardEvent/view?boardNum=${board.boardNum}'">					
+					<img src="/display?fileName=${board.filePath}" style="width: 700px; height: 500px; object-fit: contain;" onclick="location.href='/boardEvent/view?boardNum=${board.boardNum}'">					
 				</c:forEach>
 			</div>
 			<div class="tm-slideshow-description tm-bg-primary">

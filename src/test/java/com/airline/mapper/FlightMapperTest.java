@@ -1,5 +1,7 @@
 package com.airline.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,41 @@ public class FlightMapperTest {
 	
 	@Test
 	public void getSearchTest() {
-		mapper.getListSearch(new Criteria(),"인천","오사카", "2022-12-01")
+		mapper.getListSearch(new Criteria(),"김포","제주", "2024-02-28")
 		.forEach(vo->log.info(vo));
+	}
+	
+	@Test
+	public void getSearchByFlightNameTest() {
+		mapper.getListSearchByFlightName(new Criteria(),"OZ8234", "2023-12-01")
+		.forEach(vo->log.info(vo));
+	}
+	
+	@Test
+	public void getTotalSearchByFlightNameTest() {
+		log.info(mapper.getTotalSearchByFlightName(new Criteria(),"OZ8234", "2023-12-01"));
 	}
 	
 	@Test
 	public void getRoundTripPriceTest() {
 		log.info(mapper.getRoundTripPrice("홍콩", "인천"));
 	}
+	
+	@Test
+	public void getDistinctDepTest() {
+//		List<String> list = mapper.getDistinctDep();
+//		for(String str : list) {			
+//			log.info(str);
+//		}
+	}
+	
+//	@Test
+//	public void getDistinctArrByDepTest() {
+//		List<String> list = mapper.getDistinctArrByDep("제주");
+//		for(String str : list) {			
+//			log.info(str);
+//		}
+//	}
 	
 	//검색어만 하는건 성공
 	/*

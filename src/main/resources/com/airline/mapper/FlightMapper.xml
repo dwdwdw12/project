@@ -8,11 +8,11 @@
 <!-- 	<![CDATA[
 		select c.* from(select b.* from(select row_number() over(order by DEPDAY asc) as num, a.* from airplaneschedule a)b where num<= #{cri.pageNum}* #{cri.amount})c where num>= (#{cri.pageNum}-1)* #{cri.amount}
 	 ]]>  -->
-	 	select * from airplaneschedule limit #{cri.pageNum},#{cri.amount}
+	 	select * from airplaneschedule order by fulldeptime asc limit #{cri.newStart}, #{cri.amount} 
 	 </select>
 	
 	<select id="getListSearch" resultType="com.airline.vo.FlightVO">
-	<![CDATA[
+	<!-- <![CDATA[
 	 select c.* from
 	(select b.* from
         (select row_number() over(order by DEPDAY asc) as num, a.* from airplaneschedule a
@@ -21,7 +21,26 @@
 			and ARRNAME like concat('%',#{arr},'%')
 			and DEPDAY like concat('%',#{time},'%')
 		)b where num<= #{cri.pageNum}*#{cri.amount})c where num>= (#{cri.pageNum}-1)*#{cri.amount}
-	 ]]>  
+	 ]]>  --> 
+	 select * from airplaneschedule 
+	 	where DEPNAME like concat('%', #{dep}, '%') and ARRNAME like concat('%',#{arr},'%') and DEPDAY like concat('%', #{time}, '%')
+	 	order by fulldeptime asc, fno limit #{cri.newStart}, #{cri.amount}
+	</select>
+	
+	<select id="getListSearchByFlightName" resultType="com.airline.vo.FlightVO">
+	<!-- <![CDATA[
+	 select c.* from
+	(select b.* from
+        (select row_number() over(order by DEPDAY asc) as num, a.* from airplaneschedule a
+			where 1 = 1
+			and flightName like concat('%',#{flightName},'%')
+			and DEPDAY like concat('%',#{time},'%')
+		)b where num<= #{cri.pageNum}*#{cri.amount})c where num>= (#{cri.pageNum}-1)*#{cri.amount}
+	 ]]> --> 
+	 
+	 select * from airplaneschedule 
+	 	where flightName like concat('%', #{flightName}, '%') and DEPDAY like concat('%', #{time}, '%')
+	 	order by fulldeptime asc, fno limit #{cri.newStart}, #{cri.amount}
 	</select>
 	
 <!-- 	<select id="getListSearch2" resultType="com.airline.vo.FlightVO">
@@ -47,6 +66,20 @@
 			and DEPNAME like concat('%',#{dep},'%')
 			and ARRNAME like concat('%',#{arr},'%')
 			and DEPDAY like concat('%',#{time},'%')
+	</select>
+	
+	<select id="getTotalSearchByFlightName" resultType="int">
+		select count(*) from airplaneschedule where 1 = 1
+			and flightName like concat('%',#{flightName},'%')
+			and DEPDAY like concat('%',#{time},'%')
+	</select>
+		
+	<select id="getDistinctDep" resultType="String">
+		select distinct(depName) from airplaneschedule where depName like concat('%',#{depName},'%')
+	</select>
+
+	<select id="getDistinctArrByDep" resultType="String">
+		select distinct(arrName) from airplaneschedule where depName = #{depName} and arrName like concat('%',#{arrName},'%')
 	</select>
 	
 	<select id="getFlightInfo" resultType="com.airline.vo.FlightVO">
