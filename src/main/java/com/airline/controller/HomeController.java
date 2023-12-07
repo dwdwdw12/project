@@ -139,6 +139,12 @@ public class HomeController {
 		model.addAttribute("ICNtoSYD", flightService.getRoundTripPrice("인천", "시드니"));
 		model.addAttribute("ICNtoSPN", flightService.getRoundTripPrice("인천", "사이판"));
 
+		//공지사항 3개 출력
+		Criteria nCri = new Criteria();
+		nCri.setAmount(3);
+		model.addAttribute("noticeBoard", service.getPageList(nCri));
+		
+		
 		return "home";
 	}
 	

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="includes/header2.jsp"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -20,6 +21,22 @@
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 <!-- Templatemo style -->
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+	var $jLatest = jQuery.noConflict();
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  var $jb = jQuery.noConflict();
+</script>
+
+
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
 <style>
@@ -37,6 +54,14 @@
 	display: none;
 }
 
+.notice {
+	display: inline-block;
+	width: 45%;
+}
+
+.dateNumber {
+	float: right;
+}
 
 </style>
 
@@ -60,51 +85,51 @@
 
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
-		<div class="container">
+		<div class="container ">
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
 						Your <strong>Journey</strong> is our priority
 					</h2>
-					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
-						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
-						Duis nec lobortis velit. Vivamus id magna vulputate, tempor ante
-						eget, tempus augue. Maecenas ultricies neque magna.</p>
+					<p class="mb-4">비즈니스부터 여행까지, 저희 항공사는 안전하고 편안한 비행 서비스로 고객 여러분의 모든 여정을 도와드립니다.<br>
+					혁신적인 항공 기술과 친절한 승무원이 함께 어우러져, 항상 최상의 비행 경험을 제공합니다. <br>
+					풍부한 노선망과 다양한 서비스로 여러분의 다양한 요구를 충족시키며, 항공 여행을 더욱 편리하게 즐길 수 있습니다.<br> 
+					안전과 서비스에 최우선을 두는 저희 항공사는 항상 여러분의 편안하고 즐거운 여정을 위해 노력하겠습니다.</p>
 <!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 				</div>
 			</div>
-			
-			
-			
-
-			
-			
-			
-			<form action="index.html" method="get"
-						class="tm-search-form tm-section-pad-2">
+				
+					<form action="/flight/search" method="get" class="tm-search-form tm-section-pad-2">
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
+						<br><br>
 						<div class="form-row tm-search-form-row">
-							<input type="hidden" name="command" value="flightList"/>
+							<!-- <input type="hidden" name="command" value="flightList"/> -->
 							<div class="form-row tm-search-form-row">
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-									<label for="inputCity"><a>&#x2714&nbsp;&nbsp;</a>Choose Your Department</label> 
-									<input name="department" type="text" class="form-control" id="inputCity" placeholder="Type your destination...">
+									<label for="departure"><a>&#x2714&nbsp;&nbsp;</a>출발지</label> 
+									<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요">
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-									<label for="inputCity"><a>&#x2714&nbsp;&nbsp;</a>Choose Your Arrive</label> 
-									<input name="arrive" type="text" class="form-control" id="inputCity" placeholder="Type your destination...">
+									<label for="arrival"><a>&#x2714&nbsp;&nbsp;</a>도착지</label> 
+									<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요">
 								</div>
-								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+								<!-- <div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 									<label for="inputCheckIn"><a>&#x2714&nbsp;&nbsp;</a>탑승객</label> 
 									<input name="" type="text" class="form-control" id="" placeholder="탑승객">
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 									<label for="inputCheckIn"><a>&#x2714&nbsp;&nbsp;</a>좌석등급</label> 
 									<input name="" type="text" class="form-control" id="" placeholder="좌석등급">
+								</div> -->
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+									<label for="depDate"><a>&#x1F551&nbsp;&nbsp;</a>가는 날</label> 
+									<input name="depDate" type="text" class="form-control" id="depDate" placeholder="Check In">
 								</div>
-								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-									<label for="inputCheckIn"><a>&#x1F551&nbsp;&nbsp;</a>Check In Date</label> 
-									<input name="check-in" type="text" class="form-control" id="inputCheckIn" placeholder="Check In">
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1" id="depDiv">
+									<!-- <label for="arrDate"><a>&#x1F551&nbsp;&nbsp;</a>오는 날</label> 
+									<input name="arrDate" type="text" class="form-control" id="arrDate" placeholder="Check In"> -->
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 									<label for="btnSubmit">&nbsp;</label>
@@ -113,18 +138,13 @@
 								</div>
 						</div>
 					</form>
-			
-			
-			
-			
-			
-			
+
 			
 		</div>
 	</section>
 
 	<div class="tm-container-outer" id="tm-section-2">
-		<section class="tm-slideshow-section">
+		<section class="tm-slideshow-section tm-bg-gray">
 			<div class="tm-slideshow">
 				
 				<c:forEach var="board" items="${EventList}">
@@ -138,7 +158,7 @@
 					class="text-uppercase tm-btn tm-btn-white tm-btn-white-primary">게시판으로 이동</a>
 			</div>
 		</section>
-		<section
+		<!-- <section
 			class="clearfix tm-slideshow-section tm-slideshow-section-reverse">
 
 			<div class="tm-right tm-slideshow tm-slideshow-highlight">
@@ -177,10 +197,44 @@
 					class="text-uppercase tm-btn tm-btn-white tm-btn-white-primary">Continue
 					Reading</a>
 			</div>
-		</section>
+		</section> -->
 	</div>
-	<div class="tm-container-outer" id="tm-section-3">
-		<ul class="nav nav-pills tm-tabs-links">
+	
+	<!-- 공지사항 -->
+		
+		<section class="p-5 tm-container-outer tm-bg-gray">
+			<hr>
+			<div class="notice">
+						<h2 class="special_slider_title">
+							공지사항
+						</h2>
+						<p class="special_slider_subtitle" title="새로운 소식을 알려드립니다.">
+							새로운 소식을 알려드립니다.
+						</p>								
+						<a href="/notice/list">
+							더보기
+						</a>
+			</div>
+			<div class="notice">
+				<ul>
+					<c:forEach items="${noticeBoard}" var="nBoard">
+						<li>
+							<c:if test="${nBoard.emergency!=0}">
+								<i class="fa fa-warning" style="color:red"></i>
+							</c:if>
+							<a href="/notice/read?boardnum=${nBoard.boardnum}"><b>${nBoard.boardsubject}</b></a>
+							<span class="dateNumber">${fn:substring(nBoard.modifydate, 0,10)}</span>
+							<br><br>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<hr>
+		</section>
+			<!-- //공지사항 -->
+	
+	<div class="tm-container-outer tm-bg-gray" id="tm-section-3">
+		<ul class="nav nav-pills tm-tabs-links ">
 			<li class="tm-tab-link-li"><a href="#1a" data-toggle="tab"
 				class="tm-tab-link"> <img
 					src="../resources/mainImg/korea.png" width="100px" height="100px" alt="Image"
@@ -211,12 +265,12 @@
 				대양주
 			</a></li>
 		</ul>
-		<div class="tab-content clearfix">
+		<div class="tab-content clearfix tm-bg-gray">
 		<input type="hidden" value="${today}">
 		<input type="hidden" value="${nextWeek}">
 		
 			<!-- Tab 1 -->
-			<div class="tab-pane fade" id="1a">
+			<div class="tab-pane fade tm-bg-gray" id="1a">
 				<div class="tm-recommended-place-wrap">
 					<div class="tm-recommended-place">
 						<img src="../resources/mainImg/korea/Jeju.jpg" alt="Image"
@@ -228,8 +282,8 @@
 							 맑은 바다와 푸른 하늘 아래에서 휴식을 즐기면서 지친 일상을 잊을 수 있는 최고의 여행지입니다.
 							</p>
 						</div>
-						<a href="/flight/search?dep=김포&arr=제주&depDate=${today}&arrDate=${nextWeek}" class="tm-recommended-price-box">
-							<p class="tm-recommended-price"><fmt:formatNumber value="${GMPtoCJU}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
+						<a href="/flight/search?dep=김포&arr=제주&depDate=${today}&arrDate=${nextWeek}" class="tm-recommended-price-box tm-bg-gray">
+							<p class="tm-recommended-price " ><fmt:formatNumber value="${GMPtoCJU}" type="currency" currencySymbol="￦" minFractionDigits="0" /></p>
 							<p class="tm-recommended-price-link">일정 확인하기</p>
 						</a>
 					</div>
@@ -664,48 +718,107 @@
 	<%@ include file="includes/footer.jsp"%>
 	<!-- 충돌부분 추가 -->
 	<script type="text/javascript">
-		var $jLatest = jQuery.noConflict();
-		$jLatest('input[id="dates"]').daterangepicker();
-		$jLatest('input[id="startDate"]').daterangepicker(
-				{
-					singleDatePicker : true,
-					timePicker : true,
-					timePicker24Hour : true,
-					"locale" : {
-						"format" : 'YYYY-MM-DD HH:mm:SS',
-						"separator" : " ~ ",
-						"applyLabel" : "확인",
-						"cancelLabel" : "취소",
-						"fromLabel" : "From",
-						"toLabel" : "To",
-						"customRangeLabel" : "Custom",
-						"weekLabel" : "주",
-						"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-						"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월",
-								"7월", "8월", "9월", "10월", "11월", "12월" ],
-						"firstDay" : 1
-					},
-				});
-		$jLatest('input[id="endDate"]').daterangepicker(
-				{
-					singleDatePicker : true,
-					timePicker : true,
-					timePicker24Hour : true,
-					"locale" : {
-						"format" : 'YYYY-MM-DD HH:mm:SS',
-						"separator" : " ~ ",
-						"applyLabel" : "확인",
-						"cancelLabel" : "취소",
-						"fromLabel" : "From",
-						"toLabel" : "To",
-						"customRangeLabel" : "Custom",
-						"weekLabel" : "주",
-						"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-						"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월",
-								"7월", "8월", "9월", "10월", "11월", "12월" ],
-						"firstDay" : 1
-					},
-				});
+		var $123 = jQuery.noConflict();
+		$("#oneWay").on("click", function(){
+			console.log("편도");
+			str = "";
+			$("#depDiv").html(str);
+			
+		});
+		
+		$("#roundTrip").on("click", function(){
+			console.log("왕복");
+			str = "";
+			str += "<label for='arrDate'><a>&#x1F551&nbsp;&nbsp;</a>오는 날</label>"; 
+			str += "<input type='text' class='form-control' id='arrDate' name='arrDate'>";
+			$("#depDiv").html(str);
+			
+			$jLatest('input[id="arrDate"]').daterangepicker({
+				singleDatePicker: true,
+			    //timePicker: true,
+			    timePicker24Hour: true,
+				 "locale": {
+				       "format": 'YYYY-MM-DD',
+				       "separator": " ~ ",
+				       "applyLabel": "확인",
+				        "cancelLabel": "취소",
+				        "fromLabel": "From",
+				        "toLabel": "To",
+				        "customRangeLabel": "Custom",
+				        "weekLabel": "주",
+				        "daysOfWeek": [
+				             "일",
+				             "월",
+				             "화",
+				             "수",
+				             "목",
+				             "금",
+				             "토"
+				       ],
+				      "monthNames": [
+				             "1월",
+				             "2월",
+				             "3월",
+				             "4월",
+				             "5월",
+				             "6월",
+				             "7월",
+				             "8월",
+				             "9월",
+				             "10월",
+				             "11월",
+				             "12월"
+				        ],
+				        "firstDay": 1
+				    },
+				    
+				    
+				    "minDate": "2023-12-01",
+				    "maxDate": "2024-02-28"
+			});
+		});
+
+		$jLatest('input[id="depDate"]').daterangepicker({
+			singleDatePicker: true,
+		    //timePicker: true,
+		    timePicker24Hour: true,
+			 "locale": {
+			       "format": 'YYYY-MM-DD',
+			       "separator": " ~ ",
+			       "applyLabel": "확인",
+			        "cancelLabel": "취소",
+			        "fromLabel": "From",
+			        "toLabel": "To",
+			        "customRangeLabel": "Custom",
+			        "weekLabel": "주",
+			        "daysOfWeek": [
+			             "일",
+			             "월",
+			             "화",
+			             "수",
+			             "목",
+			             "금",
+			             "토"
+			       ],
+			      "monthNames": [
+			             "1월",
+			             "2월",
+			             "3월",
+			             "4월",
+			             "5월",
+			             "6월",
+			             "7월",
+			             "8월",
+			             "9월",
+			             "10월",
+			             "11월",
+			             "12월"
+			        ],
+			        "firstDay": 1
+			    },
+			    "minDate": "2023-12-01",
+			    "maxDate": "2024-02-28"
+		});
 	</script>
 	<script type="text/javascript">
 		$(function() {
@@ -751,3 +864,113 @@
 	
 		
 	</script>
+
+	<script>
+	//출발지 자동완성
+	$jb(function() {    //화면 다 뜨면 시작
+	   $jb("#departure").autocomplete({
+	        source : function( request, response ) {
+	             $jb.ajax({
+	                    type: 'get',
+	                    url: "/flight/getDistinctDep",
+	                    dataType: "json",
+	                    data: {searchValue: $("#departure").val()},
+	                    success: function(data) {
+	                    	console.log(data);
+	                        //서버에서 json 데이터 response 후 목록에 추가
+	                        response(
+	                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+	                                return {
+	                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+	                                    value: item,    //그냥 사용자 설정값
+	                                }
+	                            })
+	                        );
+	                    }
+	               });
+	            },    // source 는 자동 완성 대상
+	         select : function(event, ui) {    //아이템 선택시
+	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+	            console.log(ui.item.label);    //김치 볶음밥label
+	            console.log(ui.item.value);    //김치 볶음밥
+	            
+	        },
+	        focus : function(event, ui) {    //포커스 가면
+	            return false;//한글 에러 잡기용도로 사용됨
+	        },
+	        minLength: 0,// 최소 글자수
+	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+	//        classes: {    //잘 모르겠음
+	//            "ui-autocomplete": "highlight"
+	//        },
+	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+	//        disabled: true, //자동완성 기능 끄기
+	//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+	        close : function(event){    //자동완성창 닫아질때 호출
+	            console.log(event);
+	        }  
+	      	    
+	    });
+	   
+	});  
+	
+	//도착지 자동완성 
+	 $jb(function() {    //화면 다 뜨면 시작
+	    $jb("#arrival").autocomplete({
+	        source : function( request, response ) {
+	             $jb.ajax({
+	                    type: 'POST',
+	                    url: "/flight/getDistinctArrByDep",
+	                    //dataType: "json",
+	                    dataType: "json",
+	                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
+	                    data: {depName : $("#departure").val(),searchValue: $("#arrival").val()},
+	                    //contentType : "application/json; charset=utf-8", 
+	                    success: function(data) {
+	                    	console.log(data);
+	                    	var json = JSON.stringify(data);
+	                    	console.log(json);
+	                        //서버에서 json 데이터 response 후 목록에 추가
+	                        response(
+	                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+	                                return {
+	                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+	                                    value: item,    //그냥 사용자 설정값
+	                                }
+	                            })
+	                        );
+	                    }
+	               });
+	            },    // source 는 자동 완성 대상
+	         select : function(event, ui) {    //아이템 선택시
+	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+	            console.log(ui.item.label);    //김치 볶음밥label
+	            console.log(ui.item.value);    //김치 볶음밥
+	            
+	        },
+	        focus : function(event, ui) {    //포커스 가면
+	            return false;//한글 에러 잡기용도로 사용됨
+	        },
+	        minLength: 0,// 최소 글자수
+	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+	//        classes: {    //잘 모르겠음
+	//            "ui-autocomplete": "highlight"
+	//        },
+	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+	//        disabled: true, //자동완성 기능 끄기
+	//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+	        close : function(event){    //자동완성창 닫아질때 호출
+	            console.log(event);
+	        }  
+	      	    
+	    });
+	   
+	}); 
+	
+	//출발지부터 입력하도록.
+	$("#arrival").on("click",function(e){
+		 if($("#departure").val()==""){
+			 alert("출발지를 입력해주세요");
+		 }
+	})
+</script>
