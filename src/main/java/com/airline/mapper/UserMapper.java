@@ -83,5 +83,5 @@ public interface UserMapper {
 
 	public int getUserQnaCnt(@Param("username")String username,@Param("cri") Criteria cri);
 	
-
+	public int getMileage(String userid);
 }

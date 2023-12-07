@@ -217,4 +217,11 @@ public class UserServiceImpl implements UserService{
 		return mapper.getUserQnaCnt(username,cri);
 	}
 
+
+	@Override
+	public int getMileage(String userid) {
+		return mapper.getMileage(userid);
+	}
+	
+
 }
