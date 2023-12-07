@@ -135,8 +135,8 @@ span:before {
 							</c:forEach>
 						</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/userInfo'"> 회원정보 관리
-							>></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/userInfo'"><i class="bi bi-chevron-double-right"></i>&nbsp; 회원정보 관리
+							</button>
 					</div>
 				</div>
 			</div>
@@ -184,8 +184,8 @@ span:before {
 						      </c:forEach>	      		
 			      		</table> 
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/cancelTicket'">항공권 취소 처리
-							>></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/cancelTicket'"><i class="bi bi-chevron-double-right"></i>&nbsp;항공권 취소 처리
+							</button>
 					</div>
 				</div>
 				<div class="col">
@@ -251,13 +251,57 @@ span:before {
 					      </c:forEach>	      		
 	      			</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/buyTicket'">상세조회
-							>></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="window.open()"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
+							</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+	<!-- 항공 운항내역 조회/추가/수정/조회 -->
+	<section class="p-5 tm-container-outer tm-bg-gray">
+		<div class="container">
+			<div class="row gx-6">
+				<div class="col">
+					<div class="p-3 border bg-light">
+						<p>
+						<h3 style="text-align: center;">항공운항내역 조회 및 업데이트</h3>
+						</p>
+						<table class="table table-hover">
+					    <thead>
+					    	<th>항공기</th>
+					    	<th>출발지</th>
+					    	<th>출발시간</th>
+					    	<th>도착지</th>
+					    	<th>도착시간</th>
+					    	<th>총 운항시간</th>
+					    	<th>좌석 수</th>
+					    </thead>
+					    <c:forEach items="${avo}" var="avo">
+					    <tbody>
+					      <tr>
+					      	<td>${avo.flightName}</td>
+					      	<td>${avo.depName}</td>
+					      	<td>${avo.fullDeptime}</td>
+					        <td>${avo.arrName}</td>
+					        <td>${avo.fullArrtime}</td>
+					        <td>${avo.flightTime}</td>
+					        <td>24</td>
+      					</tr>
+      					</tbody>
+      					</c:forEach>
+	      			</table>
+						<button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/flightSchedule'"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
+							</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
 
 	<!-- 게시글 작성내역 -->
 	<section class="p-5 tm-container-outer tm-bg-gray">
@@ -270,14 +314,12 @@ span:before {
 						</p>
 						<table class="table table-hover">
 						    <thead>
-						    	<th>번호</th>
 						    	<th>제목</th>
 						    	<th>작성일</th>
 						    </thead>
 						    <c:forEach items="${nvo}" var="nvo">
 						    <tbody>
 						      <tr>
-						        <td>${nvo.boardnum}</td>
 						        <td>${nvo.boardsubject}</td>
 						        <td>${nvo.regidate}</td>
 						         <%-- <td><fmt:formatDate value="${nvo.regidate}"
@@ -287,8 +329,8 @@ span:before {
 						      </c:forEach>	      		
 		      			</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/notice'">상세조회
-							>></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/notice'"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
+							</button>
 					</div>
 				</div>
 
@@ -317,8 +359,8 @@ span:before {
 					      </c:forEach>	      		
 	      				</table> 
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/event'">상세조회
-							>></button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/event'"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
+							</button>
 					</div>
 				</div>
 			</div>

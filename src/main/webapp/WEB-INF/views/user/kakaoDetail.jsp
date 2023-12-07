@@ -24,36 +24,11 @@
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css">
 <style>
-.slideshow {
-	height: 465px;
-	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
-	position: relative;
-}
 
-.slideshow img {
-	position: absolute;
-	/*이미지 위치 가운데로 옮기기*/
-	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
-	margin-left: -800px;
-	display: none;
-}
 </style>
 
-<div class="tm-page-wrap mx-auto">
-	<section class="tm-banner">
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px">
 
-		<!-- .tm-container-outer -->
-		<div class="inner">
-			<div class="slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-02.jpg"
-					alt="" width="1600" height="1000"> <img
-					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-04.jpg"
-					alt="" width="1600" height="1000">
-			</div>
-		</div>
-	</section>
    
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
@@ -84,6 +59,7 @@
 					<thead>
 						<tr>
 							<th>번호</th>
+							<th>적립/사용</th>
 							<th>포인트 변동사항</th>
 							<th>일자</th>
 						</tr>
@@ -92,6 +68,14 @@
 						<tbody>
 							<tr>
 								<td>${list.pno}</td>
+								<c:choose>
+									<c:when test="${list.amount>0}">
+										<td>적립</td>
+									</c:when>
+									<c:otherwise>
+										<td>사용/결제취소</td>
+									</c:otherwise>
+								</c:choose>
 								<td><fmt:formatNumber value="${list.amount}" pattern="#,###" /></td>
 								<td><fmt:formatDate value="${list.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 							</tr>

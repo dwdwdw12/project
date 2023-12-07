@@ -12,6 +12,8 @@ import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
+import com.airline.vo.GradeLogVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -83,5 +85,10 @@ public interface UserMapper {
 
 	public int getUserQnaCnt(@Param("username")String username,@Param("cri") Criteria cri);
 	
+	public List<GradeLogVO> getGradeLog(@Param("userid")String userid,@Param("cri") Criteria cri);
+
+	public int getGradeLogCnt(@Param("userid")String userid,@Param("cri") Criteria cri);
+
+	public List<FlightVO> getFlightList3();
 
 }

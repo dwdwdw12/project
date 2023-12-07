@@ -35,10 +35,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
-					<h2 class="text-uppercase mb-4">항공권 취소요청 확인 및 결제취소 처리</h2>
-					<p class="mb-2">*영업일 기준 3일 이내 처리</p>
+					<h2 class="text-uppercase mb-4">항공운항내역 조회 및 업데이트</h2>
+					<p>*항공운항내역 업데이트 및 삭제 시 사유입력 필수</p>
 				</div>
-				
 			</div>
 
 <!-- 			<form action="/flight/search" method="get"
@@ -55,41 +54,43 @@
 			</form> -->
 
 			<div class="container">
+		<button type="button"
+							class="btn btn-primary btn-sm btn-custom" onclick="window.open('/admin/flightCreate','항공정보인서트','width = 2100, height = 300, top = 100, left = 100, location = no')"><i class="bi bi-chevron-double-right"></i>&nbsp;신규 운항내역 등록
+							</button> 
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>아이디</th>
-							<th>예약번호</th>
-							<th>요청일</th>
-							<th>취소여부</th>
-							<th>처리여부</th>
-							<th>취소</th>
+							<th>번호</th>
+							<th>항공기</th>
+							<th>출발지</th>
+							<th>출발시간</th>
+							<th>도착지</th>
+							<th>도착시간</th>
+							<th>운항시간</th>
+							<th>좌석수</th>
+							<th>수정</th>
+							<th>삭제</th>
+							
 						</tr>
 					</thead>
 					<c:forEach items="${vo}" var="list">
 						<tbody>
 							<tr class="flight">
-								<td>${list.userid}</td>
-								<td>${list.resno}</td>
-								<td><fmt:formatDate value="${list.requestTime}"
-										pattern="yyyy-MM-dd HH:mm" /></td>
-								<c:choose>
-									<c:when test="${list.isCancel==1}">		
-										<td>true</td>
-									</c:when>
-									<c:otherwise>		
-										<td>false</td>
-									</c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${list.cancelOk ==1}">
-										<td>true</td>
-									</c:when>
-									<c:otherwise>
-										<td>false</td>
-									</c:otherwise>
-								</c:choose>
-								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="cancelTicket('${list.resno}',${list.isCancel},'${list.cancelOk}','${list.userid}')">취소</button></td>
+								<td>${list.fno}</td>
+								<td>${list.flightName}</td>
+								<td>${list.depName}</td>
+								<td>${list.fullDeptime}</td>
+								<td>${list.arrName}</td>
+								<td>${list.fullArrtime}</td>
+								<td>${list.flightTime}</td>
+								<td>24</td>
+								<td><button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/flightSchedule'"><i class="bi bi-chevron-double-right"></i>&nbsp;수정
+							</button></td>
+								<td><button type="button"
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/flightSchedule'"><i class="bi bi-chevron-double-right"></i>&nbsp;삭제
+							</button></td>
+						
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -254,4 +255,4 @@
 		slidesToScroll : 1
 	});
 </script> -->
-<%@ include file="../includes/footer.jsp"%>
+<%@ include file="../includes/footer.jsp"%>l>

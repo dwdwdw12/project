@@ -79,4 +79,16 @@
 	<select id="eventCtn" resultType="int">
 		select count(*) from boardevent 
 	</select>
+	
+	<select id="getFlightList" resultType="com.airline.vo.FlightVO">
+		select * from airplaneschedule order by fulldeptime desc limit #{cri.pageNum},#{cri.amount}
+	</select>
+	
+	<select id="getFlightListCnt" resultType="int">
+		select count(*) from airplaneschedule 
+	</select>
+	
+	<select id="getFno" resultType="int">
+		select count(*) from airplaneschedule 
+	</select>
 </mapper>
