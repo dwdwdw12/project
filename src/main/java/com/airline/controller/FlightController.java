@@ -145,6 +145,7 @@ public class FlightController {
 		model.addAttribute("dep", dep);
 		model.addAttribute("arr", arr);
 		model.addAttribute("targetDate", targetDate);
+		model.addAttribute("flightName", flightName);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");         
 		Date now = new Date();         
