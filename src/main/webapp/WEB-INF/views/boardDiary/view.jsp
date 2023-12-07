@@ -86,10 +86,23 @@
 					class="form-control" id="boardWriter" name="boardWriter"
 					value="${board.boardWriter}" readonly="readonly">
 			</div>
+			
+			<div class="form-group">
+				<label for="boardWriter">작성일</label> 
+				<input type="text" class="form-control" id="regiDate" name="regiDate" value="${board.regiDate}" readonly="readonly">
+			</div>
+			
+			<c:if test="${board.regiDate<board.modifyDate}">
+				<div class="form-group">
+					<label for="boardWriter">수정일</label> 
+				<input type="text" class="form-control" id="regiDate" name="modifyDate" value="${board.modifyDate}" readonly="readonly">
+			</div>
+			</c:if>
 
 			<label for="boardContent">내용</label>
 			<div class="form-group"
 				style="border-top: 1px solid; border-bottom: 1px solid;">
+				<%-- <textarea id="summernote" class="summernote" name="boardContent"><c:out value="${board.boardContent}"/></textarea> --%>
 				<br> ${board.boardContent} <br>
 				<br>
 			</div>
@@ -251,9 +264,11 @@
 	</div>
 	<!-- /모달창 -->
 
-	<script type="text/javascript" src="../resources/script/reply.js"></script>
+<script type="text/javascript" src="../resources/script/reply.js"></script>
 
-	<script>
+<script>
+	$('#summernote').summernote('disable');
+	
 	var bnoValue = '${board.boardNum}';
 	var userId = '${loginUser.userId}';
 	var replyUL = $(".chat");
@@ -336,7 +351,7 @@
 		console.log("유효성 검사중");
 		console.log(replyContent.val());
 	    if(replyContent.val()==""||replyContent.val().trim()==""){
-	        alert("내용을 입력해주세요.");
+	        alert("내용을 입력해주세요");
 	        return false;
 	    }
 	    
@@ -361,7 +376,7 @@
 			textarea.value = '';
 			
 			replyService.add(reply, function(result){
-				alert(result);
+				alert("댓글이 등록되었습니다");
 				
 				showList(-1);			//댓글 내용 새로 고침(댓글 1페이지 호출) -> -1페이지 호출, getList()에서 paging을 새로 작동
 			});
@@ -410,7 +425,7 @@
 		};
 		
 		replyService.update(reply, function(result){
-			alert(result);
+			alert("댓글이 수정되었습니다");
 			
 			$('#myModal').modal("hide");
 			console.log("Modify => " + pageNum)
@@ -425,7 +440,7 @@
 		var originalReplyer = modalInputReplyer.val();
 	
 		replyService.remove(replyNum, originalReplyer, function(result){
-			alert(result);
+			alert("댓글이 삭제되었습니다.");
 			$('#myModal').modal("hide");
 			console.log("Delete => " + pageNum)
 			showList(pageNum);

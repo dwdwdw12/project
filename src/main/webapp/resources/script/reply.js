@@ -114,11 +114,19 @@ var replyService =  (function(){
 
     function displayTime(timeValue){
         var today = new Date();
-
-        var gap = today.getTime() - timeValue;
+        
+		var time = new Date(timeValue);
+		console.log("time>>"+time);
+			
+        var gap = today.getTime() - time;
+     	console.log("today>>"+today.getTime());
+     	console.log("timeV>>"+timeValue);
+     	console.log("gap">>>+gap)
+     	
         var dateObj = new Date(timeValue);
 
         console.log("dateObj : " + dateObj);
+     
         var str = "";
 
         if(gap<(1000*60*60*24)){                    //24시간(밀리초*초*분*시)
