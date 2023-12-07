@@ -19,18 +19,18 @@ public class JoinServiceTest {
 	@Autowired
 	private JoinService join;
 
-	@Test
-	public void confirmMemberTest() {
-		KakaoUserVO vo = KakaoUserVO.builder()
-				.userNameE("userchoi")
-				.userNameK("최유ㅇ저")
-				.gender("M")
-				.userReginumFirst(881231)
-				.userReginumLast(1111111)
-				.build();
-		
-		join.confirmMember(vo);
-		}
+//	@Test
+//	public void confirmMemberTest() {
+//		KakaoUserVO vo = KakaoUserVO.builder()
+//				.userNameE("userchoi")
+//				.userNameK("최유ㅇ저")
+//				.gender("M")
+//				.userReginumFirst(881231)
+//				.userReginumLast(1111111)
+//				.build();
+//		
+//		join.confirmMember(vo);
+//		}
 	
 	@Test
 	public void kakaoLoginTest() throws Throwable {

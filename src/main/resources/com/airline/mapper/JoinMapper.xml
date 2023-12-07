@@ -4,6 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.airline.mapper.JoinMapper">
 
+<resultMap type="com.airline.vo.KakaoUserVO" id="joinMap">
+	<id property="userId" column="userId"/>
+	<result property="userNick" column="userNick"/>
+	<result property="gradeCode" column="gradeCode"/>
+	<result property="userNameK" column="userNameK"/>
+	<result property="userNameE" column="userNameE"/>
+	<result property="gender" column="gender"/>
+	<result property="pwd" column="pwd"/>
+	<result property="mail" column="mail"/>
+	<result property="phone" column="phone"/>
+	<result property="postCode" column="postCode"/>
+	<result property="address" column="address"/>
+	<result property="userReginumFirst" column="userReginumFirst"/>
+	<result property="userReginumLast" column="userReginumLast"/>
+	<result property="admin" column="admin"/>
+	<result property="enabled" column="enabled"/>
+	<collection property="authority" column="authMap" ofType="com.airline.vo.AuthorityVO" autoMapping="true">
+		<id property="userId" column="userId"/>
+		<id property="authority" column="authority"/>
+	</collection>
+</resultMap>
+
 <select id="checkEmail" resultType="String">
 	select mail from kakaouser where mail= #{email};
 </select>
@@ -20,13 +42,13 @@
 	select * from kakaouser where mail = #{email} and mail_key = #{mail_key}
 </select>
 
-<select id="checkMember" resultType="com.airline.vo.KakaoUserVO" parameterType="map">
-	select * from kakaouser where 
-	userNameE = #{userNameE}
-	and userNameK = #{userNameK}
-	and gender = #{gender}
-	and userReginumFirst = #{userReginumFirst}
-	and userReginumLast = #{userReginumLast}
+<select id="checkMember" resultMap="joinMap">
+	select * from kakaouser a left join authorities b on a.userid=b.userid where 
+	a.userNameE = #{userNameE}
+	and a.userNameK = #{userNameK}
+	and a.gender = #{gender}
+	and a.userReginumFirst = #{userReginumFirst}
+	and a.userReginumLast = #{userReginumLast} 
 </select>
 
 <select id="getTerms" resultType="com.airline.vo.TermsVO">
@@ -72,8 +94,10 @@
 	select count(userNick) from kakaouser where userNick = #{userNick}
 </select>
 
-<select id="kakaoLoginCheck" resultType="com.airline.vo.KakaoUserVO">
-	select * from kakaouser where mail = #{email} and userNameK = #{userNameK}
+<select id="kakaoLoginCheck" resultMap="joinMap">
+	select * from kakaouser a left join authorities b
+	on a.userId = b.userid 
+	where mail = #{email} and userNameK = #{userNameK}
 </select>
 
 <insert id="registerBasicTerms">
@@ -86,8 +110,16 @@
 	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'Y')  
 </insert>
 
-<select id="getPwd" resultType="String">
-	select pwd from kakaouser where userId = #{userId}
+<insert id="insertAuthorityMEMBER" >
+	insert into authorities values(#{userId}, 'ROLE_MEMBER')
+</insert>
+
+<insert id="insertAuthorityADMIN" >
+	insert into authorities values(#{userId}, 'ROLE_ADMIN')
+</insert>
+
+<select id="getAuthorities" resultType="org.springframework.security.core.authority.SimpleGrantedAuthority">
+    SELECT authority FROM authorities WHERE userid = #{email}
 </select>
 
 </mapper>

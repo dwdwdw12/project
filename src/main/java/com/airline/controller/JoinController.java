@@ -1,18 +1,21 @@
 package com.airline.controller;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import org.springframework.security.core.authority.AuthorityUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Description;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,10 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.mail.MailHandler;
@@ -33,13 +34,12 @@ import com.airline.mail.TempKey;
 import com.airline.security.CustomLoginSuccessHandler;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
+import com.airline.vo.AuthorityVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Log4j
@@ -361,14 +361,14 @@ public class JoinController {
 	// email정보가 담겨있음
 	@GetMapping("/kakao")
 	@CrossOrigin(origins = "http://localhost:8081/join/kakao")
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model)
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model, HttpServletRequest request)
 			throws Throwable {
 		System.out.println("kakao controller타는중~~~(join에서 get)");
 		// 1번
 		log.info("code:" + code);
 
 		// 2번
-		String access_Token = join.getAccessToken(code);
+		String access_Token = join.getAccessToken(code); //url에 있는 code를 넣어서 access_Token을 가져옴
 		log.info("###access_Token#### : " + access_Token);
 		// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
 
@@ -394,7 +394,7 @@ public class JoinController {
 		String userNameK = (String) userInfo.get("name");
 		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
 		
-		log.info("vo 결과 >>> " + vo); //authority=null 92INPhy432
+		log.info("vo 결과 >>> " + vo); //authority=null 이 나와서 아래에서 getAuthority가 진행되지 않음..
 		
 		if (vo == null) {
 
@@ -410,16 +410,22 @@ public class JoinController {
 			model.addAttribute("pwd", mail_key);
 			return "/join/kakaoMemberInfo";
 		} else {
-//			log.info(vo.getAuthority().toString());
-//			String userAuthority = vo.getAuthority().toString();
-//			
-//			
-//			List<GrantedAuthority> authority = AuthorityUtils.createAuthorityList(userAuthority);
-//			Authentication authentication = new UsernamePasswordAuthenticationToken(vo.getUserId(), null, authority);
-//	        SecurityContextHolder.getContext().setAuthentication(authentication);
+			// 사용자 정보로 Authentication 객체 생성
+			 List<SimpleGrantedAuthority> userAuthorities = join.getAuthorities(email);
+		        List<GrantedAuthority> authorities = new ArrayList<>(userAuthorities);
 
-	            return "redirect:/home"; //일단 홈으로 보냄
-		}
+		        Authentication authentication = new UsernamePasswordAuthenticationToken(vo.getMail(), null, authorities);
+
+			// SecurityContext에 설정
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			// 세션에 사용자 정보 저장
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", vo);
+
+			// 로그인 후의 페이지로 리다이렉트
+			return "redirect:/user"; // 사용자에 따라 조절할 수 있음
+			}
 	}
 	
 	@PostMapping("/kakaoMemberInfo")
@@ -431,7 +437,7 @@ public class JoinController {
 		//###gender### : female
 		//###phone_number### : +82 10-4784-4991 값 처리해야함....... vo말고 파라미터로 받아야함...
 		log.info("기존의 phone >> " + phone_kakao);
-		log.info("가공된 gender_kakao >> " + gender_kakao);
+		log.info("기존의 gender_kakao >> " + gender_kakao);
 
 		String gender = gender_kakao;
 		String phone = "0"+ phone_kakao.substring(4);
@@ -472,6 +478,8 @@ public class JoinController {
 
 			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, addressDetail);
 			join.registerAllTerms(userId);
+			
+			join.registerAuthorityMEMBER(userId);
 			
 			return "redirect:/join/joinSuccess";
 

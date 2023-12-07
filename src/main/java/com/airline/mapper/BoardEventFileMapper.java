@@ -2,8 +2,11 @@ package com.airline.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.airline.vo.BoardEventFileVO;
 
+@Component
 public interface BoardEventFileMapper {
 	
 	public List<BoardEventFileVO> searchFileByBoardNum(int boardNum);

@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -42,16 +43,14 @@ public class JoinMapperTest {
 
 	@Test
 	public void checkMemberTest() {
-
-		KakaoUserVO vo = KakaoUserVO.builder()
-				.userNameE("userchoi")
-				.userNameK("최유저")
-				.gender("M")
-				.userReginumFirst(881231)
-				.userReginumLast(1111111)
+		KakaoUserVO vo = KakaoUserVO.builder() 
+				.userNameE("jjj") 
+				.userNameK("정윤정")
+				.gender("W") 
+				.userReginumFirst(999999) 
+				.userReginumLast(1111111) 
 				.build();
-		
-		join.checkMember(vo);
+		log.info(join.checkMember(vo));
 	}
 	
 	@Test
@@ -59,8 +58,8 @@ public class JoinMapperTest {
 		join.getTerms(1);
 	}
 	
-	@Test
-	public void insertMemberTest() {
+//	@Test
+//	public void insertMemberTest() {
 //		KakaoUserVO vo = KakaoUserVO.builder()
 //				.userId("kakaooo")
 //				.userNick("test000")
@@ -76,7 +75,7 @@ public class JoinMapperTest {
 //				.userReginumLast(2222222)
 //				.build();
 //		join.insertMember(vo);
-	}
+//	}
 
 
 	@Test
@@ -104,5 +103,10 @@ public class JoinMapperTest {
 	@Test
 	public void bcryptTest() {//@ContextConfiguration에다가 security 추가 + @Autowired(PasswordEncoder) 추가함
 		log.info(pwencoder.encode("test11!"));
+	}
+	
+	@Test
+	public void getAuthoritiesTest() {
+		log.info(join.getAuthorities("dbswjd4991@naver.com") );
 	}
 }
