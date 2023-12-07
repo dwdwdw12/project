@@ -181,6 +181,10 @@ public class UserController {
 		model.addAttribute("userInfo", vo);
 	}
 	
+	@GetMapping("/myInfoModify")
+	public void myInfoModify(Model model, HttpSession session) {
+		
+	}
 
 	
 }
