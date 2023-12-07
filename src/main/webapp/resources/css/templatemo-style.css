@@ -391,7 +391,8 @@ label { font-weight: 700; }
 
 .tm-recommended-price-box {    
     background-color: #ffc107;
-    background-image: url(../img/button-curve.png);
+    /* background-image: url(../img/button-curve.png); */
+    background-image: url(../img/button-curve2.png);
     background-repeat: no-repeat;
     background-size: auto 100%;
     font-weight: 400;
@@ -420,13 +421,15 @@ label { font-weight: 700; }
 .tm-recommended-price-box:hover { background-color: #c66995; }
 
 .tm-recommended-price {
-    color: white;
+    /* color: white; */
+    color: black;
     font-size: 1.6rem;
     font-weight: 600;
 }
 
 .tm-recommended-price-link {
-    color: white;
+    /* color: white; */
+    color: black;
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;

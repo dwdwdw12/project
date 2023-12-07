@@ -1,18 +1,19 @@
 package com.airline.controller;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.security.core.authority.AuthorityUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Description;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,24 +23,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.mail.MailHandler;
 import com.airline.mail.TempKey;
 import com.airline.security.CustomLoginSuccessHandler;
+import com.airline.security.CustomUser;
+import com.airline.security.CustomUserDetailService;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Log4j
@@ -54,10 +53,10 @@ public class JoinController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	@GetMapping("/joinTerms")
 	public void joinTermsGet(Model model) {
 		TermsVO terms1 = join.getTerms(1);
@@ -65,12 +64,10 @@ public class JoinController {
 		TermsVO terms3 = join.getTerms(3);
 		TermsVO terms4 = join.getTerms(4);
 
-
 		model.addAttribute("terms1", terms1);
 		model.addAttribute("terms2", terms2);
 		model.addAttribute("terms3", terms3);
 		model.addAttribute("terms4", terms4);
-
 
 		log.info("JoinController >> joinTerms [get]");
 	}
@@ -81,7 +78,7 @@ public class JoinController {
 		log.info("JoinController >> joinTerms [post]");
 
 		model.addAttribute("termsAgree", terms);
-		
+
 		return "/join/checkMember";
 	}
 
@@ -189,10 +186,10 @@ public class JoinController {
 				log.info("controller에서 아아디 찾기 메일 보냄 완료");
 
 				log.info("raw mail_key >> " + mail_key);
-				//password 암호화...;
+				// password 암호화...;
 				mail_key = passwordEncoder.encode("mail_key");
 				log.info("encoded password >> " + mail_key);
-				
+
 				join.modifyPwdByMailKey(userId, mail_key);
 
 				return "redirect:/join/mailSended";
@@ -221,19 +218,18 @@ public class JoinController {
 
 		model.addAttribute("userInfo", vo);
 		model.addAttribute("termsAgree", termsAgree);
-		
+
 		KakaoUserVO result = join.confirmMember(vo);
 		log.info(vo);
 		if (result == null) {
 			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!
-		} else if(termsAgree == null) {
+		} else if (termsAgree == null) {
 			model.addAttribute("joinMessage", "약관에 동의해주시기 바랍니다.");
 			return "/join/joinTerms"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
 		} else {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
 			return "/login"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
-		} 
-
+		}
 
 	}
 
@@ -280,26 +276,24 @@ public class JoinController {
 	}
 
 	@PostMapping("/memberInfo")
-	public String memberInfo(RedirectAttributes attr, String termsAgree, 
-			String userId, String userNick, String userNameK,
-			String userNameE, String gender, String pwd, int userReginumFirst, int userReginumLast, String phone_first,
-			String phone_middle, String phone_last, String email, String mail_Domain, int postCode,
+	public String memberInfo(RedirectAttributes attr, String termsAgree, String userId, String userNick,
+			String userNameK, String userNameE, String gender, String pwd, int userReginumFirst, int userReginumLast,
+			String phone_first, String phone_middle, String phone_last, String email, String mail_Domain, int postCode,
 			String addressDefault, String addressDetail) {
-		
+
 		// email phone address 합쳐줘야해서.. parameter로 받음....
-		
+
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
-		
+
 		log.info("raw password >> " + pwd);
-		//password 암호화...;
+		// password 암호화...;
 		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
-		
- 
-		String[] userTermsAgree =  termsAgree.split(","); //selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
-		
+
+		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
+
 //		for (String string : userTermsAgree) {
 //			log.info("terms 입력받은거 >> " + string);
 //			INFO : com.airline.controller.JoinController - terms 입력받은거 >> selectall
@@ -309,16 +303,15 @@ public class JoinController {
 //		}		
 
 		try {
-			
-			//String mail_key = new TempKey().getKey(); // 랜덤키 생성
+
+			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("email", email);
-			//params.put("mail_key", mail_key);
+			// params.put("mail_key", mail_key);
 
 //			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 			log.info("입력받은 이메일 >> " + mail);
-
 
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
@@ -328,13 +321,15 @@ public class JoinController {
 			sendMail.send();
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
-      
+
 			join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, address);
 
-			//userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
-			//-> length로 바꿈
-			if(userTermsAgree.length == 4) {
+			
+			
+			// userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
+			// -> length로 바꿈
+			if (userTermsAgree.length == 4) {
 				join.registerAllTerms(userId);
 			} else {
 				join.registerBasicTerms(userId);
@@ -361,14 +356,14 @@ public class JoinController {
 	// email정보가 담겨있음
 	@GetMapping("/kakao")
 	@CrossOrigin(origins = "http://localhost:8081/join/kakao")
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model)
-			throws Throwable {
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model,
+			HttpServletRequest request) throws Throwable {
 		System.out.println("kakao controller타는중~~~(join에서 get)");
 		// 1번
 		log.info("code:" + code);
 
 		// 2번
-		String access_Token = join.getAccessToken(code);
+		String access_Token = join.getAccessToken(code); // url에 있는 code를 넣어서 access_Token을 가져옴
 		log.info("###access_Token#### : " + access_Token);
 		// 위의 access_Token 받는 걸 확인한 후에 밑에 진행
 
@@ -393,9 +388,9 @@ public class JoinController {
 		String email = (String) userInfo.get("email");
 		String userNameK = (String) userInfo.get("name");
 		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
-		
-		log.info("vo 결과 >>> " + vo); //authority=null 92INPhy432
-		
+
+		log.info("vo 결과 >>> " + vo); // authority=null 이 나와서 아래에서 getAuthority가 진행되지 않음..
+
 		if (vo == null) {
 
 			String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -410,56 +405,87 @@ public class JoinController {
 			model.addAttribute("pwd", mail_key);
 			return "/join/kakaoMemberInfo";
 		} else {
-//			log.info(vo.getAuthority().toString());
-//			String userAuthority = vo.getAuthority().toString();
-//			
-//			
-//			List<GrantedAuthority> authority = AuthorityUtils.createAuthorityList(userAuthority);
-//			Authentication authentication = new UsernamePasswordAuthenticationToken(vo.getUserId(), null, authority);
-//	        SecurityContextHolder.getContext().setAuthentication(authentication);
+			// 사용자 정보로 Authentication 객체 생성
+			List<SimpleGrantedAuthority> userAuthorities = join.getAuthorities(email);
+			List<GrantedAuthority> authorities = new ArrayList<>(userAuthorities);
+			
+			CustomUser customuser = new CustomUser(vo);
+			log.info("customuser >> " + customuser);
 
-	            return "redirect:/home"; //일단 홈으로 보냄
+			//(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities)
+			Authentication authentication = new UsernamePasswordAuthenticationToken(customuser, null, authorities);
+			log.info("authentication >> " + authentication);
+			
+			// SecurityContext에 설정
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+			// 세션에 사용자 정보 저장
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", vo);
+			
+			
+			// 로그인 후의 페이지로 리다이렉트
+			log.warn("login success");
+			List<String> roleNames = new ArrayList<>();
+			authentication.getAuthorities().forEach(authority -> {
+				roleNames.add(authority.getAuthority());
+				log.info("authority >> " + authority);
+			});
+		
+			log.warn("role names : " + roleNames);
+			if(roleNames.contains("ROLE_ADMIN")) {
+				return "/admin";
+			}
+			
+			if(roleNames.contains("ROLE_MEMBER")) {
+				return "/user";
+			}
+			
+			
+			return "/";
+			
+			
+			
 		}
 	}
-	
+
 	@PostMapping("/kakaoMemberInfo")
-	public String kakaoMemberInfo(RedirectAttributes attr, 
-			String userId, String userNick, String userNameK,
-			String userNameE, String gender_kakao, String pwd, int userReginumFirst, int userReginumLast, 
-			String phone_kakao, 
-			String mail, int postCode, String addressDefault, String addressDetail) {
-		//###gender### : female
-		//###phone_number### : +82 10-4784-4991 값 처리해야함....... vo말고 파라미터로 받아야함...
+	public String kakaoMemberInfo(RedirectAttributes attr, String userId, String userNick, String userNameK,
+			String userNameE, String gender_kakao, String pwd, int userReginumFirst, int userReginumLast,
+			String phone_kakao, String mail, int postCode, String addressDefault, String addressDetail) {
+		// ###gender### : female
+		// ###phone_number### : +82 10-4784-4991 값 처리해야함....... vo말고 파라미터로 받아야함...
 		log.info("기존의 phone >> " + phone_kakao);
-		log.info("가공된 gender_kakao >> " + gender_kakao);
+		log.info("기존의 gender_kakao >> " + gender_kakao);
 
 		String gender = gender_kakao;
-		String phone = "0"+ phone_kakao.substring(4);
-		
+		String phone = "0" + phone_kakao.substring(4);
+
 		log.info("raw password >> " + pwd);
-		//password 암호화...;
+		// password 암호화...;
 		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
-		
-		if(gender_kakao.equals("female")) {
+
+		if (gender_kakao.equals("female")) {
 			gender = "W";
 		} else {
 			gender = "M";
 		}
-		
+
 		log.info("가공된 phone >> " + phone);
 		log.info("가공된 gender >> " + gender);
-		
+
 		try {
 
-			//String mail_key = new TempKey().getKey(); // 랜덤키 생성
+			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("email", mail);
-			//params.put("mail_key", mail_key);
+			// params.put("mail_key", mail_key);
 
-			//mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
-			//log.info("입력받은 이메일 >> " + mail + "생성된 key >> " + mail_key);
+			// mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+			// log.info("입력받은 이메일 >> " + mail + "생성된 key >> " + mail_key);
 
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
@@ -470,9 +496,12 @@ public class JoinController {
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
 
-			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast, postCode, phone, mail, addressDetail);
+			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast,
+					postCode, phone, mail, addressDetail);
 			join.registerAllTerms(userId);
-			
+
+			join.registerAuthorityMEMBER(userId);
+
 			return "redirect:/join/joinSuccess";
 
 		} catch (Exception e) {

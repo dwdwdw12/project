@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%-- <%@ include file="../includes/header2.jsp"%>
- --%>
+
+<%@ include file="../includes/header2.jsp"%>
+
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -126,7 +128,7 @@ td {
 								<td>${list.fullArrtime}</td>
 								<td>${list.depName}</td>
 								<td>${list.arrName}</td>
-								<td><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">reservation</button></td>
+								<td><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기</button></td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -326,7 +328,7 @@ $jb(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
@@ -379,7 +381,7 @@ $jb(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"

@@ -236,4 +236,11 @@ public class UserServiceImpl implements UserService{
 		return mapper.getFlightList3();
 	}
 
+
+	@Override
+	public int getMileage(String userid) {
+		return mapper.getMileage(userid);
+	}
+	
+
 }

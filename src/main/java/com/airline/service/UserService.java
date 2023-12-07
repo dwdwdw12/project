@@ -85,5 +85,7 @@ public interface UserService {
 	int getGradeLogCnt(String userid, Criteria cri);
 	//항공운항내역
 	List<FlightVO> getFlightList3();
+	//mileage 가져오기
+	public int getMileage(String userid);
 
 }

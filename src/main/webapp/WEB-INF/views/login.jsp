@@ -42,13 +42,11 @@
 					<div class="form-group tm-container">
 						<label for="userid">ID</label> 
 						<input type="text" id="userid" name="username" class="form-control" placeholder="id" required value="<%=cookie%>"/>
-						<input type="hidden" id="kakaoUserId" name="kakaoUserId" value="${kakaoUserId}"/>
 						
 					</div>
 					<div class="form-group tm-container">
 						<label for="pwd">PASSWORD</label> 
 						<input type="password" id="pwd" name="password" class="form-control" placeholder="pwd" required />
-						<input type="hidden" id="kakaoPwd" name="kakaoPwd" value="${kakaoPwd}"/>
 					</div>
 					<div class="form-group tm-container">
 						<label for="remember">아이디 저장</label> 
@@ -79,7 +77,7 @@
 
 <br><br>
 					<div style="margin-top: 50px;">
-					<a href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address">
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,profile_nickname">
 					<img alt="kakao_login" src="../resources/img/kakao/kakao_login_small.png">
 					</a>
 					</div>
@@ -120,47 +118,10 @@
 		e.preventDefault();
 		alert("login");
 		$("form").submit();
-		
-/*		암호화된 pwd를 입력하는건 로그인이 안됨..
-		var kakaoUserId = document.getElementById("kakaoUserId");
-		var kakaoPwd = document.getElementById("kakaoPwd");
-		
-		if(kakaoUserId != null){
-			attr.username(kakaoUserId);
-		}
-		if(kakaoPwd != null){
-			attr.password(kakaoPwd);
-		}
- */		
+
 	});
 	
 
-/* 	 $(document).ready(function(){
-		 var operForm = $("#operForm");
-		 
-	$("button[data-oper='join']").on("click", function(e){
-		e.preventDefault();
-		alert("join");
-		operForm.attr("action", "/join/joinTerms").attr("method","get").submit();
-		}); 
-	}); */
-	 
-	 $(document).ready(function(){
-		<%--  var message = "<%= request.getAttribute("joinMessage") %>"; --%>
- 		 var message = document.getElementById("joinMessage");
-			 console.log(message+"hi");
-		 if(message != null){
-			 alert(message);
-		 };
-	 });
-	 
-	 	 
-	var message = ${joinMessage};
-	if(message != null){
-		alert(message);
-	};
-	
-	//error랑 logout 처리...
 </script>
 </body>
 

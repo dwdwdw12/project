@@ -77,12 +77,15 @@ public class HomeController {
 	private FlightService flightService;
 		
     @Autowired
- 	private BoardNoticeService service;
+ 	private BoardNoticeService noticeService;
+    
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
-		model.addAttribute("emer", service.noticePopup(cri));
+		model.addAttribute("emer", noticeService.noticePopup(cri));
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();
@@ -139,6 +142,12 @@ public class HomeController {
 		model.addAttribute("ICNtoSYD", flightService.getRoundTripPrice("인천", "시드니"));
 		model.addAttribute("ICNtoSPN", flightService.getRoundTripPrice("인천", "사이판"));
 
+		//공지사항 3개 출력
+		Criteria nCri = new Criteria();
+		nCri.setAmount(3);
+		model.addAttribute("noticeBoard", noticeService.getPageList(nCri));
+		
+		
 		return "home";
 	}
 	
@@ -285,130 +294,25 @@ public class HomeController {
 		
 	}
 	
-	//카카오메세지 토큰값 가져오기
-	@GetMapping(value="/oath")
-	public void oath(@RequestParam("code")String code, Model model) {
-		System.out.println(code);
-		String getCode = code;
-		String grant_type = code;
-		String url = "https://kauth.kakao.com/oauth/token";
-		//String url = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
-		String redirect_url = "http://localhost:8081/oath";
-		String rest_api_key="607caeca9f2a0089b46f99c667e0dee3";
-		Map<String, String> jsonData = new HashMap<String, String>();
-		jsonData.put("grant_type", grant_type);
-		jsonData.put("client_id", rest_api_key);
-		jsonData.put("redirect_url", redirect_url);
-		jsonData.put("code", code);
-		
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // 예쁜 형식으로 출력
-        String access_Token = "";
-        try {
-            // JSON 파일 생성
-            objectMapper.writeValue(new File("output.json"), jsonData);
-            System.out.println("JSON 파일이 생성되었습니다.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-        try {
-            URL reqUrl = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) reqUrl.openConnection();
-            
-          //필수 헤더 세팅
-            conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-            conn.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
-            conn.setRequestMethod("POST");
-            
-            //	POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-            StringBuilder sb = new StringBuilder();
-            //필수 쿼리 파라미터 세팅
-            sb.append("grant_type=authorization_code");
-            sb.append("&client_id=").append(rest_api_key);
-            sb.append("&redirect_uri=").append(redirect_url);
-            sb.append("&code=").append(code);
-            
-            bw.write(sb.toString());
-            bw.flush();
-            
-            //    결과 코드가 200이라면 성공
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-            
-           
-			/*
-			 * BufferedReader br = new BufferedReader(new
-			 * InputStreamReader(conn.getInputStream())); String line = ""; String result =
-			 * "";
-			 */
-            
-            //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-            BufferedReader br;
-            if (responseCode >= 200 && responseCode <= 300) {
-                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            } else {
-                br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            }
 
-            String line = "";
-            StringBuilder responseSb = new StringBuilder();
-            while((line = br.readLine()) != null){
-                responseSb.append(line);
-            }
-            
-            String result = responseSb.toString();
-            System.out.println("result : " + result);
-            
-//          Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(result);
+	@GetMapping("/memberGrade")
+	public void grade(Model model) {
+		//유저정보 가져오기
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
+			String userid = userDetails.getUsername();
 
-            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-            String refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-
-            System.out.println("access_token : " + access_Token);
-            System.out.println("refresh_token : " + refresh_Token);
-            model.addAttribute("access_Token",access_Token);
-            model.addAttribute("refresh_token",refresh_Token);
-            br.close();
-            bw.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        
-        //메세지 보내기
-        try {
-            URL reqUrl = new URL("https://kapi.kakao.com/v2/api/talk/memo/default/send");
-            HttpURLConnection conn = (HttpURLConnection) reqUrl.openConnection();
-            String templateObject = "{ \"object_type\": \"feed\", \"content\": { \"title\": \"오늘의 디저트\", \"description\": \"아메리카노, 빵, 케익\", \"image_url\": \"https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg\", \"image_width\": 640, \"image_height\": 640, \"link\": { \"web_url\": \"http://www.daum.net\", \"mobile_web_url\": \"http://m.daum.net\", \"android_execution_params\": \"contentId=100\", \"ios_execution_params\": \"contentId=100\" } }, \"item_content\" : { \"profile_text\" :\"Kakao\", \"profile_image_url\" :\"https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png\", \"title_image_url\" : \"https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png\", \"title_image_text\" :\"Cheese cake\", \"title_image_category\" : \"Cake\", \"items\" : [ { \"item\" :\"Cake1\", \"item_op\" : \"1000원\" }, { \"item\" :\"Cake2\", \"item_op\" : \"2000원\" }, { \"item\" :\"Cake3\", \"item_op\" : \"3000원\" }, { \"item\" :\"Cake4\", \"item_op\" : \"4000원\" }, { \"item\" :\"Cake5\", \"item_op\" : \"5000원\" } ], \"sum\" :\"Total\", \"sum_op\" : \"15000원\" }, \"social\": { \"like_count\": 100, \"comment_count\": 200, \"shared_count\": 300, \"view_count\": 400, \"subscriber_count\": 500 }, \"buttons\": [ { \"title\": \"웹으로 이동\", \"link\": { \"web_url\": \"http://www.daum.net\", \"mobile_web_url\": \"http://m.daum.net\" } }, { \"title\": \"앱으로 이동\", \"link\": { \"android_execution_params\": \"contentId=100\", \"ios_execution_params\": \"contentId=100\" } } ] }";
-            String encodedTemplateObject = URLEncoder.encode(templateObject, StandardCharsets.UTF_8.toString());
-            
-            //필수 헤더 세팅
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-            conn.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-            
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = ("template_object=" + encodedTemplateObject).getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-
-            // 응답 코드 확인
-            int responseCode = conn.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
-
-            // 응답 데이터 확인 (생략 가능)
-            // ...
-
-            // 연결 종료
-            conn.disconnect();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+			KakaoUserVO vo = user.getUserInfo(userid);
+			//등급조회
+			String getGrade = user.getGrade(vo.getGradeCode());
+			model.addAttribute("vo",vo);
+			model.addAttribute("grade",getGrade);
+			//마일리지 가져오기
+			//UserPayVO pvo = user.getPoint(userid); //마일리지 내역
+			int mile = user.getMileage(userid);
+			model.addAttribute("mile", mile);
+		}
 	}
 
 }

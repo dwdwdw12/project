@@ -67,16 +67,29 @@ td {
 			<form action="/flight/flightDepArrSearch" method="get" class="tm-search-form tm-section-pad-1">
 				<br><br>
 				<div class="form-row tm-search-form-row" id="searchText">
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="dep">출발지</label> 
-						<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요" value = "${dep}" required="required">
-					</div>
+					<c:if test="${empty flightName}">
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<label for="dep">출발지</label> 
+							<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요" value = "${dep}" required="required">
+						</div>
+						
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<label for="arr">도착지</label> 
+							<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요" value = "${arr}" required="required">
+						</div>
+					</c:if>
 					
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="arr">도착지</label> 
-						<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요" value = "${arr}" required="required">
-					</div>
+					<c:if test="${!empty flightName}">
+					
+						<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2' style='float:right;'>
+							<label for='flightName'>항공편명</label>
+							<input name='flightName' type='text' class='form-control' id='flightName' placeholder='항공편명을 입력해주세요' value='${flightName}' required='required'>
+						</div>
+						<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2' style='float:right;'>
+						</div>
+					</c:if>
 				</div>
+				
 				<br>
 				<!-- form-row -->
 				<div class="form-row tm-search-form-row">
@@ -98,7 +111,11 @@ td {
 			<input type="hidden" id="sampleArr" name="sampleArr" value = "${arr}" >
 			
 			<div class="container">
-				
+				<c:if test="${empty list}">
+						<h3 style="text-align: center;">조회 가능한 항공편이 없습니다. &nbsp;<i class='fas fa-plane-departure'></i><br>
+						다시 여정을 선택해주세요.</h3>	
+				</c:if>
+				<c:if test="${!empty list}">
 				<table class="table table-hover" id="searchTable">
 					<thead>
 						<tr>
@@ -133,7 +150,7 @@ td {
 						</tbody>
 					</c:forEach>
 				</table>
-			
+				
 				<!-- 페이징 -->
 				<ul class="pagination justify-content-center">
 					<c:if test="${pageMaker.prev}">
@@ -150,7 +167,7 @@ td {
 						<li class="page-item"><a class="page-link" href="${pageMaker.endPage+1}">Next</a></li>
 					</c:if>
 				</ul>
-		
+				</c:if>
 			</div>
 		</div>
 	</section>
@@ -273,10 +290,10 @@ $jb(function() {    //화면 다 뜨면 시작
                     	console.log(data);
                         //서버에서 json 데이터 response 후 목록에 추가
                         response(
-                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+                            $jb.map(data, function(item) {    
                                 return {
                                 	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
-                                    value: item,    //그냥 사용자 설정값
+                                    value: item,    //사용자 설정값
                                 }
                             })
                         );
@@ -285,14 +302,14 @@ $jb(function() {    //화면 다 뜨면 시작
             },    // source 는 자동 완성 대상
          select : function(event, ui) {    //아이템 선택시
             console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-            console.log(ui.item.label);    //김치 볶음밥label
-            console.log(ui.item.value);    //김치 볶음밥
+            console.log(ui.item.label);    
+            console.log(ui.item.value);    
             
         },
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
@@ -338,14 +355,14 @@ $jb(function() {    //화면 다 뜨면 시작
             },    // source 는 자동 완성 대상
          select : function(event, ui) {    //아이템 선택시
             console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-            console.log(ui.item.label);    //김치 볶음밥label
-            console.log(ui.item.value);    //김치 볶음밥
+            console.log(ui.item.label);    
+            console.log(ui.item.value);    
             
         },
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"

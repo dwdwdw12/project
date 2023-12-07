@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.airline.mapper.UserMapper;
-import com.airline.vo.CustomUser;
 import com.airline.vo.KakaoUserVO;
 
 import lombok.Getter;

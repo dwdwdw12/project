@@ -84,11 +84,13 @@ public interface UserMapper {
 	public List<BoardQnaVO> getUserQna(@Param("username")String username,@Param("cri") Criteria cri);
 
 	public int getUserQnaCnt(@Param("username")String username,@Param("cri") Criteria cri);
-	
+
 	public List<GradeLogVO> getGradeLog(@Param("userid")String userid,@Param("cri") Criteria cri);
 
 	public int getGradeLogCnt(@Param("userid")String userid,@Param("cri") Criteria cri);
 
 	public List<FlightVO> getFlightList3();
+
+	public int getMileage(String userid);
 
 }

@@ -208,6 +208,10 @@
 	
 	<select id="getFlightList3" resultType="com.airline.vo.FlightVO">
 		select * from airplaneschedule order by fulldeptime desc limit 0,3
+  </select>
+  
+	<select id="getMileage" resultType="int">
+		select totalMileage from userlog where userid = #{userid} order by lognum desc limit 1
 	</select>
 	
 </mapper>
