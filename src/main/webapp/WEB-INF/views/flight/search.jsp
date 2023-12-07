@@ -89,7 +89,7 @@ td {
 					</div>
 					
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1" id="depDiv">
-						<c:if test="${!empty arrlist}">
+						<c:if test="${!empty arrDate}">
 						<label for="boardTitle">오는 날</label> 
 						<input type="text" class="form-control" id="arrDate" name="arrDate" value = "${arrDate}">
 						</c:if>
@@ -111,8 +111,10 @@ td {
 			<c:if test="${empty list}">
 			<section class="p-5 tm-container-outer tm-bg-gray">
 				<div class="container" >
-				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
-				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+				<div class="text-right">
+					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
+					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+				</div>
 				<h2 style="text-align: center">${depDate} : ${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
 					<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 				<br><br><br><br><br>
