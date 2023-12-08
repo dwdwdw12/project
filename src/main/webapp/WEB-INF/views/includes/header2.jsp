@@ -82,7 +82,7 @@
 										<li><a href="/"><img
 												src="../resources/img/kakao/chunsik.png" alt=""
 												style="width: 60px"></a></li>
-										<li><a href="/">home</a></li>
+										<li><a href="/">Home</a></li>
 										<li><a href="/flight/list">flight<i
 												class="ti-angle-down"></i></a>
 											<ul class="submenu">
@@ -99,20 +99,23 @@
 												<li><a href="/boardDiary/list">여행일기</a></li>
 												
 											</ul></li>
-										<sec:authorize access="isAuthenticated()">
-										</sec:authorize>
+									
 										 
-										<c:if test="${loginUser.admin eq 0}">
+										<c:if test="${${loginUser.authority[0].getAuthority() == 'ROLE_MEMBER'}}">
 											<li><a href="/user">myPage(user)<i class="ti-angle-down"></i></a>
+
 												<ul class="submenu">
 													<li><a href="/user/myInfoModify">회원정보 조회/수정</a></li>
 													<li><a href="/user/mileage">마일리지 조회</a></li>
 													<li><a href="/user/chargePoint">포인트 충전</a></li>
+
+					
+
 													<li><a href="/user/userResDetail">구매내역 조회</a></li>
 											</ul></li>
 										</c:if>
 											
-										<c:if test="${loginUser.admin eq 1}">
+										<c:if test="${${loginUser.authority[0].getAuthority() == 'ROLE_ADMIN'}}">
 										<%-- <sec:authorize access="hasRole('ROLE_ADMIN'))"> --%>
 										<li>
 											<a href="/admin">myPage(admin)
@@ -126,6 +129,7 @@
 										</li>
 										<%-- </sec:authorize> --%>
 										</c:if>
+
 										<li><a href="/contact">Contact</a></li>
 									</ul>
 								</nav>

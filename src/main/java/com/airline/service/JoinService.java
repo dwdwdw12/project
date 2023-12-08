@@ -41,7 +41,7 @@ public interface JoinService {
 	
 	public void registerKakaoMember(KakaoUserVO vo);
 
-	public KakaoUserVO kakaoLoginCheck(String email, String userNameK);
+	public KakaoUserVO kakaoLoginCheck(String email, String userId);
 
 	public void registerBasicTerms(String userId);
 	public void registerAllTerms(String userId);

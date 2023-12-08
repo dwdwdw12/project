@@ -77,6 +77,13 @@ public class JoinMapperTest {
 //		join.insertMember(vo);
 //	}
 
+	@Test
+	public void kakaoLoginCheckTest() {
+		String mail = "dbswjd4991@naver.com";
+		String userId = "dbswjd4991@naver.com";
+		join.kakaoLoginCheck(mail, userId);
+	}
+	
 
 	@Test
 	public void checkUserIdAndEmailTest() {
@@ -89,10 +96,15 @@ public class JoinMapperTest {
 	
 	@Test
 	public void updatePwdByMailKeyTest() {
-		String mail_key = new TempKey().getKey();
-		String userId = "hana111";
+		String before_mail_key = new TempKey().getKey();
+		String after_mail_key = pwencoder.encode(before_mail_key);
 		
-		join.updatePwdByMailKey(userId, mail_key);
+		log.info("encoded password >> " + after_mail_key);
+		log.info("" + pwencoder.matches(before_mail_key, after_mail_key));
+		
+		String userId = "test11";
+		
+		join.updatePwdByMailKey(userId, after_mail_key);
 	}
 	@Test
 	public void registerAllTermsTest() {

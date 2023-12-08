@@ -339,8 +339,8 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public KakaoUserVO kakaoLoginCheck(String email, String userNameK) {
-		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
+	public KakaoUserVO kakaoLoginCheck(String email, String userId) {
+		KakaoUserVO vo = join.kakaoLoginCheck(email, userId);
 		return vo;
 	}
 

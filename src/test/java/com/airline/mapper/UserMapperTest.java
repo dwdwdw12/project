@@ -28,5 +28,23 @@ public class UserMapperTest {
 	/*
 	 * @Test public void queryTest() { log.info(mapper.getq()); }
 	 */
-
+	
+	@Test
+	public void updateUserInfoTest() {
+		String userId = "dbswjd4991@naver.com";
+		String userNick = "윤정윤정";
+		String userNameK = "윤정윤정";
+		String userNameE = "YUN";
+		String phone = "010-1111-1111";
+		int postCode = 55555;
+		String address = "경기도 수원시";
+		mapper.updateUserInfo(userId, userNick, userNameK, userNameE, phone, phone, postCode, address);
+	}
+	
+	@Test
+	public void updateUserPwd() {
+		String userId = "dbswjd4991@naver.com";
+		String pwd = "asdf";
+		mapper.updateUserPwd(userId, pwd);
+	}
 }
