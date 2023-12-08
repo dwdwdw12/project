@@ -713,6 +713,10 @@
 	<!-- 모달창 -->
 	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/>   
 	<!-- /모달창 -->
+	
+	<!-- 모달창 -->
+	 <jsp:include page="/WEB-INF/views/FlightPopup.jsp"/>   
+	<!-- /모달창 -->
 
 	<!-- .tm-container-outer -->
 	<%@ include file="includes/footer.jsp"%>

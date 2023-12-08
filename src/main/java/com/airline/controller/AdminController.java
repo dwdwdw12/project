@@ -2,11 +2,9 @@ package com.airline.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.AdminService;
 import com.airline.vo.BoardEventVO;
@@ -130,38 +129,101 @@ public class AdminController {
 	}
 	
 	//항공스케줄 조회 및 업데이트
-		@GetMapping("flightSchedule")
-		public void flightSchedule(Model model, Criteria cri) {
-			List<FlightVO> vo = admin.getFlightList(cri);
-			model.addAttribute("vo",vo);
-			model.addAttribute("paging",new PageDTO(cri, admin.getFlightListCnt(cri)));
+	@GetMapping("/flightSchedule")
+	public void flightSchedule(Model model, Criteria cri) {
+		List<FlightVO> vo = admin.getFlightList(cri);
+		model.addAttribute("vo",vo);
+		model.addAttribute("paging",new PageDTO(cri, admin.getFlightListCnt(cri)));
+	}
+	
+	//항공스케줄 인서트 뷰 페이지
+	@GetMapping("/flightCreate")
+	public void flightSchedule(Model model) {
+		int fno = admin.getFno();
+		model.addAttribute("fno",fno);
+		List<String> depCode = admin.getDepcode();
+		System.out.println("depCode>>>>"+depCode);
+		model.addAttribute("depCode",depCode);
+		List<String> arrCode = admin.getArrcode();
+		model.addAttribute("arrCode",arrCode);
+		List<Integer> dRCode = admin.getdRCode();
+		List<Integer> aRCode = admin.getaRCode();
+		model.addAttribute("dRCode",dRCode);
+		model.addAttribute("aRCode",aRCode);
+		/*
+		 * String arrCode = admin.arrDepcode(); model.addAttribute("depCode",depCode);
+		 */
+		
+	}
+	
+	@PostMapping(value="/flightCreate",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String postFlightSchedule(@RequestBody FlightVO vo, RedirectAttributes rttr) {
+		System.out.println("vo>>>"+vo);
+		String depDay = vo.getFullDeptime().substring(0, 11)+"00:00:00";
+		String arrDay = vo.getFullArrtime().substring(0, 11)+"00:00:00";
+		System.out.println(depDay+" : "+arrDay);
+		String depTime = vo.getFullDeptime().substring(11);
+		String arrTime = vo.getFullArrtime().substring(11);
+		System.out.println(depTime+" : "+arrTime);
+		String fullDeparture = admin.getFullDeparture(vo.getDepCode());
+		String fullArrival = admin.getFullArrival(vo.getArrCode());
+		System.out.println(fullDeparture+" : "+fullArrival);
+		//인서트
+		vo.setDepDay(depDay);
+		vo.setArrDay(arrDay);
+		vo.setDepTime(depTime);
+		vo.setArrTime(arrTime);
+		vo.setFullDeparture(fullDeparture);
+		vo.setFullArrival(fullArrival);
+		System.out.println("vo출력>>"+vo);
+		int result = admin.insertFlight(vo);
+		if(result == 1) rttr.addFlashAttribute(result);
+		return "redirect:/admin/flightSchedule";
+	}
+	
+	//항공스케줄 수정 뷰 페이지
+	@GetMapping("/flightModify")
+	public void flightModify(Model model,@Param("fno")int fno) {
+		System.out.println("fno>>"+fno);
+		FlightVO vo = admin.getFlightInfo(fno);
+		System.out.println("vo>>>"+vo);
+		model.addAttribute("vo",vo);
+
+		
+	}
+	
+	@PostMapping(value="/flightModify",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String postflightModify(@RequestBody FlightVO vo, RedirectAttributes rttr) {
+		System.out.println("modify vo>>>"+vo);
+		int isdelete = vo.getIsDelete();
+		System.out.println("delete>>"+isdelete);
+		String depDay = vo.getFullDeptime().substring(0, 11)+"00:00:00";
+		String arrDay = vo.getFullArrtime().substring(0, 11)+"00:00:00";
+		System.out.println(depDay+" : "+arrDay);
+		String depTime = vo.getFullDeptime().substring(11);
+		String arrTime = vo.getFullArrtime().substring(11);
+		System.out.println(depTime+" : "+arrTime);
+		String fullDeparture = admin.getFullDeparture(vo.getDepCode());
+		String fullArrival = admin.getFullArrival(vo.getArrCode());
+		System.out.println(fullDeparture+" : "+fullArrival);
+		System.out.println(vo.getIsDelete());
+		//수정
+		vo.setDepDay(depDay);
+		vo.setArrDay(arrDay);
+		vo.setDepTime(depTime);
+		vo.setArrTime(arrTime);
+		vo.setFullDeparture(fullDeparture);
+		vo.setFullArrival(fullArrival);
+		System.out.println("vo출력>>"+vo);
+		int result = admin.modifyFlight(vo);
+		if(result == 1) {
+			//메인화면 공지 띄우기
+			//공지관련 테이블 저장 후 home 에 모달띄우기
+			int fResult = admin.insertFlightLog(vo);
+			rttr.addFlashAttribute(result);
 		}
 		
-		//항공스케줄 인서트 뷰 페이지
-		@GetMapping("flightCreate")
-		public void flightSchedule(Model model) {
-			int fno = admin.getFno();
-			model.addAttribute("fno",fno);
-			List<String> depCode = admin.getDepcode();
-			System.out.println("depCode>>>>"+depCode);
-			model.addAttribute("depCode",depCode);
-			List<String> arrCode = admin.getArrcode();
-			model.addAttribute("arrCode",arrCode);
-			List<Integer> dRCode = admin.getdRCode();
-			List<Integer> aRCode = admin.getaRCode();
-			model.addAttribute("dRCode",dRCode);
-			model.addAttribute("aRCode",aRCode);
-			/*
-			 * String arrCode = admin.arrDepcode(); model.addAttribute("depCode",depCode);
-			 */
-			
-		}
-		
-		@PostMapping(value="flightCreate",consumes = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<String> postFlightSchedule(@RequestBody FlightVO vo) {
-			System.out.println("vo>>>"+vo);
-			return ResponseEntity.ok("Success");
-			
-		}
+		return "redirect:/admin/flightSchedule";
+	}
 
 }

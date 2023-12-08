@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.airline.service.AdminService;
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
 import com.airline.service.FlightService;
@@ -64,12 +65,16 @@ public class HomeController {
  	private BoardNoticeService noticeService;
     
     @Autowired
+ 	private AdminService adminService;
+    
+    @Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
 		model.addAttribute("emer", noticeService.noticePopup(cri));
+		model.addAttribute("modi", adminService.flightNoticePopup());
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();

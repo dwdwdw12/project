@@ -73,5 +73,23 @@ public interface AdminMapper {
 
 	@Select("SELECT DISTINCT arrregioncode FROM airplaneschedule")
 	public List<Integer> getaRCode();
+	
+	@Select("SELECT DISTINCT fulldeparture FROM airplaneschedule where depcode=#{depCode}")
+	public String getFullDeparture(String depCode);
+
+	@Select("SELECT DISTINCT fullarrival FROM airplaneschedule where arrcode=#{arrCode}")
+	public String getFullArrival(String arrCode);
+
+	public int insertFlight(@Param("vo")FlightVO vo);
+
+	public FlightVO getFlightInfo(int fno);
+
+	public int modifyFlight(@Param("vo")FlightVO vo);
+
+	public int insertFlightLog(@Param("vo")FlightVO vo);
+
+	public FlightVO flightNoticePopup();
+	
+	
 
 }

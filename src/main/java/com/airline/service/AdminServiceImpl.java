@@ -155,4 +155,38 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.getaRCode();
 	}
 
+	@Override
+	public String getFullDeparture(String depCode) {
+		return mapper.getFullDeparture(depCode);
+	}
+
+	@Override
+	public String getFullArrival(String arrCode) {
+		return mapper.getFullArrival(arrCode);
+	}
+
+	@Override
+	public int insertFlight(FlightVO vo) {
+		return mapper.insertFlight(vo);
+	}
+
+	@Override
+	public FlightVO getFlightInfo(int fno) {
+		return mapper.getFlightInfo(fno);
+	}
+
+	@Override
+	public int modifyFlight(FlightVO vo) {
+		return mapper.modifyFlight(vo);
+	}
+
+	@Override
+	public int insertFlightLog(FlightVO vo) {
+		return mapper.insertFlightLog(vo);
+	}
+
+	@Override
+	public FlightVO flightNoticePopup() {
+		return mapper.flightNoticePopup();
+	}
 }
