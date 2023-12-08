@@ -241,6 +241,21 @@ public class UserServiceImpl implements UserService{
 	public int getMileage(String userid) {
 		return mapper.getMileage(userid);
 	}
+
+
+	@Override
+	public void modifyUserInfo(String userId, String userNick, String userNameK, String userNameE, String phone,
+			int postCode, String address) {
+		mapper.updateUserInfo(userId, userNick, userNameK, userNameE, phone, phone, postCode, address);
+	}
+
+
+	@Override
+	public void modifyUserPwd(String userId, String pwd) {
+		mapper.updateUserPwd(userId, pwd);
+	}
+
+
 	
 
 }

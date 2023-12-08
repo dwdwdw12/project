@@ -14,10 +14,10 @@
 							<h2>비밀번호 찾기</h2>
 							<br>
 							<h6>
-								회원가입 시 등록한 이메일 주소와 아이디를 입력해주시기 바랍니다.<br> 등록된 회원정보와 입력된 내용이
-								일치할 경우, 등록된 이메일 주소로 안내 메일을 발송해 드립니다.
+								회원가입 시 등록한 이메일 주소와 아이디를 입력해주시기 바랍니다. <br> 기입한 이메일 주소로 안내
+								메일을 발송해 드립니다. <br> 이메일 발송에는 1~2분의 시간이 소요될 수 있습니다.
 							</h6>
-							<br> <br>
+							<br>
 							<hr>
 							<br>
 
@@ -26,16 +26,16 @@
 									<tr>
 										<th>아이디</th>
 										<td style="padding-bottom: 6px"><input type="text"
-											name="userId" id="inputUseridForm" maxlength="30"
-											class="form-control"></td>
+											required="required" name="userId" id="inputUseridForm"
+											maxlength="30" class="form-control"></td>
 									</tr>
 									<tr>
 										<th
 											style="padding: 8px; border-top: none; text-align: center; vertical-align: middle; width: 150px">이메일</th>
 										<td style="border-top: none; padding: 0"><input
-											type="text" name="email" id="inputEmailForm" maxlength="30"
-											class="form-control" style="display: inline; width: 250px">
-										</td>
+											required="required" type="text" name="email"
+											id="inputEmailForm" maxlength="30" class="form-control"
+											style="display: inline; width: 250px"></td>
 									</tr>
 
 
@@ -71,16 +71,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var message = document.getElementById('message').value; //${message}를 하는 경우 var message = ; 이렇게 표시됨 -> id주어서 수정함
-		console.log(message);
-
-		$(document).ready(function() {
-			if (message !== null) {
-				alert(message);
-			}
-			;
-		});
-
+		
 		function check(pattern, taget, message) {
 			if (pattern.test(taget)) {
 				return true;

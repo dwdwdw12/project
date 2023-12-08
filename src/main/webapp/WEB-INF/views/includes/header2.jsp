@@ -82,7 +82,7 @@
 										<li><a href="/"><img
 												src="../resources/img/kakao/chunsik.png" alt=""
 												style="width: 60px"></a></li>
-										<li><a href="/">home</a></li>
+										<li><a href="/">Home</a></li>
 										<li><a href="/flight/list">flight<i
 												class="ti-angle-down"></i></a>
 											<ul class="submenu">
@@ -100,6 +100,40 @@
 												<li><a href="single-blog.html">single-blog</a></li>
 											</ul></li>
 										<sec:authorize access="isAuthenticated()">
+										<c:choose>
+										<c:when test="${loginUser.authority[0].getAuthority() == 'ROLE_MEMBER'}">
+										<!-- 권한이 하나라서 가능. 여러가지 권한이면 다시 수정해야함...  -->
+											<li ><a
+												href="/user" href="#">myPage(user)<i
+													class="ti-angle-down"></i></a>
+												<ul class="submenu">
+													<li><a href="blog.html">회원정보 조회/수정</a></li>
+													<li><a href="/user/chargePoint">포인트 충전</a></li>
+													<li><a href="single-blog.html">체크인</a></li>
+													<li><a href="single-blog.html">구매내역 조회</a></li>
+												</ul></li>
+												</c:when>
+										<c:otherwise>
+										<li ><a
+												href="/user" href="#">myPage(user)<i
+													class="ti-angle-down"></i></a>
+												<ul class="submenu">
+													<li><a href="blog.html">회원정보 조회/수정</a></li>
+													<li><a href="/user/chargePoint">포인트 충전</a></li>
+													<li><a href="single-blog.html">체크인</a></li>
+													<li><a href="single-blog.html">구매내역 조회</a></li>
+												</ul></li>
+											<li><a
+												href="/admin" href="#">myPage(admin)<i
+													class="ti-angle-down"></i></a>
+												<ul class="submenu">
+													<li><a href="blog.html">회원조회</a></li>
+													<li><a href="single-blog.html">항공스케줄 등록/수정</a></li>
+												</ul></li>
+										</c:otherwise>
+										</c:choose>
+										</sec:authorize>
+<%-- 										<sec:authorize access="isAuthenticated()">
 											<li sec:authorize="hasRole('ROLE_MEMBER'))"><a
 												href="/user" href="#">myPage(user)<i
 													class="ti-angle-down"></i></a>
@@ -116,7 +150,7 @@
 													<li><a href="blog.html">회원조회</a></li>
 													<li><a href="single-blog.html">항공스케줄 등록/수정</a></li>
 												</ul></li>
-										</sec:authorize>
+										</sec:authorize> --%>
 										<li><a href="/contact">Contact</a></li>
 									</ul>
 								</nav>

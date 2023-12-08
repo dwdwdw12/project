@@ -92,5 +92,12 @@ public interface UserMapper {
 	public List<FlightVO> getFlightList3();
 
 	public int getMileage(String userid);
+	
+	public void updateUserInfo(@Param("userId") String userId, @Param("userNick") String userNick,
+			@Param("userNameK") String userNameK, @Param("userNameE") String userNameE, 
+			@Param("phone") String phone, @Param("mail") String mail, 
+			@Param("postCode") int postCode, @Param("address") String address);
+	
+	public void updateUserPwd(@Param("userId") String userId, @Param("pwd") String pwd);
 
 }

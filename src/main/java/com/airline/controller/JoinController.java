@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -187,7 +188,7 @@ public class JoinController {
 
 				log.info("raw mail_key >> " + mail_key);
 				// password 암호화...;
-				mail_key = passwordEncoder.encode("mail_key");
+				mail_key = passwordEncoder.encode(mail_key);
 				log.info("encoded password >> " + mail_key);
 
 				join.modifyPwdByMailKey(userId, mail_key);
@@ -314,7 +315,7 @@ public class JoinController {
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
 
-			join.registerMember(userId, userNick, userNameK, userNameK, gender, pwd, userReginumFirst, userReginumLast,
+			join.registerMember(userId, userNick, userNameE, userNameK, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, address);
 			
 			// userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
@@ -373,8 +374,8 @@ public class JoinController {
 		// userNameK와 mail로 DB를 조회하여 결과가 있으면 마이페이지(혹은 로그인 선택 전의 페이지)
 		// 결과가 없으면 model에 정보를 담아서 추가입력정보 페이지 (kakaoMemberInfo)로 이동
 		String email = (String) userInfo.get("email");
-		String userNameK = (String) userInfo.get("name");
-		KakaoUserVO vo = join.kakaoLoginCheck(email, userNameK);
+		String userId = (String) userInfo.get("email");
+		KakaoUserVO vo = join.kakaoLoginCheck(email, userId);
 
 		log.info("vo 결과 >>> " + vo); 
 
@@ -416,6 +417,7 @@ public class JoinController {
 			authentication.getAuthorities().forEach(authority -> {
 				roleNames.add(authority.getAuthority());
 				log.info("authority >> " + authority);
+				log.info("vo.getAuthority >> " + vo.getAuthority());
 			});
 		
 			log.warn("role names : " + roleNames);
