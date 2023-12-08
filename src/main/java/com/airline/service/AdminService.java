@@ -7,6 +7,7 @@ import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.UserPayVO;
 
@@ -46,6 +47,16 @@ public interface AdminService {
 	//이벤트 게시판
 	public List<BoardEventVO> getEvent(Criteria cri);
 	public int eventCtn(Criteria cri);
+	//항공운항 리스트 조회
+	public List<FlightVO> getFlightList(Criteria cri);
+	public int getFlightListCnt(Criteria cri);
+	//fno 가져오기
+	public int getFno();
+	//depCode 가져오기
+	public List<String> getDepcode();
+	public List<String> getArrcode();
+	public List<Integer> getdRCode();
+	public List<Integer> getaRCode();
 	
 
 }

@@ -25,45 +25,19 @@
 <script src="../resources/js/vendor/modernizr.custom.min.js"></script>
 <link rel="stylesheet" href="../resources/css/normalize.css"> -->
 <style>
-.slideshow {
-	height: 465px;
-	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
-	position: relative;
-}
 
-.slideshow img {
-	position: absolute;
-	/*이미지 위치 가운데로 옮기기*/
-	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
-	margin-left: -800px;
-	display: none;
-}
 </style>
 
-<div class="tm-page-wrap mx-auto">
-	<section class="tm-banner">
-
-		<!-- .tm-container-outer -->
-		<div class="inner">
-			<div class="slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-02.jpg"
-					alt="" width="1600" height="1000"> <img
-					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-04.jpg"
-					alt="" width="1600" height="1000">
-			</div>
-		</div>
-	</section>
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px">
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">항공권 예약 확인 및 취소</h2>
-					<p class="mb-4">구매하신 항공권 내역 확인 및 취소가 가능합니다.</p>
-					<p class="mb-4">*취소한 항공권은 영업일 기준 3일 이내 취소처리됩니다.</p>
-					<p class="mb-4">*체크인 항공권은 취소처리가 불가합니다.</p>
+					<p class="mb-2">구매하신 항공권 내역 확인 및 취소가 가능합니다.</p>
+					<p class="mb-2">*취소한 항공권은 영업일 기준 3일 이내 취소처리됩니다.</p>
+					<p class="mb-2">*체크인이 완료 된 항공권은 취소가 불가합니다.</p>
 				</div>
 			</div>
 
@@ -75,8 +49,8 @@
 <%-- 						<label for="dep">총 구매횟수 &nbsp;:&nbsp; ${count}번</label> 
 						<label for="dep">/ 총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
 								value="${totalPrice}" pattern="#,###" />원</label> --%>
-						<p>총 구매횟수 &nbsp;:&nbsp; ${count}번</p>
-						<p>총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
+						<p class="mb-2">총 구매횟수 &nbsp;:&nbsp; ${count}번</p>
+						<p class="mb-2">총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
 								value="${totalPrice}" pattern="#,###" />원</p>
 					</div>
 

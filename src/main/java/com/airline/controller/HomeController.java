@@ -2,6 +2,8 @@ package com.airline.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -29,7 +31,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
@@ -50,6 +50,7 @@ import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -77,7 +78,7 @@ public class HomeController {
 	private FlightService flightService;
 		
     @Autowired
- 	private BoardNoticeService service;
+ 	private BoardNoticeService noticeService;
     
     @Autowired
 	private PasswordEncoder passwordEncoder;
@@ -86,7 +87,7 @@ public class HomeController {
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
-		model.addAttribute("emer", service.noticePopup(cri));
+		model.addAttribute("emer", noticeService.noticePopup(cri));
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();
@@ -143,6 +144,12 @@ public class HomeController {
 		model.addAttribute("ICNtoSYD", flightService.getRoundTripPrice("인천", "시드니"));
 		model.addAttribute("ICNtoSPN", flightService.getRoundTripPrice("인천", "사이판"));
 
+		//공지사항 3개 출력
+		Criteria nCri = new Criteria();
+		nCri.setAmount(3);
+		model.addAttribute("noticeBoard", noticeService.getPageList(nCri));
+		
+		
 		return "home";
 	}
 	
@@ -152,7 +159,6 @@ public class HomeController {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
-		
 		
 		if(error != null) {
 			model.addAttribute("error","Login Error Check your account");
@@ -283,16 +289,40 @@ public class HomeController {
         //이벤트 게시판
         List<BoardEventVO> evo = user.getEvent();
         model.addAttribute("evo",evo);
-        
+        //항공운항내역3
+        List<FlightVO> avo = user.getFlightList3();
+        model.addAttribute("avo",avo);
         
 
 		
 	}
 	
+
 	
 	@GetMapping("/contact")
 	public void contact() {
 		
+	}
+	
+
+	@GetMapping("/memberGrade")
+	public void grade(Model model) {
+		//유저정보 가져오기
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 
+			String userid = userDetails.getUsername();
+
+			KakaoUserVO vo = user.getUserInfo(userid);
+			//등급조회
+			String getGrade = user.getGrade(vo.getGradeCode());
+			model.addAttribute("vo",vo);
+			model.addAttribute("grade",getGrade);
+			//마일리지 가져오기
+			//UserPayVO pvo = user.getPoint(userid); //마일리지 내역
+			int mile = user.getMileage(userid);
+			model.addAttribute("mile", mile);
+		}
 	}
 
 }

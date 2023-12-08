@@ -11,6 +11,7 @@ import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.UserPayVO;
 
@@ -117,6 +118,41 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int eventCtn(Criteria cri) {
 		return mapper.eventCtn(cri);
+	}
+	
+	@Override
+	public List<FlightVO> getFlightList(Criteria cri) {
+		return mapper.getFlightList(cri);
+	}
+
+	@Override
+	public int getFlightListCnt(Criteria cri) {
+		return mapper.getFlightListCnt(cri);
+	}
+
+	@Override
+	public int getFno() {
+		return mapper.getFno();
+	}
+
+	@Override
+	public List<String> getDepcode() {
+		return mapper.getDepCode();
+	}
+
+	@Override
+	public List<String> getArrcode() {
+		return mapper.getArrcode();
+	}
+
+	@Override
+	public List<Integer> getdRCode() {
+		return mapper.getdRCode();
+	}
+
+	@Override
+	public List<Integer> getaRCode() {
+		return mapper.getaRCode();
 	}
 
 }

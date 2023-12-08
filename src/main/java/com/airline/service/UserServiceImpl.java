@@ -13,6 +13,8 @@ import com.airline.vo.BoardQnaVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
+import com.airline.vo.GradeLogVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -216,5 +218,29 @@ public class UserServiceImpl implements UserService{
 	public int getUserQnaCnt(String username, Criteria cri) {
 		return mapper.getUserQnaCnt(username,cri);
 	}
+	
+	@Override
+	public List<GradeLogVO> getGradeLog(String userid, Criteria cri) {
+		return mapper.getGradeLog(userid, cri);
+	}
+
+
+	@Override
+	public int getGradeLogCnt(String userid, Criteria cri) {
+		return mapper.getGradeLogCnt(userid, cri);
+	}
+
+
+	@Override
+	public List<FlightVO> getFlightList3() {
+		return mapper.getFlightList3();
+	}
+
+
+	@Override
+	public int getMileage(String userid) {
+		return mapper.getMileage(userid);
+	}
+	
 
 }

@@ -128,7 +128,7 @@ td {
 								<td>${list.fullArrtime}</td>
 								<td>${list.depName}</td>
 								<td>${list.arrName}</td>
-								<td><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">reservation</button></td>
+								<td><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기</button></td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -328,7 +328,7 @@ $jb(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
@@ -381,7 +381,7 @@ $jb(function() {    //화면 다 뜨면 시작
         focus : function(event, ui) {    //포커스 가면
             return false;//한글 에러 잡기용도로 사용됨
         },
-        minLength: 1,// 최소 글자수
+        minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"

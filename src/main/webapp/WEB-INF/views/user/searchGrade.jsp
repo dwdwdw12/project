@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/header2.jsp"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -21,89 +20,84 @@
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 <!-- Templatemo style -->
-<!-- 
-<script src="../resources/js/vendor/modernizr.custom.min.js"></script>
-<link rel="stylesheet" href="../resources/css/normalize.css"> -->
-<style>
 
+<script src="../resources/js/vendor/modernizr.custom.min.js"></script>
+<link rel="stylesheet" href="../resources/css/normalize.css">
+<style>
+.slideshow {
+	height: 465px;
+	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
+	position: relative;
+}
+
+.slideshow img {
+	position: absolute;
+	/*이미지 위치 가운데로 옮기기*/
+	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
+	margin-left: -800px;
+	display: none;
+}
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px">
-
-
+	
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
-					<h2 class="text-uppercase mb-4">항공권 취소요청 확인 및 결제취소 처리</h2>
-					<p class="mb-2">*영업일 기준 3일 이내 처리</p>
+					<h2 class="text-uppercase mb-4">
+						등급 변동 내역 조회
+					</h2>
+					<p class="mb-4"><strong>${userid}</strong>님의 현재등급 : <img src="../resources/img/kakao/등급_춘식이.png" alt="춘식이" style="width: 90px"/></p>
 				</div>
-				
 			</div>
-
-<!-- 			<form action="/flight/search" method="get"
-				class="tm-search-form tm-section-pad-1">
-				<div class="form-row tm-search-form-row">
-					<div
-						class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-
-					</div>
-
-				</div>
-				form-row
-				<div class="form-row tm-search-form-row"></div>
-			</form> -->
 
 			<div class="container">
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>아이디</th>
-							<th>예약번호</th>
-							<th>요청일</th>
-							<th>취소여부</th>
-							<th>처리여부</th>
-							<th>취소</th>
+							<th>번호</th>
+							<th>등급코드</th>
+							<th>등급</th>
+							<th>변동일</th>
 						</tr>
+						
 					</thead>
 					<c:forEach items="${vo}" var="list">
 						<tbody>
-							<tr class="flight">
-								<td>${list.userid}</td>
-								<td>${list.resno}</td>
-								<td><fmt:formatDate value="${list.requestTime}"
-										pattern="yyyy-MM-dd HH:mm" /></td>
+							<tr>
+								<td>${list.gno}</td>
+								<td>${list.gradecode}</td>
 								<c:choose>
-									<c:when test="${list.isCancel==1}">		
-										<td>true</td>
+									<c:when test="${list.gradecode==0}">
+										<td> <img src="../resources/img/kakao/등급_제이지.png" alt="제이지" style="width: 45px"/></p></td>
 									</c:when>
-									<c:otherwise>		
-										<td>false</td>
-									</c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${list.cancelOk ==1}">
-										<td>true</td>
+									<c:when test="${list.gradecode==1}">
+										<td> <img src="../resources/img/kakao/등급_어피치.png" alt="어피치" style="width: 50px"/></p></td>
+									</c:when>
+									<c:when test="${list.gradecode==2}">
+										<td> <img src="../resources/img/kakao/등급_라이언.png" alt="라이언" style="width: 40px"/></p></td>
 									</c:when>
 									<c:otherwise>
-										<td>false</td>
+										<td> <img src="../resources/img/kakao/등급_춘식이.png" alt="춘식이" style="width: 50px"/></p></td>
 									</c:otherwise>
 								</c:choose>
-								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="cancelTicket('${list.resno}',${list.isCancel},'${list.cancelOk}','${list.userid}')">취소</button></td>
+								<td><fmt:formatDate value="${list.updateDate}"
+												pattern="yyyy-MM-dd HH:mm" /></td>
 							</tr>
 						</tbody>
 					</c:forEach>
 				</table>
-				<!-- 페이징  -->
-				<ul class="pagination justify-content-center">
-							<c:if test="${paging.prev}">
+				<!-- 페이징 -->
+		<ul class="pagination justify-content-center">
+ 				<c:if test="${paging.prev}">
 					<li class="page-item">
 							<c:if test="${paging.cri.pageNum>=1}">
 								<a class="page-link" href="?pageNum=${paging.cri.pageNum-1}&amount=${paging.cri.amount}">Previous</a>
 							</c:if>
 					</li>
 				</c:if> 
-				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num" >
 					<c:choose>
 				        <c:when test="${num eq paging.cri.pageNum}">
 				            <li class="page-item active">
@@ -120,55 +114,35 @@
 				 <c:if test="${paging.next}">
 					<li class="page-item">
 					<a class="page-link" href="?pageNum=${paging.cri.pageNum+1}&amount=${paging.cri.amount}">Next</a></li>
-				</c:if> 
-				</ul>
+				</c:if>
+		</ul>
 			</div>
 		</div>
 	</section>
-
-<%-- 	<!-- 전달 폼 -->
-	<form id="ticketForm" action="/user/kakaoDetail" method="get">
+	
+	<!-- 전달 폼 -->
+	<form id="actionForm" action="/user/kakaoDetail" method="get">
 		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}" />
-		<input type="hidden" name="amount" value="${paging.cri.amount}" /> <input
-			type="hidden"
-			value='sec:authentication property="principal.username"' />
-	</form> --%>
+		<input type="hidden" name="amount" value="${paging.cri.amount}" />
+		<input type="hidden" value='sec:authentication property="principal.username"'/>
+	</form>
 
 </div>
 <!-- .tm-container-outer -->
-
+<%@ include file="../includes/footer.jsp"%>
 <script type="text/javascript">
-	function cancelTicket(resno,isCancel,cancelOk,userid){
-		console.log(resno,isCancel,cancelOk,userid);
-		 if(cancelOk == 1){
-			alert("이미 취소처리가 완료 된 항공권입니다.");
-			return false;
-		}else{
-			console.log("취소중...");
-			$.ajax({
-				url : "/admin/cancelTicket",
-				async : false,
-				dataType : "text",
-				data : {
-					resno : resno,
-					userid : userid
-				},
-				type : "POST",
-				success : function(data){
-					console.log(data);
-				},error : function(err){
-					console.log(err);
-				}
-				
-			});
-			
-			location.reload(); 
-		}
-	}	
-
+	//페이지 버튼 클릭 이동
+/* 	var actionForm = $("#actionForm");
+	$(".page-item a").on("click", function(e) {
+		e.preventDefault();
+		console.log("test--------------------------");
+		actionForm.find("input[name='pageNum']").val($(this).attr("href")); 
+		actionForm.submit();
+	}); */
+	
 
 </script>
-<!--  충돌부분 추가 
+<!-- 충돌부분 추가 -->
 <script type="text/javascript">
 	var $jLatest = jQuery.noConflict();
 	$jLatest('input[id="dates"]').daterangepicker();
@@ -212,8 +186,8 @@
 					"firstDay" : 1
 				},
 			});
-</script> -->
-<!-- <script type="text/javascript">
+</script>
+<script type="text/javascript">
 	$(function() {
 		$('.slideshow').each(function() {
 			// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
@@ -253,5 +227,4 @@
 		slidesToShow : 1,
 		slidesToScroll : 1
 	});
-</script> -->
-<%@ include file="../includes/footer.jsp"%>
+</script>

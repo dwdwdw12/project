@@ -23,6 +23,7 @@ import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
+import com.airline.vo.GradeLogVO;
 import com.airline.vo.PageDTO;
 import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
@@ -175,12 +176,30 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/myPage")
+
+	//등급조회
+	@GetMapping("/searchGrade")
+	public void searchGrade(Model model, Criteria cri) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			String userid = userDetails.getUsername();
+			System.out.println("id : " + userid);
+			model.addAttribute("userid",userid);
+			List<GradeLogVO> vo = service.getGradeLog(userid,cri);
+			model.addAttribute("vo",vo);
+			model.addAttribute("paging", new PageDTO(cri, service.getGradeLogCnt(userid, cri)));
+
+		}
+		
+	}
+	
+  	@GetMapping("/myPage")
 	public void myPage(Model model, HttpSession session) {
 		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
 		model.addAttribute("userInfo", vo);
 	}
-	
+  
 	@GetMapping("/myInfoModify")
 	public void myInfoModify(Model model, HttpSession session) {
 		

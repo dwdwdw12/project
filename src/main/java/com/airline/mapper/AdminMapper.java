@@ -3,6 +3,7 @@ package com.airline.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import com.airline.vo.BoardEventVO;
@@ -10,6 +11,7 @@ import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.UserPayVO;
 
@@ -53,5 +55,23 @@ public interface AdminMapper {
 	public List<BoardEventVO> getEvent(@Param("cri")Criteria cri);
 
 	public int eventCtn(@Param("cri")Criteria cri);
+	
+	public List<FlightVO> getFlightList(@Param("cri")Criteria cri);
+
+	public int getFlightListCnt(@Param("cri")Criteria cri);
+
+	public int getFno();
+
+	@Select("SELECT DISTINCT depcode FROM airplaneschedule")
+	public List<String> getDepCode();
+
+	@Select("SELECT DISTINCT arrcode FROM airplaneschedule")
+	public List<String> getArrcode();
+
+	@Select("SELECT DISTINCT depregioncode FROM airplaneschedule")
+	public List<Integer> getdRCode();
+
+	@Select("SELECT DISTINCT arrregioncode FROM airplaneschedule")
+	public List<Integer> getaRCode();
 
 }

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,6 +21,7 @@ import com.airline.vo.BoardNoticeVO;
 import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.FlightVO;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.PageDTO;
 import com.airline.vo.UserPayVO;
@@ -125,5 +128,40 @@ public class AdminController {
 		model.addAttribute("vo",vo);
 		model.addAttribute("paging",new PageDTO(cri, admin.eventCtn(cri)));
 	}
+	
+	//항공스케줄 조회 및 업데이트
+		@GetMapping("flightSchedule")
+		public void flightSchedule(Model model, Criteria cri) {
+			List<FlightVO> vo = admin.getFlightList(cri);
+			model.addAttribute("vo",vo);
+			model.addAttribute("paging",new PageDTO(cri, admin.getFlightListCnt(cri)));
+		}
+		
+		//항공스케줄 인서트 뷰 페이지
+		@GetMapping("flightCreate")
+		public void flightSchedule(Model model) {
+			int fno = admin.getFno();
+			model.addAttribute("fno",fno);
+			List<String> depCode = admin.getDepcode();
+			System.out.println("depCode>>>>"+depCode);
+			model.addAttribute("depCode",depCode);
+			List<String> arrCode = admin.getArrcode();
+			model.addAttribute("arrCode",arrCode);
+			List<Integer> dRCode = admin.getdRCode();
+			List<Integer> aRCode = admin.getaRCode();
+			model.addAttribute("dRCode",dRCode);
+			model.addAttribute("aRCode",aRCode);
+			/*
+			 * String arrCode = admin.arrDepcode(); model.addAttribute("depCode",depCode);
+			 */
+			
+		}
+		
+		@PostMapping(value="flightCreate",consumes = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<String> postFlightSchedule(@RequestBody FlightVO vo) {
+			System.out.println("vo>>>"+vo);
+			return ResponseEntity.ok("Success");
+			
+		}
 
 }
