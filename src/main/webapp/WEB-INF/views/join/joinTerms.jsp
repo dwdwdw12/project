@@ -24,7 +24,7 @@
 				</div>
 				<br>
 				<form action="/join/joinTerms" method="post" name="frm"
-					style="margin: 0 20px 0 20px">
+					style="margin: auto; width: 80%;">
 					<fieldset style="margin: 20px 20px 20px 20px">
 						<hr>
 						<input type="checkbox" name="selectall" id="agree_all"

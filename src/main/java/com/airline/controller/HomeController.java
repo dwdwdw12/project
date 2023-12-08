@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,6 +82,7 @@ public class HomeController {
     
     @Autowired
 	private PasswordEncoder passwordEncoder;
+    
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -170,8 +172,16 @@ public class HomeController {
 	}
 		
 	@PostMapping("/logout")
-	public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response){
+	public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 		log.info("logout..post");
+		
+		String access_token = (String) session.getAttribute("access_token");
+
+		//if(access_token != null)
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Authorization", "Bearer " + access_token);
+		
+		
 	    try {
 	        log.info("logout..post");
 	        request.getSession();

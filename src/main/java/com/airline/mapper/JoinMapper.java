@@ -60,5 +60,7 @@ public interface JoinMapper {
 	
 	public void insertUserlog(String userId);
 	public void insertGradelog(String userId);
+	public void insertUserPay(String userId);
+	public void insertPoint(String userId);
 	
 }

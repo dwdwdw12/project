@@ -2,6 +2,8 @@ package com.airline.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +22,7 @@ import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.KakaoUserVO;
 import com.airline.vo.GradeLogVO;
 import com.airline.vo.PageDTO;
 import com.airline.vo.PointVO;
@@ -173,6 +176,7 @@ public class UserController {
 		}
 	}
 	
+
 	//등급조회
 	@GetMapping("/searchGrade")
 	public void searchGrade(Model model, Criteria cri) {
@@ -190,7 +194,16 @@ public class UserController {
 		
 	}
 	
-	
+  	@GetMapping("/myPage")
+	public void myPage(Model model, HttpSession session) {
+		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
+		model.addAttribute("userInfo", vo);
+	}
+  
+	@GetMapping("/myInfoModify")
+	public void myInfoModify(Model model, HttpSession session) {
+		
+	}
 
 	
 }

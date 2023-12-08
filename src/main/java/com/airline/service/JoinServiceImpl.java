@@ -1,3 +1,4 @@
+
 package com.airline.service;
 
 import java.io.BufferedReader;
@@ -224,20 +225,6 @@ public class JoinServiceImpl implements JoinService {
 						log.info("birthday >> " + birthday);
 						log.info("phone_number >> " + phone_number);
 //						log.info("shipping_address >> " +shipping_address);
-
-//			            JsonParser parser = new JsonParser();
-//			            JsonElement element = parser.parse(result);
-//
-//			            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-//			            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-//
-//			            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-//			            String email = kakao_account.getAsJsonObject().get("email").getAsString();
-//			            
-//			            userInfo.put("accessToken", access_Token);
-//			            userInfo.put("nickname", nickname);
-//			            userInfo.put("email", email);
-						
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -249,6 +236,79 @@ public class JoinServiceImpl implements JoinService {
 				return userInfo;
 			
 	}
+	
+	
+//	//토큰주고 정보받아오기
+//		@Override 
+//		public HashMap<String, Object> getKakaoLogout(String access_Token) throws Throwable {
+//			// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+//					HashMap<String, Object> userInfo = new HashMap<String, Object>();
+//					String reqURL = "https://kapi.kakao.com/v1/user/logout";
+//
+//					try {
+//						//post타입으로 지정한 url에 접속
+//						URL url = new URL(reqURL);
+//						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//						conn.setRequestMethod("POST");
+//
+//						// 요청에 필요한 Header에 포함될 내용  (String key, String value) => kakao로부터 정보를 받아오기 위함
+//						conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+//						
+//
+//						int responseCode = conn.getResponseCode(); //200이 나오면 정상
+//						log.info("responseCode >> " + responseCode);
+//
+//						//kakao가 주는 정보 담은 애
+//						BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//
+//						String line = "";
+//						String result = "";
+//
+//						//잘 연결이 되었다면(access Token conn 등에 오류가 없다면..) result에 결과를 전부 담음
+//						while ((line = br.readLine()) != null) {
+//							result += line;
+//						}
+//						log.info("response body >> " + result);
+//						log.info("result type >> " + result.getClass().getName()); // java.lang.String
+//
+//						try {
+//							// jackson objectmapper 객체 생성(Json 타입의 데이터를 java 데이터로 바꾸기 위해)
+//							ObjectMapper objectMapper = new ObjectMapper();
+//							// JSON String -> Map
+//							Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
+//							});
+//							//result(JSON 형태의 데이터)를 TypeReference로 끊어서 읽음
+//							//TypeReference는 그냥 런타임시에도 유형을 보존해주는 메소드..
+//							//결론적으로 result를 map으로 끊어서 map에 저장함
+//
+//							log.info("jsonMap Data >> " +jsonMap.get("id")); //null error처리해주기
+//							//jsonMap에서 "properties"라는 이름을 가진 데이터를 출력
+//							
+//							// kakao는 kakao_account에 유저정보가 있다.
+//							//Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
+//							//"properties"라는 데이터를 map형태로 가져옴 아래도 마찬가지..
+//							Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("id");
+//
+//							//System.out.println("properties >> " + properties);
+//							
+//							log.info(kakao_account.get("id"));
+//
+//							String id = kakao_account.get("id").toString();
+//
+//							log.info("id >> " + id);
+//							
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
+//
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//					return userInfo;
+//				
+//		}
+	
+	
  
 	@Override
 	public TermsVO getTerms(int termsCode) {
@@ -302,6 +362,26 @@ public class JoinServiceImpl implements JoinService {
 	@Override
 	public List<SimpleGrantedAuthority> getAuthorities(String email) {
 		return join.getAuthorities(email);
+	}
+
+	@Override
+	public void registerUserlog(String userId) {
+		join.insertUserlog(userId);
+	}
+
+	@Override
+	public void registerGradelog(String userId) {
+		join.insertGradelog(userId);
+	}
+
+	@Override
+	public void registerUserPay(String userId) {
+		join.insertUserPay(userId);
+	}
+
+	@Override
+	public void registerPoint(String userId) {
+		join.insertPoint(userId);
 	}
 
 	
