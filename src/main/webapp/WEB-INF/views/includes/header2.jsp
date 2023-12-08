@@ -97,7 +97,8 @@ bottom:30px;
 												<li><a href="single-blog.html">single-blog</a></li>
 											</ul>
 										</li>
-										<sec:authorize access="isAuthenticated()">
+										<%-- <sec:authorize access="isAuthenticated()"> --%>
+										<sec:authorize access="hasRole('ROLE_MEMBER')">
 											<li sec:authorize="hasRole('ROLE_MEMBER'))"><a href="/user" href="#">myPage(user)<i class="ti-angle-down"></i></a>
 												<ul class="submenu">
 													<li><a href="blog.html">회원정보 조회/수정</a></li>
@@ -106,13 +107,16 @@ bottom:30px;
 													<li><a href="single-blog.html">구매내역 조회</a></li>
 												</ul>
 											</li>
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_ADMIN')">
 											<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin" href="#">myPage(admin)<i class="ti-angle-down"></i></a>
 												<ul class="submenu">
 													<li><a href="blog.html">회원조회</a></li>
 													<li><a href="single-blog.html">항공스케줄 등록/수정</a></li>
 												</ul>
 											</li>
-										</sec:authorize>
+										</sec:authorize>	
+										
 										<li><a href="/contact">Contact</a></li>
 									</ul>
 								</nav>
