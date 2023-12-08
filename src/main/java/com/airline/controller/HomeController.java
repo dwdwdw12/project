@@ -152,7 +152,7 @@ public class HomeController {
 		log.info("login page");
 		
 		if(error != null) {
-			model.addAttribute("error","Login Error Check your account");
+			model.addAttribute("error","아이디 또는 비밀번호를 잘못 입력하였습니다.");
 		}
 		
 		if(model != null) {
