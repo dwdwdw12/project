@@ -89,6 +89,8 @@ public interface AdminMapper {
 	public int insertFlightLog(@Param("vo")FlightVO vo);
 
 	public FlightVO flightNoticePopup();
+
+	public int deleteFlight(@Param("vo")FlightVO vo);
 	
 	
 

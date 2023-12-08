@@ -110,7 +110,7 @@ function submit(){
 			fullArrtime : $("#fullArrTime").val(),
 			flightTime : $("#flightTime").val(),
 			reason : $("#reason").val(),
-			isDelete : 1
+			isDelete : 2
 			
 		}),
 		success : function(data){

@@ -84,13 +84,10 @@
 								<td>${list.fullArrtime}</td>
 								<td>${list.flightTime}</td>
 								<td>24</td>
-								<td><button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom"  onclick="window.open('/admin/flightModify?fno=${list.fno}','항공정보수정','width = 2100, height = 300, top = 100, left = 100, location = no')"><i class="bi bi-chevron-double-right"></i>&nbsp;수정
-							</button> 
-							</button></td>
-								<td><button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/flightSchedule'"><i class="bi bi-chevron-double-right"></i>&nbsp;삭제
-							</button></td>
+								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom"  onclick="window.open('/admin/flightModify?fno=${list.fno}','항공정보수정','width = 2100, height = 300, top = 100, left = 100, location = no')">
+								<i class="bi bi-chevron-double-right"></i>&nbsp;수정 </button> </td>
+								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="submit('${list.fno}')"><i class="bi bi-chevron-double-right"></i>&nbsp;삭제
+								</button></td>
 						
 							</tr>
 						</tbody>
@@ -140,33 +137,40 @@
 <!-- .tm-container-outer -->
 
 <script type="text/javascript">
-	function cancelTicket(resno,isCancel,cancelOk,userid){
-		console.log(resno,isCancel,cancelOk,userid);
-		 if(cancelOk == 1){
-			alert("이미 취소처리가 완료 된 항공권입니다.");
-			return false;
-		}else{
-			console.log("취소중...");
-			$.ajax({
-				url : "/admin/cancelTicket",
-				async : false,
-				dataType : "text",
-				data : {
-					resno : resno,
-					userid : userid
-				},
-				type : "POST",
-				success : function(data){
-					console.log(data);
-				},error : function(err){
-					console.log(err);
-				}
+function submit(fno){
+	if(!confirm(fno+"번 항공을 결항처리하시겠습니까?")){
+		return false;
+	}else{
+		var reason = prompt("결항 사유를 입력하여 주십시오.");
+		$.ajax({
+			url : "/admin/flightDelete",
+			type : "POST",
+			//dataType : "json",
+			async : true,
+			contentType : "application/json",
+			data : JSON.stringify({
+				fno : fno,
+				reason : reason,
+				isDelete : 3
 				
-			});
-			
-			location.reload(); 
-		}
-	}	
+			}),
+			success : function(data){
+				console.log(data);
+				window.close();
+	/* 			location.href="admin/flightSchedule"; */
+			},
+			error : function(err){
+				console.log(err);
+	/* 			console.log(err.responseText); // 서버에서 전송한 오류 메시지
+			    console.log(err.status);  */
+				alert("항공스케즐 수정에 실패했습니다!");
+			}
+		});
+	}
+	
+
+		
+}
 
 
 </script>

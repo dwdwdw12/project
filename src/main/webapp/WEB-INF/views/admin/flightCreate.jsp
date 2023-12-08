@@ -42,7 +42,6 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>번호</th>
 							<th style="width: 10%">운항기</th>
 							<th>출발지</th>
 							<th>출발공항 코드</th>
@@ -57,7 +56,6 @@
 					</thead>
 						<tbody>
 							<tr class="flight">
-								<td><input type="hidden" id="fno" name="fno" value="${fno}" readonly="readonly"/>${fno}</td>
 								<td><input type="text" id="flightName" name="flightName" placeholder="OZ1155" value="" required="required" style="border: 0; background-color: #efefef; width: 80px"/></td>
 								<td><input type="text" id="depName" name="depName" placeholder="인천" value="" required="required" style="border: 0; background-color: #efefef;width: 80px"/></td>
 								<!-- <td><input type="text" id="depCode"/></td> -->
@@ -123,7 +121,7 @@ function submit(){
 		async : true,
 		contentType : "application/json",
 		data : JSON.stringify({
-			fno : $("#fno").val(),
+			/* fno : $("#fno").val(), */
 			flightName : $("#flightName").val(),
 			depName : $("#depName").val(),
 			depCode : $("#depCode").val(),
