@@ -30,7 +30,7 @@
             }
         }
 
-        window.onload = checkCookie; // 수정: 페이지 로딩 시에 checkCookie 함수 호출
+        window.onload = checkCookie(); // 수정: 페이지 로딩 시에 checkCookie 함수 호출
     </script>
 <title>Insert title here</title>
 <style>

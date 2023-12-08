@@ -261,21 +261,21 @@ hr {
 							어피치 등급까지
 							<fmt:formatNumber value="${300000-mile}" pattern="###,###,###" />
 							마일리지 남았습니다.
-						</c:when>
+							</c:when>
 							<c:when test="${mile>=300000 and mile < 500000}">
 							라이언 등급까지 
 							<fmt:formatNumber value="${500000-mile}" pattern="###,###,###" />
 							마일리지 남았습니다.
-						</c:when>
+							</c:when>
 							<c:when test="${mile>=500000 and mile <1000000}">
 							춘식이 등급까지 
 							<fmt:formatNumber value="${1000000-mile}" pattern="###,###,###" />
 							 마일리지 남았습니다.
-						</c:when>
+							</c:when>
 							<c:otherwise>
 								<fmt:formatNumber value="${mile}" pattern="###,###,###" />
 							마일리지를 보유하여 춘식이 등급입니다.
-						</c:otherwise>
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</c:if>
