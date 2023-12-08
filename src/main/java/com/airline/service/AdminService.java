@@ -70,5 +70,7 @@ public interface AdminService {
 	public int insertFlightLog(FlightVO vo);
 	//모달정보불러오기
 	public FlightVO flightNoticePopup();
+	//항공스케줄 삭제
+	public int deleteFlight(FlightVO vo);
 
 }

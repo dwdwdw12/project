@@ -139,8 +139,6 @@ public class AdminController {
 	//항공스케줄 인서트 뷰 페이지
 	@GetMapping("/flightCreate")
 	public void flightSchedule(Model model) {
-		int fno = admin.getFno();
-		model.addAttribute("fno",fno);
 		List<String> depCode = admin.getDepcode();
 		System.out.println("depCode>>>>"+depCode);
 		model.addAttribute("depCode",depCode);
@@ -225,5 +223,44 @@ public class AdminController {
 		
 		return "redirect:/admin/flightSchedule";
 	}
+	
+	//항공스케줄 삭제 뷰 페이지
+	/*
+	 * @GetMapping("/flightDelete") public void flightDelete(Model
+	 * model,@Param("fno")int fno) { System.out.println("fno>>"+fno); FlightVO vo =
+	 * admin.getFlightInfo(fno); System.out.println("vo>>>"+vo);
+	 * model.addAttribute("vo",vo);
+	 * 
+	 * 
+	 * }
+	 */
+		
+		@PostMapping(value="/flightDelete",consumes = MediaType.APPLICATION_JSON_VALUE)
+		public String postflightDelete(@RequestBody FlightVO vo, RedirectAttributes rttr) {
+			System.out.println("modify vo>>>"+vo);
+			int isdelete = vo.getIsDelete();
+			System.out.println("delete>>"+isdelete);
+
+			 FlightVO flightInfo = admin.getFlightInfo(vo.getFno());
+			 flightInfo.setReason(vo.getReason());
+			 int fResult = admin.insertFlightLog(flightInfo);
+			//삭제(운항테이블)+인서트(로그)
+//			vo.setDepDay(depDay);
+//			vo.setArrDay(arrDay);
+//			vo.setDepTime(depTime);
+//			vo.setArrTime(arrTime);
+//			vo.setFullDeparture(fullDeparture);
+//			vo.setFullArrival(fullArrival);
+//			System.out.println("vo출력>>"+vo);
+			int result = admin.deleteFlight(vo);
+			if(result == 1) {
+				//메인화면 공지 띄우기
+				//공지관련 테이블 저장 후 home 에 모달띄우기
+				
+				rttr.addFlashAttribute(result);
+			}
+			
+			return "redirect:/admin/flightSchedule";
+		}
 
 }

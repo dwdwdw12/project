@@ -57,20 +57,25 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
             <p style="color:red">
 <img src="/resources/img/alert.png" onerror="this.style.display='none'" width=20px height=auto usemap="#popup" alt="event page">
 <c:choose>
-	<c:when test="${modi.isDelete==1}">
-	<h2>항공 운항시간 변경 안내</h2>
+	<c:when test="${modi.isDelete==2}">
+	<h2>항공 운항 변경 안내</h2>
+	</c:when>
+	<c:when test="${modi.isDelete==3}">
+	<h2>항공결항 안내</h2>
 	</c:when>
 	<c:otherwise>
-	<h2>항공결항 안내</h2>
 	</c:otherwise>
 </c:choose> 
 
- 
-<p>${modi.reason}로 인한 ${modi.flightName}편 ${modi.depName} to ${modi.arrName} 행 </p><c:choose><c:when test="${modi.isDelete==1}">
-	<p>항공 운항시간 변경 안내 드립니다.</p>
+<p>${modi.reason}로 인한 ${modi.flightName}편 ${modi.depName} to ${modi.arrName} 행 </p>
+<c:choose>
+	<c:when test="${modi.isDelete==2}">
+	<p>항공 운항 변경 안내</p>
+	</c:when>
+	<c:when test="${modi.isDelete==3}">
+	<p>항공결항 안내</p>
 	</c:when>
 	<c:otherwise>
-	<p>항공결항 안내 드립니다.</p>
 	</c:otherwise>
 </c:choose> 
 <%-- ${modi.reason} --%>

@@ -189,4 +189,9 @@ public class AdminServiceImpl implements AdminService{
 	public FlightVO flightNoticePopup() {
 		return mapper.flightNoticePopup();
 	}
+
+	@Override
+	public int deleteFlight(FlightVO vo) {
+		return mapper.deleteFlight(vo);
+	}
 }
