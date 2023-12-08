@@ -47,7 +47,7 @@
 				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 					<h2 class="text-uppercase mb-4">
 						등급 변동 내역 조회
-					</h2>
+					</h2><!-- 등급추가 -->
 					<p class="mb-4"><strong>${userid}</strong>님의 현재등급 : <c:choose>
 									<c:when test="${list.gradecode==0}">
 										<td> <img src="../resources/img/kakao/등급_제이지.png" alt="제이지" style="width: 90px"/></p></td>
