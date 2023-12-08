@@ -28,7 +28,7 @@
 
 </style>
 
-<div class="tm-page-wrap mx-auto" style="margin-top: 180px">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
@@ -52,11 +52,11 @@
 				form-row
 				<div class="form-row tm-search-form-row"></div>
 			</form> -->
-
 			<div class="container">
-		<button type="button"
-							class="btn btn-primary btn-sm btn-custom" onclick="window.open('/admin/flightCreate','항공정보인서트','width = 2100, height = 300, top = 100, left = 100, location = no')"><i class="bi bi-chevron-double-right"></i>&nbsp;신규 운항내역 등록
-							</button> 
+		 		<div class="container wrapper">
+				<button type="button" class="btn btn-primary btn-sm btn-custom" onclick="window.open('/admin/flightCreate','항공정보인서트','width = 2100, height = 300, top = 100, left = 100, location = no')" style="float: right;"><i class="bi bi-chevron-double-right"></i>&nbsp;신규 운항 등록
+				</button>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -84,8 +84,10 @@
 								<td>${list.fullArrtime}</td>
 								<td>${list.flightTime}</td>
 								<td>24</td>
-								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom"  onclick="window.open('/admin/flightModify?fno=${list.fno}','항공정보수정','width = 2100, height = 300, top = 100, left = 100, location = no')">
-								<i class="bi bi-chevron-double-right"></i>&nbsp;수정 </button> </td>
+ 								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom"  onclick="window.open('/admin/flightModify?fno=${list.fno}','항공정보수정','width = 1800, height = 300, top = 100, left = 100, location = no')">
+								<i class="bi bi-chevron-double-right"></i>&nbsp;수정 </button> </td> 
+								<%-- <td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom"  onclick="modify('${list.fno}')">
+								<i class="bi bi-chevron-double-right"></i>&nbsp;수정 </button> </td> --%>
 								<td><button type="button" class="btn btn-primary btn-sm btn-block btn-custom" onclick="submit('${list.fno}')"><i class="bi bi-chevron-double-right"></i>&nbsp;삭제
 								</button></td>
 						
@@ -137,6 +139,38 @@
 <!-- .tm-container-outer -->
 
 <script type="text/javascript">
+function modify(fno){
+	if(!confirm(fno+"번 항공운항내역을 수정하시겠습니까?")){
+		return false;
+	}else{
+		var reason = prompt("결항 사유를 입력하여 주십시오.");
+		$.ajax({
+			url : "/admin/flightModify",
+			type : "POST",
+			//dataType : "json",
+			async : true,
+			contentType : "application/json",
+			data : JSON.stringify({
+				fno : fno,
+				reason : reason
+				
+			}),
+			success : function(data){
+				console.log(data);
+				location.href="/admin/flightModify";
+			},
+			error : function(err){
+				console.log(err);
+	/* 			console.log(err.responseText); // 서버에서 전송한 오류 메시지
+			    console.log(err.status);  */
+				alert("항공스케즐 수정에 실패했습니다!");
+			}
+		});
+	}
+}
+
+
+
 function submit(fno){
 	if(!confirm(fno+"번 항공을 결항처리하시겠습니까?")){
 		return false;
@@ -174,90 +208,5 @@ function submit(fno){
 
 
 </script>
-<!--  충돌부분 추가 
-<script type="text/javascript">
-	var $jLatest = jQuery.noConflict();
-	$jLatest('input[id="dates"]').daterangepicker();
-	$jLatest('input[id="startDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-	$jLatest('input[id="endDate"]').daterangepicker(
-			{
-				singleDatePicker : true,
-				timePicker : true,
-				timePicker24Hour : true,
-				"locale" : {
-					"format" : 'YYYY-MM-DD HH:mm:SS',
-					"separator" : " ~ ",
-					"applyLabel" : "확인",
-					"cancelLabel" : "취소",
-					"fromLabel" : "From",
-					"toLabel" : "To",
-					"customRangeLabel" : "Custom",
-					"weekLabel" : "주",
-					"daysOfWeek" : [ "일", "월", "화", "수", "목", "금", "토" ],
-					"monthNames" : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					"firstDay" : 1
-				},
-			});
-</script> -->
-<!-- <script type="text/javascript">
-	$(function() {
-		$('.slideshow').each(function() {
-			// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
-			let $slides = $(this).find("img");
-			let slideCount = $slides.length;
-			let currentIndex = 0;
-			$slides.eq(currentIndex).fadeIn();
-			// 첫 이미지를 나타나게 함
 
-			// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
-			let showNextSlide = function() {
-				let nextIndex = (currentIndex + 1) % slideCount;
-				// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
-				$slides.eq(currentIndex).fadeOut();
-				// 현재 이미지를 사라지게 하고
-				$slides.eq(nextIndex).fadeIn();
-				// 위에서 구한 다음 이미지를 나타나게 함
-				currentIndex = nextIndex;
-				// 다음 이미지의 값을 현재로 
-			}
-
-			let timer = setInterval(showNextSlide, 1000);
-			$(this).on('mouseover', function() {
-				//타이머 취소
-				clearInterval(timer);
-			}).on('mouseout', function() {
-				//타이머 시작
-				timer = setInterval(showNextSlide, 1000);
-			})
-		})
-	});
-
-	// Slick Carousel
-	$('.tm-slideshow').slick({
-		infinite : true,
-		arrows : true,
-		slidesToShow : 1,
-		slidesToScroll : 1
-	});
-</script> -->
-<%@ include file="../includes/footer.jsp"%>l>
+<%@ include file="../includes/footer.jsp"%>
