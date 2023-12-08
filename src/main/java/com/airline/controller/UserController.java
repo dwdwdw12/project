@@ -95,6 +95,7 @@ public class UserController {
 			String userid = userDetails.getUsername();
 			System.out.println("id : " + userid);
 			List<UserPayVO> vo = service.getMPoint(userid, cri);
+			System.out.println("vo : "+vo);
 			int sumP= service.getSumP(userid);
 			model.addAttribute("vo",vo);
 			model.addAttribute("sumP",sumP);

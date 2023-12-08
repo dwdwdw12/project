@@ -131,9 +131,10 @@
 	</select>
 	
 	<select id="getMPoint" resultType="com.airline.vo.UserPayVO">
-	<![CDATA[
+		select * from userpay where userid=#{userid} order by getDate desc limit #{cri.pageNum},#{cri.amount}
+<!-- 	<![CDATA[
 		select c.* from(select b.* from(select row_number() over(order by getDate asc) as num, a.* from userpay a where userid=#{userid})b where num<= #{cri.pageNum}* #{cri.amount})c where num>= (#{cri.pageNum}-1)* #{cri.amount}
-	 ]]> 
+	 ]]>  -->
 	</select>
 	
 	<select id="getKTotal" resultType="int">
