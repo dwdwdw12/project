@@ -182,8 +182,7 @@ p.btn.btn-default {
 				<br><br><br><br><br>
 				<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
 					다시 여정을 선택해주세요.
-				</h3>
-				<br><br>
+				</h3><br>
 				<h5 style="text-align: center;">
 					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
 				</h5>	
@@ -232,9 +231,8 @@ p.btn.btn-default {
 					</thead>
 					<c:if test="${empty list}">
 						<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-						다시 여정을 선택해주세요.
-						</h3>	
-						<br><br>
+						다시 여정을 선택해주세요.</h3>
+						<br>	
 						<h5 style="text-align: center;">
 						가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
 						</h5>
@@ -313,9 +311,8 @@ p.btn.btn-default {
 			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 		<br><br><br><br><br>
 		<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-			다시 여정을 선택해주세요.
-		</h3>
-		<br><br>	
+			다시 여정을 선택해주세요.</h3>
+		<br>	
 		<h5 style="text-align: center;">
 				가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.
 		</h5>

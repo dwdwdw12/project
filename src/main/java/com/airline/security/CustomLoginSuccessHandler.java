@@ -52,26 +52,27 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		});
 	
 		log.warn("role names : " + roleNames);
-		if(roleNames.contains("ROLE_ADMIN")) {
-			//resultRedirectStrategy(request, response, auth);
-			response.sendRedirect("/admin");
-			return ;
-		}
-		
-		if(roleNames.contains("ROLE_MEMBER")) {
-			//resultRedirectStrategy(request, response, auth);
-			response.sendRedirect("/user");
-			return;
-		}
+//		if(roleNames.contains("ROLE_ADMIN")) {
+//			resultRedirectStrategy(request, response, auth);
+//			//response.sendRedirect("/admin");
+//			return ;
+//		}
+//		
+//		if(roleNames.contains("ROLE_MEMBER")) {
+//			resultRedirectStrategy(request, response, auth);
+//			//response.sendRedirect("/user");
+//			return;
+//		}
 		clearAuthenticationAttributes(request);
-		//resultRedirectStrategy(request, response, auth);
-		response.sendRedirect("/");
+		
+		//response.sendRedirect("/");
+		resultRedirectStrategy(request, response, auth);
 	}
 
 	//로그인 실패 에러세션 지우기
 	private void clearAuthenticationAttributes(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if(session == null) return;
+		if(session != null) return;
 		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 		
 	}
