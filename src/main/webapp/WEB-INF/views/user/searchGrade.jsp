@@ -48,7 +48,20 @@
 					<h2 class="text-uppercase mb-4">
 						등급 변동 내역 조회
 					</h2>
-					<p class="mb-4"><strong>${userid}</strong>님의 현재등급 : <img src="../resources/img/kakao/등급_춘식이.png" alt="춘식이" style="width: 90px"/></p>
+					<p class="mb-4"><strong>${userid}</strong>님의 현재등급 : <c:choose>
+									<c:when test="${list.gradecode==0}">
+										<td> <img src="../resources/img/kakao/등급_제이지.png" alt="제이지" style="width: 90px"/></p></td>
+									</c:when>
+									<c:when test="${list.gradecode==1}">
+										<td> <img src="../resources/img/kakao/등급_어피치.png" alt="어피치" style="width: 90px"/></p></td>
+									</c:when>
+									<c:when test="${list.gradecode==2}">
+										<td> <img src="../resources/img/kakao/등급_라이언.png" alt="라이언" style="width: 90px"/></p></td>
+									</c:when>
+									<c:otherwise>
+										<td> <img src="../resources/img/kakao/등급_춘식이.png" alt="춘식이" style="width: 90px"/></p></td>
+									</c:otherwise>
+								</c:choose></p>
 				</div>
 			</div>
 
