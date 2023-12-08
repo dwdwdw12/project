@@ -101,7 +101,7 @@
 											</ul></li>
 									
 										 
-										<c:if test="${${loginUser.authority[0].getAuthority() == 'ROLE_MEMBER'}}">
+										<c:if test="${loginUser.authority[0].getAuthority() == 'ROLE_MEMBER'}">
 											<li><a href="/user">myPage(user)<i class="ti-angle-down"></i></a>
 
 												<ul class="submenu">
@@ -115,7 +115,7 @@
 											</ul></li>
 										</c:if>
 											
-										<c:if test="${${loginUser.authority[0].getAuthority() == 'ROLE_ADMIN'}}">
+										<c:if test="${loginUser.authority[0].getAuthority() == 'ROLE_ADMIN'}"> 
 										<%-- <sec:authorize access="hasRole('ROLE_ADMIN'))"> --%>
 										<li>
 											<a href="/admin">myPage(admin)

@@ -717,7 +717,7 @@
 	<!-- 모달창 -->
 	 <jsp:include page="/WEB-INF/views/FlightPopup.jsp"/>   
 	<!-- /모달창 -->
-
+	
 	<!-- .tm-container-outer -->
 	<%@ include file="includes/footer.jsp"%>
 	<!-- 충돌부분 추가 -->
