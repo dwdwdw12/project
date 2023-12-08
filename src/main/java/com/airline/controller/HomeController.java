@@ -31,6 +31,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -155,7 +156,7 @@ public class HomeController {
 	
 	//로그인->spring 페이지로 뺄까..?
 	@GetMapping("/login")
-	public void login(String error, String logout, Model model) {
+	public void login(String error, String logout, Model model, HttpServletRequest request) {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
@@ -168,6 +169,11 @@ public class HomeController {
 			model.addAttribute("logout", "logout");
 		}
 		
+		//이전 페이지로 되돌아가기 위한 Referer 헤더값을 세션의 prevPage attribute로 저장 
+	    String uri = request.getHeader("Referer");
+	    if (uri != null && !uri.contains("/login")) {
+	        request.getSession().setAttribute("prevPage", uri);
+	    }
 		
 	}
 		

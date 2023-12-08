@@ -49,7 +49,7 @@
     text-align: center;
     top: 0px;
     background-color: gray !important;
-    z-index: 1;
+    z-index: 2;
 }
 #arrTable th {
     position: sticky;
@@ -68,7 +68,7 @@ td {
 p.btn.btn-default {
     font-size: 10px;
     padding: 12px;
-    width: 80px;
+    width: 90px;
     border-radius: 5px;
     margin: 15px -2px 15px -2px;
     display: inline-block;
@@ -97,6 +97,7 @@ p.btn.btn-default {
     left: 0;
     border-radius: 50%;
     top: -5px;
+    
 }
 .seprator:last-child:before {		/* 화살표 */
     width: 0;
@@ -107,6 +108,7 @@ p.btn.btn-default {
     top: -10px;
     right: 0;
     border-bottom: 10px solid black;
+    
 }
 </style>
 
@@ -120,6 +122,7 @@ p.btn.btn-default {
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
 				<br><br>
+					<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
 				<div class="form-row tm-search-form-row">
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
 						<label for="dep">출발지</label> 
@@ -165,14 +168,25 @@ p.btn.btn-default {
 			<section class="p-5 tm-container-outer tm-bg-gray">
 				<div class="container" >
 				<div class="text-right">
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+					<c:if test="${empty arrDate}">
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}#1'">다음날</button>
+					</c:if>	
+					<c:if test="${!empty arrDate}">
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+					</c:if>
 				</div>
 				<h2 style="text-align: center">${depDate} : ${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
 					<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 				<br><br><br><br><br>
 				<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-					다시 여정을 선택해주세요.</h3>	
+					다시 여정을 선택해주세요.
+				</h3>
+				<br><br>
+				<h5 style="text-align: center;">
+					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
+				</h5>	
 				</div>
 				</div>
 			</section>
@@ -218,7 +232,13 @@ p.btn.btn-default {
 					</thead>
 					<c:if test="${empty list}">
 						<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-					다시 여정을 선택해주세요.</h3>	
+						다시 여정을 선택해주세요.
+						</h3>	
+						<br><br>
+						<h5 style="text-align: center;">
+						가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
+						</h5>
+						
 					</c:if>
 					<c:forEach items="${list}" var="list">
 						<tbody>
@@ -228,10 +248,15 @@ p.btn.btn-default {
 									<strong>${fn:substring(list.fullDeptime, 11,16)}</strong>
 									<div class="seprator"></div>  
 									  <p class="btn btn-default">
-									  		<i class='far fa-clock'></i>&nbsp;${list.flightTime}
+									  		<i class='far fa-clock'></i>&nbsp;<strong> <c:if test="${fn:split(list.flightTime,':')[0]!=0}">${fn:split(list.flightTime,':')[0]}시간 </c:if> ${fn:split(list.flightTime,':')[1]}분 </strong>
 									  </p>
 									   <div class="seprator"></div>
-									<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)==fn:substring(list.fullDeptime, 0,10)}">
+										<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									</c:if>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)!=fn:substring(list.fullDeptime, 0,10)}">
+										<strong>다음날) ${fn:substring(list.fullArrtime, 11,16)}</strong>										
+									</c:if>
 								</td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice*1.5}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
@@ -288,7 +313,12 @@ p.btn.btn-default {
 			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 		<br><br><br><br><br>
 		<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-			다시 여정을 선택해주세요.</h3>	
+			다시 여정을 선택해주세요.
+		</h3>
+		<br><br>	
+		<h5 style="text-align: center;">
+				가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.
+		</h5>
 		</div>
 		</div>
 	</section>
@@ -332,10 +362,15 @@ p.btn.btn-default {
 									<strong>${fn:substring(list.fullDeptime, 11,16)}</strong>
 									<div class="seprator"></div>  
 									  <p class="btn btn-default">
-									  		<i class='far fa-clock'></i>&nbsp;${list.flightTime}
+									  		<i class='far fa-clock'></i>&nbsp;<strong><c:if test="${fn:split(list.flightTime,':')[0]!=0}">${fn:split(list.flightTime,':')[0]}시간 </c:if> ${fn:split(list.flightTime,':')[1]}분 </strong>
 									  </p>
 									   <div class="seprator"></div>
-									<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)==fn:substring(list.fullDeptime, 0,10)}">
+										<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									</c:if>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)!=fn:substring(list.fullDeptime, 0,10)}">
+										<strong>다음날) ${fn:substring(list.fullArrtime, 11,16)}</strong>										
+									</c:if>
 								</td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice*1.5}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>

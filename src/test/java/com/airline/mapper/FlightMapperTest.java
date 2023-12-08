@@ -63,6 +63,11 @@ public class FlightMapperTest {
 //		}
 //	}
 	
+	@Test
+	public void getClosestFlightPrevTest() {
+		log.info(mapper.getClosestFlightPrev("홍콩", "인천", "2023-12-08"));
+	}
+	
 	//검색어만 하는건 성공
 	/*
 	 * @Test public void getSearchTest2() { mapper.getListSearch2("인천","오사카",

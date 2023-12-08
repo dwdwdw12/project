@@ -122,6 +122,14 @@ public class FlightController {
 			model.addAttribute("prevArrDay", arrDateCal.plusDays(-1));			
 		}
 		
+		//해당 일자의 항공편 부재시, 가장 가까운 일정 찾기
+		model.addAttribute("closestFlightPrev", flights.getClosestFlightPrev(dep, arr, depDate));
+		model.addAttribute("closestFlightAfter", flights.getClosestFlightAfter(dep, arr, depDate));
+		if(arrDate!=null) {
+			model.addAttribute("closestFlightPrevArr", flights.getClosestFlightPrev(dep, arr, arrDate));
+			model.addAttribute("closestFlightAfterArr", flights.getClosestFlightAfter(dep, arr, arrDate));			
+		}
+		
 	}
 	
 	@GetMapping("/flightDepArrSearch")
@@ -561,6 +569,18 @@ public class FlightController {
 		return list;
 	}
 	
-
+	//검색어 자동완성 - 항공편명
+	@GetMapping(value = "/getDistinctFlightName")
+	@ResponseBody
+	public String getDistinctFlightName(String searchValue){
+		log.info("getDistinctFlightName... ");
+		List<String> list = flights.getDistinctFlightName(searchValue);
+//		for(String str : list) {
+//			log.info(str);
+//		}
+		
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
 	
 }
