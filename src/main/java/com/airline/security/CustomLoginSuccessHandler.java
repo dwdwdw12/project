@@ -1,6 +1,6 @@
 package com.airline.security;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,12 +53,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 		log.warn("role names : " + roleNames);
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/admin");
+			resultRedirectStrategy(request, response, auth);
+			//response.sendRedirect("/admin");
 			return ;
 		}
 		
 		if(roleNames.contains("ROLE_MEMBER")) {
-			response.sendRedirect("/user");
+			resultRedirectStrategy(request, response, auth);
+			//response.sendRedirect("/user");
 			return;
 		}
 		clearAuthenticationAttributes(request);
@@ -78,11 +80,29 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	private void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException{
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		log.info("로그인 성공");
+		
+		// 기본 URI
+        String uri = "/";
+		
+		String prevPage = (String) request.getSession().getAttribute("prevPage");
+        if (prevPage != null) {
+            request.getSession().removeAttribute("prevPage");
+        }
+		
 		if(savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
 			redirectStrategy.sendRedirect(request, response, targetUrl);
-		}else {
-			redirectStrategy.sendRedirect(request, response, null);
+		} else if(prevPage != null && !prevPage.equals("")){
+			// 회원가입 - 로그인으로 넘어온 경우 "/"로 redirect
+            if (prevPage.contains("/join")) {
+                uri = "/";
+                redirectStrategy.sendRedirect(request, response, uri);
+            } else {
+                uri = prevPage;
+                redirectStrategy.sendRedirect(request, response, uri);
+            }
+		} else  {
+			redirectStrategy.sendRedirect(request, response, "/");
 		}
 		
 	}
