@@ -53,14 +53,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 		log.warn("role names : " + roleNames);
 		if(roleNames.contains("ROLE_ADMIN")) {
-			resultRedirectStrategy(request, response, auth);
-			//response.sendRedirect("/admin");
+			//resultRedirectStrategy(request, response, auth);
+			response.sendRedirect("/admin");
 			return ;
 		}
 		
 		if(roleNames.contains("ROLE_MEMBER")) {
-			resultRedirectStrategy(request, response, auth);
-			//response.sendRedirect("/user");
+			//resultRedirectStrategy(request, response, auth);
+			response.sendRedirect("/user");
 			return;
 		}
 		clearAuthenticationAttributes(request);
