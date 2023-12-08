@@ -47,7 +47,7 @@ span:before {
 }
 </style>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
@@ -251,7 +251,7 @@ span:before {
 					      </c:forEach>	      		
 	      			</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="window.open()"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/buyTicket'"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
 							</button>
 					</div>
 				</div>

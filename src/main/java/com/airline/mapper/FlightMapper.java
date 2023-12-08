@@ -22,6 +22,10 @@ public interface FlightMapper {
 
 	//public List<FlightVO> getListSearch2(@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 	
+	public FlightVO getClosestFlightPrev(@Param("dep") String dep,@Param("arr") String arr, @Param("time") String time);
+
+	public FlightVO getClosestFlightAfter(@Param("dep") String dep,@Param("arr") String arr, @Param("time") String time);
+	
 	public int getTotal(Criteria cri);
 
 	public int getTotalSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
@@ -33,6 +37,8 @@ public interface FlightMapper {
 	public List<String> getDistinctDep(String searchValue);
 
 	public List<String> getDistinctArrByDep(@Param("depName")String depName, @Param("arrName")String arrName);
+
+	public List<String> getDistinctFlightName(String flightName);
 
 	public Integer getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 

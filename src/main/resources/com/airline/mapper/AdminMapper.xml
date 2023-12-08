@@ -91,4 +91,29 @@
 	<select id="getFno" resultType="int">
 		select count(*) from airplaneschedule 
 	</select>
+	
+	<insert id="insertFlight">
+		insert into airplaneschedule(flightname,depday,arrday,fulldeptime,deptime,fullarrtime,arrtime,flighttime,fulldeparture,depcode,depname,fullarrival,arrcode,arrname,depregioncode,arrregioncode) values(#{vo.flightName}, #{vo.depDay}, #{vo.arrDay}, #{vo.fullDeptime}, #{vo.depTime}, #{vo.fullArrtime}, #{vo.arrTime}, #{vo.flightTime}, #{vo.fullDeparture}, #{vo.depCode}, #{vo.depName}, #{vo.fullArrival}, #{vo.arrCode}, #{vo.arrName}, #{vo.depRegioncode}, #{vo.arrRegioncode} )
+	</insert>
+	
+	<select id="getFlightInfo" resultType="com.airline.vo.FlightVO">
+		select * from airplaneschedule where fno=#{fno}
+	</select>
+	
+	<update id="modifyFlight">
+		update airplaneschedule set depday=#{vo.depDay},arrday=#{vo.arrDay},fulldeptime=#{vo.fullDeptime},deptime=#{vo.depTime},fullarrtime=#{vo.fullArrtime},arrtime=#{vo.arrTime} where fno=#{vo.fno}
+	</update>
+	
+	<insert id="insertFlightLog">
+		insert into adminflight(fno, reason, isdelete, depname, arrname,flightname)values(#{vo.fno},#{vo.reason},#{vo.isDelete},#{vo.depName},#{vo.arrName},#{vo.flightName})
+	</insert>
+	
+	<select id="flightNoticePopup" resultType="com.airline.vo.FlightVO">
+		select * from adminflight order by ano desc limit 0, 1
+		<!-- select * from airplaneschedule f left join adminflight a on f.fno=a.fno order by a.ano desc limit 0,1 -->
+	</select>
+	
+	<delete id="deleteFlight">
+		delete from airplaneschedule where fno=#{vo.fno}
+	</delete>
 </mapper>

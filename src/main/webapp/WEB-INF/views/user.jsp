@@ -46,7 +46,7 @@ span:before {
 
 </style>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<%-- <section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">

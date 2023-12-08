@@ -73,6 +73,22 @@
 			and flightName like concat('%',#{flightName},'%')
 			and DEPDAY like concat('%',#{time},'%')
 	</select>
+	
+	<select id="getClosestFlightPrev" resultType="com.airline.vo.FlightVO">
+		<![CDATA[
+		select * from airplaneschedule 
+			where depname=#{dep} and arrname = #{arr} and depday < #{time} 
+			order by depday desc limit 1;
+		]]>
+	</select>
+	
+	<select id="getClosestFlightAfter" resultType="com.airline.vo.FlightVO">
+		<![CDATA[
+		select * from airplaneschedule 
+			where depname=#{dep} and arrname = #{arr} and depday > #{time} 
+			order by depday desc limit 1;
+		]]>
+	</select>
 		
 	<select id="getDistinctDep" resultType="String">
 		select distinct(depName) from airplaneschedule where depName like concat('%',#{depName},'%') order by 1 asc
@@ -80,6 +96,10 @@
 
 	<select id="getDistinctArrByDep" resultType="String">
 		select distinct(arrName) from airplaneschedule where depName = #{depName} and arrName like concat('%',#{arrName},'%') order by 1 asc
+	</select>
+
+	<select id="getDistinctFlightName" resultType="String">
+		select distinct(flightname) from airplaneschedule where flightname like concat('%',#{flightName},'%') order by 1 asc
 	</select>
 	
 	<select id="getFlightInfo" resultType="com.airline.vo.FlightVO">

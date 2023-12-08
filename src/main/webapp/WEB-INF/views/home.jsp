@@ -67,7 +67,7 @@
 
 
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<section class="tm-banner">
 
 		<!-- .tm-container-outer -->
@@ -712,6 +712,10 @@
 
 	<!-- 모달창 -->
 	<jsp:include page="/WEB-INF/views/NoticePopup.jsp"/>   
+	<!-- /모달창 -->
+	
+	<!-- 모달창 -->
+	 <jsp:include page="/WEB-INF/views/FlightPopup.jsp"/>   
 	<!-- /모달창 -->
 
 	<!-- .tm-container-outer -->

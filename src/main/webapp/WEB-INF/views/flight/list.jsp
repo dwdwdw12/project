@@ -157,7 +157,7 @@ td {
 	<form id="actionForm" action="/flight/list" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}" />
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
-		<input type="hidden" value='sec:authentication property="principal.username"'/>
+		<!-- <input type="hidden" value='sec:authentication property="principal.username"'/> -->
 	</form>
 	<!-- 예약페이지 이동 -->
 	<form name="resForm" action="/flight/reservation" method="get">

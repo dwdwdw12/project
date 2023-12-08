@@ -1,16 +1,5 @@
 package com.airline.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -38,8 +27,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.airline.service.AdminService;
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
 import com.airline.service.FlightService;
@@ -57,9 +46,6 @@ import com.airline.vo.PointVO;
 import com.airline.vo.UserPayVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -82,6 +68,9 @@ public class HomeController {
  	private BoardNoticeService noticeService;
     
     @Autowired
+ 	private AdminService adminService;
+    
+    @Autowired
 	private PasswordEncoder passwordEncoder;
     
 	
@@ -89,6 +78,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
 		model.addAttribute("emer", noticeService.noticePopup(cri));
+		model.addAttribute("modi", adminService.flightNoticePopup());
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();
@@ -156,19 +146,24 @@ public class HomeController {
 	
 	//로그인->spring 페이지로 뺄까..?
 	@GetMapping("/login")
-	public void login(String error, String logout, Model model) {
+	public void login(String error, String logout, Model model, HttpServletRequest request) {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
 		
 		if(error != null) {
-			model.addAttribute("error","Login Error Check your account");
+			model.addAttribute("error","아이디 또는 비밀번호를 잘못 입력하였습니다.");
 		}
 		
 		if(model != null) {
 			model.addAttribute("logout", "logout");
 		}
 		
+		//이전 페이지로 되돌아가기 위한 Referer 헤더값을 세션의 prevPage attribute로 저장 
+	    String uri = request.getHeader("Referer");
+	    if (uri != null && !uri.contains("/login")) {
+	        request.getSession().setAttribute("prevPage", uri);
+	    }
 		
 	}
 		
