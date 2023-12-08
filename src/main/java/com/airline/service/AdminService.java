@@ -57,6 +57,18 @@ public interface AdminService {
 	public List<String> getArrcode();
 	public List<Integer> getdRCode();
 	public List<Integer> getaRCode();
-	
+	//출발지 도착지 풀네임 가져오기
+	public String getFullDeparture(String depCode);
+	public String getFullArrival(String arrCode);
+	//항공스케줄 인서트
+	public int insertFlight(FlightVO vo);
+	//항공스케줄 불러오기(수정페이지)
+	public FlightVO getFlightInfo(int fno);
+	////항공스케줄 수정
+	public int modifyFlight(FlightVO vo);
+	//모달용 데이터 인서트
+	public int insertFlightLog(FlightVO vo);
+	//모달정보불러오기
+	public FlightVO flightNoticePopup();
 
 }

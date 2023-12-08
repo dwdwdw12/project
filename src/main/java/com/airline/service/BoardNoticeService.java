@@ -34,4 +34,5 @@ public interface BoardNoticeService {
 	public List<BoardNoticeVO> noticePopup(Criteria cri);
 	
 	public int popupTotal();
+	
 }

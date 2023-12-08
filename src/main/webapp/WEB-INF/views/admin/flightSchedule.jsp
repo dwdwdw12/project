@@ -85,7 +85,8 @@
 								<td>${list.flightTime}</td>
 								<td>24</td>
 								<td><button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/flightSchedule'"><i class="bi bi-chevron-double-right"></i>&nbsp;수정
+							class="btn btn-primary btn-sm btn-block btn-custom"  onclick="window.open('/admin/flightModify?fno=${list.fno}','항공정보수정','width = 2100, height = 300, top = 100, left = 100, location = no')"><i class="bi bi-chevron-double-right"></i>&nbsp;수정
+							</button> 
 							</button></td>
 								<td><button type="button"
 							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/flightSchedule'"><i class="bi bi-chevron-double-right"></i>&nbsp;삭제

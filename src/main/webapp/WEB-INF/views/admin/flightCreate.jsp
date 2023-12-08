@@ -20,9 +20,8 @@
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 <!-- Templatemo style -->
-<!-- 
-<script src="../resources/js/vendor/modernizr.custom.min.js"></script>
-<link rel="stylesheet" href="../resources/css/normalize.css"> -->
+
+<script src="../resources/js/jquery-1.11.3.min.js"></script>
 <style>
 
 </style>
@@ -38,7 +37,7 @@
 					<p class="mb-2">양식에 맞게 정확히 기입 해 주세요.</p>
 				</div>
 			</div>
-			<form action="/admin/flightCreate" method="post" >
+			<!-- <form action="/admin/flightCreate" method="post" > -->
 			<div class="container">
 				<table class="table table-hover">
 					<thead>
@@ -63,19 +62,17 @@
 								<td><input type="text" id="depName" name="depName" placeholder="인천" value="" required="required" style="border: 0; background-color: #efefef;width: 80px"/></td>
 								<!-- <td><input type="text" id="depCode"/></td> -->
 								<td>
-									
-									<select name="dCode" id="dCode style="border: 0; background-color: #efefef;width: 80px">
+									<select name="depCode" id="depCode" style="border: 0; background-color: #efefef;width: 80px">
 									<c:forEach items="${depCode}" var="dCode">	
-<!-- 										<option value=""></option> -->
 										<option value="${dCode}">${dCode}</option>
 									</c:forEach>
 									</select> 
 								</td>
 								<!-- <td><input type="text" id="depRegionCode"/></td> -->
 								<td>
-								<select name="dRCode" name="dRCode" style="border: 0; background-color: #efefef;width: 80px">
-									<c:forEach items="${dRCode}" var="dRCode">
-											<option value="${dRCode}">${dRCode}</option>
+								<select name="dRCode" id="dRCode" style="border: 0; background-color: #efefef;width: 80px">
+									<c:forEach items="${dRCode}" var="drCode">
+											<option value="${drCode}">${drCode}</option>
 									</c:forEach>
 									</select> 
 								</td>
@@ -105,76 +102,50 @@
 
 				</table>
 				<button type="button" class="btn btn-primary btn-sm btn-custom" onclick="submit()"><i class="bi bi-chevron-double-right"></i>&nbsp;등록 </button>
-				</form>
+				<!-- </form> -->
 
 			</div>
 		</div>
 	</section>
 
-<%-- 	<!-- 전달 폼 -->
-	<form id="ticketForm" action="/user/kakaoDetail" method="get">
-		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}" />
-		<input type="hidden" name="amount" value="${paging.cri.amount}" /> <input
-			type="hidden"
-			value='sec:authentication property="principal.username"' />
-	</form> --%>
-
 </div>
 <!-- .tm-container-outer -->
 
 <script type="text/javascript">
-$(window).load(function() {	
-	var strWidth;
-	var strHeight;
-	if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {			
-		strWidth = $('#contents').outerWidth() + (window.outerWidth - window.innerWidth);			
-		strHeight = $('#contents').outerHeight() + (window.outerHeight - window.innerHeight);		
-	}else {			
-		var strDocumentWidth = $(document).outerWidth();			
-		var strDocumentHeight = $(document).outerHeight();			
-		window.resizeTo ( strDocumentWidth, strDocumentHeight );			
-		var strMenuWidth = strDocumentWidth - $(window).width();			
-		var strMenuHeight = strDocumentHeight - $(window).height();			
-		strWidth = $('#contents').outerWidth() + strMenuWidth;			
-		strHeight = $('#contents').outerHeight() + strMenuHeight;		}		
-	//resize		
-		window.resizeTo( strWidth, strHeight );	});
-
+console.log("dddd");
 function submit(){
 	alert("작동확인..")
 	check();
-	var dCode = $("#dCode");
-	var dRCode = $("#dRCode");
-	var aCode = $("#aCode");
-	var aRCode = $("#aRCode");
 	$.ajax({
 		url : "/admin/flightCreate",
 		type : "POST",
-		dataType : "json",
+		//dataType : "json",
 		async : true,
 		contentType : "application/json",
 		data : JSON.stringify({
 			fno : $("#fno").val(),
 			flightName : $("#flightName").val(),
 			depName : $("#depName").val(),
-			dCode : dCode.options[dCode.selectedIndex].val(),
-			dRCode : dRCode.options[dRCode.selectedIndex].val(),
-			fullDepTime : $("#fullDepTime").val(),
+			depCode : $("#depCode").val(),
+			depRegioncode : $("#dRCode").val(),
+			fullDeptime : $("#fullDepTime").val(),
 			arrName : $("#arrName").val(),
-			aCode : aCode.options[aCode.selectedIndex].val(),
-			aRCode : aRCode.options[aRCode.selectedIndex].val(),
-			fullArrTime : $("#fullArrTime").val(),
-			flightTime $("#flightTime").val():
+			arrCode : $("#aCode").val(),
+			arrRegioncode : $("#aRCode").val(),
+			fullArrtime : $("#fullArrTime").val(),
+			flightTime : $("#flightTime").val()
 			
 		}),
 		success : function(data){
 			console.log(data);
-			location.href="admin/flightSchedule";
+			window.close();
+/* 			location.href="admin/flightSchedule"; */
 		},
 		error : function(err){
 			console.log(err);
+/* 			console.log(err.responseText); // 서버에서 전송한 오류 메시지
+		    console.log(err.status);  */
 			alert("항공스케즐 업로드에 실패했습니다!");
-			location.reload();
 		}
 	});
 		

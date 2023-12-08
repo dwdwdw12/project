@@ -251,7 +251,7 @@ span:before {
 					      </c:forEach>	      		
 	      			</table>
 						<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick="window.open()"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/admin/buyTicket'"><i class="bi bi-chevron-double-right"></i>&nbsp;상세조회
 							</button>
 					</div>
 				</div>

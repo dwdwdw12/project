@@ -28,11 +28,8 @@
 
 </style>
 
-<div class="tm-page-wrap mx-auto">
-	<section class="tm-banner">
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px">
 
-
-	</section>
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
