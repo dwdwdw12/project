@@ -3,7 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
 
-
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <body>
 	<div class="tm-main-content" id="top">
 		<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
@@ -14,10 +21,8 @@
 							<h2>아이디 찾기</h2>
 							<br>
 							<h6>
-								회원가입 시 등록한 이메일 주소를 입력해주시기 바랍니다.
-								<br> 기입한 이메일 주소로 안내 메일을 발송해 드립니다.
-								<br> 카카오 회원가입의 경우, 카카오 계정의 이메일 주소로 메일이 발송됩니다.
-								<br> 이메일 발송에는 1~2분의 시간이 소요될 수 있습니다.
+								회원가입 시 등록한 이메일 주소를 입력해주시기 바랍니다. <br> 기입한 이메일 주소로 안내 메일을 발송해
+								드립니다. <br> 이메일 발송에는 1~2분의 시간이 소요될 수 있습니다.
 							</h6>
 							<br>
 							<hr>
@@ -40,9 +45,10 @@
 								<br> <br> <input type="hidden"
 									name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-
-								<button id="eamilAuthBtn" type="submit" class="btn btn-primary"
-									style="display: inline;">인증 메일 보내기</button>
+								<button id="emailAuthBtn" type="submit"
+									class="btn btn-primary"
+									style="display: inline;" name="findIdButton">인증 메일 보내기</button>
+								<input class="spinner-border text-warning" type="hidden" name="spinner" id="spinner">
 								<div>
 									<input type="hidden" id="message" name="${message}"
 										value="${message}" />
@@ -75,7 +81,6 @@
 			if (message !== null) {
 				alert(message);
 			}
-			;
 		});
 
 		function check(pattern, taget, message) {
@@ -93,18 +98,23 @@
 			//false 반환
 		};
 
-		$("#eamilAuthBtn")
+		$("#emailAuthBtn")
 				.on(
 						"click",
 						function(e) {
 							e.preventDefault();
 							var form = document.signUpForm;
+							var submitButton = document.getElementById('emailAuthBtn');
+							var spinner = document.getElementById('spinner');
 
 							var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 							var email = form.email.value;
 							if (!check(emailPattern, email,
 									"유효하지 않은 이메일 주소입니다.")) {
 							}
+							submitButton.style.display = 'none';
+							spinner.type = 'text';
+
 							form.submit();
 						});
 	</script>
