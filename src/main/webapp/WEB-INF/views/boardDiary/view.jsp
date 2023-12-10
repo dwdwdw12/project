@@ -59,7 +59,7 @@
 }
 </style>
 </head>
-<body style="background-color: white; margin-top: 180px;">
+<body class="p-5 tm-container-outer tm-bg-gray" style=" margin-top: 180px;">
 
 	<input type="hidden" id="boardNum" name="boardNum"
 		value="${board.boardNum}" readonly="readonly">

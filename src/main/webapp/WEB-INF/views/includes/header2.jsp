@@ -75,7 +75,7 @@
 			<div id="sticky-header" class="main-header-area">
 				<div class="container-fluid p-0">
 					<div class="row align-items-center no-gutters">
-						<div class="col-xl-6 col-lg-6">
+						<div class="col-xl-7 col-lg-7">
 							<div class="main-menu  d-none d-lg-block">
 								<nav>
 									<ul id="navigation">
@@ -83,44 +83,22 @@
 												src="../resources/img/kakao/chunsik.png" alt=""
 												style="width: 60px"></a></li>
 										<li><a href="/">Home</a></li>
-										<li><a href="/flight/list">flight<i
-												class="ti-angle-down"></i></a>
-											<ul class="submenu">
-												<li><a href="/flight/list">항공편 검색/예약</a></li>
-												<li><a href="single-blog.html">AirPort</a></li>
-												<li><a href="single-blog.html">Price Information</a></li>
-												<li><a href="/flight/flightDepArrSearch">출도착 조회</a></li>
-												<li><a href="/memberGrade">회원 등급 안내</a></li>
-											</ul></li>
-										<li><a href="/notice/list">board<i class="ti-angle-down"></i></a>
-											<ul class="submenu">
-												<li><a href="/notice/list">공지사항</a></li>
-												<li><a href="/boardEvent/list">이벤트 </a></li>
-												<li><a href="/qna/list">Q&A</a></li>
-												<li><a href="/boardDiary/list">여행일기</a></li>
-												
-											</ul></li>
-									
 										 
 										<c:if test="${loginUser.authority[0].getAuthority() == 'ROLE_MEMBER'}">
 											<li><a href="/user">myPage(user)<i class="ti-angle-down"></i></a>
 
-												<ul class="submenu">
+												<ul class="submenu" style="width: 230px;">
 													<li><a href="/user/myInfoModify">회원정보 조회/수정</a></li>
 													<li><a href="/user/mileage">마일리지 조회</a></li>
 													<li><a href="/user/chargePoint">포인트 충전</a></li>
-
-					
 
 													<li><a href="/user/userResDetail">구매내역 조회</a></li>
 											</ul></li>
 										</c:if>
 											
 										<c:if test="${loginUser.authority[0].getAuthority() == 'ROLE_ADMIN'}"> 
-										<%-- <sec:authorize access="hasRole('ROLE_ADMIN'))"> --%>
 										<li>
-											<a href="/admin">myPage(admin)
-												<i class="ti-angle-down"></i></a>
+											<a href="/admin" style="font-size: 15px;">myPage(admin)<i class="ti-angle-down"></i></a>
 											<ul class="submenu">
 												<li><a href="/admin/userInfo">회원조회</a></li>
 												<li><a href="/admin/buyTicket">항공권 현황</a></li>
@@ -128,8 +106,28 @@
 												<li><a href="/admin/flightSchedule">항공스케줄 관리</a></li>
 											</ul>
 										</li>
-										<%-- </sec:authorize> --%>
 										</c:if>
+										
+										<li><a href="/flight/search">flight<i
+												class="ti-angle-down"></i></a>
+											<ul class="submenu" style="width: 220px;">
+												<li><a href="/flight/search">항공편 검색/예약</a></li>
+												<li><a href="single-blog.html">AirPort</a></li>
+												<li><a href="single-blog.html">Price Information</a></li>
+												<li><a href="/flight/flightDepArrSearch">출도착 조회</a></li>
+												<li><a href="/memberGrade">회원 등급 안내</a></li>
+											</ul>
+										</li>
+										
+										<li><a href="/notice/list">board<i class="ti-angle-down"></i></a>
+											<ul class="submenu">
+												<li><a href="/notice/list">공지사항</a></li>
+												<li><a href="/boardEvent/list">이벤트 </a></li>
+												<li><a href="/qna/list">Q&A</a></li>
+												<li><a href="/boardDiary/list">여행일기</a></li>
+												
+											</ul>
+										</li>
 
 										<li><a href="/contact">Contact</a></li>
 									</ul>
