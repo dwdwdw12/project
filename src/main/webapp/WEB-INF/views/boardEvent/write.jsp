@@ -63,9 +63,9 @@
 </style>
 
 </head>
-<body style="background-color: white; margin-top : 180px;">
+<body style="margin-top : 180px;">
 	
-	 <div class="container">
+	 <div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>이벤트 등록</h2>
 		<form action="/boardEvent/write" role="form" method="post" name="frm" >
 			<div class="form-group">

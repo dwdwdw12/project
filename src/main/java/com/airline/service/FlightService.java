@@ -26,9 +26,13 @@ public interface FlightService {
 	public int getTotalSearchByFlightName(Criteria cri, String flightName, String time);
 	
 	//검색어 조회
-	public List<String> getDistinctDep(String searchValue);
+	public List<String> getDistinctDep(String depName, String depRegionCode);
 
-	public List<String> getDistinctArrByDep(@Param("depName")String depName, @Param("arrName")String arrName);
+	public List<String> getDistinctArrRegionCode(String depName);
+
+	public List<String> getDistinctArrByDep1(String depName, String arrName);
+
+	public List<String> getDistinctArrByDep2(String depName, String arrName, String arrRegionCode);
 	
 	public List<String> getDistinctFlightName(String flightName);
 	
