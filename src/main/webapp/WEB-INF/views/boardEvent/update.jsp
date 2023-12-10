@@ -55,7 +55,7 @@
 
 </style>
 </head>
-<body style="background-color: white; margin-top : 180px;">
+<body class="p-5 tm-container-outer tm-bg-gray" style=" margin-top : 180px;">
 	
 	 <div class="container">
 		<h2>이벤트 수정</h2>

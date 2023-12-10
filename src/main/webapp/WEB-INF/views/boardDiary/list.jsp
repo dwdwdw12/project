@@ -26,6 +26,8 @@
 <link rel="stylesheet" type="text/css" href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 
+<!-- 구글 아이콘 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style>
 	#th1 {
@@ -57,8 +59,8 @@
 
 </style>
 </head>
-<body style="background-color: white; margin-top : 180px;">
-	<div style="max-width: 1400px; margin: 0 auto; ">
+<body style="margin-top : 180px;">
+	<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1400px; margin: 0 auto; ">
 	<h2>여행일기</h2>
 	<hr class="hr1" noshade>
 	<div class="mt-3 text-right">
@@ -124,9 +126,7 @@
 			<c:forEach var="board" items="${diaryList}">
 
 				<tr>
-					<td>${board.boardNum}</td>
-					<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}">${board.boardTitle} [${board.replyCount}]</a></td>
-					<td>${board.boardWriter}</td>
+					
 					<c:choose>
 
 						<c:when test="${board.regiDate>=board.modifyDate}">
@@ -136,13 +136,21 @@
 								<c:set var="hh" value="${fn:substring(board.regiDate, 11,13)}"/>
 								<c:set var="mi" value="${fn:substring(board.regiDate, 14,16)}"/>
 								<c:set var="ss" value="${fn:substring(board.regiDate, 17,19)}"/>
-
+								
+								<td>${board.boardNum}</td>
+								<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}"><i class="material-icons" style="color:red">fiber_new</i>${board.boardTitle} [${board.replyCount}]</a></td>
+								<td>${board.boardWriter}</td>
+								
 								<td>${hh}:${mi}:${ss}</td>
 							</c:if>
 							<c:if test="${nowfmtTime-parsedMyDate.time>=(1000*60*60*24)}">
 								<c:set var="yy" value="${fn:substring(board.regiDate, 0,4)}"/>
 								<c:set var="mm" value="${fn:substring(board.regiDate, 5,7)}"/>
 								<c:set var="dd" value="${fn:substring(board.regiDate, 8,10)}"/>
+								
+								<td>${board.boardNum}</td>
+								<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}">${board.boardTitle} [${board.replyCount}]</a></td>
+								<td>${board.boardWriter}</td>
 								
 								<td>${yy}/${mm}/${dd}</td>
 							</c:if>
@@ -154,7 +162,10 @@
 								<c:set var="hh" value="${fn:substring(board.modifyDate, 11,13)}"/>
 								<c:set var="mi" value="${fn:substring(board.modifyDate, 14,16)}"/>
 								<c:set var="ss" value="${fn:substring(board.modifyDate, 17,19)}"/>
-
+								
+								<td>${board.boardNum}</td>
+								<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}"><i class="material-icons" style="color:red">fiber_new</i>${board.boardTitle} [${board.replyCount}]</a></td>
+								<td>${board.boardWriter}</td>
 								<td>${hh}:${mi}:${ss}</td>
 							</c:if>
 							<c:if test="${nowfmtTime-parsedMyDate2.time>=(1000*60*60*24)}">
@@ -162,6 +173,9 @@
 								<c:set var="mm" value="${fn:substring(board.modifyDate, 5,7)}"/>
 								<c:set var="dd" value="${fn:substring(board.modifyDate, 8,10)}"/>
 								
+								<td>${board.boardNum}</td>
+								<td><a href="/boardDiary/view?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&order=${paging.cri.order}">${board.boardTitle} [${board.replyCount}]</a></td>
+								<td>${board.boardWriter}</td>
 								<td>${yy}/${mm}/${dd}</td>
 							</c:if>
 						

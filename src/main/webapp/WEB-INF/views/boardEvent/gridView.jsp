@@ -46,11 +46,11 @@
 
 </style>
 </head>
-<body style="background-color: white; margin-top: 180px;">
+<body style=" margin-top: 180px;">
 	
 	<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
 	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
-	<div class="container">
+	<div class="p-5 tm-container-outer tm-bg-gray">
 		<h1>이벤트 상세보기</h1>
 			<form action="/boardEvent/gridDelete" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">

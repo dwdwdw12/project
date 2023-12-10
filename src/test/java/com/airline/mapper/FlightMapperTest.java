@@ -49,23 +49,28 @@ public class FlightMapperTest {
 	
 	@Test
 	public void getDistinctDepTest() {
-//		List<String> list = mapper.getDistinctDep();
-//		for(String str : list) {			
-//			log.info(str);
-//		}
+		List<String> list = mapper.getDistinctDep("","1");
+		for(String str : list) {			
+			log.info(str);
+		}
 	}
 	
-//	@Test
-//	public void getDistinctArrByDepTest() {
-//		List<String> list = mapper.getDistinctArrByDep("제주");
-//		for(String str : list) {			
-//			log.info(str);
-//		}
-//	}
+	@Test
+	public void getDistinctArrByDepTest() {
+		List<String> list = mapper.getDistinctArrByDep2("인천","","2");
+		for(String str : list) {			
+			log.info(str);
+		}
+	}
 	
 	@Test
 	public void getClosestFlightPrevTest() {
 		log.info(mapper.getClosestFlightPrev("홍콩", "인천", "2023-12-08"));
+	}
+	
+	@Test
+	public void getDistinctArrRegionCodeTest() {
+		log.info(mapper.getDistinctArrRegionCode("김포"));
 	}
 	
 	//검색어만 하는건 성공

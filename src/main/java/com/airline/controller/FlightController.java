@@ -82,27 +82,30 @@ public class FlightController {
 	}
 	
 	@GetMapping(value="/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public void getSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr,@Param("arrDate") String arrDate, @Param("depDate") String depDate) throws ParseException {
+	public void getSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr,@Param("arrDate") String arrDate, @Param("depDate") String depDate, @Param("depRegionCode") String depRegionCode, @Param("arrRegionCode") String arrRegionCode ) throws ParseException {
 		System.out.println("dep : "+dep+" arr : "+arr+" time : "+ arrDate);
 		
-		List<FlightVO> listSearch = flights.getListSearch(cri,dep,arr,depDate);
-		System.out.println(listSearch.size());
-		for(FlightVO vo : listSearch) {
-			System.out.println("vo : "+vo);
+		if(dep!=null||arr!=null) {	
+			List<FlightVO> listSearch = flights.getListSearch(cri,dep,arr,depDate);
+			System.out.println(listSearch.size());
+			for(FlightVO vo : listSearch) {
+				System.out.println("vo : "+vo);
+			}
+			
+			cri.setAmount(50);
+			model.addAttribute("list", flights.getListSearch(cri,dep,arr,depDate));
+			//model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
+			
+			model.addAttribute("arrlist", flights.getListSearch(cri,arr,dep,arrDate));
+			//model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
 		}
-		
-		cri.setAmount(50);
-		model.addAttribute("list", flights.getListSearch(cri,dep,arr,depDate));
-		//model.addAttribute("pageMaker", new PageDTO(cri, flights.getTotalSearch(cri,dep,arr,depDate)));
-		
-		model.addAttribute("arrlist", flights.getListSearch(cri,arr,dep,arrDate));
-		//model.addAttribute("arrPageMaker", new PageDTO(cri, flights.getTotalSearch(cri,arr,dep,arrDate)));
-		
 		//검색창 반환값
 		model.addAttribute("dep", dep);
 		model.addAttribute("arr", arr);
 		model.addAttribute("arrDate", arrDate);
 		model.addAttribute("depDate", depDate);
+		model.addAttribute("depRegionCode", depRegionCode);
+		model.addAttribute("arrRegionCode", arrRegionCode);
 		
 		//가격정보 설정
 		if(flights.getPrice(dep, arr)!=null) {
@@ -113,9 +116,11 @@ public class FlightController {
 		}
 		
 		//날짜계산
-		LocalDate depDateCal = LocalDate.parse(depDate);
-		model.addAttribute("nextDepDay", depDateCal.plusDays(1));
-		model.addAttribute("prevDepDay", depDateCal.plusDays(-1));
+		if(depDate!=null) {
+			LocalDate depDateCal = LocalDate.parse(depDate);
+			model.addAttribute("nextDepDay", depDateCal.plusDays(1));
+			model.addAttribute("prevDepDay", depDateCal.plusDays(-1));
+		}
 		if(arrDate!=null) {
 			LocalDate arrDateCal = LocalDate.parse(arrDate);
 			model.addAttribute("nextArrDay", arrDateCal.plusDays(1));
@@ -123,8 +128,10 @@ public class FlightController {
 		}
 		
 		//해당 일자의 항공편 부재시, 가장 가까운 일정 찾기
-		model.addAttribute("closestFlightPrev", flights.getClosestFlightPrev(dep, arr, depDate));
-		model.addAttribute("closestFlightAfter", flights.getClosestFlightAfter(dep, arr, depDate));
+		if(depDate!=null) {
+			model.addAttribute("closestFlightPrev", flights.getClosestFlightPrev(dep, arr, depDate));
+			model.addAttribute("closestFlightAfter", flights.getClosestFlightAfter(dep, arr, depDate));
+		}
 		if(arrDate!=null) {
 			model.addAttribute("closestFlightPrevArr", flights.getClosestFlightPrev(dep, arr, arrDate));
 			model.addAttribute("closestFlightAfterArr", flights.getClosestFlightAfter(dep, arr, arrDate));			
@@ -133,7 +140,7 @@ public class FlightController {
 	}
 	
 	@GetMapping("/flightDepArrSearch")
-	public void getflightDepArrSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr, @Param("targetDate") String targetDate, @Param("flightName") String flightName) {
+	public void getflightDepArrSearch(Model model, Criteria cri, @Param("dep") String dep,@Param("arr") String arr, @Param("targetDate") String targetDate, @Param("flightName") String flightName, @Param("depRegionCode") String depRegionCode, @Param("arrRegionCode") String arrRegionCode ) {
 		System.out.println("dep : " + dep + " arr : " + arr + " target : " + targetDate + " flightName : " + flightName);
 		if(dep!=null||arr!=null) {			
 			List<FlightVO> listSearch = flights.getListSearch(cri,dep,arr,targetDate);
@@ -154,6 +161,8 @@ public class FlightController {
 		model.addAttribute("arr", arr);
 		model.addAttribute("targetDate", targetDate);
 		model.addAttribute("flightName", flightName);
+		model.addAttribute("depRegionCode", depRegionCode);
+		model.addAttribute("arrRegionCode", arrRegionCode);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");         
 		Date now = new Date();         
@@ -541,25 +550,45 @@ public class FlightController {
 	}
 	
 	//검색어 자동완성 - 출발지
-	@GetMapping(value = "/getDistinctDep", produces="text/plain;charset=UTF-8")
+	@GetMapping(value = "/getDistinctDep")
 	@ResponseBody
-	public String getDistinctDep(String searchValue){
+//	public String getDistinctDep(String searchValue, String depRegionCode){
+	public List<String> getDistinctDep(String searchValue, String depRegionCode){
 		log.info("getDistinctDep... ");
-		List<String> list = flights.getDistinctDep(searchValue);
-//		for(String str : list) {
-//			log.info(str);
-//		}
+		List<String> list = flights.getDistinctDep(searchValue, depRegionCode);
+		for(String str : list) {
+			log.info(str);
+		}
 		
-		Gson gson = new Gson();
-		return gson.toJson(list);
+//		Gson gson = new Gson();
+//		return gson.toJson(list);
+		return list;
 	}
 	
 	//검색어 자동완성 - 도착지
-	@PostMapping(value = "/getDistinctArrByDep")
+	@PostMapping(value = "/getDistinctArrByDep1")
 	@ResponseBody
-	public List<String> getDistinctArrByDep( String depName, String searchValue){
+	public List<String> getDistinctArrByDep1( String depName, String searchValue){
 		log.info("getDistinctArrByDep... ");
-		List<String> list = flights.getDistinctArrByDep(depName, searchValue);
+		List<String> list = flights.getDistinctArrByDep1(depName, searchValue);
+		for(String str : list) {
+			log.info(str);
+		}
+		
+		//Gson gson = new Gson();
+		//return gson.toJson(list);
+		return list;
+	}
+	
+	//검색어 자동완성 - 도착지
+	@PostMapping(value = "/getDistinctArrByDep2")
+	@ResponseBody
+	public List<String> getDistinctArrByDep2( String depName, String searchValue, String arrRegionCode){
+		log.info("getDistinctArrByDep2... ");
+		log.info("depName" +depName);
+		log.info("arrName" +searchValue);
+		log.info("arrRegionCode" +arrRegionCode);
+		List<String> list = flights.getDistinctArrByDep2(depName, searchValue, arrRegionCode);
 		for(String str : list) {
 			log.info(str);
 		}
@@ -578,6 +607,20 @@ public class FlightController {
 //		for(String str : list) {
 //			log.info(str);
 //		}
+		
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
+	
+	//검색어 자동완성 - 대륙코드
+	@GetMapping(value = "/getDistinctArrRegionCode")
+	@ResponseBody
+	public String getDistinctArrRegionCode(String depName){
+		log.info("getDistinctArrRegionCode... ");
+		List<String> list = flights.getDistinctArrRegionCode(depName);
+//			for(String str : list) {
+//				log.info(str);
+//			}
 		
 		Gson gson = new Gson();
 		return gson.toJson(list);

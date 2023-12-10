@@ -55,9 +55,9 @@
 
 </style>
 </head>
-<body style="background-color: white; margin-top : 180px;">
+<body style="margin-top : 180px;">
 	
-	 <div class="container">
+	 <div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>이벤트 수정</h2>
 		<form action="/boardEvent/gridUpdate" role="form" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 

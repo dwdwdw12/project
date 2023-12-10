@@ -91,11 +91,19 @@
 	</select>
 		
 	<select id="getDistinctDep" resultType="String">
-		select distinct(depName) from airplaneschedule where depName like concat('%',#{depName},'%') order by 1 asc
+		select distinct(depName) from airplaneschedule where depName like concat('%',#{depName},'%') and depregioncode=#{depRegionCode} order by 1 asc
 	</select>
 
-	<select id="getDistinctArrByDep" resultType="String">
+	<select id="getDistinctArrRegionCode" resultType="String">
+		select distinct(arrRegionCode) from airplaneschedule where depName like concat('%',#{depName},'%') order by 1 asc
+	</select>
+
+	<select id="getDistinctArrByDep1" resultType="String">
 		select distinct(arrName) from airplaneschedule where depName = #{depName} and arrName like concat('%',#{arrName},'%') order by 1 asc
+	</select>
+
+	<select id="getDistinctArrByDep2" resultType="String">
+		select distinct(arrName) from airplaneschedule where depName = #{depName} and arrName like concat('%',#{arrName},'%') and arrRegioncode=#{arrRegionCode} order by 1 asc
 	</select>
 
 	<select id="getDistinctFlightName" resultType="String">
