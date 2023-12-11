@@ -26,11 +26,19 @@
 p{
 	text-align: center;
 }
-
-
 </style>
 
-<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
+<div class="tm-page-wrap mx-auto">
+	<section class="tm-banner">
+
+		<!-- .tm-container-outer -->
+		<div class="inner">
+			<div class="slideshow">
+				<img src="../resources/img/kakao/둥둥섬2.jpg" alt="" width="1400"
+					height="650"/>
+			</div>
+		</div>
+	</section>
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
@@ -52,14 +60,19 @@ p{
 	</div>
 	<div class="tm-container-outer" id="tm-section-3">
 		<ul class="nav nav-pills tm-tabs-links">
-			<li class="tm-tab-link-li" style="font-size: 20px;"><a style="font-size: 20px;" href="history" data-toggle="information"
-				class="tm-tab-link">  <strong>소개</strong> 
+			<li class="tm-tab-link-li"><a href="history" data-toggle="information"
+				class="tm-tab-link"> <img
+					src="../resources/img/north-america.png" alt="Image"
+					class="img-fluid"> 소개 
 			</a></li>
-			<li class="tm-tab-link-li"><a style="font-size: 20px;" href="history" data-toggle="history"
-				class="tm-tab-link">  <strong>연혁</strong> 
+			<li class="tm-tab-link-li"><a href="history" data-toggle="history"
+				class="tm-tab-link"> <img
+					src="../resources/img/south-america.png" alt="Image"
+					class="img-fluid"> 연혁
 			</a></li>
-			<li class="tm-tab-link-li"><a style="font-size: 20px;" href="map" data-toggle="map"
-				class="tm-tab-link"><strong>찾아오는 길</strong> 
+			<li class="tm-tab-link-li"><a href="map" data-toggle="map"
+				class="tm-tab-link"><img src="../resources/img/antartica.png"
+					alt="Image" class="img-fluid"> 찾아오는 길
 			</a></li>
 		</ul>
 
@@ -124,4 +137,45 @@ p{
 			
 		});
 
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('.slideshow').each(function() {
+				// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
+				let $slides = $(this).find("img");
+				let slideCount = $slides.length;
+				let currentIndex = 0;
+				$slides.eq(currentIndex).fadeIn();
+				// 첫 이미지를 나타나게 함
+
+				// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
+				let showNextSlide = function() {
+					let nextIndex = (currentIndex + 1) % slideCount;
+					// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
+					$slides.eq(currentIndex).fadeOut();
+					// 현재 이미지를 사라지게 하고
+					$slides.eq(nextIndex).fadeIn();
+					// 위에서 구한 다음 이미지를 나타나게 함
+					currentIndex = nextIndex;
+					// 다음 이미지의 값을 현재로 
+				}
+
+				let timer = setInterval(showNextSlide, 1000);
+				$(this).on('mouseover', function() {
+					//타이머 취소
+					clearInterval(timer);
+				}).on('mouseout', function() {
+					//타이머 시작
+					timer = setInterval(showNextSlide, 1000);
+				})
+			})
+		}); 
+		
+		// Slick Carousel
+        $('.tm-slideshow').slick({
+            infinite: true,
+            arrows: true,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
 	</script>
