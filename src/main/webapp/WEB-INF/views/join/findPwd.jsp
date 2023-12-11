@@ -47,8 +47,12 @@
 								<button onclick="return emailValCheck()" id="eamilAuthBtn"
 									type="submit" class="btn btn-primary" style="display: inline;">인증
 									메일 보내기</button>
+								<input class="spinner-border text-warning" type="hidden"
+									name="spinner" id="spinner">
+
 								<div>
-									<input type="hidden" name="${message}" value="${message}" />
+									<input type="hidden" id="joinMessage" name="joinMessage"
+										value="${joinMessage}" />
 									<!-- 이메일 정보가 없는 경우 controller의 model에서 message 받아옴 -->
 								</div>
 								<br> <br>
@@ -71,7 +75,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		
 		function check(pattern, taget, message) {
 			if (pattern.test(taget)) {
 				return true;
@@ -93,14 +96,25 @@
 						function(e) {
 							e.preventDefault();
 							var form = document.signUpForm;
+							var submitButton = document
+									.getElementById('emailAuthBtn');
+							var spinner = document.getElementById('spinner');
 
 							var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 							var email = form.email.value;
 							if (!check(emailPattern, email,
 									"유효하지 않은 이메일 주소입니다.")) {
 							}
+							submitButton.style.display = 'none';
+							spinner.type = 'text';
+
 							form.submit();
 						});
+
+		var joinMessage = document.getElementById('joinMessage').value;
+		if (joinMessage != "") {
+			alert(joinMessage);
+		};
 	</script>
 
 </body>

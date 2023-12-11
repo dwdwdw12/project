@@ -59,8 +59,9 @@ display: none;
 							</td>
 						</tr>
 						<tr>
-							<th scope="row" style="padding: 8px;">영문명<span class="icon_require"
-								style="color: red; font-size: x-small;"> *</span></th>
+							<th scope="row" style="padding: 8px;"><label
+							for="userNameE">영문명<span class="icon_require"
+								style="color: red; font-size: x-small;"> *</span></label></th>
 							<td style="padding: 8px">
 							<input type="text" id="userNameE" name="userNameE" oninput="handleOnInputEng(this)"
 								placeholder="영문 명 입력 (예 : HONGGILDONG)" title="영문 명 입력 (예 : HONGGILDONG)"
@@ -173,7 +174,7 @@ display: none;
 				<br>
 				<div align="center">
 					<button type="button" class="btn btn-primary"
-						onclick="location.href='/'">취소</button>
+						onclick="location.href='/user/myPage'">취소</button>
 					<button type="button" class="btn btn-primary"
 						onclick="return formCheck()">확인</button>
 				</div>
@@ -218,8 +219,21 @@ display: none;
 			var regId = /^[a-zA-Z0-9]{6,10}$/;
 			var regIdPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,10}$/;
 			var form = document.frm;
-
-			if(document.frm.phone_first.value.length == 0){
+	
+			if (document.frm.userNick.value.length == 0) {
+				alert("닉네임을 입력해주세요.")
+				document.frm.userNick.focus;
+				return false;
+			} else if (!regNick.test(document.frm.userNick.value)) {
+				alert("2~10자리 한글, 영문(대소문자 구별), 숫자를 입력해주세요.")
+				document.frm.userNick.focus;
+				return false;
+			}
+			else if (!checkNick()) {
+				alert("닉네임을 다시 확인해주세요.");
+		        return false;
+		    }
+			else if(document.frm.phone_first.value.length == 0){
 	            alert("휴대전화번호를 다시 확인해주세요.")
 	            document.frm.phone_first.focus;
 	            return false;

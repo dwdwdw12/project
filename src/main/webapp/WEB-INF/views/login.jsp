@@ -18,73 +18,96 @@
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
 
 <!-- Templatemo style -->
-	<!-- 쿠키값으로 id정보 받아오기 -->
-	<%String cookie = "";
-		Cookie[] cookies = request.getCookies(); //쿠키생성
-		if(cookies !=null&& cookies.length > 0)
-		for (int i = 0; i < cookies.length; i++){
-			if (cookies[i].getName().equals("userid")) { // 내가 원하는 쿠키명 찾아서 값 저장
-				cookie = cookies[i].getValue();}}%>
-				
-	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
-		<div class="tm-container-outer tm-banner-bg">
-		<div class="container"><!-- 원복=> 컨테이너 제거 -->
+<!-- 쿠키값으로 id정보 받아오기 -->
+<%
+	String cookie = "";
+Cookie[] cookies = request.getCookies(); //쿠키생성
+if (cookies != null && cookies.length > 0)
+	for (int i = 0; i < cookies.length; i++) {
+		if (cookies[i].getName().equals("userid")) { // 내가 원하는 쿠키명 찾아서 값 저장
+	cookie = cookies[i].getValue();
+		}
+	}
+%>
+
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
+	<div class="tm-container-outer tm-banner-bg">
+		<div class="container">
+			<!-- 원복=> 컨테이너 제거 -->
 			<div class="row tm-banner-row tm-banner-row-header">
 				<!-- <div class="tm-banner-header"> -->
 				<div>
 					<h1 class="text-uppercase tm-banner-title">로그인</h1>
 				</div>
-			<!-- 	<div>
+				<!-- 	<div>
 					<h4 class="mb-4">아이디 및 패스워드를 입력 해 주세요.</h4>
 				</div> -->
-					
+
 				<!-- </div> -->
 			</div>
-		<!-- 	<div class="row tm-banner-row tm-banner-row-header tm-about-text-wrap mx-auto text-center">	 -->
-			<div class="row tm-banner-row mx-auto text-center">				
-				<form action="/login" role="form" method="post" class="tm-search-form tm-section-pad-4" name="frm" id="operForm" style="background-color:white; width: 670px; height:180px;">
+			<!-- 	<div class="row tm-banner-row tm-banner-row-header tm-about-text-wrap mx-auto text-center">	 -->
+			<div class="row tm-banner-row mx-auto text-center">
+				<form action="/login" role="form" method="post"
+					class="tm-search-form tm-section-pad-4" name="frm" id="operForm"
+					style="background-color: white; width: 670px; height: 180px;">
 					<div class="form-group tm-container">
-						<label for="userid">ID</label> 
-						<input type="text" id="userid" name="username" class="form-control" placeholder="id" required value="<%=cookie%>"/>
-						
+						<label for="userid">ID</label> <input type="text" id="userid"
+							name="username" class="form-control" placeholder="id" required
+							value="<%=cookie%>" />
+
 					</div>
 					<div class="form-group tm-container">
-						<label for="pwd">PASSWORD</label> 
-						<input type="password" id="pwd" name="password" class="form-control" placeholder="pwd" required />
+						<label for="pwd">PASSWORD</label> <input type="password" id="pwd"
+							name="password" class="form-control" placeholder="pwd" required />
 					</div>
-					
+
 					<div class="form-group tm-container">
-						<label for="remember">아이디 저장</label> 
-						<input type="checkbox" name="rememberCheck" class="form-control" />
+						<label for="remember">아이디 저장</label> <input type="checkbox"
+							name="rememberCheck" class="form-control" />
 						<!--자동로그인 name 속성값 remember-me-->
 						<!-- <input type="checkbox" name="remember-me" class="form-control" /> -->
 					</div>
-				
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="submit" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" id="login">로그인</button>
-					</div>
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/joinTerms'">회원가입</button>
+					<div
+						class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+						<button type="submit"
+							class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase"
+							id="login">로그인</button>
 					</div>
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findId'" >아이디 찾기</button>
+					<div
+						class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+
+						<button type="button"
+							class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase"
+							onclick="location.href='/join/joinTerms'">회원가입</button>
 					</div>
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-						<button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase" onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
+					<div
+						class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+						<button type="button"
+							class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase"
+							onclick="location.href='/join/findId'">아이디 찾기</button>
+					</div>
+					<div
+						class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+						<button type="button"
+							class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase"
+							onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
 					</div>
 
- 
-<%-- 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+
+					<%-- 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,gender,birthday,phone_number,shipping_address
 						"><button type="button" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">카카오 로그인</button></a>
 					</div> --%>
-					
-<br><br>
+
+					<br>
+					<br>
 					<div style="margin-top: 50px;">
-					<a href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,profile_nickname&prompt=login">
-					<img alt="kakao_login" src="../resources/img/kakao/kakao_login_small.png">
-					</a>
+						<a
+							href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,profile_nickname&prompt=login">
+							<img alt="kakao_login"
+							src="../resources/img/kakao/kakao_login_small.png">
+						</a>
 					</div>
 					<br>
 					<p style="color: red">${error}</p>
@@ -99,34 +122,39 @@
 					    alt="카카오 로그인 버튼" />
 					</a> -->
 					<p id="token-result"></p>
-					
+
 					<div>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-						<input type="hidden" id="joinMessage" name="joinMessage" value="${joinMessage}"/>
-						<input type="hidden" id="logout" name="logout" value="${logout}"/>
-						<input type="hidden" id="error" name="error" value="${error}"/>
-						
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> <input type="hidden" id="joinMessage"
+							name="joinMessage" value="${joinMessage}" /> <input type="hidden"
+							id="logout" name="logout" value="${logout}" /> <input
+							type="hidden" id="error" name="error" value="${error}" />
+
 					</div>
-			</form>
-			
+				</form>
 
 
-		</div>
+
+			</div>
 		</div>
 	</div>
 
-	</div>
-	<%@ include file="includes/footer.jsp"%>
+</div>
+<%@ include file="includes/footer.jsp"%>
 
 <script type="text/javascript">
-	$("#login").on("click",function(e){
+	var joinMessage = document.getElementById('joinMessage').value;
+	if (joinMessage != "") {
+		alert(joinMessage);
+	};
+
+	$("#login").on("click", function(e) {
 		e.preventDefault();
 		//alert("login");
+
 		$("form").submit();
 
 	});
-	
-
 </script>
 </body>
 

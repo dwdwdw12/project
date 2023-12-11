@@ -97,7 +97,7 @@ public class JoinController {
 		log.info("result >> " + result);
 
 		if (result == null) {
-			model.addAttribute("message", "입력하신 정보를 다시 확인해주시기 바랍니다.");
+			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
 			return "redirect:/join/findId";
 		} else {
 			try {
@@ -161,7 +161,7 @@ public class JoinController {
 		log.info("result >> " + result);
 
 		if (result == null) {
-			model.addAttribute("message", "입력하신 정보를 다시 확인해주시기 바랍니다.");
+			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
 			return "redirect:/join/findPwd";
 		} else {
 			try {
@@ -208,14 +208,10 @@ public class JoinController {
 		log.info("JoinController >> checkMember [get]");
 	}
 
-	@PostMapping("/checkMember") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
+	@PostMapping("/checkMember") // 약관동의 후 기존멤버 체크
 	public String checkMember(Model model, KakaoUserVO vo, String termsAgree) {
 		log.info("JoinController >> checkMember [post]");
 		log.info(vo);
-
-//		String userYear = Integer.toString(userReginumFirst).substring(0, 2);
-//		String userMonth = Integer.toString(userReginumFirst).substring(2, 4);
-//		String userDate = Integer.toString(userReginumFirst).substring(4, 6);
 
 		model.addAttribute("userInfo", vo);
 		model.addAttribute("termsAgree", termsAgree);
@@ -223,10 +219,7 @@ public class JoinController {
 		KakaoUserVO result = join.confirmMember(vo);
 		log.info(vo);
 		if (result == null) {
-			return "/join/memberInfo"; // 정보조회가 되지않아야 신규회원이 맞음!
-		} else if (termsAgree == null) {
-			model.addAttribute("joinMessage", "약관에 동의해주시기 바랍니다.");
-			return "/join/joinTerms"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
+			return "/join/memberInfo"; // 정보조회가 되지않으면 신규회원
 		} else {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
 			return "/login"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
@@ -260,7 +253,7 @@ public class JoinController {
 		// select count(pwd) from kakaouser where pwd = #{pwd_check} => DB에 입력받는 pwd가
 		// 없으니 당연함..
 		// 1이 안나옴..
-		if (pwd.equals(pwd_check)) {
+		if (pwd.equals(pwd_check)) { //입력값과 equals로 직접비교
 			userPwdCnt = 1;
 			log.info("result userPwdCnt >> " + userPwdCnt);
 		} else {
@@ -270,7 +263,7 @@ public class JoinController {
 		return userPwdCnt;
 	}
 
-	@GetMapping("/memberInfo") // 약관동의 후 기존멤버 체크(아직 약관동의 저장, 유효성 구현하지 않음)
+	@GetMapping("/memberInfo") // 약관동의 후 기존멤버 체크
 	public void memberInfoGet(Model model, KakaoUserVO vo) {
 		model.addAttribute("userInfo", vo);
 		log.info("JoinController >>  [get]");
@@ -289,7 +282,7 @@ public class JoinController {
 		String address = addressDefault + addressDetail;
 
 		log.info("raw password >> " + pwd);
-		// password 암호화...
+		// password 암호화
 		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
 
@@ -441,7 +434,7 @@ public class JoinController {
 			String userNameE, String gender_kakao, String pwd, int userReginumFirst, int userReginumLast,
 			String phone_kakao, String mail, int postCode, String addressDefault, String addressDetail) {
 		// ###gender### : female
-		// ###phone_number### : +82 10-4784-4991 값 처리해야함....... vo말고 파라미터로 받아야함...
+		// ###phone_number### : +82 10-0000-0000 값 처리해야함....... vo말고 파라미터로 받아야함...
 		log.info("기존의 phone >> " + phone_kakao);
 		log.info("기존의 gender_kakao >> " + gender_kakao);
 
@@ -449,7 +442,7 @@ public class JoinController {
 		String phone = "0" + phone_kakao.substring(4);
 
 		log.info("raw password >> " + pwd);
-		// password 암호화...;
+		// password 암호화
 		pwd = passwordEncoder.encode(pwd);
 		log.info("encoded password >> " + pwd);
 
