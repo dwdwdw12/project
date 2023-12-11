@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,9 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.mail.MailHandler;
 import com.airline.mail.TempKey;
-import com.airline.security.CustomLoginSuccessHandler;
 import com.airline.security.CustomUser;
-import com.airline.security.CustomUserDetailService;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
 import com.airline.vo.KakaoUserVO;
@@ -57,7 +60,7 @@ public class JoinController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@GetMapping("/joinTerms")
 	public void joinTermsGet(Model model) {
 		TermsVO terms1 = join.getTerms(1);
@@ -253,7 +256,7 @@ public class JoinController {
 		// select count(pwd) from kakaouser where pwd = #{pwd_check} => DB에 입력받는 pwd가
 		// 없으니 당연함..
 		// 1이 안나옴..
-		if (pwd.equals(pwd_check)) { //입력값과 equals로 직접비교
+		if (pwd.equals(pwd_check)) { // 입력값과 equals로 직접비교
 			userPwdCnt = 1;
 			log.info("result userPwdCnt >> " + userPwdCnt);
 		} else {
@@ -276,7 +279,7 @@ public class JoinController {
 			String addressDefault, String addressDetail) {
 
 		// email phone address 합쳐줘야해서.. parameter로 받음....
-		userNameE = userNameE.toUpperCase(); 
+		userNameE = userNameE.toUpperCase();
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
@@ -287,7 +290,7 @@ public class JoinController {
 		log.info("encoded password >> " + pwd);
 
 		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
-		
+
 		try {
 
 			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -310,7 +313,7 @@ public class JoinController {
 
 			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, address);
-			
+
 			// userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
 			// -> length로 바꿈(선택약관 늘어나면 다시 고려해봐야함..)
 			if (userTermsAgree.length == 4) {
@@ -323,7 +326,7 @@ public class JoinController {
 			join.registerUserlog(userId);
 			join.registerGradelog(userId);
 			join.registerUserPay(userId);
-			join.registerPoint(userId);			
+			join.registerPoint(userId);
 
 			return "redirect:/join/joinSuccess";
 
@@ -343,7 +346,7 @@ public class JoinController {
 	@GetMapping("/kakao")
 	@CrossOrigin(origins = "http://localhost:8081/join/kakao")
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model,
-			HttpServletRequest request, RedirectAttributes attr) throws Throwable {
+			HttpServletRequest request, HttpServletResponse response, RedirectAttributes attr) throws Throwable {
 		System.out.println("kakao controller타는중~~~(join에서 get)");
 		// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 		log.info("code:" + code);
@@ -370,7 +373,7 @@ public class JoinController {
 		String userId = (String) userInfo.get("email");
 		KakaoUserVO vo = join.kakaoLoginCheck(email, userId);
 
-		log.info("vo 결과 >>> " + vo); 
+		log.info("vo 결과 >>> " + vo);
 
 		if (vo == null) {
 
@@ -389,43 +392,79 @@ public class JoinController {
 			// 사용자 정보로 Authentication 객체 생성
 			List<SimpleGrantedAuthority> userAuthorities = join.getAuthorities(email);
 			List<GrantedAuthority> authorities = new ArrayList<>(userAuthorities);
-			
+
 			CustomUser customuser = new CustomUser(vo);
 			log.info("customuser >> " + customuser);
 
-			//(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities)
+			// (Object principal, Object credentials, Collection<? extends GrantedAuthority>
+			// authorities)
 			Authentication authentication = new UsernamePasswordAuthenticationToken(customuser, null, authorities);
 			log.info("authentication >> " + authentication);
-			
+
 			// SecurityContext에 설정
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
 			// 세션에 사용자 정보 저장
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", vo);
-			
+
 			// 로그인 후의 페이지로 리다이렉트
-			log.warn("login success");
+			log.warn("login success [join controller]===========");
 			List<String> roleNames = new ArrayList<>();
 			authentication.getAuthorities().forEach(authority -> {
 				roleNames.add(authority.getAuthority());
 				log.info("authority >> " + authority);
 				log.info("vo.getAuthority >> " + vo.getAuthority());
 			});
-		
+
 			log.warn("role names : " + roleNames);
-			if(roleNames.contains("ROLE_ADMIN")) {
-				model.addAttribute("vo", vo);
-				return "redirect:/user";
+			
+//			if (roleNames.contains("ROLE_ADMIN")) {
+//			model.addAttribute("vo", vo);
+//			return "redirect:/user";
+//		}
+//
+//		if (roleNames.contains("ROLE_MEMBER")) {
+//			model.addAttribute("vo", vo);
+//			return "redirect:/user";
+//		}
+
+			// 로그인 성공 시 타겟url 으로 리다이렉트
+			RequestCache requestCache = new HttpSessionRequestCache();
+			RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+			SavedRequest savedRequest = requestCache.getRequest(request, response);
+			String uri = "/";
+
+			String prevPage = (String) request.getSession().getAttribute("prevPage");
+			if (prevPage != null) {
+				request.getSession().removeAttribute("prevPage");
+			}
+
+			if (savedRequest != null) {
+				String targetUrl = savedRequest.getRedirectUrl();
+				redirectStrategy.sendRedirect(request, response, targetUrl);
+			} else if (prevPage != null && !prevPage.equals("")) {
+				// 회원가입 - 로그인으로 넘어온 경우 "/"로 redirect
+				if (prevPage.contains("/join")) {
+					log.info("첫번째if문-------------------");
+					uri = "/";
+					redirectStrategy.sendRedirect(request, response, uri);
+				} else {
+					uri = prevPage;
+					redirectStrategy.sendRedirect(request, response, uri);
+				}
+			} else {
+				redirectStrategy.sendRedirect(request, response, "/");
 			}
 			
-			if(roleNames.contains("ROLE_MEMBER")) {
-				model.addAttribute("vo", vo);
-				return "redirect:/user";
-			}
-			
-			return "/";
-			
+			uri = request.getHeader("Referer");
+		    if (uri != null && !uri.contains("/login")) {
+		        request.getSession().setAttribute("prevPage", uri);
+		    }
+
+			return uri;
+
 		}
 	}
 
@@ -451,7 +490,7 @@ public class JoinController {
 		} else {
 			gender = "M";
 		}
-		userNameE = userNameE.toUpperCase(); 
+		userNameE = userNameE.toUpperCase();
 
 		log.info("가공된 phone >> " + phone);
 		log.info("가공된 gender >> " + gender);
@@ -478,14 +517,14 @@ public class JoinController {
 
 			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, addressDetail);
-			
+
 			join.registerAllTerms(userId);
 			join.registerAuthorityMEMBER(userId);
 			join.registerUserlog(userId);
 			join.registerGradelog(userId);
 			join.registerUserPay(userId);
 			join.registerPoint(userId);
-			
+
 			return "redirect:/join/joinSuccess";
 
 		} catch (Exception e) {
@@ -494,11 +533,11 @@ public class JoinController {
 		}
 
 	}
-	
+
 	@GetMapping("/error/accessError")
 	@CrossOrigin("http://localhost:8081/error/accessError")
 	public void aceessError() {
-		
+
 	}
 
 }
