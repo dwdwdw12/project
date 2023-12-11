@@ -217,7 +217,6 @@
 	
 	<update id="updateUserInfo" parameterType="map">
 		update kakaouser set
-		userNick = #{userNick}, 
 		userNameK = #{userNameK}, 
 		userNameE = #{userNameE}, 
 		phone = #{phone}, 
@@ -225,6 +224,11 @@
 		address = #{address}
 		where userId = #{userId}
 	</update>
+<update id="updateUserNick" parameterType="map">
+	update kakaouser k, boarddiary bd, boarddiaryreply br, boardqna bq
+set k.userNick = #{userNick}, bd.boardWriter = #{userNick}, br.replyWriter = #{userNick}, bq.boardWriter = #{userNick}
+where k.userId = #{userId} and bd.userId=br.userId and br.userId=k.userId and bd.userId = k.userId;
+</update>
 	
 	<update id="updateUserPwd" parameterType="map">
 		update kakaouser set pwd = #{pwd} where userId = #{userId}

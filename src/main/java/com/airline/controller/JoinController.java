@@ -276,7 +276,7 @@ public class JoinController {
 			String addressDefault, String addressDetail) {
 
 		// email phone address 합쳐줘야해서.. parameter로 받음....
-
+		userNameE = userNameE.toUpperCase(); 
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
@@ -308,7 +308,7 @@ public class JoinController {
 
 			log.info("controller에서 가입완료 메일 보냄 완료");
 
-			join.registerMember(userId, userNick, userNameE, userNameK, gender, pwd, userReginumFirst, userReginumLast,
+			join.registerMember(userId, userNick, userNameK, userNameE, gender, pwd, userReginumFirst, userReginumLast,
 					postCode, phone, mail, address);
 			
 			// userTermsAgree가 0 1 2 3으로 들어가서 3번째에 값이 있으면 전체동의, 3번째에 값이 없으면 기본동의 하려고하는데 에러남
@@ -451,6 +451,7 @@ public class JoinController {
 		} else {
 			gender = "M";
 		}
+		userNameE = userNameE.toUpperCase(); 
 
 		log.info("가공된 phone >> " + phone);
 		log.info("가공된 gender >> " + gender);
@@ -492,6 +493,12 @@ public class JoinController {
 			return "redirect:/error/accessError";
 		}
 
+	}
+	
+	@GetMapping("/error/accessError")
+	@CrossOrigin("http://localhost:8081/error/accessError")
+	public void aceessError() {
+		
 	}
 
 }

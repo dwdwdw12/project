@@ -34,6 +34,9 @@
 		<security:form-login login-page="/login" authentication-success-handler-ref="cusotmLoginSuccess"/>
 		<security:logout logout-url="/logout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" logout-success-url="/"/>
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+		<security:session-management invalid-session-url="/" session-fixation-protection="migrateSession" >
+			<security:concurrency-control max-sessions="1" expired-url="/login" />
+		</security:session-management>
 		
 	</security:http>
 

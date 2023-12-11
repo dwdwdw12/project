@@ -3,7 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
 
-
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <body>
 	<div class="tm-main-content" id="top">
 		<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
@@ -21,7 +28,7 @@
 							<hr>
 							<br>
 
-							<form name="signUpForm" method="post">
+							<form name="signUpForm" method="post" id="signUpForm">
 								<table style="margin-left: auto; margin-right: auto;">
 									<tr>
 										<th>아이디</th>
@@ -44,9 +51,8 @@
 								<br> <br> <input type="hidden"
 									name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-								<button onclick="return emailValCheck()" id="eamilAuthBtn"
-									type="submit" class="btn btn-primary" style="display: inline;">인증
-									메일 보내기</button>
+								<button id="emailAuthBtn" type="submit" class="btn btn-primary"
+									style="display: inline;" name="findIdButton">인증 메일 보내기</button>
 								<input class="spinner-border text-warning" type="hidden"
 									name="spinner" id="spinner">
 
@@ -75,6 +81,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		var joinMessage = document.getElementById('joinMessage').value;
+		if (joinMessage != "") {
+			alert(joinMessage);
+		};
+
 		function check(pattern, taget, message) {
 			if (pattern.test(taget)) {
 				return true;
@@ -90,7 +101,7 @@
 			//false 반환
 		};
 
-		$("#eamilAuthBtn")
+		$("#emailAuthBtn")
 				.on(
 						"click",
 						function(e) {
@@ -110,11 +121,6 @@
 
 							form.submit();
 						});
-
-		var joinMessage = document.getElementById('joinMessage').value;
-		if (joinMessage != "") {
-			alert(joinMessage);
-		};
 	</script>
 
 </body>

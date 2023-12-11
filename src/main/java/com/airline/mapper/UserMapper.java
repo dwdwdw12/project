@@ -93,11 +93,13 @@ public interface UserMapper {
 
 	public int getMileage(String userid);
 	
-	public void updateUserInfo(@Param("userId") String userId, @Param("userNick") String userNick,
+	public void updateUserInfo(@Param("userId") String userId,
 			@Param("userNameK") String userNameK, @Param("userNameE") String userNameE, 
 			@Param("phone") String phone, @Param("mail") String mail, 
 			@Param("postCode") int postCode, @Param("address") String address);
 	
 	public void updateUserPwd(@Param("userId") String userId, @Param("pwd") String pwd);
+	
+	public void updateUserNick(@Param("userId") String userId, @Param("userNick") String userNick);
 
 }

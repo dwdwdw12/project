@@ -90,7 +90,7 @@
 											<li><a href="/user">myPage(user)<i class="ti-angle-down"></i></a>
 
 												<ul class="submenu" style="width: 230px;">
-													<li><a href="/user/myInfoModify">회원정보 조회/수정</a></li>
+													<li><a href="/user/myPage">회원정보 조회/수정</a></li>
 													<li><a href="/user/mileage">마일리지 조회</a></li>
 													<li><a href="/user/chargePoint">포인트 충전</a></li>
 

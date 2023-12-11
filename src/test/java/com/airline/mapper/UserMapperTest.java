@@ -3,6 +3,7 @@ package com.airline.mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -14,6 +15,9 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/security-context.xml","file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 @Log4j
 public class UserMapperTest {
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserMapper mapper;
@@ -32,19 +36,27 @@ public class UserMapperTest {
 	@Test
 	public void updateUserInfoTest() {
 		String userId = "dbswjd4991@naver.com";
-		String userNick = "윤정윤정";
+		//String userNick = "윤정윤정";
 		String userNameK = "윤정윤정";
 		String userNameE = "YUN";
 		String phone = "010-1111-1111";
 		int postCode = 55555;
 		String address = "경기도 수원시";
-		mapper.updateUserInfo(userId, userNick, userNameK, userNameE, phone, phone, postCode, address);
+		mapper.updateUserInfo(userId, userNameK, userNameE, phone, phone, postCode, address);
 	}
 	
 	@Test
 	public void updateUserPwd() {
-		String userId = "dbswjd4991@naver.com";
-		String pwd = "asdf";
+		String userId = "user01";
+		String pwd = "user01";
+		pwd = passwordEncoder.encode(pwd);
 		mapper.updateUserPwd(userId, pwd);
+	}
+	
+	@Test
+	public void updateUwerNick() {
+		String userId = "user01";
+		String userNick = "uuu";
+		mapper.updateUserNick(userId, userNick);
 	}
 }
