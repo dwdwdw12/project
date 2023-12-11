@@ -129,7 +129,7 @@ font: bold;
 			    <div class="col">
 			    	 <div class="p-1 border bg-light">
 						<h3 style="text-align: center;">
-							<strong>${loginUser.userNameK} 님</strong>의 질문 글 </h3>
+							<strong>${loginUser.userNick} 님</strong>의 질문 글 </h3>
 			    	 	<table id="listTable">
 							<tr>
 								<th width=10%>글번호</th>
@@ -164,7 +164,7 @@ font: bold;
 			    	 <div class="p-3 border bg-light">
 			    	 <p>
 						<h3 style="text-align: center;">
-							<strong>${loginUser.userNameK} 님</strong> 받은 답변 현황 </h3>
+							<strong>${loginUser.userNick} 님</strong> 받은 답변 현황 </h3>
 						</p>
 			    	 	<table class="table table-hover">
 					    <thead>
@@ -189,7 +189,7 @@ font: bold;
    	 		    <div class="col">
 			    	 <div class="p-3 border bg-light">
 						<h3 style="text-align: center;">
-							<strong>${loginUser.userNameK} 님</strong> 미답변 현황 </h3>
+							<strong>${loginUser.userNick} 님</strong> 미답변 현황 </h3>
 			    	 	<table class="table table-hover">
 					    <thead>
 					    	<th>제목</th>
