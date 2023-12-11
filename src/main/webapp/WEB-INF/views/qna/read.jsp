@@ -146,7 +146,10 @@ a {
 							<button data-oper="modify" class="gradient" type="submit">수정</button>
 						</c:if>
 							<button data-oper="list" class="gradient" type="submit" >목록</button>
-						<c:if test="${loginUser.admin==1 || loginUser.userNick eq board.boardwriter || auth.boardwriter eq loginUser.userNick}">
+						<c:if test="${auth.boardwriter eq loginUser.userNick}">
+							<button data-oper="reply" type="submit" class="gradient">질문</button>
+						</c:if>
+						<c:if test="${loginUser.admin==1}">
 							<button data-oper="reply" type="submit" class="gradient">답변</button>
 						</c:if>
 						<c:if test="${loginUser.admin==1 || loginUser.userNick eq board.boardwriter}">
