@@ -67,7 +67,7 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 	</c:otherwise>
 </c:choose> 
 
-<p>${modi.reason}로 인한 ${modi.flightName}편 ${modi.depName} to ${modi.arrName} 행 </p>
+<p>${modi.reason}로 인한 ${modi.flightName}편 ${modi.depName} <i class="bi bi-arrow-right"></i> ${modi.arrName} 행</p>
 <%-- <c:choose>
 	<c:when test="${modi.isDelete==2}">
 	<p>항공 운항 변경 안내</p>

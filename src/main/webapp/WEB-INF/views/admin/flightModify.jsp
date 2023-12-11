@@ -60,7 +60,7 @@
 								<td><input type="text" id="flightName" name="flightName" value="${vo.flightName}" readonly="readonly" style="border: 0; background-color: #efefef; width: 80px"/></td>
 								<td><input type="text" id="depName" name="depName" value="${vo.depName}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px"/></td>
 								<td><input type="text" id="depCode" name="depCode" value="${vo.depCode}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px;"/></td>
-								<td><input type="text" id="dRCode" name="dRCode" value="${vo.depRegioncode}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px;"/></td>
+								<td><input type="text" id="dRCode" name="dRCode" value="${vo.depRegionCode}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px;"/></td>
 								<td><input type="text" id="fullDepTime" name="fullDepTime" value="${vo.fullDeptime}" required="required" style="border: 0; background-color: #efefef;width: 160px"/></td>
 					</tr>
 				</tbody>
@@ -83,7 +83,7 @@
 					<tr class="flight">
 						<td><input type="text" id="arrName" name="arrName" value="${vo.arrName}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px"/></td>
 								<td><input type="text" id="aCode" name="aCode" value="${vo.arrCode}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px;"/></td>
-								<td><input type="text" id="aRCode" name="aRCode" value="${vo.arrRegioncode}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px;"/></td>
+								<td><input type="text" id="aRCode" name="aRCode" value="${vo.arrRegionCode}" readonly="readonly" style="border: 0; background-color: #efefef;width: 80px;"/></td>
 								<td><input type="text" id="fullArrTime" name="fullArrTime" required="required" value="${vo.fullArrtime}"  style="border: 0; background-color: #efefef;width: 160px"/></td>
 								<td><input type="text" id="flightTime" name="flightTime" required="required" value="${vo.flightTime}"  style="border: 0; background-color: #efefef;width: 80px"/></td>
 								<td><input type="text" id="reason" name="reason" required="required" value="${vo.reason}"  style="border: 0; background-color: #efefef;width: 80px"/></td>
@@ -124,11 +124,11 @@
 				flightName : $("#flightName").val(),
 				depName : $("#depName").val(),
 				depCode : $("#depCode").val(),
-				depRegioncode : $("#dRCode").val(),
+				depRegionCode : $("#dRCode").val(),
 				fullDeptime : $("#fullDepTime").val(),
 				arrName : $("#arrName").val(),
 				arrCode : $("#aCode").val(),
-				arrRegioncode : $("#aRCode").val(),
+				arrRegionCode : $("#aRCode").val(),
 				fullArrtime : $("#fullArrTime").val(),
 				flightTime : $("#flightTime").val(),
 				reason : $("#reason").val(),

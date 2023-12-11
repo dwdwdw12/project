@@ -160,11 +160,11 @@
 				flightName : $("#flightName").val(),
 				depName : $("#depName").val(),
 				depCode : $("#depCode").val(),
-				depRegioncode : $("#dRCode").val(),
+				depRegionCode : $("#dRCode").val(),
 				fullDeptime : $("#fullDepTime").val(),
 				arrName : $("#arrName").val(),
 				arrCode : $("#aCode").val(),
-				arrRegioncode : $("#aRCode").val(),
+				arrRegionCode : $("#aRCode").val(),
 				fullArrtime : $("#fullArrTime").val(),
 				flightTime : $("#flightTime").val()
 
