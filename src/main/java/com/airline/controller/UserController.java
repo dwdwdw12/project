@@ -2,6 +2,7 @@ package com.airline.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,6 +206,7 @@ public class UserController {
 	public void myPage(Model model, HttpSession session) {
 		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
 		model.addAttribute("userInfo", vo);
+		log.info("마이페이지 겟컨트롤러 >> "+vo);
 	}
   
   	//마이페이지 수정
@@ -229,7 +231,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/myInfoModify")
-	public String myInfoModify(RedirectAttributes attr, String userId, String userNick,
+	public String myInfoModify(HttpSession session, String userId, String userNick,
 			String userNameK, String userNameE, 
 			String phone_first, String phone_middle, String phone_last, 
 			int postCode, String addressDefault, String addressDetail) {
@@ -238,18 +240,23 @@ public class UserController {
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		//String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
+		userNameE = userNameE.toUpperCase(); 
 		
-		log.info(userId);
-		log.info(userNick);
+		log.info("myinfomodify post controller >> "+userId);
+		//log.info(userNick);
 		log.info(userNameK);
 		log.info(userNameE);
 		log.info(phone);
 		log.info(postCode);
 		log.info(address);
 		
-		service.modifyUserInfo(userId, userNick, userNameK, userNameE, phone, postCode, address);
+		service.modifyUserInfo(userId, userNameK, userNameE, phone, postCode, address);
+		//service.modifyUserNick(userId, userNick);
+		KakaoUserVO vo = service.getUserInfo(userId);
+		session.setAttribute("loginUser", vo);
+		log.info("modified loginUser >> "+vo);
 		
-		return "redirect:/user";
+		return "redirect:/user/myPage";
 	}
 	
 	@GetMapping("/myPwdModify") //mypage에서 get으로 링크타고 이동해서 다시 session가져옴..
@@ -264,6 +271,18 @@ public class UserController {
 		service.modifyUserPwd(userId, pwd);
 		return "redirect:/user";
 	}
-	
+	@GetMapping("/myNickModify")
+	public void myNickModify(Model model, HttpSession session) {
+		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
+		model.addAttribute("userInfo", vo);
+	}
+	@PostMapping("/myNickModify")
+	public String myNickModify(String userId, String userNick, HttpSession session) {
+		service.modifyUserNick(userId, userNick);
+		KakaoUserVO vo = service.getUserInfo(userId);
+		session.setAttribute("loginUser", vo);
+		log.info("modified loginUser >> "+vo);
+		return "redirect:/user";
+	}
 	
 }

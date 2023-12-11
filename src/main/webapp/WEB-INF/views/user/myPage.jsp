@@ -30,6 +30,8 @@
 
 			<div align="right" style="margin: 0px auto 10px auto; width: 800px">
 				<button type="button" class="btn btn-primary btn-sm"
+					onclick="location.href='/user/myNickModify'">닉네임 변경</button>
+				<button type="button" class="btn btn-primary btn-sm"
 					onclick="location.href='/user/myPwdModify'">비밀번호 변경</button>
 				<button type="button" class="btn btn-primary btn-sm"
 					onclick="location.href='/user/myInfoModify'">수정</button>

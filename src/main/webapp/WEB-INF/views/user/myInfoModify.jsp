@@ -70,28 +70,7 @@ display: none;
 							</td>
 						</tr>
 
-						<tr>
-							<th scope="row" style="padding: 8px;"><label for="userNick">닉네임 <span
-									class="icon_require" style="color: red; font-size: x-small;">
-										*</span>
-							</label></th>
-							<td style="padding: 8px"><input type="text" id="userNick" name="userNick"
-								placeholder="한글/영문 2~10자" title="한글/영문 2~10자"
-								style="width: 200px; display: inline;" maxlength="10"
-								class="input_Nick; form-control" oninput="checkNick()" required="required"
-								value="${userInfo.userNick }">
-							<!-- oninput="checkId()"으로 값을 입력할 때마다 바로바로 데이터 확인시킴, style로 색을 지정하고 none;으로 숨겨둔 상태 -->
-							<!-- id ajax 중복체크 -->
-								<span class="userNick_ok">&nbsp;&nbsp;사용 가능한 닉네임입니다.</span>
-								<span class="userNick_already">&nbsp;&nbsp;사용 불가능한 닉네임입니다.</span>
 
-								<p style="color: gray; margin-top: 10px; font-size: 0.8em;">
-									2 ~ 10자리 한글, 영문(대소문자 구별), 숫자 조합 입력 가능 <br>(단 공백,
-									특수문자 입력 불가)
-									>
-								</p>
-							</td>
-						</tr>
 
 						<tr>
 							<th scope="row" style="padding: 8px;"><label for="phone_first">휴대전화<span
@@ -191,49 +170,44 @@ display: none;
 
 <script type="text/javascript">		
 	
-		function checkNick(){
-			var userNick = $('#userNick').val(); 
-			$.ajax({
-				url : '/join/userNickDuplicateCheck', //controller에서 요청받을 주소
-				type : 'post', //post방식으로 전달
-				data : {userNick:userNick}, //데이터
-				dataType : 'json',
-				success : function(userNickCnt){ //controller에서 넘어온 cnt값을 받음
-					if(userNickCnt == 0){ //0이면 사용가능 1이면 중복
-						$('.userNick_ok').css("display", "inline-block");
-						$('.userNick_already').css("display", "none");
-					} else { //!=0일때 (중복일때)
-						$('.userNick_ok').css("display", "none");
-						$('.userNick_already').css("display", "inline-block");
-						//$('#userNick').val(''); 값을 지우는데 지우면 확인못할것같아서 주석처리함
-					}
-				},
-				error:function(){
-					alert("오류가 발생하였습니다.");
-				}
-			});
-		};
+function checkNick() {
+	var userNick = $('#userNick').val();
+	var checkNickResult = "";
+	$.ajax({
+		url : '/join/userNickDuplicateCheck', //controller에서 요청받을 주소
+		type : 'post', //post방식으로 전달
+		data : {
+			userNick : userNick
+		}, //데이터
+		dataType : 'json',
+		async: false,
+		success : function(userNickCnt) { //controller에서 넘어온 cnt값을 받음
+			if (userNickCnt == 0) { //0이면 사용가능 1이면 중복
+				$('.userNick_ok').css("display", "inline-block");
+				$('.userNick_already').css("display", "none");
+				checkNickResult = true;
+			} else { //!=0일때 (중복일때)
+				$('.userNick_ok').css("display", "none");
+				$('.userNick_already').css("display", "inline-block");
+				//$('#userNick').val(''); 값을 지우는데 지우면 확인못할것같아서 주석처리함
+				checkNickResult = false;
+			}
+		},
+		error : function() {
+			alert("오류가 발생하였습니다.");
+		}
+	});
+	return checkNickResult;
+};
 
 		function formCheck() {
 
 			var regId = /^[a-zA-Z0-9]{6,10}$/;
 			var regIdPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,10}$/;
+			var regNick = /^[a-zA-Z0-9가-힣]{2,10}$/;
 			var form = document.frm;
 	
-			if (document.frm.userNick.value.length == 0) {
-				alert("닉네임을 입력해주세요.")
-				document.frm.userNick.focus;
-				return false;
-			} else if (!regNick.test(document.frm.userNick.value)) {
-				alert("2~10자리 한글, 영문(대소문자 구별), 숫자를 입력해주세요.")
-				document.frm.userNick.focus;
-				return false;
-			}
-			else if (!checkNick()) {
-				alert("닉네임을 다시 확인해주세요.");
-		        return false;
-		    }
-			else if(document.frm.phone_first.value.length == 0){
+if(document.frm.phone_first.value.length == 0){
 	            alert("휴대전화번호를 다시 확인해주세요.")
 	            document.frm.phone_first.focus;
 	            return false;
