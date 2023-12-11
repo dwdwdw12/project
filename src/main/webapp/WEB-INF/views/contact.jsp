@@ -28,14 +28,14 @@ p{
 }
 </style>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px">
 	<section class="tm-banner">
 
 		<!-- .tm-container-outer -->
 		<div class="inner">
 			<div class="slideshow">
 				<img src="../resources/img/kakao/둥둥섬2.jpg" alt="" width="1400"
-					height="650"/>
+					height="550"/>
 			</div>
 		</div>
 	</section>
@@ -61,18 +61,25 @@ p{
 	<div class="tm-container-outer" id="tm-section-3">
 		<ul class="nav nav-pills tm-tabs-links">
 			<li class="tm-tab-link-li"><a href="history" data-toggle="information"
-				class="tm-tab-link"> <img
+				class="tm-tab-link"> <!-- <img
 					src="../resources/img/north-america.png" alt="Image"
-					class="img-fluid"> 소개 
+					class="img-fluid"> 소개 --> 
+				<img src="../resources/img/kakao/등급_라이언.png" alt="Image"
+					class="img-fluid" style="width: 50px"> 소개 
 			</a></li>
 			<li class="tm-tab-link-li"><a href="history" data-toggle="history"
-				class="tm-tab-link"> <img
-					src="../resources/img/south-america.png" alt="Image"
-					class="img-fluid"> 연혁
+				class="tm-tab-link"> 
+<!-- 				<img src="../resources/img/south-america.png" alt="Image"
+					class="img-fluid"> 연혁 -->
+				<img src="../resources/img/kakao/등급_어피치.png" alt="Image"
+					class="img-fluid" style="width: 55px"> 연혁
 			</a></li>
 			<li class="tm-tab-link-li"><a href="map" data-toggle="map"
-				class="tm-tab-link"><img src="../resources/img/antartica.png"
-					alt="Image" class="img-fluid"> 찾아오는 길
+				class="tm-tab-link">
+<!-- 				<img src="../resources/img/antartica.png"
+					alt="Image" class="img-fluid"> 찾아오는 길 -->
+				<img src="../resources/img/kakao/등급_춘식이.png"
+					alt="Image" class="img-fluid" style="width: 55px"> 찾아오는 길
 			</a></li>
 		</ul>
 

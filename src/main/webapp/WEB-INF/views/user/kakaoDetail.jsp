@@ -56,8 +56,8 @@
 
 			<div class="container">
 				<table class="table table-hover">
-					<thead>
-						<tr>
+					<thead style="background: #ffc107">
+						<tr >
 							<th>번호</th>
 							<th>적립/사용</th>
 							<th>포인트 변동사항</th>

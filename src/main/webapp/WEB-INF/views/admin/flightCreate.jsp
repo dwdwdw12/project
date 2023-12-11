@@ -44,7 +44,7 @@
 		<div class="row">
 			<div class="col-xs-6">
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
 							<th style="width: 10%">운항기</th>
 							<th>출발지</th>
@@ -87,7 +87,7 @@
 			
 			<div class="col-xs-6">
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
 							<th>도착지</th>
 							<th>도착공항 코드</th>

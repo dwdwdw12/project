@@ -50,8 +50,8 @@ max-width: 100%;
 					<h2 class="text-uppercase mb-4">
 						<strong>kakao point 충전</strong>
 					</h2>
-					<p class="mb-4">카카오페이 포인트를 충전하고, 항공권 결제 시 사용할 수 있습니다.</p>
-					<p class="mb-4">원하는 충전금액을 선택한 후 결제버튼을 클릭 해 주세요.</p>
+					<p class="mb-2">카카오페이 포인트를 충전하고, 항공권 결제 시 사용할 수 있습니다.</p>
+					<p class="mb-2">원하는 충전금액을 선택한 후 결제버튼을 클릭 해 주세요.</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 						<div class="card-body bg-white mt-0 shadow">

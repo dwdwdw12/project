@@ -56,7 +56,7 @@
 
 			<div class="container">
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
 							<th>아이디</th>
 							<th>예약번호</th>

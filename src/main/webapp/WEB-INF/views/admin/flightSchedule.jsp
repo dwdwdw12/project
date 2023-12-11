@@ -58,7 +58,7 @@
 				</button>
 				</div>
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
 							<th>번호</th>
 							<th>항공기</th>
