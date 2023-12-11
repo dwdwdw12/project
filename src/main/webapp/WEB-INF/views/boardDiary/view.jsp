@@ -59,14 +59,15 @@
 }
 </style>
 </head>
-<body class="p-5 tm-container-outer tm-bg-gray" style=" margin-top: 180px;">
+<body style=" margin-top: 180px;">
 
 	<input type="hidden" id="boardNum" name="boardNum"
 		value="${board.boardNum}" readonly="readonly">
 	<input type="hidden" id="userId" name="userId"
 		value="${loginUser.userId}" readonly="readonly">
-	<div class="container">
-		<h1>게시글 상세보기</h1>
+	<div class="p-5 tm-container-outer tm-bg-gray">
+		<h2>게시글 상세보기</h2>
+		<hr class="hr1" noshade>
 		<form action="/boardDiary/delete" method="post" name="frm">
 			<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly"> 
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">

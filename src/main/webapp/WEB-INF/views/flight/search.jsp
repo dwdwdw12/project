@@ -48,7 +48,7 @@
     position: sticky;
     text-align: center;
     top: 0px;
-    background-color: gray !important;
+    background-color: #FFC107 !important;
     z-index: 2;
 }
 #arrTable th {
@@ -56,7 +56,7 @@
     text-align: center;
     vertical-align: middle;
     top: 0px;
-    background-color: gray !important;
+    background-color: #FFC107 !important;
 }
 td {
 	font-size: 15px;
