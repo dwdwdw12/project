@@ -261,21 +261,21 @@ hr {
 							어피치 등급까지
 							<fmt:formatNumber value="${300000-mile}" pattern="###,###,###" />
 							마일리지 남았습니다.
-						</c:when>
+							</c:when>
 							<c:when test="${mile>=300000 and mile < 500000}">
 							라이언 등급까지 
 							<fmt:formatNumber value="${500000-mile}" pattern="###,###,###" />
 							마일리지 남았습니다.
-						</c:when>
+							</c:when>
 							<c:when test="${mile>=500000 and mile <1000000}">
 							춘식이 등급까지 
 							<fmt:formatNumber value="${1000000-mile}" pattern="###,###,###" />
 							 마일리지 남았습니다.
-						</c:when>
+							</c:when>
 							<c:otherwise>
 								<fmt:formatNumber value="${mile}" pattern="###,###,###" />
 							마일리지를 보유하여 춘식이 등급입니다.
-						</c:otherwise>
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</c:if>
@@ -344,28 +344,7 @@ hr {
 				<td><b>Silver</b></td>
 			</tr>
 			<tr>
-				<td>예약 대기 시 우선권</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-			</tr>
-			<tr>
-				<td>전용 카운터</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-			</tr>
-			<tr>
-				<td>위탁 수하물 무료추가</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-			</tr>
-			<tr>
-				<td>수하물 우선 처리</td>
+				<td>국제선 일반석 사전 좌석 배정 서비스</td>
 				<td>O</td>
 				<td>O</td>
 				<td>O</td>
@@ -376,14 +355,7 @@ hr {
 				<td>O</td>
 				<td>O</td>
 				<td>O</td>
-				<td>O</td>
-			</tr>
-			<tr>
-				<td>국제선 일반석 사전 좌석 배정 서비스</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
-				<td>O</td>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>성수기 보너스 이용 시<br>평수기 공제 마일리지 적용
@@ -402,9 +374,37 @@ hr {
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td>위탁 수하물 무료추가</td>
+				<td>O</td>
+				<td>O</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>수하물 우선 처리</td>
+				<td>O</td>
+				<td>O</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
 				<td>전용전화 이용 (국내)</td>
 				<td>O</td>
 				<td>O</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>예약 대기 시 우선권</td>
+				<td>O</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>전용 카운터</td>
+				<td>O</td>
+				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>

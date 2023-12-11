@@ -51,7 +51,7 @@
 	}
 </style>
 </head>
-<body style="background-color: white; margin-top : 180px;">
+<body class="p-5 tm-container-outer tm-bg-gray" style=" margin-top : 180px;">
 	<div style="max-width: 1400px; margin: 0 auto; ">
 	<h2>이벤트 게시판</h2>
 	<hr class="hr1" noshade>

@@ -50,7 +50,7 @@ public interface JoinMapper {
 	public int userIdDuplicateCheck(String userId);
 	public int userNickDuplicateCheck(String userNick);
 	
-	public KakaoUserVO kakaoLoginCheck(@Param("email") String email, @Param("userNameK") String userNameK);
+	public KakaoUserVO kakaoLoginCheck(@Param("email") String email, @Param("userId") String userId);
 
 	public void registerBasicTerms(String userId);
 	public void registerAllTerms(String userId);
@@ -60,5 +60,7 @@ public interface JoinMapper {
 	
 	public void insertUserlog(String userId);
 	public void insertGradelog(String userId);
+	public void insertUserPay(String userId);
+	public void insertPoint(String userId);
 	
 }

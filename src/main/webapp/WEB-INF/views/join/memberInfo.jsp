@@ -116,7 +116,7 @@ display: none;
 							<input type="text" id="userId" name="userId"
 								placeholder="영문+숫자 6~10자" title="영문+숫자 6~10자"
 								style="width: 200px; display: inline;" maxlength="10"
-								class="input_id; form-control" oninput="checkId()" required="required">
+								class="input_id; form-control" oninput="checkId(); validationUserId();" required="required">
 							<!-- oninput="checkId()"으로 값을 입력할 때마다 바로바로 데이터 확인시킴, style로 색을 지정하고 none;으로 숨겨둔 상태 -->
 							<!-- id ajax 중복체크 -->
 								<span class="id_ok">&nbsp;&nbsp;사용 가능한 아이디입니다.</span>
@@ -153,7 +153,7 @@ display: none;
 								<span class="userNick_already">&nbsp;&nbsp;사용 불가능한 닉네임입니다.</span>
 
 								<p style="color: gray; margin-top: 10px; font-size: 0.8em;">
-									6 ~ 10자리 영문(대소문자 구별), 숫자 조합 입력 가능 <br>(단 한글, 공백,
+									2 ~ 10자리 한글, 영문(대소문자 구별), 숫자 조합 입력 가능 <br>(단 공백,
 									특수문자 입력 불가)
 									>
 								</p>
@@ -168,7 +168,7 @@ display: none;
 							<td style="padding: 8px">
 							<input type="password" id="pwd" autocomplete="off"
 								name="pwd" placeholder="영문+숫자+특수문자 6~10자리" maxlength="10"
-								title="영문+숫자+특수문자 6~10자리" style="width: 200px;"
+								title="영문+숫자+특수문자 6~10자리" style="width: 200px;" oninput="pwdCheck()" 
 								class="form-control" required="required"></td>
 						</tr>
 						<tr>
@@ -397,7 +397,7 @@ display: none;
 				}
 			});
 		};
-		
+	
 		function formCheck() {
 	        /*  if (document.frm.idDuplication.value == "idUncheck" ) {
 	            alert("아이디 중복확인을 해주세요.");
@@ -411,6 +411,7 @@ display: none;
 	         }  */
 			var regId = /^[a-zA-Z0-9]{6,10}$/;
 			var regIdPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,10}$/;
+			var regNick = /^[a-zA-Z0-9가-힣]{2,10};
 			var form = document.frm;
 
 			if(document.frm.userId.value.length == 0){
@@ -462,6 +463,18 @@ display: none;
 	            document.frm.phone_last.focus;
 	            return false;
 	         } 
+			
+	         else if(document.frm.userNick.value.length == 0){
+		            alert("닉네임을 다시 확인해주세요.")
+		            document.frm.userNick.focus;
+		            return false;
+		     } 
+	         else if( !regNick.test(document.frm.userNick.value) ){
+		            alert("2~10자리 한글, 영문(대소문자 구별), 숫자를 입력해주세요.")
+		            document.frm.userNick.focus;
+		            return false;
+		     } 
+			
 	         else if(document.frm.email.value.length == 0){
 	            alert("이메일을 다시 확인해주세요.")
 	            document.frm.email.focus;

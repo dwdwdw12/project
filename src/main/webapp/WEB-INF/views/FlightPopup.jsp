@@ -17,13 +17,13 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
     display: block; /* 이미지 사이에 추가 공백 제거 */
     margin: 0 auto; /* 중앙 정렬 */}
 .layerPopup:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:9000}
-.layerPopup .layerBox {    z-index:10000;   
-position:fixed; left:55%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
-.layerPopup #layer_popup_flight .layerBox {
+.layerPopup .layerBoxFlight {    z-index:10000;   
+position:fixed; left:40%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
+.layerPopup #layer_popup_flight .layerBoxFlight {
     top: 60%;
 }
-.layerPopup .layerBox .title {margin-bottom:10px; padding-bottom:10px; font-weight:600; border-bottom:1px solid #d9d9d9;}
-.layerPopup .layerBox .btnTodayHide {
+.layerPopup .layerBoxFlight .title {margin-bottom:10px; padding-bottom:10px; font-weight:600; border-bottom:1px solid #d9d9d9;}
+.layerPopup .layerBoxFlight .btnTodayHide {
 font-size:14px; font-weight:600; color:black; 
 float: left;text-decoration:none;width: 150px; 
 height : 30px;line-height:30px;border:black solid 1px; text-align : center;text-decoration:none;
@@ -51,7 +51,7 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 </head>
 <body>
 <div class="layerPopup" id="layer_popup_flight" style="visibility: visible;">
-    <div class="layerBox"> 
+    <div class="layerBoxFlight"> 
 		<h4 class="title"> <a  href="/notice/list"> Kakao Airline 항공 지연/결항 공지사항</a></h4>
         <div class="cont">
             <p style="color:red">
@@ -85,8 +85,8 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
             </p>
         </div>
           <form name="pop_form">
-        <div id="check" ><input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
-        <label for="chkbox">&nbsp&nbsp오늘 하루동안 보지 않기</label></div>
+        <div id="check" ><input type="checkbox" name="chkbox_flight" value="checkbox" id='chkbox_flight' >
+        <label for="chkbox_flight">&nbsp&nbsp오늘 하루동안 보지 않기</label></div>
 		<div id="close" ><a href="#" class="flight-close" onclick="closePop('layer_popup_flight')" data-modal-id="layer_popup_flight">닫기</a></div>    
 		</form>
 	</div>
@@ -106,42 +106,21 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
    $(document).ready(function(){
 	   console.log("ddd");
 	      function setCookie(name, value, expiredays) {
-	            var todayDate = new Date();
-	            todayDate.setDate(todayDate.getDate() + expiredays);
+			    var todayDate = new Date();
+			    todayDate.setDate(todayDate.getDate() + expiredays);
 	            // 디버깅 메시지 추가
-	            console.log("Setting cookie: " + name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString());
-	            document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
-	        }
-	 
-		   $(".notice-close").on("click", function (e) {
-		        e.preventDefault();
-		        var chkbox = $(this).closest('.layerPopup').find('#chkbox')[0];
-		        console.log("box>>" + chkbox);
-
-		        if (chkbox) {
-		            if (chkbox.checked !== undefined) {
-		                setCookie("maindiv", "done", 1);
-		            } else {
-		                console.log("안찍힘");
-		            }
-		        } else {
-		            console.log("chkbox가 존재하지 않음");
-		        }
-
-		        var modalId = $(this).data("modal-id");
-		        closePop(modalId);
-		    });
-	      
-	      
+	            console.log("Setting cookie: " + name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString());	 
+			    document.cookie = name + "=" + encodeURIComponent(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+			}
 	      
 	      $(".flight-close").on("click", function (e) {
 	          e.preventDefault();
-	          var chkbox = $(this).closest('.layerPopup').find('#chkbox')[0];
+	          var chkbox = $(this).closest('.layerPopup').find('#chkbox_flight')[0];
 	          console.log("box>>" + chkbox);
 
 	          if (chkbox) {
-	              if (chkbox.checked !== undefined) {
-	                  setCookie("maindiv", "done", 1);
+	              if (chkbox && chkbox.checked !== undefined && chkbox.checked) {
+	                  setCookie("maindiv_flight", "done", 1);
 	              } else {
 	                  console.log("안찍힘");
 	              }
@@ -155,13 +134,6 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 
 	        // 수정: 페이지 로딩 시에 쿠키를 읽고 상태에 따라 모달을 띄울지 말지 결정
 		 function checkCookie() {
-		        var cookiedata_notice = document.cookie;
-		        if (cookiedata_notice.indexOf("maindiv_notice=done") < 0) {
-		            $('#layer_popup_notice').css('display', 'block');
-		        } else {
-		            $('#layer_popup_notice').css('display', 'none');
-		        }
-		
 		        var cookiedata_flight = document.cookie;
 		        if (cookiedata_flight.indexOf("maindiv_flight=done") < 0) {
 		            $('#layer_popup_flight').css('display', 'block');
@@ -170,7 +142,7 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 		        }
 		    }
 
-	        window.onload = checkCookie; // 수정: 페이지 로딩 시에 checkCookie 함수 호출 
+	        window.onload = checkCookie(); // 수정: 페이지 로딩 시에 checkCookie 함수 호출 
    })
   
     </script>

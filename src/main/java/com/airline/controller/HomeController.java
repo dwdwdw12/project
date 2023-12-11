@@ -4,11 +4,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,6 +72,7 @@ public class HomeController {
     
     @Autowired
 	private PasswordEncoder passwordEncoder;
+    
 	
 	//메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -142,25 +146,38 @@ public class HomeController {
 	
 	//로그인->spring 페이지로 뺄까..?
 	@GetMapping("/login")
-	public void login(String error, String logout, Model model) {
+	public void login(String error, String logout, Model model, HttpServletRequest request) {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
 		
 		if(error != null) {
-			model.addAttribute("error","Login Error Check your account");
+			model.addAttribute("error","아이디 또는 비밀번호를 잘못 입력하였습니다.");
 		}
 		
 		if(model != null) {
 			model.addAttribute("logout", "logout");
 		}
 		
+		//이전 페이지로 되돌아가기 위한 Referer 헤더값을 세션의 prevPage attribute로 저장 
+	    String uri = request.getHeader("Referer");
+	    if (uri != null && !uri.contains("/login")) {
+	        request.getSession().setAttribute("prevPage", uri);
+	    }
 		
 	}
 		
 	@PostMapping("/logout")
-	public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response){
+	public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 		log.info("logout..post");
+		
+		String access_token = (String) session.getAttribute("access_token");
+
+		//if(access_token != null)
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Authorization", "Bearer " + access_token);
+		
+		
 	    try {
 	        log.info("logout..post");
 	        request.getSession();

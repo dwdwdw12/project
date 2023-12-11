@@ -46,7 +46,7 @@ span:before {
 
 </style>
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<%-- <section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
 			<div class="row gx-6">
@@ -121,7 +121,7 @@ span:before {
 						</h3>
 						</p>
  					<button type="button"
-							class="btn btn-primary btn-sm btn-block btn-custom" onclick=""><i class="bi bi-chevron-double-right"></i>&nbsp;내 정 보 조 회</button>
+							class="btn btn-primary btn-sm btn-block btn-custom" onclick="location.href='/user/myPage'"><i class="bi bi-chevron-double-right"></i>&nbsp;내 정 보 조 회</button>
 					<p>
 						<h3 style="text-align: center;">
 							<strong>알림</strong>&nbsp;&nbsp;<i class="bi bi-bell"></i>

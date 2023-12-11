@@ -87,5 +87,11 @@ public interface UserService {
 	List<FlightVO> getFlightList3();
 	//mileage 가져오기
 	public int getMileage(String userid);
+	//마이페이지(유저) 정보수정 업데이트
+	public void modifyUserInfo(String userId, String userNick,
+			String userNameK, String userNameE, 
+			String phone, int postCode, String address);
+	//마이페이지(유저) 비밀번호 업데이트
+	public void modifyUserPwd(String userId, String pwd);
 
 }

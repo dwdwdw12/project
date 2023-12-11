@@ -49,7 +49,7 @@
     text-align: center;
     top: 0px;
     background-color: gray !important;
-    z-index: 1;
+    z-index: 2;
 }
 #arrTable th {
     position: sticky;
@@ -68,7 +68,7 @@ td {
 p.btn.btn-default {
     font-size: 10px;
     padding: 12px;
-    width: 80px;
+    width: 90px;
     border-radius: 5px;
     margin: 15px -2px 15px -2px;
     display: inline-block;
@@ -97,6 +97,7 @@ p.btn.btn-default {
     left: 0;
     border-radius: 50%;
     top: -5px;
+    
 }
 .seprator:last-child:before {		/* 화살표 */
     width: 0;
@@ -107,6 +108,7 @@ p.btn.btn-default {
     top: -10px;
     right: 0;
     border-bottom: 10px solid black;
+    
 }
 </style>
 
@@ -120,14 +122,37 @@ p.btn.btn-default {
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
 				<br><br>
+					<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
+				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+					<label for="dep">출발지</label> 
+				</div>
+				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+					<label for="arr">도착지</label> 
+				</div>
+				
+				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+					<select id="depRegionCode" name="depRegionCode">
+						<option value="1" <c:if test="${depRegionCode=='1'}">selected="selected"</c:if>>한국</option>
+						<option value="2" <c:if test="${depRegionCode=='2'}">selected="selected"</c:if>>동북아시아</option>
+						<option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
+						<option value="4" <c:if test="${depRegionCode=='4'}">selected="selected"</c:if>>몽골/중앙아시아</option>
+						<option value="5" <c:if test="${depRegionCode=='5'}">selected="selected"</c:if>>유럽</option>
+						<option value="6" <c:if test="${depRegionCode=='6'}">selected="selected"</c:if>>미주(미국,캐나다)</option>
+						<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option>
+					</select>
+				</div>
+				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+					<select id="arrRegionCode" name="arrRegionCode">
+						<option value="">선택해주세요</option>
+						
+					</select>
+				</div>
+				
 				<div class="form-row tm-search-form-row">
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="dep">출발지</label> 
 						<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요" value = "${dep}" required="required">
 					</div>
-					
-					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-						<label for="arr">도착지</label> 
+					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2" id="arrSearchBar">
 						<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요" value = "${arr}" required="required">
 					</div>
 				</div>
@@ -160,23 +185,38 @@ p.btn.btn-default {
 			<jsp:useBean id="now" class="java.util.Date" />
 			<fmt:parseNumber value="${now.time}" integerOnly="true" var="nowfmtTime" scope="request"/>
 			<input type="hidden" class="form-control" id="sampleArr" name="sampleArr" value = "${arrDate}" >
-			
-			<c:if test="${empty list}">
+			<input type="hidden" class="form-control" id="arrText" name="arrText" value = "${arr}" >
+			<input type="hidden" class="form-control" id="sampleArrCode" name="sampleArrCode" value = "${arrRegionCode}" >
+		
+		
+			<c:if test="${!empty dep&&empty list}">
 			<section class="p-5 tm-container-outer tm-bg-gray">
 				<div class="container" >
 				<div class="text-right">
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+					<c:if test="${empty arrDate}">
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}#1'">다음날</button>
+					</c:if>	
+					<c:if test="${!empty arrDate}">
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+					</c:if>
 				</div>
 				<h2 style="text-align: center">${depDate} : ${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
 					<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 				<br><br><br><br><br>
 				<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-					다시 여정을 선택해주세요.</h3>	
+					다시 여정을 선택해주세요.
+				</h3><br>
+				<h5 style="text-align: center;">
+					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
+				</h5>	
 				</div>
 				</div>
 			</section>
 			</c:if>	 
+			
+			
 			<c:if test="${!empty list}">
 			<section class="p-5 tm-container-outer tm-bg-gray">
 			<div class="container"  >
@@ -218,7 +258,12 @@ p.btn.btn-default {
 					</thead>
 					<c:if test="${empty list}">
 						<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-					다시 여정을 선택해주세요.</h3>	
+						다시 여정을 선택해주세요.</h3>
+						<br>	
+						<h5 style="text-align: center;">
+						가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
+						</h5>
+						
 					</c:if>
 					<c:forEach items="${list}" var="list">
 						<tbody>
@@ -228,10 +273,15 @@ p.btn.btn-default {
 									<strong>${fn:substring(list.fullDeptime, 11,16)}</strong>
 									<div class="seprator"></div>  
 									  <p class="btn btn-default">
-									  		<i class='far fa-clock'></i>&nbsp;${list.flightTime}
+									  		<i class='far fa-clock'></i>&nbsp;<strong> <c:if test="${fn:split(list.flightTime,':')[0]!=0}">${fn:split(list.flightTime,':')[0]}시간 </c:if> ${fn:split(list.flightTime,':')[1]}분 </strong>
 									  </p>
 									   <div class="seprator"></div>
-									<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)==fn:substring(list.fullDeptime, 0,10)}">
+										<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									</c:if>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)!=fn:substring(list.fullDeptime, 0,10)}">
+										<strong>다음날) ${fn:substring(list.fullArrtime, 11,16)}</strong>										
+									</c:if>
 								</td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${depPrice*1.5}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
@@ -288,7 +338,11 @@ p.btn.btn-default {
 			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 		<br><br><br><br><br>
 		<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
-			다시 여정을 선택해주세요.</h3>	
+			다시 여정을 선택해주세요.</h3>
+		<br>	
+		<h5 style="text-align: center;">
+				가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.
+		</h5>
 		</div>
 		</div>
 	</section>
@@ -332,10 +386,15 @@ p.btn.btn-default {
 									<strong>${fn:substring(list.fullDeptime, 11,16)}</strong>
 									<div class="seprator"></div>  
 									  <p class="btn btn-default">
-									  		<i class='far fa-clock'></i>&nbsp;${list.flightTime}
+									  		<i class='far fa-clock'></i>&nbsp;<strong><c:if test="${fn:split(list.flightTime,':')[0]!=0}">${fn:split(list.flightTime,':')[0]}시간 </c:if> ${fn:split(list.flightTime,':')[1]}분 </strong>
 									  </p>
 									   <div class="seprator"></div>
-									<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)==fn:substring(list.fullDeptime, 0,10)}">
+										<strong>${fn:substring(list.fullArrtime, 11,16)}</strong>
+									</c:if>
+									<c:if test="${fn:substring(list.fullArrtime, 0,10)!=fn:substring(list.fullDeptime, 0,10)}">
+										<strong>다음날) ${fn:substring(list.fullArrtime, 11,16)}</strong>										
+									</c:if>
 								</td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
 								<td style="vertical-align: middle;"><fmt:formatNumber value="${arrPrice*1.5}" type="currency" currencySymbol="￦" minFractionDigits="0" /></td>
@@ -586,9 +645,11 @@ $jb(function() {    //화면 다 뜨면 시작
                     type: 'get',
                     url: "/flight/getDistinctDep",
                     dataType: "json",
-                    data: {searchValue: $("#departure").val()},
+                    data: {searchValue: $("#departure").val(), depRegionCode: $("#depRegionCode").val()},
                     success: function(data) {
                     	console.log(data);
+                    	var json = JSON.stringify(data);
+                    	console.log(json);
                         //서버에서 json 데이터 response 후 목록에 추가
                         response(
                             $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
@@ -603,8 +664,45 @@ $jb(function() {    //화면 다 뜨면 시작
             },    // source 는 자동 완성 대상
          select : function(event, ui) {    //아이템 선택시
             console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-            console.log(ui.item.label);    //김치 볶음밥label
-            console.log(ui.item.value);    //김치 볶음밥
+            console.log(ui.item.label);    
+            console.log(ui.item.value);
+            $.ajax({
+    	        type: 'get',
+    	        url: "/flight/getDistinctArrRegionCode",
+    	        dataType: "json",
+    	        data: {depName : ui.item.label},
+    	        //contentType : "application/json; charset=utf-8", 
+    	        success: function(data) {
+		     	   console.log(data);
+		     	   str = "";
+		     	   str += "<option value=''>선택해주세요</option>"
+		     	   if(data.includes('1')){
+		     		  str+="<option value='1'>한국</option>";
+		     	   } 
+		     	   if(data.includes('2')){
+		     		  str+="<option value='2'>동북아시아</option>";
+		     	   } 
+		     	   if(data.includes('3')){
+		     		 str+= "<option value='3'>동남아시아/서남아시아</option>";
+		     	   } 
+		     	   if(data.includes('4')){
+		     		  str+="<option value='4'>몽골/중앙아시아</option>";
+		     	   } 
+		     	   if(data.includes('5')){
+		     		  str+="<option value='5'>유럽</option>";
+		     	   } 
+		     	   if(data.includes('6')){
+		     		  str+="<option value='6'>미주(미국,캐나다)</option>";
+		     	   } 
+		     	   if(data.includes('7')){
+		     		  //$("#arrRegionCode").append("<option value='7'>대양주/사이판</option>");
+		     		  str+="<option value='7'>대양주/사이판</option>";
+		     	   } 
+    	     	   
+    	     	   $("#arrRegionCode").html(str);
+    	        
+    	        }
+    	    });
             
         },
         focus : function(event, ui) {    //포커스 가면
@@ -632,8 +730,7 @@ $jb(function() {    //화면 다 뜨면 시작
         source : function( request, response ) {
              $jb.ajax({
                     type: 'POST',
-                    url: "/flight/getDistinctArrByDep",
-                    //dataType: "json",
+                    url: "/flight/getDistinctArrByDep1",
                     dataType: "json",
                     //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
                     data: {depName : $("#departure").val(),searchValue: $("#arrival").val()},
@@ -656,8 +753,8 @@ $jb(function() {    //화면 다 뜨면 시작
             },    // source 는 자동 완성 대상
          select : function(event, ui) {    //아이템 선택시
             console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-            console.log(ui.item.label);    //김치 볶음밥label
-            console.log(ui.item.value);    //김치 볶음밥
+            console.log(ui.item.label);    
+            console.log(ui.item.value);    
             
         },
         focus : function(event, ui) {    //포커스 가면
@@ -679,10 +776,176 @@ $jb(function() {    //화면 다 뜨면 시작
    
 }); 
 
+//도착지 자동완성 
+ $jb(function() {    //화면 다 뜨면 시작
+    $jb("#arrival2").autocomplete({
+        source : function( request, response ) {
+             $jb.ajax({
+                    type: 'POST',
+                    url: "/flight/getDistinctArrByDep2",
+                    dataType: "json",
+                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
+                    data: {depName : $("#departure").val(),searchValue: $("#arrival").val(), arrRegionCode: $("#arrRegionCode").val()},
+                    //contentType : "application/json; charset=utf-8", 
+                    success: function(data) {
+                    	console.log(data);
+                    	var json = JSON.stringify(data);
+                    	console.log(json);
+                        //서버에서 json 데이터 response 후 목록에 추가
+                        response(
+                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+                                return {
+                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+                                    value: item,    //그냥 사용자 설정값
+                                }
+                            })
+                        );
+                    }
+               });
+            },    // source 는 자동 완성 대상
+         select : function(event, ui) {    //아이템 선택시
+            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+            console.log(ui.item.label);    
+            console.log(ui.item.value);    
+            
+        },
+        focus : function(event, ui) {    //포커스 가면
+            return false;//한글 에러 잡기용도로 사용됨
+        },
+        minLength: 0,// 최소 글자수
+        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+//        classes: {    //잘 모르겠음
+//            "ui-autocomplete": "highlight"
+//        },
+        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+//        disabled: true, //자동완성 기능 끄기
+//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+        close : function(event){    //자동완성창 닫아질때 호출
+            console.log(event);
+        }  
+      	    
+    });
+   
+}); 
+
+$("#depRegionCode").on("change", function(){
+	$("#departure").val("");
+	$("#arrRegionCode").html("<option value=''>선택해주세요</option>");	
+	$("#arrival").val("");
+	$("#arrival2").val("");	
+	//console.log("arrArea.value>>>"+arrArea.value);
+}); 
+
+$("#arrRegionCode").on("click", function(){
+	
+	
+	if($("#departure").val()!=""){
+		var arrText = $("#arrText").val();
+	    
+  	    $("#arrSearchBar").html("<input name='arr' type='text' class='form-control' id='arrival2' placeholder='도착지를 입력해주세요' required='required'>");
+     
+  	    $jb("#arrival2").autocomplete({
+  	        source : function( request, response ) {
+  	             $jb.ajax({
+  	                    type: 'POST',
+  	                    url: "/flight/getDistinctArrByDep2",
+  	                    dataType: "json",
+  	                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
+  	                    data: {depName : $("#departure").val(),searchValue: $("#arrival2").val(), arrRegionCode: $("#arrRegionCode").val()},
+  	                    //contentType : "application/json; charset=utf-8", 
+  	                    success: function(data) {
+  	                    	console.log(data);
+  	                    	var json = JSON.stringify(data);
+  	                    	console.log(json);
+  	                        //서버에서 json 데이터 response 후 목록에 추가
+  	                        response(
+  	                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+  	                                return {
+  	                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+  	                                    value: item,    //그냥 사용자 설정값
+  	                                }
+  	                            })
+  	                        );
+  	                    }
+  	               });
+  	            },    // source 는 자동 완성 대상
+  	         select : function(event, ui) {    //아이템 선택시
+  	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+  	            console.log(ui.item.label);    
+  	            console.log(ui.item.value);    
+  	            
+  	        },
+  	        focus : function(event, ui) {    //포커스 가면
+  	            return false;//한글 에러 잡기용도로 사용됨
+  	        },
+  	        minLength: 0,// 최소 글자수
+  	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+//  	        classes: {    //잘 모르겠음
+//  	            "ui-autocomplete": "highlight"
+//  	        },
+  	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+//  	        disabled: true, //자동완성 기능 끄기
+//  	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+  	        close : function(event){    //자동완성창 닫아질때 호출
+  	            console.log(event);
+  	        }  
+  	      	    
+  	    });
+	}   
+});
+
 //출발지부터 입력하도록.
 $("#arrival").on("click",function(e){
 	 if($("#departure").val()==""){
 		 alert("출발지를 입력해주세요");
 	 }
-})
+});
+
+//select 그리기sampleArrCode
+$jb(function(){
+	console.log("셀렉트 시작");
+	var sampleArrCode = $("#sampleArrCode").val();
+	
+	$.ajax({
+        type: 'get',
+        url: "/flight/getDistinctArrRegionCode",
+        dataType: "json",
+        data: {depName : $("#departure").val()},
+        //contentType : "application/json; charset=utf-8", 
+        success: function(data) {
+			 console.log(data);
+			 str = "";
+			 str += "<option value=''>선택해주세요</option>";
+			 if(data.includes('1')){
+			 str+="<option value='1'>한국</option>";
+			 } 
+			 if(data.includes('2')){
+			 str+="<option value='2'>동북아시아</option>";
+			 } 
+			 if(data.includes('3')){
+			str+= "<option value='3'>동남아시아/서남아시아</option>";
+			 } 
+			 if(data.includes('4')){
+			 str+="<option value='4'>몽골/중앙아시아</option>";
+			 } 
+			 if(data.includes('5')){
+			 str+="<option value='5'>유럽</option>";
+			 } 
+			 if(data.includes('6')){
+			 str+="<option value='6'>미주(미국,캐나다)</option>";
+			 } 
+			 if(data.includes('7')){
+			 str+="<option value='7'>대양주/사이판</option>";
+			 } 
+			 
+			 $("#arrRegionCode").html(str);	
+     	   
+     		 $('#arrRegionCode option[value= '+ sampleArrCode +']').prop("selected", true);
+
+        }
+	
+	});
+});	
+
+
 </script>

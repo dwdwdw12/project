@@ -215,4 +215,19 @@
 		select totalMileage from userlog where userid = #{userid} order by lognum desc limit 1
 	</select>
 	
+	<update id="updateUserInfo" parameterType="map">
+		update kakaouser set
+		userNick = #{userNick}, 
+		userNameK = #{userNameK}, 
+		userNameE = #{userNameE}, 
+		phone = #{phone}, 
+		postCode = #{postCode}, 
+		address = #{address}
+		where userId = #{userId}
+	</update>
+	
+	<update id="updateUserPwd" parameterType="map">
+		update kakaouser set pwd = #{pwd} where userId = #{userId}
+	</update>
+	
 </mapper>

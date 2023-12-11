@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../resources/script/boardDiary.js"></script>
 <style>
-	ul {
+	#eventUl {
     display:grid;
     list-style-type:none;
     margin:0;padding:0;
@@ -55,8 +55,8 @@
 
 <title>Insert title here</title>
 </head>
-<body style="background-color: white; margin-top : 180px;">
-	<div style="max-width: 1300px; margin: 0 auto; ">	
+<body style=" margin-top : 180px;">
+	<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1300px; margin: 0 auto; ">	
 	<h2>이벤트 게시판</h2>
 	<hr class="hr1" noshade>
 	<div class="mt-3 text-right">
@@ -79,7 +79,7 @@
 	</div>
 	<br>
 		
-		<ul class="thumbTypeGrid">
+		<ul id="eventUl" class="thumbTypeGrid">
 			<c:forEach var="board" items="${EventList}">			
 				<div class="img">
 					<a href="/boardEvent/gridView?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">
@@ -116,7 +116,7 @@
 		
 		<c:if test="${paging.total>0}">
 		
-			<ul class="pagination pagination justify-content-center">
+			<ul id="eventUl2" class="pagination pagination justify-content-center">
 					<c:choose>
 						<c:when test="${paging.cri.pageNum<=1}">
 							<li class="page-item"><a class="page-link">Previous</a></li>

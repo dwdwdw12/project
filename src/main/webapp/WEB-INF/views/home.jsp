@@ -67,7 +67,7 @@
 
 
 
-<div class="tm-page-wrap mx-auto">
+<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 	<section class="tm-banner">
 
 		<!-- .tm-container-outer -->
@@ -104,39 +104,95 @@
 						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
 						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
 						<br><br>
+						
+								<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<label for="dep">&#x2714&nbsp;출발지</label> 
+						</div>
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<label for="arr">&#x2714&nbsp;도착지</label> 
+						</div>
+						
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<select id="depRegionCode" name="depRegionCode">
+								<option value="1" <c:if test="${depRegionCode=='1'}">selected="selected"</c:if>>한국</option>
+								<option value="2" <c:if test="${depRegionCode=='2'}">selected="selected"</c:if>>동북아시아</option>
+								<option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
+								<option value="4" <c:if test="${depRegionCode=='4'}">selected="selected"</c:if>>몽골/중앙아시아</option>
+								<option value="5" <c:if test="${depRegionCode=='5'}">selected="selected"</c:if>>유럽</option>
+								<option value="6" <c:if test="${depRegionCode=='6'}">selected="selected"</c:if>>미주(미국,캐나다)</option>
+								<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option>
+							</select>
+						</div>
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+							<select id="arrRegionCode" name="arrRegionCode">
+								<option value="">선택해주세요</option>
+								
+							</select>
+						</div>
+						
 						<div class="form-row tm-search-form-row">
-							<!-- <input type="hidden" name="command" value="flightList"/> -->
+							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+								<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요"  required="required">
+							</div>
+							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2" id="arrSearchBar">
+								<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요"  required="required">
+							</div>
+						</div>
+						<br>
+						<!-- form-row -->
+						<div class="form-row tm-search-form-row">
+							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+								<label for="boardTitle">&#x1F551&nbsp;가는 날</label> 
+								<input type="text" class="form-control" id="depDate" name="depDate" value = "${depDate}" >
+							</div>
+							
+							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1" id="depDiv">
+								<c:if test="${!empty arrDate}">
+								<label for="boardTitle">&#x1F551&nbsp;오는 날</label> 
+								<input type="text" class="form-control" id="arrDate" name="arrDate" value = "${arrDate}">
+								</c:if>
+							</div>
+							<div
+								class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+								<label for="btnSubmit" id="1">&nbsp;</label>
+								<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase "
+									id="btnSubmit">검색</button>
+							</div>
+						</div>
+						<!-- <div class="form-row tm-search-form-row">
+							<input type="hidden" name="command" value="flightList"/>
 							<div class="form-row tm-search-form-row">
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 									<label for="departure"><a>&#x2714&nbsp;&nbsp;</a>출발지</label> 
-									<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요">
+									<input name="dep" type="text" class="form-control" id="departure" placeholder="출발지를 입력해주세요" required="required">
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 									<label for="arrival"><a>&#x2714&nbsp;&nbsp;</a>도착지</label> 
-									<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요">
+									<input name="arr" type="text" class="form-control" id="arrival" placeholder="도착지를 입력해주세요" required="required">
 								</div>
-								<!-- <div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 									<label for="inputCheckIn"><a>&#x2714&nbsp;&nbsp;</a>탑승객</label> 
 									<input name="" type="text" class="form-control" id="" placeholder="탑승객">
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 									<label for="inputCheckIn"><a>&#x2714&nbsp;&nbsp;</a>좌석등급</label> 
 									<input name="" type="text" class="form-control" id="" placeholder="좌석등급">
-								</div> -->
+								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 									<label for="depDate"><a>&#x1F551&nbsp;&nbsp;</a>가는 날</label> 
 									<input name="depDate" type="text" class="form-control" id="depDate" placeholder="Check In">
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1" id="depDiv">
-									<!-- <label for="arrDate"><a>&#x1F551&nbsp;&nbsp;</a>오는 날</label> 
-									<input name="arrDate" type="text" class="form-control" id="arrDate" placeholder="Check In"> -->
+									<label for="arrDate"><a>&#x1F551&nbsp;&nbsp;</a>오는 날</label> 
+									<input name="arrDate" type="text" class="form-control" id="arrDate" placeholder="Check In">
 								</div>
 								<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 									<label for="btnSubmit">&nbsp;</label>
-									<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="btnSubmit"  onclick="return checksubmit()">Check Availability</button>
+									<button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="btnSubmit"  onclick="return checksubmit()">검색</button>
 								</div>
 								</div>
-						</div>
+						</div> -->
 					</form>
 
 			
@@ -717,7 +773,7 @@
 	<!-- 모달창 -->
 	 <jsp:include page="/WEB-INF/views/FlightPopup.jsp"/>   
 	<!-- /모달창 -->
-
+	
 	<!-- .tm-container-outer -->
 	<%@ include file="includes/footer.jsp"%>
 	<!-- 충돌부분 추가 -->
@@ -878,9 +934,11 @@
 	                    type: 'get',
 	                    url: "/flight/getDistinctDep",
 	                    dataType: "json",
-	                    data: {searchValue: $("#departure").val()},
+	                    data: {searchValue: $("#departure").val(), depRegionCode: $("#depRegionCode").val()},
 	                    success: function(data) {
 	                    	console.log(data);
+	                    	var json = JSON.stringify(data);
+	                    	console.log(json);
 	                        //서버에서 json 데이터 response 후 목록에 추가
 	                        response(
 	                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
@@ -895,8 +953,45 @@
 	            },    // source 는 자동 완성 대상
 	         select : function(event, ui) {    //아이템 선택시
 	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-	            console.log(ui.item.label);    //김치 볶음밥label
-	            console.log(ui.item.value);    //김치 볶음밥
+	            console.log(ui.item.label);    
+	            console.log(ui.item.value);
+	            $.ajax({
+	    	        type: 'get',
+	    	        url: "/flight/getDistinctArrRegionCode",
+	    	        dataType: "json",
+	    	        data: {depName : ui.item.label},
+	    	        //contentType : "application/json; charset=utf-8", 
+	    	        success: function(data) {
+			     	   console.log(data);
+			     	   str = "";
+			     	   str += "<option value=''>선택해주세요</option>"
+			     	   if(data.includes('1')){
+			     		  str+="<option value='1'>한국</option>";
+			     	   } 
+			     	   if(data.includes('2')){
+			     		  str+="<option value='2'>동북아시아</option>";
+			     	   } 
+			     	   if(data.includes('3')){
+			     		 str+= "<option value='3'>동남아시아/서남아시아</option>";
+			     	   } 
+			     	   if(data.includes('4')){
+			     		  str+="<option value='4'>몽골/중앙아시아</option>";
+			     	   } 
+			     	   if(data.includes('5')){
+			     		  str+="<option value='5'>유럽</option>";
+			     	   } 
+			     	   if(data.includes('6')){
+			     		  str+="<option value='6'>미주(미국,캐나다)</option>";
+			     	   } 
+			     	   if(data.includes('7')){
+			     		  //$("#arrRegionCode").append("<option value='7'>대양주/사이판</option>");
+			     		  str+="<option value='7'>대양주/사이판</option>";
+			     	   } 
+	    	     	   
+	    	     	   $("#arrRegionCode").html(str);
+	    	        
+	    	        }
+	    	    });
 	            
 	        },
 	        focus : function(event, ui) {    //포커스 가면
@@ -904,12 +999,12 @@
 	        },
 	        minLength: 0,// 최소 글자수
 	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-	//        classes: {    //잘 모르겠음
-	//            "ui-autocomplete": "highlight"
-	//        },
+//	        classes: {    //잘 모르겠음
+//	            "ui-autocomplete": "highlight"
+//	        },
 	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
-	//        disabled: true, //자동완성 기능 끄기
-	//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+//	        disabled: true, //자동완성 기능 끄기
+//	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 	        close : function(event){    //자동완성창 닫아질때 호출
 	            console.log(event);
 	        }  
@@ -917,15 +1012,14 @@
 	    });
 	   
 	});  
-	
+
 	//도착지 자동완성 
 	 $jb(function() {    //화면 다 뜨면 시작
 	    $jb("#arrival").autocomplete({
 	        source : function( request, response ) {
 	             $jb.ajax({
 	                    type: 'POST',
-	                    url: "/flight/getDistinctArrByDep",
-	                    //dataType: "json",
+	                    url: "/flight/getDistinctArrByDep1",
 	                    dataType: "json",
 	                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
 	                    data: {depName : $("#departure").val(),searchValue: $("#arrival").val()},
@@ -948,8 +1042,8 @@
 	            },    // source 는 자동 완성 대상
 	         select : function(event, ui) {    //아이템 선택시
 	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-	            console.log(ui.item.label);    //김치 볶음밥label
-	            console.log(ui.item.value);    //김치 볶음밥
+	            console.log(ui.item.label);    
+	            console.log(ui.item.value);    
 	            
 	        },
 	        focus : function(event, ui) {    //포커스 가면
@@ -957,12 +1051,12 @@
 	        },
 	        minLength: 0,// 최소 글자수
 	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-	//        classes: {    //잘 모르겠음
-	//            "ui-autocomplete": "highlight"
-	//        },
+//	        classes: {    //잘 모르겠음
+//	            "ui-autocomplete": "highlight"
+//	        },
 	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
-	//        disabled: true, //자동완성 기능 끄기
-	//        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+//	        disabled: true, //자동완성 기능 끄기
+//	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 	        close : function(event){    //자동완성창 닫아질때 호출
 	            console.log(event);
 	        }  
@@ -971,10 +1065,176 @@
 	   
 	}); 
 	
+	//도착지 자동완성 
+	 $jb(function() {    //화면 다 뜨면 시작
+	    $jb("#arrival2").autocomplete({
+	        source : function( request, response ) {
+	             $jb.ajax({
+	                    type: 'POST',
+	                    url: "/flight/getDistinctArrByDep2",
+	                    dataType: "json",
+	                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
+	                    data: {depName : $("#departure").val(),searchValue: $("#arrival").val(), arrRegionCode: $("#arrRegionCode").val()},
+	                    //contentType : "application/json; charset=utf-8", 
+	                    success: function(data) {
+	                    	console.log(data);
+	                    	var json = JSON.stringify(data);
+	                    	console.log(json);
+	                        //서버에서 json 데이터 response 후 목록에 추가
+	                        response(
+	                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+	                                return {
+	                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+	                                    value: item,    //그냥 사용자 설정값
+	                                }
+	                            })
+	                        );
+	                    }
+	               });
+	            },    // source 는 자동 완성 대상
+	         select : function(event, ui) {    //아이템 선택시
+	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+	            console.log(ui.item.label);    
+	            console.log(ui.item.value);    
+	            
+	        },
+	        focus : function(event, ui) {    //포커스 가면
+	            return false;//한글 에러 잡기용도로 사용됨
+	        },
+	        minLength: 0,// 최소 글자수
+	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+//	        classes: {    //잘 모르겠음
+//	            "ui-autocomplete": "highlight"
+//	        },
+	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+//	        disabled: true, //자동완성 기능 끄기
+//	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+	        close : function(event){    //자동완성창 닫아질때 호출
+	            console.log(event);
+	        }  
+	      	    
+	    });
+	   
+	}); 
+
+	//select 바 선택
+	 $("#depRegionCode").on("change", function(){
+			$("#departure").val("");
+			$("#arrRegionCode").html("<option value=''>선택해주세요</option>");	
+			$("#arrival").val("");
+			$("#arrival2").val("");	
+			//console.log("arrArea.value>>>"+arrArea.value);
+		}); 
+
+		$("#arrRegionCode").on("click", function(){
+			
+			
+			if($("#departure").val()!=""){
+				var arrText = $("#arrText").val();
+			    
+		  	    $("#arrSearchBar").html("<input name='arr' type='text' class='form-control' id='arrival2' placeholder='도착지를 입력해주세요' required='required'>");
+		     
+		  	    $jb("#arrival2").autocomplete({
+		  	        source : function( request, response ) {
+		  	             $jb.ajax({
+		  	                    type: 'POST',
+		  	                    url: "/flight/getDistinctArrByDep2",
+		  	                    dataType: "json",
+		  	                    //data: JSON.stringify({depName : $("#departure").val(),searchValue: $("#arrival").val()}),
+		  	                    data: {depName : $("#departure").val(),searchValue: $("#arrival2").val(), arrRegionCode: $("#arrRegionCode").val()},
+		  	                    //contentType : "application/json; charset=utf-8", 
+		  	                    success: function(data) {
+		  	                    	console.log(data);
+		  	                    	var json = JSON.stringify(data);
+		  	                    	console.log(json);
+		  	                        //서버에서 json 데이터 response 후 목록에 추가
+		  	                        response(
+		  	                            $jb.map(data, function(item) {    //json[i] 번째 에 있는게 item 임.
+		  	                                return {
+		  	                                	label: item+"",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+		  	                                    value: item,    //그냥 사용자 설정값
+		  	                                }
+		  	                            })
+		  	                        );
+		  	                    }
+		  	               });
+		  	            },    // source 는 자동 완성 대상
+		  	         select : function(event, ui) {    //아이템 선택시
+		  	            console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+		  	            console.log(ui.item.label);    
+		  	            console.log(ui.item.value);    
+		  	            
+		  	        },
+		  	        focus : function(event, ui) {    //포커스 가면
+		  	            return false;//한글 에러 잡기용도로 사용됨
+		  	        },
+		  	        minLength: 0,// 최소 글자수
+		  	        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+//		  	        classes: {    //잘 모르겠음
+//		  	            "ui-autocomplete": "highlight"
+//		  	        },
+		  	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+//		  	        disabled: true, //자동완성 기능 끄기
+//		  	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+		  	        close : function(event){    //자동완성창 닫아질때 호출
+		  	            console.log(event);
+		  	        }  
+		  	      	    
+		  	    });
+			}   
+		});	
+	
+	
 	//출발지부터 입력하도록.
 	$("#arrival").on("click",function(e){
 		 if($("#departure").val()==""){
 			 alert("출발지를 입력해주세요");
 		 }
 	})
+	
+//select 그리기sampleArrCode
+$jb(function(){
+	console.log("셀렉트 시작");
+	var sampleArrCode = $("#sampleArrCode").val();
+	
+	$.ajax({
+        type: 'get',
+        url: "/flight/getDistinctArrRegionCode",
+        dataType: "json",
+        data: {depName : $("#departure").val()},
+        //contentType : "application/json; charset=utf-8", 
+        success: function(data) {
+			 console.log(data);
+			 str = "";
+			 str += "<option value=''>선택해주세요</option>";
+			 if(data.includes('1')){
+			 str+="<option value='1'>한국</option>";
+			 } 
+			 if(data.includes('2')){
+			 str+="<option value='2'>동북아시아</option>";
+			 } 
+			 if(data.includes('3')){
+			str+= "<option value='3'>동남아시아/서남아시아</option>";
+			 } 
+			 if(data.includes('4')){
+			 str+="<option value='4'>몽골/중앙아시아</option>";
+			 } 
+			 if(data.includes('5')){
+			 str+="<option value='5'>유럽</option>";
+			 } 
+			 if(data.includes('6')){
+			 str+="<option value='6'>미주(미국,캐나다)</option>";
+			 } 
+			 if(data.includes('7')){
+			 str+="<option value='7'>대양주/사이판</option>";
+			 } 
+			 
+			 $("#arrRegionCode").html(str);	
+     	   
+     		 $('#arrRegionCode option[value= '+ sampleArrCode +']').prop("selected", true);
+
+        }
+	
+	});
+});
 </script>

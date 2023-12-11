@@ -62,13 +62,38 @@ public class FlightServiceImpl implements FlightService{
 	}
 	
 	@Override
-	public List<String> getDistinctDep(String searchValue) {
-		return mapper.getDistinctDep(searchValue);
+	public List<String> getDistinctDep(String depName, String depRegionCode) {
+		return mapper.getDistinctDep(depName, depRegionCode);
+	}
+
+	@Override
+	public List<String> getDistinctArrRegionCode(String depName) {
+		return mapper.getDistinctArrRegionCode(depName);
 	}
 	
 	@Override
-	public List<String> getDistinctArrByDep(String depName, String arrName) {
-		return mapper.getDistinctArrByDep(depName, arrName);
+	public List<String> getDistinctArrByDep1(String depName, String arrName) {
+		return mapper.getDistinctArrByDep1(depName, arrName);
+	}
+
+	@Override
+	public List<String> getDistinctArrByDep2(String depName, String arrName, String arrRegionCode) {
+		return mapper.getDistinctArrByDep2(depName, arrName, arrRegionCode);
+	}
+
+	@Override
+	public List<String> getDistinctFlightName(String flightName) {
+		return mapper.getDistinctFlightName(flightName);
+	}
+	
+	@Override
+	public FlightVO getClosestFlightPrev(String dep, String arr, String time) {
+		return mapper.getClosestFlightPrev(dep, arr, time);
+	}
+	
+	@Override
+	public FlightVO getClosestFlightAfter(String dep, String arr, String time) {
+		return mapper.getClosestFlightAfter(dep, arr, time);
 	}
 
 	@Override

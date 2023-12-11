@@ -22,6 +22,10 @@ public interface FlightMapper {
 
 	//public List<FlightVO> getListSearch2(@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
 	
+	public FlightVO getClosestFlightPrev(@Param("dep") String dep,@Param("arr") String arr, @Param("time") String time);
+
+	public FlightVO getClosestFlightAfter(@Param("dep") String dep,@Param("arr") String arr, @Param("time") String time);
+	
 	public int getTotal(Criteria cri);
 
 	public int getTotalSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);
@@ -30,9 +34,15 @@ public interface FlightMapper {
 
 	public FlightVO getFlightInfo(int fno);
 	
-	public List<String> getDistinctDep(String searchValue);
+	public List<String> getDistinctDep(@Param("depName") String depName, @Param("depRegionCode") String depRegionCode);
 
-	public List<String> getDistinctArrByDep(@Param("depName")String depName, @Param("arrName")String arrName);
+	public List<String> getDistinctArrRegionCode(String depName);
+
+	public List<String> getDistinctArrByDep1(@Param("depName")String depName, @Param("arrName")String arrName);
+
+	public List<String> getDistinctArrByDep2(@Param("depName")String depName, @Param("arrName")String arrName, @Param("arrRegionCode") String arrRegionCode);
+
+	public List<String> getDistinctFlightName(String flightName);
 
 	public Integer getPrice(@Param("depname")String depName,@Param("arrname") String arrName);
 

@@ -163,10 +163,10 @@
 		}
 	}
 	function handleOnInputEng(e) {
-		e.value = e.value.replace(/[^A-Za-z]/ig, '')
+		e.value = e.value.replace(/[^A-Za-z]/ig, '') //영문말고 다른 문자 입력시 제거
 	}
 	function handleOnInputKor(e) {
-		e.value = e.value.replace(/[^ㄱ-힣]/ig, '')
+		e.value = e.value.replace(/[^ㄱ-힣]/ig, '') //한글말고 다른 문자 입력시 제거
 	}
 
 

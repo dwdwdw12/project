@@ -2,24 +2,29 @@ package com.airline.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardQnaVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
+import com.airline.vo.KakaoUserVO;
 import com.airline.vo.GradeLogVO;
 import com.airline.vo.PageDTO;
 import com.airline.vo.PointVO;
@@ -36,6 +41,9 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 //	private PayService pay;
@@ -174,6 +182,7 @@ public class UserController {
 		}
 	}
 	
+
 	//등급조회
 	@GetMapping("/searchGrade")
 	public void searchGrade(Model model, Criteria cri) {
@@ -191,7 +200,70 @@ public class UserController {
 		
 	}
 	
+	//마이페이지 이동
+  	@GetMapping("/myPage")
+	public void myPage(Model model, HttpSession session) {
+		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
+		model.addAttribute("userInfo", vo);
+	}
+  
+  	//마이페이지 수정
+	@GetMapping("/myInfoModify")
+	public void myInfoModify(Model model, HttpSession session) {
+		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
+		model.addAttribute("userInfo", vo);
+		//010-0000-0000
+		String phone_first = vo.getPhone().substring(0, 3);		
+		String phone_middle = vo.getPhone().substring(4, 8);		
+		String phone_last = vo.getPhone().substring(9, 13);		
+		model.addAttribute("phone_first" , phone_first);
+		model.addAttribute("phone_middle" , phone_middle);
+		model.addAttribute("phone_last" , phone_last);
+		
+		String[] mail = vo.getMail().split("@");
+		String email = mail[0];
+		String mail_Domain = mail[1];
+		model.addAttribute("email", email);
+		model.addAttribute("mail_Domain", mail_Domain);
+		
+	}
 	
+	@PostMapping("/myInfoModify")
+	public String myInfoModify(RedirectAttributes attr, String userId, String userNick,
+			String userNameK, String userNameE, 
+			String phone_first, String phone_middle, String phone_last, 
+			int postCode, String addressDefault, String addressDetail) {
+		// email phone address 합쳐줘야해서.. parameter로 받음....
 
+		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
+		//String mail = email + "@" + mail_Domain;
+		String address = addressDefault + addressDetail;
+		
+		log.info(userId);
+		log.info(userNick);
+		log.info(userNameK);
+		log.info(userNameE);
+		log.info(phone);
+		log.info(postCode);
+		log.info(address);
+		
+		service.modifyUserInfo(userId, userNick, userNameK, userNameE, phone, postCode, address);
+		
+		return "redirect:/user";
+	}
+	
+	@GetMapping("/myPwdModify") //mypage에서 get으로 링크타고 이동해서 다시 session가져옴..
+	public void myPwdModify(Model model, HttpSession session) {
+		KakaoUserVO vo = (KakaoUserVO) session.getAttribute("loginUser");
+		model.addAttribute("userInfo", vo);
+	}
+
+	@PostMapping("/myPwdModify") //mypage에서 get으로 링크타고 이동해서 다시 session가져옴..
+	public String myPwdModify(String userId, String pwd, RedirectAttributes attr) {
+		pwd = passwordEncoder.encode(pwd);
+		service.modifyUserPwd(userId, pwd);
+		return "redirect:/user";
+	}
+	
 	
 }
