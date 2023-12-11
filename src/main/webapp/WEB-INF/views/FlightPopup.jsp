@@ -17,8 +17,8 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
     display: block; /* 이미지 사이에 추가 공백 제거 */
     margin: 0 auto; /* 중앙 정렬 */}
 .layerPopup:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:9000}
-.layerPopup .layerBoxFlight {    z-index:10000;   
-position:fixed; left:40%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
+.layerPopup .layerBoxFlight {    z-index:9999;   
+position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
 .layerPopup #layer_popup_flight .layerBoxFlight {
     top: 60%;
 }
@@ -58,10 +58,10 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 <img src="/resources/img/alert.png" onerror="this.style.display='none'" width=20px height=auto usemap="#popup" alt="event page">
 <c:choose>
 	<c:when test="${modi.isDelete==2}">
-	<h2>항공 운항 변경 안내</h2>
+	<h3>항공 운항 변경 안내</h3>
 	</c:when>
 	<c:when test="${modi.isDelete==3}">
-	<h2>항공결항 안내</h2>
+	<h3>항공결항 안내</h3>
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>
@@ -78,7 +78,6 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 	<c:otherwise>
 	</c:otherwise>
 </c:choose>
- 
 <%-- ${modi.reason} --%>
 <hr>
 

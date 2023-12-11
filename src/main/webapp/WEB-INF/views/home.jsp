@@ -105,7 +105,7 @@
 						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
 						<br><br>
 						
-								<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
+								<p>검색창에서 아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
 							<label for="dep">&#x2714&nbsp;출발지</label> 
 						</div>

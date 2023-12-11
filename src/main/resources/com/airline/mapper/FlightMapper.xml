@@ -89,6 +89,11 @@
 			order by depday desc limit 1;
 		]]>
 	</select>
+	
+	<update id="updateSeatCount">
+		update airplaneschedule a set seatcount = (select 24-ifnull(count(*),0) from flightreservation b where b.flightname=#{flightName} and deptime like concat('%',#{time},'%')) 
+			where a.flightname=#{flightName} and a.depday like concat('%',#{time},'%');
+	</update>
 		
 	<select id="getDistinctDep" resultType="String">
 		select distinct(depName) from airplaneschedule where depName like concat('%',#{depName},'%') and depregioncode=#{depRegionCode} order by 1 asc

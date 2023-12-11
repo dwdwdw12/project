@@ -73,6 +73,13 @@ public class FlightMapperTest {
 		log.info(mapper.getDistinctArrRegionCode("김포"));
 	}
 	
+	@Test
+	public void updateSeatCountTest() {
+		int updateSeatCount = mapper.updateSeatCount("OZ740","2024-02-28");
+		log.info(mapper.updateSeatCount("OZ740","2024-02-28"));
+		log.info(">>>>"+updateSeatCount);
+	}
+	
 	//검색어만 하는건 성공
 	/*
 	 * @Test public void getSearchTest2() { mapper.getListSearch2("인천","오사카",
