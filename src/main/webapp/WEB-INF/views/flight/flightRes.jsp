@@ -32,17 +32,17 @@
 
 </style>
 
-<div class="tm-page-wrap mx-auto">
-	<section class="tm-banner">
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px">
+<!-- 	<section class="tm-banner">
 
-		<!-- .tm-container-outer -->
+		.tm-container-outer
 		<div class="inner">
 			<div class="slideshow">
 				<img src="../resources/img/kakao/카카오1.jpg" alt="" width="1400"
 					height="650">
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
@@ -85,7 +85,7 @@
 							<label for="vo">항공정보</label> 
 						</div>
 							<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="vo" type="text" class="form-control" id="vo" value="${vo.depName}=> ${vo.arrName} , ${vo.fullDeptime}" readonly="readonly">
+							<input name="vo" type="text" class="form-control" id="vo" value="${vo.depName}&rarr; ${vo.arrName} , ${vo.fullDeptime}" readonly="readonly">
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="seat">좌석정보</label> 
