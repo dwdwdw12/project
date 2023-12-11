@@ -93,7 +93,7 @@
 	</select>
 	
 	<insert id="insertFlight">
-		insert into airplaneschedule(flightname,depday,arrday,fulldeptime,deptime,fullarrtime,arrtime,flighttime,fulldeparture,depcode,depname,fullarrival,arrcode,arrname,depregioncode,arrregioncode) values(#{vo.flightName}, #{vo.depDay}, #{vo.arrDay}, #{vo.fullDeptime}, #{vo.depTime}, #{vo.fullArrtime}, #{vo.arrTime}, #{vo.flightTime}, #{vo.fullDeparture}, #{vo.depCode}, #{vo.depName}, #{vo.fullArrival}, #{vo.arrCode}, #{vo.arrName}, #{vo.depRegioncode}, #{vo.arrRegioncode} )
+		insert into airplaneschedule(flightname,depday,arrday,fulldeptime,deptime,fullarrtime,arrtime,flighttime,fulldeparture,depcode,depname,fullarrival,arrcode,arrname,depregioncode,arrregioncode) values(#{vo.flightName}, #{vo.depDay}, #{vo.arrDay}, #{vo.fullDeptime}, #{vo.depTime}, #{vo.fullArrtime}, #{vo.arrTime}, #{vo.flightTime}, #{vo.fullDeparture}, #{vo.depCode}, #{vo.depName}, #{vo.fullArrival}, #{vo.arrCode}, #{vo.arrName}, #{vo.depRegionCode}, #{vo.arrRegionCode} )
 	</insert>
 	
 	<select id="getFlightInfo" resultType="com.airline.vo.FlightVO">
