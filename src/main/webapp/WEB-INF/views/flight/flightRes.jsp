@@ -139,14 +139,14 @@
 							<label for="total">총 결제금액</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="total" type="text" class="form-control" id="total" value=<fmt:formatNumber value="${total}" pattern="#,###" /> readonly="readonly">
+							<input name="total" type="text" class="form-control" id="total" value=<fmt:formatNumber value="${total}" pattern="#,###" />원 readonly="readonly">
 							<input name="total" type="hidden" class="form-control" id="htotal" value="${total}" readonly="readonly">
 						</div>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="totalPay">최종결제금액</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="totalPay" type="text" class="form-control" id="totalPay" value=<fmt:formatNumber value="${total}" pattern="#,###" /> readonly="readonly">
+							<input name="totalPay" type="text" class="form-control" id="totalPay" value=<fmt:formatNumber value="${total}" pattern="#,###" />원 readonly="readonly">
 						</div>
 					</div>
 					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
