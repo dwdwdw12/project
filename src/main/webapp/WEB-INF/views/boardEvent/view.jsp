@@ -52,7 +52,7 @@
 	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
 	<div class="container">
 		<h2>이벤트 상세보기</h2>
-		<hr class="hr1" noshade> 
+		<hr class="hr1" noshade>  
 			<form action="/boardEvent/delete" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
 			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
