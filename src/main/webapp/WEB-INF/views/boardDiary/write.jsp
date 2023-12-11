@@ -45,10 +45,11 @@
 </style>
 
 </head>
-<body class="p-5 tm-container-outer tm-bg-gray" style=" margin-top : 180px;">
+<body style=" margin-top : 180px;">
 	
-	 <div class="container">
+	 <div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>여행일기 등록</h2>
+		<hr class="hr1" noshade>
 		<form action="/boardDiary/write" method="post" name="frm">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<input type="hidden" id="userId" name="userId" value="${loginUser.userId}">

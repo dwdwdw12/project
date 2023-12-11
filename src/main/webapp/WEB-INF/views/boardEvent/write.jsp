@@ -67,6 +67,7 @@
 	
 	 <div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>이벤트 등록</h2>
+		<hr class="hr1" noshade>
 		<form action="/boardEvent/write" role="form" method="post" name="frm" >
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 

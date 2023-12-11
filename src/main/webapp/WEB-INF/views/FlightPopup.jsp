@@ -68,17 +68,17 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 </c:choose> 
 
 <p>${modi.reason}로 인한 ${modi.flightName}편 ${modi.depName} <i class="bi bi-arrow-right"></i> ${modi.arrName} 행</p>
- <c:choose>
-<c:when test="${modi.isDelete==2}">
-	<p>항공 운항 변경 안내 드립니다.</p>
+<%-- <c:choose>
+	<c:when test="${modi.isDelete==2}">
+	<p>항공 운항 변경 안내</p>
 	</c:when>
 	<c:when test="${modi.isDelete==3}">
-	<p>항공결항 안내 드립니다.</p>
+	<p>항공결항 안내.</p>
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>
-</c:choose>
-<%-- ${modi.reason} --%>
+</c:choose>  --%>
+<%-- ${modi.reason} --%> 
 <hr>
 
 		
