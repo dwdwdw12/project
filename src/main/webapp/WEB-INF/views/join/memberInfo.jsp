@@ -2,6 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<!-- Google web font "Open Sans" -->
+<link rel="stylesheet"
+	href="../resources/font-awesome-4.7.0/css/font-awesome.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<!-- Bootstrap style -->
+<!-- <link rel="stylesheet" type="text/css"
+	href="../resources/css/datepicker.css" /> -->
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick-theme.css" />
+<link rel="stylesheet" href="../resources/css/templatemo-style.css">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
 <style>
 .id_ok {
 	font-size: small;
@@ -203,13 +221,14 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 						</select> <input type="text" id="phone_middle" name="phone_middle"
-							placeholder="중간번호" title="휴대전화 번호 가운데 자리" maxlength="4"
+							placeholder="중간번호" title="휴대전화 번호 가운데 자리" maxlength="4" 
 							style="width: 150px; display: inline;" class="form-control"
 							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-							required="required"> <input type="text" id="phone_last"
+							required="required"> 
+						<input type="text" id="phone_last"
 							name="phone_last" placeholder="끝 번호" title="휴대전화번호 끝자리"
 							maxlength="4" style="width: 150px; display: inline;"
-							class="form-control"
+							class="form-control" 
 							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
 							required="required">
 							<p class="txt_error_Msg" id="error_koreaPhone"
@@ -314,6 +333,7 @@
 			<div align="center">
 				<button type="button" class="btn btn-primary" id="submitButton"
 					onclick="return formCheck()">확인</button>
+			<br><br>
 				<input class="spinner-border text-warning" type="hidden"
 									name="spinner" id="spinner">
 			</div>
@@ -330,14 +350,15 @@
 
 		</form>
 
-
 	</section>
 </div>
-<br>
+
+<%@ include file="../includes/footer.jsp"%>
 
 <script type="text/javascript">
 	function checkId() {
 		var userId = $('#userId').val();
+		var checkIdResult = "";
 		$.ajax({
 			url : '/join/userIdDuplicateCheck', //controller에서 요청받을 주소
 			type : 'post', //post방식으로 전달
@@ -345,15 +366,16 @@
 				userId : userId
 			}, //데이터
 			dataType : 'json',
+			async: false,
 			success : function(userIdCnt) { //controller에서 넘어온 cnt값을 받음
 				if (userIdCnt == 0) { //0이면 사용가능 1이면 중복
 					$('.id_ok').css("display", "inline-block");
 					$('.id_already').css("display", "none");
-					return true;
+					checkIdResult = true;
 				} else { //!=0일때 (중복일때)
 					$('.id_ok').css("display", "none");
 					$('.id_already').css("display", "inline-block");
-					return false;
+					checkIdResult = false;
 					//$('#userId').val(''); 값을 지우는데 지우면 확인못할것같아서 주석처리함
 				}
 			},
@@ -361,10 +383,12 @@
 				alert("오류가 발생하였습니다.");
 			}
 		});
+		return checkIdResult;
 	};
 
 	function checkNick() {
 		var userNick = $('#userNick').val();
+		var checkNickResult = "";
 		$.ajax({
 			url : '/join/userNickDuplicateCheck', //controller에서 요청받을 주소
 			type : 'post', //post방식으로 전달
@@ -372,27 +396,30 @@
 				userNick : userNick
 			}, //데이터
 			dataType : 'json',
+			async: false,
 			success : function(userNickCnt) { //controller에서 넘어온 cnt값을 받음
 				if (userNickCnt == 0) { //0이면 사용가능 1이면 중복
 					$('.userNick_ok').css("display", "inline-block");
 					$('.userNick_already').css("display", "none");
-					return true;
+					checkNickResult = true;
 				} else { //!=0일때 (중복일때)
 					$('.userNick_ok').css("display", "none");
 					$('.userNick_already').css("display", "inline-block");
 					//$('#userNick').val(''); 값을 지우는데 지우면 확인못할것같아서 주석처리함
-					return false;
+					checkNickResult = false;
 				}
 			},
 			error : function() {
 				alert("오류가 발생하였습니다.");
 			}
 		});
+		return checkNickResult;
 	};
 
 	function checkPwd() {
 		var pwd = $('#pwd').val();
 		var pwd_check = $('#pwd_check').val();
+		var checkPwdResult = "";
 		$.ajax({
 			url : '/join/userPwdCheck', //controller에서 요청받을 주소
 			type : 'post', //post방식으로 전달
@@ -401,16 +428,17 @@
 				pwd_check : pwd_check
 			}, //데이터
 			dataType : 'json',
+			async: false,
 			success : function(userPwdCnt) { //controller에서 넘어온 cnt값을 받음
 				if (userPwdCnt == 1) { //1이면 일치(확인됨)
 					$('.userPwd_ok').css("display", "inline-block");
 					$('.userPwd_already').css("display", "none");
-					return true;
+					checkPwdResult = true;
 				} else if (userPwdCnt == 0) { // 0 불일치
 					$('.userPwd_ok').css("display", "none");
 					$('.userPwd_already').css("display", "inline-block");
 					//값을 지우면 확인못할것같아서 주석처리함
-					return false;
+					checkPwdResult = false;
 				} else { //-1 : controller에서 문제가 발생
 					alert("오류가 발생하였습니다.");
 				}
@@ -419,8 +447,10 @@
 				alert("오류가 발생하였습니다.");
 			}
 		});
+		return checkPwdResult;
 	};
 
+	
 	function formCheck() {
 		/*  if (document.frm.idDuplication.value == "idUncheck" ) {
 		    alert("아이디 중복확인을 해주세요.");
@@ -492,12 +522,12 @@
 			alert("휴대전화번호를 다시 확인해주세요.")
 			document.frm.phone_first.focus;
 			return false;
-		} else if (document.frm.phone_middle.value.length == 0) {
-			alert("휴대전화번호를 다시 확인해주세요.")
+		} else if (document.frm.phone_middle.value.length == 0||document.frm.phone_middle.value.length<4) {
+			alert("휴대전화번호 가운데 자리를 다시 확인해주세요(4글자).")
 			document.frm.phone_middle.focus;
 			return false;
-		} else if (document.frm.phone_last.value.length == 0) {
-			alert("휴대전화번호를 다시 확인해주세요.")
+		} else if (document.frm.phone_last.value.length == 0||document.frm.phone_last.value.length<4) {
+			alert("휴대전화번호 마지막 자리를 다시 확인해주세요(4글자).")
 			document.frm.phone_last.focus;
 			return false;
 		}
@@ -595,5 +625,7 @@
 				}).open();
 	}
 </script>
+
+
 </body>
 </html>

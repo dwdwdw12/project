@@ -384,6 +384,9 @@ public class FlightController {
 			}
 			System.out.println("oriCode>>"+oriCode + ":" +getCode );
 			//flightSum이 grade 테이블의 gradeStandard 이상인 gradeCode를 가져와 kakaoUser 테이블에 업데이트
+			
+			
+			flights.updateSeatCount(vo.getFlightName(), vo.getDepDay().substring(0,10));
 		}
 		
 		//getRescomplete으로 리다이렉트(예약정보 가져오기)

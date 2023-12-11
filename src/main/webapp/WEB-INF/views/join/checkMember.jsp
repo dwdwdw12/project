@@ -107,8 +107,7 @@
 							<hr>
 							<input type="hidden" name="termsAgree" value="${termsAgree}"> <br>
 								
-							<button type="submit" id="checkMemberBtn" class="btn btn-primary"
-								>확인</button>
+							<button type="button" id="checkMemberBtn" class="btn btn-primary" onclick="return formCheck()">확인</button>
 						</form>
 
 
@@ -130,32 +129,36 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$("#checkMemberBtn").on("click", function(e){ //값이 비었는지 확인
-		e.preventDefault();
+	//$("#checkMemberBtn").on("click", function(e){ //값이 비었는지 확인
+	function formCheck() {
+		//e.preventDefault();
 		
 		var regfirst = /^(?=.*[0-9]).{6,7}$/;
 		var reglast = /^(?=.*[0-9]).{7,8}$/;
-
-		if (document.frm.userNameE.value.length == 0) {
-			alert("영문 명을 입력해주세요.");
-			return false;
-		}
+		var frm = document.frm;
+		
 		if (document.frm.userNameK.value.length == 0) {
 			alert("한글 명을 입력해주세요.");
 			return false;
 		}
-		if (document.frm.userReginumFirst.value.length == 0) {
-			alert("주민등록번호를 입력해주세요.");
+		if (document.frm.userNameE.value.length == 0) {
+			alert("영문 명을 입력해주세요.");
 			return false;
 		}
-		if (document.frm.userReginumLast.value.length == 0) {
-			alert("주민등록번호를 입력해주세요.");
+		
+		if (document.frm.userReginumFirst.value.length == 0||document.frm.userReginumFirst.value.length < 6) {
+			alert("주민등록번호를 확인해주세요.");
+			return false;
+		}
+		if (document.frm.userReginumLast.value.length == 0||document.frm.userReginumLast.value.length < 6) {
+			alert("주민등록번호를 확인해주세요.");
 			return false;
 		}
 		
 		frm.submit();
 	
-	});
+	}
+	//);
 
 	function handleOnInput(el, maxlength) {
 		if (el.value.length > maxlength) {

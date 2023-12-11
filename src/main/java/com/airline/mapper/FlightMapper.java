@@ -26,6 +26,8 @@ public interface FlightMapper {
 
 	public FlightVO getClosestFlightAfter(@Param("dep") String dep,@Param("arr") String arr, @Param("time") String time);
 	
+	public int updateSeatCount(@Param("flightName") String flightName, @Param("time") String time);
+	
 	public int getTotal(Criteria cri);
 
 	public int getTotalSearch(@Param("cri")Criteria cri,@Param("dep") String dep,@Param("arr") String arr,@Param("time") String time);

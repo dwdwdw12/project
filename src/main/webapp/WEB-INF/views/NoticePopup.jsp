@@ -17,7 +17,7 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
     margin: 0 auto; /* 중앙 정렬 */}
 .layerPopup:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:9000}
 .layerPopup .layerBoxNotice {    z-index:10000;   
-position:fixed; left:65%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
+position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; width: 900px;}
 .layerPopup #layer_popup_notice .layerBoxNotice {
     top: 60%;
 }

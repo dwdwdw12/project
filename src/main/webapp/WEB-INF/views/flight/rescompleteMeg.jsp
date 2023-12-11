@@ -133,7 +133,7 @@ max-width: 100%;
 				
 					<div class="form-row tm-search-form-row">
                 		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="window.open(`https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/flight/oath&response_type=code&scope=talk_message`)">알림 메세지 보내기->카카오로그인시 사용가능</button>
-						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" href="location.href='/'">메인페이지</button>	
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" onclick="location.href='/'">메인페이지</button>	
 						<p id="token-result"></p>
 					</div>		
 						</div>

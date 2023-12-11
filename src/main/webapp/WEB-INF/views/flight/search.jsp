@@ -122,7 +122,7 @@ p.btn.btn-default {
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="oneWay" style="width: 100px;">편도</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" id="roundTrip">왕복</button>
 				<br><br>
-					<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
+					<p>검색창에서 아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
 				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
 					<label for="dep">출발지</label> 
 				</div>
@@ -194,12 +194,12 @@ p.btn.btn-default {
 				<div class="container" >
 				<div class="text-right">
 					<c:if test="${empty arrDate}">
-						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
-						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}#1'">다음날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${nextDepDay}#1'">다음날</button>
 					</c:if>	
 					<c:if test="${!empty arrDate}">
-						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
-						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
 					</c:if>
 				</div>
 				<h2 style="text-align: center">${depDate} : ${dep} <i class='fa fa-arrow-right'></i> ${arr}</h2>
@@ -223,14 +223,14 @@ p.btn.btn-default {
 			
 			<c:if test="${empty arrDate}">
 				<div class="text-right">
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}#1'">다음날</button>
+					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${prevDepDay}#1'">이전날</button>
+					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${nextDepDay}#1'">다음날</button>
 				</div>
 			</c:if>
 			<c:if test="${!empty arrDate}">
 				<div class="text-right">
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
-					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
+					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${prevDepDay}&arrDate=${arrDate}#1'">이전날</button>
+					<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${nextDepDay}&arrDate=${arrDate}#1'">다음날</button>
 				</div>
 			</c:if>
 			
@@ -296,8 +296,12 @@ p.btn.btn-default {
 									<td style="vertical-align: middle;">예약 마감</td>
 								</c:if>
 								<c:if test="${parsedMyDate.time-nowfmtTime>=(1000*60*30)}">
-								<td style="vertical-align: middle;"><button type="submit"
-										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기</button></td>
+									<c:if test="${list.seatCount>0}">
+										<td style="vertical-align: middle;"><button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기(${list.seatCount}석)</button></td>
+									</c:if>
+									<c:if test="${list.seatCount<=0}">
+										<td style="vertical-align: middle;">좌석 없음</td>
+									</c:if>
 								</c:if>
 							</tr>
 						</tbody>
@@ -331,8 +335,8 @@ p.btn.btn-default {
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container" id="2">
 		<div class="text-right">
-			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${prevArrDay}#2'">이전날</button>
-			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${nextArrDay}#2'">다음날</button>
+			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${prevArrDay}#2'">이전날</button>
+			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${nextArrDay}#2'">다음날</button>
 		</div>
 		<h2 style="text-align: center">${arrDate} :${arr} <i class='fa fa-arrow-right'></i> ${dep}</h2>
 			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">

@@ -41,6 +41,9 @@ public interface FlightService {
 
 	public FlightVO getClosestFlightAfter(String dep, String arr, String time);
 	
+	//좌석 갯수
+	public int updateSeatCount(String flightName, String time);
+	
 	//항공정보
 	public FlightVO getFlightInfo(int fno);
 

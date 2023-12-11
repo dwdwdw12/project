@@ -66,7 +66,7 @@ td {
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="route" style="width: 100px;">노선</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="fName" style="width: 100px;">편명</button>
 				<br><br>
-				<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
+				<p>검색창에서 아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
 				<div class="form-row tm-search-form-row" id="searchText">
 					<c:if test="${empty flightName}">
 						<%-- <div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">

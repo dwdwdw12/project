@@ -97,6 +97,11 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
+	public int updateSeatCount(String flightName, String time) {
+		return mapper.updateSeatCount(flightName, time);
+	}
+	
+	@Override
 	public FlightVO getFlightInfo(int fno) {
 		return mapper.getFlightInfo(fno);
 	}
