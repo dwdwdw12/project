@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../includes/header2.jsp"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -28,23 +29,7 @@
 <!-- 이미지로더 -->
 <script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
 <style>
-img{
-max-width: 100%;
-}
 
-.slideshow {
-	height: 465px;
-	overflow: hidden; /*높이와 overflow만 잡아주면 이미지 중첩됨*/
-	position: relative;
-}
-
-.slideshow img {
-	position: absolute;
-	/*이미지 위치 가운데로 옮기기*/
-	left: 50%; /*오른쪽으로 50% 밀고 margin으로 위치 조정*/
-	margin-left: -800px;
-	display: none;
-}
 </style>
 
 <div class="tm-page-wrap mx-auto">
@@ -53,12 +38,8 @@ max-width: 100%;
 		<!-- .tm-container-outer -->
 		<div class="inner">
 			<div class="slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-02.jpg"
-					alt="" width="1600" height="1000"> <img
-					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-04.jpg"
-					alt="" width="1600" height="1000">
+				<img src="../resources/img/kakao/카카오1.jpg" alt="" width="1400"
+					height="650">
 			</div>
 		</div>
 	</section>
@@ -70,10 +51,8 @@ max-width: 100%;
 					<h2 class="text-uppercase mb-4">
 						비행기 티켓 결제 정보
 					</h2>
-					<p class="mb-4">Nullam auctor, sapien sit amet lacinia euismod,
-						lorem magna lobortis massa, in tincidunt mi metus quis lectus.
-						Duis nec lobortis velit. Vivamus id magna vulputate, tempor ante
-						eget, tempus augue. Maecenas ultricies neque magna.</p>
+					<p class="mb-2">선택하신 항공 및 좌석정보, 탑승하실 승객의 개인정보를 모두 확인하여 주시기 바랍니다.</p> 
+					<p class="mb-2">잘못 기재된 정보의 미확인으로 인한 책임은 모두 승객 본인에게 있음을 안내드립니다.</p>
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 						<div>
@@ -130,7 +109,8 @@ max-width: 100%;
 				            <label class="checkbox-test">마일리지 금액</label>
 						</div>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="point" type="text" class="form-control" id="point" value="${point}" readonly="readonly">
+	                	<input name="point" type="text" class="form-control" id="point" value=<fmt:formatNumber value="${point}" pattern="#,###" />  readonly="readonly">
+						<input name="point" type="hidden" class="form-control" id="hpoint" value="${point}" readonly="readonly">
 						</div>
 					</div>
 					
@@ -148,7 +128,7 @@ max-width: 100%;
 	                		<label class="checkbox-test">카카오페이 금액</label>
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="kakaoP" type="text" class="form-control" id="kakaoP" value="${kakaoP}" readonly="readonly">
+							<input name="kakaoP" type="text" class="form-control" id="kakaoP" value=<fmt:formatNumber value="${kakaoP}" pattern="#,###" /> readonly="readonly">
 						</div>
 					</div>
 					
@@ -159,13 +139,14 @@ max-width: 100%;
 							<label for="total">총 결제금액</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="total" type="text" class="form-control" id="total" value="${total}" readonly="readonly">
+							<input name="total" type="text" class="form-control" id="total" value=<fmt:formatNumber value="${total}" pattern="#,###" /> readonly="readonly">
+							<input name="total" type="hidden" class="form-control" id="htotal" value="${total}" readonly="readonly">
 						</div>
 	                	<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<label for="totalPay">최종결제금액</label> 
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-							<input name="totalPay" type="text" class="form-control" id="totalPay" value="${total}" readonly="readonly">
+							<input name="totalPay" type="text" class="form-control" id="totalPay" value=<fmt:formatNumber value="${total}" pattern="#,###" /> readonly="readonly">
 						</div>
 					</div>
 					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
@@ -181,23 +162,43 @@ max-width: 100%;
 	
 </div>
 <!-- .tm-container-outer -->
-<%@ include file="../includes/footer.jsp"%>
+
  <script>
  window.onload = function () {
+	 console.log("dd");
    // $("#pointUse1").click(function(){
+	//총합
+	var total = $("#htotal").val();
+	console.log("total : "+total);
+	//포인트 사용 후 최종결제값
+	var totalPay = $("#totalPay").val();
+	console.log("totalPay : "+totalPay);
     $("#pointUse1").change(function(){
         var chk = $(this).is(":checked");
-
+		console.log(chk);
         if(chk == true){
         	$("#pointUse2").removeAttr("readonly");
+        	//체크상태이면 readonly 해제+keyup으로 밸류값 얻어오기
+        	$("#pointUse2").keyup(function(){
+        		var pointVal = $("#pointUse2").val();
+        		console.log(pointVal);
+        		totalPay = total - pointVal;
+        		console.log("totalPay1 : "+totalPay);
+        		$("#totalPay").val(totalPay);
+            	//console.log("valTest>>"+$("#totalPay").val())
+        		})
+
+        	}
  /*        	var pointVal = $("#pointUse2").val();
         	 updatePayment(); */
         	
-        }else{
+        else{
         	$("#pointUse2").val("0");
+        	totalPay = total;
         	$("#pointUse2").attr("readonly","readonly");
+        	$("#totalPay").val(totalPay);
         }
-        updatePayment();
+/*         updatePayment(); */
     });
     
     $("#kakaoPUse1").click(function(){
@@ -205,33 +206,49 @@ max-width: 100%;
         
         if(chk == true){
         	$("#kakaoPUse2").removeAttr("readonly");
-        	var kpoint = $("#kakaoPUse2").val();
+        	$("#kakaoPUse2").keyup(function(){
+        		var kpoint = $("#kakaoPUse2").val();
+        		console.log(kpoint);
+        		totalPay = total - kpoint;
+        		console.log("totalPay1 : "+totalPay);
+        		$("#totalPay").val(totalPay);
+        		})
+        	/* var kpoint = $("#kakaoPUse2").val(); */
         }else{
         	console.log("체크박스 해제");
         	$("#kakaoPUse2").val("0");
+        	totalPay = total;
         	$("#kakaoPUse2").attr("readonly","readonly");
+        	$("#totalPay").val(totalPay);
         	
         }
-        updatePayment();
+        /* updatePayment(); */
     }); 
     
     function updatePayment(){
     	var total = parseInt($("#total").val()) || 0; // 총 결제금액 가져오기
         // 카카오페이 사용 체크 여부 확인
         if ($("#kakaoPUse1").is(":checked")) {
-            var kakaoP = parseInt($("#kakaoPUse2").val()) || 0; // 카카오페이 금액 가져오기
+            var kakaoP = parseInt($("#kakaoPUse2").keyup(function(){
+        		var pointVal = $("#kakaoPUse2").val();
+        		console.log(kakaoPUse2);
+        		})) || 0; // 카카오페이 금액 가져오기
             total -= kakaoP; // 카카오페이 금액 빼기
         }
     	
         // 포인트 사용 체크 여부 확인
         if ($("#pointUse1").is(":checked")) {
-            var mileage = parseInt($("#pointUse2").val()) || 0; // 마일리지 금액 가져오기
+            var mileage = parseInt($("#pointUse2").keyup(function(){
+        		var pointVal = $("#pointUse2").val();
+        		console.log(pointVal);
+        		})) || 0; // 마일리지 금액 가져오기
             total -= mileage; // 마일리지 금액 빼기
         }
         
         // 최종결제금액 표시
         $("#totalPay").val(total);
     }
+
  }
 
 </script>
@@ -310,46 +327,4 @@ max-width: 100%;
         });
     });
 </script>
-
-
-<script type="text/javascript">
-	$(function() {
-		$('.slideshow').each(function() {
-			// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
-			let $slides = $(this).find("img");
-			let slideCount = $slides.length;
-			let currentIndex = 0;
-			$slides.eq(currentIndex).fadeIn();
-			// 첫 이미지를 나타나게 함
-
-			// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
-			let showNextSlide = function() {
-				let nextIndex = (currentIndex + 1) % slideCount;
-				// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
-				$slides.eq(currentIndex).fadeOut();
-				// 현재 이미지를 사라지게 하고
-				$slides.eq(nextIndex).fadeIn();
-				// 위에서 구한 다음 이미지를 나타나게 함
-				currentIndex = nextIndex;
-				// 다음 이미지의 값을 현재로 
-			}
-
-			let timer = setInterval(showNextSlide, 1000);
-			$(this).on('mouseover', function() {
-				//타이머 취소
-				clearInterval(timer);
-			}).on('mouseout', function() {
-				//타이머 시작
-				timer = setInterval(showNextSlide, 1000);
-			})
-		})
-	});
-
-	// Slick Carousel
-	$('.tm-slideshow').slick({
-		infinite : true,
-		arrows : true,
-		slidesToShow : 1,
-		slidesToScroll : 1
-	});
-</script>
+<%@ include file="../includes/footer.jsp"%>
