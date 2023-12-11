@@ -73,12 +73,12 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 	<p>항공 운항 변경 안내</p>
 	</c:when>
 	<c:when test="${modi.isDelete==3}">
-	<p>항공결항 안내</p>
+	<p>항공결항 안내.</p>
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>
 </c:choose>  --%>
-<%-- ${modi.reason} --%>
+<%-- ${modi.reason} --%> 
 <hr>
 
 		

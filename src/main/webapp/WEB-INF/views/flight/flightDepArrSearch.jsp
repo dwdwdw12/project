@@ -38,7 +38,7 @@
 #searchTable th {
     text-align: center;
     top: 0px;
-    background-color: gray !important;
+    background-color: #FFC107 !important;
 }
 td {
 	text-align: center;
@@ -57,12 +57,13 @@ td {
 	<section class="p-5 tm-container-outer tm-bg-gray">
 	<h2>출도착 조회</h2>
 		<div class="container">
-		<ul class="list_type3 border">
-			<li>아시아나 운항 항공편에 한하여 조회가 가능하며, 공동 운항편 또는 외항사의 출도착 정보는 해당 항공사 홈페이지에서 조회하시기 바랍니다. </li>
-			<li>출/도착 일자 및 시간은 현지 시간 기준입니다.</li>
-		</ul>
 		
 			<form action="/flight/flightDepArrSearch" method="get" class="tm-search-form tm-section-pad-1">
+				<ul class="list_type3 border">
+					<li>-아시아나 운항 항공편에 한하여 조회가 가능합니다.</li> 
+					<li>-공동 운항편 또는 외항사의 출도착 정보는 해당 항공사 홈페이지에서 조회하시기 바랍니다.</li>
+					<li>-출/도착 일자 및 시간은 현지 시간 기준입니다.</li>
+				</ul>
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="route" style="width: 100px;">노선</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="fName" style="width: 100px;">편명</button>
 				<br><br>

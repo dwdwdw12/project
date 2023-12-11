@@ -51,7 +51,8 @@
 	<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
 	<input type="hidden" id="userId" name="userId" value="${loginUser.userId}" readonly="readonly">
 	<div class="container">
-		<h1>이벤트 상세보기</h1>
+		<h2>이벤트 상세보기</h2>
+		<hr class="hr1" noshade>
 			<form action="/boardEvent/delete" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}" readonly="readonly">
 			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
@@ -177,7 +178,7 @@ $(document).ready(function(){
 					//str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "' data-fileOrder='" + attach.fileOrder>"'";
 					str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "' data-fileOrder='" + attach.fileOrder +"'>";
 					str += "<div>";
-					str += "	<img src='/display?fileName=" + fileCallPath + "' style='max-width: 100%; height: auto;'>";
+					str += "	<img src='/display?fileName=" + fileCallPath + "' style='width: 100%; height: auto;'>";
 					str += "</div>";
 					str += "</li>";
 					

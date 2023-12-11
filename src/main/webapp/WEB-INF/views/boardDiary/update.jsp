@@ -49,6 +49,7 @@
 	
 	<div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>여행일기 수정</h2>
+		<hr class="hr1" noshade>
 		<form action="/boardDiary/update" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}">
 			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">

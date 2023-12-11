@@ -59,6 +59,7 @@
 	
 	 <div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>이벤트 수정</h2>
+		<hr class="hr1" noshade>
 		<form action="/boardEvent/gridUpdate" role="form" method="post" name="frm">
 			<input type="hidden" id="boardNum" name="boardNum" value="${board.boardNum}"> 
 			<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
@@ -150,7 +151,7 @@
  	<script>
  		$('#summernote').summernote({
  			disableDragAndDrop: true,
- 			height : 300,
+ 			/* height : 300, */
 			/* width : 1200, */
 			lang : "ko-KR",
  			toolbar: [
