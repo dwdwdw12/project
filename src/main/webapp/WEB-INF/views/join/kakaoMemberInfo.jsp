@@ -112,9 +112,9 @@
 
 				<tbody>
 					<tr>
-						<th scope="row" style="padding: 8px;">영문명<span
+						<th scope="row" style="padding: 8px;"><label for="userNameE">영문명<span
 							class="icon_require" style="color: red; font-size: x-small;">
-								*</span></th>
+								*</span></label></th>
 						<td style="padding: 8px"><input type="text" id="userNameE"
 							name="userNameE" placeholder="영문 명 입력 (예 : HONGGILDONG)"
 							title="영문 명 입력 (예 : HONGGILDONG)"
@@ -124,21 +124,10 @@
 							oninput="handleOnInputEng(this)" required="required"></td>
 					</tr>
 					<tr>
-						<th scope="row" style="padding: 8px;">주민등록번호<span
+						<th scope="row" style="padding: 8px;"><label for="userReginumFirst">주민등록번호<span
 							class="icon_require" style="color: red; font-size: x-small;">
-								*</span></th>
+								*</span></label></th>
 						<td style="padding: 8px">
-							<!-- 						<div class="info" id="info__birth">
-						  <select class="box" id="birth-year" name="birthYear">
-						    <option disabled selected>출생 연도</option>
-						  </select>
-						  <select class="box" id="birth-month" name="birthMonth">
-						    <option disabled selected>월</option>
-						  </select>
-						  <select class="box" id="birth-day" name="birthDay"> 
-						    <option disabled selected>일</option>
-						  </select>
-						</div> -->
 
 								<input class="form-control" type="text" name="userReginumFirst"
 									oninput="handleOnInput(this, 6); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"

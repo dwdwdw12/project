@@ -30,6 +30,15 @@
 	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 	var $jLatest = jQuery.noConflict();
 </script>
@@ -68,8 +77,8 @@
 						<tr>
 							<th>아이디</th>
 							<td style="padding-bottom: 6px"><input type="text"
-								required="required" name="userId" id="inputUseridForm"
-								maxlength="30" class="form-control"></td>
+								required="required" name="userId" id="userId" maxlength="30"
+								class="form-control"></td>
 						</tr>
 						<tr>
 							<th
@@ -87,7 +96,7 @@
 						name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 					<button id="emailAuthBtn" type="submit" class="btn btn-primary"
-						style="display: inline;" name="findIdButton">인증 메일 보내기</button>
+						style="display: inline;" name="findIdButton" onclick="formCheck()">인증 메일 보내기</button>
 					<input class="spinner-border text-warning" type="hidden"
 						name="spinner" id="spinner">
 
@@ -102,19 +111,48 @@
 
 			</div>
 		</div>
-</section>
+	</section>
 </div>
 
 
 
-	<%@ include file="../includes/footer.jsp"%>
+<%@ include file="../includes/footer.jsp"%>
 
 <script type="text/javascript">
 	var joinMessage = document.getElementById('joinMessage').value;
+	console.log(joinMessage);
 	if (joinMessage != "") {
 		alert(joinMessage);
 	};
+	
+	function formCheck() {
+		var regId = /^[a-zA-Z0-9]{6,10}$/;
+		var form = document.signUpForm;
+		var submitButton = document
+				.getElementById('emailAuthBtn');
+		var spinner = document.getElementById('spinner');
 
+		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var email = form.email.value;
+
+
+		if (document.signUpForm.userId.value.length == 0) {
+			alert("아이디를 입력해주세요.");
+			document.signUpForm.userId.focus;
+			return false;
+		} else if (!regId.test(document.signUpForm.userId.value)) { //아이디 영어 대소문자 확인
+			alert("6~10자 영문 대소문자, 숫자만 입력해주세요.")
+			userId.focus();
+			return false;
+		}
+		if (!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
+		}
+		submitButton.style.display = 'none';
+		spinner.type = 'text';
+
+		form.submit();
+
+	}
 	function check(pattern, taget, message) {
 		if (pattern.test(taget)) {
 			return true;
@@ -130,25 +168,6 @@
 		//false 반환
 	};
 
-	$("#emailAuthBtn")
-			.on(
-					"click",
-					function(e) {
-						e.preventDefault();
-						var form = document.signUpForm;
-						var submitButton = document
-								.getElementById('emailAuthBtn');
-						var spinner = document.getElementById('spinner');
-
-						var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-						var email = form.email.value;
-						if (!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
-						}
-						submitButton.style.display = 'none';
-						spinner.type = 'text';
-
-						form.submit();
-					});
 </script>
 
 </body>

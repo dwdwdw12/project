@@ -1,5 +1,7 @@
 package com.airline.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +103,7 @@ public class JoinController {
 
 		if (result == null) {
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
-			return "redirect:/join/findId";
+			return "/join/findId";
 		} else {
 			try {
 				String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -165,7 +167,7 @@ public class JoinController {
 
 		if (result == null) {
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
-			return "redirect:/join/findPwd";
+			return "/join/findPwd";
 		} else {
 			try {
 				String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -270,15 +272,23 @@ public class JoinController {
 	public void memberInfoGet(Model model, KakaoUserVO vo) {
 		model.addAttribute("userInfo", vo);
 		log.info("JoinController >>  [get]");
+	
 	}
 
 	@PostMapping("/memberInfo")
 	public String memberInfo(RedirectAttributes attr, String termsAgree, String userId, String userNick,
 			String userNameK, String userNameE, String gender, String pwd, int userReginumFirst, int userReginumLast,
 			String phone_first, String phone_middle, String phone_last, String email, String mail_Domain, int postCode,
-			String addressDefault, String addressDetail) {
+			String addressDefault, String addressDetail, Model model) {
 
 		// email phone address 합쳐줘야해서.. parameter로 받음....
+		//memberInfo에 바로 접근하는 경우 접근 막음
+		if(termsAgree == "" || termsAgree == null) {
+			log.info("termsAgree >> " +termsAgree);
+			model.addAttribute("joinMessage","잘못된 접근입니다.");
+			return "/login";
+		}
+
 		userNameE = userNameE.toUpperCase();
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
@@ -291,6 +301,7 @@ public class JoinController {
 
 		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
 
+		
 		try {
 
 			// String mail_key = new TempKey().getKey(); // 랜덤키 생성

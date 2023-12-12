@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
-
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
@@ -11,23 +10,41 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
-<!-- <link rel="stylesheet" type="text/css"
-	href="../resources/css/datepicker.css" /> -->
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
-<meta name="referrer" content="no-referrer-when-downgrade" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Templatemo style -->
 
+<script src="../resources/js/vendor/modernizr.custom.min.js"></script>
+<link rel="stylesheet" href="../resources/css/normalize.css">
+
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+	var $jLatest = jQuery.noConflict();
+</script>
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	var $jb = jQuery.noConflict();
+</script>
+
+<!-- Font Awesome 5 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <style>
 .id_ok {
 	font-size: small;
@@ -67,19 +84,10 @@
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
-	<section class="tm-banner">
-		<div class="tm-container-outer ">
-			<div class="container">
-				<!-- <div class="row tm-banner-row" id="tm-section-search"></div> -->
-				<!-- row -->
-			</div>
-			<!-- .container -->
-		</div>
-		<!-- .tm-container-outer -->
-	</section>
+	<section class="p-5 tm-container-outer tm-bg-gray">
 
-	<section class="tm-page-wrap-allwhite">
-		<div align="center">
+		<!-- .tm-container-outer -->
+		<div class="row">
 			<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 				<h2 class="text-uppercase mb-4">회원 정보 입력</h2>
 				<h6>회원님의 개인정보를 입력해주시기 바랍니다.</h6>
@@ -483,7 +491,7 @@
 			document.frm.userId.focus;
 			return false;
 		} else if (!regId.test(document.frm.userId.value)) { //아이디 영어 대소문자 확인
-			alert("6~10자 영문 대소문자, 숫자만 입력하세요.")
+			alert("6~10자 영문 대소문자, 숫자만 입력해주세요.")
 			userId.focus();
 			return false;
 		}
