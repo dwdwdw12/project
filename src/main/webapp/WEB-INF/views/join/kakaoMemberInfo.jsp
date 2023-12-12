@@ -47,9 +47,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
-
-
-
 <style>
 .id_ok {
 	font-size: small;
@@ -195,7 +192,7 @@
 			<br> <br>
 
 			<div align="center">
-				<button type="submit" class="btn btn-primary"
+				<button type="button" class="btn btn-primary" id="submitButton"
 					onclick="return formCheck()">확인</button>
 			</div>
 			<input type="hidden" name="userId" value="${mail}"> <input
@@ -218,60 +215,6 @@
 	<br>
 
 	<script type="text/javascript">
-		// '출생 연도' 셀렉트 박스 option 목록 동적 생성
-		var birthYearEl = document.querySelector('#birth-year')
-		var birthMonthEl = document.querySelector('#birth-month')
-		var birthDayEl = document.querySelector('#birth-day')
-		// option 목록 생성 여부 확인
-		isYearOptionExisted = false;
-		isMonthOptionExisted = false;
-		isDayOptionExisted = false;
-
-		birthYearEl.addEventListener('focus', function() {
-			// year 목록 생성되지 않았을 때 (최초 클릭 시)
-			if (!isYearOptionExisted) {
-				isYearOptionExisted = true
-				for (var i = 1940; i <= 2023; i++) {
-					// option element 생성
-					const YearOption = document.createElement('option')
-					YearOption.setAttribute('value', i)
-					YearOption.innerText = i
-					// birthYearEl의 자식 요소로 추가
-					this.appendChild(YearOption);
-				}
-			}
-		});
-
-		birthMonthEl.addEventListener('focus', function() {
-			// year 목록 생성되지 않았을 때 (최초 클릭 시)
-			if (!isMonthOptionExisted) {
-				isMonthOptionExisted = true
-				for (var i = 1; i <= 12; i++) {
-					// option element 생성
-					const MonthOption = document.createElement('option')
-					MonthOption.setAttribute('value', i)
-					MonthOption.innerText = i
-					// birthYearEl의 자식 요소로 추가
-					this.appendChild(MonthOption);
-				}
-			}
-		});
-
-		birthDayEl.addEventListener('focus', function() {
-			// year 목록 생성되지 않았을 때 (최초 클릭 시)
-			if (!isDayOptionExisted) {
-				isDayOptionExisted = true
-				for (var i = 1; i <= 31; i++) {
-					// option element 생성
-					const DayOption = document.createElement('option')
-					DayOption.setAttribute('value', i)
-					DayOption.innerText = i
-					// birthYearEl의 자식 요소로 추가
-					this.appendChild(DayOption);
-				}
-			}
-		});
-		// Month, Day도 동일한 방식으로 구현
 
 		function handleOnInput(el, maxlength) {
 			if (el.value.length > maxlength) {
@@ -284,29 +227,34 @@
 
 		function formCheck() {
 			if (document.frm.userNameE.value.length == 0) {
+				document.frm.userNameE.focus;
 				alert("영문 명을 입력해주세요.");
 				return false;
-			} else if (document.frm.postcode.value.length == 0) {
+			} 
+			
+			else if (document.frm.userReginumFirst.value.length == 0||document.frm.userReginumFirst.value.length < 6) {
+				alert("주민등록번호를 확인해주세요.");
+				return false;
+			}
+			else if (document.frm.userReginumLast.value.length == 0||document.frm.userReginumLast.value.length < 7) {
+				alert("주민등록번호를 확인해주세요.");
+				return false;
+			}
+			
+			else if (document.frm.postCode.value.length == 0) {
 				alert("우편번호를 다시 확인해주세요.")
-				document.frm.postcode.focus;
+				document.frm.postCode.focus;
 				return false;
 			} else if (document.frm.addressDefault.value.length == 0) {
 				alert("주소를 다시 확인해주세요.")
 				document.frm.addressDefault.focus;
 				return false;
-			} else if (document.frm.birth - year.value.length == 0) {
-				alert("출생년도를 다시 확인해주세요.")
-				document.frm.birth - year.focus;
-				return false;
-			} else if (document.frm.birth - month.value.length == 0) {
-				alert("출생년도를 다시 확인해주세요.")
-				document.frm.birth - month.focus;
-				return false;
-			} else if (document.frm.birth - day.value.length == 0) {
-				alert("출생년도를 다시 확인해주세요.")
-				document.frm.birth - day.focus;
-				return false;
-			}
+			} 
+			
+
+			
+			submitButton.disabled = 'disable';
+			frm.submit();
 
 		}
 	</script>

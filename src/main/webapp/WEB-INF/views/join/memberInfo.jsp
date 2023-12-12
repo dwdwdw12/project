@@ -83,6 +83,7 @@
 }
 </style>
 
+<body style="background: #e6e6e6;">
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
 	<section class="p-5 tm-container-outer tm-bg-gray">
 
@@ -347,11 +348,11 @@
 
 			<br> <br>
 			<div align="center">
-				<button type="button" class="btn btn-primary" id="submitButton"
+				<button type="button" class="btn btn-primary" id="submitButton" 
 					onclick="return formCheck()">확인</button>
 			<br><br>
-				<input class="spinner-border text-warning" type="hidden"
-									name="spinner" id="spinner">
+				<!-- <input class="spinner-border text-warning" type="hidden"
+									name="spinner" id="spinner"> -->
 			</div>
 			<input type="hidden" name="userNameK" value="${userInfo.userNameK}">
 			<input type="hidden" name="userNameE" value="${userInfo.userNameE}">
@@ -559,15 +560,16 @@
 			return false;
 		} else if (document.frm.postCode.value.length == 0) {
 			alert("우편번호를 다시 확인해주세요.")
-			document.frm.postcode.focus;
+			document.frm.postCode.focus;
 			return false;
 		} else if (document.frm.addressDefault.value.length == 0) {
 			alert("주소를 다시 확인해주세요.")
 			document.frm.addressDefault.focus;
 			return false;
 		}
-		submitButton.style.display = 'none';
-		spinner.type = 'text';
+		//disabled="disabled"
+		submitButton.disabled = 'disable';
+		//spinner.type = 'text';
 		
 		form.submit();
 	}

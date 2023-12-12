@@ -31,14 +31,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 	var $jLatest = jQuery.noConflict();
 </script>
@@ -55,7 +48,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-
+<body style="background: #e6e6e6;">
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
 	<section class="p-5 tm-container-outer tm-bg-gray">
 
@@ -97,8 +90,8 @@
 
 					<button id="emailAuthBtn" type="submit" class="btn btn-primary"
 						style="display: inline;" name="findIdButton" onclick="formCheck()">인증 메일 보내기</button>
-					<input class="spinner-border text-warning" type="hidden"
-						name="spinner" id="spinner">
+					<!-- <input class="spinner-border text-warning" type="hidden"
+						name="spinner" id="spinner"> -->
 
 					<div>
 						<input type="hidden" id="joinMessage" name="joinMessage"
@@ -147,9 +140,9 @@
 		}
 		if (!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
 		}
-		submitButton.style.display = 'none';
-		spinner.type = 'text';
-
+		//submitButton.style.display = 'none';
+		//spinner.type = 'text';
+		submitButton.disabled = 'disable';
 		form.submit();
 
 	}
