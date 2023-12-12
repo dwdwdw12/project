@@ -61,6 +61,16 @@ public class BoardEventController {
 		model.addAttribute("paging", new PageDTO(cri, service.getTotalCount(cri)));
 	}
 	
+	@GetMapping("/pastEventList")
+	public void pastEventList(Model model, Criteria cri) {
+		log.info("list..." + cri);
+		//cri.setPageNum(1);
+		//cri.setAmount(2);
+				
+		model.addAttribute("EventList", service.getListPastEvent(cri));
+		model.addAttribute("paging", new PageDTO(cri, service.getTotalCountPastEvent(cri)));
+	}
+	
 	@GetMapping({"/write", "/gridWrite"})
 	@PreAuthorize("isAuthenticated()")
 	public void write() {

@@ -41,6 +41,12 @@ public class BoardEventMapperTest {
 	}
 	
 	@Test
+	public void getListPastEventTest() {
+		Criteria cri = new Criteria();
+		mapper.getListPastEvent(cri).forEach(board->log.info(board));
+	}
+	
+	@Test
 	public void getTest() {
 		BoardEventVO vo = mapper.get(3);
 		log.info("Event VO : "+vo);

@@ -21,6 +21,19 @@
 		 boardNum limit #{newStart}, #{amount}
 	</select>
 
+	<select id="getListPastEvent" resultType="com.airline.vo.BoardEventVO">
+		select * from boardEvent where
+		<if test="type=='boardTitle'.toString()">
+			boardTitle like concat('%',#{keyword},'%') and 
+		</if>
+		<if test="type=='boardContent'.toString()" >
+			boardContent like concat('%', #{keyword}, '%') and 
+		</if>
+  		 isongoing=0
+		 order by endDate asc, 
+		 boardNum limit #{newStart}, #{amount}
+	</select>
+
 	<select id="get" resultType="com.airline.vo.BoardEventVO">
 		select * from boardEvent where boardNum = #{boardNum}
 	</select>
@@ -46,6 +59,17 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(*) from boardEvent where isongoing!=0 
+		<if test="type=='boardTitle'.toString()">
+			and boardTitle like concat('%',#{keyword},'%')
+		</if>
+		<if test="type=='boardContent'.toString()" >
+			and boardContent like concat('%', #{keyword}, '%')
+		</if>
+
+	</select>
+
+	<select id="getTotalCountPastEvent" resultType="int">
+		select count(*) from boardEvent where isongoing=0 
 		<if test="type=='boardTitle'.toString()">
 			and boardTitle like concat('%',#{keyword},'%')
 		</if>
