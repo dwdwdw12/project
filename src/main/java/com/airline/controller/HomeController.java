@@ -330,7 +330,7 @@ public class HomeController {
 	
 	@GetMapping("/error/accessError")
 	@CrossOrigin("http://localhost:8081/error/accessError")
-	public String aceessError(RedirectAttributes attr, HttpSession session) {
+	public String accessError(RedirectAttributes attr, HttpSession session) {
 		if(session.getAttribute("loginUser") != null)
 			return "redirect:/";
 		return "/error/accessError";

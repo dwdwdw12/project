@@ -232,7 +232,7 @@ public class JoinController {
 
 	@PostMapping("/userIdDuplicateCheck")
 	@ResponseBody
-	public int memberInfo(@RequestParam("userId") String userId) {
+	public int userIdDuplicateCheck(@RequestParam("userId") String userId) {
 		// ajax 아이디 체크
 		int userIdCnt = join.userIdDuplicateCheck(userId);
 		return userIdCnt;
@@ -536,7 +536,7 @@ public class JoinController {
 
 	@GetMapping("/error/accessError")
 	@CrossOrigin("http://localhost:8081/error/accessError")
-	public void aceessError() {
+	public void accessError() {
 
 	}
 
