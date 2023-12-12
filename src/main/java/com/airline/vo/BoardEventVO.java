@@ -30,6 +30,7 @@ public class BoardEventVO {
 	private int readCount;
 	private String repImg;
 	private String filePath;
+	private int isOngoing;
 	
 	private List<BoardEventFileVO> attachList;
 }

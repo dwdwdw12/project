@@ -5,17 +5,18 @@
 <mapper namespace="com.airline.mapper.BoardEventMapper">
 	
 	<select id="getList" resultType="com.airline.vo.BoardEventVO">
-		select * from boardEvent order by boardNum
+		select * from boardEvent where isongoing!=0 order by boardNum
 	</select>
 	
 	<select id="getListwithPaging" resultType="com.airline.vo.BoardEventVO">
-		select * from boardEvent 
+		select * from boardEvent where
 		<if test="type=='boardTitle'.toString()">
-			where boardTitle like concat('%',#{keyword},'%')
+			boardTitle like concat('%',#{keyword},'%') and 
 		</if>
 		<if test="type=='boardContent'.toString()" >
-			where boardContent like concat('%', #{keyword}, '%')
+			boardContent like concat('%', #{keyword}, '%') and 
 		</if>
+  		 isongoing!=0
 		 order by endDate asc, 
 		 boardNum limit #{newStart}, #{amount}
 	</select>
@@ -44,12 +45,12 @@
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(*) from boardEvent 
+		select count(*) from boardEvent where isongoing!=0 
 		<if test="type=='boardTitle'.toString()">
-			where boardTitle like concat('%',#{keyword},'%')
+			and boardTitle like concat('%',#{keyword},'%')
 		</if>
 		<if test="type=='boardContent'.toString()" >
-			where boardContent like concat('%', #{keyword}, '%')
+			and boardContent like concat('%', #{keyword}, '%')
 		</if>
 
 	</select>
@@ -60,6 +61,17 @@
 	
 	<update id="updateRepImg">
 		update boardEvent set repImg = #{repImg}, filePath = #{filePath} where boardNum = #{boardNum}
+	</update>
+	
+	<select id="getListOverDue" resultType="com.airline.vo.BoardEventVO">
+		<![CDATA[
+			select * from boardEvent where isongoing!=0 and timestampdiff(second, #{time}, enddate)<0;
+		]]>
+	</select>
+	
+	<update id="updateOngoing">
+		update boardEvent set isOngoing = 0
+			where boardNum = #{boardNum}
 	</update>
 	
 </mapper>

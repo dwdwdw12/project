@@ -112,6 +112,18 @@ public class BoardEventServiceImpl implements BoardEventService{
 		log.info("getRepImg service impl");
 		return fileMapper.findRepImgFiles();
 	}
+
+	@Override
+	public List<BoardEventVO> getListOverDue(String time) {
+		log.info("getListOverDue service impl");
+		return mapper.getListOverDue(time);
+	}
+
+	@Override
+	public int updateOngoing(int boardNum) {
+		log.info("updateOngoing service impl");
+		return mapper.updateOngoing(boardNum);
+	}
 	
 	
 	

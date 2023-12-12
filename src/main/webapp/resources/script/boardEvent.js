@@ -5,7 +5,7 @@ function boardCheck(){
         return false;
     }
 
-	if(uploadFile01.value==""||uploadFile02.value!=""||uploadFile02.value!=""||uploadFile03.value!=""||uploadFile04.value!=""||uploadFile05.value!=""){
+	if(uploadFile01.value==""&&uploadFile02.value==""&&uploadFile02.value==""&&uploadFile03.value==""&&uploadFile04.value==""&&uploadFile05.value==""){
     	alert("파일이 등록되어야 합니다.");
     	return false;
     }

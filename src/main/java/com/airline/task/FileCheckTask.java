@@ -14,7 +14,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.airline.mapper.BoardEventFileMapper;
+import com.airline.service.BoardEventService;
 import com.airline.vo.BoardEventFileVO;
+import com.airline.vo.BoardEventVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,6 +26,9 @@ public class FileCheckTask {
 	
 	@Autowired
 	private BoardEventFileMapper attachMapper;
+	
+	@Autowired
+	private BoardEventService eventService;
 	
 //	@Scheduled(cron="0 * * * * *")
 //	public void checkFiles() throws Exception{
@@ -80,5 +85,28 @@ public class FileCheckTask {
 			log.warn(file.getAbsolutePath());
 			file.delete();
 		}
+	}
+	
+	//@Scheduled(cron = "0 0 2 * * *")			//서버가 구동중이라면 새벽 2시에 기간이 지난 이벤트 숨김...
+	@Scheduled(cron="0 * * * * *")				//초 분 시 일 월 요일 (연도-선택)
+	public void checkEvent() throws Exception{
+		
+		log.warn("Event Check Task run...");
+		log.warn(new Date());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");         
+		Date now = new Date();         
+		String today = sdf.format(now);
+		System.out.println("현재 시간>>>" + today);
+		
+		//기간 지난 이벤트 리스트
+		List<BoardEventVO> list = eventService.getListOverDue(today);
+		eventService.getListOverDue(today).forEach(board->log.info(board));
+		
+		for(BoardEventVO vo : list) {
+			eventService.updateOngoing(vo.getBoardNum());
+			log.info(">>>>>수정>>>>"+vo);
+		}
+		
 	}
 }
