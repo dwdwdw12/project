@@ -114,7 +114,6 @@
 												class="ti-angle-down"></i></a>
 											<ul class="submenu" style="width: 220px;">
 												<li><a href="/flight/search">항공편 검색/예약</a></li>
-												<li><a href="single-blog.html">AirPort</a></li>
 												<li><a href="single-blog.html">Price Information</a></li>
 												<li><a href="/flight/flightDepArrSearch">출도착 조회</a></li>
 												<li><a href="/memberGrade">회원 등급 안내</a></li>
@@ -124,8 +123,8 @@
 										<li><a href="/notice/list">board<i class="ti-angle-down"></i></a>
 											<ul class="submenu">
 												<li><a href="/notice/list">공지사항</a></li>
-												<li><a href="/boardEvent/list">이벤트 </a></li>
 												<li><a href="/qna/list">Q&A</a></li>
+												<li><a href="/boardEvent/list">이벤트 </a></li>
 												<li><a href="/boardDiary/list">여행일기</a></li>
 												
 											</ul>

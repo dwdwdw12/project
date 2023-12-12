@@ -111,12 +111,12 @@
 		 <c:if test="${paging.total>0}">
 
 			<tr>
-				<th id="th1">번호</th>
-				<th id="th1">제목</th>
-				<th id="th1">작성자</th>
-				<th id="th1">날짜</th>
-				<th id="th1">조회수</th>
-				<th id="th1">추천수</th>
+				<th id="th1" width="10%">번호</th>
+				<th id="th1" width="40%">제목</th>
+				<th id="th1" width="15%">작성자</th>
+				<th id="th1" width="15%">날짜</th>
+				<th id="th1" width="10%">조회수</th>
+				<th id="th1" width="10%">추천수</th>
 			</tr>
 
 		
