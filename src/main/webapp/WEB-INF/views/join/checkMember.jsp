@@ -71,7 +71,8 @@
 											name="userNameE"></td>
 									</tr>
 									<tr>
-										<th scope="row" style="text-align: left;">성별</th>
+										<th scope="row" style="text-align: left;"><label
+											for="gender_man">성별</label></th>
 
 										<td>
 											<div class="form-control">

@@ -112,7 +112,7 @@ public class JoinController {
 				params.put("email", email);
 				params.put("mail_key", mail_key);
 
-				mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+				mailSendService.modifyMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 				log.info("입력받은 이메일 >> " + email + "생성된 key >> " + mail_key);
 
 				MailHandler sendMail = new MailHandler(mailSender);
@@ -146,7 +146,7 @@ public class JoinController {
 			throws Exception {
 		log.info("JoinController >> getUserId");
 		KakaoUserVO vo = join.showUserId(email, mail_key);
-		mailSendService.resetMailKey(email);
+		mailSendService.removeMailKey(email);
 		model.addAttribute("user", vo);
 		return "/join/getUserId"; // 다시 클릭하면 아이디값이 나오지 않음 따라서 다른 페이지로 이동시키는것도 나쁘지 않을 듯..
 	}
@@ -177,7 +177,7 @@ public class JoinController {
 				params.put("email", email);
 				params.put("mail_key", mail_key);
 
-				mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+				mailSendService.modifyMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 				log.info("입력받은 아이디 >> " + userId + " 입력받은 이메일 >> " + email + " 생성된 key >> " + mail_key);
 
 				MailHandler sendMail = new MailHandler(mailSender);
