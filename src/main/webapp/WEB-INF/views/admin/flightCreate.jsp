@@ -49,7 +49,7 @@
 							<th style="width: 10%">운항기</th>
 							<th>출발지</th>
 							<th>출발공항 코드</th>
-							<th>출발지역 코드</th>
+							<!-- <th>출발지역 코드</th> -->
 							<th>출발시간</th>
 						</tr>
 					</thead>
@@ -67,12 +67,12 @@
 										<option value="${dCode}">${dCode}</option>
 									</c:forEach>
 							</select></td>
-							<td><select name="dRCode" id="dRCode"
+<%-- 							<td><select name="dRCode" id="dRCode"
 								style="border: 0; background-color: #efefef; width: 80px">
 									<c:forEach items="${dRCode}" var="drCode">
 										<option value="${drCode}">${drCode}</option>
 									</c:forEach>
-							</select></td>
+							</select></td> --%>
 							<td><input type="text" id="fullDepTime" name="fullDepTime"
 								placeholder="2024-02-28 10:11:00" value="" required="required"
 								style="border: 0; background-color: #efefef; width: 160px" /></td>
@@ -91,7 +91,7 @@
 						<tr>
 							<th>도착지</th>
 							<th>도착공항 코드</th>
-							<th>도착지역 코드</th>
+							<!-- <th>도착지역 코드</th> -->
 							<th>도착시간</th>
 							<th>비행시간</th>
 						</tr>
@@ -109,12 +109,12 @@
 									</c:forEach>
 							</select></td>
 							<!-- <td><input type="text" id="arrRegionCode"/></td> -->
-							<td><select id="aRCode" name="aRCode"
+<%-- 							<td><select id="aRCode" name="aRCode"
 								style="border: 0; background-color: #efefef; width: 80px">
 									<c:forEach items="${aRCode}" var="aRCode">
 										<option value="${aRCode}">${aRCode}</option>
 									</c:forEach>
-							</select></td>
+							</select></td> --%>
 							<td><input type="text" id="fullArrTime" name="fullArrTime"
 								placeholder="2024-02-28 10:11:00" value="" required="required"
 								style="border: 0; background-color: #efefef; width: 160px" /></td>
@@ -145,7 +145,44 @@
 
 <script type="text/javascript">
 	console.log("dddd");
+	//유효성 체크
+	function check() {
+		  	var flightName = $("#flightName").val();
+		    var depName = $("#depName").val();
+		    var fullDepTime = $("#fullDepTime").val();
+		    var arrName = $("#arrName").val();
+		    var fullArrTime = $("#fullArrTime").val();
+		    var flightTime = $("#flightTime").val();
 
+		    if (flightName.length < 1) {
+		        alert("비행기 이름을 1자리 이상 입력하여 주십시오");
+		        return false;
+		    }
+		    if (depName.length < 1) {
+		        alert("출발지 이름을 1자리 이상 입력하여 주십시오");
+		        return false;
+		    }
+		    if (fullDepTime.length < 1) {
+		        alert("출발시간을 1자리 이상 입력하여 주십시오");
+		        return false;
+		    }
+		    if (arrName.length < 1) {
+		        alert("도착지 이름을 1자리 이상 입력하여 주십시오");
+		        return false;
+		    }
+		    if (fullArrTime.length < 1) {
+		        alert("도착시간을 1자리 이상 입력하여 주십시오");
+		        return false;
+		    }
+		    if (flightTime.length < 1) {
+		        alert("비행시간을 1자리 이상 입력하여 주십시오");
+		        return false;
+		    }
+
+		    return true; 
+	}
+	
+	
 	function submit() {
 		alert("등록중..")
 		check();
@@ -160,11 +197,11 @@
 				flightName : $("#flightName").val(),
 				depName : $("#depName").val(),
 				depCode : $("#depCode").val(),
-				depRegionCode : $("#dRCode").val(),
+				//depRegionCode : $("#dRCode").val(),
 				fullDeptime : $("#fullDepTime").val(),
 				arrName : $("#arrName").val(),
 				arrCode : $("#aCode").val(),
-				arrRegionCode : $("#aRCode").val(),
+				//arrRegionCode : $("#aRCode").val(),
 				fullArrtime : $("#fullArrTime").val(),
 				flightTime : $("#flightTime").val()
 
@@ -178,13 +215,10 @@
 				console.log(err);
 				/* 			console.log(err.responseText); // 서버에서 전송한 오류 메시지
 				 console.log(err.status);  */
-				alert("항공스케즐 업로드에 실패했습니다!");
+				alert("항공스케줄 업로드에 실패했습니다!");
 			}
 		});
 
 	}
-	//유효성 체크
-	function check() {
 
-	}
 </script>
