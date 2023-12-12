@@ -24,4 +24,8 @@ public interface BoardEventService {
 	
 	public List<BoardEventFileVO> getRepImgList();
 	
+	public List<BoardEventVO> getListOverDue(String time);
+	
+	public int updateOngoing(int boardNum);
+	
 }

@@ -67,7 +67,6 @@
 		조회옵션
 		<select onchange="if(this.value) location.href=this.value;">
 			<option value="">선택하세요
-			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=2&order=${paging.cri.order}" <c:if test="${paging.cri.amount==2}">selected="selected"</c:if>>테스트2개씩
 			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=10&order=${paging.cri.order}" <c:if test="${paging.cri.amount==10}">selected="selected"</c:if>>10개씩
 			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=20&order=${paging.cri.order}" <c:if test="${paging.cri.amount==20}">selected="selected"</c:if>>20개씩
 			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=40&order=${paging.cri.order}" <c:if test="${paging.cri.amount==40}">selected="selected"</c:if>>40개씩
@@ -78,9 +77,9 @@
 			<option value="">선택하세요
 			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=latest" <c:if test="${paging.cri.order=='latest'}">selected="selected"</c:if>>최신순
 			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=oldest" <c:if test="${paging.cri.order=='oldest'}">selected="selected"</c:if>>과거순
-			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=readcount" <c:if test="${paging.cri.order=='viewcount'}">selected="selected"</c:if>>조회순
+			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=readcount" <c:if test="${paging.cri.order=='readcount'}">selected="selected"</c:if>>조회순
 			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=replycount" <c:if test="${paging.cri.order=='replycount'}">selected="selected"</c:if>>댓글순
-			<option value="?pageNum=${paging.cri.pageNum}&keyword=$keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=likecount" <c:if test="${paging.cri.order=='likecount'}">selected="selected"</c:if>>추천순
+			<option value="?pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}&amount=${paging.cri.amount}&order=likecount" <c:if test="${paging.cri.order=='likecount'}">selected="selected"</c:if>>추천순
 		</select>
 	</div> 
 	<br>

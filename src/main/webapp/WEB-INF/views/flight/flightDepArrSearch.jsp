@@ -150,6 +150,10 @@ td {
 						<h3 style="text-align: center;">조회 가능한 항공편이 없습니다. &nbsp;<i class='fas fa-plane-departure'></i><br>
 						다시 여정을 선택해주세요.</h3>	
 				</c:if>
+				<c:if test="${empty list&&!empty flightName}">
+						<h3 style="text-align: center;">조회 가능한 항공편이 없습니다. &nbsp;<i class='fas fa-plane-departure'></i><br>
+						다시 여정을 선택해주세요.</h3>	
+				</c:if>
 				<c:if test="${!empty list}">
 				<table class="table table-hover" id="searchTable">
 					<thead>

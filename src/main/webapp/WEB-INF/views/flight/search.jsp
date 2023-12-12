@@ -188,6 +188,14 @@ p.btn.btn-default {
 			<input type="hidden" class="form-control" id="arrText" name="arrText" value = "${arr}" >
 			<input type="hidden" class="form-control" id="sampleArrCode" name="sampleArrCode" value = "${arrRegionCode}" >
 		
+				
+			<c:if test="${empty depPrice}">
+				<section class="p-5 tm-container-outer tm-bg-gray">
+					<h3 style="text-align: center;">일치하는 노선이 없습니다. <i class='fa fa-plane'></i><br>
+						다시 여정을 선택해주세요.</h3>
+					<br>
+				</section>
+			</c:if>
 		
 			<c:if test="${!empty dep&&empty list}">
 			<section class="p-5 tm-container-outer tm-bg-gray">
@@ -218,6 +226,7 @@ p.btn.btn-default {
 			
 			
 			<c:if test="${!empty list}">
+				<c:if test="${!empty depPrice}">
 			<section class="p-5 tm-container-outer tm-bg-gray">
 			<div class="container"  >
 			
@@ -328,8 +337,9 @@ p.btn.btn-default {
 			</div>
 			</div>
 			</section>
-			</c:if>
-		
+				</c:if>	<!-- if : {!empty depPrice} -->
+			</c:if>	<!-- if : {!empty list} -->
+	
 	
 	<c:if test="${!empty arrDate and empty arrlist}">
 	<section class="p-5 tm-container-outer tm-bg-gray">
@@ -353,6 +363,8 @@ p.btn.btn-default {
 	</c:if>	
 	
 		<c:if test="${!empty arrlist}">
+			<c:if test="${!empty arrPrice}">
+			
 		<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container" id="2">
 		<div class="text-right">
@@ -442,6 +454,7 @@ p.btn.btn-default {
 			</div>
 		</div>
 	</section>
+		</c:if>
 	</c:if>
 	
 	<!-- 전달 폼 -->

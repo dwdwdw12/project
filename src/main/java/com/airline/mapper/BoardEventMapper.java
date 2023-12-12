@@ -28,4 +28,9 @@ public interface BoardEventMapper {
 	
 	int updateRepImg(@Param("repImg") String repImg, @Param("filePath") String filePath, @Param("boardNum") int boardNum);
 	
+	public List<BoardEventVO> getListOverDue(String time);
+	
+	public int updateOngoing(int boardNum);
+	
+	
 }

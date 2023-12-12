@@ -110,7 +110,7 @@
 										</li>
 										</c:if>
 										
-										<li><a href="/flight/search">flight<i
+										<li><a href="/flight/search">Flights<i
 												class="ti-angle-down"></i></a>
 											<ul class="submenu" style="width: 220px;">
 												<li><a href="/flight/search">항공편 검색/예약</a></li>
@@ -120,7 +120,7 @@
 											</ul>
 										</li>
 										
-										<li><a href="/notice/list">board<i class="ti-angle-down"></i></a>
+										<li><a href="/notice/list">Boards<i class="ti-angle-down"></i></a>
 											<ul class="submenu">
 												<li><a href="/notice/list">공지사항</a></li>
 												<li><a href="/qna/list">Q&A</a></li>
@@ -228,6 +228,9 @@
 		$("#adminTalk").on("click", function() {
 			window.open(link);
 		});
+		
+		
+		
 	</script>
 
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -278,6 +281,7 @@
 			js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
 			js.crossOrigin = 'anonymous';
 			fjs.parentNode.insertBefore(js, fjs);
+			document.getElementsById('aaaaa').classList.toggle('show');
 		})(document, 'script', 'kakao-js-sdk');
 	</script>
 	<!-- header-end -->
