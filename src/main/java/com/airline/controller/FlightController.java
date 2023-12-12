@@ -555,7 +555,6 @@ public class FlightController {
 	//검색어 자동완성 - 출발지
 	@GetMapping(value = "/getDistinctDep")
 	@ResponseBody
-//	public String getDistinctDep(String searchValue, String depRegionCode){
 	public List<String> getDistinctDep(String searchValue, String depRegionCode){
 		log.info("getDistinctDep... ");
 		List<String> list = flights.getDistinctDep(searchValue, depRegionCode);
@@ -563,8 +562,6 @@ public class FlightController {
 			log.info(str);
 		}
 		
-//		Gson gson = new Gson();
-//		return gson.toJson(list);
 		return list;
 	}
 	
@@ -578,8 +575,6 @@ public class FlightController {
 			log.info(str);
 		}
 		
-		//Gson gson = new Gson();
-		//return gson.toJson(list);
 		return list;
 	}
 	

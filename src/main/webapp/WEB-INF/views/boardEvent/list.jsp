@@ -76,11 +76,11 @@
 		<table class="table table-hover">
 		 <c:if test="${paging.total>0}">
 			<tr>
-				<th id="th1">번호</th>
-				<th id="th1">제목</th>
-				<th id="th1">시작일</th>
-				<th id="th1">종료일</th>
-				<th id="th1">조회수</th>
+				<th id="th1" width="10%">번호</th>
+				<th id="th1" width="45%">제목</th>
+				<th id="th1" width="17.5%">시작일</th>
+				<th id="th1" width="17.5%">종료일</th>
+				<th id="th1" width="10%">조회수</th>
 			</tr>
 
 		

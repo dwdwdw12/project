@@ -209,7 +209,7 @@ p.btn.btn-default {
 					다시 여정을 선택해주세요.
 				</h3><br>
 				<h5 style="text-align: center;">
-					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
+					가장 가까운 항공편은 <c:if test="${!empty closestFlightPrev.depDay}">${fn:substring(closestFlightPrev.depDay, 0,10)},</c:if>  ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
 				</h5>	
 				</div>
 				</div>
@@ -261,7 +261,7 @@ p.btn.btn-default {
 						다시 여정을 선택해주세요.</h3>
 						<br>	
 						<h5 style="text-align: center;">
-						가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
+						가장 가까운 항공편은 <c:if test="${!empty closestFlightPrev.depDay}">${fn:substring(closestFlightPrev.depDay, 0,10)},</c:if>  ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
 						</h5>
 						
 					</c:if>
@@ -345,7 +345,7 @@ p.btn.btn-default {
 			다시 여정을 선택해주세요.</h3>
 		<br>	
 		<h5 style="text-align: center;">
-				가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.
+				가장 가까운 항공편은 <c:if test="${!empty closestFlightPrev.depDay}">${fn:substring(closestFlightPrev.depDay, 0,10)},</c:if>  ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.
 		</h5>
 		</div>
 		</div>
@@ -717,7 +717,7 @@ $jb(function() {    //화면 다 뜨면 시작
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
 //        },
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //        disabled: true, //자동완성 기능 끄기
 //        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
         close : function(event){    //자동완성창 닫아질때 호출
@@ -769,7 +769,7 @@ $jb(function() {    //화면 다 뜨면 시작
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
 //        },
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //        disabled: true, //자동완성 기능 끄기
 //        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
         close : function(event){    //자동완성창 닫아질때 호출
@@ -821,7 +821,7 @@ $jb(function() {    //화면 다 뜨면 시작
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
 //        },
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //        disabled: true, //자동완성 기능 끄기
 //        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
         close : function(event){    //자동완성창 닫아질때 호출
@@ -887,7 +887,7 @@ $("#arrRegionCode").on("click", function(){
 //  	        classes: {    //잘 모르겠음
 //  	            "ui-autocomplete": "highlight"
 //  	        },
-  	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+  	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //  	        disabled: true, //자동완성 기능 끄기
 //  	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
   	        close : function(event){    //자동완성창 닫아질때 호출

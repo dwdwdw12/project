@@ -763,7 +763,7 @@
 				</div>
 
 			</div>
-			<!-- tab-pane -->
+			<!-- tab-pane -->&nbsp;
 		</div>
 	</div>
 
@@ -1004,7 +1004,7 @@
 //	        classes: {    //잘 모르겠음
 //	            "ui-autocomplete": "highlight"
 //	        },
-	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //	        disabled: true, //자동완성 기능 끄기
 //	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 	        close : function(event){    //자동완성창 닫아질때 호출
@@ -1056,7 +1056,7 @@
 //	        classes: {    //잘 모르겠음
 //	            "ui-autocomplete": "highlight"
 //	        },
-	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //	        disabled: true, //자동완성 기능 끄기
 //	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 	        close : function(event){    //자동완성창 닫아질때 호출
@@ -1108,7 +1108,7 @@
 //	        classes: {    //잘 모르겠음
 //	            "ui-autocomplete": "highlight"
 //	        },
-	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //	        disabled: true, //자동완성 기능 끄기
 //	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 	        close : function(event){    //자동완성창 닫아질때 호출
@@ -1175,7 +1175,7 @@
 //		  	        classes: {    //잘 모르겠음
 //		  	            "ui-autocomplete": "highlight"
 //		  	        },
-		  	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+		  	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //		  	        disabled: true, //자동완성 기능 끄기
 //		  	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 		  	        close : function(event){    //자동완성창 닫아질때 호출
