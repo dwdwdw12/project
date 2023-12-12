@@ -257,10 +257,13 @@
 						<th scope="row" style="padding: 8px;"><label
 							for="input_emailID">이메일<span class="icon_require"
 								style="color: red; font-size: x-small"> *</span></label></th>
-						<td style="padding: 8px"><input type="text"
+						<td style="padding: 8px">
+						<input type="text"
 							id="input_emailID" name="email" placeholder="이메일 입력"
 							title="이메일 아이디 입력" style="width: 130px; display: inline;"
-							class="form-control" required="required"> @ &nbsp; <select
+							class="form-control" required="required"> 
+							@ &nbsp; 
+							<select
 							id="select_emailDomain" title="이메일 도메인 선택" name="mail_Domain"
 							style="width: 148px; display: inline;" onchange="display()"
 							class="form-control" required="required">
@@ -283,7 +286,7 @@
 
 								<option value="" id="option_directInput"
 									onclick="return display()">직접입력</option>
-						</select> <input type="text" id="input_emailDomain" placeholder="직접입력"
+						</select> <input type="text" id="input_emailDomain" placeholder="직접입력" name="mail_Domain"
 							title="직접입력" style="width: 150px; display: inline;"
 							disabled="disabled" class="form-control"></td>
 					</tr>
