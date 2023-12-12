@@ -47,7 +47,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
-
+<body style="background: #e6e6e6;">
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
 	<section class="p-5 tm-container-outer tm-bg-gray">
 
@@ -82,8 +82,8 @@
 
 					<button id="emailAuthBtn" type="submit" class="btn btn-primary"
 						style="display: inline;" name="findIdButton">인증 메일 보내기</button>
-					<input class="spinner-border text-warning" type="hidden"
-						name="spinner" id="spinner">
+					<!-- <input class="spinner-border text-warning" type="hidden"
+						name="spinner" id="spinner"> -->
 					<div>
 						<input type="hidden" id="joinMessage" name="joinMessage"
 							value="${joinMessage}" />
@@ -138,8 +138,9 @@
 						var email = form.email.value;
 						if (!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
 						}
-						submitButton.style.display = 'none';
-						spinner.type = 'text';
+						//submitButton.style.display = 'none';
+						//spinner.type = 'text';
+						submitButton.disabled = 'disable';
 
 						form.submit();
 					});

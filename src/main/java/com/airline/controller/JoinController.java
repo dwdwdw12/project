@@ -1,5 +1,7 @@
 package com.airline.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +103,7 @@ public class JoinController {
 
 		if (result == null) {
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
-			return "redirect:/join/findId";
+			return "/join/findId";
 		} else {
 			try {
 				String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -110,7 +112,7 @@ public class JoinController {
 				params.put("email", email);
 				params.put("mail_key", mail_key);
 
-				mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+				mailSendService.modifyMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 				log.info("입력받은 이메일 >> " + email + "생성된 key >> " + mail_key);
 
 				MailHandler sendMail = new MailHandler(mailSender);
@@ -144,7 +146,7 @@ public class JoinController {
 			throws Exception {
 		log.info("JoinController >> getUserId");
 		KakaoUserVO vo = join.showUserId(email, mail_key);
-		mailSendService.resetMailKey(email);
+		mailSendService.removeMailKey(email);
 		model.addAttribute("user", vo);
 		return "/join/getUserId"; // 다시 클릭하면 아이디값이 나오지 않음 따라서 다른 페이지로 이동시키는것도 나쁘지 않을 듯..
 	}
@@ -165,7 +167,7 @@ public class JoinController {
 
 		if (result == null) {
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
-			return "redirect:/join/findPwd";
+			return "/join/findPwd";
 		} else {
 			try {
 				String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -175,7 +177,7 @@ public class JoinController {
 				params.put("email", email);
 				params.put("mail_key", mail_key);
 
-				mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+				mailSendService.modifyMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
 				log.info("입력받은 아이디 >> " + userId + " 입력받은 이메일 >> " + email + " 생성된 key >> " + mail_key);
 
 				MailHandler sendMail = new MailHandler(mailSender);
@@ -232,7 +234,7 @@ public class JoinController {
 
 	@PostMapping("/userIdDuplicateCheck")
 	@ResponseBody
-	public int memberInfo(@RequestParam("userId") String userId) {
+	public int userIdDuplicateCheck(@RequestParam("userId") String userId) {
 		// ajax 아이디 체크
 		int userIdCnt = join.userIdDuplicateCheck(userId);
 		return userIdCnt;
@@ -270,15 +272,23 @@ public class JoinController {
 	public void memberInfoGet(Model model, KakaoUserVO vo) {
 		model.addAttribute("userInfo", vo);
 		log.info("JoinController >>  [get]");
+	
 	}
 
 	@PostMapping("/memberInfo")
 	public String memberInfo(RedirectAttributes attr, String termsAgree, String userId, String userNick,
 			String userNameK, String userNameE, String gender, String pwd, int userReginumFirst, int userReginumLast,
 			String phone_first, String phone_middle, String phone_last, String email, String mail_Domain, int postCode,
-			String addressDefault, String addressDetail) {
+			String addressDefault, String addressDetail, Model model) {
 
 		// email phone address 합쳐줘야해서.. parameter로 받음....
+		//memberInfo에 바로 접근하는 경우 접근 막음
+		if(termsAgree == "" || termsAgree == null) {
+			log.info("termsAgree >> " +termsAgree);
+			model.addAttribute("joinMessage","잘못된 접근입니다.");
+			return "/login";
+		}
+
 		userNameE = userNameE.toUpperCase();
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
 		String mail = email + "@" + mail_Domain;
@@ -291,6 +301,7 @@ public class JoinController {
 
 		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
 
+		
 		try {
 
 			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -536,7 +547,7 @@ public class JoinController {
 
 	@GetMapping("/error/accessError")
 	@CrossOrigin("http://localhost:8081/error/accessError")
-	public void aceessError() {
+	public void accessError() {
 
 	}
 

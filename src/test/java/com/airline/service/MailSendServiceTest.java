@@ -39,7 +39,7 @@ public class MailSendServiceTest {
 		params.put("mail_key", mail_key);
 		
 		log.info("BEFORE MAPPER");
-		mailSendService.updateMailKey(params); //email 조건으로 랜덤키 컬럼에 저장
+		mailSendService.modifyMailKey(params); //email 조건으로 랜덤키 컬럼에 저장
 		log.info("AFTER MAPPER");
 
 		MailHandler sendMail = new MailHandler(mailSender);

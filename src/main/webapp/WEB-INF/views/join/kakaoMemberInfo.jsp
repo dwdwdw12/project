@@ -2,6 +2,50 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../includes/header2.jsp"%>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<!-- Google web font "Open Sans" -->
+<link rel="stylesheet"
+	href="../resources/font-awesome-4.7.0/css/font-awesome.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<!-- Bootstrap style -->
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/slick/slick-theme.css" />
+<link rel="stylesheet" href="../resources/css/templatemo-style.css">
+<!-- Templatemo style -->
+
+<script src="../resources/js/vendor/modernizr.custom.min.js"></script>
+<link rel="stylesheet" href="../resources/css/normalize.css">
+
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+	var $jLatest = jQuery.noConflict();
+</script>
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	var $jb = jQuery.noConflict();
+</script>
+
+<!-- Font Awesome 5 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
 
 <style>
 .id_ok {
@@ -41,21 +85,11 @@
 }
 </style>
 
-<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
+	<section class="p-5 tm-container-outer tm-bg-gray">
 
-	<section class="tm-banner">
-		<div class="tm-container-outer ">
-			<div class="container">
-				<!-- <div class="row tm-banner-row" id="tm-section-search"></div> -->
-				<!-- row -->
-			</div>
-			<!-- .container -->
-		</div>
 		<!-- .tm-container-outer -->
-	</section>
-
-	<section class="tm-page-wrap-allwhite">
-		<div align="center">
+		<div class="row">
 			<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 				<h2 class="text-uppercase mb-4">추가 정보 입력</h2>
 				<h6>카카오 항공의 서비스를 보다 편리하게 이용하기 위하여 추가적인 정보를 입력해주시기 바랍니다.</h6>
@@ -75,9 +109,9 @@
 
 				<tbody>
 					<tr>
-						<th scope="row" style="padding: 8px;">영문명<span
+						<th scope="row" style="padding: 8px;"><label for="userNameE">영문명<span
 							class="icon_require" style="color: red; font-size: x-small;">
-								*</span></th>
+								*</span></label></th>
 						<td style="padding: 8px"><input type="text" id="userNameE"
 							name="userNameE" placeholder="영문 명 입력 (예 : HONGGILDONG)"
 							title="영문 명 입력 (예 : HONGGILDONG)"
@@ -87,21 +121,10 @@
 							oninput="handleOnInputEng(this)" required="required"></td>
 					</tr>
 					<tr>
-						<th scope="row" style="padding: 8px;">주민등록번호<span
+						<th scope="row" style="padding: 8px;"><label for="userReginumFirst">주민등록번호<span
 							class="icon_require" style="color: red; font-size: x-small;">
-								*</span></th>
+								*</span></label></th>
 						<td style="padding: 8px">
-							<!-- 						<div class="info" id="info__birth">
-						  <select class="box" id="birth-year" name="birthYear">
-						    <option disabled selected>출생 연도</option>
-						  </select>
-						  <select class="box" id="birth-month" name="birthMonth">
-						    <option disabled selected>월</option>
-						  </select>
-						  <select class="box" id="birth-day" name="birthDay"> 
-						    <option disabled selected>일</option>
-						  </select>
-						</div> -->
 
 								<input class="form-control" type="text" name="userReginumFirst"
 									oninput="handleOnInput(this, 6); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
@@ -169,7 +192,7 @@
 			<br> <br>
 
 			<div align="center">
-				<button type="submit" class="btn btn-primary"
+				<button type="button" class="btn btn-primary" id="submitButton"
 					onclick="return formCheck()">확인</button>
 			</div>
 			<input type="hidden" name="userId" value="${mail}"> <input
@@ -192,60 +215,6 @@
 	<br>
 
 	<script type="text/javascript">
-		// '출생 연도' 셀렉트 박스 option 목록 동적 생성
-		var birthYearEl = document.querySelector('#birth-year')
-		var birthMonthEl = document.querySelector('#birth-month')
-		var birthDayEl = document.querySelector('#birth-day')
-		// option 목록 생성 여부 확인
-		isYearOptionExisted = false;
-		isMonthOptionExisted = false;
-		isDayOptionExisted = false;
-
-		birthYearEl.addEventListener('focus', function() {
-			// year 목록 생성되지 않았을 때 (최초 클릭 시)
-			if (!isYearOptionExisted) {
-				isYearOptionExisted = true
-				for (var i = 1940; i <= 2023; i++) {
-					// option element 생성
-					const YearOption = document.createElement('option')
-					YearOption.setAttribute('value', i)
-					YearOption.innerText = i
-					// birthYearEl의 자식 요소로 추가
-					this.appendChild(YearOption);
-				}
-			}
-		});
-
-		birthMonthEl.addEventListener('focus', function() {
-			// year 목록 생성되지 않았을 때 (최초 클릭 시)
-			if (!isMonthOptionExisted) {
-				isMonthOptionExisted = true
-				for (var i = 1; i <= 12; i++) {
-					// option element 생성
-					const MonthOption = document.createElement('option')
-					MonthOption.setAttribute('value', i)
-					MonthOption.innerText = i
-					// birthYearEl의 자식 요소로 추가
-					this.appendChild(MonthOption);
-				}
-			}
-		});
-
-		birthDayEl.addEventListener('focus', function() {
-			// year 목록 생성되지 않았을 때 (최초 클릭 시)
-			if (!isDayOptionExisted) {
-				isDayOptionExisted = true
-				for (var i = 1; i <= 31; i++) {
-					// option element 생성
-					const DayOption = document.createElement('option')
-					DayOption.setAttribute('value', i)
-					DayOption.innerText = i
-					// birthYearEl의 자식 요소로 추가
-					this.appendChild(DayOption);
-				}
-			}
-		});
-		// Month, Day도 동일한 방식으로 구현
 
 		function handleOnInput(el, maxlength) {
 			if (el.value.length > maxlength) {
@@ -258,29 +227,34 @@
 
 		function formCheck() {
 			if (document.frm.userNameE.value.length == 0) {
+				document.frm.userNameE.focus;
 				alert("영문 명을 입력해주세요.");
 				return false;
-			} else if (document.frm.postcode.value.length == 0) {
+			} 
+			
+			else if (document.frm.userReginumFirst.value.length == 0||document.frm.userReginumFirst.value.length < 6) {
+				alert("주민등록번호를 확인해주세요.");
+				return false;
+			}
+			else if (document.frm.userReginumLast.value.length == 0||document.frm.userReginumLast.value.length < 7) {
+				alert("주민등록번호를 확인해주세요.");
+				return false;
+			}
+			
+			else if (document.frm.postCode.value.length == 0) {
 				alert("우편번호를 다시 확인해주세요.")
-				document.frm.postcode.focus;
+				document.frm.postCode.focus;
 				return false;
 			} else if (document.frm.addressDefault.value.length == 0) {
 				alert("주소를 다시 확인해주세요.")
 				document.frm.addressDefault.focus;
 				return false;
-			} else if (document.frm.birth - year.value.length == 0) {
-				alert("출생년도를 다시 확인해주세요.")
-				document.frm.birth - year.focus;
-				return false;
-			} else if (document.frm.birth - month.value.length == 0) {
-				alert("출생년도를 다시 확인해주세요.")
-				document.frm.birth - month.focus;
-				return false;
-			} else if (document.frm.birth - day.value.length == 0) {
-				alert("출생년도를 다시 확인해주세요.")
-				document.frm.birth - day.focus;
-				return false;
-			}
+			} 
+			
+
+			
+			submitButton.disabled = 'disable';
+			frm.submit();
 
 		}
 	</script>

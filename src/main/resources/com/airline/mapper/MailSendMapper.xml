@@ -7,11 +7,11 @@
 		update kakaouser set mail_key = #{mail_key} where mail = #{email}
 	</update>
 	
-	<select id="checkedMailKey" resultType="com.airline.vo.KakaoUserVO">
+<!-- 	<select id="checkedMailKey" resultType="com.airline.vo.KakaoUserVO">
 		select * from kakaouser where mail_key = {mail_key}
-	</select>
+	</select> -->
 	
-	<update id="resetMailkey" >
+	<update id="resetMailKey" >
 		update kakaouser set mail_key = 0 where mail = #{email}
 	</update>
 	

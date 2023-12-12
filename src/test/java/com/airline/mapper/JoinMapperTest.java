@@ -109,7 +109,7 @@ public class JoinMapperTest {
 	@Test
 	public void registerAllTermsTest() {
 		String userId = "test11";
-		join.registerAllTerms(userId);
+		join.insertAllTerms(userId);
 	}
 	
 	@Test

@@ -16,8 +16,12 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+
+
+
 <meta name="referrer" content="no-referrer-when-downgrade" />
 
+<body>
 <div class="tm-main-content" id="top">
 	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<section class="tm-banner">
@@ -31,7 +35,7 @@
 			<!-- .tm-container-outer -->
 		</section>
 
-		<section class="tm-page-wrap-allwhite">
+		<section class="p-5 tm-container-outer tm-bg-gray">
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
@@ -42,7 +46,7 @@
 							<br> <br>
 						</div>
 						<form action="/join/checkMember" name="frm" method="post"
-							class="tm-contact-form" style="position: inherit; width: 570px;">
+							style="position: inherit; width: 570px;">
 							<!-- class="tm-contact-form" -->
 							<table class="table_form" style="margin: auto">
 
@@ -67,7 +71,8 @@
 											name="userNameE"></td>
 									</tr>
 									<tr>
-										<th scope="row" style="text-align: left;">성별</th>
+										<th scope="row" style="text-align: left;"><label
+											for="gender_man">성별</label></th>
 
 										<td>
 											<div class="form-control">
@@ -150,7 +155,7 @@
 			alert("주민등록번호를 확인해주세요.");
 			return false;
 		}
-		if (document.frm.userReginumLast.value.length == 0||document.frm.userReginumLast.value.length < 6) {
+		if (document.frm.userReginumLast.value.length == 0||document.frm.userReginumLast.value.length < 7) {
 			alert("주민등록번호를 확인해주세요.");
 			return false;
 		}
@@ -174,5 +179,3 @@
 
 
 </script>
-</body>
-</html>
