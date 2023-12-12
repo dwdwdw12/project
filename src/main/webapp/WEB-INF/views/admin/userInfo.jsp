@@ -55,7 +55,7 @@
 
 			<div class="container">
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
 							<th>아이디</th>
 							<th>등급</th>
@@ -65,8 +65,8 @@
 							<th>이메일</th>
 							<th>전화번호</th>
 							<th>관리자여부</th>
-							<th>휴먼계정여부</th>
-							<th>휴먼계정처리</th>
+							<th>휴면계정여부</th>
+							<th>휴면계정처리</th>
 
 							
 						</tr>
@@ -155,10 +155,10 @@
 	function userEnable(userid,enabled){
 		console.log(userid,enabled);
 		 if(enabled == 1){
-			 if(!confirm("휴먼회원 처리를 진행하시겠습니까?")){
+			 if(!confirm("휴면회원 처리를 진행하시겠습니까?")){
 				  return false;
 			 }else{
-					console.log("휴먼처리중...");
+					console.log("휴면처리중...");
 					$.ajax({
 						url : "/admin/userInfo",
 						async : false,
@@ -179,10 +179,10 @@
 			 }
 		
 		}else if(enabled == 0){
-			if(!confirm("휴먼회원을 해제하시겠습니까?")){
+			if(!confirm("휴면회원을 해제하시겠습니까?")){
 				return false;
 			}else{
-				console.log("휴먼해제중...");
+				console.log("휴면해제중...");
 				$.ajax({
 					url : "/admin/userInfo",
 					async : false,

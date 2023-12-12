@@ -43,7 +43,7 @@
 
 			<div class="container">
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
 							<th>제목</th>
 							<th>작성자</th>

@@ -138,7 +138,7 @@ public class AdminController {
 	
 	//항공스케줄 인서트 뷰 페이지
 	@GetMapping("/flightCreate")
-	public void flightSchedule(Model model) {
+	public void flightCreate(Model model) {
 		List<String> depCode = admin.getDepcode();
 		System.out.println("depCode>>>>"+depCode);
 		model.addAttribute("depCode",depCode);

@@ -49,9 +49,9 @@
 <%-- 						<label for="dep">총 구매횟수 &nbsp;:&nbsp; ${count}번</label> 
 						<label for="dep">/ 총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
 								value="${totalPrice}" pattern="#,###" />원</label> --%>
-						<p class="mb-2">총 구매횟수 &nbsp;:&nbsp; ${count}번</p>
-						<p class="mb-2">총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
-								value="${totalPrice}" pattern="#,###" />원</p>
+						<p class="mb-2">총 구매횟수 &nbsp;:&nbsp; <strong>${count}</strong>번</p>
+						<p class="mb-2">총 구매금액 &nbsp;:&nbsp; <strong><fmt:formatNumber
+								value="${totalPrice}" pattern="#,###" /></strong>원</p>
 					</div>
 
 				</div>
@@ -61,16 +61,16 @@
 
 			<div class="container">
 				<table class="table table-hover">
-					<thead>
+					<thead style="background: #ffc107">
 						<tr>
-							<th>예약번호</th>
+							<th style="width: 20%">예약번호</th>
 							<th>구매일자</th>
 							<th>출발지</th>
 							<th>출발시간</th>
 							<th>도착지</th>
 							<th>도착시간</th>
-							<th>취소여부</th>
-							<th>체크인여부</th>
+							<th style="width: 5%">취소여부</th>
+							<th style="width: 6%">체크인여부</th>
 							<th>취소</th>
 							<th>체크인</th>
 						</tr>
