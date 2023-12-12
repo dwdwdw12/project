@@ -91,6 +91,10 @@ public interface AdminMapper {
 	public FlightVO flightNoticePopup();
 
 	public int deleteFlight(@Param("vo")FlightVO vo);
+
+	public int getRegionCode(String depName);
+
+	public int getArrRegionCode(String arrName);
 	
 	
 

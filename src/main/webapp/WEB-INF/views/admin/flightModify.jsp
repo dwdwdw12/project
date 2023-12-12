@@ -50,7 +50,7 @@
 						<th style="width: 10%">운항기</th>
 						<th>출발지</th>
 						<th>출발공항 코드</th>
-						<th>출발지역 코드</th>
+					    <th>출발지역 코드</th>
 						<th>출발시간</th>
 					</tr>
 				</thead>
@@ -73,7 +73,7 @@
 					<tr>
 						<th>도착지</th>
 						<th>도착공항 코드</th>
-						<th>도착지역 코드</th>
+						<!-- <th>도착지역 코드</th> -->
 						<th>도착시간</th>
 						<th>비행시간</th>
 						<th>수정사유</th>
@@ -144,7 +144,7 @@
 				console.log(err);
 				/* 			console.log(err.responseText); // 서버에서 전송한 오류 메시지
 				 console.log(err.status);  */
-				alert("항공스케즐 수정에 실패했습니다!");
+				alert("항공스케줄 수정에 실패했습니다!");
 			}
 		});
 

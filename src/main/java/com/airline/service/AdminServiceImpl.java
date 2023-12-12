@@ -194,4 +194,14 @@ public class AdminServiceImpl implements AdminService{
 	public int deleteFlight(FlightVO vo) {
 		return mapper.deleteFlight(vo);
 	}
+
+	@Override
+	public int getRegionCode(String depName) {
+		return mapper.getRegionCode(depName);
+	}
+
+	@Override
+	public int getArrRegionCode(String arrName) {
+		return mapper.getArrRegionCode(arrName);
+	}
 }

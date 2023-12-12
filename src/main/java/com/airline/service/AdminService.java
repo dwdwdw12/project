@@ -72,5 +72,8 @@ public interface AdminService {
 	public FlightVO flightNoticePopup();
 	//항공스케줄 삭제
 	public int deleteFlight(FlightVO vo);
+	//지역코드 받아오기
+	public int getRegionCode(String depName);
+	public int getArrRegionCode(String arrName);
 
 }

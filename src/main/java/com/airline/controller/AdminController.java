@@ -166,6 +166,9 @@ public class AdminController {
 		String fullDeparture = admin.getFullDeparture(vo.getDepCode());
 		String fullArrival = admin.getFullArrival(vo.getArrCode());
 		System.out.println(fullDeparture+" : "+fullArrival);
+		int depRegionCode = admin.getRegionCode(vo.getDepName());
+		int arrRegionCode = admin.getArrRegionCode(vo.getArrName());
+		System.out.println(depRegionCode+" : "+arrRegionCode);
 		//인서트
 		vo.setDepDay(depDay);
 		vo.setArrDay(arrDay);
@@ -173,6 +176,8 @@ public class AdminController {
 		vo.setArrTime(arrTime);
 		vo.setFullDeparture(fullDeparture);
 		vo.setFullArrival(fullArrival);
+		vo.setDepRegionCode(depRegionCode);
+		vo.setArrRegionCode(arrRegionCode);
 		System.out.println("vo출력>>"+vo);
 		int result = admin.insertFlight(vo);
 		if(result == 1) rttr.addFlashAttribute(result);

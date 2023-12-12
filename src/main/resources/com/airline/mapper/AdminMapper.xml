@@ -116,4 +116,12 @@
 	<delete id="deleteFlight">
 		delete from airplaneschedule where fno=#{vo.fno}
 	</delete>
+	
+	<select id="getRegionCode" resultType="int">
+		select distinct depregioncode from airplaneschedule where depname=#{depName};
+	</select>
+	
+	<select id="getArrRegionCode" resultType="int">
+		select distinct arrregioncode from airplaneschedule where arrname=#{arrName};
+	</select>
 </mapper>
