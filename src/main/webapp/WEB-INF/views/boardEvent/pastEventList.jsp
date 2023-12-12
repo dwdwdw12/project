@@ -53,10 +53,10 @@
 </head>
 <body style=" margin-top : 180px;">
 	<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1400px; margin: 0 auto; ">
-	<h2>이벤트 게시판</h2>
+	<h2>이벤트 게시판-지난 이벤트</h2>
 	<hr class="hr1" noshade>
 	<div class="mt-3 text-right">
-		<input type="button" class="gradient" onclick="location.href='/boardEvent/pastEventList'" style="width: 120px" value="지난 이벤트 보기">
+		<input type="button" class="gradient" onclick="location.href='/boardEvent/list'" style="width: 120px" value="리스트형으로 보기">
 		<input type="button" class="gradient" onclick="location.href='/boardEvent/gridList'" style="width: 120px" value="그리드형으로 보기">
 	</div>
 	<div>   

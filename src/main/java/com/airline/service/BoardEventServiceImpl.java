@@ -29,6 +29,12 @@ public class BoardEventServiceImpl implements BoardEventService{
 		return mapper.getListwithPaging(criteria);
 	}
 
+	@Override
+	public List<BoardEventVO> getListPastEvent(Criteria criteria) {
+		log.info("get list with paging service");
+		return mapper.getListPastEvent(criteria);
+	}
+
 	@Transactional
 	@Override
 	public BoardEventVO get(int boardNum) {
@@ -99,6 +105,12 @@ public class BoardEventServiceImpl implements BoardEventService{
 	public int getTotalCount(Criteria cri) {
 		log.info("getTotalCount");
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public int getTotalCountPastEvent(Criteria cri) {
+		log.info("getTotalCountPastEvent");
+		return mapper.getTotalCountPastEvent(cri);
 	}
 
 	@Override
