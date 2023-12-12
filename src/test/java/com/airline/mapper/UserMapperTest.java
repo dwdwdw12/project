@@ -54,9 +54,9 @@ public class UserMapperTest {
 	}
 	
 	@Test
-	public void updateUwerNick() {
-		String userId = "user01";
-		String userNick = "uuu";
+	public void updateUserNickTest() {
+		String userId = "dbswjd4991@naver.com";
+		String userNick = "변경테스트";
 		mapper.updateUserNick(userId, userNick);
 	}
 }
