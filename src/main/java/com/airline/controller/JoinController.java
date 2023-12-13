@@ -291,8 +291,9 @@ public class JoinController {
 
 		userNameE = userNameE.toUpperCase();
 		String phone = phone_first + "-" + phone_middle + "-" + phone_last;
-		String mail = email + "@" + mail_Domain;
 		String address = addressDefault + addressDetail;
+		String mail = email + "@" + mail_Domain;
+		log.info("입력된 이메일 >> " + mail);
 
 		log.info("raw password >> " + pwd);
 		// password 암호화
@@ -300,18 +301,23 @@ public class JoinController {
 		log.info("encoded password >> " + pwd);
 
 		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
-
+		
+		if(mail.contains(",")) {
+			String[] splitMail = mail.split(",");
+			mail = splitMail[0] + splitMail[1];
+			log.info("splitMail >> " + mail);
+		}
 		
 		try {
 
 			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
 			Map<String, String> params = new HashMap<String, String>();
-			params.put("email", email);
+			params.put("email", mail);
 			// params.put("mail_key", mail_key);
 
 //			mailSendService.updateMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
-			log.info("입력받은 이메일 >> " + mail);
+			log.info("메일 보내질 이메일 >> " + mail);
 
 			MailHandler sendMail = new MailHandler(mailSender);
 			sendMail.setSubject("카카오 항공 가입을 환영합니다.");
