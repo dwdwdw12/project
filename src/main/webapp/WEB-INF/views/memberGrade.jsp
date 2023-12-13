@@ -20,8 +20,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
@@ -95,7 +95,7 @@ body {
 	width: 1400px;
 	margin: 0 auto;
 	margin-top: 200px;
-	background-color: #EFEFEF;
+	/* background-color: #EFEFEF; */
 }
 
 .greylist {
@@ -229,6 +229,7 @@ hr {
 </style>
 </head>
 <body>
+<div class="p-5 tm-container-outer tm-bg-gray">
 	<button type="button" class="button" id="gradeInformation"
 		name="gradeInformation">회원등급안내</button>
 	<button type="button" class="button" id="gradeBenefit"
@@ -418,7 +419,7 @@ hr {
 	</div>
 	<!-- /회원혜택안내 -->
 
-
+</div>
 	<%@ include file="includes/footer.jsp"%>
 
 </body>

@@ -114,8 +114,8 @@
 												class="ti-angle-down"></i></a>
 											<ul class="submenu" style="width: 220px;">
 												<li><a href="/flight/search">항공편 검색/예약</a></li>
-												<li><a href="/priceInform">운임 정책</a></li>
 												<li><a href="/flight/flightDepArrSearch">출도착 조회</a></li>
+												<li><a href="/priceInform">운임 정책</a></li>
 												<li><a href="/memberGrade">회원 등급 안내</a></li>
 											</ul>
 										</li>

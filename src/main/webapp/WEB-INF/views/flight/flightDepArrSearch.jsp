@@ -86,7 +86,7 @@ td {
 							<label for="arr">도착지</label> 
 						</div>
 						
-						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2" >
 							<select id="depRegionCode" name="depRegionCode">
 								<option value="1" <c:if test="${depRegionCode=='1'}">selected="selected"</c:if>>한국</option>
 								<option value="2" <c:if test="${depRegionCode=='2'}">selected="selected"</c:if>>동북아시아</option>
@@ -122,6 +122,8 @@ td {
 						<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2' style='float:right;'>
 						</div>
 					</c:if>
+				</div>
+				<div class="form-row tm-search-form-row" id="searchText2">
 				</div>
 				
 				<br>
@@ -246,7 +248,8 @@ td {
 		str += "<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2' style='float:right;'>";
 		str += "</div>";
 		
-		$("#searchText").html(str);
+		$("#searchText2").html(str);
+		$("#searchText").hide();
 		
 		$jb(function() {    //화면 다 뜨면 시작
 		   $jb("#flightName").autocomplete({
@@ -296,7 +299,7 @@ td {
 	var sampleArrCode = $("#sampleArrCode").val();
 	$("#route").on("click", function(){
 		console.log("노선");
-		str = "";
+		/* str = "";
 		str += "<div class='form-group tm-form-group tm-form-group-pad tm-form-group-2'>"; 
 		str += "<label for='dep'>출발지</label>";
 		str += "</div>";
@@ -328,7 +331,9 @@ td {
 		str += "<input name='arr' type='text' class='form-control' id='arrival' placeholder='도착지를 입력해주세요' value = '" + sampleArr + "' required='required'>";
 		str += "</div>";
 		
-		$("#searchText").html(str);
+		$("#searchText").html(str); */
+		$("#searchText2").hide();
+		$("#searchText").show();
 		
 		$("#arrival").on("click",function(e){
 			 if($("#departure").val()==""){
@@ -336,7 +341,7 @@ td {
 			 }
 		})
 		
-		$jb(function() {    //화면 다 뜨면 시작
+		/* $jb(function() {    //화면 다 뜨면 시작
 		   $jb("#departure").autocomplete({
 		        source : function( request, response ) {
 		             $jb.ajax({
@@ -376,9 +381,9 @@ td {
 		      	    
 		    });
 			   
-		});  
+		});   */
 		
-		$jb(function() {    //화면 다 뜨면 시작
+		/* $jb(function() {    //화면 다 뜨면 시작
 		    $jb("#arrival").autocomplete({
 		        source : function( request, response ) {
 		             $jb.ajax({
@@ -423,7 +428,7 @@ td {
 		      	    
 		    });
 		   
-		});
+		}); */
 		
 		//select 그리기sampleArrCode
 		$jb(function(){
