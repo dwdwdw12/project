@@ -29,16 +29,6 @@ p{
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px">
-<!-- 	<section class="tm-banner">
-
-		.tm-container-outer
-		<div class="inner">
-			<div class="slideshow">
-				<img src="../resources/img/kakao/둥둥섬2.jpg" alt="" width="1400"
-					height="550"/>
-			</div>
-		</div>
-	</section> -->
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
@@ -92,6 +82,7 @@ p{
 				</section>
 			</section>
 	</div>
+	</div>
 	<!-- <div class="main-wrapper">
 
 	<!-- .tm-container-outer -->
@@ -144,45 +135,4 @@ p{
 			
 		});
 
-	</script>
-	<script type="text/javascript">
-		$(function() {
-			$('.slideshow').each(function() {
-				// each : 앞에 선택된 내용의 개수만큼 반복하도록 하는 메서드
-				let $slides = $(this).find("img");
-				let slideCount = $slides.length;
-				let currentIndex = 0;
-				$slides.eq(currentIndex).fadeIn();
-				// 첫 이미지를 나타나게 함
-
-				// 다음이미지가 나타나게 끔->현재 이미지를 페이드아웃하고 다음이미지를 나타나게 하고 현재이미지값으로 변경시켜서 로테이션돌게 함
-				let showNextSlide = function() {
-					let nextIndex = (currentIndex + 1) % slideCount;
-					// 다음이미지의 인덱스 값을 구하는데 이미지가 4개이므로 최대값이 3이되어야 함 따라서 나머지 연산자를 통해 반복하도록 함(1~4의 값을 4로 나누므로 0~3을 반복시킴-어차피 0은 위에서 표시되도록 했으니까.....?)
-					$slides.eq(currentIndex).fadeOut();
-					// 현재 이미지를 사라지게 하고
-					$slides.eq(nextIndex).fadeIn();
-					// 위에서 구한 다음 이미지를 나타나게 함
-					currentIndex = nextIndex;
-					// 다음 이미지의 값을 현재로 
-				}
-
-				let timer = setInterval(showNextSlide, 1000);
-				$(this).on('mouseover', function() {
-					//타이머 취소
-					clearInterval(timer);
-				}).on('mouseout', function() {
-					//타이머 시작
-					timer = setInterval(showNextSlide, 1000);
-				})
-			})
-		}); 
-		
-		// Slick Carousel
-        $('.tm-slideshow').slick({
-            infinite: true,
-            arrows: true,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        });
 	</script>
