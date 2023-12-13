@@ -219,9 +219,9 @@ hr {
 <select id="arrname">
 </select>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<label for="price">가격:</label>
-<input style="border:none; background:#EFEFEF; width: 80px; text-align:right;" type="text" id="price" readonly>원
-
+<label for="price">이코노미석 가격:</label>
+<input style="border:none; background:#EFEFEF; width: 80px; text-align:right;" type="text" id="price" readonly>원 <br>
+*비즈니스석 : 이코노미석의 1.5배&nbsp;&nbsp;&nbsp;/일등석 : 이코노미석의 2배
 <hr>
 
 <div>
@@ -290,7 +290,7 @@ hr {
 <hr>
 출발 91일 이전에 접수되는 전체 미사용 항공권의 환불위약금 및 환불 서비스 수수료가 면제됩니다.<br>
 출발 7일 이전 구매 후, 구매시점으로부터 24시간 이내 환불 접수된 항공권의 환불 위약금 및 환불 서비스 수수료가 면제 됩니다.<br>
-(단, 당사 온라인플랫폼/모바일 및 직판 발권 분 한정)<br>
+(단, 당사 온라인플랫폼 직판 발권 분 한정)<br>
 부분 사용한 항공권의 경우 사용 구간의 운임과 부분사용 환불 위약금이 공제됩니다.(부분환불 위약금 별도 확인)<br>
 두 가지 이상의 운임종류가 결합된 항공권의 경우 적용된 항공운임 및 여정의 구성에 따라 상이한 환불 위약금이 적용될 수 있습니다.<br>
 전체 미사용 항공권의 환불시는 환불 접수 시점 별 환불 위약금이 차등 적용되며, 항공권이 재발행된 경우는 최초 발행 항공권 및 재발행된 항공권의 부분환불 위약금 중 높은 위약금이 적용됩니다.<br>
@@ -342,7 +342,9 @@ hr {
 		</tr>
 		<tr>
 			<td>신청방법</td>
+      
 			<td>카카오항공 예약센터로 항공편 출발 24시간 전까지 신청<br>
+
 			<b>* 이유식은 인천 출발편만 가능</b></td>
 		</tr>
 	</table>
@@ -438,52 +440,52 @@ const flightOptions = [
   { depname: '제주', arrname: '청주', price: 94300 },
 ];
 
-document.getElementById('depname').addEventListener('change', updateDestinationOptions);
-document.getElementById('arrname').addEventListener('change', updatePrice);
-
-function updateDestinationOptions() {
-  const departureSelect = document.getElementById('depname');
-  const destinationSelect = document.getElementById('arrname');
-  const priceInput = document.getElementById('price');
-  const selectedDeparture = departureSelect.value;
-
-  while (destinationSelect.options.length > 0) {
-    destinationSelect.remove(0);
-  }
-
-  const destinations = flightOptions
-    .filter(option => option.depname === selectedDeparture)
-    .map(option => option.arrname);
-
-  destinations.forEach(destination => {
-    const option = document.createElement('option');
-    option.text = destination;
-    option.value = destination;
-    destinationSelect.add(option);
-  });
-
-  updatePrice();  // 출발지 또는 목적지가 변경될 때마다 가격 업데이트
-}
-
-function updatePrice() {
-  const departureSelect = document.getElementById('depname');
-  const destinationSelect = document.getElementById('arrname');
-  const priceInput = document.getElementById('price');
-  const selectedDeparture = departureSelect.value;
-  const selectedDestination = destinationSelect.value;
-
-  const selectedOption = flightOptions.find(option => option.depname === selectedDeparture && option.arrname === selectedDestination);
-  if (selectedOption) {
-    priceInput.value = selectedOption.price;
-    console.log(selectedOption.price);
-  } else {
-    priceInput.value = '';
-  }
-}
-
-window.onload = function () {
-  updateDestinationOptions();
-};
+		document.getElementById('depname').addEventListener('change', updateDestinationOptions);
+		document.getElementById('arrname').addEventListener('change', updatePrice);
+		
+		function updateDestinationOptions() {
+		  const departureSelect = document.getElementById('depname');
+		  const destinationSelect = document.getElementById('arrname');
+		  const priceInput = document.getElementById('price');
+		  const selectedDeparture = departureSelect.value;
+		
+		  while (destinationSelect.options.length > 0) {
+		    destinationSelect.remove(0);
+		  }
+		
+		  const destinations = flightOptions
+		    .filter(option => option.depname === selectedDeparture)
+		    .map(option => option.arrname);
+		
+		  destinations.forEach(destination => {
+		    const option = document.createElement('option');
+		    option.text = destination;
+		    option.value = destination;
+		    destinationSelect.add(option);
+		  });
+		
+		  updatePrice();  // 출발지 또는 목적지가 변경될 때마다 가격 업데이트
+		}
+		
+		function updatePrice() {
+		  const departureSelect = document.getElementById('depname');
+		  const destinationSelect = document.getElementById('arrname');
+		  const priceInput = document.getElementById('price');
+		  const selectedDeparture = departureSelect.value;
+		  const selectedDestination = destinationSelect.value;
+		
+		  const selectedOption = flightOptions.find(option => option.depname === selectedDeparture && option.arrname === selectedDestination);
+		  if (selectedOption) {
+		    priceInput.value = selectedOption.price;
+			
+		  } else {
+		    priceInput.value = '';
+		  }
+		}
+		
+		window.onload = function () {
+		  updateDestinationOptions();
+		};
 </script>
 	<%@ include file="includes/footer.jsp"%>
 
