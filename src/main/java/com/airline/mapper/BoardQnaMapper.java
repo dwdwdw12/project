@@ -37,4 +37,5 @@ public interface BoardQnaMapper {
 	public List<BoardQnaVO> myAnsweredList(KakaoUserVO vo);
 	
 	public List<BoardQnaVO> myAllList(KakaoUserVO vo);
+	
 }

@@ -36,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.airline.service.AdminService;
 import com.airline.service.BoardEventService;
 import com.airline.service.BoardNoticeService;
+import com.airline.service.BoardQnaService;
 import com.airline.service.FlightService;
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
@@ -65,6 +66,9 @@ public class HomeController {
 	
 	@Autowired
 	private BoardEventService eventService;	
+	
+	@Autowired
+	private BoardQnaService qnaService;
 	
 	@Autowired
 	private FlightService flightService;
@@ -328,6 +332,10 @@ public class HomeController {
 		}
 	}
 	
+	@GetMapping("/priceInform")
+	public void priceInform() {
+	}
+	
 	@GetMapping("/error/accessError")
 	@CrossOrigin("http://localhost:8081/error/accessError")
 	public String accessError(RedirectAttributes attr, HttpSession session) {
@@ -336,4 +344,5 @@ public class HomeController {
 		return "/error/accessError";
 	}
 
+	
 }

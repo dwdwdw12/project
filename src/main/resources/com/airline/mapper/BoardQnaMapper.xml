@@ -118,4 +118,6 @@ select * from boardqna where boardwriter = (select userNick from kakaoUser where
 	select * from boardqna where boardreref=(SELECT boardreref FROM boardqna WHERE boardnum = #{boardnum})
 </select>
 
+
+
 </mapper>
