@@ -137,55 +137,14 @@ a {
 	text-decoration-line: none;
 }
 
-.emergency {
-	color: red;
-	font: bold;
-}
 
-.grade {
-	display: flex;
-	text-align: center;
-	margin-bottom: 50px;
-}
 
-.grade img {
-	height: 300px;
-	width: auto;
-	max-width: 180px;
-	margin: 50px 50px 30px 80px;
-}
-
-.field {
-	border: 8px double #FFC107;
-	margin-bottom: 100px;
-	width: 100%;
-}
-
-.field p {
-	font-weight: bold;
-}
-
-.field hr {
-	border-top: 2px solid #FFC107;
-	margin: 20px 0;
-}
-
-/* hover 효과 */
-.field:hover {
-	box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-	transition: box-shadow 0.3s ease-in-out;
-}
 
 /* 미디어 쿼리를 사용하여 반응형 디자인 적용 */
 @media only screen and (max-width: 768px) {
 	body {
 		width: 90%;
 	}
-}
-
-.gradeInfo {
-	text-align: right;
-	font-size: 30px;
 }
 
 hr {
@@ -225,13 +184,17 @@ hr {
 항공권 가격<br>
 <label for="depname">출발지:</label>
 <select id="depname" onchange="updateDestinationOptions()">
+  <option value="---">---</option>
+  <option value="인천">인천</option>
+  <option value="제주">제주</option>
+  <option value="광주">광주</option>
   <option value="김포">김포</option>
+  <option value="대구">대구</option>
+  <option value="여수">여수</option>
   <option value="나고야">나고야</option>
   <option value="난징">난징</option>
   <option value="뉴욕">뉴욕</option>
   <option value="다낭">다낭</option>
-  <option value="인천">인천</option>
-  <option value="대구">대구</option>
   <option value="델리">델리</option>
   <option value="도쿄/나리타">도쿄/나리타</option>
   <option value="런던히드로">런던히드로</option>
@@ -239,6 +202,16 @@ hr {
   <option value="마닐라">마닐라</option>
   <option value="미야자키">미야자키</option>
   <option value="바르셀로나">바르셀로나</option>
+  <option value="방콕">방콕</option>
+  <option value="베이징">베이징</option>
+  <option value="삿포로">삿포로</option>
+  <option value="시드니">시드니</option>
+  <option value="싱가포르">싱가포르</option>
+  <option value="알마티">알마티</option>
+  <option value="옌지">옌지</option>
+  <option value="오사카">오사카</option>
+  <option value="오키나와">오키나와</option>
+ 
 </select>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <label for="arrname">도착지:</label>
@@ -328,6 +301,7 @@ hr {
 
 <div class="discountPolicy" style="display:none;" >
 	<h2 style="text-align:center;">유/소아 동반고객</h2><br><br>
+	
 	<b>
 	유/소아를 동반하실 때, 안심하고 여행할 수 있도록 안내 드립니다.<br>
 	특히, 생후 7일 ~ 만 2세 미만 유아를 동반하는 항공 여행을 준비하실 때는 아래 내용을 확인해 주시기 바랍니다.<br>
@@ -376,9 +350,9 @@ hr {
 </div>
 	
 
-
 <script>
 const flightOptions = [
+  { depname: '---', arrname: '---', price: 0 },
   { depname: '광주', arrname: '김포', price: 80300 },
   { depname: '광주', arrname: '제주', price: 77300 },
   { depname: '김포', arrname: '광주', price: 104300 },
@@ -437,6 +411,7 @@ const flightOptions = [
   { depname: '인천', arrname: '자카르타', price: 696200 },
   { depname: '인천', arrname: '창춘', price: 462200 },
   { depname: '인천', arrname: '청두', price: 347800 },
+  { depname: '인천', arrname: '제주', price: 99300 },
   { depname: '인천', arrname: '타슈켄트', price: 720200 },
   { depname: '인천', arrname: '파리', price: 1716800 },
   { depname: '인천', arrname: '상하이/푸동', price: 360100 },
@@ -456,16 +431,21 @@ const flightOptions = [
   { depname: '인천', arrname: '선전', price: 433000 },
   { depname: '사이판', arrname: '인천', price: 415000 },
   { depname: '인천', arrname: '사이판', price: 389000 },
+  { depname: '제주', arrname: '김포', price: 138300 },
+  { depname: '제주', arrname: '대구', price: 92300 },
+  { depname: '제주', arrname: '여수', price: 78300 },
+  { depname: '제주', arrname: '청주', price: 94300 },
 ];
 
-
+document.getElementById('depname').addEventListener('change', updateDestinationOptions);
+document.getElementById('arrname').addEventListener('change', updatePrice);
 
 function updateDestinationOptions() {
   const departureSelect = document.getElementById('depname');
   const destinationSelect = document.getElementById('arrname');
   const priceInput = document.getElementById('price');
   const selectedDeparture = departureSelect.value;
-  
+
   while (destinationSelect.options.length > 0) {
     destinationSelect.remove(0);
   }
@@ -481,15 +461,28 @@ function updateDestinationOptions() {
     destinationSelect.add(option);
   });
 
-  const selectedOption = flightOptions.find(option => option.depname === selectedDeparture && option.arrname === destinationSelect.value);
+  updatePrice();  // 출발지 또는 목적지가 변경될 때마다 가격 업데이트
+}
+
+function updatePrice() {
+  const departureSelect = document.getElementById('depname');
+  const destinationSelect = document.getElementById('arrname');
+  const priceInput = document.getElementById('price');
+  const selectedDeparture = departureSelect.value;
+  const selectedDestination = destinationSelect.value;
+
+  const selectedOption = flightOptions.find(option => option.depname === selectedDeparture && option.arrname === selectedDestination);
   if (selectedOption) {
     priceInput.value = selectedOption.price;
+    console.log(selectedOption.price);
   } else {
     priceInput.value = '';
   }
 }
 
-updateDestinationOptions();
+window.onload = function () {
+  updateDestinationOptions();
+};
 </script>
 	<%@ include file="includes/footer.jsp"%>
 
