@@ -86,7 +86,7 @@
 		<![CDATA[
 		select * from airplaneschedule 
 			where depname=#{dep} and arrname = #{arr} and depday > #{time} 
-			order by depday desc limit 1;
+			order by depday asc limit 1;
 		]]>
 	</select>
 	

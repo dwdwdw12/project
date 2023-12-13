@@ -190,11 +190,11 @@ p.btn.btn-default {
 		
 				
 			<c:if test="${empty depPrice}">
-				<section class="p-5 tm-container-outer tm-bg-gray">
+				<!-- <section class="p-5 tm-container-outer tm-bg-gray">
 					<h3 style="text-align: center;">일치하는 노선이 없습니다. <i class='fa fa-plane'></i><br>
 						다시 여정을 선택해주세요.</h3>
 					<br>
-				</section>
+				</section> -->
 			</c:if>
 		
 			<c:if test="${!empty dep&&empty list}">
@@ -216,9 +216,23 @@ p.btn.btn-default {
 				<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
 					다시 여정을 선택해주세요.
 				</h3><br>
-				<h5 style="text-align: center;">
-					가장 가까운 항공편은 <c:if test="${!empty closestFlightPrev.depDay}">${fn:substring(closestFlightPrev.depDay, 0,10)},</c:if>  ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
-				</h5>	
+				<c:if test="${!empty closestFlightPrev.depDay or closestFlightAfter.depDay}">
+					<c:if test="${!empty closestFlightPrev.depDay and empty closestFlightAfter.depDay}">
+						<h5 style="text-align: center;">
+							가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)} 입니다.					
+						</h5>	
+					</c:if>
+					<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+						<h5 style="text-align: center;">
+							가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+						</h5>	
+					</c:if>
+					<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+						<h5 style="text-align: center;">
+							가장 가까운 항공편은 ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+						</h5>	
+					</c:if>
+				</c:if>
 				</div>
 				</div>
 			</section>
@@ -269,9 +283,23 @@ p.btn.btn-default {
 						<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
 						다시 여정을 선택해주세요.</h3>
 						<br>	
-						<h5 style="text-align: center;">
-						가장 가까운 항공편은 <c:if test="${!empty closestFlightPrev.depDay}">${fn:substring(closestFlightPrev.depDay, 0,10)},</c:if>  ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.
-						</h5>
+						<c:if test="${!empty closestFlightPrev.depDay or closestFlightAfter.depDay}">
+							<c:if test="${!empty closestFlightPrev.depDay and empty closestFlightAfter.depDay}">
+								<h5 style="text-align: center;">
+									가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)} 입니다.					
+								</h5>	
+							</c:if>
+							<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+								<h5 style="text-align: center;">
+									가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+								</h5>	
+							</c:if>
+							<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+								<h5 style="text-align: center;">
+									가장 가까운 항공편은 ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+								</h5>	
+							</c:if>
+						</c:if>
 						
 					</c:if>
 					<c:forEach items="${list}" var="list">
@@ -354,9 +382,23 @@ p.btn.btn-default {
 		<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
 			다시 여정을 선택해주세요.</h3>
 		<br>	
-		<h5 style="text-align: center;">
-				가장 가까운 항공편은 <c:if test="${!empty closestFlightPrev.depDay}">${fn:substring(closestFlightPrev.depDay, 0,10)},</c:if>  ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.
-		</h5>
+		<c:if test="${!empty closestFlightPrev.depDay or closestFlightAfter.depDay}">
+			<c:if test="${!empty closestFlightPrev.depDay and empty closestFlightAfter.depDay}">
+				<h5 style="text-align: center;">
+					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)} 입니다.					
+				</h5>	
+			</c:if>
+			<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+				<h5 style="text-align: center;">
+					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+				</h5>	
+			</c:if>
+			<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+				<h5 style="text-align: center;">
+					가장 가까운 항공편은 ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+				</h5>	
+			</c:if>
+		</c:if>
 		</div>
 		</div>
 	</section>
