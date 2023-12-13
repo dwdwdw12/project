@@ -468,7 +468,7 @@ p.btn.btn-default {
 								</c:if>
 								<c:if test="${parsedMyDate.time-nowfmtTime>=(1000*60*30)}">
 								<td style="vertical-align: middle;"><button type="submit"
-										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기</button></td>
+										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기(${list.seatCount}석)</button></td>
 								</c:if>								
 								
 							</tr>

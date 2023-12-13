@@ -97,10 +97,10 @@ public class JoinController {
 	public String findId(String email, Model model, RedirectAttributes attr) {
 		String result = join.confirmEmail(email);
 		model.addAttribute("email", result); // 필요한가
-
+		
 		log.info("email >> " + email);
 		log.info("result >> " + result);
-
+		
 		if (result == null) {
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
 			return "/join/findId";
