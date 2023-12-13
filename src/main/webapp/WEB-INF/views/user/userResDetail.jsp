@@ -49,7 +49,7 @@
 <%-- 						<label for="dep">총 구매횟수 &nbsp;:&nbsp; ${count}번</label> 
 						<label for="dep">/ 총 구매금액 &nbsp;:&nbsp; <fmt:formatNumber
 								value="${totalPrice}" pattern="#,###" />원</label> --%>
-						<p class="mb-2">총 구매횟수 &nbsp;:&nbsp; <strong>${count}</strong>번</p>
+						<p class="mb-2">총 구매횟수 &nbsp;:&nbsp; <strong>${count-1}</strong>번</p>
 						<p class="mb-2">총 구매금액 &nbsp;:&nbsp; <strong><fmt:formatNumber
 								value="${totalPrice}" pattern="#,###" /></strong>원</p>
 					</div>

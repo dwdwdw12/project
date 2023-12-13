@@ -143,7 +143,7 @@
 						</label></th>
 						<td style="padding: 8px" id="korea_address"><input
 							type="text" id="sample6_postcode" name="postCode"
-							placeholder="우편번호" class="form-control"
+							placeholder="우편번호" class="form-control" oninput="handleOnInput(this, 6); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 							style="width: 200px; display: inline;"> <input
 							type="button" onclick="sample6_execDaumPostcode()"
 							id="input_address" value="우편번호 찾기" class="btn btn-primary"

@@ -29,16 +29,16 @@ p{
 </style>
 
 <div class="tm-page-wrap mx-auto" style="margin-top: 180px">
-	<section class="tm-banner">
+<!-- 	<section class="tm-banner">
 
-		<!-- .tm-container-outer -->
+		.tm-container-outer
 		<div class="inner">
 			<div class="slideshow">
 				<img src="../resources/img/kakao/둥둥섬2.jpg" alt="" width="1400"
 					height="550"/>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<section class="p-5 tm-container-outer tm-bg-gray">
 		<div class="container">
