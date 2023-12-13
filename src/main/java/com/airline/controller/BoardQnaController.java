@@ -114,6 +114,5 @@ public class BoardQnaController {
 		model.addAttribute("notAns", service.mynotAnwList(vo));
 		model.addAttribute("all", service.myAllList(vo));
 		}
-	
 	}
 }

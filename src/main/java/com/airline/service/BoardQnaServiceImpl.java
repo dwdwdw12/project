@@ -89,6 +89,7 @@ public class BoardQnaServiceImpl implements BoardQnaService{
 	@Override
 	public List<BoardQnaVO> questionList(int boardnum) {
 		return mapper.questionList(boardnum);
-	} 
+	}
+
 
 }
