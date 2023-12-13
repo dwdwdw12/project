@@ -92,7 +92,7 @@ tr:hover {
 }
 
 body {
-	width: 65%;
+	width: 1400px;
 	margin: 0 auto;
 	margin-top: 200px;
 	background-color: #EFEFEF;
@@ -258,23 +258,23 @@ hr {
 					<div class="mileInfo">
 						<c:choose>
 							<c:when test="${mile>=0 and mile <300000}">
-							어피치 등급까지
-							<fmt:formatNumber value="${300000-mile}" pattern="###,###,###" />
-							마일리지 남았습니다.
+								어피치 등급까지
+								<fmt:formatNumber value="${300000-mile}" pattern="###,###,###" />
+								마일리지 남았습니다.
 							</c:when>
 							<c:when test="${mile>=300000 and mile < 500000}">
-							라이언 등급까지 
-							<fmt:formatNumber value="${500000-mile}" pattern="###,###,###" />
-							마일리지 남았습니다.
+								라이언 등급까지 
+								<fmt:formatNumber value="${500000-mile}" pattern="###,###,###" />
+								마일리지 남았습니다.
 							</c:when>
 							<c:when test="${mile>=500000 and mile <1000000}">
-							춘식이 등급까지 
-							<fmt:formatNumber value="${1000000-mile}" pattern="###,###,###" />
-							 마일리지 남았습니다.
+								춘식이 등급까지 
+								<fmt:formatNumber value="${1000000-mile}" pattern="###,###,###" />
+								 마일리지 남았습니다.
 							</c:when>
 							<c:otherwise>
 								<fmt:formatNumber value="${mile}" pattern="###,###,###" />
-							마일리지를 보유하여 춘식이 등급입니다.
+								마일리지를 보유하여 춘식이 등급입니다.
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -411,7 +411,7 @@ hr {
 		</table>
 		<div class="VIPinform">
 			1) 춘식이 전용 짐부치는 곳을 이용할 수 있습니다.<br> 2) 미주 노선 일반석은 제외 됩니다.<br>
-			3) 춘식이 등급 회원은 대한항공 직영 프레스티지 클래스 라운지를 2년동안 총 4회 이용할 수 있습니다.<br>
+			3) 춘식이 등급 회원은 항공사 직영 프레스티지 클래스 라운지를 2년동안 총 4회 이용할 수 있습니다.<br>
 			4) 서비스센터, 지점에서 보너스 항공권을 구매 혹은 변경 하시는 경우 '항공권 서비스 수수료'가 부과됩니다.<br>
 		</div>
 		<br> <br> <br>

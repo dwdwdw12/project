@@ -60,6 +60,8 @@
 	border: none;
 	font-size: 12px;
 }
+
+
 </style>
 </head>
 
@@ -88,7 +90,7 @@
 											<li><a href="/user">myPage(user)<i class="ti-angle-down"></i></a>
 
 												<ul class="submenu" style="width: 230px;">
-													<li><a href="/user/myInfoModify">회원정보 조회/수정</a></li>
+													<li><a href="/user/myPage">회원정보 조회/수정</a></li>
 													<li><a href="/user/mileage">마일리지 조회</a></li>
 													<li><a href="/user/chargePoint">포인트 충전</a></li>
 
@@ -108,22 +110,21 @@
 										</li>
 										</c:if>
 										
-										<li><a href="/flight/search">flight<i
+										<li><a href="/flight/search">Flights<i
 												class="ti-angle-down"></i></a>
 											<ul class="submenu" style="width: 220px;">
 												<li><a href="/flight/search">항공편 검색/예약</a></li>
-												<li><a href="single-blog.html">AirPort</a></li>
 												<li><a href="single-blog.html">Price Information</a></li>
 												<li><a href="/flight/flightDepArrSearch">출도착 조회</a></li>
 												<li><a href="/memberGrade">회원 등급 안내</a></li>
 											</ul>
 										</li>
 										
-										<li><a href="/notice/list">board<i class="ti-angle-down"></i></a>
+										<li><a href="/notice/list">Boards<i class="ti-angle-down"></i></a>
 											<ul class="submenu">
 												<li><a href="/notice/list">공지사항</a></li>
-												<li><a href="/boardEvent/list">이벤트 </a></li>
 												<li><a href="/qna/list">Q&A</a></li>
+												<li><a href="/boardEvent/list">이벤트 </a></li>
 												<li><a href="/boardDiary/list">여행일기</a></li>
 												
 											</ul>
@@ -227,6 +228,9 @@
 		$("#adminTalk").on("click", function() {
 			window.open(link);
 		});
+		
+		
+		
 	</script>
 
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -277,6 +281,7 @@
 			js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
 			js.crossOrigin = 'anonymous';
 			fjs.parentNode.insertBefore(js, fjs);
+			document.getElementsById('aaaaa').classList.toggle('show');
 		})(document, 'script', 'kakao-js-sdk');
 	</script>
 	<!-- header-end -->

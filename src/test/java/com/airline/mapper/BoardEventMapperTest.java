@@ -1,6 +1,8 @@
 package com.airline.mapper;
 
-import static org.junit.Assert.*; 
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +38,12 @@ public class BoardEventMapperTest {
 		cri.setKeyword("test");
 		
 		mapper.getListwithPaging(cri).forEach(board->log.info(board));
+	}
+	
+	@Test
+	public void getListPastEventTest() {
+		Criteria cri = new Criteria();
+		mapper.getListPastEvent(cri).forEach(board->log.info(board));
 	}
 	
 	@Test
@@ -88,6 +96,17 @@ public class BoardEventMapperTest {
 	@Test
 	public void updateReadCountTest() {
 		int result = mapper.updateReadCount(3);
+		log.info("result : " + result);
+	}
+	
+	@Test
+	public void getListOverDueTest() {
+		mapper.getListOverDue("2025-01-01").forEach(board->log.info(board));
+	}
+	
+	@Test
+	public void updateOngoingTest() {
+		int result = mapper.updateOngoing(76);
 		log.info("result : " + result);
 	}
 

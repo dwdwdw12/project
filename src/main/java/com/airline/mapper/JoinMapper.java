@@ -52,8 +52,8 @@ public interface JoinMapper {
 	
 	public KakaoUserVO kakaoLoginCheck(@Param("email") String email, @Param("userId") String userId);
 
-	public void registerBasicTerms(String userId);
-	public void registerAllTerms(String userId);
+	public void insertBasicTerms(String userId);
+	public void insertAllTerms(String userId);
 
 	public void insertAuthorityMEMBER(String userId); // Authorities 테이블에 insert 
 	public List<SimpleGrantedAuthority> getAuthorities(String email);

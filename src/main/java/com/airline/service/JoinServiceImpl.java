@@ -346,12 +346,12 @@ public class JoinServiceImpl implements JoinService {
 
 	@Override
 	public void registerBasicTerms(String userId) {
-		join.registerBasicTerms(userId);
+		join.insertBasicTerms(userId);
 	}
 
 	@Override
 	public void registerAllTerms(String userId) {
-		join.registerAllTerms(userId);
+		join.insertAllTerms(userId);
 	}
 
 	@Override

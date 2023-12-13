@@ -24,13 +24,13 @@ public class MailSendServiceImpl implements MailSendService{
 	private MailSendMapper mailSendMapper;
 
 	@Override
-	public void updateMailKey(Map<String, String> params) throws Exception {
+	public void modifyMailKey(Map<String, String> params) throws Exception {
 		mailSendMapper.updateMailKey(params);
 	}
 
 	@Override
-	public void resetMailKey(String email) throws Exception {
-		mailSendMapper.resetMailkey(email);
+	public void removeMailKey(String email) throws Exception {
+		mailSendMapper.resetMailKey(email);
 	}
 
 

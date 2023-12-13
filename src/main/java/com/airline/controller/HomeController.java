@@ -1,5 +1,7 @@
 package com.airline.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,16 +19,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airline.service.AdminService;
 import com.airline.service.BoardEventService;
@@ -146,7 +151,8 @@ public class HomeController {
 	
 	//로그인->spring 페이지로 뺄까..?
 	@GetMapping("/login")
-	public void login(String error, String logout, Model model, HttpServletRequest request) {
+	@PreAuthorize("isAnonymous()") //로그인한경우 login페이지에 접근하지 못하게 하려했으나 에러페이지로 넘어가는 문제 발생..
+	public void login(String error, String logout, Model model, HttpServletRequest request, HttpSession session) {
 		log.info("error>>"+error);
 		log.info("logout>>"+logout);
 		log.info("login page");
@@ -164,6 +170,7 @@ public class HomeController {
 	    if (uri != null && !uri.contains("/login")) {
 	        request.getSession().setAttribute("prevPage", uri);
 	    }
+
 		
 	}
 		
@@ -319,6 +326,14 @@ public class HomeController {
 			int mile = user.getMileage(userid);
 			model.addAttribute("mile", mile);
 		}
+	}
+	
+	@GetMapping("/error/accessError")
+	@CrossOrigin("http://localhost:8081/error/accessError")
+	public String accessError(RedirectAttributes attr, HttpSession session) {
+		if(session.getAttribute("loginUser") != null)
+			return "redirect:/";
+		return "/error/accessError";
 	}
 
 }

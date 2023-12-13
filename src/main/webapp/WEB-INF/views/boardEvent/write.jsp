@@ -67,6 +67,7 @@
 	
 	 <div class="p-5 tm-container-outer tm-bg-gray">
 		<h2>이벤트 등록</h2>
+		<hr class="hr1" noshade>
 		<form action="/boardEvent/write" role="form" method="post" name="frm" >
 			<div class="form-group">
 				<label for="boardTitle">제목</label> 
@@ -278,11 +279,11 @@ $(document).ready(function(e){
 	function checkExtension(filename, fileSize){
 		
 		if(fileSize>=maxSize){
-			alert("파일 사이즈 초과");
+			alert("파일 사이즈를 초과하였습니다");
 			return false;
 		}
 		if(regex.test(filename)){
-			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			alert("해당 종류의 파일은 업로드할 수 없습니다");
 			return false;
 		}
 		return true;
@@ -350,7 +351,7 @@ $(document).ready(function(e){
 			type: 'POST',
 			success: function(result)
 			{
-				alert(result);
+				alert("삭제가 완료되었습니다");
 				targetLi.remove();
 				$("#"+targetId).val("");
 //				$("#"+targetId).replaceWith($("#"+targetId).clone(true)); //IE에서 동작하지 않으면 사용하기

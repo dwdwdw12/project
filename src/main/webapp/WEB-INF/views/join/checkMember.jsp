@@ -16,8 +16,12 @@
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+
+
+
 <meta name="referrer" content="no-referrer-when-downgrade" />
 
+<body>
 <div class="tm-main-content" id="top">
 	<div class="tm-page-wrap mx-auto" style="margin-top : 180px;">
 		<section class="tm-banner">
@@ -31,7 +35,7 @@
 			<!-- .tm-container-outer -->
 		</section>
 
-		<section class="tm-page-wrap-allwhite">
+		<section class="p-5 tm-container-outer tm-bg-gray">
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
@@ -42,7 +46,7 @@
 							<br> <br>
 						</div>
 						<form action="/join/checkMember" name="frm" method="post"
-							class="tm-contact-form" style="position: inherit; width: 570px;">
+							style="position: inherit; width: 570px;">
 							<!-- class="tm-contact-form" -->
 							<table class="table_form" style="margin: auto">
 
@@ -67,7 +71,8 @@
 											name="userNameE"></td>
 									</tr>
 									<tr>
-										<th scope="row" style="text-align: left;">성별</th>
+										<th scope="row" style="text-align: left;"><label
+											for="gender_man">성별</label></th>
 
 										<td>
 											<div class="form-control">
@@ -107,8 +112,7 @@
 							<hr>
 							<input type="hidden" name="termsAgree" value="${termsAgree}"> <br>
 								
-							<button type="submit" id="checkMemberBtn" class="btn btn-primary"
-								>확인</button>
+							<button type="button" id="checkMemberBtn" class="btn btn-primary" onclick="return formCheck()">확인</button>
 						</form>
 
 
@@ -130,32 +134,36 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$("#checkMemberBtn").on("click", function(e){ //값이 비었는지 확인
-		e.preventDefault();
+	//$("#checkMemberBtn").on("click", function(e){ //값이 비었는지 확인
+	function formCheck() {
+		//e.preventDefault();
 		
 		var regfirst = /^(?=.*[0-9]).{6,7}$/;
 		var reglast = /^(?=.*[0-9]).{7,8}$/;
-
-		if (document.frm.userNameE.value.length == 0) {
-			alert("영문 명을 입력해주세요.");
-			return false;
-		}
+		var frm = document.frm;
+		
 		if (document.frm.userNameK.value.length == 0) {
 			alert("한글 명을 입력해주세요.");
 			return false;
 		}
-		if (document.frm.userReginumFirst.value.length == 0) {
-			alert("주민등록번호를 입력해주세요.");
+		if (document.frm.userNameE.value.length == 0) {
+			alert("영문 명을 입력해주세요.");
 			return false;
 		}
-		if (document.frm.userReginumLast.value.length == 0) {
-			alert("주민등록번호를 입력해주세요.");
+		
+		if (document.frm.userReginumFirst.value.length == 0||document.frm.userReginumFirst.value.length < 6) {
+			alert("주민등록번호를 확인해주세요.");
+			return false;
+		}
+		if (document.frm.userReginumLast.value.length == 0||document.frm.userReginumLast.value.length < 7) {
+			alert("주민등록번호를 확인해주세요.");
 			return false;
 		}
 		
 		frm.submit();
 	
-	});
+	}
+	//);
 
 	function handleOnInput(el, maxlength) {
 		if (el.value.length > maxlength) {
@@ -171,5 +179,3 @@
 
 
 </script>
-</body>
-</html>

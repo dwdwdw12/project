@@ -100,12 +100,12 @@
 	where mail = #{email} and a.userId = #{userId}
 </select>
 
-<insert id="registerBasicTerms">
+<insert id="insertBasicTerms">
 	insert into termsmanage(userid, termsCode, agree)
 	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'N')  
 </insert>
 
-<insert id="registerAllTerms">
+<insert id="insertAllTerms">
 	insert into termsmanage(userid, termsCode, agree)
 	values(#{userId}, 1, 'Y'), (#{userId}, 2, 'Y'), (#{userId}, 3, 'Y'), (#{userId}, 4, 'Y')  
 </insert>

@@ -14,6 +14,8 @@ public interface BoardEventMapper {
 
 	public List<BoardEventVO> getListwithPaging(Criteria cri);
 
+	public List<BoardEventVO> getListPastEvent(Criteria cri);
+
 	public BoardEventVO get(int boardNum);
 
 	public int insert(BoardEventVO vo);
@@ -24,8 +26,14 @@ public interface BoardEventMapper {
 	
 	public int getTotalCount(Criteria cri);
 
+	public int getTotalCountPastEvent(Criteria cri);
+
 	public int updateReadCount(int boardNum);
 	
 	int updateRepImg(@Param("repImg") String repImg, @Param("filePath") String filePath, @Param("boardNum") int boardNum);
+	
+	public List<BoardEventVO> getListOverDue(String time);
+	
+	public int updateOngoing(int boardNum);
 	
 }

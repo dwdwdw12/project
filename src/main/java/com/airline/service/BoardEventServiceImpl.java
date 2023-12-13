@@ -29,6 +29,12 @@ public class BoardEventServiceImpl implements BoardEventService{
 		return mapper.getListwithPaging(criteria);
 	}
 
+	@Override
+	public List<BoardEventVO> getListPastEvent(Criteria criteria) {
+		log.info("get list with paging service");
+		return mapper.getListPastEvent(criteria);
+	}
+
 	@Transactional
 	@Override
 	public BoardEventVO get(int boardNum) {
@@ -102,6 +108,12 @@ public class BoardEventServiceImpl implements BoardEventService{
 	}
 
 	@Override
+	public int getTotalCountPastEvent(Criteria cri) {
+		log.info("getTotalCountPastEvent");
+		return mapper.getTotalCountPastEvent(cri);
+	}
+
+	@Override
 	public List<BoardEventFileVO> getFileList(int boardNum) {
 		log.info("get file list by boardNum" + boardNum);
 		return fileMapper.searchFileByBoardNum(boardNum);
@@ -111,6 +123,18 @@ public class BoardEventServiceImpl implements BoardEventService{
 	public List<BoardEventFileVO> getRepImgList() {
 		log.info("getRepImg service impl");
 		return fileMapper.findRepImgFiles();
+	}
+
+	@Override
+	public List<BoardEventVO> getListOverDue(String time) {
+		log.info("getListOverDue service impl");
+		return mapper.getListOverDue(time);
+	}
+
+	@Override
+	public int updateOngoing(int boardNum) {
+		log.info("updateOngoing service impl");
+		return mapper.updateOngoing(boardNum);
 	}
 	
 	

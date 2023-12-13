@@ -384,6 +384,9 @@ public class FlightController {
 			}
 			System.out.println("oriCode>>"+oriCode + ":" +getCode );
 			//flightSum이 grade 테이블의 gradeStandard 이상인 gradeCode를 가져와 kakaoUser 테이블에 업데이트
+			
+			
+			flights.updateSeatCount(vo.getFlightName(), vo.getDepDay().substring(0,10));
 		}
 		
 		//getRescomplete으로 리다이렉트(예약정보 가져오기)
@@ -552,7 +555,6 @@ public class FlightController {
 	//검색어 자동완성 - 출발지
 	@GetMapping(value = "/getDistinctDep")
 	@ResponseBody
-//	public String getDistinctDep(String searchValue, String depRegionCode){
 	public List<String> getDistinctDep(String searchValue, String depRegionCode){
 		log.info("getDistinctDep... ");
 		List<String> list = flights.getDistinctDep(searchValue, depRegionCode);
@@ -560,8 +562,6 @@ public class FlightController {
 			log.info(str);
 		}
 		
-//		Gson gson = new Gson();
-//		return gson.toJson(list);
 		return list;
 	}
 	
@@ -575,8 +575,6 @@ public class FlightController {
 			log.info(str);
 		}
 		
-		//Gson gson = new Gson();
-		//return gson.toJson(list);
 		return list;
 	}
 	

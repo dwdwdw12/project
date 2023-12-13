@@ -38,7 +38,7 @@
 #searchTable th {
     text-align: center;
     top: 0px;
-    background-color: gray !important;
+    background-color: #FFC107 !important;
 }
 td {
 	text-align: center;
@@ -57,16 +57,17 @@ td {
 	<section class="p-5 tm-container-outer tm-bg-gray">
 	<h2>출도착 조회</h2>
 		<div class="container">
-		<ul class="list_type3 border">
-			<li>아시아나 운항 항공편에 한하여 조회가 가능하며, 공동 운항편 또는 외항사의 출도착 정보는 해당 항공사 홈페이지에서 조회하시기 바랍니다. </li>
-			<li>출/도착 일자 및 시간은 현지 시간 기준입니다.</li>
-		</ul>
 		
 			<form action="/flight/flightDepArrSearch" method="get" class="tm-search-form tm-section-pad-1">
+				<ul class="list_type3 border">
+					<li>-아시아나 운항 항공편에 한하여 조회가 가능합니다.</li> 
+					<li>-공동 운항편 또는 외항사의 출도착 정보는 해당 항공사 홈페이지에서 조회하시기 바랍니다.</li>
+					<li>-출/도착 일자 및 시간은 현지 시간 기준입니다.</li>
+				</ul>
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="route" style="width: 100px;">노선</button> 
 				<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="fName" style="width: 100px;">편명</button>
 				<br><br>
-				<p>아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
+				<p>검색창에서 아래 방향키를 눌러, 취항지를 확인할 수 있습니다.</p>
 				<div class="form-row tm-search-form-row" id="searchText">
 					<c:if test="${empty flightName}">
 						<%-- <div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
@@ -146,6 +147,10 @@ td {
 			
 			<div class="container">
 				<c:if test="${empty list&&!empty arr}">
+						<h3 style="text-align: center;">조회 가능한 항공편이 없습니다. &nbsp;<i class='fas fa-plane-departure'></i><br>
+						다시 여정을 선택해주세요.</h3>	
+				</c:if>
+				<c:if test="${empty list&&!empty flightName}">
 						<h3 style="text-align: center;">조회 가능한 항공편이 없습니다. &nbsp;<i class='fas fa-plane-departure'></i><br>
 						다시 여정을 선택해주세요.</h3>	
 				</c:if>
@@ -276,7 +281,7 @@ td {
 		        },
 		        minLength: 2,// 최소 글자수
 		        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-		        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+		        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 		        close : function(event){    //자동완성창 닫아질때 호출
 		            console.log(event);
 		        }  
@@ -364,7 +369,7 @@ td {
 		        },
 		        minLength: 0,// 최소 글자수
 		        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-		        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+		        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 		        close : function(event){    //자동완성창 닫아질때 호출
 		            console.log(event);
 		        }  
@@ -411,7 +416,7 @@ td {
 		        },
 		        minLength: 0,// 최소 글자수
 		        autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-		        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+		        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 		        close : function(event){    //자동완성창 닫아질때 호출
 		            console.log(event);
 		        }  
@@ -521,7 +526,7 @@ td {
 //		  	        classes: {    //잘 모르겠음
 //		  	            "ui-autocomplete": "highlight"
 //		  	        },
-		  	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+		  	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //		  	        disabled: true, //자동완성 기능 끄기
 //		  	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
 		  	        close : function(event){    //자동완성창 닫아질때 호출
@@ -658,7 +663,7 @@ $jb(function() {    //화면 다 뜨면 시작
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
 //        },
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //        disabled: true, //자동완성 기능 끄기
 //        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
         close : function(event){    //자동완성창 닫아질때 호출
@@ -710,7 +715,7 @@ $jb(function() {    //화면 다 뜨면 시작
 //       classes: {    //잘 모르겠음
 //           "ui-autocomplete": "highlight"
 //       },
-       delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+       delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //       disabled: true, //자동완성 기능 끄기
 //       position: { my : "right top", at: "right bottom" },    //잘 모르겠음
        close : function(event){    //자동완성창 닫아질때 호출
@@ -760,7 +765,7 @@ $jb(function() {    //화면 다 뜨면 시작
         },
         minLength: 0,// 최소 글자수
         autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
         close : function(event){    //자동완성창 닫아질때 호출
             console.log(event);
         }  
@@ -814,7 +819,7 @@ var fname = $jb(function() {    //화면 다 뜨면 시작
 //        classes: {    //잘 모르겠음
 //            "ui-autocomplete": "highlight"
 //        },
-        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //        disabled: true, //자동완성 기능 끄기
 //        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
         close : function(event){    //자동완성창 닫아질때 호출
@@ -880,7 +885,7 @@ $("#arrRegionCode").on("click", function(){
 //  	        classes: {    //잘 모르겠음
 //  	            "ui-autocomplete": "highlight"
 //  	        },
-  	        delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+  	        delay: 200,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 //  	        disabled: true, //자동완성 기능 끄기
 //  	        position: { my : "right top", at: "right bottom" },    //잘 모르겠음
   	        close : function(event){    //자동완성창 닫아질때 호출

@@ -9,6 +9,8 @@ import com.airline.vo.Criteria;
 public interface BoardEventService {
 
 	public List<BoardEventVO> getListwithPaging(Criteria criteria);
+
+	public List<BoardEventVO> getListPastEvent(Criteria criteria);
 	
 	public BoardEventVO get(int boardNum);
 	
@@ -19,9 +21,15 @@ public interface BoardEventService {
 	public boolean update(BoardEventVO board);	
 	
 	public int getTotalCount(Criteria cri);
+
+	public int getTotalCountPastEvent(Criteria cri);
 	
 	public List<BoardEventFileVO> getFileList(int boardNum);
 	
 	public List<BoardEventFileVO> getRepImgList();
+	
+	public List<BoardEventVO> getListOverDue(String time);
+	
+	public int updateOngoing(int boardNum);
 	
 }

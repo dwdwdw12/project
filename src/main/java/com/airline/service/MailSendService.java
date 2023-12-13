@@ -9,8 +9,8 @@ import com.airline.vo.KakaoUserVO;
 
 public interface MailSendService {
 
-	public void updateMailKey(Map<String, String> params) throws Exception;
-	public void resetMailKey(String email) throws Exception;
+	public void modifyMailKey(Map<String, String> params) throws Exception;
+	public void removeMailKey(String email) throws Exception;
 	
 	
 }
