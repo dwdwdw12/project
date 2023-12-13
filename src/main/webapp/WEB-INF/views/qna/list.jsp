@@ -20,8 +20,8 @@
 <link rel="stylesheet" type="text/css" 
 	href="/resources/slick/slick-theme.css" />  
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">    
-<link rel="stylesheet"   
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"   
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
 <script 
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
@@ -66,6 +66,11 @@ th {
 th, td {
 	border-bottom: 1px solid #d3d3d3;
 	padding: 10px;
+	
+}
+
+th {
+	text-align: center;
 }
 
 tr:hover {
@@ -73,10 +78,10 @@ tr:hover {
 }
 
 body {
-	width: 65%;
+	/* width: 65%;
 	margin: 0 auto;
-	margin-top : 180px;
-	background-color:#EFEFEF;
+	margin-top : 180px; 
+	background-color:#EFEFEF;*/
 }
 
 .greylist {
@@ -124,14 +129,16 @@ font: bold;
 }
 </style>
 </head>
-<body>
+<body style="margin-top : 180px;">
+<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1400px; margin: 0 auto; ">
 	<h2><a href="/qna/list">고객센터 게시판</a></h2>
 
 	<hr class="hr1" noshade>
 
 	<br>
-	총 ${page.total}개의 글이 있습니다.
 	<form action="/qna/list" id="searchForm" method="get">
+		<span style="text-align: left; font-size: 15px">▷ 총 ${page.total}개의 글이 있습니다. </span>
+		<span style="float: right;">
 		<select name="type">
 			<option value="T" <c:out value="${page.cri.type eq 'T' ? 'selected' : ''}"/> >제목</option>
 			<option value="C" >내용</option>
@@ -140,14 +147,10 @@ font: bold;
 		<input type="text" name="keyword" <c:out value="${page.cri.keyword}"/>>
 		<input type="hidden" name="pageNum" value="${page.cri.pageNum}">
 		<input type="hidden" name="amount" value="${page.cri.amount}">
-		<button class="btn btn-warning btn-xs" >검색</button>
+		<button class="gradient" >검색</button>
+		</span>
+		<br><br>
 	</form>
-	<c:if test="${!empty loginUser.admin}">
-		<button data-oper="myAns" class="gradient right" id="myAns" type="submit">내글보기</button>
-		<input type="hidden" name="boardwriter" value="${loginUser.userNick}">
-		
-		<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
-	</c:if>
 	
 	<c:if test="${empty loginUser.admin }">
 		<span style="color:red;" class="right">로그인 후 글 작성이 가능합니다.</span>
@@ -164,14 +167,22 @@ font: bold;
 		
 			<c:forEach var="item" items="${list}">
 						<tr>	
-							<td>${item.boardnum}</td>
-							<td><a class="move" href="/qna/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
-							<td>${item.regidate }</td>
-							<td>${item.boardwriter}</td>
-							<td>${item.readcount}</td>
+							<td style="text-align: center;">${item.boardnum}</td>
+							<td ><a class="move" href="/qna/read?boardnum=${item.boardnum}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">${item.boardsubject }</a></td>
+							<td style="text-align: center;">${item.regidate }</td>
+							<td style="text-align: center;">${item.boardwriter}</td>
+							<td style="text-align: center;">${item.readcount}</td>
 						</tr>
 			</c:forEach>
 	</table>
+	<div>
+		<c:if test="${!empty loginUser.admin}">
+			<button data-oper="myAns" class="gradient right" id="myAns" type="submit">내글보기</button>
+			<input type="hidden" name="boardwriter" value="${loginUser.userNick}">
+			
+			<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
+		</c:if>
+	</div>
 	<br>
 
  <div class="container">
@@ -223,7 +234,7 @@ font: bold;
 			</ul>
 			
 		 </div>
-			
+	</div>	
 
 
 

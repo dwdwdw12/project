@@ -7,19 +7,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="/resources/css/templatemo-style.css">
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+
+<!-- <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">  -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="/resources/css/searchbar.css">
@@ -31,52 +33,15 @@
 <script type="text/javascript" src="/resources/js/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/resources/css/summernote-lite.css">
 <script type="text/javascript" src="/resources/js/summernote-lite.js"></script>
-
+<link rel="stylesheet" href="/resources/css/templatemo-style.css">
 <title>게시판</title>
 <style>
-h2 {
-	font-weight: bold;
-}
-
-.hr1 {
-	border: 0;
-	height: 2px;
-	background: #d3d3d3;
-}
-
-.grey {
-	color: #727272;
-}
-
-#strong {
-	font-weight: 900;
-}
-
-table {
-	width: 100%;
-	border: none;
-	border-collapse: collapse;
-}
-
-th {
-	background-color: #FFC107;
-	border-top: 3px solid #727272;
-}
-
-th, td {
-	border-bottom: 1px solid #d3d3d3;
-	padding: 10px;
-}
-
-tr:hover {
-	background-color: #F5F5F5;
-}
 
 body {
-	width: 100%;
+	/* width: 1400px;
 	margin: 0 auto;
 	margin-top : 180px;
-	background-color:#EFEFEF;
+	background-color:#EFEFEF; */
 }
 
 .greylist {
@@ -119,31 +84,33 @@ a {
 }
 </style>
 </head>
-<body>
+<body style=" margin-top : 180px;">
 
-	<div class="py-4 px-2 w-3/5 m-auto">
+	<div class="p-5 tm-container-outer tm-bg-gray">
+		<h2>공지사항 등록</h2>
+		<hr class="hr1" noshade>
 		<form action="/notice/register" method="post" name="frm" >
 
 			<div
-				class="max-w-full bg-white rounded-lg overflow-hidden md:max-w-full">
-				<div class="md:flex">
-					<div class="w-full px-1 py-1">
+				class="">
+				<div>
+					<div class="form-group">
 
-						<div class="mb-1">
+						<div class="">
 							<span class="text-sm">제목</span> 
 							<input type="text"	name="boardsubject"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
+								class="form-control">
 						</div>
 					
 						
-						<div class="mb-1">
+						<div class="">
 							<span class="text-sm">작성자</span> 
 							<input type="text"  value="${loginUser.userNick }"
-								class="h-12 px-3 w-full border-yellow-400 border-2 rounded focus:outline-none focus:border-blue-600">
+								class="form-control" readonly="readonly">
 							<input type="hidden" name="boardwriter" value="${loginUser.userId }">
 						</div>
 						
-						<div class="mb-1">
+						<div class="">
 							<span class="text-sm">내용</span>
 								<textarea class="summernote" name="boardcontent"></textarea>
 						</div>
@@ -158,13 +125,12 @@ a {
 							<option value="2">팝업공지</option>
 						</select> 
 						
-							<input
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-green-700"
-								type="reset" value="다시 작성">
+							<button class="gradient" id="listBtn" type="submit">목록</button>
 							<button
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="listBtn" type="submit">목록</button>
+								class="gradient"
+								type="reset" >다시 작성</button>
 							<button
-								class="ml-2 h-10 w-24 bg-yellow-400 rounded text-white hover:bg-blue-700" id="regBtn" type="submit"
+								class="gradient" id="regBtn" type="submit"
 								onclick= "return boardnoticeCheck()">등록</button>
 						</div>
  

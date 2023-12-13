@@ -39,6 +39,10 @@
 		text-align: center;
 	}
 	
+	a {
+	color: black;
+	text-decoration-line: none;
+	}
 	
 	.gradient {
 	width: 80px;

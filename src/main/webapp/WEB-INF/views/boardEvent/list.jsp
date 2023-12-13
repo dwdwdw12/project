@@ -34,6 +34,11 @@
 	border-top: 3px solid #727272;
 	}
 	
+	a {
+	color: black;
+	text-decoration-line: none;
+	}
+	
 	.gradient {
 	width: 80px;
 	height: 30px;
@@ -61,7 +66,7 @@
 	</div>
 	<div>   
 		<form action="/boardEvent/list" method="get" id="searchForm" name="searchForm">
-		<span style="text-align: left;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
+		<span style="text-align: left; font-size: 15px">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
 		<span style="float: right;">
         <select name="type" class="type-box">
 			<option value="boardTitle" <c:if test="${paging.cri.type =='boardTitle'}">selected="selected"</c:if> >제목</option>
@@ -103,7 +108,11 @@
 			</c:if>
 	
 		</table>
-			
+		<div class="mt-3 text-right">
+			<c:if test="${loginUser.admin==1}">
+				<input type="button" class="gradient" onclick="location.href='/boardEvent/write'" value="글쓰기">
+			</c:if>
+		</div>
 			<ul class="pagination pagination justify-content-center">
 					<!--nowpage->page  --> 
 					<c:choose>
@@ -151,12 +160,8 @@
 			</ul>
 			
 			
-		<div class="mt-3 text-right">
-		<c:if test="${loginUser.admin==1}">
-			<input type="button" class="gradient" onclick="location.href='/boardEvent/write'" value="글쓰기">
-		</c:if>
+		
 		<br><br>
-	</div>
 	</div>
 	
 	<%@ include file="../includes/footer.jsp"%>

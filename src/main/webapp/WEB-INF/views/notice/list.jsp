@@ -20,8 +20,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/slick/slick-theme.css" />   
 <link rel="stylesheet" href="/resources/css/templatemo-style.css"> 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
@@ -63,11 +63,13 @@ table {
 th {
 	background-color: #FFC107;
 	border-top: 3px solid #727272;
+	
 }
 
 th, td {
 	border-bottom: 1px solid #d3d3d3;
 	padding: 10px;
+	text-align: center;
 }
 
 tr:hover {
@@ -75,12 +77,12 @@ tr:hover {
 }
 
 body {
-	width: 65%;
+	/* width: 1400px;
 	margin: 0 auto;
-	margin-top : 180px;
-	background-color:#EFEFEF;
-
-}
+	margin-top : 180px; 
+	background-color:#EFEFEF;*/
+	
+} 
 
 .greylist {
 	width: 50px;
@@ -128,16 +130,16 @@ font: bold;
 
 </style>
 </head>
-<body>
-<div class="nightcolor">
+<body style="margin-top : 180px;">
+<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1400px; margin: 0 auto; ">
 	<h2><a href="/notice/list">공지사항 게시판</a></h2>
 
 	<hr class="hr1" noshade>
 
 	<br>
-	총 ${page.total}개의 글이 있습니다.
-</div>
 	<form action="/notice/list" id="searchForm" method="get">
+		<span style="text-align: left; font-size: 15px">▷ 총 ${page.total}개의 글이 있습니다. </span>
+		<span style="float: right;">
 		<select name="type">
 			<option value="T" <c:out value="${page.cri.type eq 'T' ? 'selected' : ''}"/> >제목</option>
 			<option value="C" >내용</option>
@@ -146,16 +148,19 @@ font: bold;
 		<input type="text" name="keyword" />
 		<input type="hidden" name="pageNum" value="${page.cri.pageNum}">
 		<input type="hidden" name="amount" value="${page.cri.amount}">
-		<button class="btn btn-warning btn-xs" >검색</button>
+		<button class="gradient" >검색</button>
+		</span>
+		<br><br>
 	</form>
 	
-	
-	<c:if test="${loginUser.admin ==1}">
-		<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
-	</c:if>
-	<c:if test="${loginUser.admin ==1}">
-		<button data-oper="popupList" class="gradient right" id="popupList" type="submit">팝업공지</button>
-	</c:if>
+	<%-- <div>
+		<c:if test="${loginUser.admin ==1}">
+			<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
+		</c:if>
+		<c:if test="${loginUser.admin ==1}">
+			<button data-oper="popupList" class="gradient right" id="popupList" type="submit">팝업공지</button>
+		</c:if>
+	</div> --%>
 	  
 	<table id="listTable">
 		<tr> 
@@ -191,6 +196,14 @@ font: bold;
 				</c:if>		
 			</c:forEach>
 	</table>
+	<div>
+		<c:if test="${loginUser.admin ==1}">
+			<button data-oper="register" class="gradient right" id="register" type="submit">글쓰기</button>
+		</c:if>
+		<c:if test="${loginUser.admin ==1}">
+			<button data-oper="popupList" class="gradient right" id="popupList" type="submit">팝업공지</button>
+		</c:if>
+	</div>
 	<br>
 
  <div class="container">
@@ -243,7 +256,7 @@ font: bold;
 			
 		 </div>
 			
-
+	</div>
 
 
 	<form action="/notice/list" method="get" id="actionForm">

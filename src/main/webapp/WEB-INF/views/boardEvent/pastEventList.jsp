@@ -49,6 +49,10 @@
 	height: 2px;
 	background: #d3d3d3;
 	}
+	a {
+	color: black;
+	text-decoration-line: none;
+	}
 </style>
 </head>
 <body style=" margin-top : 180px;">
@@ -61,7 +65,7 @@
 	</div>
 	<div>   
 		<form action="/boardEvent/list" method="get" id="searchForm" name="searchForm">
-		<span style="text-align: left;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
+		<span style="text-align: left; font-size: 15px;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
 		<span style="float: right;">
         <select name="type" class="type-box">
 			<option value="boardTitle" <c:if test="${paging.cri.type =='boardTitle'}">selected="selected"</c:if> >제목</option>

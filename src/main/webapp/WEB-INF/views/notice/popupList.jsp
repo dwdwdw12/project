@@ -20,8 +20,8 @@
 <link rel="stylesheet" type="text/css"  
 	href="/resources/slick/slick-theme.css" /> 
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
-<link rel="stylesheet"  
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">  
+<!-- <link rel="stylesheet"  
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">   -->
 <script  
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
@@ -73,10 +73,10 @@ tr:hover {
 }
 
 body {
-	width: 65%;
+	/* width: 1400px;
 	margin: 0 auto;
-	margin-top : 180px;
-	background-color:#EFEFEF;
+	margin-top : 180px; 
+	background-color:#EFEFEF;*/
 }
 
 .greylist {
@@ -124,7 +124,8 @@ font: bold;
 }
 </style>
 </head>
-<body>
+<body style="margin-top : 180px;">
+<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1400px; margin: 0 auto; ">
 	<h2>팝업 공지</h2>
 
 	<hr class="hr1" noshade>
@@ -222,7 +223,7 @@ font: bold;
 			</ul>
 			
 		 </div>
-			
+		</div>	
 
 
 
