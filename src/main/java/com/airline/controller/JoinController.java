@@ -488,7 +488,7 @@ public class JoinController {
 	@PostMapping("/kakaoMemberInfo")
 	public String kakaoMemberInfo(RedirectAttributes attr, String userId, String userNick, String userNameK,
 			String userNameE, String gender_kakao, String pwd, int userReginumFirst, int userReginumLast,
-			String phone_kakao, String mail, int postCode, String addressDefault, String addressDetail) {
+			String phone_kakao, String mail, int postCode, String addressDefault, String addressDetail, Model model) {
 		// ###gender### : female
 		// ###phone_number### : +82 10-0000-0000 값 처리해야함....... vo말고 파라미터로 받아야함...
 		log.info("기존의 phone >> " + phone_kakao);
@@ -511,6 +511,21 @@ public class JoinController {
 
 		log.info("가공된 phone >> " + phone);
 		log.info("가공된 gender >> " + gender);
+		
+		KakaoUserVO vo = new KakaoUserVO();
+		vo.setUserNameE(userNameE);
+		vo.setUserNameK(userNameK);
+		vo.setGender(gender);
+		vo.setUserReginumFirst(userReginumFirst);
+		vo.setUserReginumLast(userReginumLast);
+		
+		vo = join.confirmMember(vo);
+		log.info("vo >> " + vo);
+		if (vo != null) { //값이 반환된다면 기존멤버
+			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
+			return "/login"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
+		}
+		
 
 		try {
 
