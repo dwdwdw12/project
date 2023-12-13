@@ -182,7 +182,8 @@
         	$("#pointUse2").keyup(function(){
         		var pointVal = $("#pointUse2").val();
         		console.log(pointVal);
-        		totalPay = total - pointVal;
+        		//totalPay = total - pointVal;
+        		totalPay = totalPay - pointVal;
         		console.log("totalPay1 : "+totalPay);
         		$("#totalPay").val(totalPay);
             	//console.log("valTest>>"+$("#totalPay").val())
@@ -193,15 +194,15 @@
         	 updatePayment(); */
         	
         else{
+        	totalPay = parseInt(totalPay)+parseInt($("#kakaoPUse2").val());
         	$("#pointUse2").val("0");
-        	totalPay = total;
         	$("#pointUse2").attr("readonly","readonly");
         	$("#totalPay").val(totalPay);
         }
 /*         updatePayment(); */
     });
     
-    $("#kakaoPUse1").click(function(){
+    $("#kakaoPUse1").change(function(){
         var chk = $(this).is(":checked");
         
         if(chk == true){
@@ -209,15 +210,17 @@
         	$("#kakaoPUse2").keyup(function(){
         		var kpoint = $("#kakaoPUse2").val();
         		console.log(kpoint);
-        		totalPay = total - kpoint;
+        		totalPay = totalPay - kpoint;
         		console.log("totalPay1 : "+totalPay);
         		$("#totalPay").val(totalPay);
         		})
         	/* var kpoint = $("#kakaoPUse2").val(); */
         }else{
         	console.log("체크박스 해제");
+        	console.log("value값 : "+$("#kakaoPUse2").val());
+        	var kpoint = $("#kakaoPUse2").val();
+        	totalPay = parseInt(totalPay)+parseInt(kpoint);
         	$("#kakaoPUse2").val("0");
-        	totalPay = total;
         	$("#kakaoPUse2").attr("readonly","readonly");
         	$("#totalPay").val(totalPay);
         	

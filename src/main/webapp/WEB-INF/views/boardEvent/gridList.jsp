@@ -55,8 +55,8 @@
 
 <title>Insert title here</title>
 </head>
-<body style=" margin-top : 180px;">
-	<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1300px; margin: 0 auto; ">	
+<body style=" margin-top : 180px; ">
+	<div class="p-5 tm-container-outer tm-bg-gray" style="max-width: 1400px; margin: 0 auto; ">	
 	<h2>이벤트 게시판</h2>
 	<hr class="hr1" noshade>
 	<div class="mt-3 text-right">
@@ -66,7 +66,7 @@
 	<div>
 	<form action="/boardEvent/gridList" method="get" id="searchForm" name="searchForm">
 		<input type="hidden" name="Grid" value="Grid">
-		<span style="text-align: left;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
+		<span style="text-align: left; font-size: 15px;">▷ 총 ${paging.total}개의 게시물이 있습니다. </span>
 		<span style="float: right;">
         <select name="type" class="type-box">
 			<option value="boardTitle" <c:if test="${paging.cri.type =='boardTitle'}">selected="selected"</c:if> >제목</option>

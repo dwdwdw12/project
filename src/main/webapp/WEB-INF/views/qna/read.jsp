@@ -18,8 +18,8 @@
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick-theme.css" />  
 <link rel="stylesheet" href="/resources/css/templatemo-style.css">
-<link rel="stylesheet" 
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> 
+<!-- <link rel="stylesheet" 
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">  -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>  
 	
@@ -69,10 +69,10 @@ tr:hover {
 }
 
 body {
-	width: 65%;
+	/* width: 1400px;
 	margin: 0 auto;
 	margin-top : 180px;
-	background-color:#EFEFEF;
+	background-color:#EFEFEF; */
 }
 
 .greylist {
@@ -115,16 +115,16 @@ a {
 }
 </style>
 </head>
-<body>
+<body style=" width: 1400px; margin: auto; margin-top: 180px;">
 
 
-	<div class="container-fluid mt-5">
+	<div class="p-5 tm-container-outer tm-bg-gray">
 		<div class="row">
 			<div class="col-md-12">
 				<h2>${board.boardsubject}</h2>
 				<hr>
 				<div class="price">
-					<span class="mr-2"><i class="fa fa-rupee text-success"></i>작성자
+					<span class="mr-2">작성자
 						: &nbsp;${board.boardwriter}</span>
 						<br>
 					글번호 : <c:out value="${board.boardnum }" />
