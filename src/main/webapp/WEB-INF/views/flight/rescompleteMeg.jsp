@@ -113,7 +113,7 @@ max-width: 100%;
 
 					<div class="tm-search-form-row">
 					<label for="total"></label> 
-                		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="window.open(`https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://192.168.0.19:8081/flight/oath&response_type=code&scope=talk_message`)">카카오톡 메세지 보내기</button>
+                		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="window.open(`https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/flight/oath&response_type=code&scope=talk_message`)">카카오톡 메세지 보내기</button>
 						<p id="token-result"></p>
 					</div>	
 					
@@ -147,8 +147,8 @@ function sendToMe() {
               'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
             link: {
               // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-              mobile_web_url: 'http://localhost:8081/oath',
-              web_url: 'http://localhost:8081/oath',
+              mobile_web_url: 'http://192.168.0.19:8081/oath',
+              web_url: 'http://192.168.0.19:8081/oath',
             },
           },
           social: {
@@ -160,15 +160,15 @@ function sendToMe() {
             {
               title: '웹으로 보기',
               link: {
-                mobile_web_url: 'http://localhost:8081/oath',
-                web_url: 'http://localhost:8081/oath',
+                mobile_web_url: 'http://192.168.0.19:8081/oath',
+                web_url: 'http://192.168.0.19:8081/oath',
               },
             },
             {
               title: '앱으로 보기',
               link: {
-                mobile_web_url: 'http://localhost:8081/oath',
-                web_url: 'http://localhost:8081/oath',
+                mobile_web_url: 'http://192.168.0.19:8081/oath',
+                web_url: 'http://192.168.0.19:8081/oath',
               },
             },
           ],
@@ -190,7 +190,7 @@ $(document).ready(function(){
   		  function loginWithKakao() {
   		    Kakao.Auth.authorize({ //카카오 간편로그인 요청
   		      //redirectUri: https://developers.kakao.com/tool/demo/oauth',
-  		      redirectUri: 'http://localhost:8081/oath',
+  		      redirectUri: 'http://192.168.0.19:8081/oath',
   		      prompt: 'select_account',
   		      state: 'sendme_feed',
   		      scope: 'talk_message' // 앱 동의 항목 설정 및 사용자 동의 필요
@@ -217,8 +217,8 @@ $(document).ready(function(){
   		              'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
   		            link: {
   		              // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-  		              mobile_web_url: 'http://localhost:8081/oath',
-  		              web_url: 'http://localhost:8081/oath',
+  		              mobile_web_url: 'http://192.168.0.19:8081/oath',
+  		              web_url: 'http://192.168.0.19:8081/oath',
   		            },
   		          },
   		          social: {
@@ -230,15 +230,15 @@ $(document).ready(function(){
   		            {
   		              title: '웹으로 보기',
   		              link: {
-  		                mobile_web_url: 'http://localhost:8081/oath',
-  		                web_url: 'http://localhost:8081/oath',
+  		                mobile_web_url: 'http://192.168.0.19:8081/oath',
+  		                web_url: 'http://192.168.0.19:8081/oath',
   		              },
   		            },
   		            {
   		              title: '앱으로 보기',
   		              link: {
-  		                mobile_web_url: 'http://localhost:8081/oath',
-  		                web_url: 'http://localhost:8081/oath',
+  		                mobile_web_url: 'http://192.168.0.19:8081/oath',
+  		                web_url: 'http://192.168.0.19:8081/oath',
   		              },
   		            },
   		          ],
