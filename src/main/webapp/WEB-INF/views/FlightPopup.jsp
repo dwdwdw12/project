@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
   <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
     margin: 0 auto; /* 중앙 정렬 */}
 .layerPopup:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5); z-index:9000}
 .layerPopup .layerBoxFlight {    z-index:9999;   
-position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; }
+position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px; width: 900px;}
 .layerPopup #layer_popup_flight .layerBoxFlight {
     top: 60%;
 }
@@ -67,7 +68,7 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 	</c:otherwise>
 </c:choose> 
 
-<p>${modi.reason}로 인한 ${modi.flightName}편 ${modi.depName} <i class="bi bi-arrow-right"></i> ${modi.arrName} 행</p>
+<p>${modi.reason} : ${fn:substring(info.depDay, 0,4)}년 ${fn:substring(info.depDay, 5,7)}월 ${fn:substring(info.depDay, 8,10)}일자 ${modi.flightName}편 ${modi.depName} <i class="bi bi-arrow-right"></i> ${modi.arrName} 행</p>
 <%-- <c:choose>
 	<c:when test="${modi.isDelete==2}">
 	<p>항공 운항 변경 안내</p>
