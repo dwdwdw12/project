@@ -79,8 +79,8 @@
 						<tbody>
 							<tr class="flight">
 								<td>${list.resno}</td>
-								<td><fmt:formatDate value="${list.purchasetime}"
-										pattern="yyyy-MM-dd HH:mm" /></td>
+								<%-- <td><fmt:formatDate value="${list.purchasetime}" pattern="yyyy-MM-dd HH:mm" /></td> --%>
+								<td>${list.purchasetime}</td>
 								<td>${list.departure}</td>
 								<td>${list.deptime}</td>
 								<td>${list.arrival}</td>

@@ -1,5 +1,7 @@
 package com.airline.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.airline.vo.Criteria;
+import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -27,6 +31,12 @@ public class UserMapperTest {
 		KakaoUserVO vo = mapper.getUser("dbswjd4991@naver.com");
 		log.info(vo);
 		vo.getAuthority().forEach(auth->log.info(auth));
+	}
+	
+	@Test
+	public void getUserTes2t() {
+		Criteria cri = new Criteria();
+		mapper.getUserRes("user10", cri).forEach(board->log.info(board));
 	}
 	
 	/*
