@@ -325,10 +325,10 @@
             			alert(msg);
             			
             			console.log("id>>"+userid);
-            			document.location.href = "/flight/rescompleteMeg?userid=" + userid;
+            			/* document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; */
             		} else {
-            			alert("엘스");
-            			document.location.href = "/flight/flightRes?fno=" + $("#fno").val() + "&seat=" + seat;
+            			/* alert("엘스");
+            			document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; */
             		}
                 	
                 });
@@ -336,14 +336,19 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 errorMeg = msg;
+                
                 alert(msg);
+                document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; 
+                return;
+               /*  alert(msg);
                 document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; //alert창 확인 후 이동할 url 설정 
             }
             if(msg == errorMeg){
             	document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat;
             }else{
-            	document.location.href="/flight/rescompleteMeg?userid="+name;
+            	document.location.href="/flight/rescompleteMeg?userid="+name; */
             }
+            alert(msg);
             document.location.href="/flight/rescompleteMeg?userid="+name; //alert창 확인 후 이동할 url 설정 
         });
     });
