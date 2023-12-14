@@ -242,7 +242,7 @@ hr {
 	<div class="gradeInformation">
 			<div class="gradeInfo">
 				<c:if test="${!empty loginUser}">
-					<strong>${loginUser.userNameK}</strong>님의 회원등급은 
+					<strong>${loginUser.userNick}</strong>님의 회원등급은 
 				<c:if test="${loginUser.gradeCode == 3}">
 						<strong style="color: #FFCC66;">춘식이</strong> 입니다.
 				</c:if>
