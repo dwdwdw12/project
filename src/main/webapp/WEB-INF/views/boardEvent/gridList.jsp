@@ -88,7 +88,7 @@
 						<img src="/display?fileName=${board.filePath}" width="200" height="300">	<br>
 						
 					</a>
-					<p style="width: 200px"><a href="/boardEvent/gridView?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">
+					<p style="width: 200px;"><a style="color: black;" href="/boardEvent/gridView?boardNum=${board.boardNum}&pageNum=${paging.cri.pageNum}&keyword=${paging.cri.keyword}&type=${paging.cri.type}">
 					${board.boardTitle}</a><br>
 					${board.startDate} ~ <br>&nbsp;&nbsp;&nbsp;${board.endDate}</p>
 				</div>
