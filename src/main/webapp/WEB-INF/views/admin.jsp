@@ -228,8 +228,8 @@ span:before {
 					      	<td>${fvo.departure}</td>
 					      	<td>${fvo.arrival}</td>
 					        <td>${fvo.seatid}</td>
-					        <td><fmt:formatDate value="${fvo.purchasetime}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
+					        <%-- <td><fmt:formatDate value="${fvo.purchasetime}" pattern="yyyy-MM-dd HH:mm" /></td> --%>
+					        <td>${fvo.purchasetime}</td>
 					        <c:choose>
 					        	<c:when test="${fvo.ispaid==0}">
 					        		<td>true</td>

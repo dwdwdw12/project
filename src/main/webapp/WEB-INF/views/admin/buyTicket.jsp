@@ -77,8 +77,8 @@
 								<td>${list.deptime}</td>
 								<td>${list.arrival}</td>
 								<td>${list.arrtime}</td>
-								<td><fmt:formatDate value="${list.purchasetime}"
-										pattern="yyyy-MM-dd HH:mm" /></td>
+								<%-- <td><fmt:formatDate value="${list.purchasetime}" pattern="yyyy-MM-dd HH:mm" /></td> --%>
+								<td>${list.purchasetime}</td>
 								<c:choose>
 									<c:when test="${list.isCancel==1}">		
 										<td>true</td>
