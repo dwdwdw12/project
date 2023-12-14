@@ -138,5 +138,9 @@
 	insert into point(userid) values(#{userId})
 </insert>
 
+<update id="updateEnabled">
+	update kakaouser set enabled = 1 where mail = #{email} and mail_key = #{mail_key}
+</update>
+
 
 </mapper>

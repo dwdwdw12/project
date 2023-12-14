@@ -330,57 +330,26 @@
 
 
 <body style="background: #e6e6e6;">
-	<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
-		<section class="p-5 tm-container-outer tm-bg-gray">
+<div class="tm-page-wrap mx-auto" style="margin-top: 180px;">
+	<section class="p-5 tm-container-outer tm-bg-gray">
 
-			<!-- .tm-container-outer -->
-			<div class="row">
-				<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
-					<h2>아이디 찾기</h2>
-					<br>
-					<h6>회원님의 아이디는 아래와 같습니다.</h6>
-					<br> <br>
-					<hr>
-					<br>
+		<!-- .tm-container-outer -->
+		<div class="row">
+			<div class="col-xs-12 mx-auto tm-about-text-wrap text-center"> 
+							<h2 class="text-uppercase mb-4">인증이 완료되었습니다.</h2>
+							<br>  
+					<h6>언제나 회원님을 생각하는 카카오 항공이 되겠습니다.</h6>
 
-					<form action="/" name="frm" method="post"
-						style="position: inherit; width: 570px; align-content: center;">
-						<hr>
-						<br>
-						<table style="text-align: center;">
-							<tbody>
-								<tr>
-									<th width="200px">아이디</th>
-									<td width="200px">${user.userId}</td>
-								</tr>
-							</tbody>
-
-						</table>
-						<br>
-						<hr>
-						<br>
-						<!-- 비밀번호 찾기의 경우 아이디를 입력받는 jsp화면을 만들고(이메일입력과 매우 유사) 메일을보내서 임시 비밀번호로(update해서) 지정할 예정.. -->
-						<div
-							class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-							<button type="button"
-								class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase"
-								onclick="location.href='/join/findPwd'">비밀번호 찾기</button>
-						</div>
-						<div
-							class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-
-							<button type="button"
-								class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase"
+<br><br> 
+							<button type="button" class="btn btn-primary"
 								onclick="location.href='/login'">로그인</button>
+							<br>
+							<br>
+
+
 						</div>
-<br><br><br>
-					</form>
-
+					</div>
+			</section>
 				</div>
-			</div>
-		</section>
-	</div>
 
-
-
-	<%@ include file="../includes/footer.jsp"%>
+				<%@ include file="../includes/footer.jsp"%>

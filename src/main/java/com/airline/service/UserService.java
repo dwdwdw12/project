@@ -95,4 +95,6 @@ public interface UserService {
 	public void modifyUserPwd(String userId, String pwd);
 	//마이페이지(유저) 닉네임 업데이트
 	public void modifyUserNick(String userId, String userNick);
+	
+	public int getEnabled(String userId);
 }

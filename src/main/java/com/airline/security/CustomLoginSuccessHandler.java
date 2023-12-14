@@ -2,14 +2,19 @@ package com.airline.security;
 
 import java.io.IOException; 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -63,10 +68,41 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 //			//response.sendRedirect("/user");
 //			return;
 //		}
+		
 		clearAuthenticationAttributes(request);
 		
+		String userId = vo.getUserId();
+		
+		if(mapper.getEnabled(userId) == 0) {
+			String access_token = (String) session.getAttribute("access_token");
+
+			//if(access_token != null)
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("Authorization", "Bearer " + access_token);
+			
+		    String[] cookiesToKeep = {"maindiv_flight", "maindiv_notice", "Cookie_userId"};
+
+		    try {
+		        log.info("loginSuccessHandler ... ");
+		        request.getSession();
+		        Cookie[] cookies = request.getCookies();
+		        if (cookies != null) {
+		            for (Cookie cookie : cookies) {
+		            	if(!Arrays.asList(cookiesToKeep).contains(cookie.getName())) {
+		                cookie.setMaxAge(0);
+		                response.addCookie(cookie);
+		            	}
+		            }
+		        }
+		        log.info("loginsuccesshandler에서 session만료 ");
+		    }finally {		
+		    	log.info("loginsuccesshandler에서 checkEnabled 하는중.. ");
+		    	redirectStrategy.sendRedirect(request, response, "/join/checkEnabled");
+			}
+		} else {
 		//response.sendRedirect("/");
 		resultRedirectStrategy(request, response, auth);
+		}
 	}
 
 	//로그인 실패 에러세션 지우기
@@ -80,6 +116,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	//로그인 성공 시 타겟url 으로 리다이렉트
 	private void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException{
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
+		
 		log.info("로그인 성공");
 		
 		// 기본 URI

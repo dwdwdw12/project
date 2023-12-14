@@ -262,6 +262,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 
+	@Override
+	public int getEnabled(String userId) {
+		return mapper.getEnabled(userId);
+	}
+
+
 	
 
 }

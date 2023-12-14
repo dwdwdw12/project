@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -468,7 +469,6 @@ public class JoinController {
 			} else if (prevPage != null && !prevPage.equals("")) {
 				// 회원가입 - 로그인으로 넘어온 경우 "/"로 redirect
 				if (prevPage.contains("/join")) {
-					log.info("첫번째if문-------------------");
 					uri = "/";
 					redirectStrategy.sendRedirect(request, response, uri);
 				} else {
@@ -577,5 +577,66 @@ public class JoinController {
 	public void accessError() {
 
 	}
+	
+	@GetMapping("/checkEnabled")
+	public void checkEnabled() {
+		
+	}
+
+	@PreAuthorize("isAnonymous()")
+	@PostMapping("/checkEnabled") // 여유가 있다면.. 랜덤키생성/메일보내는 메서드를 따로 뺄까 생각중...
+	public String checkEnabled(String email, Model model, RedirectAttributes attr) {
+		String result = join.confirmEmail(email);
+		model.addAttribute("email", result); // 필요한가
+		
+		log.info("email >> " + email);
+		log.info("result >> " + result);
+		
+		if (result == null) {
+			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
+			return "/join/checkEnabled";
+		} else {
+			try {
+				String mail_key = new TempKey().getKey(); // 랜덤키 생성
+
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("email", email);
+				params.put("mail_key", mail_key);
+
+				mailSendService.modifyMailKey(params); // email을 기준으로 컬럼에 랜덤키 저장
+				log.info("입력받은 이메일 >> " + email + "생성된 key >> " + mail_key);
+
+				MailHandler sendMail = new MailHandler(mailSender);
+				sendMail.setSubject("카카오 항공 인증 메일입니다.");
+				sendMail.setText("<h3>카카오 항공을 찾아주셔서 감사합니다.</h3>" + "<br>아래 확인 버튼을 눌러서 인증을 완료해 주시기 바랍니다."
+						+ "<br><br><a href='http://192.168.0.19:8081/join/updateEnabled" + "/" + email + "/" + mail_key
+						+ "' target='_blank'>이메일 인증 확인</a>");
+				sendMail.setFrom("systemlocal99@gmail.com", "카카오 항공");
+				sendMail.setTo(email);
+				sendMail.send();
+
+				log.info("controller에서 enabled 메일 보냄 완료");
+
+				return "redirect:/join/mailSended";
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "redirect:/error/accessError";
+			}
+		}
+
+	}
+	
+	@GetMapping("/updateEnabled/{email}/{mail_key}") // 근데 get이라서 전부 url에 노출됨..
+	public String updateEnabled(@PathVariable("email") String email, @PathVariable("mail_key") String mail_key, Model model)
+			throws Exception {
+		log.info("JoinController >> updateEnabled");
+		join.modifyEnabled(email, mail_key);		
+		mailSendService.removeMailKey(email);
+		
+		return "/join/updateEnabled";
+	}
+
+
 
 }
