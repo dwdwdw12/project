@@ -87,7 +87,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {		
 		model.addAttribute("emer", noticeService.noticePopup(cri));
-		model.addAttribute("modi", adminService.flightNoticePopup());
+		FlightVO popupVO = adminService.flightNoticePopup();
+		model.addAttribute("modi", popupVO);
+		model.addAttribute("info", adminService.getFlightInfo(popupVO.getFno()));
     
 		//이벤트 슬라이더용 8개만 출력.
 		Criteria criEvent = new Criteria();
