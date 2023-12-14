@@ -58,7 +58,7 @@ max-width: 100%;
 						결제완료
 					</h2>
 					<p class="mb-2">${userid}님 의 결제가 완료되었습니다. </p>
-					<p class="mb-2">결제하신 항공내역을 카카오톡으로 확인하시고 싶으시다면, 아래 <strong>'카카오톡 메세지 보내기'</strong> 버튼을 클릭하여 주세요.</p>
+					<!-- <p class="mb-2">결제하신 항공내역을 카카오톡으로 확인하시고 싶으시다면, 아래 <strong>'카카오톡 메세지 보내기'</strong> 버튼을 클릭하여 주세요.</p> -->
 					<!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 						<div>
