@@ -146,7 +146,6 @@
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
 							<input name="totalPay" type="text" class="form-control" id="totalPay" value="${total}" readonly="readonly">
-							<%-- <input name="totalPay" type="text" class="form-control" id="totalPay" value=<fmt:formatNumber value="${total}" pattern="#,###" /> readonly="readonly"> --%>
 						</div>
 					</div>
 					<div class="form-row tm-search-form-row"><label for="totalPay"></label></div>
@@ -168,7 +167,7 @@
 	 console.log("dd");
    // $("#pointUse1").click(function(){
 	//총합
-	var total = $("#htotal").val();
+	var total = $("#total").val();
 	console.log("total : "+total);
 	//포인트 사용 후 최종결제값
 	var totalPay = $("#totalPay").val();
@@ -176,81 +175,87 @@
     $("#pointUse1").change(function(){
         var chk = $(this).is(":checked");
 		console.log(chk);
-        if(chk == true){
-        	$("#pointUse2").removeAttr("readonly");
-        	//체크상태이면 readonly 해제+keyup으로 밸류값 얻어오기
-        	$("#pointUse2").keyup(function(){
-        		var pointVal = $("#pointUse2").val();
-        		console.log(pointVal);
-        		//totalPay = total - pointVal;
-        		totalPay = totalPay - pointVal;
-        		console.log("totalPay1 : "+totalPay);
-        		$("#totalPay").val(totalPay);
-            	//console.log("valTest>>"+$("#totalPay").val())
-        		})
+		 if (chk == true) {
+	            $("#pointUse2").prop("readonly", false);
 
-        	}
- /*        	var pointVal = $("#pointUse2").val();
-        	 updatePayment(); */
-        	
-        else{
-        	totalPay = parseInt(totalPay)+parseInt($("#kakaoPUse2").val());
-        	$("#pointUse2").val("0");
-        	$("#pointUse2").attr("readonly","readonly");
-        	$("#totalPay").val(totalPay);
-        }
-/*         updatePayment(); */
+	            $("#pointUse2").on('input', function () {
+	                updatePayment();
+	            });
+	        } else {
+	            $("#pointUse2").val("0");
+	            $("#pointUse2").prop("readonly", true);
+	            updatePayment();
+	        }
     });
     
     $("#kakaoPUse1").change(function(){
         var chk = $(this).is(":checked");
         
-        if(chk == true){
-        	$("#kakaoPUse2").removeAttr("readonly");
-        	$("#kakaoPUse2").keyup(function(){
-        		var kpoint = $("#kakaoPUse2").val();
-        		console.log(kpoint);
-        		totalPay = totalPay - kpoint;
-        		console.log("totalPay1 : "+totalPay);
-        		$("#totalPay").val(totalPay);
-        		})
-        	/* var kpoint = $("#kakaoPUse2").val(); */
-        }else{
-        	console.log("체크박스 해제");
-        	console.log("value값 : "+$("#kakaoPUse2").val());
-        	var kpoint = $("#kakaoPUse2").val();
-        	totalPay = parseInt(totalPay)+parseInt(kpoint);
-        	$("#kakaoPUse2").val("0");
-        	$("#kakaoPUse2").attr("readonly","readonly");
-        	$("#totalPay").val(totalPay);
-        	
+        if (chk == true) {
+            $("#kakaoPUse2").prop("readonly", false);
+
+            $("#kakaoPUse2").on('input', function () {
+                updatePayment();
+            });
+        } else {
+            $("#kakaoPUse2").val("0");
+            $("#kakaoPUse2").prop("readonly", true);
+            updatePayment();
         }
-        /* updatePayment(); */
     }); 
     
-    function updatePayment(){
+    function updatePayment() {
+    	 var total = parseInt($("#total").val()) || 0;
+         var pointVal = parseInt($("#pointUse2").val()) || 0;
+         // 포인트 사용 금액이 보유 마일리지보다 많을 경우 보유 마일리지로 설정
+         if (pointVal > parseInt($("#point").val())) {
+             pointVal = parseInt($("#point").val()) || 0;
+         }
+         // 포인트 사용 금액이 총 결제 금액보다 많을 경우 총 결제 금액으로 설정
+         if (pointVal > total) {
+             pointVal = total;
+         }
+         
+    	 console.log("point>>"+pointVal);
+         var kpoint = parseInt($("#kakaoPUse2").val()) || 0;
+         if (kpoint > parseInt($("#kakaoP").val())) {
+        	 kpoint = parseInt($("#kakaoP").val()) || 0;
+         }
+         if (kpoint > total) {
+        	 kpoint = total;
+         }
+
+         var totalPay = total - pointVal - kpoint;
+         $("#totalPay").val(totalPay);
+    }
+    
+    
+    
+/*     function updatePayment(){
     	var total = parseInt($("#total").val()) || 0; // 총 결제금액 가져오기
+    	var pointVal = 0;
         // 카카오페이 사용 체크 여부 확인
         if ($("#kakaoPUse1").is(":checked")) {
+        	
             var kakaoP = parseInt($("#kakaoPUse2").keyup(function(){
-        		var pointVal = $("#kakaoPUse2").val();
-        		console.log(kakaoPUse2);
-        		})) || 0; // 카카오페이 금액 가져오기
-            total -= kakaoP; // 카카오페이 금액 빼기
+        		pointVal += parseInt($("#kakaoPUse2").val())||0;
+        		console.log(pointVal);
+        		})); // 카카오페이 금액 가져오기
+            total -= pointVal; // 카카오페이 금액 빼기
         }
     	
         // 포인트 사용 체크 여부 확인
         if ($("#pointUse1").is(":checked")) {
             var mileage = parseInt($("#pointUse2").keyup(function(){
-        		var pointVal = $("#pointUse2").val();
+        		pointVal += $("#pointUse2").val()||0;
         		console.log(pointVal);
-        		})) || 0; // 마일리지 금액 가져오기
-            total -= mileage; // 마일리지 금액 빼기
+        		})); // 마일리지 금액 가져오기
+            total -= pointVal; // 마일리지 금액 빼기
         }
         
         // 최종결제금액 표시
-        $("#totalPay").val(total);
-    }
+        $("#totalPay").val(total-pointVal);
+    } */
 
  }
 
@@ -273,7 +278,7 @@
         
         if(pointVal.length == 0){pointVal = 0};
         if(kpoint.length == 0){kpoint = 0};
-
+		var errMsg = '';
         IMP.request_pay({
             pg : 'danal_tpay',
             pay_method : 'card',
@@ -310,6 +315,7 @@
                     })
                 }).done(function(data){
                 	if ( everythings_fine ) {
+                		alert("성공");
             			var msg = '결제가 완료되었습니다.';
             			msg += '\n고유ID : ' + rsp.imp_uid;
             			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
@@ -317,15 +323,27 @@
             			msg += '카드 승인번호 : ' + rsp.apply_num;
             			
             			alert(msg);
+            			
+            			console.log("id>>"+userid);
+            			document.location.href = "/flight/rescompleteMeg?userid=" + userid;
             		} else {
-            			document.location.href="/flight/reservation";
+            			alert("엘스");
+            			document.location.href = "/flight/flightRes?fno=" + $("#fno").val() + "&seat=" + seat;
             		}
+                	
                 });
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
+                errorMeg = msg;
+                alert(msg);
+                document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; //alert창 확인 후 이동할 url 설정 
             }
-            alert(msg);
+            if(msg == errorMeg){
+            	document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat;
+            }else{
+            	document.location.href="/flight/rescompleteMeg?userid="+name;
+            }
             document.location.href="/flight/rescompleteMeg?userid="+name; //alert창 확인 후 이동할 url 설정 
         });
     });
