@@ -233,4 +233,8 @@
 		update kakaouser set pwd = #{pwd} where userId = #{userId}
 	</update>
 	
+	<select id="getEnabled" resultType="int">
+		select enabled from kakaouser where userId = #{userId}
+	</select>
+	
 </mapper>

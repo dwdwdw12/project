@@ -3,6 +3,7 @@ package com.airline.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -62,5 +63,7 @@ public interface JoinMapper {
 	public void insertGradelog(String userId);
 	public void insertUserPay(String userId);
 	public void insertPoint(String userId);
+	
+	public void updateEnabled(@Param("email") String email, @Param("mail_key") String mail_key);
 	
 }

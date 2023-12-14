@@ -53,5 +53,7 @@ public interface JoinService {
 	public void registerGradelog(String userId);
 	public void registerUserPay(String userId);
 	public void registerPoint(String userId);
+	
+	public void modifyEnabled(String email, String mail_key);
 }
  

@@ -384,5 +384,11 @@ public class JoinServiceImpl implements JoinService {
 		join.insertPoint(userId);
 	}
 
+	@Override
+	public void modifyEnabled(String email, String mail_key) {
+		join.updateEnabled(email, mail_key);
+		
+	}
+
 	
 }

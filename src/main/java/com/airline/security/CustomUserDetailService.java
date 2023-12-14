@@ -1,5 +1,7 @@
 package com.airline.security;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +38,7 @@ public class CustomUserDetailService implements UserDetailsService{
 		if(vo != null) {
 //			grantedAuthorities.add(new SimpleGrantedAuthority(vo.getAuthority().get(0).getAuthority()));
 			return new CustomUser(vo);
+			
 		}else {
 			return null;
 		}

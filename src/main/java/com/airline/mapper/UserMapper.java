@@ -101,5 +101,7 @@ public interface UserMapper {
 	public void updateUserPwd(@Param("userId") String userId, @Param("pwd") String pwd);
 	
 	public void updateUserNick(@Param("userId") String userId, @Param("userNick") String userNick);
+	
+	public int getEnabled(String userId);
 
 }
