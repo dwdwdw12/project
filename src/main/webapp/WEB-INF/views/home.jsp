@@ -73,11 +73,14 @@
 		<!-- .tm-container-outer -->
 		<div class="inner">
 			<div class="slideshow">
-				<img src="../resources/img/tm-img-01.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-02.jpg"
-					alt="" width="1600" height="1000"> <img
-					src="../resources/img/tm-img-03.jpg" alt="" width="1600"
-					height="1000"> <img src="../resources/img/tm-img-04.jpg"
+				<img src="../resources/img/tm-img-10.jpg" alt="" width="1600"
+					height="1000"> 
+					<img src="../resources/img/tm-img-11.jpg"
+					alt="" width="1600" height="1000"> 
+					<img
+					src="../resources/img/tm-img-12.jpg" alt="" width="1600"
+					height="1000"> 
+					<img src="../resources/img/tm-img-14.jpg"
 					alt="" width="1600" height="1000">
 					
 					
