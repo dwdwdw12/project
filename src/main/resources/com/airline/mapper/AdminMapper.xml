@@ -45,7 +45,7 @@
 	</select>
 	
 	<select id="getUserInfo" resultType="com.airline.vo.KakaoUserVO">
-		select * from kakaouser limit #{cri.pageNum},#{cri.amount}
+		select * from kakaouser limit #{cri.newStart},#{cri.amount}
 	</select>
 	
 	<select id="getUserCnt" resultType="int">

@@ -92,7 +92,8 @@
 	</select> -->
 	
 	<select id="getSale" resultType="com.airline.vo.UserPayVO">
-		select *, sum(price)as sum from userpay group by substr(getDate,1,10)
+		select substr(getDate,1,10) as getDate,sum(price) as sum from userpay group by substr(getDate,1,10)
+		<!-- select *, sum(price)as sum from userpay group by substr(getDate,1,10) -->
 	</select>
 	
 	<select id="reqCancel" resultType="com.airline.vo.CancelVO">
