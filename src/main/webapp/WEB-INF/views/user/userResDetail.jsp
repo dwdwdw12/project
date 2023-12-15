@@ -201,7 +201,7 @@ function checkin(resno,isCheckin,isCancel){
 			return false;
 		}else{
 			$.ajax({
-				url : "/user/userResDetail",
+				url : "/user/userResDetail2",
 				async : false,
 				dataType : "text",
 				data : {
