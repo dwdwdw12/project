@@ -18,7 +18,7 @@ public class UserPayVO {
 	private String userid;
 	private String resno;
 	private int price;
-	private Date getDate;
+	private String getDate;
 	private int mileage;
 	private int sum;
 	

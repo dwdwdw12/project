@@ -163,7 +163,15 @@
 	<select id="getFlightTotal" resultType="int">
 		select count(*) from flightreservation where userid=#{userid}	 
 	</select>
+<!--  -->	
+	<select id="findResByResNo" resultType="com.airline.vo.FlightResVO">
+		select * from flightreservation where resno=#{data}	 
+	</select>
 	
+	<insert id="insertCancel">
+		insert into cancel(userid,resno) values(#{userId},#{data})
+	</insert>
+<!--  -->	
 	<update id="cancelTicket">
 		update flightreservation set isCancel = 1 where resno=#{data}
 	</update>

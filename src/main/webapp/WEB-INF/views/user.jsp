@@ -153,8 +153,7 @@ span:before {
 				    <c:forEach items="${pvo3}" var="list">
 				    <tbody>
 				      <tr>
-				        <td><fmt:formatDate value="${list.getDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
+				        <td>${list.getDate}</td>
 				        <td><fmt:formatNumber
 									value="${list.mileage}" pattern="#,###" /></td>
 				      </tr>
@@ -183,7 +182,7 @@ span:before {
 				    <c:forEach items="${kvo3}" var="kvo">
 				    <tbody>
 				      <tr>
-				        <td><fmt:formatDate value="${kvo.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+				        <td>${kvo.buyDate}</td>
 				        <td><fmt:formatNumber
 									value="${kvo.amount}" pattern="###,###,###" /></td>
 				      </tr>
