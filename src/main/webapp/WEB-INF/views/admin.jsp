@@ -168,8 +168,7 @@ span:before {
 						    <tbody>
 						      <tr>
 						      	<td>${cvo.resno}</td>
-						        <td><fmt:formatDate value="${cvo.requestTime}"
-														pattern="yyyy-MM-dd HH:mm" /></td>
+						        <td>${cvo.requestTime}</td>
 								<c:choose>
 									<c:when test="${cvo.cancelOk == 0}">
 										<td>미처리</td>

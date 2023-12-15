@@ -17,6 +17,6 @@ public class CancelVO {
 	private String userid ;
 	private int isCancel;
 	private int cancelOk;
-	private Date cancelTime;
-	private Date requestTime;
+	private String cancelTime;
+	private String requestTime;
 }
