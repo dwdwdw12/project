@@ -3,15 +3,18 @@ package com.airline.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,6 +44,7 @@ import com.airline.mail.TempKey;
 import com.airline.security.CustomUser;
 import com.airline.service.JoinService;
 import com.airline.service.MailSendService;
+import com.airline.service.UserService;
 import com.airline.vo.KakaoUserVO;
 import com.airline.vo.TermsVO;
 
@@ -63,6 +67,9 @@ public class JoinController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/joinTerms")
 	public void joinTermsGet(Model model) {
@@ -98,10 +105,10 @@ public class JoinController {
 	public String findId(String email, Model model, RedirectAttributes attr) {
 		String result = join.confirmEmail(email);
 		model.addAttribute("email", result); // 필요한가
-		
+
 		log.info("email >> " + email);
 		log.info("result >> " + result);
-		
+
 		if (result == null) {
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
 			return "/join/findId";
@@ -273,7 +280,7 @@ public class JoinController {
 	public void memberInfoGet(Model model, KakaoUserVO vo) {
 		model.addAttribute("userInfo", vo);
 		log.info("JoinController >>  [get]");
-	
+
 	}
 
 	@PostMapping("/memberInfo")
@@ -283,10 +290,10 @@ public class JoinController {
 			String addressDefault, String addressDetail, Model model) {
 
 		// email phone address 합쳐줘야해서.. parameter로 받음....
-		//memberInfo에 바로 접근하는 경우 접근 막음
-		if(termsAgree == "" || termsAgree == null) {
-			log.info("termsAgree >> " +termsAgree);
-			model.addAttribute("joinMessage","잘못된 접근입니다.");
+		// memberInfo에 바로 접근하는 경우 접근 막음
+		if (termsAgree == "" || termsAgree == null) {
+			log.info("termsAgree >> " + termsAgree);
+			model.addAttribute("joinMessage", "잘못된 접근입니다.");
 			return "/login";
 		}
 
@@ -302,17 +309,17 @@ public class JoinController {
 		log.info("encoded password >> " + pwd);
 
 		String[] userTermsAgree = termsAgree.split(","); // selectall,selectall,selectall,terms4 이런식으로 저장되어 있음
-		
-		if(mail.contains(",")) {
+
+		if (mail.contains(",")) {
 			String[] splitMail = mail.split(",");
 			mail = splitMail[0] + splitMail[1];
 			log.info("splitMail >> " + mail);
 		}
-		if(join.confirmEmail(mail) != null) {
+		if (join.confirmEmail(mail) != null) {
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
 			return "/login";
 		}
-		
+
 		try {
 
 			// String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -392,11 +399,13 @@ public class JoinController {
 		// userNameK와 mail로 DB를 조회하여 결과가 있으면 마이페이지(혹은 로그인 선택 전의 페이지)
 		// 결과가 없으면 model에 정보를 담아서 추가입력정보 페이지 (kakaoMemberInfo)로 이동
 		String email = (String) userInfo.get("email");
+
+		String userNameK = (String) userInfo.get("name");
 		String userId = (String) userInfo.get("email");
-		KakaoUserVO vo = join.kakaoLoginCheck(email, userId);
+		KakaoUserVO vo = join.kakaoLoginCheck(userNameK, userId);
 
 		log.info("vo 결과 >>> " + vo);
-		
+
 		if (vo == null) {
 
 			String mail_key = new TempKey().getKey(); // 랜덤키 생성
@@ -410,7 +419,25 @@ public class JoinController {
 			model.addAttribute("phone", (String) userInfo.get("phone_number"));
 			model.addAttribute("pwd", mail_key);
 			return "/join/kakaoMemberInfo";
-		} else {
+
+		} else if (vo.getEnabled() == 0) {
+			String[] cookiesToKeep = { "maindiv_flight", "maindiv_notice", "Cookie_userId" };
+
+			request.getSession();
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (!Arrays.asList(cookiesToKeep).contains(cookie.getName())) {
+						cookie.setMaxAge(0);
+						response.addCookie(cookie);
+					}
+				}
+			}
+			log.info("카카오로그인 시 휴면계정 처리 >>> ");
+			return "redirect:/join/checkEnabled";
+		}
+
+		else {
 			// 사용자 정보로 Authentication 객체 생성
 			List<SimpleGrantedAuthority> userAuthorities = join.getAuthorities(email);
 			List<GrantedAuthority> authorities = new ArrayList<>(userAuthorities);
@@ -440,7 +467,7 @@ public class JoinController {
 			});
 
 			log.warn("role names : " + roleNames);
-			
+
 //			if (roleNames.contains("ROLE_ADMIN")) {
 //			model.addAttribute("vo", vo);
 //			return "redirect:/user";
@@ -478,11 +505,11 @@ public class JoinController {
 			} else {
 				redirectStrategy.sendRedirect(request, response, "/");
 			}
-			
+
 			uri = request.getHeader("Referer");
-		    if (uri != null && !uri.contains("/login")) {
-		        request.getSession().setAttribute("prevPage", uri);
-		    }
+			if (uri != null && !uri.contains("/login")) {
+				request.getSession().setAttribute("prevPage", uri);
+			}
 
 			return uri;
 
@@ -515,23 +542,21 @@ public class JoinController {
 
 		log.info("가공된 phone >> " + phone);
 		log.info("가공된 gender >> " + gender);
-		
+
 		KakaoUserVO vo = new KakaoUserVO();
 		vo.setUserNameE(userNameE);
 		vo.setUserNameK(userNameK);
 		vo.setGender(gender);
 		vo.setUserReginumFirst(userReginumFirst);
 		vo.setUserReginumLast(userReginumLast);
-		
+
 		vo = join.confirmMember(vo);
 		log.info("vo >> " + vo);
-		
-		
-		if ( (vo != null) || (join.confirmEmail(mail) != null) ){ //값이 반환된다면 기존멤버
+
+		if ((vo != null) || (join.confirmEmail(mail) != null)) { // 값이 반환된다면 기존멤버
 			model.addAttribute("joinMessage", "이미 가입된 회원입니다.");
 			return "/login"; // uri가 http://localhost:8081/join/checkMember인채로 이동함(post라서..)
 		}
-		
 
 		try {
 
@@ -571,31 +596,55 @@ public class JoinController {
 		}
 
 	}
+
 //http://192.168.0.19:8081/login
 	@GetMapping("/error/accessError")
 	@CrossOrigin("http://192.168.0.19:8081/error/accessError")
 	public void accessError() {
 
 	}
-	
+
 	@GetMapping("/checkEnabled")
 	public void checkEnabled() {
-		
+//	    String[] cookiesToKeep = {"maindiv_flight", "maindiv_notice", "Cookie_userId"};
+//		
+//	    //remember-me 쿠키 제거
+//		request.getSession();
+//		Cookie[] cookies = request.getCookies();
+//		if(cookies != null) {
+//            for (Cookie cookie : cookies) {
+//            	if(!Arrays.asList(cookiesToKeep).contains(cookie.getName())) {
+//                cookie.setMaxAge(0);
+//                response.addCookie(cookie);
+//            	}
+//            }
+//		}
+
 	}
 
-	@PreAuthorize("isAnonymous()")
+	// @PreAuthorize("isAnonymous()")
 	@PostMapping("/checkEnabled") // 여유가 있다면.. 랜덤키생성/메일보내는 메서드를 따로 뺄까 생각중...
 	public String checkEnabled(String email, Model model, RedirectAttributes attr) {
+
 		String result = join.confirmEmail(email);
 		model.addAttribute("email", result); // 필요한가
-		
 		log.info("email >> " + email);
 		log.info("result >> " + result);
+
+		String userId = join.getUserIdByMail(email); //입력받은 이메일로 아이디를 가져옴
+		int userEnabled = userService.getEnabled(userId);
 		
-		if (result == null) {
+		if (result == null) { //등록된 이메일이 없는 경우
 			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
 			return "/join/checkEnabled";
-		} else {
+			
+		} else if (userEnabled != 0) { //이메일로 유저의 아이디를 조회, 해당 아이디의 enabled가 0이 아닌 경우
+			log.info("이메일로 유저의 아이디를 조회, 해당 아이디의 enabled가 0이 아닌 경우 >>> ");
+			model.addAttribute("joinMessage", "입력하신 정보를 다시 확인해주시기 바랍니다.");
+			return "/join/checkEnabled";
+		}
+
+		else {
 			try {
 				String mail_key = new TempKey().getKey(); // 랜덤키 생성
 
@@ -626,17 +675,15 @@ public class JoinController {
 		}
 
 	}
-	
+
 	@GetMapping("/updateEnabled/{email}/{mail_key}") // 근데 get이라서 전부 url에 노출됨..
-	public String updateEnabled(@PathVariable("email") String email, @PathVariable("mail_key") String mail_key, Model model)
-			throws Exception {
+	public String updateEnabled(@PathVariable("email") String email, @PathVariable("mail_key") String mail_key,
+			Model model) throws Exception {
 		log.info("JoinController >> updateEnabled");
-		join.modifyEnabled(email, mail_key);		
+		join.modifyEnabled(email, mail_key);
 		mailSendService.removeMailKey(email);
-		
+
 		return "/join/updateEnabled";
 	}
-
-
 
 }

@@ -27,8 +27,9 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 <!-- 이미지로더 -->
-<script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
+<!-- <script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+ -->
 <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
   integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>	 -->
 <!-- <script>
@@ -111,28 +112,28 @@ max-width: 100%;
 					</div>
 				
 
-<!-- 					<div class="tm-search-form-row">
+ 					<div class="tm-search-form-row">
 					<label for="total"></label> 
-                		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="window.open(`https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://localhost:8081/flight/oath&response_type=code&scope=talk_message`)">카카오톡 메세지 보내기</button>
+                		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://192.168.0.19:8081/flight/oath&response_type=code&scope=talk_message'">카카오톡 메세지 보내기</button>
 						<p id="token-result"></p>
 					</div>	
- -->					
+					
 					<div class="tm-search-form-row">
 					<label for="total"></label> 
-						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" href="location.href='/'">메인페이지</button>	
+						<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" onclick="location.href='/'">메인페이지</button>	
 					</div>
 				
 						<p id="token-result"></p>
-					</div>	 -->	
+					</div>	
 						</div>
 
 				</div>
 			</div>		
 					
-		</div>
 	</section>
+		</div>
 
-<script>
+<!-- <script>
 function sendToMe() {
 	  console.log("dd");
     Kakao.API.request({
@@ -274,5 +275,5 @@ $(document).ready(function(){
         	
 
     });
-</script>
+</script> -->
 <%@ include file="../includes/footer.jsp"%>

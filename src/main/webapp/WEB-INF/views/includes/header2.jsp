@@ -235,7 +235,7 @@
 
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script>
-		kakao.init('3156d02ad4070a1c858f024518bda8c5');
+		kakao.init('2cc49f4ac1f17ec5d30cf1893fd98d05');
 		Kakao.Channel.createAddChannelButton({
 			container : '#kakao-talk-channel-chat-button',
 			channelPublicId : '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.
@@ -281,7 +281,7 @@
 			js.integrity = 'sha384-j5TN6EqladB+HIfGV8dVYRIzoJf9Fb4lvrkPmo9KlnDWpN1CZz8yC4rCH1ChRbbh';
 			js.crossOrigin = 'anonymous';
 			fjs.parentNode.insertBefore(js, fjs);
-			document.getElementsById('aaaaa').classList.toggle('show');
+			//document.getElementsById('aaaaa').classList.toggle('show');
 		})(document, 'script', 'kakao-js-sdk');
 	</script>
 	<!-- header-end -->

@@ -233,8 +233,8 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
-	public List<FlightResVO> getResAll(String flightName) {
-		return mapper.getResAll(flightName);
+	public List<FlightResVO> getResAll(String flightName, int fno) {
+		return mapper.getResAll(flightName, fno);
 	}
 
 	@Override
