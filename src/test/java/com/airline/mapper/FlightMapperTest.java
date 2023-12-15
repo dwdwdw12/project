@@ -69,6 +69,11 @@ public class FlightMapperTest {
 	}
 	
 	@Test
+	public void getClosestFlightafterTest() {
+		log.info(mapper.getClosestFlightAfter("인천", "타슈켄트", "2023-12-15"));
+	}
+	
+	@Test
 	public void getDistinctArrRegionCodeTest() {
 		log.info(mapper.getDistinctArrRegionCode("김포"));
 	}

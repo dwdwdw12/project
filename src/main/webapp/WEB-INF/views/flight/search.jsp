@@ -224,12 +224,12 @@ p.btn.btn-default {
 					</c:if>
 					<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
 						<h5 style="text-align: center;">
-							가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+							가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.					
 						</h5>	
 					</c:if>
 					<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
 						<h5 style="text-align: center;">
-							가장 가까운 항공편은 ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+							가장 가까운 항공편은 ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.					
 						</h5>	
 					</c:if>
 				</c:if>
@@ -291,12 +291,12 @@ p.btn.btn-default {
 							</c:if>
 							<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
 								<h5 style="text-align: center;">
-									가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+									가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.					
 								</h5>	
 							</c:if>
 							<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
 								<h5 style="text-align: center;">
-									가장 가까운 항공편은 ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+									가장 가까운 항공편은 ${fn:substring(closestFlightAfter.depDay, 0,10)} 입니다.					
 								</h5>	
 							</c:if>
 						</c:if>
@@ -376,7 +376,7 @@ p.btn.btn-default {
 			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${prevArrDay}#2'">이전날</button>
 			<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" style="width: 100px;" onclick="location.href='/flight/search?depRegionCode=${depRegionCode}&arrRegionCode=${arrRegionCode}&dep=${dep}&arr=${arr}&depDate=${depDate}&arrDate=${nextArrDay}#2'">다음날</button>
 		</div>
-		<h2 style="text-align: center">${arrDate} :${arr} <i class='fa fa-arrow-right'></i> ${dep}</h2>
+		<h2 style="text-align: center">${arrDate} : ${arr} <i class='fa fa-arrow-right'></i> ${dep}</h2>
 			<div class="container" style="overflow: auto; top: 50px; width: 100%; height: 450px;">
 		<br><br><br><br><br>
 		<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
@@ -385,12 +385,12 @@ p.btn.btn-default {
 		<c:if test="${!empty closestFlightPrev.depDay or closestFlightAfter.depDay}">
 			<c:if test="${!empty closestFlightPrev.depDay and empty closestFlightAfter.depDay}">
 				<h5 style="text-align: center;">
-					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)} 입니다.					
+					가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)} 입니다.					
 				</h5>	
 			</c:if>
 			<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
 				<h5 style="text-align: center;">
-					가장 가까운 항공편은 ${fn:substring(closestFlightPrev.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
+					가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
 				</h5>	
 			</c:if>
 			<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">

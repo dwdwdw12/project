@@ -133,8 +133,8 @@ public class FlightController {
 			model.addAttribute("closestFlightAfter", flights.getClosestFlightAfter(dep, arr, depDate));
 		}
 		if(arrDate!=null) {
-			model.addAttribute("closestFlightPrevArr", flights.getClosestFlightPrev(dep, arr, arrDate));
-			model.addAttribute("closestFlightAfterArr", flights.getClosestFlightAfter(dep, arr, arrDate));			
+			model.addAttribute("closestFlightPrevArr", flights.getClosestFlightPrev(arr, dep, arrDate));
+			model.addAttribute("closestFlightAfterArr", flights.getClosestFlightAfter(arr, dep, arrDate));			
 		}
 		
 	}
