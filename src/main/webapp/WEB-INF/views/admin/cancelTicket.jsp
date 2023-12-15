@@ -71,8 +71,7 @@
 							<tr class="flight">
 								<td>${list.userid}</td>
 								<td>${list.resno}</td>
-								<td><fmt:formatDate value="${list.requestTime}"
-										pattern="yyyy-MM-dd HH:mm" /></td>
+								<td>${list.requestTime}</td>
 								<c:choose>
 									<c:when test="${list.isCancel==1}">		
 										<td>true</td>

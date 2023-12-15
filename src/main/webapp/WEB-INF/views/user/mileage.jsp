@@ -78,7 +78,7 @@
 								</c:choose>
 								<td><fmt:formatNumber
 									value="${list.mileage}" pattern="#,###" /></td>
-								<td><fmt:formatDate value="${list.getDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+								<td>${list.getDate}</td>
 							</tr>
 						</tbody>
 					</c:forEach>

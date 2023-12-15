@@ -77,7 +77,7 @@
 									</c:otherwise>
 								</c:choose>
 								<td><fmt:formatNumber value="${list.amount}" pattern="#,###" /></td>
-								<td><fmt:formatDate value="${list.buyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+								<td>${list.buyDate}</td>
 							</tr>
 						</tbody>
 					</c:forEach>

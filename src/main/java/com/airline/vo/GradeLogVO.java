@@ -17,7 +17,7 @@ public class GradeLogVO {
 
 		private int gno;
 		private String userid;
-		private Date updateDate;
+		private String updateDate;
 		private int gradecode;
 	
 }

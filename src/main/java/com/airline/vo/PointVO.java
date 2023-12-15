@@ -1,6 +1,8 @@
 package com.airline.vo;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +19,7 @@ public class PointVO {
 	private int pno;
 	private String userid;
 	private int amount;
-	private Date buyDate;
+	private String buyDate;
 	private int sum;
 
 }

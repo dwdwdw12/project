@@ -95,8 +95,7 @@
 										<td> <img src="../resources/img/kakao/등급_춘식이.png" alt="춘식이" style="width: 50px"/></p></td>
 									</c:otherwise>
 								</c:choose>
-								<td><fmt:formatDate value="${list.updateDate}"
-												pattern="yyyy-MM-dd HH:mm" /></td>
+								<td>${list.updateDate}</td>
 							</tr>
 						</tbody>
 					</c:forEach>
