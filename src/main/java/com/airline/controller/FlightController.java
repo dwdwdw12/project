@@ -427,7 +427,7 @@ public class FlightController {
 		String grant_type = code;
 		String url = "https://kauth.kakao.com/oauth/token";
 		//String url = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
-		String redirect_url = "http://localhost:8081/flight/oath";
+		String redirect_url = "http://192.168.0.19:8081/flight/oath";
 		String rest_api_key="607caeca9f2a0089b46f99c667e0dee3";
 //		Map<String, String> jsonData = new HashMap<String, String>();
 //		jsonData.put("grant_type", grant_type);
@@ -548,8 +548,19 @@ public class FlightController {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+		FlightResVO vo = flights.getResFirst(userid);
+		//결제자 정보
+		KakaoUserVO kvo = flights.getUserInfo(userid);
+		model.addAttribute("userid",userid);
+		model.addAttribute("vo",vo);
+		model.addAttribute("kvo",kvo);
+		//총 결제금액
+		int usePoint = flights.usePoint(userid);
+		model.addAttribute("point",usePoint);
+
         
-        return "redirect:/user";
+        return "/flight/rescompleteMeg";
 	}
 	
 	//검색어 자동완성 - 출발지

@@ -3,15 +3,18 @@ package com.airline.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -580,6 +583,19 @@ public class JoinController {
 	
 	@GetMapping("/checkEnabled")
 	public void checkEnabled() {
+//	    String[] cookiesToKeep = {"maindiv_flight", "maindiv_notice", "Cookie_userId"};
+//		
+//	    //remember-me 쿠키 제거
+//		request.getSession();
+//		Cookie[] cookies = request.getCookies();
+//		if(cookies != null) {
+//            for (Cookie cookie : cookies) {
+//            	if(!Arrays.asList(cookiesToKeep).contains(cookie.getName())) {
+//                cookie.setMaxAge(0);
+//                response.addCookie(cookie);
+//            	}
+//            }
+//		}
 		
 	}
 
