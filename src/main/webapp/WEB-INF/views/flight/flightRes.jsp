@@ -260,97 +260,151 @@
  }
 
 </script>
-<script>
 
-    $('#charge_kakao').click(function () {
-        // getter
-        var IMP = window.IMP;
-        IMP.init('imp80062786');
-       // var money = $('input[name="cp_item"]:checked').val();
-       // console.log(money);
-        var pointVal = $("#pointUse2").val();
-        var kpoint = $("#kakaoPUse2").val();
-        var name = $("#userid").val();
-        var total = $("#total").val();
-        var seat = $("#seat").val();
-        var fno = $("#fno").val();
-        var mail = $("#email").val();
-        
-        if(pointVal.length == 0){pointVal = 0};
-        if(kpoint.length == 0){kpoint = 0};
-		var errMsg = '';
-        IMP.request_pay({
-            pg : 'danal_tpay',
-            pay_method : 'card',
-            merchant_uid: 'merchant_' + new Date().getTime(), //상점에서 생성한 고유 주문번호
-            name : '주문명:결제테스트',
-            amount : 100,
-            buyer_email : mail,
-            buyer_name : name,
-            buyer_tel : '010-1234-5678',
-            buyer_addr : mail,
-            buyer_postcode : '123-456',
-            biz_num : '9810030929'
-        }, function (rsp) {
-            console.log(rsp);
-            if (rsp.success) {
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-                $.ajax({
-                    type: "POST", 
-                    url: "/flight/rescomplete",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                    	//imp_uid : rsp.imp_uid,
-                        //"amount" : 100,
-                        point : pointVal,
-                        kakao : kpoint,
-                        total : total,
-                        fno : fno,
-                        seat : seat,
-                        userid : name
-                    })
-                }).done(function(data){
-                	if ( everythings_fine ) {
-                		alert("성공");
-            			var msg = '결제가 완료되었습니다.';
-            			msg += '\n고유ID : ' + rsp.imp_uid;
-            			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-            			msg += '\결제 금액 : ' + rsp.paid_amount;
-            			msg += '카드 승인번호 : ' + rsp.apply_num;
-            			
-            			alert(msg);
-            			
-            			console.log("id>>"+userid);
-            			/* document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; */
-            		} else {
-            			/* alert("엘스");
-            			document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; */
-            		}
-                	
-                });
-            } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-                errorMeg = msg;
-                
-                alert(msg);
-                document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; 
-                return;
-               /*  alert(msg);
-                document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; //alert창 확인 후 이동할 url 설정 
-            }
-            if(msg == errorMeg){
-            	document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat;
-            }else{
-            	document.location.href="/flight/rescompleteMeg?userid="+name; */
-            }
-            alert(msg);
-            document.location.href="/flight/rescompleteMeg?userid="+name; //alert창 확인 후 이동할 url 설정 
-        });
-    });
+<script>
+	$('#charge_kakao').click(function() {
+						// getter
+						var fno = $("#fno").val();
+						var pointVal = $("#pointUse2").val();
+						var kpoint = $("#kakaoPUse2").val();
+						var name = $("#userid").val();
+						var total = $("#total").val();
+						var seat = $("#seat").val();
+						var fno = $("#fno").val();
+						var mail = $("#email").val();
+
+						if (pointVal.length == 0) {
+							pointVal = 0
+						};
+						if (kpoint.length == 0) {
+							kpoint = 0
+						};
+
+						var IMP = window.IMP;
+						console.log("totalVal : "+$("#totalPay").val());
+						if ($("#totalPay").val() == 0) {
+							alert("결제가 완료되었습니다.");
+							$.ajax({
+										type : "POST",
+										url : "/flight/rescomplete",
+										contentType : "application/json; charset=utf-8",
+										data : JSON.stringify({
+											
+											fno : fno,
+											point : pointVal,
+											kakao : kpoint,
+											total : pointVal+kpoint,
+											fno : fno,
+											seat : seat,
+											userid : name
+										}),
+										success : function(data) {
+											console.log(data);	
+										},
+										error : function(err) {
+											console.log(err);
+										}
+
+									});
+							document.location.href = "/flight/rescompleteMeg?userid="+ name;
+							
+						} else {
+							IMP.init('imp80062786');
+							var errMsg = '';
+							IMP
+									.request_pay(
+											{
+												pg : 'danal_tpay',
+												pay_method : 'card',
+												merchant_uid : 'merchant_'
+														+ new Date().getTime(), //상점에서 생성한 고유 주문번호
+												name : '주문명:결제테스트',
+												amount : 100,
+												buyer_email : mail,
+												buyer_name : name,
+												buyer_tel : '010-1234-5678',
+												buyer_addr : mail,
+												buyer_postcode : '123-456',
+												biz_num : '9810030929'
+											},
+											function(rsp) {
+												console.log(rsp);
+												if (rsp.success) {
+													var msg = '결제가 완료되었습니다.';
+													msg += '고유ID : '
+															+ rsp.imp_uid;
+													msg += '상점 거래ID : '
+															+ rsp.merchant_uid;
+													msg += '결제 금액 : '
+															+ rsp.paid_amount;
+													msg += '카드 승인번호 : '
+															+ rsp.apply_num;
+													$.ajax({
+																type : "POST",
+																url : "/flight/rescomplete",
+																contentType : "application/json; charset=utf-8",
+																data : JSON
+																		.stringify({
+																			//imp_uid : rsp.imp_uid,
+																			//"amount" : 100,
+																			fno : fno,
+																			point : pointVal,
+																			kakao : kpoint,
+																			total : total,
+																			fno : fno,
+																			seat : seat,
+																			userid : name
+																		})
+																	})
+															.done(
+																	function(data) {
+																		if (everythings_fine) {
+																			alert("성공");
+																			var msg = '결제가 완료되었습니다.';
+																			msg += '\n고유ID : '+ rsp.imp_uid;
+																			msg += '\n상점 거래ID : '+ rsp.merchant_uid;
+																			msg += '\결제 금액 : '+ rsp.paid_amount;
+																			msg += '카드 승인번호 : '+ rsp.apply_num;
+
+																			alert(msg);
+
+																			console.log("id>>"
+																							+ userid);
+																			/* document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; */
+																		} else {
+																			/* alert("엘스");
+																			document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; */
+																		}
+
+																	});
+												} else {
+													var msg = '결제에 실패하였습니다.';
+													msg += '에러내용 : '+ rsp.error_msg;
+													errorMeg = msg;
+
+													alert(msg);
+													document.location.href = "/flight/flightRes?fno="
+															+ $("#fno").val()
+															+ "&seat=" + seat;
+													return;
+													/*  alert(msg);
+													 document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat; //alert창 확인 후 이동할 url 설정 
+													}
+													if(msg == errorMeg){
+													document.location.href="/flight/flightRes?fno="+$("#fno").val()+"&seat="+seat;
+													}else{
+													document.location.href="/flight/rescompleteMeg?userid="+name; */
+												}
+												alert(msg);
+												document.location.href = "/flight/rescompleteMeg?userid="
+														+ name; //alert창 확인 후 이동할 url 설정 
+											});
+						}
+
+						// var money = $('input[name="cp_item"]:checked').val();
+						// console.log(money);
+
+					});
 </script>
+
 <%@ include file="../includes/footer.jsp"%>

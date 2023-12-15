@@ -96,7 +96,7 @@ public interface FlightMapper {
 
 	public int usePoint(String userid);
 
-	public List<FlightResVO> getResAll(String flightName);
+	public List<FlightResVO> getResAll(@Param("flightName")String flightName,@Param("fno") int fno);
 
 	public int ResCnt(String flightName);
 }

@@ -27,8 +27,9 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 <!-- 이미지로더 -->
-<script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
+<!-- <script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+ -->
 <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
   integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>	 -->
 <!-- <script>
@@ -129,10 +130,10 @@ max-width: 100%;
 				</div>
 			</div>		
 					
-		</div>
 	</section>
+		</div>
 
-<script>
+<!-- <script>
 function sendToMe() {
 	  console.log("dd");
     Kakao.API.request({
@@ -274,5 +275,5 @@ $(document).ready(function(){
         	
 
     });
-</script>
+</script> -->
 <%@ include file="../includes/footer.jsp"%>

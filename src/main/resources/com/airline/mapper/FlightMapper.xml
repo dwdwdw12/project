@@ -165,7 +165,7 @@
 	</select>
 	
 	<insert id="insertRes" parameterType="java.util.Map" >
-		insert into flightreservation(resno, userid, userName, flightName, departure, arrival, arrTime, depTime, seatId) values(#{resno},#{userid},#{username},#{flightname},#{departure},#{arrival},#{arrtime},#{deptime},#{seatid})
+		insert into flightreservation(resno, userid, userName, flightName, departure, arrival, arrTime, depTime, seatId, fno) values(#{resno},#{userid},#{username},#{flightname},#{departure},#{arrival},#{arrtime},#{deptime},#{seatid},#{fno})
 	</insert>
 	
 	<insert id="insertPay">
@@ -223,7 +223,7 @@
 	</select>
 	
 	<select id="getResAll" resultType="com.airline.vo.FlightResVO">
-		select seatId from flightreservation where flightName=#{flightName}
+		select seatId from flightreservation where flightName=#{flightName} and fno=#{fno}
 	</select>
 	
 	<select id="ResCnt" resultType="int">

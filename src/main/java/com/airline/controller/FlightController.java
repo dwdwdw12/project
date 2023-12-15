@@ -188,7 +188,7 @@ public class FlightController {
 		String flightName = vo.getFlightName();
 		System.out.println("flightName>>"+flightName);
 		//예약된 좌석 명단
-		List<FlightResVO> rvo = flights.getResAll(flightName);
+		List<FlightResVO> rvo = flights.getResAll(flightName, fno);
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    try {
 	        String json = objectMapper.writeValueAsString(rvo);
@@ -200,7 +200,7 @@ public class FlightController {
 	    model.addAttribute("rvo",rvo);
 		//list.add(flights.getResAll(flightName));
 
-		System.out.println("list>>"+flights.getResAll(flightName));
+		System.out.println("list>>"+flights.getResAll(flightName,fno));
 		
 	}
 	
@@ -326,6 +326,7 @@ public class FlightController {
 		//1.예약 테이블
 		String rno = UUID.randomUUID().toString();
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("fno", String.valueOf(flight.getFno()));
 		map.put("resno", rno);
 		map.put("userid", userid);
 		map.put("username", uName);

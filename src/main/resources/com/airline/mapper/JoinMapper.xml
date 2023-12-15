@@ -30,6 +30,10 @@
 	select mail from kakaouser where mail= #{email};
 </select>
 
+<select id="getUserIdByMail" resultType="String">
+	select userId from kakaouser where mail = #{email};
+</select>
+
 <select id="checkUserIdAndEmail" resultType="String">
 	select mail from kakaouser where mail= #{email} and userId = #{userId}
 </select>
@@ -97,7 +101,7 @@
 <select id="kakaoLoginCheck" resultMap="joinMap">
 	select * from kakaouser a left join authorities b
 	on a.userId = b.userid 
-	where mail = #{email} and a.userId = #{userId}
+	where userNameK = #{userNameK} and a.userId = #{userId}
 </select>
 
 <insert id="insertBasicTerms">

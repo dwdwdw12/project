@@ -18,12 +18,16 @@ public class CustomUser extends User {
 
 	private KakaoUserVO user;
 
-	public CustomUser(String userid, String password, Collection<? extends GrantedAuthority> authorities) {
+	public CustomUser(String userid, String password, 
+			Collection<? extends GrantedAuthority> authorities) {
 		super(userid, password, authorities);
 	}
 
 	public CustomUser(KakaoUserVO vo) {
-		super(vo.getUserId(), vo.getPwd(), vo.getAuthority().stream().map(auth->new SimpleGrantedAuthority(auth.getAuthority())).collect(Collectors.toList()));
+		super(vo.getUserId(), vo.getPwd(), vo.getAuthority()
+				.stream()
+				.map(auth->new SimpleGrantedAuthority(auth.getAuthority()))
+				.collect(Collectors.toList()));
 		this.user = vo;
 	}
 

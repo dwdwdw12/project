@@ -51,7 +51,7 @@ public interface JoinMapper {
 	public int userIdDuplicateCheck(String userId);
 	public int userNickDuplicateCheck(String userNick);
 	
-	public KakaoUserVO kakaoLoginCheck(@Param("email") String email, @Param("userId") String userId);
+	public KakaoUserVO kakaoLoginCheck(@Param("userNameK") String userNameK, @Param("userId") String userId);
 
 	public void insertBasicTerms(String userId);
 	public void insertAllTerms(String userId);
@@ -65,5 +65,7 @@ public interface JoinMapper {
 	public void insertPoint(String userId);
 	
 	public void updateEnabled(@Param("email") String email, @Param("mail_key") String mail_key);
+	
+	public String getUserIdByMail(String email);
 	
 }
