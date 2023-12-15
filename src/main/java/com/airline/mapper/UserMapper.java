@@ -103,5 +103,9 @@ public interface UserMapper {
 	public void updateUserNick(@Param("userId") String userId, @Param("userNick") String userNick);
 	
 	public int getEnabled(String userId);
+	
+	public int insertCancel(@Param("userId") String userId, @Param("data") String data);
+	
+	public FlightResVO findResByResNo(String data);
 
 }

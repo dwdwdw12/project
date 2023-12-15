@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.airline.mapper.UserMapper;
 import com.airline.service.UserService;
 import com.airline.vo.BoardDiaryVO;
 import com.airline.vo.BoardQnaVO;
+import com.airline.vo.CancelVO;
 import com.airline.vo.Criteria;
 import com.airline.vo.FlightResVO;
 import com.airline.vo.KakaoUserVO;
@@ -46,6 +48,10 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	
+	@Autowired
+	private UserMapper mapper;
+	
 	@Autowired
 //	private PayService pay;
 
@@ -135,7 +141,7 @@ public class UserController {
 		}
 	}
 	
-	//항공취소, 체크인 처리
+	//항공취소
 	@PostMapping(value="/userResDetail", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void userResDetailPost(@RequestParam("resno")String data) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -144,8 +150,23 @@ public class UserController {
 			String userid = userDetails.getUsername();
 			System.out.println("id : " + userid);
 			System.out.println("data : "+data);
+			FlightResVO resvo = mapper.findResByResNo(data);
+			String userId = resvo.getUserid();
+			mapper.insertCancel(userId,data);
 			//항공취소 처리
 			int result = service.cancelTicket(data);
+		}
+	}
+	
+	//체크인 처리
+	@PostMapping(value="/userResDetail2", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void userResDetailPost2(@RequestParam("resno")String data) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			String userid = userDetails.getUsername();
+			System.out.println("id : " + userid);
+			System.out.println("data : "+data);
 			//체크인 처리
 			int resultCheckin = service.checkin(data);
 		}
