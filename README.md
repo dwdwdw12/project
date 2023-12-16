@@ -95,7 +95,7 @@
 </details>
 
 ## 🙋‍♀️ 조원
-#### [김민철 @alscjf6702](https://github.com/Jincheol-11](https://github.com/alscjf6702)
+#### [김민철 @alscjf6702](https://github.com/alscjf6702)
 #### [😆 Gwon Jincheol 👉 GitHub](https://github.com/Jincheol-11)
 <details>
   <summary>
