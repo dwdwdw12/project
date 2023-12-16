@@ -122,9 +122,8 @@
 <br>
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white" />
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" />
-
 </div>
-
+*유의사항: Tomcat 포트 번호 8081
 ​<details>
   <summary>
     개발환경-API
@@ -133,7 +132,7 @@
      Javax.mail, spring-context-support(JavaMailSender, MimeMessage, MimeMessageHelper)​<br>
      Selenium, Summernote, DateRangePicker, PortOne, chart.js, openWeather
 </details>
-*유의사항: Tomcat 포트 번호 8081
+
 
 ## 💡 기획 의도
 <details>
