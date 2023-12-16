@@ -129,10 +129,10 @@
   <summary>
     개발환경-API
   </summary>
-     카카오 지도, 카카오 로그인, 카카오톡 채널​, 카카오 postcode service(우편번호)  
-     Selenium(크롤링), Summernote(게시판 에디터), DateRangePicker(날짜 선택)​  
-     Javax.mail, spring-context-support(JavaMailSender, MimeMessage, MimeMessageHelper)(메일 전송)​  
-     PortOne(결제), chart.js(그래프), openWeather(날씨)
+     카카오 지도, 카카오 로그인, 카카오톡 채널​, 카카오 postcode service<br>
+     Selenium, Summernote, DateRangePicker<br>  
+     Javax.mail, spring-context-support(JavaMailSender, MimeMessage, MimeMessageHelper)​<br>  
+     PortOne, chart.js, openWeather
 </details>
 
 
