@@ -39,7 +39,7 @@
 ![Slide14](https://github.com/dwdwdw12/project/assets/147116004/48360da8-f71c-4e6d-beab-d12b87cc55f3)
 ![Slide15](https://github.com/dwdwdw12/project/assets/147116004/d34d99e9-6191-4d25-96af-d7e0b078f7ca)
 ![Slide16](https://github.com/dwdwdw12/project/assets/147116004/18b09ef0-e5ba-48c8-845b-56b5edac1a06)
-![Slide17](https://github.com/dwdwdw12/project/assets/147116004/784e1400-6973-4841-8561-3ea0919b269b)
+![Slide17](https://github.com/dwdwdw12/project/assets/147116004/ff91a228-cae1-46c6-8a30-42d677ec1ba1)
 ![Slide18](https://github.com/dwdwdw12/project/assets/147116004/7f30eac7-f3b3-499f-aa7f-f3e12e2fc164)
 ![Slide19](https://github.com/dwdwdw12/project/assets/147116004/af016c9e-0607-4811-97d2-9dbae74739f9)
 ![Slide20](https://github.com/dwdwdw12/project/assets/147116004/74357643-7a13-45e5-8b7c-a065182b58f2)
