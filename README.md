@@ -5,7 +5,7 @@
 2. [📖 프로젝트 소개](#-프로젝트-소개)   
 3. [🔨 개발환경](#-개발환경)  
 4. [🙋‍♀️ 조원](#-조원)     
-5. [📈 요구 명세서](#-요구-명세서)   
+5. [📈 기능 명세서](#-기능-명세서)   
 6. [📊 Diagram](#-diagram)   
 7. [📝 기능 설명](#-기능-설명)     
 8. [📹 시연 영상](#-시연-영상)   
@@ -134,12 +134,16 @@
 #### [이동우 @dwdwdw12](https://github.com/dwdwdw12) : 항공 데이터 크롤링, 여행일기 게시판, 이벤트 게시판, 항공편 검색, 메인화면, CSS
 #### [정윤정 @yjeongyjeong](https://github.com/yjeongyjeong) : 회원가입, 아이디 및 패스워드 찾기, 마이페이지(회원정보수정), 카카오 로그인, CSS
 
-## 📈 요구 명세서
+## 📈 기능 명세서
 <details>
   <summary>
-    요구 명세서
+    기능 명세서
   </summary>
-  항공사 ,,,,
+  
+![기능명세1](https://github.com/dwdwdw12/project/assets/147116004/4677c2ca-3bc7-4482-9f91-39a1dbc4b33b)
+![기능명세2](https://github.com/dwdwdw12/project/assets/147116004/2433d433-bed0-42d9-b8fc-7918001058c1)
+  ![기능명세3](https://github.com/dwdwdw12/project/assets/147116004/4acf7772-40ce-4eb6-ba0f-5d20e46de625)
+
 </details>
 
 ## 📊 Diagram
