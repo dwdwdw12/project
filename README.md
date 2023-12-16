@@ -1,9 +1,21 @@
-Airline website by spring
+목차
+[1. 📂 PPT](#ppt)
+2. 📖 프로젝트 소개
+3. 🔧 개발환경
+4. 💡 기획 의도
+5. 🙋‍♀️ Team_Member
+6. 📈 요구 명세서
+7. 📊 Diagram
+8. 📹 기능 설명
+9. 🔨개발 환경
+10. 📹 시연 영상
+
+
+
 <details>
   <summary>
-    PPT
+   1. 📂 #PPT
   </summary>
-
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
 ![Slide2](https://github.com/dwdwdw12/project/assets/147116004/e9df7646-4ac6-4355-b375-e9074f15aadd)
 ![Slide3](https://github.com/dwdwdw12/project/assets/147116004/11860b4c-8660-4420-a6f7-1343b2afa847)
@@ -57,4 +69,5 @@ Airline website by spring
 ![Slide51](https://github.com/dwdwdw12/project/assets/147116004/7c9ca239-82a5-4fd3-8b35-f45f6647e043)
 ![Slide52](https://github.com/dwdwdw12/project/assets/147116004/169c2b55-15d4-4511-80d6-ff499a65650f)
 </details>
+
 
