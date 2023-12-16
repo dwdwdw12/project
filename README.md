@@ -13,7 +13,7 @@
 ## 📂 PPT
 <details>
   <summary>
-    PPT
+    PPT-소개/개발환경/일정/역할분배
   </summary>
   
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
@@ -22,6 +22,12 @@
 ![Slide4](https://github.com/dwdwdw12/project/assets/147116004/14ef5021-f0bd-4f4a-bbf2-22cf967562f4)
 ![Slide5](https://github.com/dwdwdw12/project/assets/147116004/e3e33986-fadb-4c0c-bf13-c6b82cf2ba11)
 ![Slide6](https://github.com/dwdwdw12/project/assets/147116004/583fafb0-9310-42b9-9d7d-af3dbc608a17)
+</details>
+<details>
+  <summary>
+    PPT-기능 요구사항
+  </summary>
+
 ![Slide7](https://github.com/dwdwdw12/project/assets/147116004/273e7c7f-600e-4b9a-9da9-ce6d9de80535)
 ![Slide8](https://github.com/dwdwdw12/project/assets/147116004/d1bd98f0-8c65-465e-8a9d-c9c03a3d13fb)
 ![Slide9](https://github.com/dwdwdw12/project/assets/147116004/4d592327-bf91-4784-b650-fd3855180af4)
@@ -38,6 +44,12 @@
 ![Slide20](https://github.com/dwdwdw12/project/assets/147116004/74357643-7a13-45e5-8b7c-a065182b58f2)
 ![Slide21](https://github.com/dwdwdw12/project/assets/147116004/79a9f879-c22a-4e85-a442-8dfd66fafbe2)
 ![Slide22](https://github.com/dwdwdw12/project/assets/147116004/f7aa4bcc-0851-470d-aca0-44045f5c58e6)
+</details>
+<details>
+  <summary>
+    PPT-다이어그램
+  </summary>
+  
 ![Slide23](https://github.com/dwdwdw12/project/assets/147116004/b9390cab-c420-4b64-a9be-4d614c05f523)
 ![Slide24](https://github.com/dwdwdw12/project/assets/147116004/02703947-dea0-4d84-aab4-94e27a81149a)
 ![Slide25](https://github.com/dwdwdw12/project/assets/147116004/ae1e685a-99f0-4511-81a9-9455655a2925)
