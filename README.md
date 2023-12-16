@@ -142,7 +142,7 @@
   
 ![기능명세1](https://github.com/dwdwdw12/project/assets/147116004/4677c2ca-3bc7-4482-9f91-39a1dbc4b33b)
 ![기능명세2](https://github.com/dwdwdw12/project/assets/147116004/2433d433-bed0-42d9-b8fc-7918001058c1)
-  ![기능명세3](https://github.com/dwdwdw12/project/assets/147116004/4acf7772-40ce-4eb6-ba0f-5d20e46de625)
+![기능명세30](https://github.com/dwdwdw12/project/assets/147116004/87a46e13-6da5-4241-aa6c-27b57b168d57)
 
 </details>
 
