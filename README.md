@@ -95,12 +95,12 @@
 </details>
 
 ## 🙋‍♀️ 조원
+#### [김민철 @alscjf6702](https://github.com/Jincheol-11](https://github.com/alscjf6702)
 <details>
   <summary>
     조원
   </summary>
-  김민철 [@alscjf6702](https://github.com/alscjf6702)  
-  #### [김민철 @alscjf6702](https://github.com/Jincheol-11](https://github.com/alscjf6702)
+  
   김보람
   이동우
   정윤정
