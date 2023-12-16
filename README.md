@@ -11,10 +11,10 @@
 10. [📹 시연 영상]  
 
 
-## PPT
+## 1. 📂 PPT
 <details>
   <summary>
-   1. 📂 PPT
+    PPT
   </summary>
   
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
