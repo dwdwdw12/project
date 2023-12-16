@@ -14,7 +14,7 @@
 
 <details>
   <summary>
-   1. 📂 #PPT
+   1. 📂 # PPT
   </summary>
   
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
@@ -74,7 +74,7 @@
 
 <details>
   <summary>
-    2. 📖 #프로젝트 소개
+    2. 📖 # 프로젝트 소개
   </summary>
   항공사 ,,,,
 </details>
