@@ -1,6 +1,6 @@
 ### 목차  
-1. [📂 PPT](#1.-ppt)  
-2. [📖 프로젝트 소개](#2.-프로젝트-소개)   
+1. [📂 PPT](#-ppt)  
+2. [📖 프로젝트 소개](#-프로젝트-소개)   
 3. [🔧 개발환경]  
 4. [💡 기획 의도]  
 5. [🙋‍♀️ Team_Member]    
@@ -11,10 +11,10 @@
 10. [📹 시연 영상]  
 
 
-## 1.📂 PPT
+## 📂 PPT
 <details>
   <summary>
-    PPT
+    
   </summary>
   
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
@@ -71,10 +71,10 @@
 ![Slide52](https://github.com/dwdwdw12/project/assets/147116004/169c2b55-15d4-4511-80d6-ff499a65650f)
 </details>
 
-## 2.📖 프로젝트 소개
+## 📖 프로젝트 소개
 <details>
   <summary>
-    프로젝트 소개
+    
   </summary>
   항공사 ,,,,
 </details>
