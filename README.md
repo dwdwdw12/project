@@ -71,10 +71,10 @@
 ![Slide52](https://github.com/dwdwdw12/project/assets/147116004/169c2b55-15d4-4511-80d6-ff499a65650f)
 </details>
 
-## 프로젝트 소개
+##  2. 📖 프로젝트 소개
 <details>
   <summary>
-    2. 📖 프로젝트 소개
+    프로젝트 소개
   </summary>
   항공사 ,,,,
 </details>
