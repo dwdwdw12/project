@@ -1,4 +1,9 @@
 Airline website by spring
+<details>
+  <summary>
+    PPT
+  </summary>
+
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
 ![Slide2](https://github.com/dwdwdw12/project/assets/147116004/e9df7646-4ac6-4355-b375-e9074f15aadd)
 ![Slide3](https://github.com/dwdwdw12/project/assets/147116004/11860b4c-8660-4420-a6f7-1343b2afa847)
@@ -51,4 +56,5 @@ Airline website by spring
 ![Slide50](https://github.com/dwdwdw12/project/assets/147116004/e89954f9-8a31-4e92-b0fc-6e1fa35a4f75)
 ![Slide51](https://github.com/dwdwdw12/project/assets/147116004/7c9ca239-82a5-4fd3-8b35-f45f6647e043)
 ![Slide52](https://github.com/dwdwdw12/project/assets/147116004/169c2b55-15d4-4511-80d6-ff499a65650f)
+</details>
 
