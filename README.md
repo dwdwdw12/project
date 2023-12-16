@@ -1,3 +1,5 @@
+### 항공사 웹사이트 구현  
+
 ### 목차  
 1. [📂 PPT](#-ppt)  
 2. [📖 프로젝트 소개](#-프로젝트-소개)   
@@ -97,12 +99,42 @@
 </details>
 
 ## 🔧 개발환경
-<details>
+
+  개발환경
+<div>
+<img src="https://img.shields.io/badge/JAVA-C01818?style=flat-square&logo=coffeescript&logoColor=white" />
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=fff"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=000"/>
+     
+<br>
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat&logo=bootstrap&logoColor=white"/>
+<img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=fff"/>
+<br>
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white" />
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" />
+<img src="https://img.shields.io/badge/Mybatis-000000?style=flat&logo=Fluentd&logoColor=white"/>
+<br>
+<img src="https://img.shields.io/badge/JSP-E34F26?style=flat-square&logo=JSP&logoColor=white">
+<img src="https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=black" />
+<img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white"/>
+
+<br>
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white" />
+<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" />
+
+</div>
+
+​<details>
   <summary>
-    개발환경
+    개발환경-API
   </summary>
-  항공사 ,,,,
+     카카오 지도, 카카오 로그인, 카카오톡 채널​, 카카오 postcode service(우편번호)  
+     Selenium(크롤링), Summernote(게시판 에디터), DateRangePicker(날짜 선택)​  
+     Javax.mail, spring-context-support(JavaMailSender, MimeMessage, MimeMessageHelper)(메일 전송)​  
+     PortOne(결제), chart.js(그래프), openWeather(날씨)
 </details>
+
 
 ## 💡 기획 의도
 <details>
