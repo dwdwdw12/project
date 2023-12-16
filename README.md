@@ -95,7 +95,11 @@
 </details>
 
 ## 🙋‍♀️ 조원
-#### [김민철 @alscjf6702](https://github.com/alscjf6702)
+#### [김민철 @alscjf6702](https://github.com/alscjf6702) : 공지사항 게시판, Q&A 게시판, 카카오상담톡, 회원혜택 페이지, CSS
+#### [김보람 @kbr7105](https://github.com/kbr7105) : 헤더, 마이페이지(관리자/일반회원), 일반 로그인, 좌석선택 및 결제, contact 페이지, CSS
+#### [이동우 @dwdwdw12](https://github.com/dwdwdw12) : 항공 데이터 크롤링, 여행일기 게시판, 이벤트 게시판, 항공편 검색, 메인화면, CSS
+#### [정윤정 @yjeongyjeong](https://github.com/yjeongyjeong) : 회원가입, 아이디 및 패스워드 찾기, 마이페이지(회원정보수정), 카카오 로그인, CSS
+
 <details>
   <summary>
     조원
