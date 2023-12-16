@@ -71,12 +71,7 @@
 </details>
 
 ## 📖 프로젝트 소개
-<details>
-  <summary>
-    프로젝트 소개
-  </summary>
-  항공사 ,,,,
-</details>
+
 
 ## 🔧 개발환경
 <details>
