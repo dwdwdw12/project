@@ -46,6 +46,11 @@
 ![Slide28](https://github.com/dwdwdw12/project/assets/147116004/cd82e488-7a71-4ae2-b47a-88e858de8950)
 ![Slide29](https://github.com/dwdwdw12/project/assets/147116004/3246daaf-0d18-4d32-87c4-a5eaad114023)
 ![Slide30](https://github.com/dwdwdw12/project/assets/147116004/5d297bf8-887a-4734-8d4a-7ab41ec81f15)
+  </summary>
+<details>
+  <summary>
+    PPT-화면구현 및 소감
+  </summary>
 ![Slide31](https://github.com/dwdwdw12/project/assets/147116004/bca5343f-8417-44b7-bfd3-24d98b50ef87)
 ![Slide32](https://github.com/dwdwdw12/project/assets/147116004/173e94bf-2f65-461f-9e29-dceae311bb1b)
 ![Slide33](https://github.com/dwdwdw12/project/assets/147116004/8476def2-478a-4ff1-9455-8f8a1bab09d9)
