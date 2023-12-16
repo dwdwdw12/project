@@ -140,9 +140,7 @@
     기능 명세서
   </summary>
   
-![기능명세1](https://github.com/dwdwdw12/project/assets/147116004/4677c2ca-3bc7-4482-9f91-39a1dbc4b33b)
-![기능명세22](https://github.com/dwdwdw12/project/assets/147116004/9dcc4b15-cafd-4fc7-9697-f43e5f3635b9)
-![기능명세30](https://github.com/dwdwdw12/project/assets/147116004/87a46e13-6da5-4241-aa6c-27b57b168d57)
+![기능명세](https://github.com/dwdwdw12/project/assets/147116004/472593a0-f0a9-4a92-8e59-26bf0b1c4b23)
 
 </details>
 
