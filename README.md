@@ -1,20 +1,19 @@
 ### 목차  
 1. [📂 PPT](#-ppt)  
 2. [📖 프로젝트 소개](#-프로젝트-소개)   
-3. [🔧 개발환경]  
-4. [💡 기획 의도]  
-5. [🙋‍♀️ Team_Member]    
-6. [📈 요구 명세서]  
-7. [📊 Diagram]  
-8. [📹 기능 설명]  
-9. [🔨개발 환경]  
-10. [📹 시연 영상]  
+3. [🔨 개발환경](#-개발환경)   
+4. [💡 기획 의도](#-기획의도)   
+5. [🙋‍♀️ 조원](#-조원)     
+6. [📈 요구 명세서](#-요구-명세서)   
+7. [📊 Diagram](#-diagram)   
+8. [📝 기능 설명](#-기능-설명)     
+9. [📹 시연 영상](#-시연-영상)   
 
 
 ## 📂 PPT
 <details>
   <summary>
-    
+    PPT
   </summary>
   
 ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/8b82ffb3-b53d-4f57-acd0-9483b95ba4ee)
@@ -74,8 +73,66 @@
 ## 📖 프로젝트 소개
 <details>
   <summary>
-    
+    프로젝트 소개
   </summary>
   항공사 ,,,,
 </details>
 
+## 🔧 개발환경
+<details>
+  <summary>
+    개발환경
+  </summary>
+  항공사 ,,,,
+</details>
+
+## 💡 기획 의도
+<details>
+  <summary>
+    기획의도
+  </summary>
+  항공사 ,,,,
+</details>
+
+## 🙋‍♀️ 조원
+<details>
+  <summary>
+    조원
+  </summary>
+  김민철[@alscjf6702](https://github.com/alscjf6702)
+  김보람
+  이동우
+  정윤정
+</details>
+
+## 📈 요구 명세서
+<details>
+  <summary>
+    요구 명세서
+  </summary>
+  항공사 ,,,,
+</details>
+
+## 📊 Diagram
+<details>
+  <summary>
+    프로젝트 소개
+  </summary>
+  항공사 ,,,,
+</details>
+
+## 📹 기능 설명
+<details>
+  <summary>
+    기능 설명
+  </summary>
+  항공사 ,,,,
+</details>
+
+## 📝 시연
+<details>
+  <summary>
+    시연
+  </summary>
+  항공사 ,,,,
+</details>
