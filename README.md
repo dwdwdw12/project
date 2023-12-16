@@ -51,6 +51,7 @@
   <summary>
     PPT-화면구현 및 소감
   </summary>
+  
 ![Slide31](https://github.com/dwdwdw12/project/assets/147116004/bca5343f-8417-44b7-bfd3-24d98b50ef87)
 ![Slide32](https://github.com/dwdwdw12/project/assets/147116004/173e94bf-2f65-461f-9e29-dceae311bb1b)
 ![Slide33](https://github.com/dwdwdw12/project/assets/147116004/8476def2-478a-4ff1-9455-8f8a1bab09d9)
