@@ -168,18 +168,23 @@
   <summary>
     Class Diagram
   </summary>
+  <br>
 *메인화면/로그인/마이페이지 메인/정보 페이지
   
 ![Class1](https://github.com/dwdwdw12/project/assets/147116004/a5918349-33b3-400a-9063-3275c5e0f5ad)
-
+<br>
 *회원가입
 ![Class2](https://github.com/dwdwdw12/project/assets/147116004/88bf2d84-0524-4eb7-81a3-8eceee1d1c17)
+<br>
 *마이페이지
 ![Class3](https://github.com/dwdwdw12/project/assets/147116004/52276d13-a802-418b-90cf-f7e0d7a202f5)
+<br>
 *항공편 검색 및 예약
 ![Class4](https://github.com/dwdwdw12/project/assets/147116004/53ee5916-fd4c-4e52-bfbf-ba5536fb10ef)
+<br>
 *공지사항/Q&A 게시판
 ![Class5](https://github.com/dwdwdw12/project/assets/147116004/54b24139-787a-4e28-b883-7353ddd7d92d)
+<br>
 *여행일기/이벤트 게시판
 ![Class6](https://github.com/dwdwdw12/project/assets/147116004/1c9929f1-797d-4a5f-8608-7961281b312f)
 
