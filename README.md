@@ -133,7 +133,7 @@
      Javax.mail, spring-context-support(JavaMailSender, MimeMessage, MimeMessageHelper)​<br>
      Selenium, Summernote, DateRangePicker, PortOne, chart.js, openWeather
 </details>
-
+*유의사항: Tomcat 포트 번호 8081
 
 ## 💡 기획 의도
 <details>
