@@ -111,9 +111,36 @@
 ## 📊 Diagram
 <details>
   <summary>
-    프로젝트 소개
+    Usecase Diagram
   </summary>
-  항공사 ,,,,
+  
+  ![Usecase](https://github.com/dwdwdw12/project/assets/147116004/18a1ee61-11a2-4283-bf6a-693251756d6d)
+
+</details>
+
+<details>
+  <summary>
+    ER Diagram
+  </summary>
+  
+  ![ERD](https://github.com/dwdwdw12/project/assets/147116004/9b62b504-130a-471a-b26f-00b035efc8f4)
+
+
+</details>
+
+<details>
+  <summary>
+    Class Diagram
+  </summary>
+  
+![Class1](https://github.com/dwdwdw12/project/assets/147116004/a5918349-33b3-400a-9063-3275c5e0f5ad)
+![Class2](https://github.com/dwdwdw12/project/assets/147116004/88bf2d84-0524-4eb7-81a3-8eceee1d1c17)
+![Class3](https://github.com/dwdwdw12/project/assets/147116004/52276d13-a802-418b-90cf-f7e0d7a202f5)
+![Class4](https://github.com/dwdwdw12/project/assets/147116004/53ee5916-fd4c-4e52-bfbf-ba5536fb10ef)
+![Class5](https://github.com/dwdwdw12/project/assets/147116004/54b24139-787a-4e28-b883-7353ddd7d92d)
+![Class6](https://github.com/dwdwdw12/project/assets/147116004/1c9929f1-797d-4a5f-8608-7961281b312f)
+
+
 </details>
 
 ## 📹 기능 설명
