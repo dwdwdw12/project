@@ -123,7 +123,7 @@
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white" />
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" />
 </div>
-*유의사항: Tomcat 포트 번호 8081
+*유의사항: Tomcat 포트 번호 8081<br>
 ​<details>
   <summary>
     개발환경-API
@@ -135,12 +135,7 @@
 
 
 ## 💡 기획 의도
-<details>
-  <summary>
-    기획의도
-  </summary>
-  항공사 ,,,,
-</details>
+항공사 웹사이트를 구현해 보았습니다. 아시아나 항공을 모델로 하였고, 일부 기능을 추가 및 삭제하였습니다.
 
 ## 🙋‍♀ 조원
 #### [김민철 @alscjf6702](https://github.com/alscjf6702) : 공지사항 게시판, Q&A 게시판, 카카오상담톡, 회원혜택 페이지, CSS
