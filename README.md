@@ -414,11 +414,6 @@
   <img src="https://github.com/dwdwdw12/project/assets/147116004/ad3086ef-dbc6-467d-baa3-1b641ac604f4" width="42%">
   <img src="https://github.com/dwdwdw12/project/assets/147116004/a7167961-ace5-4fd4-b004-9ded5d4c1682" width="12%">
 </p>
-![image61](https://github.com/dwdwdw12/project/assets/147116004/7a3892fa-2cb7-4c6a-85a1-d25a054e35be)
-![image62](https://github.com/dwdwdw12/project/assets/147116004/70e29ab4-3958-48aa-86ea-ad2036d97ddc)
-![image63](https://github.com/dwdwdw12/project/assets/147116004/97ec5046-074f-4d47-9452-dd11de999d42)
-![image64](https://github.com/dwdwdw12/project/assets/147116004/ad3086ef-dbc6-467d-baa3-1b641ac604f4)
-![image66](https://github.com/dwdwdw12/project/assets/147116004/a7167961-ace5-4fd4-b004-9ded5d4c1682)
 
 </details>
 
