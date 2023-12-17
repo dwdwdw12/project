@@ -195,9 +195,141 @@
 ## 📹 기능 설명
 <details>
   <summary>
-    기능 설명
+    헤더/메인화면
   </summary>
-  항공사 ,,,,
+  
+  ![Slide1](https://github.com/dwdwdw12/project/assets/147116004/04e589df-264e-4c87-8d3e-e2c2b61b4c27)
+
+</details>
+
+<details>
+  <summary>
+    회원가입(일반)
+  </summary>
+  
+  ![Slide2](https://github.com/dwdwdw12/project/assets/147116004/91beaca7-c595-4558-9b98-37594905ebb4)
+
+
+</details>
+
+<details>
+  <summary>
+    회원가입(카카오)
+  </summary>
+  
+  ![Slide3](https://github.com/dwdwdw12/project/assets/147116004/f8e74662-42a4-40b0-9cba-f89818b25318)
+
+
+</details>
+
+<details>
+  <summary>
+    아이디/비밀번호 찾기
+  </summary>
+  
+  ![Slide4](https://github.com/dwdwdw12/project/assets/147116004/75e7f50d-b5e0-43ea-a90a-395b4f9d5d4c)
+
+
+</details>
+
+<details>
+  <summary>
+    휴면회원 풀기
+  </summary>
+  
+  ![Slide5](https://github.com/dwdwdw12/project/assets/147116004/670713b7-b8d1-4f20-a78b-1a687771dfa4)
+
+
+</details>
+
+<details>
+  <summary>
+    마이페이지(유저)
+  </summary>
+  
+  ![Slide6](https://github.com/dwdwdw12/project/assets/147116004/0c4f13c0-e87a-484d-a03a-c9d7534271b2)
+
+
+</details>
+
+<details>
+  <summary>
+    마이페이지(관리자)
+  </summary>
+  
+  ![Slide7](https://github.com/dwdwdw12/project/assets/147116004/43517fd8-ee20-4fd1-ac01-1457d0ceafff)
+
+
+</details>
+
+<details>
+  <summary>
+    회원편의
+  </summary>
+  
+  ![Slide8](https://github.com/dwdwdw12/project/assets/147116004/0c6e3f38-d2fa-4f80-97fe-e9db4ef26a50)
+
+
+</details>
+
+<details>
+  <summary>
+    항공편 검색/출도착 조회
+  </summary>
+  
+  ![Slide9](https://github.com/dwdwdw12/project/assets/147116004/0ec7da22-7129-4a9b-8f43-bc091074cbe5)
+
+
+</details>
+
+<details>
+  <summary>
+    예약 및 결제
+  </summary>
+  
+  ![Slide10](https://github.com/dwdwdw12/project/assets/147116004/28da7b1e-4699-4a2f-8441-cc227ea78086)
+
+
+</details>
+
+<details>
+  <summary>
+    공지사항
+  </summary>
+  
+  ![Slide11](https://github.com/dwdwdw12/project/assets/147116004/4a1b6573-cf67-4b38-8c02-d6ae3cb4a0fa)
+
+
+</details>
+
+<details>
+  <summary>
+    Q&A 게시판
+  </summary>
+  
+  ![Slide12](https://github.com/dwdwdw12/project/assets/147116004/65b1aaa6-fde9-4f4e-9ca3-ecd13b652ffc)
+
+
+</details>
+
+<details>
+  <summary>
+    여행일기 게시판
+  </summary>
+  
+  ![Slide13](https://github.com/dwdwdw12/project/assets/147116004/a4b4cb64-a847-4561-a170-5068fb7e336b)
+
+
+</details>
+
+<details>
+  <summary>
+    이벤트 게시판
+  </summary>
+  
+  ![Slide14](https://github.com/dwdwdw12/project/assets/147116004/7ccaaa08-86e2-478b-be64-d330885f65d5)
+
+
 </details>
 
 ## 📝 시연 영상
