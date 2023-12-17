@@ -369,6 +369,15 @@
   
   ![Slide8](https://github.com/dwdwdw12/project/assets/147116004/0c6e3f38-d2fa-4f80-97fe-e9db4ef26a50)
 
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/b4581bcb-b501-4f56-b94a-334e677a4b35" width="49%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/5beeecdb-3271-487a-b064-b1c311f000d4" width="49%">
+</p>
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/466a72eb-84b1-4bd5-99eb-2d23c5adf244" width="37%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/89eacade-e114-409b-a464-669bcdf6a54e" width="20%" height="250px">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/b93ffa73-705b-40e8-a165-8b74e0d811c2" width="37%">
+</p>
 
 </details>
 
@@ -379,8 +388,15 @@
   
   ![Slide9](https://github.com/dwdwdw12/project/assets/147116004/0ec7da22-7129-4a9b-8f43-bc091074cbe5)
 
-
-</details>
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/841cbdab-c4b7-47e7-a728-f587f4cac0c1" width="32%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/b672d2be-8fff-4400-90b0-5353afd9bf59" width="32%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/a69821d9-a712-4d69-be23-f6d096ec1b06" width="32%">
+</p>
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/cd7e1c89-24b4-4663-b690-255f8caf22ee" width="49%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/2c46573d-ec3f-48e4-a4c6-145857aab247" width="49%">
+</p>
 
 <details>
   <summary>
@@ -389,6 +405,20 @@
   
   ![Slide10](https://github.com/dwdwdw12/project/assets/147116004/28da7b1e-4699-4a2f-8441-cc227ea78086)
 
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/7a3892fa-2cb7-4c6a-85a1-d25a054e35be" width="49%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/70e29ab4-3958-48aa-86ea-ad2036d97ddc" width="49%">
+</p>
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/97ec5046-074f-4d47-9452-dd11de999d42" width="42%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/ad3086ef-dbc6-467d-baa3-1b641ac604f4" width="42%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/a7167961-ace5-4fd4-b004-9ded5d4c1682" width="12%">
+</p>
+![image61](https://github.com/dwdwdw12/project/assets/147116004/7a3892fa-2cb7-4c6a-85a1-d25a054e35be)
+![image62](https://github.com/dwdwdw12/project/assets/147116004/70e29ab4-3958-48aa-86ea-ad2036d97ddc)
+![image63](https://github.com/dwdwdw12/project/assets/147116004/97ec5046-074f-4d47-9452-dd11de999d42)
+![image64](https://github.com/dwdwdw12/project/assets/147116004/ad3086ef-dbc6-467d-baa3-1b641ac604f4)
+![image66](https://github.com/dwdwdw12/project/assets/147116004/a7167961-ace5-4fd4-b004-9ded5d4c1682)
 
 </details>
 
