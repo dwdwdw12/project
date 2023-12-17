@@ -222,6 +222,17 @@
   
   ![Slide2](https://github.com/dwdwdw12/project/assets/147116004/91beaca7-c595-4558-9b98-37594905ebb4)
 
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/efed7070-6780-49b2-84c4-15f79358797c" width="32%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/6e13f819-e4fe-4f9f-ab60-c1017b5103d9" width="32%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/faac2c65-14ae-4753-8554-1880833b17be" width="32%">
+</p>
+<p align="center">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/3f54ea69-2831-4819-a424-5d90f5b8ac76" width="32%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/6cf5ecfe-40d3-46a0-97fb-1576c7ba497a" width="32%">
+  <img src="https://github.com/dwdwdw12/project/assets/147116004/7e761909-213f-4338-81b8-458f6e5ed0ca" width="32%">
+</p>
+
 
 </details>
 
