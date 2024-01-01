@@ -197,7 +197,8 @@ bottom:30px;
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-kakao.init('3156d02ad4070a1c858f024518bda8c5');
+//kakao.init('3156d02ad4070a1c858f024518bda8c5');
+kakao.init('2c3ab09c77be5e3d93d0eb30a382940f');
 Kakao.Channel.createAddChannelButton({
 	  container: '#kakao-talk-channel-chat-button',
 	  channelPublicId: '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.

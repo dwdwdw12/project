@@ -428,8 +428,10 @@ public class FlightController {
 		String grant_type = code;
 		String url = "https://kauth.kakao.com/oauth/token";
 		//String url = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
-		String redirect_url = "http://192.168.0.19:8081/flight/oath";
-		String rest_api_key="607caeca9f2a0089b46f99c667e0dee3";
+//		String redirect_url = "http://192.168.0.19:8081/flight/oath";
+		String redirect_url = "http://43.203.77.138:8081/flight/oath";
+//		String rest_api_key="607caeca9f2a0089b46f99c667e0dee3";
+		String rest_api_key="096346fd53658772571bad9dc9b266cd";
 //		Map<String, String> jsonData = new HashMap<String, String>();
 //		jsonData.put("grant_type", grant_type);
 //		jsonData.put("client_id", rest_api_key);

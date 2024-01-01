@@ -164,7 +164,8 @@
 										<c:choose>
 											<c:when test="${fn:contains(loginUser.userId, '@')}">
 												<li><a class="logout"
-													href="https://kauth.kakao.com/oauth/logout?client_id=607caeca9f2a0089b46f99c667e0dee3&logout_redirect_uri=http://192.168.0.19:8081/logout">kakaologout</a></li>
+													href="https://kauth.kakao.com/oauth/logout?client_id=096346fd53658772571bad9dc9b266cd&logout_redirect_uri=http://43.203.77.138:8081/logout">kakaologout</a></li>
+													<!-- href="https://kauth.kakao.com/oauth/logout?client_id=607caeca9f2a0089b46f99c667e0dee3&logout_redirect_uri=http://192.168.0.19:8081/logout">kakaologout</a></li> -->
 											</c:when>
 											<c:otherwise>
 												<li><a class="logout" href="/logout"
@@ -234,7 +235,8 @@
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-	kakao.init('3156d02ad4070a1c858f024518bda8c5');
+	//kakao.init('3156d02ad4070a1c858f024518bda8c5');
+	kakao.init('2c3ab09c77be5e3d93d0eb30a382940f');
 	Kakao.Channel.createAddChannelButton({
 		container : '#kakao-talk-channel-chat-button',
 		channelPublicId : '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.
@@ -338,7 +340,7 @@
 			<div class="col-xs-12 mx-auto tm-about-text-wrap text-center"> 
 							<h2 class="text-uppercase mb-4">인증이 완료되었습니다.</h2>
 							<br>  
-					<h6>언제나 회원님을 생각하는 카카오 항공이 되겠습니다.</h6>
+					<h6>언제나 회원님을 생각하는 항공사가 되겠습니다.</h6>
 
 <br><br> 
 							<button type="button" class="btn btn-primary"

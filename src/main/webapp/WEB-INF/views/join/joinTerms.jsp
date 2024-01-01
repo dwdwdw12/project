@@ -63,7 +63,7 @@
 						<hr>
 						<input type="checkbox" name="selectall" id="agree_all"
 							data-type="all_ck_item" onclick="selectAll(this)"> <label
-							for="agree_all" class="fsz_23">카카오 클럽 일반규정, 약관 및 본인의 개인정보
+							for="agree_all" class="fsz_23"> 일반규정, 약관 및 본인의 개인정보
 							수집·이용, 국외 이전, 제 3자 제공에 모두 동의합니다.</label>
 							
 						<hr>

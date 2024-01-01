@@ -81,8 +81,10 @@ public class JoinServiceImpl implements JoinService {
 			
 			sb.append("grant_type=authorization_code");
 
-			sb.append("&client_id=607caeca9f2a0089b46f99c667e0dee3"); // REST_API키 본인이 발급받은 key 넣어주기
-			sb.append("&redirect_uri=http://192.168.0.19:8081/join/kakao"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
+			//sb.append("&client_id=607caeca9f2a0089b46f99c667e0dee3"); // REST_API키 본인이 발급받은 key 넣어주기
+			sb.append("&client_id=096346fd53658772571bad9dc9b266cd"); // REST_API키 본인이 발급받은 key 넣어주기
+			//sb.append("&redirect_uri=http://192.168.0.19:8081/join/kakao"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
+			sb.append("&redirect_uri=http://43.203.77.138:8081/join/kakao"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());

@@ -80,7 +80,7 @@ max-width: 100%;
     $('#charge_kakao').click(function () {
         // getter
         var IMP = window.IMP;
-        IMP.init('imp80062786');
+        IMP.init('imp64422117');//imp64422117 //imp80062786
         var money = $('input[name="cp_item"]:checked').val();
         console.log(money);
 	
@@ -90,7 +90,7 @@ max-width: 100%;
             pay_method: 'card',
             name: '카카오 포인트 충전',
             amount: money,
-            buyer_email: 'kbr7105@naver.com',
+            buyer_email: 'dow012@naver.com',//kbr7105@naver.com'
             buyer_name: '구매자이름',
             buyer_tel: '010-1234-5678',
             buyer_addr: '인천광역시 부평구',

@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <footer class="tm-container-outer">
 	<p class="mb-0">
-		주식회사 카카오에어라인&nbsp;
+		주식회사 항공사&nbsp;
 		 |&nbsp; 대표 : 플라잉 라이언 &nbsp;|&nbsp; 주소 : 제주특별자치도 제주시 첨단로 242(63309)
 	</p>
 	<p class="mb-0">
-		 사업자등록번호 : 110-81-14794 &nbsp;| &nbsp;통신판매업신고 : 강서 제 16-3010 &nbsp;|&nbsp; 개인정보보호책임자 : 춘식이 카카오에어라인 부사장
+		 사업자등록번호 : 110-81-14794 &nbsp;| &nbsp;통신판매업신고 : 강서 제 16-3010 &nbsp;|&nbsp; 개인정보보호책임자 : 춘식이 항공사 부사장
 	</p>
 	<p class="mb-0">
 		© 2023-2023 Kakao airline

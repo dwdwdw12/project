@@ -92,7 +92,7 @@
 		<div class="row">
 			<div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
 				<h2 class="text-uppercase mb-4">추가 정보 입력</h2>
-				<h6>카카오 항공의 서비스를 보다 편리하게 이용하기 위하여 추가적인 정보를 입력해주시기 바랍니다.</h6>
+				<h6> 항공사의 서비스를 보다 편리하게 이용하기 위하여 추가적인 정보를 입력해주시기 바랍니다.</h6>
 				<br> <br>
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 		<form action="/join/kakaoMemberInfo" name="frm" method="post"
 			style="margin: auto;">
 			<!-- class="tm-contact-form" -->
-
+`
 			<table
 				style="margin: auto; width: 800px; border-top: 0.1px solid rgb(220, 220, 220); border-bottom: 0.1px solid rgb(220, 220, 220);">
 

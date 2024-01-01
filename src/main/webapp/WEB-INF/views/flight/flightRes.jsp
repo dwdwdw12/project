@@ -309,7 +309,7 @@
 							document.location.href = "/flight/rescompleteMeg?userid="+ name;
 							
 						} else {
-							IMP.init('imp80062786');
+							IMP.init('imp64422117');//imp64422117//imp80062786
 							var errMsg = '';
 							IMP
 									.request_pay(

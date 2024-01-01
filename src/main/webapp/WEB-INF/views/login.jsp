@@ -51,6 +51,7 @@ if (cookies != null && cookies.length > 0)
 					class="tm-search-form tm-section-pad-4" name="frm" id="operForm"
 					style="background-color: white; width: 670px; height: 180px;">
 					<div class="form-group tm-container">
+					
 						<label for="userid">ID</label> <input type="text" id="userid"
 							name="username" class="form-control" placeholder="id" required />
 
@@ -59,7 +60,12 @@ if (cookies != null && cookies.length > 0)
 						<label for="pwd">PASSWORD</label> <input type="password" id="pwd"
 							name="password" class="form-control" placeholder="pwd" required />
 					</div>
-
+					
+					<div>
+					(Sample ID/Password/Authority)&nbsp;&nbsp;&nbsp;&nbsp;
+					admin00/admin00/관리자 &nbsp;&nbsp;&nbsp;&nbsp;
+					user00/user00/회원</div>	
+					<br>	
 					<div class="form-group tm-container" style="text-align: left;">
 						<label for="remember-userId">&nbsp;&nbsp;아이디 저장
 							&nbsp;&nbsp;</label> <input type="checkbox" id="remember-userId"
@@ -68,12 +74,11 @@ if (cookies != null && cookies.length > 0)
 						<!--자동로그인 name 속성값 remember-me-->
 						<!-- <input type="checkbox" name="remember-me" class="form-control" /> -->
 						<label for="remember-me">&nbsp;&nbsp;로그인 상태 유지&nbsp;&nbsp;</label>
-						<input type="checkbox" id="remember-me" name="remember-me"
-							class="form-control" style="display: inline; width: auto;" />
-						&nbsp;&nbsp;&nbsp;&nbsp; <a style="margin-left: 285px"
-							href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://192.168.0.19:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,profile_nickname&prompt=login">
-							<img alt="kakao_login"
-							src="../resources/img/kakao/kakao_login_small.png">
+						<input type="checkbox" id="remember-me" name="remember-me" class="form-control" style="display: inline; width: auto;" />
+						&nbsp;&nbsp;&nbsp;&nbsp; 
+						<!-- <a style="margin-left: 285px" href="https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://192.168.0.19:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,profile_nickname&prompt=login">
+						 --><a style="margin-left: 285px" href="https://kauth.kakao.com/oauth/authorize?client_id=096346fd53658772571bad9dc9b266cd&redirect_uri=http://43.203.77.138:8081/join/kakao&response_type=code&scope=account_email,name,gender,birthday,phone_number,profile_nickname&prompt=login">
+						<img alt="kakao_login" src="../resources/img/kakao/kakao_login_small.png">																		
 						</a>
 					</div>
 

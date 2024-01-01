@@ -134,11 +134,11 @@ p.btn.btn-default {
 					<select id="depRegionCode" name="depRegionCode">
 						<option value="1" <c:if test="${depRegionCode=='1'}">selected="selected"</c:if>>한국</option>
 						<option value="2" <c:if test="${depRegionCode=='2'}">selected="selected"</c:if>>동북아시아</option>
-						<option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
+						<%-- <option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
 						<option value="4" <c:if test="${depRegionCode=='4'}">selected="selected"</c:if>>몽골/중앙아시아</option>
 						<option value="5" <c:if test="${depRegionCode=='5'}">selected="selected"</c:if>>유럽</option>
 						<option value="6" <c:if test="${depRegionCode=='6'}">selected="selected"</c:if>>미주(미국,캐나다)</option>
-						<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option>
+						<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option> --%>
 					</select>
 				</div>
 				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
@@ -382,18 +382,18 @@ p.btn.btn-default {
 		<h3 style="text-align: center;">예약가능한 항공편이 없습니다. <i class='fa fa-plane'></i><br>
 			다시 여정을 선택해주세요.</h3>
 		<br>	
-		<c:if test="${!empty closestFlightPrev.depDay or closestFlightAfter.depDay}">
-			<c:if test="${!empty closestFlightPrev.depDay and empty closestFlightAfter.depDay}">
+		<c:if test="${!empty closestFlightPrevArr.depDay or closestFlightAfterArr.depDay}">
+			<c:if test="${!empty closestFlightPrevArr.depDay and empty closestFlightAfterArr.depDay}">
 				<h5 style="text-align: center;">
 					가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)} 입니다.					
 				</h5>	
 			</c:if>
-			<c:if test="${!empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+			<c:if test="${!empty closestFlightPrevArr.depDay and !empty closestFlightAfterArr.depDay}">
 				<h5 style="text-align: center;">
 					가장 가까운 항공편은 ${fn:substring(closestFlightPrevArr.depDay, 0,10)}, ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
 				</h5>	
 			</c:if>
-			<c:if test="${empty closestFlightPrev.depDay and !empty closestFlightAfter.depDay}">
+			<c:if test="${empty closestFlightPrevArr.depDay and !empty closestFlightAfterArr.depDay}">
 				<h5 style="text-align: center;">
 					가장 가까운 항공편은 ${fn:substring(closestFlightAfterArr.depDay, 0,10)} 입니다.					
 				</h5>	
@@ -601,9 +601,9 @@ p.btn.btn-default {
 			        "firstDay": 1
 			    },
 			    
-			    
+			    "startDate": "2023-12-01",
 			    "minDate": "2023-12-01",
-			    "maxDate": "2024-02-28"
+			    "maxDate": "2023-12-01"
 		});
 	});
 	
@@ -646,8 +646,9 @@ p.btn.btn-default {
 		        ],
 		        "firstDay": 1
 		    },
+		    "startDate": "2023-12-01",
 		    "minDate": "2023-12-01",
-		    "maxDate": "2024-02-28"
+		    "maxDate": "2023-12-01"
 	});
 	
 	$jLatest('input[id="arrDate"]').daterangepicker({
@@ -689,9 +690,9 @@ p.btn.btn-default {
 		        "firstDay": 1
 		    },
 		    
-		    
+		    "startDate": "2023-12-01",
 		    "minDate": "2023-12-01",
-		    "maxDate": "2024-02-28"
+		    "maxDate": "2023-12-01"
 	});
 </script>
 

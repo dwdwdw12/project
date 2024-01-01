@@ -163,7 +163,7 @@
 											<c:choose>
 												<c:when test="${fn:contains(loginUser.userId, '@')}">
 													<li><a class="logout"
-														href="https://kauth.kakao.com/oauth/logout?client_id=607caeca9f2a0089b46f99c667e0dee3&logout_redirect_uri=http://192.168.0.19:8081/logout">kakaologout</a></li>
+														href="https://kauth.kakao.com/oauth/logout?client_id=096346fd53658772571bad9dc9b266cd&logout_redirect_uri=http://43.203.77.138:8081/logout">kakaologout</a></li>
 												</c:when>
 												<c:otherwise>
 													<li><a class="logout" href="/logout" style="color: black; font-size: 18px;"><strong>logout</strong></a></li>
@@ -235,7 +235,8 @@
 
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script>
-		kakao.init('2cc49f4ac1f17ec5d30cf1893fd98d05');
+		//kakao.init('2cc49f4ac1f17ec5d30cf1893fd98d05');
+		kakao.init('29f31dc19a3495106cb90060df6c8545');
 		Kakao.Channel.createAddChannelButton({
 			container : '#kakao-talk-channel-chat-button',
 			channelPublicId : '_frpnG' // 카카오톡 채널 홈 URL에 명시된 id로 설정합니다.

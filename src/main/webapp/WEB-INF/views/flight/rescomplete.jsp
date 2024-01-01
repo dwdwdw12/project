@@ -109,7 +109,7 @@ max-width: 100%;
     $('#charge_kakao').click(function () {
         // getter
         var IMP = window.IMP;
-        IMP.init('imp80062786');
+        IMP.init('imp64422117');//imp64422117//imp80062786
         var money = $('input[name="cp_item"]:checked').val();
         console.log(money);
 

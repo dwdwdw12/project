@@ -90,11 +90,11 @@ td {
 							<select id="depRegionCode" name="depRegionCode">
 								<option value="1" <c:if test="${depRegionCode=='1'}">selected="selected"</c:if>>한국</option>
 								<option value="2" <c:if test="${depRegionCode=='2'}">selected="selected"</c:if>>동북아시아</option>
-								<option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
+								<%-- <option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
 								<option value="4" <c:if test="${depRegionCode=='4'}">selected="selected"</c:if>>몽골/중앙아시아</option>
 								<option value="5" <c:if test="${depRegionCode=='5'}">selected="selected"</c:if>>유럽</option>
 								<option value="6" <c:if test="${depRegionCode=='6'}">selected="selected"</c:if>>미주(미국,캐나다)</option>
-								<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option>
+								<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option> --%>
 							</select>
 						</div>
 						<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
@@ -582,8 +582,9 @@ td {
 		        ],
 		        "firstDay": 1
 		    },
+		    "startDate": "2023-12-01",
 		    "minDate": "2023-12-01",
-		    "maxDate": "2024-02-28"
+		    "maxDate": "2023-12-01"
 	});
 
 	

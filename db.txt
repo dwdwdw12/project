@@ -28,11 +28,15 @@ create table terms(
 	termstitle varchar(100) not null,
 	termsContents longtext
 );
+insert into terms values (1, '일반 규정 및 홈페이지 이용 약관', '회원이 되기 위해서는 소정의 가입신청서를 작성 및 제출하셔야 합니다....');
+insert into terms values (2, '개인정보 수집 및 이용안내', '본 항공사는 서비스 제공을 위해 회원의 동의를 얻어 개인정보를 수집하고 있습니다...');
+insert into terms values (3, '개인정보 국외 이전 동의', '본 항공사에서는 항공여행시스템 제공 업체인 A사에 당사의 예약 및 운송 시스템 운영을 위탁하고 있으며, 예약에 필요한 개인정보 국외 이전 사항은 다음과 같습니다...');
+insert into terms values (4, '마케팅 광고 활용 동의', '본 항공사는 이벤트 정보, 할인정보 등 마케팅 정보 제공을 위해 회원의 동의를 얻어 개인정보를 수집하고 있습니다...');
 
 //약관 동의여부
 create table termsmanage(
-	userid varchar(60) 
-	termsCode int 
+	userid varchar(60), 
+	termsCode int, 
 	agree char(1) default 'N'
 );
 alter table termsManage add constraint pk_temrs_id foreign key(userid) references kakaouser(userid) on delete cascade;
@@ -43,17 +47,17 @@ create table airport(
     airportname varchar(200) primary key,
     airportcode varchar(50)
 );
-insert into price airport('김포', 'GMP');
-insert into price airport('제주', 'CJU');
-insert into price airport('하네다', 'HND');
+insert into airport values('김포', 'GMP');
+insert into airport values('제주', 'CJU');
+insert into airport values('하네다', 'HND');
 
 //지역코드
 create table regioncode(
     regioncode int primary key,
     region varchar(100)
 );
-insert into regionCode values('한국', 1);
-insert into regionCode values('동북아시아', 2);
+insert into regioncode values(1, '한국');
+insert into regioncode values(2, '동북아시아');
 
 //항공권 가격
 create table price(
@@ -67,8 +71,11 @@ create table price(
 alter table price add constraint fk_price_depCode foreign key (depCode) references airport(airportCode);
 alter table price add constraint fk_price_arrCode foreign key (arrCode) references airport(airportCode);
 
+
 insert into price values('김포', 'GMP', '제주', 'CJU', 107300);
 insert into price values('김포', 'GMP', '하네다', 'HND', 410000);
+insert into price values('제주', 'CJU', '김포', 'GMP', 138300);
+insert into price values('하네다', 'HND', '김포', 'GMP', 416500);
 
 //항공 스케줄
 create table airplaneSchedule(
@@ -77,10 +84,10 @@ create table airplaneSchedule(
     depDay datetime,
     arrDay datetime,
     fullDepTime datetime,
-    depTime datetime,
+    depTime time,
     fullArrTime datetime,       
-    arrTime datetime, 
-    flightTime datetime,       
+    arrTime time, 
+    flightTime time,       
     fullDeparture varchar(200),
     depCode varchar(50),
     depName varchar(200),
@@ -90,7 +97,7 @@ create table airplaneSchedule(
     depRegionCode int,        
     arrRegionCode int,        
     isDelete int default 0,
-    seatCount int defualt 24       
+    seatCount int default 24       
 );
 
 alter table airplaneSchedule add constraint fk_sche_depRegionCode foreign key (depRegionCode) references regionCode(code);
@@ -138,9 +145,9 @@ alter table authorities add constraint fk_authority_userid foreign key(userid) r
 
 //예약 취소 테이블
 create table cancel(
-    cno int(5) primary key auto_increment
+    cno int(5) primary key auto_increment,
     userid varchar(60),			
-    resno	varchar(50),		
+    resno varchar(50),		
     isCancel int default 1,	
     RequestTime timestamp default CURRENT_TIMESTAMP,
     CancelTime timestamp default CURRENT_TIMESTAMP,
@@ -154,7 +161,7 @@ alter table cancel add constraint fk_cancel_resno foreign key(resno) references 
 create table discountpolicy(
     ageGroup varchar(20) primary key,
     ageDiscountRate float(5)			
-)
+);
 
 insert into discountpolicy values(1, 0.0);
 insert into discountpolicy values(12, 0.75);
@@ -208,7 +215,7 @@ create table point(
     userid	 varchar(60),		
     amount int(15) default 0,	
     buyDate timestamp default CURRENT_TIMESTAMP
-)
+);
 
 alter table point add constraint fk_point_userid foreign key(userid) references kakaouser(userid) on delete cascade;
 
@@ -231,9 +238,11 @@ create table userlog(
     gradeUpdate timestamp default current_timestamp,
     totalCount int(2) default 0,
     totalMileage int(10) default 0,
-    totalSum int(10) default 0,
+    totalSum int(10) default 0
+);
+    
     constraint fk_log_userid foreign key (userid) references kakaouser(userid) on delete cascade	
-)
+
 
 alter table point add constraint fk_ulog_userid foreign key(userid) references kakaouser(userid) on delete cascade;
 
@@ -245,7 +254,7 @@ create table userpay(
     price int(10),
     getDate timestamp default current_timestamp,
     mileage int(10) default 0
-)
+);
 
 alter table userpay add constraint fk_userpay_userid foreign key(userid) references kakaouser(userid) on delete cascade;
 alter table userpay add constraint fk_userpay_resno foreign key(resno) references flightreservation(resno) on delete cascade;
@@ -299,10 +308,10 @@ create table boardDiary(
     replycount int default 0,
     likecount int DEFAULT 0,
     userId varchar(200),
-    constraint fk_diaryWriter foreign key(boardWriter) references kakaouser(userNick) on update cascade,
-    constraint fk_diaryId foreign key(userId) references kakaouser(userId)
+    constraint fk_diaryWriter foreign key(boardWriter) references kakaouser(userNick) on update cascade
 );
-
+	constraint fk_diaryId foreign key(userId) references kakaouser(userId)
+	
 //여행일기-댓글
 create table boardDiaryReply(
     replyNum int auto_increment primary key,
@@ -313,19 +322,19 @@ create table boardDiaryReply(
     modifyDate datetime default current_timestamp,
     userId varchar(200),
     constraint fk_boardNum foreign key(boardNum) references boardDiary(boardNum) on delete cascade,
-    constraint fk_replyWriter foreign key(replyWriter) references kakaouser(userNick) on update cascade,
-    constraint fk_diaryReplyId foreign key(userId) references kakaouser(userId)
+    constraint fk_replyWriter foreign key(replyWriter) references kakaouser(userNick) on update cascade
+    
 );
-
+	constraint fk_diaryReplyId foreign key(userId) references kakaouser(userId)
 //여행일기-추천
 create table boardDiaryLike(
     likeNum int auto_increment primary key,      
     boardNum int,
     userId varchar(50),
     likeDate datetime default current_timestamp,
-    constraint fk_like_userId foreign key(userId) references kakaouser(userId) on delete cascade,
     constraint fk_like_boardNum foreign key(boardNum) references boardDiary(boardNum) on delete cascade
 );
+	constraint fk_like_userId foreign key(userId) references kakaouser(userId) on delete cascade,
 
 //이벤트게시판
 create table boardEvent(

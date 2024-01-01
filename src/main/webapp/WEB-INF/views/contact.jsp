@@ -37,7 +37,7 @@ p{
 					<h2 class="text-uppercase mb-4">
 						<strong>Fly, better Fly</strong>
 					</h2>
-					<p class="mb-4">카카오 에어라인 을 방문해주신 모든 분들께 감사드립니다</p>
+					<p class="mb-4">항공사를 방문해주신 모든 분들께 감사드립니다</p>
 <!-- 					<a href="#" class="text-uppercase btn-primary tm-btn">Continue
 						explore</a> -->
 				</div>
@@ -87,7 +87,8 @@ p{
 
 	<!-- .tm-container-outer -->
 	<%@ include file="includes/footer.jsp"%>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3156d02ad4070a1c858f024518bda8c5"></script>
+<!-- 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3156d02ad4070a1c858f024518bda8c5"></script>
+ -->	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c3ab09c77be5e3d93d0eb30a382940f"></script>
 	<script type="text/javascript">
 		var str="";
 		var section = $("#section");
@@ -101,9 +102,9 @@ p{
 				str+="<p></p>"; 
 				str+="<div class='tm-container-outer tm-position-relative' id='map' style='width: 800px; height: 400px;'></div>";
 				str+="<p></p>"; 
-				str+="<div><h3 class='text-uppercase mb-4' style='text-align: center;'><strong>카카오(본사)</strong> : 제주특별자치도 제주시 첨단로 242 (우)63309</h3></div>";
+				str+="<div><h3 class='text-uppercase mb-4' style='text-align: center;'><strong>본사</strong> : 제주특별자치도 제주시 첨단로 242 (우)63309</h3></div>";
 				str+="<p></p>"; 
-				str+="<div><h3 class='text-uppercase mb-4' style='text-align: center;'><strong>카카오(판교)</strong> : 경기도 성남시 분당구 판교역로 166 (우)14529</h3></div>";
+				str+="<div><h3 class='text-uppercase mb-4' style='text-align: center;'><strong>지사</strong> : 경기도 성남시 분당구 판교역로 166 (우)14529</h3></div>";
 				/* str+="</section>"; */
 			}else if(operData ==="history"){
 				str="";

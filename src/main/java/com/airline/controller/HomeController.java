@@ -110,41 +110,64 @@ public class HomeController {
 		
 		//국내선
 		model.addAttribute("GMPtoCJU", flightService.getRoundTripPrice("김포", "제주"));
-		model.addAttribute("KWJtoCJU", flightService.getRoundTripPrice("광주", "제주"));
-		model.addAttribute("GMPtoRSU", flightService.getRoundTripPrice("김포", "여수"));
+		//model.addAttribute("KWJtoCJU", flightService.getRoundTripPrice("광주", "제주"));
+		model.addAttribute("KWJtoCJU", 177600);
+		//model.addAttribute("GMPtoRSU", flightService.getRoundTripPrice("김포", "여수"));
+		model.addAttribute("GMPtoRSU", 200600);
 		
 		//동북아
-		model.addAttribute("ICNtoKIX", flightService.getRoundTripPrice("인천", "오사카"));
-		model.addAttribute("ICNtoFUK", flightService.getRoundTripPrice("인천", "후쿠오카"));
-		model.addAttribute("ICNtoTPE", flightService.getRoundTripPrice("인천", "타이베이"));
-		model.addAttribute("ICNtoHKG", flightService.getRoundTripPrice("인천", "홍콩"));
+		//model.addAttribute("ICNtoKIX", flightService.getRoundTripPrice("인천", "오사카"));
+		//model.addAttribute("ICNtoFUK", flightService.getRoundTripPrice("인천", "후쿠오카"));
+		//model.addAttribute("ICNtoTPE", flightService.getRoundTripPrice("인천", "타이베이"));
+		//model.addAttribute("ICNtoHKG", flightService.getRoundTripPrice("인천", "홍콩"));
+		model.addAttribute("ICNtoKIX", 712300);
+		model.addAttribute("ICNtoFUK", 546500);
+		model.addAttribute("ICNtoTPE", 472000);
+		model.addAttribute("ICNtoHKG", 430500);
 
 		//동남아/서남아
-		model.addAttribute("ICNtoSGN", flightService.getRoundTripPrice("인천", "호찌민"));
-		model.addAttribute("ICNtoMNL", flightService.getRoundTripPrice("인천", "마닐라"));
-		model.addAttribute("ICNtoSIN", flightService.getRoundTripPrice("인천", "싱가포르"));
-		model.addAttribute("ICNtoBKK", flightService.getRoundTripPrice("인천", "방콕"));
+//		model.addAttribute("ICNtoSGN", flightService.getRoundTripPrice("인천", "호찌민"));
+//		model.addAttribute("ICNtoMNL", flightService.getRoundTripPrice("인천", "마닐라"));
+//		model.addAttribute("ICNtoSIN", flightService.getRoundTripPrice("인천", "싱가포르"));
+//		model.addAttribute("ICNtoBKK", flightService.getRoundTripPrice("인천", "방콕"));
+		model.addAttribute("ICNtoSGN", 1090500);
+		model.addAttribute("ICNtoMNL", 880900);
+		model.addAttribute("ICNtoSIN", 1549300);
+		model.addAttribute("ICNtoBKK", 1480400);
 		
 		//중앙아시아
-		model.addAttribute("ICNtoUBN", flightService.getRoundTripPrice("인천", "울란바타르"));
-		model.addAttribute("ICNtoALA", flightService.getRoundTripPrice("인천", "알마티"));
-		model.addAttribute("ICNtoTAS", flightService.getRoundTripPrice("인천", "타슈켄트"));
+//		model.addAttribute("ICNtoUBN", flightService.getRoundTripPrice("인천", "울란바타르"));
+//		model.addAttribute("ICNtoALA", flightService.getRoundTripPrice("인천", "알마티"));
+//		model.addAttribute("ICNtoTAS", flightService.getRoundTripPrice("인천", "타슈켄트"));
+		model.addAttribute("ICNtoUBN", 856300);
+		model.addAttribute("ICNtoALA", 1657900);
+		model.addAttribute("ICNtoTAS", 1443300);
 
 		//유럽
-		model.addAttribute("ICNtoFRA", flightService.getRoundTripPrice("인천", "프랑크푸르트"));
-		model.addAttribute("ICNtoLHR", flightService.getRoundTripPrice("인천", "런던히드로"));
-		model.addAttribute("ICNtoCDG", flightService.getRoundTripPrice("인천", "파리"));
-		model.addAttribute("ICNtoFCO", flightService.getRoundTripPrice("인천", "로마"));
+//		model.addAttribute("ICNtoFRA", flightService.getRoundTripPrice("인천", "프랑크푸르트"));
+//		model.addAttribute("ICNtoLHR", flightService.getRoundTripPrice("인천", "런던히드로"));
+//		model.addAttribute("ICNtoCDG", flightService.getRoundTripPrice("인천", "파리"));
+//		model.addAttribute("ICNtoFCO", flightService.getRoundTripPrice("인천", "로마"));
+		model.addAttribute("ICNtoFRA", 3908200);
+		model.addAttribute("ICNtoLHR", 3985600);
+		model.addAttribute("ICNtoCDG", 3489500);
+		model.addAttribute("ICNtoFCO", 3458600);
 		
 		//미주
-		model.addAttribute("ICNtoLAX", flightService.getRoundTripPrice("인천", "로스앤젤레스"));
-		model.addAttribute("ICNtoJFK", flightService.getRoundTripPrice("인천", "뉴욕"));
-		model.addAttribute("ICNtoSFO", flightService.getRoundTripPrice("인천", "샌프란시스코"));
-		model.addAttribute("ICNtoHNL", flightService.getRoundTripPrice("인천", "호놀룰루"));
+//		model.addAttribute("ICNtoLAX", flightService.getRoundTripPrice("인천", "로스앤젤레스"));
+//		model.addAttribute("ICNtoJFK", flightService.getRoundTripPrice("인천", "뉴욕"));
+//		model.addAttribute("ICNtoSFO", flightService.getRoundTripPrice("인천", "샌프란시스코"));
+//		model.addAttribute("ICNtoHNL", flightService.getRoundTripPrice("인천", "호놀룰루"));
+		model.addAttribute("ICNtoLAX", 1558000);
+		model.addAttribute("ICNtoJFK", 3899000);
+		model.addAttribute("ICNtoSFO", 1508000);
+		model.addAttribute("ICNtoHNL", 1379800);
 
 		//대양주
-		model.addAttribute("ICNtoSYD", flightService.getRoundTripPrice("인천", "시드니"));
-		model.addAttribute("ICNtoSPN", flightService.getRoundTripPrice("인천", "사이판"));
+//		model.addAttribute("ICNtoSYD", flightService.getRoundTripPrice("인천", "시드니"));
+//		model.addAttribute("ICNtoSPN", flightService.getRoundTripPrice("인천", "사이판"));
+		model.addAttribute("ICNtoSYD", 2453400);
+		model.addAttribute("ICNtoSPN", 804000);
 
 		//공지사항 3개 출력
 		Criteria nCri = new Criteria();
@@ -339,7 +362,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/error/accessError")
-	@CrossOrigin("http://localhost:8081/error/accessError")
+	@CrossOrigin("http://43.203.77.138:8081/error/accessError")
 	public String accessError(RedirectAttributes attr, HttpSession session) {
 		if(session.getAttribute("loginUser") != null)
 			return "redirect:/";

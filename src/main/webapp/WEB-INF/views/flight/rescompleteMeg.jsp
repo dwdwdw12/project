@@ -36,7 +36,8 @@
   Kakao.init('607caeca9f2a0089b46f99c667e0dee3'); // restapi
 </script>  -->
 <script>
-  Kakao.init('2cc49f4ac1f17ec5d30cf1893fd98d05'); // js
+  //Kakao.init('2cc49f4ac1f17ec5d30cf1893fd98d05'); // js
+  Kakao.init('29f31dc19a3495106cb90060df6c8545'); // js
 </script>
 
 
@@ -114,7 +115,8 @@ max-width: 100%;
 
  					<div class="tm-search-form-row">
 					<label for="total"></label> 
-                		<button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://192.168.0.19:8081/flight/oath&response_type=code&scope=talk_message'">카카오톡 메세지 보내기</button>
+                		<!-- <button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=607caeca9f2a0089b46f99c667e0dee3&redirect_uri=http://192.168.0.19:8081/flight/oath&response_type=code&scope=talk_message'">카카오톡 메세지 보내기</button>
+                		 --><button type="button" class="btn btn-primary tm-btn tm-btn-search text-uppercase" id="send_kakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=096346fd53658772571bad9dc9b266cd&redirect_uri=http://43.203.77.138:8081/flight/oath&response_type=code&scope=talk_message'">카카오톡 메세지 보내기</button>
 						<p id="token-result"></p>
 					</div>	
 					
