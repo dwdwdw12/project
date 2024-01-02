@@ -29,7 +29,7 @@
 		<load-on-startup>1</load-on-startup>
 		
 		<multipart-config>
-			<location>C:\\upload\\temp</location><!-- 업로드 되는 파일을 저장할 공간 -->
+			<location>/home/tomcat/apache-tomcat-9.0.83/webapps/upload/temp</location><!-- 업로드 되는 파일을 저장할 공간 -->
 			<max-file-size>20971520</max-file-size><!-- 최대크기 1MB * 20 -->
 			<max-request-size>41943040</max-request-size><!-- 한번에 올릴 수 있는 최대크기 1MB * 40 -->
 			<file-size-threshold>20971520</file-size-threshold><!-- 메모리 사용 1MB * 20 -->

@@ -76,7 +76,7 @@ public class BoardEventController {
 	public void write() {
 		log.info("insert...");
 		
-		String tempFile = "C:\\upload\\temp";
+		String tempFile = "/home/tomcat/apache-tomcat-9.0.83/webapps/upload/temp";
 		File tempFilePath = new File(tempFile);
 		if(!tempFilePath.exists()) {
 			System.out.println(tempFilePath+"가 없으므로 생성합니다.");
@@ -212,11 +212,11 @@ public class BoardEventController {
 		
 		attachList.forEach(attach->{
 			try {
-				Path file = Paths.get("C:\\upload\\" + attach.getUploadPath() + "\\" 
+				Path file = Paths.get("/home/tomcat/apache-tomcat-9.0.83/webapps/upload/" + attach.getUploadPath() + "/" 
 							+ attach.getUuid() + "_" + attach.getFileName());
 				Files.deleteIfExists(file);
 				if(Files.probeContentType(file).startsWith("image")) {
-					Path thumbNail = Paths.get("C:\\upload\\" + attach.getUploadPath() + "\\s_" 
+					Path thumbNail = Paths.get("/home/tomcat/apache-tomcat-9.0.83/webapps/upload/" + attach.getUploadPath() + "/s_" 
 							+ attach.getUuid() + "_" + attach.getFileName());
 					Files.delete(thumbNail);
 				}

@@ -63,8 +63,8 @@ if (cookies != null && cookies.length > 0)
 					
 					<div>
 					(Sample ID/Password/Authority)&nbsp;&nbsp;&nbsp;&nbsp;
-					admin00/admin00/관리자 &nbsp;&nbsp;&nbsp;&nbsp;
-					user00/user00/회원</div>	
+					admin01/!admin01/관리자 &nbsp;&nbsp;&nbsp;&nbsp;
+					user01/!user01/회원</div>	
 					<br>	
 					<div class="form-group tm-container" style="text-align: left;">
 						<label for="remember-userId">&nbsp;&nbsp;아이디 저장

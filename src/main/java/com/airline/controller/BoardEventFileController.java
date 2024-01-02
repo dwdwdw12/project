@@ -62,7 +62,7 @@ public class BoardEventFileController {
 		System.out.println("order : " + fileOrder);
 		
 		List<AttachFileDTO> list = new ArrayList<>();
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "/home/tomcat/apache-tomcat-9.0.83/webapps/upload";
 		
 		String uploadFolderPath = getFolder();
 		//make folder
@@ -129,7 +129,7 @@ public class BoardEventFileController {
 	public ResponseEntity<byte[]> getFile(String fileName){
 		log.info("fileName : " + fileName);
 		
-		File file = new File("C:\\upload\\" + fileName);
+		File file = new File("/home/tomcat/apache-tomcat-9.0.83/webapps/upload/" + fileName);
 		
 		log.info("file : " + file);
 		
@@ -153,7 +153,7 @@ public class BoardEventFileController {
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName){
 		log.info("download file : " + fileName);
 		
-		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
+		Resource resource = new FileSystemResource("/home/tomcat/apache-tomcat-9.0.83/webapps/upload/" + fileName);
 		
 		log.info("resource : " + resource);
 		
@@ -201,7 +201,7 @@ public class BoardEventFileController {
 		File file;
 		
 		try {
-			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("/home/tomcat/apache-tomcat-9.0.83/webapps/upload/" + URLDecoder.decode(fileName, "UTF-8"));
 			
 			file.delete();
 			

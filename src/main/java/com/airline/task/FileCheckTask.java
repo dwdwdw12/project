@@ -61,13 +61,13 @@ public class FileCheckTask {
 		
 		//ready for check file in directory with database file list
 		List<Path> fileListPaths = fileList.stream()
-									.map(vo->Paths.get("C:\\upload", vo.getUploadPath(),
+									.map(vo->Paths.get("/home/tomcat/apache-tomcat-9.0.83/webapps/upload", vo.getUploadPath(),
 											vo.getUuid() + "_" + vo.getFileName()))
 									.collect(Collectors.toList());
 		
 		//image file has thumbnail file
 		fileList.stream().filter(vo->vo.getUuid()!=null)
-						.map(vo->Paths.get("C:\\upload", vo.getUploadPath(),
+						.map(vo->Paths.get("/home/tomcat/apache-tomcat-9.0.83/webapps/upload", vo.getUploadPath(),
 								"s_" + vo.getUuid() + "_" + vo.getFileName()))
 						.forEach(p->fileListPaths.add(p));
 		
@@ -76,7 +76,7 @@ public class FileCheckTask {
 		fileListPaths.forEach(p->log.warn(p));
 		
 		//files in yesterday directory
-		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
+		File targetDir = Paths.get("/home/tomcat/apache-tomcat-9.0.83/webapps/upload", getFolderYesterDay()).toFile();
 		
 		File[] removeFiles = targetDir.listFiles(file->fileListPaths.contains(file.toPath())==false);
 		

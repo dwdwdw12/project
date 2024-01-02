@@ -73,11 +73,11 @@
 	</delete>
 	
 	<select id="getEvent" resultType="com.airline.vo.BoardEventVO">
-		select * from boardevent limit #{cri.pageNum}, #{cri.amount}
+		select * from boardEvent limit #{cri.pageNum}, #{cri.amount}
 	</select>
 	
 	<select id="eventCtn" resultType="int">
-		select count(*) from boardevent 
+		select count(*) from boardEvent 
 	</select>
 	
 	<select id="getFlightList" resultType="com.airline.vo.FlightVO">

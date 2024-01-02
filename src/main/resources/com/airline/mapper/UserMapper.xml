@@ -116,7 +116,7 @@
 	
 	<select id="getEvent" resultType="com.airline.vo.BoardEventVO">
 	<![CDATA[
-	    select * from(select row_number() over(order by startDate desc, endDate desc) rownum, p.* from boardevent p )r where rownum<=3 
+	    select * from(select row_number() over(order by startDate desc, endDate desc) rownum, p.* from boardEvent p )r where rownum<=3 
 	]]>
 	</select>
 	
