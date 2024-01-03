@@ -134,11 +134,11 @@ p.btn.btn-default {
 					<select id="depRegionCode" name="depRegionCode">
 						<option value="1" <c:if test="${depRegionCode=='1'}">selected="selected"</c:if>>한국</option>
 						<option value="2" <c:if test="${depRegionCode=='2'}">selected="selected"</c:if>>동북아시아</option>
-						<%-- <option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
+						<option value="3" <c:if test="${depRegionCode=='3'}">selected="selected"</c:if>>동남아시아/서남아시아</option>
 						<option value="4" <c:if test="${depRegionCode=='4'}">selected="selected"</c:if>>몽골/중앙아시아</option>
 						<option value="5" <c:if test="${depRegionCode=='5'}">selected="selected"</c:if>>유럽</option>
 						<option value="6" <c:if test="${depRegionCode=='6'}">selected="selected"</c:if>>미주(미국,캐나다)</option>
-						<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option> --%>
+						<option value="7" <c:if test="${depRegionCode=='7'}">selected="selected"</c:if>>대양주/사이판</option> 
 					</select>
 				</div>
 				<div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
@@ -158,6 +158,9 @@ p.btn.btn-default {
 				</div>
 				<br>
 				<!-- form-row -->
+				
+				<p>-검색 기간 : 2023-12-01 ~ 2024-02-28</p>
+				
 				<div class="form-row tm-search-form-row">
 					<div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
 						<label for="boardTitle">가는 날</label> 
@@ -187,8 +190,7 @@ p.btn.btn-default {
 			<input type="hidden" class="form-control" id="sampleArr" name="sampleArr" value = "${arrDate}" >
 			<input type="hidden" class="form-control" id="arrText" name="arrText" value = "${arr}" >
 			<input type="hidden" class="form-control" id="sampleArrCode" name="sampleArrCode" value = "${arrRegionCode}" >
-		
-				
+			
 			<c:if test="${empty depPrice}">
 				<!-- <section class="p-5 tm-container-outer tm-bg-gray">
 					<h3 style="text-align: center;">일치하는 노선이 없습니다. <i class='fa fa-plane'></i><br>
@@ -340,6 +342,15 @@ p.btn.btn-default {
 										<td style="vertical-align: middle;">좌석 없음</td>
 									</c:if>
 								</c:if>
+								<c:if test="${nowfmtTime/1000>1709132399}">
+									<c:if test="${list.seatCount>0}">
+										<td style="vertical-align: middle;"><button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기(${list.seatCount}석)</button></td>
+									</c:if>
+									<c:if test="${list.seatCount<=0}">
+										<td style="vertical-align: middle;">좌석 없음</td>
+									</c:if>
+								</c:if>
+								
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -467,9 +478,21 @@ p.btn.btn-default {
 									<td style="vertical-align: middle;">예약 마감</td>
 								</c:if>
 								<c:if test="${parsedMyDate.time-nowfmtTime>=(1000*60*30)}">
-								<td style="vertical-align: middle;"><button type="submit"
-										class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기(${list.seatCount}석)</button></td>
-								</c:if>								
+									<c:if test="${list.seatCount>0}">
+										<td style="vertical-align: middle;"><button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기(${list.seatCount}석)</button></td>
+									</c:if>
+									<c:if test="${list.seatCount<=0}">
+										<td style="vertical-align: middle;">좌석 없음</td>
+									</c:if>
+								</c:if>	
+								<c:if test="${nowfmtTime/1000>1709132399}">
+									<c:if test="${list.seatCount>0}">
+										<td style="vertical-align: middle;"><button type="submit" class="btn btn-primary tm-btn tm-btn-search text-uppercase reserve-button" id="reserve" data-fno="${list.fno}">예약하기(${list.seatCount}석)</button></td>
+									</c:if>
+									<c:if test="${list.seatCount<=0}">
+										<td style="vertical-align: middle;">좌석 없음</td>
+									</c:if>
+								</c:if>							
 								
 							</tr>
 						</tbody>
@@ -601,9 +624,9 @@ p.btn.btn-default {
 			        "firstDay": 1
 			    },
 			    
-			    "startDate": "2024-12-01",
-			    "minDate": "2024-12-01",
-			    "maxDate": "2024-12-01"
+			    
+			    "minDate": "2023-12-01",
+			    "maxDate": "2024-02-28"
 		});
 	});
 	
@@ -646,9 +669,9 @@ p.btn.btn-default {
 		        ],
 		        "firstDay": 1
 		    },
-		    "startDate": "2024-12-01",
-		    "minDate": "2024-12-01",
-		    "maxDate": "2024-12-01"
+		    
+		    "minDate": "2023-12-01",
+		    "maxDate": "2024-02-28"
 	});
 	
 	$jLatest('input[id="arrDate"]').daterangepicker({
@@ -690,9 +713,9 @@ p.btn.btn-default {
 		        "firstDay": 1
 		    },
 		    
-		    "startDate": "2024-12-01",
-		    "minDate": "2024-12-01",
-		    "maxDate": "2024-12-01"
+		  
+		    "minDate": "2023-12-01",
+		    "maxDate": "2024-02-28"
 	});
 </script>
 

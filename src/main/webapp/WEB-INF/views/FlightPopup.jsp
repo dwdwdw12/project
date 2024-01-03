@@ -53,7 +53,7 @@ font-size:16px; font-weight:600; width: 40px; height : 30px;color:black; float: 
 <body>
 <div class="layerPopup" id="layer_popup_flight" style="visibility: visible;">
     <div class="layerBoxFlight"> 
-		<h4 class="title"> <a  href="/notice/list"> Kakao Airline 항공 지연/결항 공지사항</a></h4>
+		<h4 class="title"> <a  href="/notice/list"> 항공 지연/결항 공지사항</a></h4>
         <div class="cont">
             <p style="color:red">
 <img src="/resources/img/alert.png" onerror="this.style.display='none'" width=20px height=auto usemap="#popup" alt="event page">

@@ -189,9 +189,9 @@ hr {
   <option value="김포">김포</option>
   <option value="제주">제주</option>
   <option value="하네다">하네다</option>  
-  <!-- <option value="인천">인천</option>-->
-  <!-- <option value="광주">광주</option> -->
-  <!-- <option value="대구">대구</option>
+  <option value="인천">인천</option>
+  <option value="광주">광주</option>
+  <option value="대구">대구</option>
   <option value="여수">여수</option>
   <option value="나고야">나고야</option>
   <option value="난징">난징</option>
@@ -212,7 +212,7 @@ hr {
   <option value="알마티">알마티</option>
   <option value="옌지">옌지</option>
   <option value="오사카">오사카</option>
-  <option value="오키나와">오키나와</option> -->
+  <option value="오키나와">오키나와</option> 
  
 </select>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -357,14 +357,14 @@ hr {
 <script>
 const flightOptions = [
   { depname: '---', arrname: '---', price: 0 },
-  /* { depname: '광주', arrname: '김포', price: 80300 },
+  { depname: '광주', arrname: '김포', price: 80300 },
   { depname: '광주', arrname: '제주', price: 77300 },
   { depname: '김포', arrname: '광주', price: 104300 },
   { depname: '김포', arrname: '여수', price: 91300 },
-  { depname: '김포', arrname: '오사카', price: 352300 }, */
+  { depname: '김포', arrname: '오사카', price: 352300 }, 
   { depname: '김포', arrname: '제주', price: 107300 },
   { depname: '김포', arrname: '하네다', price: 410000 },
-  /* { depname: '나고야', arrname: '인천', price: 363500 },
+  { depname: '나고야', arrname: '인천', price: 363500 },
   { depname: '난징', arrname: '인천', price: 411600 },
   { depname: '뉴욕', arrname: '인천', price: 1931000 },
   { depname: '다낭', arrname: '인천', price: 539000 },
@@ -434,11 +434,11 @@ const flightOptions = [
   { depname: '선전', arrname: '인천', price: 458400 },
   { depname: '인천', arrname: '선전', price: 433000 },
   { depname: '사이판', arrname: '인천', price: 415000 },
-  { depname: '인천', arrname: '사이판', price: 389000 }, */
-  { depname: '제주', arrname: '김포', price: 138300 },/* ,
+  { depname: '인천', arrname: '사이판', price: 389000 }, 
+  { depname: '제주', arrname: '김포', price: 138300 },
   { depname: '제주', arrname: '대구', price: 92300 },
   { depname: '제주', arrname: '여수', price: 78300 },
-  { depname: '제주', arrname: '청주', price: 94300 }, */
+  { depname: '제주', arrname: '청주', price: 94300 }, 
   { depname: '하네다', arrname: '김포', price: 416500 }
 ];
 
