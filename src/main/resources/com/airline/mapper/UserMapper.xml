@@ -77,7 +77,7 @@
 	
 	<select id="getDiary" resultType="com.airline.vo.BoardDiaryVO">
 	<![CDATA[
-		select * from(select row_number() over(order by regidate desc) rownum, p.* from boarddiary p where userid=#{userid})r where rownum<=3 
+		select * from(select row_number() over(order by regidate desc) rownum, p.* from boardDiary p where userid=#{userid})r where rownum<=3 
 	]]>
 	</select>
 	
@@ -193,11 +193,11 @@
 	</select>
 	
 	<select id="getUserDiary" resultType="com.airline.vo.BoardDiaryVO">
-		select * from boarddiary where boardwriter = #{username} limit #{cri.pageNum},#{cri.amount}
+		select * from boardDiary where boardwriter = #{username} limit #{cri.pageNum},#{cri.amount}
 	</select>
 	
 	<select id="getUserDiaryCnt" resultType="int">
-		select count(*) from boarddiary where boardwriter = #{username}
+		select count(*) from boardDiary where boardwriter = #{username}
 	</select>
 	
 	<select id="getUserQna" resultType="com.airline.vo.BoardQnaVO">

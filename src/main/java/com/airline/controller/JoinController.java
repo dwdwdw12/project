@@ -295,7 +295,8 @@ public class JoinController {
 		// memberInfo에 바로 접근하는 경우 접근 막음
 		if (termsAgree == "" || termsAgree == null) {
 			log.info("termsAgree >> " + termsAgree);
-			model.addAttribute("joinMessage", "잘못된 접근입니다.");
+			//model.addAttribute("joinMessage", "잘못된 접근입니다.");
+			model.addAttribute("joinMessage", "환영합니다.");
 			return "/login";
 		}
 

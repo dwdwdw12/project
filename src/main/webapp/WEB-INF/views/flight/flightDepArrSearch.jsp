@@ -582,9 +582,9 @@ td {
 		        ],
 		        "firstDay": 1
 		    },
-		    "startDate": "2023-12-01",
-		    "minDate": "2023-12-01",
-		    "maxDate": "2023-12-01"
+		    "startDate": "2024-12-01",
+		    "minDate": "2024-12-01",
+		    "maxDate": "2024-12-01"
 	});
 
 	
