@@ -137,7 +137,7 @@ create table adminflight(
 
 //권한
 create table authorities(
-    userid varchar(10) not null,
+    userid varchar(60) not null,
     authority varchar(50) not null,
     constraint fk_auth_user foreign key(userId) references kakaouser(userId)
 );	
