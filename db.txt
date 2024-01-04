@@ -78,7 +78,7 @@ insert into price values('제주', 'CJU', '김포', 'GMP', 138300);
 insert into price values('하네다', 'HND', '김포', 'GMP', 416500);
 
 //항공 스케줄
-create table airplaneSchedule(
+create table airplaneschedule(
     fno int auto_increment primary key,
     flightName varchar(20),
     depDay datetime,
@@ -133,6 +133,7 @@ create table adminflight(
     depName varchar(50),			
     flightName varchar(50)
 );	
+-- 초기값 없으면 메인 화면에 에러 발생. 
 
 //권한
 create table authorities(
@@ -261,11 +262,11 @@ alter table userpay add constraint fk_userpay_userid foreign key(userid) referen
 alter table userpay add constraint fk_userpay_resno foreign key(resno) references flightreservation(resno) on delete cascade;
 
 //시큐리티 로그아웃
-create table PERSISTENT_LOGINS (
-  USERNAME varchar(64) not null,
-  SERIES varchar(64) primary key,
-  TOKEN varchar(64) not null,
-  LAST_USED timestamp not null
+create table persistent_logins (
+  username varchar(64) not null,
+  series varchar(64) primary key,
+  token varchar(64) not null,
+  last_used timestamp not null
 );
 
 //qna게시판
