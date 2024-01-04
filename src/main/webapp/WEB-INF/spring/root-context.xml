@@ -28,7 +28,7 @@
 		<property name="password" value="1234"></property> -->
 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://43.203.77.138:3306/project?serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false"></property>
 		<property name="username" value="project"></property>
-		<property name="password" value="project"></property>
+		<property name="password" value="비밀번호..."></property>
 	</bean>
 
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
