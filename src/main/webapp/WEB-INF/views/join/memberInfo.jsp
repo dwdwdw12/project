@@ -500,7 +500,7 @@
 				document.frm.userId.focus;
 				return false;
 			} else if (!regId.test(document.frm.userId.value)) { //아이디 영어 대소문자 확인
-				alert("6~10자 영문 대소문자, 숫자만 입력해주세요.")
+				alert("아이디에는 6~10자리 영문 대소문자, 숫자만 입력해주세요.")
 				userId.focus();
 				return false;
 			} else if (!checkId()) {
@@ -513,7 +513,7 @@
 				document.frm.userNick.focus;
 				return false;
 			} else if (!regNick.test(document.frm.userNick.value)) {
-				alert("2~10자리 한글, 영문(대소문자 구별), 숫자를 입력해주세요.")
+				alert("닉네임에는 2~10자리 한글, 영문(대소문자 구별), 숫자를 입력해주세요.")
 				document.frm.userNick.focus;
 				return false;
 			} else if (!checkNick()) {
@@ -527,7 +527,7 @@
 				pwd.focus();
 				return false;
 			} else if (!regIdPw.test(document.frm.pwd.value)) {
-				alert("6~10자 영문 대소문자, 숫자, 특수문자를 입력해주세요.")
+				alert("비밀번호에는 6~10자리 영문 대소문자, 숫자, 특수문자를 입력해주세요.")
 				pwd.focus();
 				return false;
 			} else if (document.frm.pwd.value == document.frm.userId.value) {
