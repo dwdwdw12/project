@@ -24,7 +24,8 @@
 ![Slide3](https://github.com/dwdwdw12/project/assets/147116004/11860b4c-8660-4420-a6f7-1343b2afa847)
 ![Slide4](https://github.com/dwdwdw12/project/assets/147116004/14ef5021-f0bd-4f4a-bbf2-22cf967562f4)
 ![Slide5](https://github.com/dwdwdw12/project/assets/147116004/e3e33986-fadb-4c0c-bf13-c6b82cf2ba11)
-![Slide6](https://github.com/dwdwdw12/project/assets/147116004/583fafb0-9310-42b9-9d7d-af3dbc608a17)
+![Slide6](https://github.com/dwdwdw12/project_springframework/assets/147116004/b9ea119f-beef-407f-952c-411a9d9fc586)
+
 </details>
 <details>
   <summary>
